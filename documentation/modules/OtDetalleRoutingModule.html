@@ -74,7 +74,10 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { DetalleOTResolver } from &#x27;src/app/core/resolvers/detalleOT.resolver&#x27;;
+import { RegistroLibroLobrasResolver } from &#x27;src/app/core/resolvers/registrosLibroObras.resolver&#x27;;
 import { AnexosComponent } from &#x27;./components/anexos/anexos.component&#x27;;
+import { CosteoComponent } from &#x27;./components/costeo/costeo.component&#x27;;
 import { InformacionComponent } from &#x27;./components/informacion/informacion.component&#x27;;
 import { LibroObrasComponent } from &#x27;./components/libro-obras/libro-obras.component&#x27;;
 import { OtDetalleComponent } from &#x27;./ot-detalle.component&#x27;;
@@ -88,14 +91,32 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;informacion/:id&#x27;,
         component: InformacionComponent,
+        resolve: {
+          detalleOT: DetalleOTResolver,
+        },
+      },
+      {
+        path: &#x27;costeos/:id&#x27;,
+        component: CosteoComponent,
+        resolve: {
+          detalleOT: DetalleOTResolver,
+        },
       },
       {
         path: &#x27;libro-obras/:id&#x27;,
         component: LibroObrasComponent,
+        resolve: {
+          registroLibroObras: RegistroLibroLobrasResolver,
+          detalleOT: DetalleOTResolver,
+        },
       },
       {
         path: &#x27;anexos/:id&#x27;,
         component: AnexosComponent,
+        resolve: {
+          registroLibroObras: RegistroLibroLobrasResolver,
+          detalleOT: DetalleOTResolver,
+        },
       },
     ],
   },

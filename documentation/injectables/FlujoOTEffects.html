@@ -84,6 +84,9 @@
                                 <a href="#AceptarRechazarIncialOT$" >AceptarRechazarIncialOT$</a>
                             </li>
                             <li>
+                                <a href="#aprobarRechazarOperaciones$" >aprobarRechazarOperaciones$</a>
+                            </li>
+                            <li>
                                 <a href="#asignarSupervisorTrabajo$" >asignarSupervisorTrabajo$</a>
                             </li>
                             <li>
@@ -94,6 +97,9 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#solicitarPago$" >solicitarPago$</a>
                             </li>
                         </ul>
                     </td>
@@ -275,6 +281,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="aprobarRechazarOperaciones$"></a>
+                    <span class="name">
+                        <span ><b>aprobarRechazarOperaciones$</b></span>
+                        <a href="#aprobarRechazarOperaciones$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarOperaciones),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aceptarRechazarOperaciones(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.aprobarRechazarOperacionesSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.aprobarRechazarOperacionesError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="asignarSupervisorTrabajo$"></a>
                     <span class="name">
                         <span ><b>asignarSupervisorTrabajo$</b></span>
@@ -370,7 +415,9 @@
         ofType(
           flujoOTActions.aceptarRechazarIncialOTSuccess,
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
-          flujoOTActions.asignarSupervisorTrabajoSuccess
+          flujoOTActions.asignarSupervisorTrabajoSuccess,
+          flujoOTActions.solicitarPagoSuccess,
+          flujoOTActions.aprobarRechazarOperacionesSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -380,7 +427,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -407,7 +454,9 @@
           flujoOTActions.aceptarRechazarIncialOTError,
           flujoOTActions.getPosibleSupervisorDeTrabajosError,
           flujoOTActions.aceptarOTProveedorError,
-          flujoOTActions.asignarSupervisorTrabajoError
+          flujoOTActions.asignarSupervisorTrabajoError,
+          flujoOTActions.solicitarPagoError,
+          flujoOTActions.aprobarRechazarOperacionesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -417,7 +466,42 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:105</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitarPago$"></a>
+                    <span class="name">
+                        <span ><b>solicitarPago$</b></span>
+                        <a href="#solicitarPago$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarPago),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.solicitarPago(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.solicitarPagoSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.solicitarPagoError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -521,13 +605,45 @@ export class FlujoOTEffects {
     )
   );
 
+  // SOLICITAR PAGO
+  solicitarPago$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarPago),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.solicitarPago(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.solicitarPagoSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.solicitarPagoError({ error })))
+        )
+      )
+    )
+  );
+
+  // APROBAR RECHAZAR ACTA
+  aprobarRechazarOperaciones$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarOperaciones),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aceptarRechazarOperaciones(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.aprobarRechazarOperacionesSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.aprobarRechazarOperacionesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           flujoOTActions.aceptarRechazarIncialOTSuccess,
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
-          flujoOTActions.asignarSupervisorTrabajoSuccess
+          flujoOTActions.asignarSupervisorTrabajoSuccess,
+          flujoOTActions.solicitarPagoSuccess,
+          flujoOTActions.aprobarRechazarOperacionesSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -541,7 +657,9 @@ export class FlujoOTEffects {
           flujoOTActions.aceptarRechazarIncialOTError,
           flujoOTActions.getPosibleSupervisorDeTrabajosError,
           flujoOTActions.aceptarOTProveedorError,
-          flujoOTActions.asignarSupervisorTrabajoError
+          flujoOTActions.asignarSupervisorTrabajoError,
+          flujoOTActions.solicitarPagoError,
+          flujoOTActions.aprobarRechazarOperacionesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

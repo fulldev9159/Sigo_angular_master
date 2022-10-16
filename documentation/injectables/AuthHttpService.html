@@ -93,6 +93,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getAPIVersion" >getAPIVersion</a>
+                            </li>
+                            <li>
+                                <a href="#getDatabaseVersion" >getDatabaseVersion</a>
+                            </li>
+                            <li>
                                 <a href="#logIn" >logIn</a>
                             </li>
                             <li>
@@ -164,6 +170,80 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAPIVersion"></a>
+                    <span class="name">
+                        <span ><b>getAPIVersion</b></span>
+                        <a href="#getAPIVersion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAPIVersion()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:39</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDatabaseVersion"></a>
+                    <span class="name">
+                        <span ><b>getDatabaseVersion</b></span>
+                        <a href="#getDatabaseVersion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDatabaseVersion()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;Response&lt;DatabaseVersion&gt;&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -361,7 +441,7 @@
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { environment } from &#x27;@environment&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { Response, Login } from &#x27;@model&#x27;;
+import { Response, Login,DatabaseVersion } from &#x27;@model&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
@@ -385,6 +465,19 @@ export class AuthHttpService {
       {
         proxy_id,
       }
+    );
+  }
+
+  getDatabaseVersion(): Observable&lt;Response&lt;DatabaseVersion&gt;&gt; {
+    return this.http.post&lt;Response&lt;DatabaseVersion&gt;&gt;(
+      &#x60;${this.API_URL}/configuration/flyway_schema_history/getlast&#x60;,
+      {}
+    );
+  }
+
+  getAPIVersion(): Observable&lt;Response&lt;{ api_version: string }&gt;&gt; {
+    return this.http.get&lt;Response&lt;{ api_version: string }&gt;&gt;(
+      &#x60;${this.API_URL}/configuration/api/version/get&#x60;
     );
   }
 }

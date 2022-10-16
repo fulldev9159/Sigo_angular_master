@@ -84,6 +84,18 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                        <a href="#apiVersion" 
+>
+                                            apiVersion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#databaseVersion" 
+>
+                                            databaseVersion
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#isLoggin" 
 >
                                             isLoggin
@@ -112,6 +124,72 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="apiVersion"></a>
+                                        <span class="name "><b>apiVersion</b>
+                                            <a href="#apiVersion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>apiVersion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="databaseVersion"></a>
+                                        <span class="name "><b>databaseVersion</b>
+                                            <a href="#databaseVersion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>databaseVersion:         <code><a href="../interfaces/DatabaseVersion.html" target="_self" >DatabaseVersion</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/DatabaseVersion.html" target="_self" >DatabaseVersion</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -217,7 +295,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { createReducer, on } from &#x27;@ngrx/store&#x27;;
-import { SessionData } from &#x27;@model&#x27;;
+import { DatabaseVersion, SessionData } from &#x27;@model&#x27;;
 import * as authActions from &#x27;./auth.actions&#x27;;
 import * as perfilActions from &#x27;../perfil/perfil.actions&#x27;;
 
@@ -227,12 +305,16 @@ export interface StateAuth {
   sessionData: SessionData;
   isLoggin: boolean;
   showMenuDetalleOT: boolean;
+  databaseVersion: DatabaseVersion;
+  apiVersion: string;
 }
 
 export const initialState: StateAuth &#x3D; {
   sessionData: null,
   isLoggin: false,
   showMenuDetalleOT: false,
+  databaseVersion: null,
+  apiVersion: null,
 };
 
 export const reducerAuth &#x3D; createReducer(
@@ -281,6 +363,14 @@ export const reducerAuth &#x3D; createReducer(
   on(authActions.showMenuDetalleOT, (state, { status }) &#x3D;&gt; ({
     ...state,
     showMenuDetalleOT: status,
+  })),
+  on(authActions.getDatabaseVersionSuccess, (state, { response }) &#x3D;&gt; ({
+    ...state,
+    databaseVersion: response.data,
+  })),
+  on(authActions.getAPIVersionSuccess, (state, { response }) &#x3D;&gt; ({
+    ...state,
+    apiVersion: response.data.api_version,
   }))
 );
 </code></pre>

@@ -84,10 +84,19 @@
                                 <a href="#$getUOs4Acta" >$getUOs4Acta</a>
                             </li>
                             <li>
+                                <a href="#aceptarRechazarAdicionales$" >aceptarRechazarAdicionales$</a>
+                            </li>
+                            <li>
+                                <a href="#informarTrabajosFinalizados$" >informarTrabajosFinalizados$</a>
+                            </li>
+                            <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#validarActa$" >validarActa$</a>
                             </li>
                         </ul>
                     </td>
@@ -255,6 +264,84 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="aceptarRechazarAdicionales$"></a>
+                    <span class="name">
+                        <span ><b>aceptarRechazarAdicionales$</b></span>
+                        <a href="#aceptarRechazarAdicionales$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.aceptarRechazarAdcionalesValidarActa),
+      concatMap(({ requestValidarActa, requestAdicionales }) &#x3D;&gt;
+        this.actaHttp.aceptarRechazarAdicionales(requestAdicionales).pipe(
+          map(response &#x3D;&gt;
+            actaActions.validarActa({ request: requestValidarActa })
+          ),
+          catchError(error &#x3D;&gt;
+            of(actaActions.aceptarRechazarAdcionalesValidarActaError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/store/acta/acta.effects.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="informarTrabajosFinalizados$"></a>
+                    <span class="name">
+                        <span ><b>informarTrabajosFinalizados$</b></span>
+                        <a href="#informarTrabajosFinalizados$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.informarTrabajosFinalizados),
+      concatMap(({ ot_id, observacion }) &#x3D;&gt;
+        this.actaHttp.informarTrabajosFinalizados(ot_id, observacion).pipe(
+          map(response &#x3D;&gt;
+            actaActions.informarTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(actaActions.informarTrabajosFinalizadosError({ error: err }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/store/acta/acta.effects.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="notifyAfte$"></a>
                     <span class="name">
                         <span ><b>notifyAfte$</b></span>
@@ -269,7 +356,9 @@
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaSuccess,
-          actaActions.getUOs4ActaSuccess
+          actaActions.getUOs4ActaSuccess,
+          actaActions.informarTrabajosFinalizadosSuccess,
+          actaActions.validarActaSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -279,7 +368,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/store/acta/acta.effects.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/store/acta/acta.effects.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -304,7 +393,10 @@
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaError,
-          actaActions.getUOs4ActaError
+          actaActions.getUOs4ActaError,
+          actaActions.informarTrabajosFinalizadosError,
+          actaActions.aceptarRechazarAdcionalesValidarActaError,
+          actaActions.validarActaError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -314,7 +406,42 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/store/acta/acta.effects.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/store/acta/acta.effects.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validarActa$"></a>
+                    <span class="name">
+                        <span ><b>validarActa$</b></span>
+                        <a href="#validarActa$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.validarActa),
+      concatMap(({ request }) &#x3D;&gt;
+        this.actaHttp.validarActa(request).pipe(
+          map(response &#x3D;&gt; actaActions.validarActaSuccess({ response })),
+          catchError(error &#x3D;&gt; of(actaActions.validarActaError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/store/acta/acta.effects.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -367,13 +494,61 @@ export class ActaEffects {
       )
     )
   );
+  // ENVIAR INFORME TRABAJOS FINALIZADOS ALIAS: GENERAR ACTA
+  informarTrabajosFinalizados$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.informarTrabajosFinalizados),
+      concatMap(({ ot_id, observacion }) &#x3D;&gt;
+        this.actaHttp.informarTrabajosFinalizados(ot_id, observacion).pipe(
+          map(response &#x3D;&gt;
+            actaActions.informarTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(actaActions.informarTrabajosFinalizadosError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // TODOCOMENT: REVISAR BIEN ESTÁ LOGICA DE AGRUPACION
+  // APROBAR RECHAZAR ADICIONALES Y VALIDAR ACTA
+  aceptarRechazarAdicionales$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.aceptarRechazarAdcionalesValidarActa),
+      concatMap(({ requestValidarActa, requestAdicionales }) &#x3D;&gt;
+        this.actaHttp.aceptarRechazarAdicionales(requestAdicionales).pipe(
+          map(response &#x3D;&gt;
+            actaActions.validarActa({ request: requestValidarActa })
+          ),
+          catchError(error &#x3D;&gt;
+            of(actaActions.aceptarRechazarAdcionalesValidarActaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  validarActa$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.validarActa),
+      concatMap(({ request }) &#x3D;&gt;
+        this.actaHttp.validarActa(request).pipe(
+          map(response &#x3D;&gt; actaActions.validarActaSuccess({ response })),
+          catchError(error &#x3D;&gt; of(actaActions.validarActaError({ error })))
+        )
+      )
+    )
+  );
 
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaSuccess,
-          actaActions.getUOs4ActaSuccess
+          actaActions.getUOs4ActaSuccess,
+          actaActions.informarTrabajosFinalizadosSuccess,
+          actaActions.validarActaSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -385,7 +560,10 @@ export class ActaEffects {
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaError,
-          actaActions.getUOs4ActaError
+          actaActions.getUOs4ActaError,
+          actaActions.informarTrabajosFinalizadosError,
+          actaActions.aceptarRechazarAdcionalesValidarActaError,
+          actaActions.validarActaError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

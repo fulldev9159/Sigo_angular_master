@@ -291,7 +291,10 @@ interface ServiceTableCarrito {
 }
 
 // 129 TODO: AGREGAR BOTON DETALLES
-// TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+// 173 TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+// 174 TODO: MEJORAR CSS DEL SWITCH
+// 175 TODO: VER MEJOR MANERA DE REPREENTAR LA EDICIÓN DE SERVICIOS EXISTENTES UX
+// 176 TODO: QUE NO DESPLIEGUE EL MENSAJE DE REQUERIDO CUANDO NO EXISTEN ADICIONALES
 
 @Component({
   selector: &#x27;zwc-table-servicios&#x27;,
@@ -311,7 +314,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() column_acciones: boolean &#x3D; true;
   @Input() accion_delete: boolean &#x3D; true;
   @Input() accion_detalle_materiales_uo &#x3D; false;
-  @Input() accion_aprobacion_servicio &#x3D; false;
+  @Input() accion_aprobacion_servicio_adic &#x3D; false;
 
   formTable: FormGroup &#x3D; new FormGroup({ table: new FormArray([]) });
 
@@ -433,6 +436,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
           servicio_precio_final_clp: new FormControl(
             servicio.servicio_precio_final_clp
           ),
+          validar_adicional: new FormControl(false),
           unidad_obras: new FormArray(
             servicio.unidad_obras.map(uo &#x3D;&gt; this.makeUOForm(uo))
           ),
@@ -479,12 +483,23 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     });
   }
 
+  // 177 TODO: UNIFICAR getControl
+
   getControlServiceCantidad(servicio_id: number): AbstractControl {
     const index &#x3D; (
       this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
     ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; servicio_id);
     return (this.formTable.controls[&#x27;table&#x27;] as FormArray).controls[index].get(
       &#x27;servicio_cantidad&#x27;
+    );
+  }
+
+  getControlService(servicio_id: number, control: string): AbstractControl {
+    const index &#x3D; (
+      this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
+    ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; servicio_id);
+    return (this.formTable.controls[&#x27;table&#x27;] as FormArray).controls[index].get(
+      control
     );
   }
 

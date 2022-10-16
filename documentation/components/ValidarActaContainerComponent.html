@@ -70,6 +70,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
 
 
 <section>
@@ -115,6 +122,83 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accionesOT" >accionesOT</a>
+                            </li>
+                            <li>
+                                <a href="#acta" >acta</a>
+                            </li>
+                            <li>
+                                <a href="#acta_adicionales" >acta_adicionales</a>
+                            </li>
+                            <li>
+                                <a href="#acta_originales" >acta_originales</a>
+                            </li>
+                            <li>
+                                <a href="#actaTipoPago" >actaTipoPago</a>
+                            </li>
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#ot_id" >ot_id</a>
+                            </li>
+                            <li>
+                                <a href="#servicios" >servicios</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#uos" >uos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accionExist" >accionExist</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#validarActa" >validarActa</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
 
     <section>
     <h3 id="constructor">Constructor</h3>
@@ -122,15 +206,57 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(actaFacade: <a href="../injectables/ActaFacade.html" target="_self">ActaFacade</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:49</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>actaFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActaFacade.html" target="_self" >ActaFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -139,28 +265,794 @@
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accionExist"></a>
+                    <span class="name">
+                        <span ><b>accionExist</b></span>
+                        <a href="#accionExist"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>accionExist(accion: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:140</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accion</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:178</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validarActa"></a>
+                    <span class="name">
+                        <span ><b>validarActa</b></span>
+                        <a href="#validarActa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validarActa()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:144</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accionesOT"></a>
+                    <span class="name">
+                        <span ><b>accionesOT</b></span>
+                        <a href="#accionesOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Accion.html" target="_self" >Accion[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="acta"></a>
+                    <span class="name">
+                        <span ><b>acta</b></span>
+                        <a href="#acta"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="acta_adicionales"></a>
+                    <span class="name">
+                        <span ><b>acta_adicionales</b></span>
+                        <a href="#acta_adicionales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="acta_originales"></a>
+                    <span class="name">
+                        <span ><b>acta_originales</b></span>
+                        <a href="#acta_originales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actaTipoPago"></a>
+                    <span class="name">
+                        <span ><b>actaTipoPago</b></span>
+                        <a href="#actaTipoPago"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Dropdown[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    tipo_pago: new FormControl(null, [Validators.required]),
+    // tipo_pago: new FormControl({ value: &#x27;&#x27;, disabled: true }, [
+    //   Validators.required,
+    // ]),
+    porcentaje: new FormControl(100), // 149 TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ot_id"></a>
+                    <span class="name">
+                        <span ><b>ot_id</b></span>
+                        <a href="#ot_id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="servicios"></a>
+                    <span class="name">
+                        <span ><b>servicios</b></span>
+                        <a href="#servicios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/DetalleServicio4Acta.html" target="_self" >DetalleServicio4Acta[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uos"></a>
+                    <span class="name">
+                        <span ><b>uos</b></span>
+                        <a href="#uos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/DetalleUO4Acta.html" target="_self" >DetalleUO4Acta[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import {
+  Accion,
+  ActaTipoPago,
+  CarritoService,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  Dropdown,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
+} from &#x27;@model&#x27;;
+import { ActaFacade } from &#x27;@storeOT/acta/acta.facades&#x27;;
+import { endWith, Observable, Subscription } from &#x27;rxjs&#x27;;
+
+// 142 TODO: AGREGAR LAS OBSERVACIONES
+// 143 TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
+// 144 TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCETAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
+// 145 TODO: QUITAR LOS SIN UO YA QUE SU CANTIDAD ES 0
+// 146 TODO: QUITAR LAS CANTIDADES 0
+// 147 TODO: PROGRAMAR EL BOTON INVALIDAR ACTA
+// 148 TODO: AGREGAR UNA CONFIRMACION AL VALIDAR
 
 @Component({
   selector: &#x27;zwc-validar-acta-container&#x27;,
   templateUrl: &#x27;./validar-acta-container.component.html&#x27;,
   styleUrls: [&#x27;./validar-acta-container.component.scss&#x27;],
 })
-export class ValidarActaContainerComponent {
-  constructor() {}
+export class ValidarActaContainerComponent implements OnDestroy, OnInit {
+  subscription: Subscription &#x3D; new Subscription();
+  acta: CarritoService[] &#x3D; [];
+  acta_originales: CarritoService[] &#x3D; [];
+  acta_adicionales: CarritoService[] &#x3D; [];
+  accionesOT: Accion[] &#x3D; [];
+  actaTipoPago: Dropdown[];
+
+  ot_id: number;
+
+  form: FormGroup &#x3D; new FormGroup({
+    tipo_pago: new FormControl(null, [Validators.required]),
+    // tipo_pago: new FormControl({ value: &#x27;&#x27;, disabled: true }, [
+    //   Validators.required,
+    // ]),
+    porcentaje: new FormControl(100), // 149 TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
+  });
+
+  servicios: DetalleServicio4Acta[] &#x3D; [];
+  uos: DetalleUO4Acta[] &#x3D; [];
+
+  constructor(private actaFacade: ActaFacade, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.route.data.subscribe(
+        ({ servicios4acta, uos4acta, accionesOT, actaTiposPagos }) &#x3D;&gt; {
+          console.log(accionesOT);
+          if (accionesOT) this.accionesOT &#x3D; accionesOT;
+          if (actaTiposPagos)
+            this.actaTipoPago &#x3D; (
+              actaTiposPagos.data.items as ActaTipoPago[]
+            ).map(value &#x3D;&gt; ({
+              name: value.descripcion,
+              code: value.descripcion,
+            }));
+
+          // ORGANIZAR DATA PARA TABLA
+          // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+          // 151 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+          // 152 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
+
+          let servicios &#x3D; servicios4acta?.data.items as DetalleServicio4Acta[];
+          let uob &#x3D; uos4acta?.data.items as DetalleUO4Acta[];
+
+          this.servicios &#x3D; servicios;
+          this.uos &#x3D; uob;
+
+          if (servicios &amp;&amp; servicios.length &gt; 0) {
+            this.ot_id &#x3D; servicios[0].ot_id;
+            servicios.forEach(service &#x3D;&gt; {
+              let servicioCarrito: CarritoService &#x3D; {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: &#x27;TODO&#x27;,
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                unidad_obras: [],
+              };
+
+              let uobs &#x3D; uob.filter(
+                v &#x3D;&gt;
+                  v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                  service.servicio_numero_producto
+              );
+              uobs.map(uo &#x3D;&gt;
+                this.acta.push({
+                  ...servicioCarrito,
+                  unidad_obras: [
+                    {
+                      precargado: true,
+                      uo_rowid: uo.id,
+                      uo_cantidad: uo.faltante_cantidad,
+
+                      uo_codigo: uo.unidad_obra_cod,
+                      uo_nombre: uo.unidad_obra_desc,
+                      uo_precio_total_clp: uo.valor_unitario_clp,
+                      actividad_descripcion: &#x27;TODO&#x27;,
+                      actividad_id: -1,
+                      uob_unidad_medida_cod: uo.unidad_codigo,
+                      uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                    },
+                  ],
+                })
+              );
+            });
+          }
+
+          console.log(this.acta);
+          this.acta_originales &#x3D; this.acta.filter(
+            v &#x3D;&gt; v.adicional &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+          );
+          console.log(&#x27;original&#x27;, this.acta_originales);
+          this.acta_adicionales &#x3D; this.acta.filter(
+            v &#x3D;&gt; v.adicional !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+          );
+          console.log(&#x27;adicionales&#x27;, this.acta_adicionales);
+        }
+      )
+    );
+  }
+
+  accionExist(accion: string): boolean {
+    return this.accionesOT.find(v &#x3D;&gt; v.slug &#x3D;&#x3D;&#x3D; accion) !&#x3D;&#x3D; undefined;
+  }
+
+  validarActa(): void {
+    let request_validar_acta: RequestValidarActa &#x3D; {
+      ot_id: this.ot_id,
+      tipo_pago: this.form.get(&#x27;tipo_pago&#x27;).value,
+      observacion: &#x27;&#x27;, // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
+      estado: &#x27;VALIDADO&#x27;,
+      detalle: {
+        servicio: this.servicios.map(v &#x3D;&gt; ({
+          rowid: v.id,
+          cantidad: v.faltante_cantidad,
+          porcentaje: 100,
+        })),
+        unidad_obra: this.uos.map(v &#x3D;&gt; ({
+          rowid: v.id,
+          cantidad: v.faltante_cantidad,
+          porcentaje: 100,
+        })),
+      },
+    };
+
+    let adicionales_id &#x3D; this.acta_adicionales.map(v &#x3D;&gt; v.servicio_rowid);
+
+    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales &#x3D; {
+      ot_id: this.ot_id,
+      adicionales_aceptados: [...new Set(adicionales_id)],
+      adicionales_rechazados: [],
+    };
+
+    this.actaFacade.aceptarRechazarAdicionales(
+      request_validar_acta,
+      request_aprobar_adicionales
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;validar-acta-container works!&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-acta&quot;&gt;
+    &lt;h1&gt;Validación del Acta&lt;/h1&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Autorizar Adicionales&lt;/span&gt;
+    &lt;/p-divider&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 table-autorizar-adicionales&quot;&gt;
+                &lt;zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source&#x3D;&quot;static&quot;
+                    [data_source]&#x3D;&quot;acta_adicionales&quot; [cantidad_editable]&#x3D;&quot;false&quot; [column_acciones]&#x3D;&quot;true&quot;
+                    [accion_delete]&#x3D;&quot;false&quot; [accion_aprobacion_servicio_adic]&#x3D;&quot;true&quot;&gt;
+                &lt;/zwc-table-servicios&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Servicios cubicados&lt;/span&gt;
+    &lt;/p-divider&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 table-servicios-cubicados&quot;&gt;
+                &lt;zwc-table-servicios #tableServicioCubicados mode_source&#x3D;&quot;static&quot; [data_source]&#x3D;&quot;acta_originales&quot;
+                    [cantidad_editable]&#x3D;&quot;false&quot; [column_acciones]&#x3D;&quot;false&quot;&gt;
+                &lt;/zwc-table-servicios&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Observaciones&lt;/span&gt;
+    &lt;/p-divider&gt;
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+
+    &lt;!-- 181 TODO: QUE LA SELECCION DE TIPO DE PAGO APAREZCA SOLO SI APRUEBA TODOS LOS ADICIONALES --&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Escoger tipo de pago del acta&lt;/span&gt;
+    &lt;/p-divider&gt;
+
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;tipo_pago&#x27;)&quot; Label&#x3D;&quot;*Tipo de pago&quot; dropdown_id&#x3D;&quot;select-tipo-pago&quot;
+                    [data]&#x3D;&quot;actaTipoPago&quot; Pplaceholder&#x3D;&quot;Selecione un tipo pago&quot;&gt;&lt;/zwc-pdropdown&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;card&quot; *ngIf&#x3D;&quot;form.get(&#x27;tipo_pago&#x27;).value!&#x3D;&#x3D;null&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+                &lt;h2&gt;Resumen del acta a aprobar&lt;/h2&gt;
+
+                &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;tipo_pago&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;TOTAL&#x27;&quot;&gt;
+                    &lt;zwc-table-servicios mode_source&#x3D;&quot;static&quot; [data_source]&#x3D;&quot;acta&quot; [cantidad_editable]&#x3D;&quot;false&quot;
+                        [column_acciones]&#x3D;&quot;false&quot;&gt;
+                    &lt;/zwc-table-servicios&gt;
+                &lt;/ng-container&gt;
+
+                &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;tipo_pago&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;PORCENTAJE&#x27;&quot;&gt;
+                    &lt;label&gt;Porcentaje a pagar&lt;/label&gt;
+                    &lt;p-inputNumber [formControl]&#x3D;&quot;form.get(&#x27;porcentaje&#x27;)&quot; suffix&#x3D;&quot;%&quot; [min]&#x3D;&quot;0&quot; [max]&#x3D;&quot;100&quot;&gt;
+                    &lt;/p-inputNumber&gt;
+                    &lt;zwc-table-servicios mode_source&#x3D;&quot;static&quot; [data_source]&#x3D;&quot;acta&quot; [cantidad_editable]&#x3D;&quot;false&quot;
+                        [column_acciones]&#x3D;&quot;false&quot;&gt;
+                    &lt;/zwc-table-servicios&gt;
+                &lt;/ng-container&gt;
+
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+    &lt;/p-divider&gt;
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;button pButton pRipple type&#x3D;&quot;button&quot; id&#x3D;&quot;button-atrás&quot; class&#x3D;&quot;p-button-outlined&quot;&gt;
+                    Atrás
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_VALIDAR_ACTA&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pbutton-sending Pid&#x3D;&quot;validar-acta-button&quot; content&#x3D;&quot;Validar acta&quot;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;validarActa()&quot;&gt;&lt;/zwc-pbutton-sending&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -195,8 +1087,8 @@ export class ValidarActaContainerComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>validar-acta-container works!</p></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasComponent', 'selector': 'zwc-list-actas'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container-acta">    <h1>Validación del Acta</h1>    <p-divider align="center">        <span class="p-tag">Autorizar Adicionales</span>    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 table-autorizar-adicionales">                <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static"                    [data_source]="acta_adicionales" [cantidad_editable]="false" [column_acciones]="true"                    [accion_delete]="false" [accion_aprobacion_servicio_adic]="true">                </zwc-table-servicios>            </div>        </div>    </div>    <p-divider align="center">        <span class="p-tag">Servicios cubicados</span>    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 table-servicios-cubicados">                <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"                    [cantidad_editable]="false" [column_acciones]="false">                </zwc-table-servicios>            </div>        </div>    </div>    <p-divider align="center">        <span class="p-tag">Observaciones</span>    </p-divider>    <div class="card">        <div class=" grid">        </div>    </div>    <!-- 181 TODO: QUE LA SELECCION DE TIPO DE PAGO APAREZCA SOLO SI APRUEBA TODOS LOS ADICIONALES -->    <p-divider align="center">        <span class="p-tag">Escoger tipo de pago del acta</span>    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pdropdown [control]="form.get(\'tipo_pago\')" Label="*Tipo de pago" dropdown_id="select-tipo-pago"                    [data]="actaTipoPago" Pplaceholder="Selecione un tipo pago"></zwc-pdropdown>            </div>        </div>    </div>    <div class="card" *ngIf="form.get(\'tipo_pago\').value!==null">        <div class=" grid">            <div class="field col-12 ">                <h2>Resumen del acta a aprobar</h2>                <ng-container *ngIf="form.get(\'tipo_pago\').value===\'TOTAL\'">                    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"                        [column_acciones]="false">                    </zwc-table-servicios>                </ng-container>                <ng-container *ngIf="form.get(\'tipo_pago\').value===\'PORCENTAJE\'">                    <label>Porcentaje a pagar</label>                    <p-inputNumber [formControl]="form.get(\'porcentaje\')" suffix="%" [min]="0" [max]="100">                    </p-inputNumber>                    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"                        [column_acciones]="false">                    </zwc-table-servicios>                </ng-container>            </div>        </div>    </div>    <p-divider align="center">    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">                    Atrás                </button>            </div>            <div *ngIf="accionExist(\'OT_VALIDAR_ACTA\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()"></zwc-pbutton-sending>            </div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'ValidarActaContainerComponent'};
 </script>

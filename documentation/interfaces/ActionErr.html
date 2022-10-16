@@ -194,6 +194,8 @@ import * as otActions from &#x27;@storeOT/ot/ot.actions&#x27;;
 import * as flujoOTActions from &#x27;@storeOT/flujo-ot/flujo-ot.actions&#x27;;
 import * as serviciosActions from &#x27;@storeOT/servicios/servicios.actions&#x27;;
 import * as informeAvanceActions from &#x27;@storeOT/informe-avance/informe-avance.actions&#x27;;
+import * as actaActions from &#x27;@storeOT/acta/acta.actions&#x27;;
+import * as otDetalleActions from &#x27;@storeOT/ot-detalle/ot-detalle.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
@@ -348,25 +350,23 @@ export class AfterHttpService {
     }
 
     // ACEPTAR OT INICIAL
-    // 70 TODO: AGREGAR UN MENSAJE
-    // 71 TODO: USAR BIEN LOS FILTROS
-    if (
-      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
-      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type
-    ) {
-      let filtros &#x3D; {
-        filtro_propietario: &#x27;TODAS&#x27;,
-        filtro_tipo: 0,
-      };
-      this.otFacade.getBandejaOT({
-        filtro_pestania: &#x27;EN_EJECUCION&#x27;,
-        ...filtros,
-      });
-      this.otFacade.getBandejaOT({
-        filtro_pestania: &#x27;ABIERTAS&#x27;,
-        ...filtros,
-      });
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Aprobación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.reloadTableOT();
     }
+
+    // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Asignación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.reloadTableOT();
+    }
+
+    // 70 TODO: AGREGAR UN MENSAJE
+    // if (
+    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarPagoSuccess.type ||
+    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aprobarRechazarOperacionesSuccess.type
+    // ) {
+    // }
 
     // ENVÍO DE INFORME DE AVANCE
     if (
@@ -392,6 +392,61 @@ export class AfterHttpService {
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
+
+    // GENERAR ACTA / INFORMAR TRABAJOS FINALIZADOS
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.informarTrabajosFinalizadosSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // APROBAR/RECHAZAR ACTA Y VALIDAR ACTA
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.validarActaSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // SOLICITAR PAGO
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarPagoSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Envío de solicitud exitosa&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.reloadTableOT();
+    }
+
+    // AGREGAR REGISTRO LIBRO OBRAS
+    if (action.type &#x3D;&#x3D;&#x3D; otDetalleActions.createRegistroLibroObrasSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Registro subido exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+    }
+  }
+
+  // 71 TODO: USAR BIEN LOS FILTROS
+  reloadTableOT(): void {
+    let filtros &#x3D; {
+      filtro_propietario: &#x27;TODAS&#x27;,
+      filtro_tipo: 0,
+    };
+    this.otFacade.getBandejaOT({
+      filtro_pestania: &#x27;EN_EJECUCION&#x27;,
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: &#x27;ABIERTAS&#x27;,
+      ...filtros,
+    });
   }
 }
 </code></pre>

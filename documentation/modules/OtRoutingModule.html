@@ -78,6 +78,7 @@ import { ContratosUsuarioResolver } from &#x27;src/app/core/resolvers/contratos-
 import { FormOtContainerComponent } from &#x27;./containers/form-ot-container/form-ot-container.component&#x27;;
 import { ListOtContainerComponent } from &#x27;./containers/list-ot-container/list-ot-container.component&#x27;;
 import { OtComponent } from &#x27;./ot.component&#x27;;
+import { CategoriaArchivosResolver } from &#x27;./resolvers/categoriaArchivos.resolver&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -88,6 +89,9 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;list-ot&#x27;,
         component: ListOtContainerComponent,
+        resolve: {
+          categoriaArchivos: CategoriaArchivosResolver,
+        },
       },
       {
         path: &#x27;form-ot&#x27;,

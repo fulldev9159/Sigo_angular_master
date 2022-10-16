@@ -196,10 +196,6 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#resetDetalleCubicacion" >resetDetalleCubicacion</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#resetProveedorSelected" >resetProveedorSelected</a>
                             </li>
                         </ul>
@@ -826,7 +822,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>detalleCubicacionSuccess(response: Response<DetalleCubicacion>)</code>
+                    <code>detalleCubicacionSuccess(detalleCubicacion: <a href="../interfaces/DetalleCubicacion.html" target="_self">DetalleCubicacion</a>)</code>
                 </td>
             </tr>
 
@@ -855,9 +851,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>response</td>
+                                    <td>detalleCubicacion</td>
                                     <td>
-                                            <code>Response&lt;DetalleCubicacion&gt;</code>
+                                                <code><a href="../interfaces/DetalleCubicacion.html" target="_self" >DetalleCubicacion</a></code>
                                     </td>
 
                                     <td>
@@ -1959,45 +1955,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resetDetalleCubicacion"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>resetDetalleCubicacion</b></span>
-                        <a href="#resetDetalleCubicacion"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>resetDetalleCubicacion()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="175"
-                            class="link-to-prism">src/app/store/cubicacion/cubicacion.facades.ts:175</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="resetProveedorSelected"></a>
                     <span class="name">
                         <span class="modifier">Public</span>
@@ -2158,9 +2115,9 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.detalleCubicacion({ cubicacion_id }));
   }
 
-  public detalleCubicacionSuccess(response: Response&lt;DetalleCubicacion&gt;): void {
+  public detalleCubicacionSuccess(detalleCubicacion: DetalleCubicacion): void {
     this.store.dispatch(
-      cubicacionActions.detalleCubicacionSuccess({ response })
+      cubicacionActions.detalleCubicacionSuccess({ detalleCubicacion })
     );
   }
   public detalleCubicacionError(error: any): void {
@@ -2212,9 +2169,6 @@ export class CubicacionFacade {
   }
   public resetAgenciaSelected(): void {
     this.store.dispatch(cubicacionActions.resetAgenciaSelected());
-  }
-  public resetDetalleCubicacion(): void {
-    this.store.dispatch(cubicacionActions.resetDetalleCubicacion());
   }
 }
 </code></pre>

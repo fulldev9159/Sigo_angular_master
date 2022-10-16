@@ -152,7 +152,13 @@
                                 <a href="#displayModalAgregarRegistroLibroDeObras" >displayModalAgregarRegistroLibroDeObras</a>
                             </li>
                             <li>
+                                <a href="#displayModalAprobacionOperaciones" >displayModalAprobacionOperaciones</a>
+                            </li>
+                            <li>
                                 <a href="#displayModalRechazoOrdenDeTrabajo" >displayModalRechazoOrdenDeTrabajo</a>
+                            </li>
+                            <li>
+                                <a href="#displayModalSolicitudPago" >displayModalSolicitudPago</a>
                             </li>
                             <li>
                                 <a href="#form" >form</a>
@@ -176,6 +182,9 @@
                                 <a href="#posibleSupervisorDeTrabajo$" >posibleSupervisorDeTrabajo$</a>
                             </li>
                             <li>
+                                <a href="#registrarLibroObraForm" >registrarLibroObraForm</a>
+                            </li>
+                            <li>
                                 <a href="#subscription" >subscription</a>
                             </li>
                         </ul>
@@ -194,7 +203,13 @@
                                 <a href="#aceptarOrdenProveedor" >aceptarOrdenProveedor</a>
                             </li>
                             <li>
+                                <a href="#aprobarActaOperaciones" >aprobarActaOperaciones</a>
+                            </li>
+                            <li>
                                 <a href="#confirmarAceptacionOTInicial" >confirmarAceptacionOTInicial</a>
+                            </li>
+                            <li>
+                                <a href="#confirmarSolicitarPago" >confirmarSolicitarPago</a>
                             </li>
                             <li>
                                 <a href="#findAccion" >findAccion</a>
@@ -206,10 +221,16 @@
                                 <a href="#openModalAceptacionOTProveedor" >openModalAceptacionOTProveedor</a>
                             </li>
                             <li>
+                                <a href="#rechazarActaOperaciones" >rechazarActaOperaciones</a>
+                            </li>
+                            <li>
                                 <a href="#rechazarOrdenProveedor" >rechazarOrdenProveedor</a>
                             </li>
                             <li>
                                 <a href="#rechazarOTInicial" >rechazarOTInicial</a>
+                            </li>
+                            <li>
+                                <a href="#registrarLibroObras" >registrarLibroObras</a>
                             </li>
                         </ul>
                     </td>
@@ -246,12 +267,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(flujoOTFacade: <a href="../injectables/FlujoOTFacade.html" target="_self">FlujoOTFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
+<code>constructor(flujoOTFacade: <a href="../injectables/FlujoOTFacade.html" target="_self">FlujoOTFacade</a>, otDetalleFacade: <a href="../injectables/OTDetalleFacade.html" target="_self">OTDetalleFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -273,6 +294,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/FlujoOTFacade.html" target="_self" >FlujoOTFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>otDetalleFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OTDetalleFacade.html" target="_self" >OTDetalleFacade</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -319,7 +352,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:42</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -340,7 +373,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:43</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -374,8 +407,45 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="104"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:104</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:123</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="aprobarActaOperaciones"></a>
+                    <span class="name">
+                        <span ><b>aprobarActaOperaciones</b></span>
+                        <a href="#aprobarActaOperaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>aprobarActaOperaciones()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="151"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:151</a></div>
                 </td>
             </tr>
 
@@ -411,8 +481,45 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="79"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:79</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:97</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarSolicitarPago"></a>
+                    <span class="name">
+                        <span ><b>confirmarSolicitarPago</b></span>
+                        <a href="#confirmarSolicitarPago"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmarSolicitarPago()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:146</a></div>
                 </td>
             </tr>
 
@@ -448,8 +555,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:139</a></div>
                 </td>
             </tr>
 
@@ -517,8 +624,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:183</a></div>
                 </td>
             </tr>
 
@@ -554,8 +661,45 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="96"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:96</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rechazarActaOperaciones"></a>
+                    <span class="name">
+                        <span ><b>rechazarActaOperaciones</b></span>
+                        <a href="#rechazarActaOperaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>rechazarActaOperaciones()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="160"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:160</a></div>
                 </td>
             </tr>
 
@@ -591,8 +735,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="119"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:119</a></div>
                 </td>
             </tr>
 
@@ -628,8 +772,45 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:91</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarLibroObras"></a>
+                    <span class="name">
+                        <span ><b>registrarLibroObras</b></span>
+                        <a href="#registrarLibroObras"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>registrarLibroObras()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:163</a></div>
                 </td>
             </tr>
 
@@ -669,7 +850,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -694,7 +875,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -719,7 +900,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -744,7 +925,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -769,7 +950,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -794,7 +975,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayModalAprobacionOperaciones"></a>
+                    <span class="name">
+                        <span ><b>displayModalAprobacionOperaciones</b></span>
+                        <a href="#displayModalAprobacionOperaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -819,7 +1025,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayModalSolicitudPago"></a>
+                    <span class="name">
+                        <span ><b>displayModalSolicitudPago</b></span>
+                        <a href="#displayModalSolicitudPago"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -850,7 +1081,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -883,7 +1114,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -908,7 +1139,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -939,7 +1170,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -964,7 +1195,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -989,7 +1220,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -1033,7 +1264,42 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarLibroObraForm"></a>
+                    <span class="name">
+                        <span ><b>registrarLibroObraForm</b></span>
+                        <a href="#registrarLibroObraForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/RegistrarLibroObrasComponent.html" target="_self" >RegistrarLibroObrasComponent</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(RegistrarLibroObrasComponent)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -1064,7 +1330,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/ot/components/list-ot-table-operaciones/list-ot-table-operaciones.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -1077,7 +1343,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import {
   faBook,
@@ -1087,10 +1353,18 @@ import {
   faSquareCheck,
   faSquareXmark,
 } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
-import { Accion, Dropdown, RequestAceptarRechazarOT } from &#x27;@model&#x27;;
+import {
+  Accion,
+  Dropdown,
+  RequestAceptarRechazarOT,
+  RequestAprobarRechazarOperaciones,
+  RequestCreateRegistroLibroObra,
+} from &#x27;@model&#x27;;
 import { FlujoOTFacade } from &#x27;@storeOT/flujo-ot/flujo-ot.facades&#x27;;
 import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { OTDetalleFacade } from &#x27;@storeOT/ot-detalle/ot-detalle.facades&#x27;;
 import { map, Observable, Subscription } from &#x27;rxjs&#x27;;
+import { RegistrarLibroObrasComponent } from &#x27;../registrar-libro-obras/registrar-libro-obras.component&#x27;;
 
 @Component({
   selector: &#x27;zwc-list-ot-table-operaciones&#x27;,
@@ -1100,14 +1374,21 @@ import { map, Observable, Subscription } from &#x27;rxjs&#x27;;
 export class ListOtTableOperacionesComponent implements OnDestroy {
   subscription: Subscription &#x3D; new Subscription();
 
-  // 83 TODO: MIGRAR INFORMACIONES
-  // 84 TODO: MIGRAR AGREGAR REGISTRO LIBRO DE OBRAS
-  // 85 TODO: MIGRAR VER LIBRO DE OBRAS
   // 86 TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
   // 87 TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS
   // 88 TODO: MIGRAR CASO EN QUE FALLE EL ACEPTAR OT PROVEEDOR Y SE DEBA EMPEZAR EN LA ETAPA DE ASIGNACION
+  // 161 TODO: PROGRAMAR EL RECHAZO DEL ACTA POR PARTE DE OPERACIONES
+  // 162 TODO: MIGRAR LOS TOUCH Y INVALID FORM DEL  REGISTRO DE LIBRO DE OBRAS
+  // 163 TODO: AGREGAR EL SPINNER AL BOTON DE REGISTRO LIBRO DE OBRAS
+  // 164 TODO: MEJORAR EL UX CUANDO SE CIERRA EL MODAL DEL REGISTRO DE OBRAS DEBE ESPERAR A QUE TERMINE EL ENDPOINT
+  // 165 TODO: AGREGAR SPINNER O LOADING CUANDO PRECIONE PLAY
+  // 166 TODO:  MIGRAR EL CERRAR OT
+  // 167 TODO: MIGRAR EL ACEPTAR QUIEBRE
   @Input() acciones: Accion[];
   @Input() ot_id: number;
+
+  @ViewChild(RegistrarLibroObrasComponent)
+  registrarLibroObraForm: RegistrarLibroObrasComponent;
 
   infoIcon &#x3D; faCircleInfo;
   medicalIcon &#x3D; faBookMedical;
@@ -1119,6 +1400,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalAceptarInicial &#x3D; false;
   displayModalRechazoOrdenDeTrabajo &#x3D; false;
   displayModalAceptarProveedor &#x3D; false;
+  displayModalSolicitudPago &#x3D; false;
+  displayModalAprobacionOperaciones &#x3D; false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable&lt;Dropdown[]&gt; &#x3D; this.flujoOTFacade
@@ -1151,6 +1434,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
+    private otDetalleFacade: OTDetalleFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
 
@@ -1180,6 +1464,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   rechazarOrdenProveedor(): void {
     this.displayModalRechazoOrdenDeTrabajo &#x3D; true;
   }
+
   aceptarOrdenProveedor(): void {
     const request: RequestAceptarRechazarOT &#x3D; {
       ot_id: this.ot_id,
@@ -1201,6 +1486,43 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
       this.acciones &amp;&amp;
       this.acciones.find(value &#x3D;&gt; value.slug &#x3D;&#x3D;&#x3D; accion) !&#x3D;&#x3D; undefined
     );
+  }
+
+  confirmarSolicitarPago(): void {
+    this.flujoOTFacade.solicitarPago(this.ot_id);
+    this.displayModalSolicitudPago &#x3D; false;
+  }
+
+  aprobarActaOperaciones(): void {
+    const request: RequestAprobarRechazarOperaciones &#x3D; {
+      ot_id: this.ot_id,
+      estado: &#x27;APROBAR&#x27;,
+    };
+    this.flujoOTFacade.aprobarRechazarOperaciones(request);
+    this.displayModalAprobacionOperaciones &#x3D; false;
+  }
+
+  rechazarActaOperaciones(): void {}
+
+  // ACCIONES REGISTRAR LIBRO DE OBAS
+  registrarLibroObras(): void {
+    if (this.registrarLibroObraForm.valid) {
+      const request_registrar_libroObras: RequestCreateRegistroLibroObra &#x3D; {
+        ot_id: this.ot_id,
+        observaciones:
+          this.registrarLibroObraForm.form.get(&#x27;observaciones&#x27;).value,
+      };
+
+      this.registrarLibroObraForm.filesform.clear();
+
+      this.otDetalleFacade.subirArchivoLibroObrasYregistrarLibroObras(
+        +this.registrarLibroObraForm.form.get(&#x27;categoria&#x27;).value,
+        this.registrarLibroObraForm.uploadedFiles[&#x27;files&#x27;],
+        request_registrar_libroObras
+      );
+
+      this.displayModalAgregarRegistroLibroDeObras &#x3D; false;
+    }
   }
 
   ngOnDestroy(): void {
@@ -1228,7 +1550,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
     &lt;!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS--&gt;
     &lt;!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC --&gt;
-    &lt;!-- TODO: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO --&gt;
+    &lt;!-- TODOCOMENT: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO --&gt;
     &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Editar/enviar informe avance&quot;
         [routerLink]&#x3D;&quot;[&#x27;/informe-avance/informe-avance&#x27;,ot_id]&quot;
         *ngIf&#x3D;&quot;findAccion(&#x27;OT_EDITAR_INFORME_AVANCE&#x27;)||findAccion(&#x27;OT_ENVIAR_INFORME_AVANCE&#x27;)||findAccion(&#x27;OT_AUTORIZAR_INFORME_AVANCE&#x27;)&quot;&gt;
@@ -1237,18 +1559,43 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
 
     &lt;!-- OT_ET_PAGO_GENERACION_ACTA --&gt;
-    &lt;!-- TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE --&gt;
+    &lt;!-- 182 TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE --&gt;
     &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Generar Acta&quot; [routerLink]&#x3D;&quot;[&#x27;/acta/generar-acta&#x27;,ot_id]&quot;
         *ngIf&#x3D;&quot;findAccion(&#x27;OT_GENERAR_ACTA&#x27;)&quot;&gt;
         &lt;fa-icon [icon]&#x3D;&quot;playIcon&quot;&gt;&lt;/fa-icon&gt;
     &lt;/button&gt;
 
+    &lt;!-- OT_ET_PAGO_VALIDACION_ACTA_GESTOR --&gt;
+    &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Validar Acta&quot; [routerLink]&#x3D;&quot;[&#x27;/acta/validar-acta&#x27;,ot_id]&quot;
+        *ngIf&#x3D;&quot;findAccion(&#x27;OT_VALIDAR_ACTA&#x27;)&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;playIcon&quot;&gt;&lt;/fa-icon&gt;
+    &lt;/button&gt;
+
+    &lt;!-- OT_ET_PAGO_SOLICITUD_PAGO --&gt;
+    &lt;!-- 183 TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES --&gt;
+    &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Solicitar Pago&quot; *ngIf&#x3D;&quot;findAccion(&#x27;OT_SOLICITAR_PAGO&#x27;)&quot;
+        (click)&#x3D;&quot;displayModalSolicitudPago&#x3D;true&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;playIcon&quot;&gt;&lt;/fa-icon&gt;
+    &lt;/button&gt;
+
+    &lt;!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES --&gt;
+    &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Aprobar Obras&quot; *ngIf&#x3D;&quot;findAccion(&#x27;OT_APROBACION_OPERACIONES&#x27;)&quot;
+        (click)&#x3D;&quot;displayModalAprobacionOperaciones&#x3D;true&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;playIcon&quot;&gt;&lt;/fa-icon&gt;
+    &lt;/button&gt;
+
+    &lt;!-- OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO --&gt;
+    &lt;button id&#x3D;&quot;play-button&quot; pTooltip&#x3D;&quot;Autorizar pago Acta&quot; [routerLink]&#x3D;&quot;[&#x27;/acta/validar-pago-acta&#x27;,ot_id]&quot;
+        *ngIf&#x3D;&quot;findAccion(&#x27;OT_AUTORIZAR_PAGOS&#x27;)&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;playIcon&quot;&gt;&lt;/fa-icon&gt;
+    &lt;/button&gt;
+
     &lt;!-- ACCIONES FIJAS --&gt;
-    &lt;button id&#x3D;&quot;info-button&quot; pTooltip&#x3D;&quot;Información&quot;&gt;
+    &lt;button id&#x3D;&quot;info-button&quot; pTooltip&#x3D;&quot;Información&quot; [routerLink]&#x3D;&quot;[&#x27;/ot-detalle/informacion&#x27;,ot_id]&quot;&gt;
         &lt;fa-icon [icon]&#x3D;&quot;infoIcon&quot;&gt;&lt;/fa-icon&gt;
     &lt;/button&gt;
 
-    &lt;button id&#x3D;&quot;ver-libro-obras-button&quot; pTooltip&#x3D;&quot;Ver libro de obras&quot;&gt;
+    &lt;button id&#x3D;&quot;ver-libro-obras-button&quot; pTooltip&#x3D;&quot;Ver libro de obras&quot; [routerLink]&#x3D;&quot;[&#x27;/ot-detalle/libro-obras&#x27;,ot_id]&quot;&gt;
         &lt;fa-icon [icon]&#x3D;&quot;bookIcon&quot;&gt;&lt;/fa-icon&gt;
     &lt;/button&gt;
 
@@ -1256,7 +1603,6 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
         *ngIf&#x3D;&quot;findAccion(&#x27;OT_REGISTRAR_LIBRO_OBRAS&#x27;)&quot; (click)&#x3D;&quot;displayModalAgregarRegistroLibroDeObras&#x3D;true&quot;&gt;
         &lt;fa-icon [icon]&#x3D;&quot;medicalIcon&quot;&gt;&lt;/fa-icon&gt;
     &lt;/button&gt;
-
 
 &lt;/div&gt;
 
@@ -1266,6 +1612,13 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
 &lt;p-dialog header&#x3D;&quot;Agregar registro a libro de obras&quot; [(visible)]&#x3D;&quot;displayModalAgregarRegistroLibroDeObras&quot;
     [draggable]&#x3D;&quot;false&quot; [modal]&#x3D;&quot;true&quot;&gt;
+
+    &lt;zwc-registrar-libro-obras #registrarLibroObraForm&gt;&lt;/zwc-registrar-libro-obras&gt;
+    &lt;ng-template pTemplate&#x3D;&quot;footer&quot;&gt;
+        &lt;zwc-pbutton-sending Pid&#x3D;&quot;subir-registro&quot; content&#x3D;&quot;Subir registro&quot;
+            Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; [Pdisabled]&#x3D;&quot;!registrarLibroObraForm.valid&quot;
+            [sending]&#x3D;&quot;sendingCreateOT$|async&quot; (call)&#x3D;&quot;registrarLibroObras()&quot;&gt;&lt;/zwc-pbutton-sending&gt;
+    &lt;/ng-template&gt;
 
 &lt;/p-dialog&gt;
 
@@ -1287,12 +1640,14 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
 
 &lt;!-- OT_ET_AUTORIZACION_PROVEEDOR --&gt;
+&lt;!-- 184 TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN --&gt;
 &lt;p-dialog header&#x3D;&quot;Aceptación de la orden de trabajo&quot; [(visible)]&#x3D;&quot;displayModalAceptarProveedor&quot; [draggable]&#x3D;&quot;false&quot;
     [modal]&#x3D;&quot;true&quot; [style]&#x3D;&quot;{heigth: &#x27;50vh&#x27;}&quot;&gt;
     &lt;p&gt; Order de trabajo ID: {{ot_id}}&lt;/p&gt;
-    &lt;p&gt;Si acepta esta orden de trabajo, escoja el supervisor de trabajos que la realizará&lt;/p&gt;
+    &lt;p&gt;Escoja el supervisor de trabajos que la realizará el trabajo en caso de aceptar realizar la orden&lt;/p&gt;
+    &lt;br&gt;
     &lt;form novalidate autocomplete&#x3D;&quot;off&quot; [formGroup]&#x3D;&quot;form&quot;&gt;
-        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;trabajador_id&#x27;)&quot; Label&#x3D;&quot;*Supervisor&quot;
+        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;trabajador_id&#x27;)&quot; Label&#x3D;&quot;* Supervisor&quot;
             dropdown_id&#x3D;&quot;select-supervisor-trabajos&quot; [data]&#x3D;&quot;posibleSupervisorDeTrabajo$|async&quot;
             Pplaceholder&#x3D;&quot;Selecione una persona&quot; [loading]&#x3D;&quot;loadingPosibleSupervisorDeTrabajos$|async&quot;&gt;&lt;/zwc-pdropdown&gt;
     &lt;/form&gt;
@@ -1301,14 +1656,32 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     &lt;div class&#x3D;&quot;container-button-confirmar&quot;&gt;
         &lt;button pButton pRipple type&#x3D;&quot;button&quot; id&#x3D;&quot;button-cancelar&quot; class&#x3D;&quot;p-button-outlined&quot;
             (click)&#x3D;&quot;rechazarOrdenProveedor()&quot;&gt;
-            &lt;fa-icon [icon]&#x3D;&quot;cancelIcon&quot; style&#x3D;&quot;color: #ccc;&quot;&gt;&lt;/fa-icon&gt;
             Rechazar Orden
         &lt;/button&gt;
         &lt;button pButton type&#x3D;&quot;button&quot; id&#x3D;&quot;button-confirmar&quot; (click)&#x3D;&quot;aceptarOrdenProveedor()&quot;&gt;
-            &lt;fa-icon [icon]&#x3D;&quot;checkIcon&quot;&gt;&lt;/fa-icon&gt;
             Aceptar Orden
         &lt;/button&gt;
     &lt;/div&gt;
+&lt;/p-dialog&gt;
+
+
+
+&lt;!-- OT_ET_PAGO_SOLICITUD_PAGO --&gt;
+&lt;p-dialog header&#x3D;&quot;Solicitud de pago&quot; [(visible)]&#x3D;&quot;displayModalSolicitudPago&quot; [draggable]&#x3D;&quot;false&quot; [modal]&#x3D;&quot;true&quot;&gt;
+    Order de trabajo ID: {{ot_id}}
+    &lt;zwc-view-confirmacion pregunta&#x3D;&#x27;¿Comfirma solicitar pago?&#x27; (cancelar)&#x3D;&quot;displayModalSolicitudPago&#x3D;false&quot;
+        (confirmar)&#x3D;&quot;confirmarSolicitarPago()&quot; textConfirmar&#x3D;&quot;Confirmar&quot;&gt;
+    &lt;/zwc-view-confirmacion&gt;
+&lt;/p-dialog&gt;
+
+
+&lt;!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES --&gt;
+&lt;p-dialog header&#x3D;&quot;Aceptación acta&quot; [(visible)]&#x3D;&quot;displayModalAprobacionOperaciones&quot; [draggable]&#x3D;&quot;false&quot; [modal]&#x3D;&quot;true&quot;&gt;
+    Order de trabajo ID: {{ot_id}}
+
+    &lt;zwc-view-confirmacion pregunta&#x3D;&#x27;¿Desea aprobar esta acta?&#x27; (cancelar)&#x3D;&quot;rechazarActaOperaciones()&quot;
+        textCancel&#x3D;&quot;Rechazar Acta&quot; (confirmar)&#x3D;&quot;aprobarActaOperaciones()&quot; textConfirmar&#x3D;&quot;Aprobar Acta&quot;&gt;
+    &lt;/zwc-view-confirmacion&gt;
 &lt;/p-dialog&gt;</code></pre>
     </div>
 
@@ -1322,9 +1695,11 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
     button {
         cursor: pointer;
-        padding: 6px;
-        border: 0.05rem solid;
+        padding: 7px;
+        border: 0.05rem solid #b3b3b7;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 2rem;
     }
 }
 
@@ -1343,7 +1718,6 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
         cursor: pointer;
 
         fa-icon {
-            margin-right: 9px;
             font-size: 0.9rem;
             color: #fff;
         }
@@ -1376,8 +1750,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container-acciones">    <!-- PLAY CONTINUAR -->    <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion(\'OT_ACEPTAR_INICIAL\')"        (click)="displayModalAceptarInicial=true">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_AUTORIZACION_PROVEEDOR ADMIN EECC-->    <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion(\'OT_ACEPTAR_PROVEEDOR\')"        (click)="openModalAceptacionOTProveedor()">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->    <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->    <!-- TODO: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->    <button id="play-button" pTooltip="Editar/enviar informe avance"        [routerLink]="[\'/informe-avance/informe-avance\',ot_id]"        *ngIf="findAccion(\'OT_EDITAR_INFORME_AVANCE\')||findAccion(\'OT_ENVIAR_INFORME_AVANCE\')||findAccion(\'OT_AUTORIZAR_INFORME_AVANCE\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_GENERACION_ACTA -->    <!-- TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->    <button id="play-button" pTooltip="Generar Acta" [routerLink]="[\'/acta/generar-acta\',ot_id]"        *ngIf="findAccion(\'OT_GENERAR_ACTA\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- ACCIONES FIJAS -->    <button id="info-button" pTooltip="Información">        <fa-icon [icon]="infoIcon"></fa-icon>    </button>    <button id="ver-libro-obras-button" pTooltip="Ver libro de obras">        <fa-icon [icon]="bookIcon"></fa-icon>    </button>    <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"        *ngIf="findAccion(\'OT_REGISTRAR_LIBRO_OBRAS\')" (click)="displayModalAgregarRegistroLibroDeObras=true">        <fa-icon [icon]="medicalIcon"></fa-icon>    </button></div><!-- MODALS --><p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"    [draggable]="false" [modal]="true"></p-dialog><!-- OT_ET_AUTORIZACION_INICIAL --><p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"    [modal]="true">    Order de trabajo ID: {{ot_id}}    <zwc-view-confirmacion pregunta=\'¿Desea aceptar la continuidad de la orden de trabajo?\'        (cancelar)="rechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"        textConfirmar="Aceptar OT">    </zwc-view-confirmacion></p-dialog><p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"    [modal]="true">    <zwc-view-rechazo></zwc-view-rechazo></p-dialog><!-- OT_ET_AUTORIZACION_PROVEEDOR --><p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"    [modal]="true" [style]="{heigth: \'50vh\'}">    <p> Order de trabajo ID: {{ot_id}}</p>    <p>Si acepta esta orden de trabajo, escoja el supervisor de trabajos que la realizará</p>    <form novalidate autocomplete="off" [formGroup]="form">        <zwc-pdropdown [control]="form.get(\'trabajador_id\')" Label="*Supervisor"            dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async"            Pplaceholder="Selecione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>    </form>    <!-- 102 TODO: AGREGAR LA VALIDACION AL BOTON ACEPTAR ORDEN -->    <div class="container-button-confirmar">        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"            (click)="rechazarOrdenProveedor()">            <fa-icon [icon]="cancelIcon" style="color: #ccc;"></fa-icon>            Rechazar Orden        </button>        <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">            <fa-icon [icon]="checkIcon"></fa-icon>            Aceptar Orden        </button>    </div></p-dialog></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasComponent', 'selector': 'zwc-list-actas'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container-acciones">    <!-- PLAY CONTINUAR -->    <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion(\'OT_ACEPTAR_INICIAL\')"        (click)="displayModalAceptarInicial=true">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_AUTORIZACION_PROVEEDOR ADMIN EECC-->    <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion(\'OT_ACEPTAR_PROVEEDOR\')"        (click)="openModalAceptacionOTProveedor()">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->    <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->    <!-- TODOCOMENT: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->    <button id="play-button" pTooltip="Editar/enviar informe avance"        [routerLink]="[\'/informe-avance/informe-avance\',ot_id]"        *ngIf="findAccion(\'OT_EDITAR_INFORME_AVANCE\')||findAccion(\'OT_ENVIAR_INFORME_AVANCE\')||findAccion(\'OT_AUTORIZAR_INFORME_AVANCE\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_GENERACION_ACTA -->    <!-- 182 TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->    <button id="play-button" pTooltip="Generar Acta" [routerLink]="[\'/acta/generar-acta\',ot_id]"        *ngIf="findAccion(\'OT_GENERAR_ACTA\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_VALIDACION_ACTA_GESTOR -->    <button id="play-button" pTooltip="Validar Acta" [routerLink]="[\'/acta/validar-acta\',ot_id]"        *ngIf="findAccion(\'OT_VALIDAR_ACTA\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_SOLICITUD_PAGO -->    <!-- 183 TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->    <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion(\'OT_SOLICITAR_PAGO\')"        (click)="displayModalSolicitudPago=true">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->    <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion(\'OT_APROBACION_OPERACIONES\')"        (click)="displayModalAprobacionOperaciones=true">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO -->    <button id="play-button" pTooltip="Autorizar pago Acta" [routerLink]="[\'/acta/validar-pago-acta\',ot_id]"        *ngIf="findAccion(\'OT_AUTORIZAR_PAGOS\')">        <fa-icon [icon]="playIcon"></fa-icon>    </button>    <!-- ACCIONES FIJAS -->    <button id="info-button" pTooltip="Información" [routerLink]="[\'/ot-detalle/informacion\',ot_id]">        <fa-icon [icon]="infoIcon"></fa-icon>    </button>    <button id="ver-libro-obras-button" pTooltip="Ver libro de obras" [routerLink]="[\'/ot-detalle/libro-obras\',ot_id]">        <fa-icon [icon]="bookIcon"></fa-icon>    </button>    <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"        *ngIf="findAccion(\'OT_REGISTRAR_LIBRO_OBRAS\')" (click)="displayModalAgregarRegistroLibroDeObras=true">        <fa-icon [icon]="medicalIcon"></fa-icon>    </button></div><!-- MODALS --><p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"    [draggable]="false" [modal]="true">    <zwc-registrar-libro-obras #registrarLibroObraForm></zwc-registrar-libro-obras>    <ng-template pTemplate="footer">        <zwc-pbutton-sending Pid="subir-registro" content="Subir registro"            Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!registrarLibroObraForm.valid"            [sending]="sendingCreateOT$|async" (call)="registrarLibroObras()"></zwc-pbutton-sending>    </ng-template></p-dialog><!-- OT_ET_AUTORIZACION_INICIAL --><p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"    [modal]="true">    Order de trabajo ID: {{ot_id}}    <zwc-view-confirmacion pregunta=\'¿Desea aceptar la continuidad de la orden de trabajo?\'        (cancelar)="rechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"        textConfirmar="Aceptar OT">    </zwc-view-confirmacion></p-dialog><p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"    [modal]="true">    <zwc-view-rechazo></zwc-view-rechazo></p-dialog><!-- OT_ET_AUTORIZACION_PROVEEDOR --><!-- 184 TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN --><p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"    [modal]="true" [style]="{heigth: \'50vh\'}">    <p> Order de trabajo ID: {{ot_id}}</p>    <p>Escoja el supervisor de trabajos que la realizará el trabajo en caso de aceptar realizar la orden</p>    <br>    <form novalidate autocomplete="off" [formGroup]="form">        <zwc-pdropdown [control]="form.get(\'trabajador_id\')" Label="* Supervisor"            dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async"            Pplaceholder="Selecione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>    </form>    <!-- 102 TODO: AGREGAR LA VALIDACION AL BOTON ACEPTAR ORDEN -->    <div class="container-button-confirmar">        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"            (click)="rechazarOrdenProveedor()">            Rechazar Orden        </button>        <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">            Aceptar Orden        </button>    </div></p-dialog><!-- OT_ET_PAGO_SOLICITUD_PAGO --><p-dialog header="Solicitud de pago" [(visible)]="displayModalSolicitudPago" [draggable]="false" [modal]="true">    Order de trabajo ID: {{ot_id}}    <zwc-view-confirmacion pregunta=\'¿Comfirma solicitar pago?\' (cancelar)="displayModalSolicitudPago=false"        (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">    </zwc-view-confirmacion></p-dialog><!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES --><p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">    Order de trabajo ID: {{ot_id}}    <zwc-view-confirmacion pregunta=\'¿Desea aprobar esta acta?\' (cancelar)="rechazarActaOperaciones()"        textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">    </zwc-view-confirmacion></p-dialog></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'ListOtTableOperacionesComponent'};
 </script>

@@ -389,8 +389,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="381"
-                            class="link-to-prism">src/app/features/cubicacion/containers/form-cub/form-cub-container.component.ts:381</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="391"
+                            class="link-to-prism">src/app/features/cubicacion/containers/form-cub/form-cub-container.component.ts:391</a></div>
                 </td>
             </tr>
 
@@ -463,8 +463,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="530"
-                            class="link-to-prism">src/app/features/cubicacion/containers/form-cub/form-cub-container.component.ts:530</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="540"
+                            class="link-to-prism">src/app/features/cubicacion/containers/form-cub/form-cub-container.component.ts:540</a></div>
                 </td>
             </tr>
 
@@ -994,7 +994,7 @@ export class FormCubContainerComponent
       .get(&#x27;tipo_servicio_id&#x27;)
       .disable({ emitEvent: false });
     this.agregarServiciosForm.formFilter
-      .get(&#x27;servicio_cod&#x27;)
+      .get(&#x27;servicio_id&#x27;)
       .disable({ emitEvent: false });
     this.agregarServiciosForm.formFilter
       .get(&#x27;unidad_obra_cod&#x27;)
@@ -1025,7 +1025,7 @@ export class FormCubContainerComponent
         .get(&#x27;tipo_servicio_id&#x27;)
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
-        .get(&#x27;servicio_cod&#x27;)
+        .get(&#x27;servicio_id&#x27;)
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
         .get(&#x27;unidad_obra_cod&#x27;)
@@ -1050,7 +1050,7 @@ export class FormCubContainerComponent
         .get(&#x27;tipo_servicio_id&#x27;)
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
-        .get(&#x27;servicio_cod&#x27;)
+        .get(&#x27;servicio_id&#x27;)
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
         .get(&#x27;unidad_obra_cod&#x27;)
@@ -1073,7 +1073,7 @@ export class FormCubContainerComponent
           .get(&#x27;tipo_servicio_id&#x27;)
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
-          .get(&#x27;servicio_cod&#x27;)
+          .get(&#x27;servicio_id&#x27;)
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get(&#x27;unidad_obra_cod&#x27;)
@@ -1092,7 +1092,7 @@ export class FormCubContainerComponent
           .get(&#x27;tipo_servicio_id&#x27;)
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
-          .get(&#x27;servicio_cod&#x27;)
+          .get(&#x27;servicio_id&#x27;)
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get(&#x27;unidad_obra_cod&#x27;)
@@ -1107,7 +1107,7 @@ export class FormCubContainerComponent
         this.serviciosFacade.resetUnidadesObraServicio();
 
         this.agregarServiciosForm.formFilter
-          .get(&#x27;servicio_cod&#x27;)
+          .get(&#x27;servicio_id&#x27;)
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get(&#x27;unidad_obra_cod&#x27;)
@@ -1202,39 +1202,49 @@ export class FormCubContainerComponent
       combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))
         .subscribe(([proveedorSelected, carrito]) &#x3D;&gt; {
+          const {
+            nombre,
+            tipocubicacion,
+            direcciondesde,
+            direcciondesdealtura,
+            direccionhasta,
+            direccionhastaaltura,
+            descripcion,
+            contrato,
+            agencia_id,
+            cmarcoproveedor_id,
+          } &#x3D; this.formulario.formCub.value;
+
+          // 155 TODO: UNIFICAR TIPO FORMULARIO
+          const formTableArray &#x3D; this.tableServicios?.formTable
+            ? (this.tableServicios.formTable.get(&#x27;table&#x27;).value as Array&lt;{
+                servicio_id: number;
+                servicio_cantidad: number;
+                unidad_obras: Array&lt;{
+                  uo_cantidad: number;
+                  uo_codigo: string;
+                }&gt;;
+              }&gt;)
+            : [];
+
           const request: RequestCreateCubicacion &#x3D; {
             cubicacion_datos: {
-              nombre: this.formulario.formCub.get(&#x27;nombre&#x27;).value, // FORMULARIO
-              tipo_cubicacion_id:
-                +this.formulario.formCub.get(&#x27;tipocubicacion&#x27;).value, // FORMULARIO
-              contrato_id: +this.formulario.formCub.get(&#x27;contrato&#x27;).value, // FORMULARIO
-              agencia_id: +this.formulario.formCub.get(&#x27;agencia_id&#x27;).value, // FORMULARIO
+              nombre, // FORMULARIO
+              tipo_cubicacion_id: tipocubicacion, // FORMULARIO
+              contrato_id: +contrato, // FORMULARIO
+              agencia_id: +agencia_id, // FORMULARIO
               proveedor_id: proveedorSelected.id, // NGRX proveedorselected
               codigo_acuerdo: proveedorSelected.codigo_acuerdo, // NGRX proveedorselected
-              cmarco_has_proveedor_id:
-                +this.formulario.formCub.get(&#x27;cmarcoproveedor_id&#x27;).value, // FORMULARIO
+              cmarco_has_proveedor_id: +cmarcoproveedor_id, // FORMULARIO
               usuario_creador_id: +this.sessionData.usuario_id, // LOCALSTORE
-              direccion_desde:
-                this.formulario.formCub.get(&#x27;direcciondesde&#x27;).value, // FORMULARIO
-              altura_desde: this.formulario.formCub.get(&#x27;direcciondesdealtura&#x27;)
-                .value, // FORMULARIO
-              direccion_hasta:
-                this.formulario.formCub.get(&#x27;direccionhasta&#x27;).value, // FORMULARIO
-              altura_hasta: this.formulario.formCub.get(&#x27;direccionhastaaltura&#x27;)
-                .value, // FORMULARIO
-              descripcion: this.formulario.formCub.get(&#x27;descripcion&#x27;).value, // FORMULARIO
+              direccion_desde: direcciondesde, // FORMULARIO
+              altura_desde: direcciondesdealtura, // FORMULARIO
+              direccion_hasta: direccionhasta, // FORMULARIO
+              altura_hasta: direccionhastaaltura, // FORMULARIO
+              descripcion: descripcion, // FORMULARIO
             },
             cubicacion_detalle: {
-              nuevo: (
-                this.tableServicios.formTable.get(&#x27;table&#x27;).value as Array&lt;{
-                  servicio_id: number;
-                  servicio_cantidad: number;
-                  unidad_obras: Array&lt;{
-                    uo_cantidad: number;
-                    uo_codigo: string;
-                  }&gt;;
-                }&gt;
-              ).map(servicio &#x3D;&gt; ({
+              nuevo: formTableArray.map(servicio &#x3D;&gt; ({
                 servicio_id: servicio.servicio_id,
                 actividad_id: carrito.find(
                   value &#x3D;&gt;
@@ -1483,7 +1493,7 @@ export class FormCubContainerComponent
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><zwc-content-layout [navbarHeader]="navbarHeader">    <div content>        <h1>{{editMode?title:\'Creación de una nueva Cubicación/Costeo\' }}</h1>        <zwc-formulario #formulario></zwc-formulario>        <p-divider align="center">            <span class="p-tag">Agregar Servicios</span>        </p-divider>        <div class="grid">            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">                <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="Cubicacion">                </zwc-form-agregar-servicios>            </div>            <div class="field col-12 md:col-9 lg:col-9 xl:col-9">                <zwc-table-servicios #tableServicios></zwc-table-servicios>            </div>        </div>        <ng-container *ngIf="editMode;else createModeButton">            <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"                Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"                (call)="editarCubicacion()"></zwc-pbutton-sending>        </ng-container>        <ng-template #createModeButton>            <zwc-pbutton-sending Pid="crear-cubicacion" content="Crear nueva cubicación"                Pclass="p-button-info p-button-sm mt-4 w-full"                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"                [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>        </ng-template>    </div></zwc-content-layout></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasComponent', 'selector': 'zwc-list-actas'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormCubContainerComponent'};
 </script>

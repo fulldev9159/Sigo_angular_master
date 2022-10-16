@@ -1,0 +1,1509 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  LastActa</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/core/model/acta.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#autorizacion_estado" 
+>
+                                            autorizacion_estado
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#autorizacion_fecha" 
+>
+                                            autorizacion_fecha
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#ceco" 
+>
+                                            ceco
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#created_at" 
+>
+                                            created_at
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#cuenta_sap" 
+>
+                                            cuenta_sap
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#flg_pagado" 
+>
+                                            flg_pagado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#flg_pagar_cerrar" 
+>
+                                            flg_pagar_cerrar
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#id_opex" 
+>
+                                            id_opex
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imputacion1_estado" 
+>
+                                            imputacion1_estado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imputacion1_fecha" 
+>
+                                            imputacion1_fecha
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imputacion2_estado" 
+>
+                                            imputacion2_estado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#imputacion2_fecha" 
+>
+                                            imputacion2_fecha
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#informe_avance_id" 
+>
+                                            informe_avance_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#lp" 
+>
+                                            lp
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#many_acta_detalle_servicio" 
+>
+                                            many_acta_detalle_servicio
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#many_acta_detalle_uob" 
+>
+                                            many_acta_detalle_uob
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#obs_fin_trabajos" 
+>
+                                            obs_fin_trabajos
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#obs_validacion" 
+>
+                                            obs_validacion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#ot_id" 
+>
+                                            ot_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#pep2" 
+>
+                                            pep2
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#pmo_codigo" 
+>
+                                            pmo_codigo
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#tipo_pago" 
+>
+                                            tipo_pago
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#tipo_sustento" 
+>
+                                            tipo_sustento
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#validacion_estado" 
+>
+                                            validacion_estado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#validacion_fecha" 
+>
+                                            validacion_fecha
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#validacion_usuario_id" 
+>
+                                            validacion_usuario_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#valor_total_clp" 
+>
+                                            valor_total_clp
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="autorizacion_estado"></a>
+                                        <span class="name "><b>autorizacion_estado</b>
+                                            <a href="#autorizacion_estado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>autorizacion_estado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="autorizacion_fecha"></a>
+                                        <span class="name "><b>autorizacion_fecha</b>
+                                            <a href="#autorizacion_fecha">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>autorizacion_fecha:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ceco"></a>
+                                        <span class="name "><b>ceco</b>
+                                            <a href="#ceco">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ceco:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="created_at"></a>
+                                        <span class="name "><b>created_at</b>
+                                            <a href="#created_at">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>created_at:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="cuenta_sap"></a>
+                                        <span class="name "><b>cuenta_sap</b>
+                                            <a href="#cuenta_sap">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>cuenta_sap:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="flg_pagado"></a>
+                                        <span class="name "><b>flg_pagado</b>
+                                            <a href="#flg_pagado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>flg_pagado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="flg_pagar_cerrar"></a>
+                                        <span class="name "><b>flg_pagar_cerrar</b>
+                                            <a href="#flg_pagar_cerrar">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>flg_pagar_cerrar:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id_opex"></a>
+                                        <span class="name "><b>id_opex</b>
+                                            <a href="#id_opex">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id_opex:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imputacion1_estado"></a>
+                                        <span class="name "><b>imputacion1_estado</b>
+                                            <a href="#imputacion1_estado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imputacion1_estado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imputacion1_fecha"></a>
+                                        <span class="name "><b>imputacion1_fecha</b>
+                                            <a href="#imputacion1_fecha">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imputacion1_fecha:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imputacion2_estado"></a>
+                                        <span class="name "><b>imputacion2_estado</b>
+                                            <a href="#imputacion2_estado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imputacion2_estado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imputacion2_fecha"></a>
+                                        <span class="name "><b>imputacion2_fecha</b>
+                                            <a href="#imputacion2_fecha">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imputacion2_fecha:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="informe_avance_id"></a>
+                                        <span class="name "><b>informe_avance_id</b>
+                                            <a href="#informe_avance_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>informe_avance_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="lp"></a>
+                                        <span class="name "><b>lp</b>
+                                            <a href="#lp">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>lp:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="many_acta_detalle_servicio"></a>
+                                        <span class="name "><b>many_acta_detalle_servicio</b>
+                                            <a href="#many_acta_detalle_servicio">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>many_acta_detalle_servicio:     <code>DetalleServicioLastActa[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>DetalleServicioLastActa[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="many_acta_detalle_uob"></a>
+                                        <span class="name "><b>many_acta_detalle_uob</b>
+                                            <a href="#many_acta_detalle_uob">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>many_acta_detalle_uob:     <code>DetalleUnidadObraLastActa[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>DetalleUnidadObraLastActa[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="obs_fin_trabajos"></a>
+                                        <span class="name "><b>obs_fin_trabajos</b>
+                                            <a href="#obs_fin_trabajos">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>obs_fin_trabajos:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="obs_validacion"></a>
+                                        <span class="name "><b>obs_validacion</b>
+                                            <a href="#obs_validacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>obs_validacion:     <code></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ot_id"></a>
+                                        <span class="name "><b>ot_id</b>
+                                            <a href="#ot_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ot_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pep2"></a>
+                                        <span class="name "><b>pep2</b>
+                                            <a href="#pep2">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pep2:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pmo_codigo"></a>
+                                        <span class="name "><b>pmo_codigo</b>
+                                            <a href="#pmo_codigo">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pmo_codigo:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="tipo_pago"></a>
+                                        <span class="name "><b>tipo_pago</b>
+                                            <a href="#tipo_pago">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>tipo_pago:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="tipo_sustento"></a>
+                                        <span class="name "><b>tipo_sustento</b>
+                                            <a href="#tipo_sustento">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>tipo_sustento:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="validacion_estado"></a>
+                                        <span class="name "><b>validacion_estado</b>
+                                            <a href="#validacion_estado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>validacion_estado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="validacion_fecha"></a>
+                                        <span class="name "><b>validacion_fecha</b>
+                                            <a href="#validacion_fecha">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>validacion_fecha:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="validacion_usuario_id"></a>
+                                        <span class="name "><b>validacion_usuario_id</b>
+                                            <a href="#validacion_usuario_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>validacion_usuario_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="valor_total_clp"></a>
+                                        <span class="name "><b>valor_total_clp</b>
+                                            <a href="#valor_total_clp">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>valor_total_clp:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ModelMaterial } from &#x27;./material&#x27;;
+import { ModelServicio } from &#x27;./servicio&#x27;;
+import { ModelUnidadObra } from &#x27;./unidad-obra&#x27;;
+
+export interface DetalleServicio4Acta {
+  servicio_numero_producto: string;
+  adicional_aceptacion_estado: string;
+  cantidad_total: number;
+  evidencia_id: number;
+  factor_conversion_precio: number;
+  faltante_cantidad: number;
+  id: number;
+  informe_avance_id: number;
+  ot_id: number;
+  precio_tipo_moneda_codigo: string;
+  precio_tipo_moneda_id: number;
+  precio_tipo_moneda_nombre: string;
+  prov_has_serv_precio: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  servicio_id: number;
+  tipo_contrato_id: number;
+  unidad_codigo: string;
+  unidad_descripcion: string;
+  unidad_id: number;
+
+  faltante_porcentaje_entero: number;
+  faltante_porcentaje_fraccion: number;
+
+  servicio_codigo: string;
+  servicio_descripcion: string;
+
+  valor_unitario_clp: number;
+}
+
+export interface DetalleUO4Acta {
+  cantidad_total: number;
+  faltante_cantidad: number;
+  id: number;
+  informe_avance_id: number;
+  ot_id: number;
+  tipo_contrato_id: number;
+  unidad_codigo: string;
+  unidad_descripcion: string;
+  unidad_id: number;
+  unidad_obra_cod: string;
+  faltante_porcentaje_entero: number;
+  faltante_porcentaje_fraccion: number;
+  unidad_obra_desc: string;
+  valor_unitario_clp: number;
+  servicio_adicional_aceptacion_estado: string;
+
+  informe_has_servicio_id: number;
+  servicio_codigo: string;
+  servicio_descripcion: string;
+
+  servicio_numero_producto: string;
+  servicio_requiere_evidencia: boolean;
+  servicio_evidencia_id: number;
+}
+
+export interface ActaTipoPago {
+  id: number;
+  descripcion: string;
+}
+
+export interface RequestValidarActa {
+  ot_id: number;
+  tipo_pago: string;
+  observacion: string;
+  estado: string;
+  detalle: {
+    servicio: Servicios4ValidarActa[];
+    unidad_obra: UOs4ValidarActa[];
+  };
+}
+
+export interface Servicios4ValidarActa {
+  rowid: number;
+  cantidad: number;
+  porcentaje: number;
+}
+
+export interface UOs4ValidarActa {
+  rowid: number;
+  cantidad: number;
+  porcentaje: number;
+}
+
+// ACEPTAR/RECHAZAR ADICIONALES
+export interface RequestAceptarRechazarAdicionales {
+  ot_id: number;
+  adicionales_aceptados?: number[];
+  adicionales_rechazados?: number[];
+  causas_rechazo_id?: number;
+  observacion?: string;
+}
+
+// LAST ACTA
+export interface LastActa {
+  created_at: Date;
+  flg_pagado: boolean;
+  id: number;
+  informe_avance_id: number;
+  obs_fin_trabajos: string;
+  obs_validacion: null;
+  ot_id: number;
+  tipo_pago: string;
+  validacion_estado: string;
+  validacion_fecha: Date;
+  validacion_usuario_id: number;
+  autorizacion_estado: string;
+  autorizacion_fecha?: any;
+  tipo_sustento: string;
+  pmo_codigo: number;
+  id_opex?: any;
+  lp: string;
+  cuenta_sap?: any;
+  pep2: string;
+  ceco?: any;
+  valor_total_clp: number;
+
+  imputacion1_estado: string;
+  imputacion1_fecha: Date;
+  imputacion2_estado: string;
+  imputacion2_fecha: Date;
+  flg_pagar_cerrar: Date;
+
+  many_acta_detalle_servicio: DetalleServicioLastActa[];
+  many_acta_detalle_uob: DetalleUnidadObraLastActa[];
+}
+
+export interface DetalleServicioLastActa {
+  acta_id: number;
+  id: number;
+  informe_has_servicio_id: number;
+
+  imputacion1_estado: null;
+  imputacion2_estado: null;
+  imputacion1_json: null;
+  imputacion2_json: null;
+  model_informe_has_servicio_id: {
+    numero_producto: string;
+    actividad_id: number;
+    adicional_aceptacion_estado: string;
+    adicional_aceptacion_fecha: Date;
+    adicional_aceptacion_usuario_id: number;
+    adicional_causas_rechazo_id: number;
+    adicional_rechazo_observacion: string;
+    cantidad: number;
+    evidencia_id: number;
+    factor_conversion_precio: number;
+    id: number;
+    informe_avance_id: number;
+    model_servicio_id: ModelServicio;
+    precio_tipo_moneda_id: number;
+    prov_has_serv_precio: number;
+    puntos_baremos: number;
+    requiere_evidencia: boolean;
+    servicio_id: number;
+    tipo_servicio_id: number;
+    unidad_id: number;
+    valor_unitario_clp: number;
+  };
+  pago_cantidad: number;
+  pago_porcentaje: number;
+
+  valor_detalle_clp: number;
+}
+
+export interface DetalleUnidadObraLastActa {
+  id: number;
+  acta_id: number;
+  informe_has_uob_id: number;
+  pago_cantidad: number;
+  pago_porcentaje: number;
+  model_informe_has_uob_id: {
+    id: number;
+    informe_has_servicio_id: number;
+    unidad_obra_cod: string;
+    cantidad: number;
+    unidad_id: number;
+    clave: string;
+    model_informe_has_servicio_id: ModelInformeHasServicio;
+    model_unidad_obra_cod: ModelUnidadObra;
+    many_informe_has_material: MaterialesLastActa[];
+    valor_unitario_clp: number;
+  };
+  valor_detalle_clp: number;
+}
+
+export interface ModelInformeHasServicio {
+  id: number;
+  informe_avance_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  adicional_aceptacion_estado: string;
+  adicional_aceptacion_usuario_id?: any;
+  adicional_aceptacion_fecha?: any;
+  adicional_causas_rechazo_id?: any;
+  adicional_rechazo_observacion?: any;
+  requiere_evidencia: boolean;
+  evidencia_id?: any;
+  model_servicio_id: ModelServicio;
+  numero_producto: string;
+}
+
+export interface MaterialesLastActa {
+  id: number;
+  material_cod: string;
+  informe_has_uob_id: number;
+  cantidad: number;
+  unidad_id: number;
+  tipo_moneda_id: number;
+  valor: number;
+  codigo_sap: string;
+  origen: string;
+  factor_conversion: number;
+  valor_unitario_clp: number;
+  model_material_cod: ModelMaterial;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'LastActa.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

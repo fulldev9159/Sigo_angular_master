@@ -345,6 +345,20 @@ export interface SessionData extends Login {
   multiperfiles?: boolean;
   rol?: string;
 }
+
+// GET DATABASE VERSION
+export interface DatabaseVersion {
+  checksum: number;
+  description: string;
+  execution_time: number;
+  installed_by: string;
+  installed_on: Date;
+  installed_rank: number;
+  script: string;
+  success: boolean;
+  type: string;
+  version: string;
+}
 </code></pre>
     </div>
 </div>

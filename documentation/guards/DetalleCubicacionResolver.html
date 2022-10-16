@@ -296,7 +296,7 @@ export class DetalleCubicacionResolver
     }
     return this.service.getDetalleCubicacion(id).pipe(
       tap(response &#x3D;&gt; {
-        this.cubicacionFacade.detalleCubicacionSuccess(response);
+        this.cubicacionFacade.detalleCubicacionSuccess(response.data);
       }),
       catchError(error &#x3D;&gt; {
         this.cubicacionFacade.detalleCubicacionError(error);

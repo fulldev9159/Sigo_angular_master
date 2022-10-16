@@ -77,8 +77,11 @@ import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { AccionesOTResolver } from &#x27;src/app/core/resolvers/accionesOT.resolver&#x27;;
 import { ActaComponent } from &#x27;./acta.component&#x27;;
 import { GenerarActaContainerComponent } from &#x27;./containers/generar-acta-container/generar-acta-container.component&#x27;;
-import { ListActasComponent } from &#x27;./containers/list-actas/list-actas.component&#x27;;
+import { ListActasContainerComponent } from &#x27;./containers/list-actas-container/list-actas-container.component&#x27;;
 import { ValidarActaContainerComponent } from &#x27;./containers/validar-acta-container/validar-acta-container.component&#x27;;
+import { ValidarPagoActaContainerComponent } from &#x27;./containers/validar-pago-acta-container/validar-pago-acta-container.component&#x27;;
+import { ActaTiposPagosResolver } from &#x27;./resolvers/actaTipoPago.resolver&#x27;;
+import { LastActaResolver } from &#x27;./resolvers/lastActa.resolver&#x27;;
 import { Servicios4ActaResolver } from &#x27;./resolvers/servicios4acta.resolver&#x27;;
 import { UOs4ActaResolver } from &#x27;./resolvers/uos4acta.resolver&#x27;;
 
@@ -90,7 +93,7 @@ const routes: Routes &#x3D; [
       { path: &#x27;&#x27;, redirectTo: &#x27;list-acta&#x27;, pathMatch: &#x27;full&#x27; },
       {
         path: &#x27;list-actas&#x27;,
-        component: ListActasComponent,
+        component: ListActasContainerComponent,
       },
       {
         path: &#x27;generar-acta/:id&#x27;,
@@ -104,6 +107,20 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;validar-acta/:id&#x27;,
         component: ValidarActaContainerComponent,
+        resolve: {
+          servicios4acta: Servicios4ActaResolver,
+          uos4acta: UOs4ActaResolver,
+          accionesOT: AccionesOTResolver,
+          actaTiposPagos: ActaTiposPagosResolver,
+        },
+      },
+      {
+        path: &#x27;validar-pago-acta/:id&#x27;,
+        component: ValidarPagoActaContainerComponent,
+        resolve: {
+          accionesOT: AccionesOTResolver,
+          lastActa: LastActaResolver,
+        },
       },
     ],
   },

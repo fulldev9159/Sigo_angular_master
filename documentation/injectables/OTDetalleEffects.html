@@ -78,16 +78,28 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#createRegistroLibroObras$" >createRegistroLibroObras$</a>
+                            </li>
+                            <li>
                                 <a href="#getAccionesOT$" >getAccionesOT$</a>
                             </li>
                             <li>
+                                <a href="#getCategoriasArchivos$" >getCategoriasArchivos$</a>
+                            </li>
+                            <li>
                                 <a href="#getDetalleOT$" >getDetalleOT$</a>
+                            </li>
+                            <li>
+                                <a href="#getLibroObras$" >getLibroObras$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#subirArchivoLibroObrasYregistrarLibroObras$" >subirArchivoLibroObrasYregistrarLibroObras$</a>
                             </li>
                         </ul>
                     </td>
@@ -108,7 +120,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, otDetalleHttp: <a href="../injectables/OtDetalleHttpService.html" target="_self">OtDetalleHttpService</a>)</code>
+<code>constructor(actions$: Actions, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, otDetalleHttp: <a href="../injectables/OtDetalleHttpService.html" target="_self">OtDetalleHttpService</a>, libroObrasHttp: <a href="../injectables/LibroObrasHttpService.html" target="_self">LibroObrasHttpService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -166,6 +178,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>libroObrasHttp</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LibroObrasHttpService.html" target="_self" >LibroObrasHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -181,6 +205,45 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createRegistroLibroObras$"></a>
+                    <span class="name">
+                        <span ><b>createRegistroLibroObras$</b></span>
+                        <a href="#createRegistroLibroObras$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.createRegistroLibroObras),
+      concatMap(({ request }) &#x3D;&gt;
+        this.libroObrasHttp.createRegistroLibroObras(request).pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.createRegistroLibroObrasSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.createRegistroLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -211,7 +274,48 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCategoriasArchivos$"></a>
+                    <span class="name">
+                        <span ><b>getCategoriasArchivos$</b></span>
+                        <a href="#getCategoriasArchivos$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getCategoriasArchivos),
+      concatMap(() &#x3D;&gt;
+        this.libroObrasHttp.getCategoriasArchivos().pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.getCategoriasArchivosSuccess({
+              categoriaArchivo: response.data.items,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getCategoriasArchivosError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -246,7 +350,48 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLibroObras$"></a>
+                    <span class="name">
+                        <span ><b>getLibroObras$</b></span>
+                        <a href="#getLibroObras$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getLibroObras),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.libroObrasHttp.getLibroObras(ot_id).pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.getLibroObrasSuccess({
+              registrosLibroObras: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -271,7 +416,8 @@
       this.actions$.pipe(
         ofType(
           otDetalleActions.getDetalleOTSuccess,
-          otDetalleActions.getAccionesOTSuccess
+          otDetalleActions.getAccionesOTSuccess,
+          otDetalleActions.createRegistroLibroObrasSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -281,7 +427,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:129</a></div>
                         </td>
                     </tr>
 
@@ -306,7 +452,11 @@
       this.actions$.pipe(
         ofType(
           otDetalleActions.getDetalleOTError,
-          otDetalleActions.getAccionesOTTError
+          otDetalleActions.getAccionesOTTError,
+          otDetalleActions.getCategoriasArchivosError,
+          otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError,
+          otDetalleActions.createRegistroLibroObrasError,
+          otDetalleActions.getLibroObrasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -316,7 +466,57 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subirArchivoLibroObrasYregistrarLibroObras$"></a>
+                    <span class="name">
+                        <span ><b>subirArchivoLibroObrasYregistrarLibroObras$</b></span>
+                        <a href="#subirArchivoLibroObrasYregistrarLibroObras$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.subirArchivoLibroObrasYregistrarLibroObras),
+      concatMap(({ categoria_id, files, request_libroobras }) &#x3D;&gt;
+        this.libroObrasHttp
+          .subirArchivo(categoria_id, &#x27;LIBRO_OBRAS&#x27;, files)
+          .pipe(
+            map(response &#x3D;&gt; {
+              return otDetalleActions.createRegistroLibroObras({
+                request: {
+                  ...request_libroobras,
+                  archivos: response.data.repositorio_archivos_ids,
+                },
+              });
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError(
+                  { error }
+                )
+              )
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -331,7 +531,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
-import { AfterHttpService } from &#x27;@services&#x27;;
+import { AfterHttpService, LibroObrasHttpService } from &#x27;@services&#x27;;
 import * as otDetalleActions from &#x27;./ot-detalle.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
@@ -342,7 +542,8 @@ export class OTDetalleEffects {
   constructor(
     private actions$: Actions,
     private afterHttp: AfterHttpService,
-    private otDetalleHttp: OtDetalleHttpService
+    private otDetalleHttp: OtDetalleHttpService,
+    private libroObrasHttp: LibroObrasHttpService
   ) {}
 
   // GET DETALLE OT
@@ -373,12 +574,96 @@ export class OTDetalleEffects {
     )
   );
 
+  // GET CATEGORIA ARCHIVOS
+  getCategoriasArchivos$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getCategoriasArchivos),
+      concatMap(() &#x3D;&gt;
+        this.libroObrasHttp.getCategoriasArchivos().pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.getCategoriasArchivosSuccess({
+              categoriaArchivo: response.data.items,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getCategoriasArchivosError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SUBIR ARCHIVO/REGISTRO LIBRO DE OBRAS
+  subirArchivoLibroObrasYregistrarLibroObras$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.subirArchivoLibroObrasYregistrarLibroObras),
+      concatMap(({ categoria_id, files, request_libroobras }) &#x3D;&gt;
+        this.libroObrasHttp
+          .subirArchivo(categoria_id, &#x27;LIBRO_OBRAS&#x27;, files)
+          .pipe(
+            map(response &#x3D;&gt; {
+              return otDetalleActions.createRegistroLibroObras({
+                request: {
+                  ...request_libroobras,
+                  archivos: response.data.repositorio_archivos_ids,
+                },
+              });
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError(
+                  { error }
+                )
+              )
+            )
+          )
+      )
+    )
+  );
+
+  // CREATE REGISTRO LIBRO DE OBRAS
+  createRegistroLibroObras$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.createRegistroLibroObras),
+      concatMap(({ request }) &#x3D;&gt;
+        this.libroObrasHttp.createRegistroLibroObras(request).pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.createRegistroLibroObrasSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.createRegistroLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // GET LIBRO OBRAS
+  getLibroObras$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getLibroObras),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.libroObrasHttp.getLibroObras(ot_id).pipe(
+          map(response &#x3D;&gt;
+            otDetalleActions.getLibroObrasSuccess({
+              registrosLibroObras: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           otDetalleActions.getDetalleOTSuccess,
-          otDetalleActions.getAccionesOTSuccess
+          otDetalleActions.getAccionesOTSuccess,
+          otDetalleActions.createRegistroLibroObrasSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -390,7 +675,11 @@ export class OTDetalleEffects {
       this.actions$.pipe(
         ofType(
           otDetalleActions.getDetalleOTError,
-          otDetalleActions.getAccionesOTTError
+          otDetalleActions.getAccionesOTTError,
+          otDetalleActions.getCategoriasArchivosError,
+          otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError,
+          otDetalleActions.createRegistroLibroObrasError,
+          otDetalleActions.getLibroObrasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

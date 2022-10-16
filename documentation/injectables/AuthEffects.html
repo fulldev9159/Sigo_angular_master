@@ -78,6 +78,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getAPIVersion$" >getAPIVersion$</a>
+                            </li>
+                            <li>
+                                <a href="#getDatabaseVersion$" >getDatabaseVersion$</a>
+                            </li>
+                            <li>
                                 <a href="#getPermisosPerfilUsuario4Login$" >getPermisosPerfilUsuario4Login$</a>
                             </li>
                             <li>
@@ -111,7 +117,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, loginService: <a href="../injectables/AuthHttpService.html" target="_self">AuthHttpService</a>, perfilesHttpService: <a href="../injectables/PerfilesHttpService.html" target="_self">PerfilesHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
+<code>constructor(actions$: Actions, loginService: <a href="../injectables/AuthHttpService.html" target="_self">AuthHttpService</a>, perfilesHttpService: <a href="../injectables/PerfilesHttpService.html" target="_self">PerfilesHttpService</a>, authHttpService: <a href="../injectables/AuthHttpService.html" target="_self">AuthHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -170,6 +176,18 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>authHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthHttpService.html" target="_self" >AuthHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>afterHttp</td>
                                                   
                                                         <td>
@@ -196,6 +214,80 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAPIVersion$"></a>
+                    <span class="name">
+                        <span ><b>getAPIVersion$</b></span>
+                        <a href="#getAPIVersion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getAPIVersion),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getAPIVersion().pipe(
+          map(response &#x3D;&gt; authActions.getAPIVersionSuccess({ response })),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.getAPIVersionError({ error }));
+          })
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/store/auth/auth.effects.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDatabaseVersion$"></a>
+                    <span class="name">
+                        <span ><b>getDatabaseVersion$</b></span>
+                        <a href="#getDatabaseVersion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getDatabaseVersion),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getDatabaseVersion().pipe(
+          map(response &#x3D;&gt; authActions.getDatabaseVersionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(authActions.getDatabaseVersionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/store/auth/auth.effects.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -228,7 +320,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/auth/auth.effects.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/store/auth/auth.effects.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -263,7 +355,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/auth/auth.effects.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/store/auth/auth.effects.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -300,7 +392,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/store/auth/auth.effects.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/store/auth/auth.effects.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -326,7 +418,9 @@
         ofType(
           authActions.loginError,
           authActions.refreshLoginError,
-          authActions.getPermisosPerfilUsuario4LoginError
+          authActions.getPermisosPerfilUsuario4LoginError,
+          authActions.getDatabaseVersionError,
+          authActions.getAPIVersionError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -336,7 +430,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/store/auth/auth.effects.ts:78</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/store/auth/auth.effects.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -371,7 +465,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/store/auth/auth.effects.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/store/auth/auth.effects.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -401,6 +495,7 @@ export class AuthEffects {
     private actions$: Actions,
     private loginService: AuthHttpService,
     private perfilesHttpService: PerfilesHttpService,
+    private authHttpService: AuthHttpService,
     private afterHttp: AfterHttpService
   ) {}
 
@@ -447,6 +542,34 @@ export class AuthEffects {
     )
   );
 
+  getDatabaseVersion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getDatabaseVersion),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getDatabaseVersion().pipe(
+          map(response &#x3D;&gt; authActions.getDatabaseVersionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(authActions.getDatabaseVersionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAPIVersion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getAPIVersion),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getAPIVersion().pipe(
+          map(response &#x3D;&gt; authActions.getAPIVersionSuccess({ response })),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.getAPIVersionError({ error }));
+          })
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -467,7 +590,9 @@ export class AuthEffects {
         ofType(
           authActions.loginError,
           authActions.refreshLoginError,
-          authActions.getPermisosPerfilUsuario4LoginError
+          authActions.getPermisosPerfilUsuario4LoginError,
+          authActions.getDatabaseVersionError,
+          authActions.getAPIVersionError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

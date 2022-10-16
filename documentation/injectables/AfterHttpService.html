@@ -82,6 +82,9 @@
                                 <a href="#errorHandler" >errorHandler</a>
                             </li>
                             <li>
+                                <a href="#reloadTableOT" >reloadTableOT</a>
+                            </li>
+                            <li>
                                 <a href="#successHandler" >successHandler</a>
                             </li>
                         </ul>
@@ -107,7 +110,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/core/service/after-http.service.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/service/after-http.service.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -218,8 +221,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/app/core/service/after-http.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/app/core/service/after-http.service.ts:48</a></div>
                 </td>
             </tr>
 
@@ -271,6 +274,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="reloadTableOT"></a>
+                    <span class="name">
+                        <span ><b>reloadTableOT</b></span>
+                        <a href="#reloadTableOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reloadTableOT()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="252"
+                            class="link-to-prism">src/app/core/service/after-http.service.ts:252</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="successHandler"></a>
                     <span class="name">
                         <span ><b>successHandler</b></span>
@@ -287,8 +327,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/core/service/after-http.service.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/core/service/after-http.service.ts:56</a></div>
                 </td>
             </tr>
 
@@ -353,6 +393,8 @@ import * as otActions from &#x27;@storeOT/ot/ot.actions&#x27;;
 import * as flujoOTActions from &#x27;@storeOT/flujo-ot/flujo-ot.actions&#x27;;
 import * as serviciosActions from &#x27;@storeOT/servicios/servicios.actions&#x27;;
 import * as informeAvanceActions from &#x27;@storeOT/informe-avance/informe-avance.actions&#x27;;
+import * as actaActions from &#x27;@storeOT/acta/acta.actions&#x27;;
+import * as otDetalleActions from &#x27;@storeOT/ot-detalle/ot-detalle.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
@@ -507,25 +549,23 @@ export class AfterHttpService {
     }
 
     // ACEPTAR OT INICIAL
-    // 70 TODO: AGREGAR UN MENSAJE
-    // 71 TODO: USAR BIEN LOS FILTROS
-    if (
-      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
-      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type
-    ) {
-      let filtros &#x3D; {
-        filtro_propietario: &#x27;TODAS&#x27;,
-        filtro_tipo: 0,
-      };
-      this.otFacade.getBandejaOT({
-        filtro_pestania: &#x27;EN_EJECUCION&#x27;,
-        ...filtros,
-      });
-      this.otFacade.getBandejaOT({
-        filtro_pestania: &#x27;ABIERTAS&#x27;,
-        ...filtros,
-      });
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Aprobación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.reloadTableOT();
     }
+
+    // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Asignación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.reloadTableOT();
+    }
+
+    // 70 TODO: AGREGAR UN MENSAJE
+    // if (
+    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarPagoSuccess.type ||
+    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aprobarRechazarOperacionesSuccess.type
+    // ) {
+    // }
 
     // ENVÍO DE INFORME DE AVANCE
     if (
@@ -551,6 +591,61 @@ export class AfterHttpService {
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
+
+    // GENERAR ACTA / INFORMAR TRABAJOS FINALIZADOS
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.informarTrabajosFinalizadosSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // APROBAR/RECHAZAR ACTA Y VALIDAR ACTA
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.validarActaSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // SOLICITAR PAGO
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarPagoSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Envío de solicitud exitosa&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.reloadTableOT();
+    }
+
+    // AGREGAR REGISTRO LIBRO OBRAS
+    if (action.type &#x3D;&#x3D;&#x3D; otDetalleActions.createRegistroLibroObrasSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Registro subido exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+    }
+  }
+
+  // 71 TODO: USAR BIEN LOS FILTROS
+  reloadTableOT(): void {
+    let filtros &#x3D; {
+      filtro_propietario: &#x27;TODAS&#x27;,
+      filtro_tipo: 0,
+    };
+    this.otFacade.getBandejaOT({
+      filtro_pestania: &#x27;EN_EJECUCION&#x27;,
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: &#x27;ABIERTAS&#x27;,
+      ...filtros,
+    });
   }
 }
 </code></pre>

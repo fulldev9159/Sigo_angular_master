@@ -470,10 +470,13 @@ export const reducerCubicacion &#x3D; createReducer(
     ...state,
     listarCubicaciones: response.data.items,
   })),
-  on(cubicacionActions.detalleCubicacionSuccess, (state, { response }) &#x3D;&gt; ({
-    ...state,
-    detalleCubicacion: response.data,
-  })),
+  on(
+    cubicacionActions.detalleCubicacionSuccess,
+    (state, { detalleCubicacion }) &#x3D;&gt; ({
+      ...state,
+      detalleCubicacion,
+    })
+  ),
   on(
     cubicacionActions.getCubicacionesContratoSuccess,
     (state, { response }) &#x3D;&gt; ({
@@ -500,10 +503,6 @@ export const reducerCubicacion &#x3D; createReducer(
   on(cubicacionActions.resetProveedorSelected, (state, {}) &#x3D;&gt; ({
     ...state,
     proveedorSelected: null,
-  })),
-  on(cubicacionActions.resetDetalleCubicacion, (state, {}) &#x3D;&gt; ({
-    ...state,
-    detalleCubicacion: null,
   }))
 );
 </code></pre>
