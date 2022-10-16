@@ -1,0 +1,32 @@
+<div class="sidebar-menu">
+  <ul>
+    <li class="header-menu" *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']">
+      <span>ADMINISTRACION</span>
+    </li>
+    <li *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']" routerLinkActive="active" id="menu-perfil">
+      <a [routerLink]="['/administracion/perfiles']">
+        <fa-icon [icon]="perfilIcon"></fa-icon>
+        <span>Perfiles</span>
+      </a>
+    </li>
+    <li *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']" routerLinkActive="active" id="menu-usuario">
+      <a [routerLink]="['/administracion/usuarios']">
+        <fa-icon [icon]="userIcon"></fa-icon>
+        <span>Usuarios</span>
+      </a>
+    </li>
+    <li *ngxPermissionsOnly="['PERFIL_LISTAR']" routerLinkActive="active" id="menu-area">
+      <a [routerLink]="['/administracion/areas']">
+        <fa-icon [icon]="areaIcon"></fa-icon>
+        <span>Area</span>
+      </a>
+    </li>
+
+    <li *ngxPermissionsOnly="['PERFIL_LISTAR']" routerLinkActive="active" id="menu-contratos">
+      <a [routerLink]="['/administracion/contratos']">
+        <fa-icon [icon]="contratoIcon"></fa-icon>
+        <span>Contratos</span>
+      </a>
+    </li>
+  </ul>
+</div>

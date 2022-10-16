@@ -1,0 +1,35 @@
+.sidebar-menu {
+    padding: 23px 0px 8px 0px;
+    font-size: 14px;
+
+    .header-menu {
+        background: #035682;
+        text-align: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.06rem;
+    }
+
+
+    a {
+        color: #eff3f7;
+        display: block;
+        padding: 8px 0px;
+        font-size: 0.8rem;
+
+        &:hover {
+            background-color: #0075b08a;
+        }
+
+        fa-icon,
+        span {
+            margin-left: 10px;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+
+}

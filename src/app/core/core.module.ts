@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideBarComponent } from './layout/main-layout/components/side-bar/side-bar.component';
 import { SharedModule } from '@sharedOT/shared.module';
 import { NavbarComponent } from './layout/main-layout/components/navbar/navbar.component';
-import { MenuComponent } from './layout/main-layout/components/menu/menu.component';
+import { MenuAdminComponent } from './layout/main-layout/components/menu-admin/menu-admin.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-detalle-ot/menu-detalle-ot.component';
 
@@ -16,7 +16,7 @@ import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-det
     MainLayoutComponent,
     SideBarComponent,
     NavbarComponent,
-    MenuComponent,
+    MenuAdminComponent,
     MenuDetalleOtComponent,
   ],
   imports: [
