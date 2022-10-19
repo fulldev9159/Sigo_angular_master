@@ -18,6 +18,7 @@ import {
   RequestAdicionales,
   RequestAutorizarInformeAvance,
   ServicioAdicionalActualizar,
+  UOAdicionalActualizar,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -304,7 +305,7 @@ export class InformeAvanceComponent
               })),
             }));
 
-          // 158 TODO: SERVICIOS A ACTUALIZAR
+          // 158 TODO DONE CLOSE: SERVICIOS A ACTUALIZAR
           // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
           let servicios_actualizar: ServicioAdicionalActualizar[] =
             formularioCarrito
@@ -314,7 +315,32 @@ export class InformeAvanceComponent
                 cantidad: value.servicio_cantidad,
               }));
 
-          // 159 TODO: UO A ACTUALIZAR
+          // 159 TODO DONE CLOSE: UO A ACTUALIZAR
+
+          let valueIntial: {
+            precargado: boolean;
+            uo_cantidad: number;
+            uo_codigo: string;
+            uo_precio_total_clp: number;
+            uo_rowid: number;
+          }[] = [];
+
+          let uosAdicionalesPrecargadas: {
+            precargado: boolean;
+            uo_cantidad: number;
+            uo_codigo: string;
+            uo_precio_total_clp: number;
+            uo_rowid: number;
+          }[] = formularioCarrito.reduce((acc, curr) => {
+            acc.push(...curr.unidad_obras.filter(v => v.precargado));
+            return acc;
+          }, valueIntial);
+
+          let uos_actualizar: UOAdicionalActualizar[] =
+            uosAdicionalesPrecargadas.map(v => ({
+              rowid: v.uo_rowid,
+              cantidad: v.uo_cantidad,
+            }));
 
           // 160 TODO: UO A AGREGAR
 
@@ -324,9 +350,7 @@ export class InformeAvanceComponent
               nuevo: nuevosAdicionales,
               actualizar: {
                 servicio: servicios_actualizar,
-                // unidad_obra: [...uo_actualizar.flat()].filter(
-                //   value => value !== undefined
-                // ),
+                unidad_obra: uos_actualizar,
                 // agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
                 //   value => value !== undefined
                 // ),
