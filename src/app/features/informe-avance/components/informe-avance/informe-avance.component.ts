@@ -13,10 +13,12 @@ import {
   ContratosUser,
   DetalleInformeAvance,
   DetalleOT,
+  ItemSerivioUO,
   NuevoServicioAdicional,
   ProveedorAgenciaContrato,
   RequestAdicionales,
   RequestAutorizarInformeAvance,
+  RequestUpdateInformeAvance,
   ServicioAdicionalActualizar,
   UOAdicionalActualizar,
 } from '@model';
@@ -28,6 +30,22 @@ import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.faca
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Observable, Subscription, take } from 'rxjs';
+
+interface TableService {
+  precargado: boolean;
+  servicio_cantidad: number;
+  servicio_id: number;
+  servicio_precio_final_clp: number;
+  servicio_rowid: number;
+  unidad_obras: {
+    precargado: boolean;
+    uo_rowid: number;
+    uo_codigo: string;
+    uo_cantidad: number;
+
+    uo_precio_total_clp: number;
+  }[];
+}
 
 // 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
@@ -58,6 +76,12 @@ export class InformeAvanceComponent
     static: false,
   })
   tableServiciosAdicionales: TableServiciosComponent;
+
+  @ViewChild('tableServiciosInformeAvance', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServiciosInformeAvance: TableServiciosComponent;
 
   subscription: Subscription = new Subscription();
   serviciosInformeAvance: CarritoService[] = [];
@@ -247,11 +271,134 @@ export class InformeAvanceComponent
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
   }
 
+  getRequestServiciosAdicionales(
+    formularioServiciosAdicionales: TableService[],
+    carrito: CarritoService[]
+  ): RequestAdicionales {
+    // SERVICIOS/UO COMPLETAMENTE NUEVOS
+    let nuevosAdicionales: NuevoServicioAdicional[] =
+      formularioServiciosAdicionales
+        .filter(value => !value.precargado)
+        .map(value => ({
+          servicio_id: +value.servicio_id,
+          actividad_id: +carrito.find(
+            servicio => servicio.servicio_id === +value.servicio_id
+          ).unidad_obras[0].actividad_id, // 116 TODO: CONSULTAR SI EXISTE LA POSIBILIDAD DE QUE EXISTA UNA UO CON DISTINTOS TIPOS DE SERVICIO/ACTIVIDAD
+          tipo_servicio_id: +carrito.find(
+            servicio => servicio.servicio_id === +value.servicio_id
+          ).tipo_servicio_id,
+          // cantidad: value.dummy ? 0 : value.servicio_cantidad,
+          cantidad: value.servicio_cantidad,
+          unidad_obra: value.unidad_obras.map(uo => ({
+            uob_codigo: uo.uo_codigo,
+            cantidad: uo.uo_cantidad,
+          })),
+        }));
+
+    // 158 TODO DONE CLOSE: SERVICIOS A ACTUALIZAR
+    // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
+    let servicios_actualizar: ServicioAdicionalActualizar[] =
+      formularioServiciosAdicionales
+        .filter(value => value.precargado)
+        .map(value => ({
+          rowid: value.servicio_rowid,
+          cantidad: value.servicio_cantidad,
+        }));
+
+    // 159 TODO DONE CLOSE: UO A ACTUALIZAR
+
+    let valueIntial: {
+      precargado: boolean;
+      uo_cantidad: number;
+      uo_codigo: string;
+      uo_precio_total_clp: number;
+      uo_rowid: number;
+    }[] = [];
+
+    let uosAdicionalesPrecargadas: {
+      precargado: boolean;
+      uo_cantidad: number;
+      uo_codigo: string;
+      uo_precio_total_clp: number;
+      uo_rowid: number;
+    }[] = formularioServiciosAdicionales.reduce((acc, curr) => {
+      acc.push(...curr.unidad_obras.filter(v => v.precargado));
+      return acc;
+    }, valueIntial);
+
+    let uos_actualizar: UOAdicionalActualizar[] = uosAdicionalesPrecargadas.map(
+      v => ({
+        rowid: v.uo_rowid,
+        cantidad: v.uo_cantidad,
+      })
+    );
+
+    // 160 TODO: UO A AGREGAR
+
+    // REQUEST SERVICIOS ADICONALES
+    let request_adicionales: RequestAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_solicitados: {
+        nuevo: nuevosAdicionales,
+        actualizar: {
+          servicio: servicios_actualizar,
+          unidad_obra: uos_actualizar,
+          // agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
+          //   value => value !== undefined
+          // ),
+        },
+      },
+    };
+
+    return request_adicionales;
+  }
+
+  getRequestUpdateInformeAvance(
+    formularioInformeAvance: TableService[]
+  ): RequestUpdateInformeAvance {
+    let servicio: ItemSerivioUO[] = formularioInformeAvance.map(v => ({
+      row_id: v.servicio_rowid,
+      cantidad: v.servicio_cantidad,
+    }));
+
+    let valueIntial: {
+      precargado: boolean;
+      uo_cantidad: number;
+      uo_codigo: string;
+      uo_precio_total_clp: number;
+      uo_rowid: number;
+    }[] = [];
+
+    let uos: {
+      precargado: boolean;
+      uo_cantidad: number;
+      uo_codigo: string;
+      uo_precio_total_clp: number;
+      uo_rowid: number;
+    }[] = formularioInformeAvance.reduce((acc, curr) => {
+      acc.push(...curr.unidad_obras);
+      return acc;
+    }, valueIntial);
+
+    let unidad_obra: ItemSerivioUO[] = uos.map(v => ({
+      row_id: v.uo_rowid,
+      cantidad: v.uo_cantidad,
+    }));
+
+    return {
+      servicio,
+      unidad_obra,
+    };
+  }
+
   guardarBorrador(): void {
     this.subscription.add(
       this.carrito$.pipe(take(1)).subscribe(carrito => {
-        // 113 TODO DONE CLOSE: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
+        // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
         // TODO: PROBAR QUE OCURRE SI ELIMINA UN SERVICIO Y LUEGO LO VUELVE A AGREGAR
+        // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
+
+        // ELIMINAR ADICIONALES ESCOGIDOS SI ES QUE EXISTEN
         if (
           this.tableServiciosAdicionales.servicios_eliminar.length > 0 ||
           this.tableServiciosAdicionales.uos_eliminar.length > 0
@@ -262,103 +409,35 @@ export class InformeAvanceComponent
           );
         }
 
-        // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
-        // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
+        // GUARDAR BORRADOR
 
-        // SERVICIOS ADICIONALES
-        //  TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
-        let formularioCarrito = this.tableServiciosAdicionales.formTable.get(
-          'table'
-        ).value as Array<{
-          precargado: boolean;
-          servicio_cantidad: number;
-          servicio_id: number;
-          servicio_precio_final_clp: number;
-          servicio_rowid: number;
-          unidad_obras: {
-            precargado: boolean;
-            uo_rowid: number;
-            uo_codigo: string;
-            uo_cantidad: number;
+        let formularioServiciosAdicionales =
+          this.tableServiciosAdicionales.formTable.get('table')
+            .value as Array<TableService>;
+        let formularioInformeAvance =
+          this.tableServiciosInformeAvance.formTable.get('table')
+            .value as Array<TableService>;
 
-            uo_precio_total_clp: number;
-          }[];
-        }>;
+        let request_informe_avance: any = this.getRequestUpdateInformeAvance(
+          formularioInformeAvance
+        );
 
-        if (formularioCarrito.length > 0) {
-          // SERVICIOS/UO COMPLETAMENTE NUEVOS
-          let nuevosAdicionales: NuevoServicioAdicional[] = formularioCarrito
-            .filter(value => !value.precargado)
-            .map(value => ({
-              servicio_id: +value.servicio_id,
-              actividad_id: +carrito.find(
-                servicio => servicio.servicio_id === +value.servicio_id
-              ).unidad_obras[0].actividad_id, // 116 TODO: CONSULTAR SI EXISTE LA POSIBILIDAD DE QUE EXISTA UNA UO CON DISTINTOS TIPOS DE SERVICIO/ACTIVIDAD
-              tipo_servicio_id: +carrito.find(
-                servicio => servicio.servicio_id === +value.servicio_id
-              ).tipo_servicio_id,
-              // cantidad: value.dummy ? 0 : value.servicio_cantidad,
-              cantidad: value.servicio_cantidad,
-              unidad_obra: value.unidad_obras.map(uo => ({
-                uob_codigo: uo.uo_codigo,
-                cantidad: uo.uo_cantidad,
-              })),
-            }));
-
-          // 158 TODO DONE CLOSE: SERVICIOS A ACTUALIZAR
-          // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
-          let servicios_actualizar: ServicioAdicionalActualizar[] =
-            formularioCarrito
-              .filter(value => value.precargado)
-              .map(value => ({
-                rowid: value.servicio_rowid,
-                cantidad: value.servicio_cantidad,
-              }));
-
-          // 159 TODO DONE CLOSE: UO A ACTUALIZAR
-
-          let valueIntial: {
-            precargado: boolean;
-            uo_cantidad: number;
-            uo_codigo: string;
-            uo_precio_total_clp: number;
-            uo_rowid: number;
-          }[] = [];
-
-          let uosAdicionalesPrecargadas: {
-            precargado: boolean;
-            uo_cantidad: number;
-            uo_codigo: string;
-            uo_precio_total_clp: number;
-            uo_rowid: number;
-          }[] = formularioCarrito.reduce((acc, curr) => {
-            acc.push(...curr.unidad_obras.filter(v => v.precargado));
-            return acc;
-          }, valueIntial);
-
-          let uos_actualizar: UOAdicionalActualizar[] =
-            uosAdicionalesPrecargadas.map(v => ({
-              rowid: v.uo_rowid,
-              cantidad: v.uo_cantidad,
-            }));
-
-          // 160 TODO: UO A AGREGAR
-
-          let request: RequestAdicionales = {
-            ot_id: this.ot_id,
-            adicionales_solicitados: {
-              nuevo: nuevosAdicionales,
-              actualizar: {
-                servicio: servicios_actualizar,
-                unidad_obra: uos_actualizar,
-                // agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
-                //   value => value !== undefined
-                // ),
-              },
-            },
-          };
-
-          this.serviciosFacade.agregarAdicionales(request);
+        if (formularioServiciosAdicionales.length > 0) {
+          //  ACTUALIZAR INFORME DE AVANCE Y ADICIONALES SI ES QUE EXISTEN ADICIONALES
+          let request_adicionales: RequestAdicionales =
+            this.getRequestServiciosAdicionales(
+              formularioServiciosAdicionales,
+              carrito
+            );
+          this.informeAvanceFacade.actualizarInformeAvanceYAdicionales(
+            request_informe_avance,
+            request_adicionales
+          );
+        } else {
+          // ACTUALIZAR SOLO EL INFORME DE AVANCE
+          this.informeAvanceFacade.actualizarInformeAvance(
+            request_informe_avance
+          );
         }
       })
     );

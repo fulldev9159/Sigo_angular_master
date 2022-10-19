@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AfterHttpService, InformeAvanceHttpService } from '@services';
 import * as informeAvanceActions from './informe-avance.actions';
+import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -70,6 +71,49 @@ export class InformeAvanceEffects {
     )
   );
 
+  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+  actualizarInformeAvanceYAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYAdicionales),
+      concatMap(({ request_informe_avance, request_adicionales }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            serviciosActions.agregarAdicionales({
+              request: request_adicionales,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceYAdicionalesError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  actualizarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvance),
+      concatMap(({ request_informe_avance }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            informeAvanceActions.actualizarInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -89,7 +133,9 @@ export class InformeAvanceEffects {
         ofType(
           informeAvanceActions.getDetalleInformeAvanceError,
           informeAvanceActions.sendDetalleInformeAvanceError,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTError
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError,
+          informeAvanceActions.actualizarInformeAvanceYAdicionalesError,
+          informeAvanceActions.actualizarInformeAvanceError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

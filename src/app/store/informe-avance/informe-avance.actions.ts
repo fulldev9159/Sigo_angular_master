@@ -1,6 +1,8 @@
 import {
   DetalleInformeAvance,
+  RequestAdicionales,
   RequestAutorizarInformeAvance,
+  RequestUpdateInformeAvance,
   Response,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
@@ -39,16 +41,48 @@ export const sendDetalleInformeAvanceError = createAction(
 
 //  ACEPTAR/RECHAZAR INFORME DE AVANCE
 export const AceptarRechazarInformeAvanceOT = createAction(
-  '[OT] GET AceptarRechazarInformeAvanceOT',
+  '[INFORME AVANCE] GET AceptarRechazarInformeAvanceOT',
   props<{ request: RequestAutorizarInformeAvance }>()
 );
 
 export const AceptarRechazarInformeAvanceOTSuccess = createAction(
-  '[OT] GET AceptarRechazarInformeAvanceOT Success',
+  '[INFORME AVANCE] GET AceptarRechazarInformeAvanceOT Success',
   props<{ response: Response<any> }>()
 );
 
 export const AceptarRechazarInformeAvanceOTError = createAction(
-  '[OT] GET AceptarRechazarInformeAvanceOT Error',
+  '[INFORME AVANCE] GET AceptarRechazarInformeAvanceOT Error',
+  props<{ error: any }>()
+);
+
+// ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+export const actualizarInformeAvanceYAdicionales = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceYAdicionales',
+  props<{
+    request_informe_avance: RequestUpdateInformeAvance;
+    request_adicionales: RequestAdicionales;
+  }>()
+);
+
+export const actualizarInformeAvanceYAdicionalesError = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceYAdicionales Error',
+  props<{ error: any }>()
+);
+
+// ACTUALIZAR INFORME DE AVANCE
+export const actualizarInformeAvance = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvance',
+  props<{
+    request_informe_avance: RequestUpdateInformeAvance;
+  }>()
+);
+
+export const actualizarInformeAvanceSuccess = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const actualizarInformeAvanceError = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvance Error',
   props<{ error: any }>()
 );

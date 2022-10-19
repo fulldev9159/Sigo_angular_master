@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
   DetalleInformeAvance,
+  RequestAdicionales,
   RequestAutorizarInformeAvance,
+  RequestUpdateInformeAvance,
   Response,
 } from '@model';
 import { Store } from '@ngrx/store';
@@ -52,6 +54,29 @@ export class InformeAvanceFacade {
   ): void {
     this.store.dispatch(
       informeAvanceActions.AceptarRechazarInformeAvanceOT({ request })
+    );
+  }
+
+  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+  public actualizarInformeAvanceYAdicionales(
+    request_informe_avance: RequestUpdateInformeAvance,
+    request_adicionales: RequestAdicionales
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvanceYAdicionales({
+        request_informe_avance,
+        request_adicionales,
+      })
+    );
+  }
+
+  public actualizarInformeAvance(
+    request_informe_avance: RequestUpdateInformeAvance
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvance({
+        request_informe_avance,
+      })
     );
   }
 }

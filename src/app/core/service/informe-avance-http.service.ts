@@ -4,6 +4,7 @@ import { environment } from '@environment';
 import {
   DetalleInformeAvance,
   RequestAutorizarInformeAvance,
+  RequestUpdateInformeAvance,
   Response,
 } from '@model';
 import { Observable } from 'rxjs';
@@ -39,6 +40,15 @@ export class InformeAvanceHttpService {
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/informe_avance/aprobacion/update`,
+      request
+    );
+  }
+
+  updateInformeAvance(
+    request: RequestUpdateInformeAvance
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/informe_avance_detalle/update`,
       request
     );
   }

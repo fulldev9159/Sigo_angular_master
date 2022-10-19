@@ -155,7 +155,10 @@ export class AfterHttpService {
     }
 
     // GUARDAR BORRADOR INFORME DE AVANCE
-    if (action.type === serviciosActions.agregarAdicionalesSuccess.type) {
+    if (
+      action.type === serviciosActions.agregarAdicionalesSuccess.type ||
+      action.type === informeAvanceActions.actualizarInformeAvanceSuccess.type
+    ) {
       this.snackMessage.showMessage(
         `Se guarda el informe de avance exitosamente`,
         'Exito',
