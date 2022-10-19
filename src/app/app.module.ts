@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { LogModule } from '@log';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -26,6 +27,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   declarations: [AppComponent],
   imports: [
     CoreModule,
+    LogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(
