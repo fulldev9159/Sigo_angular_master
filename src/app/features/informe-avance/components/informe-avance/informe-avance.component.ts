@@ -248,11 +248,20 @@ export class InformeAvanceComponent
   guardarBorrador(): void {
     this.subscription.add(
       this.carrito$.pipe(take(1)).subscribe(carrito => {
-        // 113 TODO: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
+        // 113 TODO DONE CLOSE: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
+        // TODO: PROBAR QUE OCURRE SI ELIMINA UN SERVICIO Y LUEGO LO VUELVE A AGREGAR
+        if (
+          this.tableServiciosAdicionales.servicios_eliminar.length > 0 ||
+          this.tableServiciosAdicionales.uos_eliminar.length > 0
+        ) {
+          this.serviciosFacade.eliminarAdicional(
+            this.tableServiciosAdicionales.servicios_eliminar,
+            this.tableServiciosAdicionales.uos_eliminar
+          );
+        }
+
         // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
         // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
-
-        console.log(this.tableServiciosAdicionales.formTable.value);
 
         // SERVICIOS ADICIONALES
         //  TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
@@ -274,7 +283,6 @@ export class InformeAvanceComponent
           }[];
         }>;
 
-        console.log('form', formularioCarrito);
         if (formularioCarrito.length > 0) {
           // SERVICIOS/UO COMPLETAMENTE NUEVOS
           let nuevosAdicionales: NuevoServicioAdicional[] = formularioCarrito
@@ -294,8 +302,6 @@ export class InformeAvanceComponent
                 cantidad: uo.uo_cantidad,
               })),
             }));
-
-          console.log('nuevos', nuevosAdicionales);
 
           // 158 TODO: SERVICIOS A ACTUALIZAR
 

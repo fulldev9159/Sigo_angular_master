@@ -68,7 +68,7 @@
                     </td>
                     <td *ngIf="column_acciones" [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         <button *ngIf="accion_delete" (click)="deleteServicioFromCarrito(servicio)"
-                            class="ui button eliminar-color">
+                            class="ui button eliminar-button">
                             <fa-icon [icon]="trashICon"></fa-icon>
                         </button>
 
@@ -130,7 +130,7 @@
                             <td *ngIf="column_acciones">
                                 <ng-container *ngIf="servicio.unidad_obras.length>1 && accion_delete">
                                     <button (click)="deleteUOFromServicioFromCarrito(servicio, uo)"
-                                        class="ui button eliminar-color">
+                                        class="ui button eliminar-button">
                                         <fa-icon [icon]="trashICon"></fa-icon>
                                     </button>
                                 </ng-container>

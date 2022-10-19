@@ -23,4 +23,15 @@ export class ServiciosAdicionalesHttpService {
       request
     );
   }
+
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicional(
+    servicio_adicional: number[],
+    unidad_obra: number[]
+  ): Observable<Response<{ servicio: number[]; unidad_obra: [] }>> {
+    return this.http.post<Response<{ servicio: number[]; unidad_obra: [] }>>(
+      `${this.API_URL}/ot/servicio_adicional/solicitud/delete`,
+      { servicio_adicional, unidad_obra }
+    );
+  }
 }

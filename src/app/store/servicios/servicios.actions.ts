@@ -128,6 +128,21 @@ export const agregarAdicionalesError = createAction(
   props<{ error: any }>()
 );
 
+// ELIMINAR SERVICIOS ADICIONALES
+export const eliminarAdicional = createAction(
+  '[SERVICIOS] GET eliminarAdicional',
+  props<{ servicio_adicional: number[]; unidad_obra: number[] }>()
+);
+
+export const eliminarAdicionalSuccess = createAction(
+  '[SERVICIOS] GET eliminarAdicional Success',
+  props<{ response: Response<any> }>()
+);
+export const eliminarAdicionalError = createAction(
+  '[SERVICIOS] eliminarAdicional Error',
+  props<{ error: any }>()
+);
+
 // RESETS
 export const resetServiciosAgenciaContratoProveedor = createAction(
   '[SERVICIOS] resetServiciosAgenciaContratoProveedor '

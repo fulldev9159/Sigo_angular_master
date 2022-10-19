@@ -120,6 +120,25 @@ export class ServiciosEffects {
     )
   );
 
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.eliminarAdicional),
+      concatMap(({ servicio_adicional, unidad_obra }) =>
+        this.serviciosAdicionalesHttpService
+          .eliminarAdicional(servicio_adicional, unidad_obra)
+          .pipe(
+            map(response =>
+              serviciosActions.eliminarAdicionalSuccess({ response })
+            ),
+            catchError(err =>
+              of(serviciosActions.eliminarAdicionalError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -127,7 +146,8 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
           serviciosActions.addServicioCarritoSuccess,
-          serviciosActions.agregarAdicionalesSuccess
+          serviciosActions.agregarAdicionalesSuccess,
+          serviciosActions.eliminarAdicionalSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -141,7 +161,8 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
           serviciosActions.addServicioCarritoError,
-          serviciosActions.agregarAdicionalesError
+          serviciosActions.agregarAdicionalesError,
+          serviciosActions.eliminarAdicionalError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
