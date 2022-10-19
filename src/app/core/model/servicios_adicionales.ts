@@ -24,8 +24,8 @@ export interface NuevaUOServicioAdicional {
 
 // ACTUALIZAR ADICIONAL
 export interface ActualizarServicioAdicional {
-  servicio: ServicioAdicionalActualizar[];
-  unidad_obra: UOAdicionalActualizar[];
+  servicio?: ServicioAdicionalActualizar[];
+  unidad_obra?: UOAdicionalActualizar[];
   agregar_uob_a_servicio?: AgregarUOAdicionalAServicio[];
 }
 

@@ -17,6 +17,7 @@ import {
   ProveedorAgenciaContrato,
   RequestAdicionales,
   RequestAutorizarInformeAvance,
+  ServicioAdicionalActualizar,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -304,6 +305,14 @@ export class InformeAvanceComponent
             }));
 
           // 158 TODO: SERVICIOS A ACTUALIZAR
+          // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
+          let servicios_actualizar: ServicioAdicionalActualizar[] =
+            formularioCarrito
+              .filter(value => value.precargado)
+              .map(value => ({
+                rowid: value.servicio_rowid,
+                cantidad: value.servicio_cantidad,
+              }));
 
           // 159 TODO: UO A ACTUALIZAR
 
@@ -313,15 +322,15 @@ export class InformeAvanceComponent
             ot_id: this.ot_id,
             adicionales_solicitados: {
               nuevo: nuevosAdicionales,
-              // actualizar: {
-              //   servicio: servicio_actualizar,
-              //   unidad_obra: [...uo_actualizar.flat()].filter(
-              //     value => value !== undefined
-              //   ),
-              //   agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
-              //     value => value !== undefined
-              //   ),
-              // },
+              actualizar: {
+                servicio: servicios_actualizar,
+                // unidad_obra: [...uo_actualizar.flat()].filter(
+                //   value => value !== undefined
+                // ),
+                // agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
+                //   value => value !== undefined
+                // ),
+              },
             },
           };
 
