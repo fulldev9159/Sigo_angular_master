@@ -29,7 +29,9 @@
                         </zwc-form-agregar-servicios>
                     </div>
                     <div class="field col-12 md:col-9 lg:col-9 xl:col-9 table-adicionales">
-                        <zwc-table-servicios #tableServiciosAdicionales>
+                        <!-- IMPORTANTE: SE DEBE INDICAR QUE ES MODO AGREGACION DE ADICIONALES INFORME AVANCE Y ENVIAR EL INFORME DE AVANCE ACTUAL PARA DETERMINAR SI UN SERVICIO YA EXISTE O NO -->
+                        <zwc-table-servicios mode_source="agregar-adicionales-informe-avance"
+                            [informe_avance]="serviciosInformeAvance" #tableServiciosAdicionales>
                         </zwc-table-servicios>
                     </div>
                 </div>

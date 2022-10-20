@@ -660,7 +660,7 @@ describe('INFORME DE AVANCE', () => {
       .contains('td', 'J101')
       .siblings()
       .eq(2)
-      .contains('El servicio debe ser modificado desde el informe de avance');
+      .contains('Su cantidad debe modificarse desde el informe de avance');
   });
 
   it.skip('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
