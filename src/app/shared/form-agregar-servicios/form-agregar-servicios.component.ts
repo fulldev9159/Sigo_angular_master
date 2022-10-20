@@ -415,7 +415,17 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       console.log(
         'Es un servicio original existente en el informe de avance pero la uo es nueva'
       );
-      // SE DEBE ALMACENAR UN SERVICIO DUMMY JUNTO AL UO
+      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+        {
+          agencia_id,
+          cmarco_has_proveedor_id,
+          servicio_id: +servicio_id,
+          tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+          actividad_id: this.formFilter.get('actividad_id').value,
+        };
+
+      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
     }
 
     // SI SERVICIO/UO EXISTE EN EL INFORME AVANCE PERO NO ES ORIGINAL (ADICIONAL QUE YA SE HA AGREGADO ANTES)

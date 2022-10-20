@@ -112,7 +112,6 @@ describe('REVISAR FORMULARIO INFORME DE AVANCE', () => {
   });
 
   // REVISION
-
   it('Debe desplegar el carrito para adicionales vacio', () => {
     cy.get('.table-adicionales>zwc-table-servicios>form>table>tbody')
       .find('tr')

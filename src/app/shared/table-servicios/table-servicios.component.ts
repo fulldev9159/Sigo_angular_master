@@ -119,6 +119,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   }
 
   loadData(data$: Observable<CarritoService[]>): Observable<CarritoService[]> {
+    // PARA LOS CASOS DE SERVICIOS ADICONALES EXISTENTES EN EL INFORME DE AVANCE Y QUE SE NECESITE AGREGAR UNA UO NUEVA SE DEBE VERIFICAR SI EXISTE EL SERVICIO EN EL INFORME Y SI EXISTE SE DEBE MARCAR COMO SERVICIO DUMMY PARA QUE NO SEA EDITABLE
     return data$.pipe(
       map(servicios => {
         let valueInitial: CarritoService[] = [];

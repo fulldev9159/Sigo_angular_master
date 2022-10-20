@@ -18,7 +18,6 @@ describe('INFORME DE AVANCE', () => {
   });
 
   // AGREGAR ADICIONALES
-
   it.skip('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
@@ -629,11 +628,44 @@ describe('INFORME DE AVANCE', () => {
 
   it.skip('Al intenet agregar el mismo adicional anterior debe desplegar el siguiente mensaje de error "" ', () => {});
 
-  it.skip('Al agregar un uo adicional a un servicio adicional existente debe agregarlo al mismo servicio adicional y al presionar el boton guardar borrador debe cargar esa uo nueva', () => {});
+  it('Agregar la UO C048 al servicio J101', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'MATRIZ');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-unidad-obra', 'C048 - CABLE 900-26 SUB');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'C048')
+      .siblings()
+      .eq(0)
+      .contains('CABLE 900-26 SUB');
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'J101')
+      .siblings()
+      .eq(2)
+      .contains('El servicio debe ser modificado desde el informe de avance');
+  });
 
   it.skip('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
 
-  it('Al realizar cambios al servicio J730 y presionar guardar borrador los cambios debe permanecer', () => {
+  it.skip('Al realizar cambios al servicio J730 y presionar guardar borrador los cambios debe permanecer', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.get('.table-informe-avance>zwc-table-servicios>.carrito-container>table')
