@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AfterHttpService, PerfilesHttpService } from '@services';
 import * as perfilActions from './perfil.actions';
@@ -11,7 +12,8 @@ export class PerfilEffects {
   constructor(
     private actions$: Actions,
     private perfilesHttpService: PerfilesHttpService,
-    private afterHttp: AfterHttpService
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
 
   getPerfilesUsuario$ = createEffect(() =>
@@ -169,6 +171,20 @@ export class PerfilEffects {
           profileActions.createPerfilError
         ),
         tap(action => this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSavePerfilSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
+        ),
+        tap(() =>
+          this.router.navigate(['/administracion/perfiles/list-perfiles'])
+        )
       ),
     { dispatch: false }
   );

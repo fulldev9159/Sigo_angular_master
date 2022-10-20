@@ -1,1 +1,66 @@
-<p>form-perfiles-container works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-create-profile">
+      <h1 class="mt-4">Creación de Perfil </h1>
+      <span>formulario para crear un nuevo perfil</span>
+    </div>
+    <div class="col">
+      <button (click)="goBack()" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row" [formGroup]="formPerfil">
+        <div class="col-md-3">
+          <div class="row">
+            <div class="col-12" id="nombre-perfil-input">
+              <span class="p-float-label field">
+                <input type="text" pInputText name="nombre" class="p-inputtext-sm" [formControl]="formControls.nombre" />
+                <label for="nombre">* Nombre:</label>
+                <zwc-input-alert [control]="formControls.nombre"> </zwc-input-alert>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" id="rol-perfil-select">
+              <zwc-pdropdown [control]="formControls.rol" Label="* Rol" dropdown_id="perfil-rol" [data]="allRoles$|async" Pplaceholder="Selecione un rol" [loading]="false" optionLabel="nombre" optionValue="id">
+              </zwc-pdropdown>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-12" id="descripcion-perfil-input">
+              <span class="p-float-label">
+                <textarea name="descripcion" pInputTextarea [formControl]="formControls.descripcion" rows="5" cols="30"></textarea>
+                <label for="descripcion">* Descripción:</label>
+                <zwc-input-alert [control]="formControls.descripcion"> </zwc-input-alert>
+              </span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12 text-center mt-2 p-0">
+              <p-button label="Guardar" (click)="saveProfile()" [disabled]="!formPerfil.valid" slyle="font-size: 0.83rem;" icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row" *ngIf="formPerfil.get('rol').value!==null && permisosRol.length>0">
+            <div *ngFor="let item of permisosRol" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
+              <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions" optionValue="model_permiso_id.id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="model_permiso_id.nombre_corto">
+                <ng-template pTemplate="header">
+                  {{item.module}}
+                </ng-template>
+              </p-listbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -55,6 +55,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       multi: true,
     },
     { provide: LOCALE_ID, useValue: 'es-CL' },
+    { provide: 'environment', useValue: environment },
   ],
   bootstrap: [AppComponent],
 })
