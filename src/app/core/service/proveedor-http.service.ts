@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { ProveedorAgenciaContrato, Response } from '@model';
+import { ProveedorAgenciaContrato, ModelProveedor, Response } from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +21,15 @@ export class ProveedorHttpService {
     return this.http.post<Response<{ items: ProveedorAgenciaContrato[] }>>(
       `${this.API_URL}/cubicacion/proveedores_from_agencia_contrato/get`,
       { agencia_id, contrato_id }
+    );
+  }
+
+  getAllProveedores4CreateUser(
+    interno: boolean
+  ): Observable<Response<{ items: ModelProveedor[] }>> {
+    return this.http.post<Response<{ items: ModelProveedor[] }>>(
+      `${this.API_URL}/usuario/proveedor/get`,
+      { interno }
     );
   }
 }

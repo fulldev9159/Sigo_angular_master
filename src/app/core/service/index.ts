@@ -18,3 +18,5 @@ export * from './informe-avance-http.service';
 export * from './servicios-adicionales-http.service';
 export * from './acta-http.service';
 export * from './libro-obras-http.service';
+export * from './area-http.service';
+export * from './guia-subgrupo-http.service';
