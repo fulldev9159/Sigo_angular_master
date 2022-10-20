@@ -1,1 +1,132 @@
-<p>list-perfiles-container works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-list-profile">
+      <h1 class="mt-4">Perfiles </h1>
+      <span>listado de perfiles en sistema</span>
+    </div>
+    <div class="col">
+      <button [routerLink]="['/administracion/perfiles/form-perfiles']" pButton type="button" label="Nuevo Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class=" grid">
+        <div class="field col-12 table-list-perfiles">
+          <ng-container *ngIf="perfiles$ | async as perfiles">
+            <p-table [value]="perfiles" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="nombre">
+                    Nombre Perfil
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="rol">
+                    Rol
+                    <p-sortIcon field="rol"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="descripcion">
+                    Descripción
+                    <p-sortIcon field="descripcion"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="created_at">
+                    Fecha Creación
+                    <p-sortIcon field="created_at"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="updated_at">
+                    Fecha Modificación
+                    <p-sortIcon field="updated_at"></p-sortIcon>
+                  </th>
+                  <th></th>
+                <tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                <tr>
+                  <td>
+                    <strong>{{ item.nombre }}</strong>
+                  </td>
+                  <td>{{ item.model_rol_id.nombre }}</td>
+                  <td>{{ item.descripcion }}</td>
+                  <td style="text-align: right;">{{ item.created_at | date:'dd-MM-yyyy' }}</td>
+                  <td style="text-align: right;">{{ item.updated_at | date:'dd-MM-yyyy' }}</td>
+                  <td style="text-align: right;">
+                    <div class="ui icon buttons mini basic">
+                      <button class="ui button generic-color" (click)="verPermisos(item)">Ver permisos</button>
+
+                      <div *ngIf="!item.eliminable" pTooltip="No se puede editar">
+                        <button style="height: 100%;" [disabled]="true" class="ui button generic-color">Editar</button>
+                      </div>
+                      <button *ngIf="item.eliminable" class="ui button generic-color" (click)="editar(item)">Editar</button>
+
+                      <div *ngIf="!item.eliminable" pTooltip="No se puede eliminar">
+                        <button [disabled]="true" class="ui button eliminar-color" style="height: 100%;">
+                          <fa-icon [icon]="trashIcon"></fa-icon>
+                        </button>
+                      </div>
+                      <button *ngIf="item.eliminable" class="ui button eliminar-color" (click)="eliminar(item)">
+                        <fa-icon [icon]="trashIcon"></fa-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  En total hay {{ perfiles ? perfiles.length : 0 }} elementos.
+                </div>
+              </ng-template>
+            </p-table>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="false" (onHide)="closeModalPermisosPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="header">
+    Lista de Permisos del perfil
+  </ng-template>
+  <div class="row" style="width: 87vw;">
+    <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
+      <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive" [disabled]="true">
+        <ng-template pTemplate="header">
+          {{item.module}}
+        </ng-template>
+      </p-listbox>
+    </div>
+  </div>
+  <div class="row">
+    <button pButton type="button" (click)="closeModalPermisosPerfil()" label="Cerrar" class="p-button-sm mt-5 float-right" id="close-permisos-perfil-button" style="background: #b8b6b6; border: gray;"></button>
+  </div>
+  <p-footer></p-footer>
+</p-dialog>
+
+<p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
+  <div class="row">
+    <div class="col">
+      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este perfil?</p>
+      <div style="padding: 0 9rem 0 9rem;">
+        <div class="row">
+          <div class="col">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-perfil-user-button" style="background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;"></button>
+            &nbsp;
+            <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar" class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer></p-footer>
+</p-dialog>

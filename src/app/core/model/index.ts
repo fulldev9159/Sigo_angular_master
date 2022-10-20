@@ -26,6 +26,8 @@ export * from './servicios_adicionales';
 export * from './acta';
 export * from './archivo';
 export * from './libro-obras';
+export * from './permiso';
+
 export interface Response<T> {
   data: T;
   status: StatusResponse;
