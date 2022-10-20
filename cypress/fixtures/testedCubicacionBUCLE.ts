@@ -425,6 +425,8 @@ export const CubicacionEditada = {
   ],
 };
 
+// INFORME DE AVANCE
+
 export const adicionalesBucle1 = {
   items: [
     {
@@ -462,6 +464,138 @@ export const adicionalesBucle1 = {
           nombre: 'DT06 - CONECTOR RG11',
           precio: '$0',
           cantidad: '3',
+          total: '$0',
+        },
+      ],
+    },
+  ],
+};
+
+export const InformeAvanceEdicionTrabajador = {
+  contrato: 'BUCLE',
+  agencia: 'APOQUINDO',
+  proveedor: '330000659 - COBRA CHILE SERVICIOS S.A.',
+  totalServicios: '$3.022.590,4',
+  totalUOs: '$49.224',
+  total: '$3.071.814,4',
+  items: [
+    {
+      nombre: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
+      precio: '$180,32',
+      cantidad: '20',
+      total: '$3.606,4',
+      tipo_servicio: 'CABLES',
+      actividad: 'MATRIZ',
+      unidad_obras: [
+        {
+          nombre: 'D013 - CONECTOR ROJO CAL.24-19',
+          precio: '$56,8',
+          cantidad: '15',
+          total: '$852',
+        },
+        {
+          nombre: 'D012 - CONECTOR AMARILLO CAL.24-19',
+          precio: '$0',
+          cantidad: '14',
+          total: '$0',
+        },
+      ],
+    },
+    {
+      nombre: 'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+      precio: '$471,6',
+      cantidad: '5.011',
+      total: '$2.363.187,6',
+      tipo_servicio: 'LINEAS',
+      actividad: 'MATRIZ',
+      unidad_obras: [
+        {
+          nombre: 'C926 - CABLE 1800-26 PS',
+          precio: '$0',
+          cantidad: '150,37',
+          total: '$0',
+        },
+        {
+          nombre: 'C881 - CABLE FS 1212-24 SUB.',
+          precio: '$0',
+          cantidad: '2,3',
+          total: '$0',
+        },
+        {
+          nombre: 'C105 - CABLE PS 600-26 SUB.',
+          precio: '$0',
+          cantidad: '80,32',
+          total: '$0',
+        },
+      ],
+    },
+    {
+      nombre:
+        'D080 - DISEÑO DE RED PARA PROYECTOS DEL TIPO BROWNFIELD (CADA UIP)',
+      precio: '$1.485',
+      cantidad: '5',
+      total: '$7.425',
+      tipo_servicio: 'PROYECTOS',
+      actividad: 'FTTX',
+      unidad_obras: [
+        {
+          nombre: '0 - SIN UO',
+          precio: '$0',
+          cantidad: '0',
+          total: '$0',
+        },
+      ],
+    },
+    {
+      nombre: 'J201 - INSTALAR CABLES EN EDIFICIOS Y CENTRALES TELEFONICAS',
+      precio: '$982,5',
+      cantidad: '10',
+      total: '$9.825',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
+      unidad_obras: [
+        {
+          nombre: 'H006 - ANGULO PLANO LEGRAND 40*16',
+          precio: '$458',
+          cantidad: '9',
+          total: '$4.122',
+        },
+        {
+          nombre: 'H002 - ANGULO INT./EXT.LEGRAND 32*10',
+          precio: '$295',
+          cantidad: '150',
+          total: '$44.250',
+        },
+      ],
+    },
+    {
+      nombre: 'J726 - INST. REPARTIDOR MURAL, 1 VERTICAL, TIPO 2/3 VERTICALES',
+      precio: '$22.008',
+      cantidad: '15',
+      total: '$330.120',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
+      unidad_obras: [
+        {
+          nombre: '0 - SIN UO',
+          precio: '$0',
+          cantidad: '0',
+          total: '$0',
+        },
+      ],
+    },
+    {
+      nombre: 'J730 - INST. ESCALERILLA SOPORTE',
+      precio: '$12.851,1',
+      cantidad: '24',
+      total: '$308.426,4',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
+      unidad_obras: [
+        {
+          nombre: 'H134 - ESCALERILLA PC TIPO NEC 200*32',
+          precio: '$0',
+          cantidad: '26',
           total: '$0',
         },
       ],
