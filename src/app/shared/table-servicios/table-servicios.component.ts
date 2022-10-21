@@ -229,21 +229,25 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
       // NUEVO SERVICIO
       if (indexServiceFormulario === -1) {
-        console.log('id', servicio.servicio_id);
-        console.log('cantidad', servicio.servicio_cantidad);
-        console.log(
-          servicio.servicio_cantidad ? servicio.servicio_cantidad : 1
+        let servicio_cantidad_control = new FormControl(
+          servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+          [Validators.required, Validators.min(0.01)]
         );
+
+        if (
+          servicio.servicio_cantidad !== undefined &&
+          servicio.servicio_cantidad === 0
+        ) {
+          servicio_cantidad_control = new FormControl(0);
+        }
+
         const group = new FormGroup({
           precargado: new FormControl(servicio.precargado ?? false, []),
           servicio_rowid: new FormControl(servicio.servicio_rowid, []),
           servicio_id: new FormControl(servicio.servicio_id, [
             Validators.required,
           ]),
-          servicio_cantidad: new FormControl(
-            servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
-            [Validators.required, Validators.min(0.01)] // QUE SEA DINAMICO
-          ),
+          servicio_cantidad: servicio_cantidad_control,
           servicio_precio_final_clp: new FormControl(
             servicio.servicio_precio_final_clp
           ),

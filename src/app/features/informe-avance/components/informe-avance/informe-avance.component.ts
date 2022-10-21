@@ -430,10 +430,10 @@ export class InformeAvanceComponent
             );
 
           console.log(request_adicionales);
-          // this.informeAvanceFacade.actualizarInformeAvanceYAdicionales(
-          //   request_informe_avance,
-          //   request_adicionales
-          // );
+          this.informeAvanceFacade.actualizarInformeAvanceYAdicionales(
+            request_informe_avance,
+            request_adicionales
+          );
         } else {
           // ACTUALIZAR SOLO EL INFORME DE AVANCE
           this.informeAvanceFacade.actualizarInformeAvance(
