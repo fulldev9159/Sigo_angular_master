@@ -17,7 +17,17 @@
       <div class=" grid">
         <div class="field col-12 table-list-perfiles">
           <ng-container *ngIf="perfiles$ | async as perfiles">
-            <p-table [value]="perfiles" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+            <p-table #dt [columns]="['nombre', 'descripcion', 'created_at', 'superior']" [value]="perfiles" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+              <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  <h5 class="p-m-0"></h5>
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                  </span>
+                </div>
+              </ng-template>
+
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="nombre">
@@ -88,7 +98,7 @@
   </div>
 </div>
 
-<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="false" (onHide)="closeModalPermisosPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="true" (onHide)="closeModalPermisosPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
   <ng-template pTemplate="header">
     Lista de Permisos del perfil
   </ng-template>

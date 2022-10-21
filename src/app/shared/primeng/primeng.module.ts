@@ -21,6 +21,7 @@ import { ChipModule } from 'primeng/chip';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PanelModule } from 'primeng/panel';
 import { ListboxModule } from 'primeng/listbox';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { ListboxModule } from 'primeng/listbox';
     FileUploadModule,
     PanelModule,
     ListboxModule,
+    MenuModule,
   ],
   exports: [
     InputTextModule,
@@ -70,6 +72,7 @@ import { ListboxModule } from 'primeng/listbox';
     FileUploadModule,
     PanelModule,
     ListboxModule,
+    MenuModule,
   ],
 })
 export class PrimeNgModule {}
