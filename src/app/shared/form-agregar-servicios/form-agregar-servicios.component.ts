@@ -388,18 +388,44 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   ): boolean {
     // SI SERVICIO/UO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL
 
-    const servicioYUOExistenEnInformeORIGINAL = this.informeAvance.find(
+    let servicioInInforme = this.informeAvance.find(
       servicio =>
         servicio.servicio_id === servicio_id &&
-        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
         servicio.adicional === 'ORIGINAL'
     );
 
-    if (servicioYUOExistenEnInformeORIGINAL !== undefined) {
+    let uoInInforme;
+
+    console.log('servicio in informe', servicioInInforme);
+
+    if (servicioInInforme)
+      uoInInforme = servicioInInforme.unidad_obras.find(
+        v => v.uo_codigo === unidad_obra_cod
+      );
+
+    console.log('uo in informe avance', uoInInforme);
+
+    const servicioYUOExistenEnInformeORIGINAL =
+      servicioInInforme !== undefined && uoInInforme !== undefined;
+
+    console.log('existen', servicioYUOExistenEnInformeORIGINAL);
+    // this.informeAvance.find(
+    //   servicio => {
+    //     return (
+    //       servicio.servicio_id === servicio_id &&
+    //       servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
+    //       servicio.adicional === 'ORIGINAL'
+    //     );
+    //   }
+    // );
+
+    if (servicioYUOExistenEnInformeORIGINAL) {
       this.serviciosFacade.alertServicioExistenteCarrito(
         true,
         'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
       );
+
+      return true;
     }
 
     // SI SERVICIO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL PERO LA UO ES NUEVA

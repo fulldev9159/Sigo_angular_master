@@ -295,7 +295,6 @@ export class InformeAvanceComponent
           })),
         }));
 
-    // 158 TODO DONE CLOSE: SERVICIOS A ACTUALIZAR
     // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
     let servicios_actualizar: ServicioAdicionalActualizar[] =
       formularioServiciosAdicionales
@@ -304,8 +303,6 @@ export class InformeAvanceComponent
           rowid: value.servicio_rowid,
           cantidad: value.servicio_cantidad,
         }));
-
-    // 159 TODO DONE CLOSE: UO A ACTUALIZAR
 
     let valueIntial: {
       precargado: boolean;
@@ -333,7 +330,7 @@ export class InformeAvanceComponent
       })
     );
 
-    // 160 TODO: UO A AGREGAR
+    // 196 TODO: UO A AGREGAR A ADICIONAL EXISTENTE EN EL CARRITO
 
     // REQUEST SERVICIOS ADICONALES
     let request_adicionales: RequestAdicionales = {
@@ -429,7 +426,6 @@ export class InformeAvanceComponent
               carrito
             );
 
-          console.log(request_adicionales);
           this.informeAvanceFacade.actualizarInformeAvanceYAdicionales(
             request_informe_avance,
             request_adicionales
