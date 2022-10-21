@@ -164,7 +164,7 @@ export class AfterHttpService {
         'Exito',
         6000
       );
-      location.reload();
+      // location.reload();
     }
 
     // ACEPTAR OT INICIAL

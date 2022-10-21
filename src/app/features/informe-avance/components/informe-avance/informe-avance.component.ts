@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
   AgenciaContrato,
+  AgregarUOAdicionalAServicio,
   CarritoService,
   ContratosUser,
   DetalleInformeAvance,
@@ -298,7 +299,9 @@ export class InformeAvanceComponent
           })),
         }));
 
+    // ACTUALIZAR
     // TODO: SE PODRIA COMPARAR LA CANTIDAD CON $CARRITO PARA DETERMINAR SI REALMENTE SE HIZO UN CAMBIO
+    // SERVICIOS
     let servicios_actualizar: ServicioAdicionalActualizar[] =
       formularioServiciosAdicionales
         .filter(value => value.precargado)
@@ -307,6 +310,7 @@ export class InformeAvanceComponent
           cantidad: value.servicio_cantidad,
         }));
 
+    // UOS
     let valueIntial: {
       precargado: boolean;
       uo_cantidad: number;
@@ -334,6 +338,31 @@ export class InformeAvanceComponent
     );
 
     // 196 TODO: UO A AGREGAR A ADICIONAL EXISTENTE EN EL CARRITO
+    // UO NUEVO EN SERVICIO EXISTE
+    let s = formularioServiciosAdicionales.filter(value => value.precargado);
+    let initialVal: {
+      servicio_rowid: number;
+      uob_codigo: string;
+      uob_cantidad: number;
+    }[] = [];
+    let agregar_uob_a_servicio: AgregarUOAdicionalAServicio[] = s.reduce(
+      (acc, curr) => {
+        let uosNuevos = curr.unidad_obras.filter(v => !v.precargado);
+        if (uosNuevos.length > 0) {
+          acc.push(
+            ...uosNuevos.map(v => ({
+              servicio_rowid: curr.servicio_rowid,
+              uob_codigo: v.uo_codigo,
+              uob_cantidad: v.uo_cantidad,
+            }))
+          );
+        }
+        return acc;
+      },
+      initialVal
+    );
+
+    console.log('servicios a actualizar', agregar_uob_a_servicio);
 
     // REQUEST SERVICIOS ADICONALES
     let request_adicionales: RequestAdicionales = {
@@ -343,9 +372,7 @@ export class InformeAvanceComponent
         actualizar: {
           servicio: servicios_actualizar,
           unidad_obra: uos_actualizar,
-          // agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
-          //   value => value !== undefined
-          // ),
+          agregar_uob_a_servicio,
         },
       },
     };
