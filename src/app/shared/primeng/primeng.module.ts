@@ -20,6 +20,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ChipModule } from 'primeng/chip';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PanelModule } from 'primeng/panel';
+import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { PanelModule } from 'primeng/panel';
     ChipModule,
     FileUploadModule,
     PanelModule,
+    ListboxModule,
   ],
   exports: [
     InputTextModule,
@@ -67,6 +69,7 @@ import { PanelModule } from 'primeng/panel';
     ChipModule,
     FileUploadModule,
     PanelModule,
+    ListboxModule,
   ],
 })
 export class PrimeNgModule {}
