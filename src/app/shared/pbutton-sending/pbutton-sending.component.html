@@ -1,14 +1,13 @@
 <ng-container *ngIf="sending; else noSending">
-    <button disabled [id]="Pid" pButton type="button" 
-    [label]="content" 
-    [class]="Pclass"> 
-     <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+    <button disabled [id]="Pid" pButton type="button" [label]="content" [class]="Pclass">
+        <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
     </button>
 </ng-container>
 <ng-template #noSending>
-    <button [disabled]="Pdisabled" [id]="Pid" pButton type="button" 
-    [label]="content" 
-    [class]="Pclass"
-    (click)="callClick()"> 
+    <button [disabled]="Pdisabled" [id]="Pid" pButton type="button" [label]="content" [class]="Pclass"
+        (click)="callClick()">
+        <ng-container *ngIf="icon!==''">
+            <fa-icon [icon]="iconSelected"></fa-icon>
+        </ng-container>
     </button>
-</ng-template> 
+</ng-template>

@@ -51,6 +51,7 @@ export interface StateLoadings {
   sendingCreateOT: boolean;
   sendingGetPosibleSupervisorTrabajos: boolean;
   sendingSendDetalleInformeAvance: boolean;
+  sendingSendBorradorInformeAvance: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -91,6 +92,7 @@ export const initialStateLoading: StateLoadings = {
   sendingCreateOT: false,
   sendingGetPosibleSupervisorTrabajos: false,
   sendingSendDetalleInformeAvance: false,
+  sendingSendBorradorInformeAvance: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -538,6 +540,26 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingSendDetalleInformeAvance: false,
+    })
+  ),
+
+  on(
+    serviciosActions.agregarAdicionales,
+    informeAvanceActions.actualizarInformeAvance,
+    state => ({
+      ...state,
+      sendingSendBorradorInformeAvance: true,
+    })
+  ),
+
+  on(
+    serviciosActions.agregarAdicionalesSuccess,
+    serviciosActions.agregarAdicionalesError,
+    informeAvanceActions.actualizarInformeAvanceSuccess,
+    informeAvanceActions.actualizarInformeAvanceError,
+    state => ({
+      ...state,
+      sendingSendBorradorInformeAvance: false,
     })
   )
 );

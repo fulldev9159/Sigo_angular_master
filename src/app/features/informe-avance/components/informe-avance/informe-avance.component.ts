@@ -95,6 +95,9 @@ export class InformeAvanceComponent
   sendingSendInformeAvance$: Observable<boolean> =
     this.loadingsFacade.sendingCreateOT$();
 
+  sendingSendBorradorInformeAvance$: Observable<boolean> =
+    this.loadingsFacade.sendingSendBorradorInformeAvance$();
+
   // MODAL
   showModalRechazarInformeAvance = false;
 

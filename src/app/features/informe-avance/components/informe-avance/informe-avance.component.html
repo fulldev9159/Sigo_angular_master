@@ -45,13 +45,15 @@
     <div class="card">
         <div class=" grid">
             <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"
+                    [routerLink]="['/ot']">
                     Atrás
                 </button>
             </div>
             <div *ngIf="accionExist('OT_EDITAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador"
-                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"></zwc-pbutton-sending>
+                <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador" icon="save"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"
+                    [sending]="sendingSendBorradorInformeAvance$|async"></zwc-pbutton-sending>
             </div>
 
             <div *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">

@@ -182,3 +182,8 @@ export const sendingGetPosibleSupervisorTrabajos = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetPosibleSupervisorTrabajos
 );
+
+export const sendingSendBorradorInformeAvance = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingSendBorradorInformeAvance
+);
