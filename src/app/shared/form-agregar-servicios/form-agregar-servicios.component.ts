@@ -328,7 +328,6 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
 
           if (this.reglasDeAgregacion === 'ServiciosAdicionales')
             this.ReglasAgregarServiciosAdicionales(
-              carrito,
               servicio_id,
               unidad_obra_cod,
               proveedorSelected.cmarco_has_proveedor_id,
@@ -380,14 +379,11 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   // 120 TODO: CASO SERVICIO/UO ADICIONAL EXISTENTE EN EL CARRITO TEMPORAL ANTES DE GUARDAR BORRADOR
 
   ReglasAgregarServiciosAdicionales(
-    carrito: CarritoService[],
     servicio_id: number,
     unidad_obra_cod: string,
     cmarco_has_proveedor_id: number,
     agencia_id: number
   ): boolean {
-    // SI SERVICIO/UO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL
-
     let servicioInInforme = this.informeAvance.find(
       servicio =>
         servicio.servicio_id === servicio_id &&
@@ -405,39 +401,32 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
 
     console.log('uo in informe avance', uoInInforme);
 
-    const servicioYUOExistenEnInformeORIGINAL =
+    // CASO 1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE Y EL UO TAMBIÉN
+    const service_and_UO_in_informeAvance =
       servicioInInforme !== undefined && uoInInforme !== undefined;
 
-    console.log('existen', servicioYUOExistenEnInformeORIGINAL);
-    // this.informeAvance.find(
-    //   servicio => {
-    //     return (
-    //       servicio.servicio_id === servicio_id &&
-    //       servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
-    //       servicio.adicional === 'ORIGINAL'
-    //     );
-    //   }
-    // );
+    console.log('existen', service_and_UO_in_informeAvance);
 
-    if (servicioYUOExistenEnInformeORIGINAL) {
+    if (service_and_UO_in_informeAvance) {
       this.serviciosFacade.alertServicioExistenteCarrito(
         true,
         'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
       );
-
       return true;
     }
 
-    // SI SERVICIO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL PERO LA UO ES NUEVA
+    // CASO 2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA
 
-    const servicioExisteYUOnoExisteEnInformeORIGINAL = this.informeAvance.find(
-      servicio =>
-        servicio.servicio_id === servicio_id &&
-        servicio.unidad_obras[0].uo_codigo !== unidad_obra_cod &&
-        servicio.adicional === 'ORIGINAL'
-    );
+    const service_in_informeAvance_UO_nueva =
+      servicioInInforme !== undefined && uoInInforme === undefined;
+    // const servicioExisteYUOnoExisteEnInformeORIGINAL = this.informeAvance.find(
+    //   servicio =>
+    //     servicio.servicio_id === servicio_id &&
+    //     servicio.unidad_obras[0].uo_codigo !== unidad_obra_cod &&
+    //     servicio.adicional === 'ORIGINAL'
+    // );
 
-    if (servicioExisteYUOnoExisteEnInformeORIGINAL !== undefined) {
+    if (service_in_informeAvance_UO_nueva) {
       console.log(
         'Es un servicio original existente en el informe de avance pero la uo es nueva'
       );
@@ -452,8 +441,10 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         };
 
       this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
+      return true;
     }
 
+    // CASO 3:
     // SI SERVICIO/UO EXISTE EN EL INFORME AVANCE PERO NO ES ORIGINAL (ADICIONAL QUE YA SE HA AGREGADO ANTES)
     const servicioYUOExistenEnInformeADICIONAL = this.informeAvance.find(
       servicio =>
@@ -470,8 +461,8 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     }
 
     if (
-      servicioYUOExistenEnInformeORIGINAL === undefined &&
-      servicioExisteYUOnoExisteEnInformeORIGINAL === undefined &&
+      service_and_UO_in_informeAvance === undefined &&
+      service_in_informeAvance_UO_nueva === undefined &&
       servicioYUOExistenEnInformeADICIONAL === undefined
     ) {
       this.serviciosFacade.alertServicioExistenteCarrito(false, null);
