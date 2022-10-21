@@ -449,7 +449,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
 
             this.serviciosFacade.alertServicioExistenteCarrito(
               true,
-              'El servicio/UO ya existe como adicional'
+              'El servicio/UO ya fue agregado como adicional'
             );
             return false;
           }
@@ -483,7 +483,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           // SERVICIO YA SE HA AGREGADO COMO ADICIONAL PERO LA UO AÚN NO
           if (
             (servicioINCarrito === undefined && uoInCarrito === undefined) ||
-            (servicioINCarrito === undefined && uoInCarrito !== undefined)
+            (servicioINCarrito !== undefined && uoInCarrito === undefined)
           ) {
             this.serviciosFacade.alertServicioExistenteCarrito(false, null);
             this.serviciosFacade.addServicioCarrito(

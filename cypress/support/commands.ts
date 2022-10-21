@@ -206,8 +206,11 @@ Cypress.Commands.add('_select_dropdown', (selector, item) => {
   cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
     timeout: 5000,
   }).should('not.exist');
-  cy.get(selector).click().contains('ul li > span', item).click();
-  cy.get(selector + '>.p-dropdown>span').contains(item, { timeout: 5000 });
+  cy.get(selector)
+    .click()
+    .contains('ul li > span', item, { timeout: 18000 })
+    .click();
+  cy.get(selector + '>.p-dropdown>span').contains(item, { timeout: 8000 });
   cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
     timeout: 5000,
   }).should('not.exist');

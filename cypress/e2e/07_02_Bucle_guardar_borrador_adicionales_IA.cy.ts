@@ -8,7 +8,7 @@ import {
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacionBUCLE';
 
-describe('INFORME DE AVANCE', () => {
+describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('cctrabajador1', 'asdasd');
@@ -17,8 +17,196 @@ describe('INFORME DE AVANCE', () => {
     cy.get('button[id="play-button"]').click();
   });
 
+  // VERIFICAR TODOS LOS CASOS DE AGREGACION DE ADICIONALES
+
+  // CASO 1: SERVICIO Y UNIDAD DE OBRA A AGREGAR YA EXISTE EN EL INFORME DE AVANCE
+  it('Agregar el servicio J101 uo C926 debe desplegar mensaje "Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance"', () => {
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'MATRIZ');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-unidad-obra', 'C926 - CABLE 1800-26 PS');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.get(
+      '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+    ).contains(
+      'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
+    );
+  });
+
+  // CASO 2.3: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA -
+  //        EL SERVICIO Y LA UO AUN NO SE HAN AGREGADO COMO ADICIONAL
+  it('Agregar una nueva UO C048 al servicio J101, servicio que ya existe en el informe pero no se ha agregado aún como adicional', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'MATRIZ');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-unidad-obra', 'C048 - CABLE 900-26 SUB');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'C048')
+      .siblings()
+      .eq(0)
+      .contains('CABLE 900-26 SUB');
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'J101')
+      .siblings()
+      .eq(2)
+      .contains('Su cantidad se debe modificar desde el informe de avance');
+  });
+
+  // CASO 2.2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA -
+  //        EL SERVICIO YA EXISTE COMO ADICIONAL Y LA UNIDAD DE OBRA NO HAN SIDO AGREGADA
+
+  it('Agregar una nueva UO C870 al servicio J101, servicio que ya existe en el informe y que ya ha sido agregado con una uo adicional', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'MATRIZ');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-unidad-obra', 'C870 - CABLE PS 1212-26 SUB.');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'C870')
+      .siblings()
+      .eq(0)
+      .contains('CABLE PS 1212-26 SUB.');
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'J101')
+      .siblings()
+      .eq(2)
+      .contains('Su cantidad se debe modificar desde el informe de avance');
+  });
+
+  // CASO 2.1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA
+  // Y EL SERVICIO Y LA UO YA HAN SIDO AGREGADOS COMO ADICIONALES
+
+  it('Al presionar nuevamente el agregar debe desplegar mensaje error "El servicio/UO ya fue agregado como adicional"', () => {
+    cy.get('#agregar-button').click();
+    cy.get(
+      '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+    ).contains('El servicio/UO ya fue agregado como adicional');
+  });
+
+  // CASO 3.1: EL SERVICIO Y LA UO NO EXISTEN EN EL INFORME DE AVANCE Y
+  // SERVICIO/UO NO SE HA AGREGADO COMO ADICIONAL
+
+  it('Agregar una nueva UO DT09 al servicio nuevo T057', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'DTH');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'T057 - ACTIVACION DEL AMPLIFICADOR EN DIRECTA'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-unidad-obra',
+      'DT09 - AMPLIFICADOR FI TELEVES'
+    );
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'DT09')
+      .siblings()
+      .eq(0)
+      .contains('AMPLIFICADOR FI TELEVES');
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'T057')
+      .siblings()
+      .eq(0)
+      .contains('ACTIVACION DEL AMPLIFICADOR EN DIRECTA');
+  });
+  // CASO 3.3: EL SERVICIO Y LA UO NO EXISTEN EN EL INFORME DE AVANCE Y
+  // SERVICIO YA SE HA AGREGADO COMO ADICIONAL PERO LA UO AÚN NO
+  it('Agregar una nueva UO DT07 al servicio nuevo T057 servicio ya agregado como adicional', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
+    cy.wait(1500);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', 'DTH');
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-servicio',
+      'T057 - ACTIVACION DEL AMPLIFICADOR EN DIRECTA'
+    );
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown(
+      '#select-unidad-obra',
+      'DT07 - ANTENA SATELITAL, MARCA AZURE SHINE, MODELO AZ-120FM, S/SERIGRAFÍA.'
+    );
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
+
+    cy.wait(1000);
+    cy.get('.table-adicionales>zwc-table-servicios>form>table')
+      .contains('td', 'DT07')
+      .siblings()
+      .eq(0)
+      .contains(
+        'ANTENA SATELITAL, MARCA AZURE SHINE, MODELO AZ-120FM, S/SERIGRAFÍA.'
+      );
+  });
+
   // AGREGAR ADICIONALES
-  it.skip('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
+  it('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // AGREGAR T051 con 2 UO DT04 - DT01
@@ -166,7 +354,7 @@ describe('INFORME DE AVANCE', () => {
 
       cy.get('.table-adicionales>zwc-table-servicios>form>table>tbody')
         .find('tr')
-        .should('have.length', 5);
+        .should('have.length', 11);
 
       dataServiciosAdicionales.items.forEach(servicio => {
         cy.get('.table-adicionales>zwc-table-servicios>form>table')
@@ -257,16 +445,16 @@ describe('INFORME DE AVANCE', () => {
   });
 
   // ELIMINAR ADICIONALES
-  it.skip('Al eliminar una uo y un servicio estos no deben aparecer al apretar guardar borrador', () => {
+  it('Al eliminar una uo y un servicio estos no deben aparecer al apretar guardar borrador', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // ELIMINAR SERVICIO T052
     cy.get(
-      '.table-adicionales>zwc-table-servicios>form>table>tbody>tr:nth-child(4)>td:nth-child(5)>button'
+      '.table-adicionales>zwc-table-servicios>form>table>tbody>tr:nth-child(10)>td:nth-child(5)>button'
     ).click();
     // ELIMINAR UO DT04
     cy.get(
-      '.table-adicionales>zwc-table-servicios>form>table>tbody>tr:nth-child(2)>td:nth-child(5)>button'
+      '.table-adicionales>zwc-table-servicios>form>table>tbody>tr:nth-child(8)>td:nth-child(5)>button'
     ).click();
 
     cy.get('button[id="guardar-borrador-button"]').click();
@@ -368,27 +556,12 @@ describe('INFORME DE AVANCE', () => {
 
       cy.get('.table-adicionales>zwc-table-servicios>form>table>tbody')
         .find('tr')
-        .should('have.length', 2);
+        .should('have.length', 8);
     });
-
-    // ELIMINAR TODO
-    cy.get(
-      '.table-adicionales>zwc-table-servicios>form>table>tbody>tr:nth-child(1)>td:nth-child(5)>button'
-    ).click();
-
-    cy.get('button[id="guardar-borrador-button"]').click();
-
-    cy.get('.table-informe-avance>zwc-table-servicios>form>table>tbody')
-      .find('tr')
-      .should('have.length', 16);
-
-    cy.get('.table-adicionales>zwc-table-servicios>form>table>tbody')
-      .find('tr')
-      .should('have.length', 0);
   });
 
   // AGREGAR NUEVAMENTE LOS ADICIONALES
-  it.skip('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
+  it('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // AGREGAR T051 con 2 UO DT04 - DT01
@@ -536,7 +709,7 @@ describe('INFORME DE AVANCE', () => {
 
       cy.get('.table-adicionales>zwc-table-servicios>form>table>tbody')
         .find('tr')
-        .should('have.length', 5);
+        .should('have.length', 11);
 
       dataServiciosAdicionales.items.forEach(servicio => {
         cy.get('.table-adicionales>zwc-table-servicios>form>table')
@@ -625,236 +798,4 @@ describe('INFORME DE AVANCE', () => {
       });
     });
   });
-
-  it.skip('Al intenet agregar el mismo adicional anterior debe desplegar el siguiente mensaje de error "" ', () => {});
-
-  it('Agregar la UO C048 al servicio J101', () => {
-    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
-
-    cy.wait(1500);
-    cy.get('body').trigger('keydown', { keyCode: 27 });
-    cy._select_dropdown('#select-actividad', 'MATRIZ');
-
-    cy.get('body').trigger('keydown', { keyCode: 27 });
-    cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
-    cy.get('body').trigger('keydown', { keyCode: 27 });
-    cy._select_dropdown(
-      '#select-servicio',
-      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
-    );
-
-    cy.get('body').trigger('keydown', { keyCode: 27 });
-    cy._select_dropdown('#select-unidad-obra', 'C048 - CABLE 900-26 SUB');
-    cy.get('body').trigger('keydown', { keyCode: 27 });
-    cy.get('#agregar-button').click();
-
-    cy.wait(1000);
-    cy.get('.table-adicionales>zwc-table-servicios>form>table')
-      .contains('td', 'C048')
-      .siblings()
-      .eq(0)
-      .contains('CABLE 900-26 SUB');
-
-    cy.wait(1000);
-    cy.get('.table-adicionales>zwc-table-servicios>form>table')
-      .contains('td', 'J101')
-      .siblings()
-      .eq(2)
-      .contains('Su cantidad se debe modificar desde el informe de avance');
-  });
-
-  it.skip('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
-
-  it.skip('Al realizar cambios al servicio J730 y presionar guardar borrador los cambios debe permanecer', () => {
-    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
-
-    cy.get('.table-informe-avance>zwc-table-servicios>.carrito-container>table')
-      .contains('td', 'J730')
-      .siblings()
-      .eq(2)
-      .find('p-inputnumber>span>input')
-      .clear()
-      .type(`24{enter}`);
-
-    cy.get('button[id="guardar-borrador-button"]').click();
-
-    cy.wait('@HTTPRESPONSE').then(() => {
-      cy.get(
-        '.table-informe-avance>zwc-table-servicios>.carrito-container>table'
-      )
-        .contains('td', 'J730')
-        .siblings()
-        .eq(2)
-        .find('p-inputnumber>span>input')
-        .invoke('val')
-        .then(val => {
-          expect(val).to.eql('24,00');
-        });
-    });
-  });
-
-  it.skip('Al realizar todos los cambios al informe de avance', () => {});
-  it.skip('Enviar informe de avance debe desplegar el mensaje y redirigir al listar ot', () => {
-    cy.get('button[id="enviar-button"]').click();
-  });
 });
-
-// it('El mensaje de alerta debería desaparecer si cambio de actividad', () => {
-//   // cy._select_dropdown(
-//   //   '#select-servicio',
-//   //   'J912 - ABRIR EMPALME COM. TIPO MECANICO TTRC O EFA'
-//   // );
-//   // cy.get(
-//   //   '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
-//   // ).should('not.exist');
-// });
-
-// TODO: PENDIENTE HASTA QUE SE PROGRAME EL GUARDAR INFORME DE AVANCE
-// it('Al guardar borrador sin hacer ningun cambio debería recargar los mismos datos anteriores', () => {
-//   cy.get('button[id="guardar-borrador-button"]').click();
-
-//   cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
-
-//   const data = CubicacionEditada;
-
-//   cy.wait('@HTTPRESPONSE').then(() => {
-//     data.items.forEach(servicio => {
-//       cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         .contains('td', servicio.nombre.split('-')[0].trim())
-//         .siblings()
-//         .eq(0)
-//         .contains(servicio.nombre.split('-')[1].trim());
-
-//       // cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//       //   .contains('td', servicio.nombre.split('-')[0].trim())
-//       //   .siblings()
-//       //   .eq(1)
-//       //   .contains(servicio.tipo_servicio);
-
-//       cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         .contains('td', servicio.nombre.split('-')[0].trim())
-//         .siblings()
-//         .eq(2)
-//         .find('p-inputnumber>span>input')
-//         .invoke('val')
-//         .then(val => {
-//           expect(val).to.eql(
-//             servicio.cantidad.split(',')[1] === undefined
-//               ? servicio.cantidad + ',00'
-//               : +servicio.cantidad.split(',')[1] > 9
-//               ? servicio.cantidad
-//               : servicio.cantidad + 0
-//           );
-//         });
-
-//       // cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//       //   .contains('td', servicio.nombre.split('-')[0].trim())
-//       //   .siblings()
-//       //   .eq(3)
-//       //   .contains(servicio.precio);
-
-//       // cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//       //   .contains('td', servicio.nombre.split('-')[0].trim())
-//       //   .siblings()
-//       //   .eq(4)
-//       //   .contains(servicio.total);
-
-//       cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         .contains('td', servicio.nombre.split('-')[0].trim())
-//         .siblings()
-//         .eq(3)
-//         .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
-
-//       cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         .contains('td', servicio.nombre.split('-')[0].trim())
-//         .siblings()
-//         .eq(4)
-//         .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
-
-//       // cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//       //   .contains('td', servicio.nombre.split('-')[0].trim())
-//       //   .siblings()
-//       //   .eq(7)
-//       //   .contains(servicio.actividad);
-
-//       if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-//         cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//           .contains(
-//             'td',
-//             servicio.unidad_obras[0].nombre.split('-')[0].trim()
-//           )
-//           .siblings()
-//           .eq(6)
-//           .find('p-inputnumber>span>input')
-//           .invoke('val')
-//           .then(val => {
-//             expect(val).to.eql(
-//               servicio.unidad_obras[0].cantidad.split(',')[1] === undefined
-//                 ? servicio.unidad_obras[0].cantidad + ',00'
-//                 : +servicio.unidad_obras[0].cantidad.split(',')[1] > 9
-//                 ? servicio.unidad_obras[0].cantidad
-//                 : servicio.unidad_obras[0].cantidad + 0
-//             );
-//           });
-
-//         //   cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         //     .contains('td', servicio.nombre.split('-')[0].trim())
-//         //     .siblings()
-//         //     .eq(9)
-//         //     .contains(servicio.unidad_obras[0].precio);
-
-//         //   cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//         //     .contains('td', servicio.nombre.split('-')[0].trim())
-//         //     .siblings()
-//         //     .eq(10)
-//         //     .contains(servicio.unidad_obras[0].total);
-//       }
-
-//       servicio.unidad_obras.forEach((uo, index) => {
-//         if (index !== 0) {
-//           cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//             .contains('td', uo.nombre.split('-')[0].trim())
-//             .siblings()
-//             .eq(0)
-//             .contains(uo.nombre.split('-')[1].trim());
-
-//           // cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//           //   .contains('td', uo.nombre.split('-')[0].trim())
-//           //   .siblings()
-//           //   .eq(1)
-//           //   .contains(servicio.actividad);
-
-//           if (uo.nombre !== '0 - SIN UO') {
-//             cy.get('table')
-//               .contains('td', uo.nombre.split('-')[0].trim())
-//               .siblings()
-//               .eq(2)
-//               .find('p-inputnumber>span>input')
-//               .invoke('val')
-//               .then(val => {
-//                 expect(val).to.eql(
-//                   uo.cantidad.split(',')[1] === undefined
-//                     ? uo.cantidad + ',00'
-//                     : +uo.cantidad.split(',')[1] > 9
-//                     ? uo.cantidad
-//                     : uo.cantidad + 0
-//                 );
-//               });
-
-//             //   cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//             //     .contains('td', uo.nombre.split('-')[0].trim())
-//             //     .siblings()
-//             //     .eq(3)
-//             //     .contains(uo.precio);
-
-//             //   cy.get('.table-informe-avance>zwc-table-servicios>form>table')
-//             //     .contains('td', uo.nombre.split('-')[0].trim())
-//             //     .siblings()
-//             //     .eq(4)
-//             //     .contains(uo.total);
-//           }
-//         }
-//       });
-//     });
-//   });
-// });
