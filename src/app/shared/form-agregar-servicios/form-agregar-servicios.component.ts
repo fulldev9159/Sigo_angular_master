@@ -383,102 +383,177 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     unidad_obra_cod: string,
     cmarco_has_proveedor_id: number,
     agencia_id: number
-  ): boolean {
-    let servicioInInforme = this.informeAvance.find(
-      servicio =>
-        servicio.servicio_id === servicio_id &&
-        servicio.adicional === 'ORIGINAL'
+  ): void {
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        console.log('carrito', carrito);
+
+        let valueInitial: CarritoService[] = [];
+
+        const carritoReducerEstricto = carrito.reduce((acc, curr) => {
+          let indexService = acc.findIndex(
+            value => value.servicio_id === curr.servicio_id
+          );
+          if (indexService === -1) {
+            acc.push(curr);
+          } else {
+            let temp = [
+              ...acc.map(item => ({
+                ...item,
+                unidad_obras: [...item.unidad_obras],
+              })),
+            ];
+            temp[indexService].unidad_obras.push(...curr.unidad_obras);
+            acc[indexService] = temp[indexService];
+          }
+
+          return acc;
+        }, valueInitial);
+
+        let servicioInInforme = this.informeAvance.find(
+          servicio =>
+            servicio.servicio_id === servicio_id &&
+            servicio.adicional === 'ORIGINAL'
+        );
+
+        let uoInInforme;
+
+        console.log('servicio in informe', servicioInInforme);
+
+        if (servicioInInforme)
+          uoInInforme = servicioInInforme.unidad_obras.find(
+            v => v.uo_codigo === unidad_obra_cod
+          );
+
+        console.log('uo in informe avance', uoInInforme);
+
+        // CASO 1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE Y EL UO TAMBIÉN
+        const service_and_UO_in_informeAvance =
+          servicioInInforme !== undefined && uoInInforme !== undefined;
+
+        console.log('existen', service_and_UO_in_informeAvance);
+
+        if (service_and_UO_in_informeAvance) {
+          this.serviciosFacade.alertServicioExistenteCarrito(
+            true,
+            'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
+          );
+          return true;
+        }
+
+        // CASO 2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA
+
+        const service_in_informeAvance_UO_nueva =
+          servicioInInforme !== undefined && uoInInforme === undefined;
+        // const servicioExisteYUOnoExisteEnInformeORIGINAL = this.informeAvance.find(
+        //   servicio =>
+        //     servicio.servicio_id === servicio_id &&
+        //     servicio.unidad_obras[0].uo_codigo !== unidad_obra_cod &&
+        //     servicio.adicional === 'ORIGINAL'
+        // );
+
+        if (service_in_informeAvance_UO_nueva) {
+          console.log(
+            'Es un servicio original existente en el informe de avance pero la uo es nueva'
+          );
+
+          let servicioINCarrito = carritoReducerEstricto.find(
+            servicio => servicio.servicio_id === servicio_id
+          );
+
+          let uoInCarrito;
+
+          console.log('servicio in carrito', servicioINCarrito);
+
+          if (servicioINCarrito)
+            uoInCarrito = servicioINCarrito.unidad_obras.find(
+              v => v.uo_codigo === unidad_obra_cod
+            );
+
+          let servicio_uo_in_carrito =
+            servicioINCarrito !== undefined && uoInCarrito !== undefined;
+
+          if (servicio_uo_in_carrito) {
+            // CASO 2.1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA - EL SERVICIO Y LA UNIDAD DE OBRA YA HAN SIDO AGREGADOS
+
+            console.log('El servicio/UO ya existe como adicional');
+
+            this.serviciosFacade.alertServicioExistenteCarrito(
+              true,
+              'El servicio/UO ya existe como adicional'
+            );
+            return false;
+          } else {
+            // CASO 2.2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA - EL SERVICIO Y LA UNIDAD DE OBRA NO HAN SIDO AGREGADOS COMO ADICIONALES
+
+            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+            const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+              {
+                agencia_id,
+                cmarco_has_proveedor_id,
+                servicio_id: +servicio_id,
+                tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+                actividad_id: this.formFilter.get('actividad_id').value,
+              };
+
+            this.serviciosFacade.addServicioCarrito(
+              request_service,
+              unidad_obra_cod
+            );
+            return true;
+          }
+        }
+
+        // CASO 3: EL SERVICIO Y LA UO NO EXISTEN EN EL INFORME DE AVANCE
+        const service_nuevo_UO_nueva =
+          servicioInInforme === undefined && uoInInforme === undefined;
+
+        // const service_nuevo_UO_nueva = this.informeAvance.find(
+        //   servicio =>
+        //     servicio.servicio_id === servicio_id &&
+        //     servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
+        //     servicio.adicional !== 'ORIGINAL'
+        // );
+
+        if (service_nuevo_UO_nueva) {
+          console.log('Servicio y UO no existentes en el informe de avance');
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+          const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+            {
+              agencia_id,
+              cmarco_has_proveedor_id,
+              servicio_id: +servicio_id,
+              tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+              actividad_id: this.formFilter.get('actividad_id').value,
+            };
+
+          this.serviciosFacade.addServicioCarrito(
+            request_service,
+            unidad_obra_cod
+          );
+        }
+
+        // if (
+        //   service_and_UO_in_informeAvance === undefined &&
+        //   service_in_informeAvance_UO_nueva === undefined &&
+        //   service_nuevo_UO_nueva === undefined
+        // ) {
+        //   this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+        //   const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+        //     {
+        //       agencia_id,
+        //       cmarco_has_proveedor_id,
+        //       servicio_id: +servicio_id,
+        //       tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+        //       actividad_id: this.formFilter.get('actividad_id').value,
+        //     };
+
+        //   this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
+        // }
+
+        return false;
+      })
     );
-
-    let uoInInforme;
-
-    console.log('servicio in informe', servicioInInforme);
-
-    if (servicioInInforme)
-      uoInInforme = servicioInInforme.unidad_obras.find(
-        v => v.uo_codigo === unidad_obra_cod
-      );
-
-    console.log('uo in informe avance', uoInInforme);
-
-    // CASO 1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE Y EL UO TAMBIÉN
-    const service_and_UO_in_informeAvance =
-      servicioInInforme !== undefined && uoInInforme !== undefined;
-
-    console.log('existen', service_and_UO_in_informeAvance);
-
-    if (service_and_UO_in_informeAvance) {
-      this.serviciosFacade.alertServicioExistenteCarrito(
-        true,
-        'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
-      );
-      return true;
-    }
-
-    // CASO 2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA
-
-    const service_in_informeAvance_UO_nueva =
-      servicioInInforme !== undefined && uoInInforme === undefined;
-    // const servicioExisteYUOnoExisteEnInformeORIGINAL = this.informeAvance.find(
-    //   servicio =>
-    //     servicio.servicio_id === servicio_id &&
-    //     servicio.unidad_obras[0].uo_codigo !== unidad_obra_cod &&
-    //     servicio.adicional === 'ORIGINAL'
-    // );
-
-    if (service_in_informeAvance_UO_nueva) {
-      console.log(
-        'Es un servicio original existente en el informe de avance pero la uo es nueva'
-      );
-      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
-      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
-        {
-          agencia_id,
-          cmarco_has_proveedor_id,
-          servicio_id: +servicio_id,
-          tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
-          actividad_id: this.formFilter.get('actividad_id').value,
-        };
-
-      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
-      return true;
-    }
-
-    // CASO 3:
-    // SI SERVICIO/UO EXISTE EN EL INFORME AVANCE PERO NO ES ORIGINAL (ADICIONAL QUE YA SE HA AGREGADO ANTES)
-    const servicioYUOExistenEnInformeADICIONAL = this.informeAvance.find(
-      servicio =>
-        servicio.servicio_id === servicio_id &&
-        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
-        servicio.adicional !== 'ORIGINAL'
-    );
-
-    if (servicioYUOExistenEnInformeADICIONAL !== undefined) {
-      console.log(
-        'Es un servicio y uo adicinal existente en el informe de avance'
-      );
-      // SE DEBE ENVIAR MENSAJE DE ERROR "Servicio y unidad de obra adicional existentes en el informe de avance. Debe cambiar la cantidad en el informe de avance"
-    }
-
-    if (
-      service_and_UO_in_informeAvance === undefined &&
-      service_in_informeAvance_UO_nueva === undefined &&
-      servicioYUOExistenEnInformeADICIONAL === undefined
-    ) {
-      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
-      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
-        {
-          agencia_id,
-          cmarco_has_proveedor_id,
-          servicio_id: +servicio_id,
-          tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
-          actividad_id: this.formFilter.get('actividad_id').value,
-        };
-
-      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
-    }
-
-    return false;
   }
 
   ngOnDestroy(): void {

@@ -184,7 +184,6 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
             );
             if (indexService === -1) {
               // SERVICIO NUEVO
-              console.log('existInInformeAvance', existInInformeAvance);
               if (existInInformeAvance === undefined) acc.push(curr);
               if (existInInformeAvance !== undefined)
                 acc.push({
