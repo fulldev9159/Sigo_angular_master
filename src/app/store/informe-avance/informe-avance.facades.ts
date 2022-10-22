@@ -71,11 +71,13 @@ export class InformeAvanceFacade {
   }
 
   public actualizarInformeAvance(
-    request_informe_avance: RequestUpdateInformeAvance
+    request_informe_avance: RequestUpdateInformeAvance,
+    ot_id: number
   ): void {
     this.store.dispatch(
       informeAvanceActions.actualizarInformeAvance({
         request_informe_avance,
+        ot_id,
       })
     );
   }

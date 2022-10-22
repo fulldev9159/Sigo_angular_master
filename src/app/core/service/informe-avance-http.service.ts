@@ -6,6 +6,7 @@ import {
   RequestAutorizarInformeAvance,
   RequestUpdateInformeAvance,
   Response,
+  ResponseUpdateInformeAvance,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -46,8 +47,8 @@ export class InformeAvanceHttpService {
 
   updateInformeAvance(
     request: RequestUpdateInformeAvance
-  ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  ): Observable<Response<ResponseUpdateInformeAvance>> {
+    return this.http.post<Response<ResponseUpdateInformeAvance>>(
       `${this.API_URL}/ot/informe_avance_detalle/update`,
       request
     );

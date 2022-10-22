@@ -31,3 +31,8 @@ export interface ItemSerivioUO {
   row_id: number;
   cantidad: number;
 }
+
+export interface ResponseUpdateInformeAvance {
+  servicio: number[];
+  unidad_obra: number[];
+}

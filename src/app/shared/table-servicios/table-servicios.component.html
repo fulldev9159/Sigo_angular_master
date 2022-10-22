@@ -180,6 +180,7 @@
     </table>
 </form>
 
-<div class="message" id="alert-carrito-vacio" *ngIf="(data_carrito$|async).length === 0">
+<div class="message" id="alert-carrito-vacio"
+    *ngIf="(data_carrito$|async).length === 0 && mode_source!=='agregar-adicionales-informe-avance'">
     <p-message severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>
 </div>

@@ -4,6 +4,7 @@ import {
   RequestAutorizarInformeAvance,
   RequestUpdateInformeAvance,
   Response,
+  ResponseUpdateInformeAvance,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -74,12 +75,13 @@ export const actualizarInformeAvance = createAction(
   '[INFORME AVANCE] GET actualizarInformeAvance',
   props<{
     request_informe_avance: RequestUpdateInformeAvance;
+    ot_id: number;
   }>()
 );
 
 export const actualizarInformeAvanceSuccess = createAction(
   '[INFORME AVANCE] GET actualizarInformeAvance Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<ResponseUpdateInformeAvance>; ot_id: number }>()
 );
 
 export const actualizarInformeAvanceError = createAction(

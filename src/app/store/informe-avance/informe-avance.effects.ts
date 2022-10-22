@@ -97,10 +97,13 @@ export class InformeAvanceEffects {
   actualizarInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(informeAvanceActions.actualizarInformeAvance),
-      concatMap(({ request_informe_avance }) =>
+      concatMap(({ request_informe_avance, ot_id }) =>
         this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
           map(response =>
-            informeAvanceActions.actualizarInformeAvanceSuccess({ response })
+            informeAvanceActions.actualizarInformeAvanceSuccess({
+              response,
+              ot_id,
+            })
           ),
           catchError(error =>
             of(
@@ -120,7 +123,8 @@ export class InformeAvanceEffects {
         ofType(
           informeAvanceActions.getDetalleInformeAvanceSuccess,
           informeAvanceActions.sendDetalleInformeAvanceSuccess,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess,
+          informeAvanceActions.actualizarInformeAvanceSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),

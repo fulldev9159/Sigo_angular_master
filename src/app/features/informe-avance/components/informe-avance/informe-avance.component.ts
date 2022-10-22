@@ -88,6 +88,8 @@ export class InformeAvanceComponent
   serviciosInformeAvance: CarritoService[] = [];
   // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
   carrito$ = this.serviciosFacade.carrito$();
+  detalleInformeAvance$: Observable<DetalleInformeAvance> =
+    this.informeAvanceFacade.getDetalleInformeAvance$();
   accionesOT: Accion[] = [];
   ot_id: number;
 
@@ -117,9 +119,7 @@ export class InformeAvanceComponent
         ({ detalleOT, detalleInformeAvance, accionesOT }) => {
           console.log(accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
-          if (detalleInformeAvance) {
-            const detalleInforme =
-              detalleInformeAvance.data as DetalleInformeAvance;
+          if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
 
             this.ot_id = ot.ot.id;
@@ -146,78 +146,83 @@ export class InformeAvanceComponent
               id: ot.ot.model_cubicacion_id.proveedor_id,
             };
             this.cubicacionFacade.proveedorSelected(proveedor);
-
-            // CARGAR CARRITO
-            detalleInforme.many_informe_has_servicio.forEach(service => {
-              service.many_informe_has_uob.forEach(uo => {
-                let new_service: CarritoService = {
-                  precargado: true,
-                  servicio_rowid: service.id,
-                  servicio_cantidad: service.cantidad,
-                  adicional: service.adicional_aceptacion_estado,
-
-                  servicio_id: service.servicio_id,
-                  servicio_codigo: service.model_servicio_id.codigo,
-                  numero_producto: service.numero_producto,
-                  servicio_precio_final_clp: service.valor_unitario_clp,
-                  servicio_nombre: service.model_servicio_id.descripcion,
-                  tipo_servicio_descripcion: 'TODO',
-                  tipo_servicio_id: service.tipo_servicio_id,
-                  servicio_unidad_cod: service.model_unidad_id.codigo,
-                  servicio_unidad_descripcion:
-                    service.model_unidad_id.descripcion,
-                  unidad_obras: [
-                    {
-                      precargado: true,
-                      uo_rowid: uo.id,
-                      uo_cantidad: uo.cantidad,
-
-                      uo_codigo: uo.unidad_obra_cod,
-                      uo_nombre: uo.model_unidad_obra_cod.descripcion,
-                      uo_precio_total_clp: uo.valor_unitario_clp,
-                      actividad_descripcion: 'TODO',
-                      actividad_id: -1,
-                      uob_unidad_medida_cod: uo.model_unidad_id.codigo,
-                      uob_unidad_medida_descripcion:
-                        uo.model_unidad_id.descripcion,
-                    },
-                  ],
-                };
-
-                // PARA CARGAR INFORME DE AVANCE
-                if (new_service.adicional === 'ORIGINAL')
-                  this.serviciosInformeAvance.push(new_service);
-                // PARA PRE CARGAR SERVICIOS ADICIONALES
-                if (new_service.adicional !== 'ORIGINAL')
-                  this.serviciosFacade.addDirectServiceCarrito(new_service);
-              });
-            });
-            let valueInitial: CarritoService[] = [];
-            this.serviciosInformeAvance = this.serviciosInformeAvance.reduce(
-              (acc, curr) => {
-                let indexService = acc.findIndex(
-                  value => value.servicio_id === curr.servicio_id
-                );
-                if (indexService === -1) {
-                  acc.push(curr);
-                } else {
-                  let temp = [
-                    ...acc.map(item => ({
-                      ...item,
-                      unidad_obras: [...item.unidad_obras],
-                    })),
-                  ];
-                  temp[indexService].unidad_obras.push(...curr.unidad_obras);
-                  acc[indexService] = temp[indexService];
-                }
-
-                return acc;
-              },
-              valueInitial
-            );
           }
         }
       )
+    );
+    this.subscription.add(
+      this.detalleInformeAvance$.subscribe(detalleInforme => {
+        if (detalleInforme) {
+          // CARGAR CARRITO
+          detalleInforme.many_informe_has_servicio.forEach(service => {
+            service.many_informe_has_uob.forEach(uo => {
+              let new_service: CarritoService = {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.cantidad,
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                servicio_codigo: service.model_servicio_id.codigo,
+                numero_producto: service.numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.model_servicio_id.descripcion,
+                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_id: service.tipo_servicio_id,
+                servicio_unidad_cod: service.model_unidad_id.codigo,
+                servicio_unidad_descripcion:
+                  service.model_unidad_id.descripcion,
+                unidad_obras: [
+                  {
+                    precargado: true,
+                    uo_rowid: uo.id,
+                    uo_cantidad: uo.cantidad,
+
+                    uo_codigo: uo.unidad_obra_cod,
+                    uo_nombre: uo.model_unidad_obra_cod.descripcion,
+                    uo_precio_total_clp: uo.valor_unitario_clp,
+                    actividad_descripcion: 'TODO',
+                    actividad_id: -1,
+                    uob_unidad_medida_cod: uo.model_unidad_id.codigo,
+                    uob_unidad_medida_descripcion:
+                      uo.model_unidad_id.descripcion,
+                  },
+                ],
+              };
+
+              // PARA CARGAR INFORME DE AVANCE
+              if (new_service.adicional === 'ORIGINAL')
+                this.serviciosInformeAvance.push(new_service);
+              // PARA PRE CARGAR SERVICIOS ADICIONALES
+              if (new_service.adicional !== 'ORIGINAL')
+                this.serviciosFacade.addDirectServiceCarrito(new_service);
+            });
+          });
+          let valueInitial: CarritoService[] = [];
+          this.serviciosInformeAvance = this.serviciosInformeAvance.reduce(
+            (acc, curr) => {
+              let indexService = acc.findIndex(
+                value => value.servicio_id === curr.servicio_id
+              );
+              if (indexService === -1) {
+                acc.push(curr);
+              } else {
+                let temp = [
+                  ...acc.map(item => ({
+                    ...item,
+                    unidad_obras: [...item.unidad_obras],
+                  })),
+                ];
+                temp[indexService].unidad_obras.push(...curr.unidad_obras);
+                acc[indexService] = temp[indexService];
+              }
+
+              return acc;
+            },
+            valueInitial
+          );
+        }
+      })
     );
   }
 
@@ -461,7 +466,8 @@ export class InformeAvanceComponent
         } else {
           // ACTUALIZAR SOLO EL INFORME DE AVANCE
           this.informeAvanceFacade.actualizarInformeAvance(
-            request_informe_avance
+            request_informe_avance,
+            this.ot_id
           );
         }
       })
