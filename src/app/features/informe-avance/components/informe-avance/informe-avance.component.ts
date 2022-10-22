@@ -91,7 +91,6 @@ export class InformeAvanceComponent
   accionesOT: Accion[] = [];
   ot_id: number;
 
-  // 126 TODO: AGREGAR EL SENDING BORRADOR
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
     this.loadingsFacade.sendingCreateOT$();
@@ -421,7 +420,6 @@ export class InformeAvanceComponent
   guardarBorrador(): void {
     this.subscription.add(
       this.carrito$.pipe(take(1)).subscribe(carrito => {
-        // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
         // TODO: PROBAR QUE OCURRE SI ELIMINA UN SERVICIO Y LUEGO LO VUELVE A AGREGAR
 
         // ELIMINAR ADICIONALES ESCOGIDOS SI ES QUE EXISTEN
