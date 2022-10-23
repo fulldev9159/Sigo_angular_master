@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faFloppyDisk, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-pbutton-sending',
@@ -18,12 +18,14 @@ export class PbuttonSendingComponent implements OnInit {
 
   // ICONS
   iconSelected: any;
-  saveIcon = faFloppyDisk;
   constructor() {}
 
   ngOnInit(): void {
     if (this.icon === 'save') {
-      this.iconSelected = this.saveIcon;
+      this.iconSelected = faFloppyDisk;
+    }
+    if (this.icon === 'play') {
+      this.iconSelected = faPlay;
     }
   }
 

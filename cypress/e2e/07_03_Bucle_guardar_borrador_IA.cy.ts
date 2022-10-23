@@ -9,6 +9,10 @@ import {
 } from 'cypress/fixtures/testedCubicacionBUCLE';
 
 describe('GUARDAR BORRADOR CAMBIOS INFORME DE AVANCE', () => {
+  beforeEach(() => {
+    cy.viewport(1500, 700);
+  });
+
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('cctrabajador1', 'asdasd');

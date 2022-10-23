@@ -471,7 +471,7 @@ export const adicionalesBucle1 = {
   ],
 };
 
-export const InformeAvanceEdicionTrabajador = {
+export const InformeAvanceFinalTrabajador = {
   contrato: 'BUCLE',
   agencia: 'APOQUINDO',
   proveedor: '330000659 - COBRA CHILE SERVICIOS S.A.',

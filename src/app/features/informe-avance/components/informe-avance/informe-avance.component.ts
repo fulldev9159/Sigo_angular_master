@@ -102,6 +102,7 @@ export class InformeAvanceComponent
 
   // MODAL
   showModalRechazarInformeAvance = false;
+  displayModalEnvioInformeAvance = false;
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -153,6 +154,10 @@ export class InformeAvanceComponent
     this.subscription.add(
       this.detalleInformeAvance$.subscribe(detalleInforme => {
         if (detalleInforme) {
+          if (this.tableServiciosAdicionales) {
+            this.tableServiciosAdicionales.uos_eliminar = [];
+            this.tableServiciosAdicionales.servicios_eliminar = [];
+          }
           // CARGAR CARRITO
           detalleInforme.many_informe_has_servicio.forEach(service => {
             service.many_informe_has_uob.forEach(uo => {
@@ -478,7 +483,17 @@ export class InformeAvanceComponent
     // 117 TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
     // 118 TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
 
-    this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
+    this.guardarBorrador();
+    this.subscription.add(
+      this.sendingSendBorradorInformeAvance$.subscribe(v => {
+        console.log('sending not yet', v);
+        if (!v) {
+          console.log('sending now yes', v);
+          this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
+          this.displayModalEnvioInformeAvance = false;
+        }
+      })
+    );
   }
 
   displayModalRechazarInformeAvance(): void {
