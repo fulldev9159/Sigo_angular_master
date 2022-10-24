@@ -431,9 +431,9 @@ export const adicionalesBucle1 = {
   items: [
     {
       nombre: 'T051 - INSTALAR DIVISOR, DERIVADOR (INCLUIDO TAP DIRECCIONABLE)',
-      precio: '$5.005,2',
+      precio: '$3.032,8',
       cantidad: '4',
-      total: '$20.020,80',
+      total: '$12.131,2',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
@@ -454,9 +454,9 @@ export const adicionalesBucle1 = {
     {
       nombre:
         'T052 - INSTALAR AMPLIFICADOR O FUENTE DE ALIMENTACION HASTA 8 AMPERIOS',
-      precio: '$6.256,5',
+      precio: '$3.791',
       cantidad: '2',
-      total: '$12.513,00',
+      total: '$7.582',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
@@ -475,9 +475,9 @@ export const adicionalesFinalesIATrabajador = {
   contrato: 'BUCLE',
   agencia: 'APOQUINDO',
   proveedor: '330000659 - COBRA CHILE SERVICIOS S.A.',
-  totalServicios: '$55.431,44',
+  totalServicios: '$42.610,84',
   totalUOs: '0',
-  total: '$55.431,44',
+  total: '$42.610,84',
   items: [
     {
       nombre: 'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
@@ -527,9 +527,9 @@ export const adicionalesFinalesIATrabajador = {
     },
     {
       nombre: 'T051 - INSTALAR DIVISOR, DERIVADOR (INCLUIDO TAP DIRECCIONABLE)',
-      precio: '$5.005,2',
+      precio: '$3.032,8',
       cantidad: '4',
-      total: '$20.020,80',
+      total: '$12.131,2',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
@@ -550,9 +550,9 @@ export const adicionalesFinalesIATrabajador = {
     {
       nombre:
         'T052 - INSTALAR AMPLIFICADOR O FUENTE DE ALIMENTACION HASTA 8 AMPERIOS',
-      precio: '$6.256,5',
+      precio: '$3.791',
       cantidad: '2',
-      total: '$12.513,00',
+      total: '$7.582',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
@@ -703,9 +703,9 @@ export const InformeAvanceYadicionalesFinal = {
   contrato: 'BUCLE',
   agencia: 'APOQUINDO',
   proveedor: '330000659 - COBRA CHILE SERVICIOS S.A.',
-  totalServicios: '$3.078.021,84',
+  totalServicios: '$3.065.201,24',
   totalUOs: '$49.224',
-  total: '$3.127.245,84',
+  total: '$3.114.425,24',
   items: [
     {
       nombre: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
@@ -876,9 +876,9 @@ export const InformeAvanceYadicionalesFinal = {
     },
     {
       nombre: 'T051 - INSTALAR DIVISOR, DERIVADOR (INCLUIDO TAP DIRECCIONABLE)',
-      precio: '$5.005,2',
+      precio: '$3.032,8',
       cantidad: '4',
-      total: '$20.020,80',
+      total: '$12.131,2',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
@@ -899,9 +899,9 @@ export const InformeAvanceYadicionalesFinal = {
     {
       nombre:
         'T052 - INSTALAR AMPLIFICADOR O FUENTE DE ALIMENTACION HASTA 8 AMPERIOS',
-      precio: '$6.256,5',
+      precio: '$3.791',
       cantidad: '2',
-      total: '$12.513,00',
+      total: '$7.582',
       tipo_servicio: 'DTH',
       actividad: 'DISTRIBUCION',
       unidad_obras: [
