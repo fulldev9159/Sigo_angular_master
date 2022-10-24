@@ -472,8 +472,6 @@ export class InformeAvanceComponent
   }
 
   enviarInformeAvance(): void {
-    // 117 TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
-    // 118 TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
     this.subscription.add(
       this.carrito$.pipe(take(1)).subscribe(carrito => {
         // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
