@@ -1,13 +1,3 @@
-import {
-  getTipoServiciosContratoMOCK200ok,
-  ServiciosAgenciaContratoProveedorMOCK200OK,
-  UnidadObraServicioMOCK200OK,
-} from '@mocksOT';
-import {
-  adicionalesBucle1,
-  CubicacionEditada,
-} from 'cypress/fixtures/testedCubicacionBUCLE';
-
 describe('GUARDAR BORRADOR CAMBIOS INFORME DE AVANCE', () => {
   beforeEach(() => {
     cy.viewport(1500, 700);

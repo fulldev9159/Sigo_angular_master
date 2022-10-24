@@ -31,6 +31,103 @@ export class InformeAvanceEffects {
     )
   );
 
+  // BORRADOR
+  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+  actualizarInformeAvanceYAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYAdicionales),
+      concatMap(({ request_informe_avance, request_adicionales }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            serviciosActions.agregarAdicionales({
+              request: request_adicionales,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceYAdicionalesError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO EL INFORME DE AVANCE
+  actualizarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvance),
+      concatMap(({ request_informe_avance, ot_id }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            informeAvanceActions.actualizarInformeAvanceSuccess({
+              response,
+              ot_id,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ENVIAR INFORME DE AVANCE
+
+  // ACTUALIZAR INFORME DE AVANCE, LOS ADICIONALES Y ENVIAR EL INFORME
+  actualizarInformeAvanceAdicionalesYenviar$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceAdicionalesYenviar),
+      concatMap(({ request_informe_avance, request_adicionales, ot_id }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            serviciosActions.agregarAdicionalesYenviarIA({
+              request: request_adicionales,
+              ot_id,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError(
+                {
+                  error,
+                }
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO INFORME DE AVANCE Y ENVIAR EL INFORME
+  actualizarInformeAvanceYenviar$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYenviar),
+      concatMap(({ request_informe_avance, ot_id }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceYenviarError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // SEND DETALLE INFORME DE AVANCE
   SendDetalleInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
@@ -71,52 +168,6 @@ export class InformeAvanceEffects {
     )
   );
 
-  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
-  actualizarInformeAvanceYAdicionales$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(informeAvanceActions.actualizarInformeAvanceYAdicionales),
-      concatMap(({ request_informe_avance, request_adicionales }) =>
-        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
-          map(response =>
-            serviciosActions.agregarAdicionales({
-              request: request_adicionales,
-            })
-          ),
-          catchError(error =>
-            of(
-              informeAvanceActions.actualizarInformeAvanceYAdicionalesError({
-                error,
-              })
-            )
-          )
-        )
-      )
-    )
-  );
-
-  actualizarInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(informeAvanceActions.actualizarInformeAvance),
-      concatMap(({ request_informe_avance, ot_id }) =>
-        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
-          map(response =>
-            informeAvanceActions.actualizarInformeAvanceSuccess({
-              response,
-              ot_id,
-            })
-          ),
-          catchError(error =>
-            of(
-              informeAvanceActions.actualizarInformeAvanceError({
-                error,
-              })
-            )
-          )
-        )
-      )
-    )
-  );
-
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -139,7 +190,9 @@ export class InformeAvanceEffects {
           informeAvanceActions.sendDetalleInformeAvanceError,
           informeAvanceActions.AceptarRechazarInformeAvanceOTError,
           informeAvanceActions.actualizarInformeAvanceYAdicionalesError,
-          informeAvanceActions.actualizarInformeAvanceError
+          informeAvanceActions.actualizarInformeAvanceError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError,
+          informeAvanceActions.actualizarInformeAvanceYenviarError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

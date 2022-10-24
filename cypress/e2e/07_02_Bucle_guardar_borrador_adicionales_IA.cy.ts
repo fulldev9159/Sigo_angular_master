@@ -24,7 +24,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   // VERIFICAR TODOS LOS CASOS DE AGREGACION DE ADICIONALES
 
   // CASO 1: SERVICIO Y UNIDAD DE OBRA A AGREGAR YA EXISTE EN EL INFORME DE AVANCE
-  it.skip('Agregar el servicio J101 uo C926 debe desplegar mensaje "Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance"', () => {
+  it('Agregar el servicio J101 uo C926 debe desplegar mensaje "Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance"', () => {
     cy.wait(1500);
     cy.get('body').trigger('keydown', { keyCode: 27 });
     cy._select_dropdown('#select-actividad', 'MATRIZ');
@@ -51,7 +51,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
 
   // CASO 2.3: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA -
   //        EL SERVICIO Y LA UO AUN NO SE HAN AGREGADO COMO ADICIONAL
-  it.skip('Agregar una nueva UO C048 al servicio J101, servicio que ya existe en el informe pero no se ha agregado aún como adicional', () => {
+  it('Agregar una nueva UO C048 al servicio J101, servicio que ya existe en el informe pero no se ha agregado aún como adicional', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(1500);
@@ -89,7 +89,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   // CASO 2.2: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA -
   //        EL SERVICIO YA EXISTE COMO ADICIONAL Y LA UNIDAD DE OBRA NO HAN SIDO AGREGADA
 
-  it.skip('Agregar una nueva UO C870 al servicio J101, servicio que ya existe en el informe y que ya ha sido agregado con una uo adicional', () => {
+  it('Agregar una nueva UO C870 al servicio J101, servicio que ya existe en el informe y que ya ha sido agregado con una uo adicional', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(1500);
@@ -127,7 +127,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   // CASO 2.1: SERVICIO A AGREGAR YA EXISTE EN EL INFORME DE AVANCE PERO LA UO ES NUEVA
   // Y EL SERVICIO Y LA UO YA HAN SIDO AGREGADOS COMO ADICIONALES
 
-  it.skip('Al presionar nuevamente el agregar debe desplegar mensaje error "El servicio/UO ya fue agregado como adicional"', () => {
+  it('Al presionar nuevamente el agregar debe desplegar mensaje error "El servicio/UO ya fue agregado como adicional"', () => {
     cy.get('#agregar-button').click();
     cy.get(
       '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
@@ -137,7 +137,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   // CASO 3.1: EL SERVICIO Y LA UO NO EXISTEN EN EL INFORME DE AVANCE Y
   // SERVICIO/UO NO SE HA AGREGADO COMO ADICIONAL
 
-  it.skip('Agregar una nueva UO DT09 al servicio nuevo T057', () => {
+  it('Agregar una nueva UO DT09 al servicio nuevo T057', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(1500);
@@ -176,7 +176,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
   // CASO 3.3: EL SERVICIO Y LA UO NO EXISTEN EN EL INFORME DE AVANCE Y
   // SERVICIO YA SE HA AGREGADO COMO ADICIONAL PERO LA UO AÚN NO
-  it.skip('Agregar una nueva UO DT07 al servicio nuevo T057 servicio ya agregado como adicional', () => {
+  it('Agregar una nueva UO DT07 al servicio nuevo T057 servicio ya agregado como adicional', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(1500);
@@ -210,7 +210,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
 
   // AGREGAR ADICIONALES
-  it.skip('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
+  it('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // AGREGAR T051 con 2 UO DT04 - DT01
@@ -449,7 +449,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
 
   // ELIMINAR ADICIONALES
-  it.skip('Al eliminar una uo y un servicio estos no deben aparecer al apretar guardar borrador', () => {
+  it('Al eliminar una uo y un servicio estos no deben aparecer al apretar guardar borrador', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // ELIMINAR SERVICIO T052
@@ -565,7 +565,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
 
   // AGREGAR NUEVAMENTE LOS ADICIONALES
-  it.skip('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
+  it('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito y no debe aparecer en el informe', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     // AGREGAR T051 con 2 UO DT04 - DT01
@@ -804,7 +804,7 @@ describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
 
   // CASO 4 PENDIENTE CORRECCION: AGREGAR UNA UO ADICIONAL A UN SERVICIO ADICIONAL AGREGADO GUARDADO PREVIAMENTE
-  it.skip('Agregar uo nueva DT19 al servicio T057', () => {
+  it('Agregar uo nueva DT19 al servicio T057', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(1500);

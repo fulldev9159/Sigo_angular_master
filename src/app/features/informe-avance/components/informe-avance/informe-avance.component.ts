@@ -432,22 +432,14 @@ export class InformeAvanceComponent
       this.carrito$.pipe(take(1)).subscribe(carrito => {
         // TODO: PROBAR QUE OCURRE SI ELIMINA UN SERVICIO Y LUEGO LO VUELVE A AGREGAR
 
-        // ELIMINAR ADICIONALES ESCOGIDOS SI ES QUE EXISTEN
-        if (
-          this.tableServiciosAdicionales.servicios_eliminar.length > 0 ||
-          this.tableServiciosAdicionales.uos_eliminar.length > 0
-        ) {
-          this.serviciosFacade.eliminarAdicional(
-            this.tableServiciosAdicionales.servicios_eliminar,
-            this.tableServiciosAdicionales.uos_eliminar
-          );
-        }
+        // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
+        this.eliminarAdicionalesEscogidos();
 
         // GUARDAR BORRADOR
-
         let formularioServiciosAdicionales =
           this.tableServiciosAdicionales.formTable.get('table')
             .value as Array<TableService>;
+
         let formularioInformeAvance =
           this.tableServiciosInformeAvance.formTable.get('table')
             .value as Array<TableService>;
@@ -482,18 +474,62 @@ export class InformeAvanceComponent
   enviarInformeAvance(): void {
     // 117 TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
     // 118 TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
-
-    this.guardarBorrador();
     this.subscription.add(
-      this.sendingSendBorradorInformeAvance$.subscribe(v => {
-        console.log('sending not yet', v);
-        if (!v) {
-          console.log('sending now yes', v);
-          this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
-          this.displayModalEnvioInformeAvance = false;
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
+
+        // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
+        this.eliminarAdicionalesEscogidos();
+
+        // GUARDAR BORRADOR
+        let formularioServiciosAdicionales =
+          this.tableServiciosAdicionales.formTable.get('table')
+            .value as Array<TableService>;
+
+        let formularioInformeAvance =
+          this.tableServiciosInformeAvance.formTable.get('table')
+            .value as Array<TableService>;
+
+        let request_informe_avance: any = this.getRequestUpdateInformeAvance(
+          formularioInformeAvance
+        );
+
+        if (formularioServiciosAdicionales.length > 0) {
+          //  ACTUALIZAR INFORME DE AVANCE ADICIONALES SI ES QUE EXISTEN ADICIONALES Y ENVIAR IA
+          let request_adicionales: RequestAdicionales =
+            this.getRequestServiciosAdicionales(
+              formularioServiciosAdicionales,
+              carrito
+            );
+
+          this.informeAvanceFacade.actualizarInformeAvanceAdicionalesYenviar(
+            request_informe_avance,
+            request_adicionales,
+            this.ot_id
+          );
+        } else {
+          // ACTUALIZAR SOLO EL INFORME DE AVANCE
+          this.informeAvanceFacade.actualizarInformeAvanceYenviar(
+            request_informe_avance,
+            this.ot_id
+          );
         }
+
+        this.displayModalEnvioInformeAvance = false;
       })
     );
+  }
+
+  eliminarAdicionalesEscogidos(): void {
+    if (
+      this.tableServiciosAdicionales.servicios_eliminar.length > 0 ||
+      this.tableServiciosAdicionales.uos_eliminar.length > 0
+    ) {
+      this.serviciosFacade.eliminarAdicional(
+        this.tableServiciosAdicionales.servicios_eliminar,
+        this.tableServiciosAdicionales.uos_eliminar
+      );
+    }
   }
 
   displayModalRechazarInformeAvance(): void {

@@ -6,6 +6,7 @@ import {
   ServiciosAdicionalesHttpService,
 } from '@services';
 import * as serviciosActions from './servicios.actions';
+import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import { catchError, concatMap, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ServiciosHttpService } from 'src/app/core/service/servicios-http.service';
@@ -120,6 +121,25 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR SERVICIOS ADICIONALES Y ENVIAR INFORME DE AVANCE
+  agregarAdicionalesYenviarIA$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYenviarIA),
+      concatMap(({ request, ot_id }) =>
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response =>
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(err =>
+            of(
+              serviciosActions.agregarAdicionalesYenviarIAError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // ELIMINAR SERVICIOS ADICIONALES
   eliminarAdicionales$ = createEffect(() =>
     this.actions$.pipe(
@@ -162,7 +182,8 @@ export class ServiciosEffects {
           serviciosActions.getUnidadesObraServicioError,
           serviciosActions.addServicioCarritoError,
           serviciosActions.agregarAdicionalesError,
-          serviciosActions.eliminarAdicionalError
+          serviciosActions.eliminarAdicionalError,
+          serviciosActions.agregarAdicionalesYenviarIAError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
