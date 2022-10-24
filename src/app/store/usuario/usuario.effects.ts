@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
 import {
   AfterHttpService,
   UsuarioHttpService,
@@ -25,7 +26,8 @@ export class UsuarioEffects {
     private proveedorHttpService: ProveedorHttpService,
     private guiaSubgrupoHttpService: GuiaSubgrupoHttpService,
     private perfilHttpService: PerfilesHttpService,
-    private afterHttp: AfterHttpService
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
 
   getAllUser$ = createEffect(() =>
@@ -368,6 +370,20 @@ export class UsuarioEffects {
           usuarioActions.getAllAreas4CreateUserError
         ),
         tap(action => this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSaveUsuarioSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          usuarioActions.createUserSuccess,
+          usuarioActions.updateUserSuccess
+        ),
+        tap(() =>
+          this.router.navigate(['/administracion/usuarios/list-usuarios'])
+        )
       ),
     { dispatch: false }
   );

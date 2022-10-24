@@ -22,6 +22,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { PanelModule } from 'primeng/panel';
 import { ListboxModule } from 'primeng/listbox';
 import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   imports: [
@@ -48,6 +50,8 @@ import { MenuModule } from 'primeng/menu';
     PanelModule,
     ListboxModule,
     MenuModule,
+    MultiSelectModule,
+    InputMaskModule,
   ],
   exports: [
     InputTextModule,
@@ -73,6 +77,8 @@ import { MenuModule } from 'primeng/menu';
     PanelModule,
     ListboxModule,
     MenuModule,
+    MultiSelectModule,
+    InputMaskModule,
   ],
 })
 export class PrimeNgModule {}
