@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  MotivoRechazo,
   PosibleSupervisorTrabajo,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -71,5 +72,14 @@ export class FlujoOTFacade {
     request: RequestAprobarRechazarOperaciones
   ): void {
     this.store.dispatch(flujoOTActions.aprobarRechazarOperaciones({ request }));
+  }
+
+  // GET POSIBLE SUPERVISOR DE TRABAJOS
+  public getMotivosRechazo(tipo: string): void {
+    this.store.dispatch(flujoOTActions.getAllMotivoRechazoOT({ tipo }));
+  }
+
+  public getMotivosRechazo$(): Observable<MotivoRechazo[]> {
+    return this.store.select(flujoOTSelectors.motivosRechazo);
   }
 }

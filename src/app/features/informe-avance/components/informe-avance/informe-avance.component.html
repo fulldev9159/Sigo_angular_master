@@ -79,7 +79,17 @@
 </div>
 <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"
     [modal]="true">
-    <zwc-view-rechazo></zwc-view-rechazo>
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInformeAvanceForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="showModalRechazarInformeAvance=false">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="rechazarInformeAvance()"
+            [disabled]="!rechazoInformeAvanceForm.formRechazo.valid">
+            Rechazar informe de avance
+        </button>
+    </ng-template>
 </p-dialog>
 
 <p-dialog header="Confirmar envío de Informe de Avance" [(visible)]="displayModalEnvioInformeAvance" [draggable]="false"

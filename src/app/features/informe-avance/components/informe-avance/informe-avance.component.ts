@@ -14,7 +14,9 @@ import {
   ContratosUser,
   DetalleInformeAvance,
   DetalleOT,
+  Dropdown,
   ItemSerivioUO,
+  MotivoRechazo,
   NuevoServicioAdicional,
   ProveedorAgenciaContrato,
   RequestAdicionales,
@@ -25,12 +27,14 @@ import {
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
+import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { Observable, Subscription, take } from 'rxjs';
+import { map, Observable, Subscription, take, tap } from 'rxjs';
 
 interface TableService {
   precargado: boolean;
@@ -84,12 +88,32 @@ export class InformeAvanceComponent
   })
   tableServiciosInformeAvance: TableServiciosComponent;
 
+  @ViewChild('rechazoInformeAvanceForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoInformeAvanceForm: ViewRechazoComponent;
+
   subscription: Subscription = new Subscription();
   serviciosInformeAvance: CarritoService[] = [];
   // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
   carrito$ = this.serviciosFacade.carrito$();
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.informeAvanceFacade.getDetalleInformeAvance$();
+  motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.motivo > b.motivo ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.motivo,
+          code: value.id,
+        }))
+      )
+    );
   accionesOT: Accion[] = [];
   ot_id: number;
 
@@ -110,6 +134,7 @@ export class InformeAvanceComponent
     private cubicacionFacade: CubicacionFacade,
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
+    private flujoOTFacade: FlujoOTFacade,
     private route: ActivatedRoute
   ) {}
 
@@ -531,6 +556,20 @@ export class InformeAvanceComponent
   }
 
   displayModalRechazarInformeAvance(): void {
+    this.flujoOTFacade.getMotivosRechazo('INFORME_AVANCE');
+    this.showModalRechazarInformeAvance = true;
+  }
+
+  rechazarInformeAvance(): void {
+    const request: RequestAutorizarInformeAvance = {
+      ot_id: this.ot_id,
+      estado: 'RECHAZADO',
+      observacion:
+        this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
+      tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
+    };
+
+    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
     this.showModalRechazarInformeAvance = true;
   }
 
