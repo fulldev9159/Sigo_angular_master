@@ -93,22 +93,7 @@
 
               <br>
 
-              <!--
-              <div id="superior-perfil-form">
-                <app-select [control]="formAddControls.superior_proxy_id" label="Superior directo">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione persona</option>
-                    <option value="null">No posee superior directo</option>
-                    <ng-container *ngFor="let superior of posiblesSuperiores$ | async">
-                      <option [value]="superior.proxy_id">
-                        {{ superior.usuario_nombre }} ({{ superior.perfil_nombre }})
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
-                -->
-              <zwc-pdropdown [control]="formAddControls.superior_proxy_id" Label="Superior directo" dropdown_id="superior-perfil-form" [data]="posiblesSuperiores$|async" Pplaceholder="Selecione persona" [loading]="false" optionLabel="usuario_nombre" optionValue="proxy_id"></zwc-pdropdown>
+              <zwc-pdropdown [control]="formAddControls.superior_proxy_id" Label="Superior directo" dropdown_id="superior-perfil-form" [data]="posiblesSuperiores$|async" Pplaceholder="Selecione persona" [loading]="false" optionLabel="dropdown_menu_item_label" optionValue="proxy_id"></zwc-pdropdown>
             </form>
           </div>
         </div>

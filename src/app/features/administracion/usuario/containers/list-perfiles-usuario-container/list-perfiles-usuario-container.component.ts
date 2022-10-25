@@ -18,6 +18,10 @@ import { map, withLatestFrom } from 'rxjs/operators';
 import { ListPerfilesUserFormService } from './list-perfiles-user-form.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+interface PosiblesSuperioresMenuItem extends PosiblesSuperiores {
+  dropdown_menu_item_label: string;
+}
+
 @Component({
   selector: 'zwc-list-perfiles-usuario-container',
   templateUrl: './list-perfiles-usuario-container.component.html',
@@ -33,7 +37,7 @@ export class ListPerfilesUsuarioContainerComponent
   allUsers$: Observable<User>;
   perfilesUser$: Observable<ListPerfilesUserType[]>;
   allPerfiles$: Observable<Perfil[]>;
-  posiblesSuperiores$: Observable<PosiblesSuperiores[]>;
+  posiblesSuperiores$: Observable<PosiblesSuperioresMenuItem[]>;
 
   // DISPLAY MODALS
   displayModalPerfilesUser$: Observable<boolean>;
@@ -146,7 +150,16 @@ export class ListPerfilesUsuarioContainerComponent
         }
       })
     );
-    this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$();
+    this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$().pipe(
+      map(superiores =>
+        superiores.map(superior => ({
+          ...superior,
+          dropdown_menu_item_label: `${superior?.usuario_nombre ?? 'NN'} (${
+            superior?.perfil_nombre ?? 'NN'
+          })`,
+        }))
+      )
+    );
 
     this.subscription.add(
       this.userFacade.perfilSelected$().subscribe(perfil => {
