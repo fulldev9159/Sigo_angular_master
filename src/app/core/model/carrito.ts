@@ -5,6 +5,7 @@ export interface CarritoService {
   servicio_unidad_cod?: string;
   servicio_unidad_descripcion?: string;
   adicional?: string;
+  servicios_adicional_dummy?: boolean;
 
   // Data response http API
   servicio_id: number;

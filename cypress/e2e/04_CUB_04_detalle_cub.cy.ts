@@ -4,6 +4,10 @@ import { crearCubicacionMOVIL } from 'cypress/fixtures/testedCubicacionMOVIL';
 import { crearCubicacionORDINARIO } from 'cypress/fixtures/testedCubicacionOrdinario';
 
 describe('Detalle Cubicaciones', () => {
+  beforeEach(() => {
+    cy.viewport(1500, 700);
+  });
+
   it('should let enter to create cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');

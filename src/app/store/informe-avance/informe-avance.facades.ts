@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
   DetalleInformeAvance,
+  RequestAdicionales,
   RequestAutorizarInformeAvance,
+  RequestUpdateInformeAvance,
   Response,
 } from '@model';
 import { Store } from '@ngrx/store';
@@ -39,12 +41,65 @@ export class InformeAvanceFacade {
     return this.store.select(informeAvanceSelectors.getDetalleInformeAvance);
   }
 
-  // SEND DETALLE INFORME AVANCE
-  public sendDetalleInformeAvance(ot_id: number): void {
+  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+  public actualizarInformeAvanceYAdicionales(
+    request_informe_avance: RequestUpdateInformeAvance,
+    request_adicionales: RequestAdicionales
+  ): void {
     this.store.dispatch(
-      informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+      informeAvanceActions.actualizarInformeAvanceYAdicionales({
+        request_informe_avance,
+        request_adicionales,
+      })
     );
   }
+
+  // ACTUALIZAR SOLO EL INFORME DE AVANCE
+  public actualizarInformeAvance(
+    request_informe_avance: RequestUpdateInformeAvance,
+    ot_id: number
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvance({
+        request_informe_avance,
+        ot_id,
+      })
+    );
+  }
+
+  // ACTUALIZAR INFORME DE AVANCE Y ENVIAR INFORME DE AVANCE
+  public actualizarInformeAvanceYenviar(
+    request_informe_avance: RequestUpdateInformeAvance,
+    ot_id: number
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvanceYenviar({
+        request_informe_avance,
+        ot_id,
+      })
+    );
+  }
+  // ACTUALIZAR INFORME DE AVANCE, ADICIONALES Y ENVIAR INFORME DE AVANCE
+  public actualizarInformeAvanceAdicionalesYenviar(
+    request_informe_avance: RequestUpdateInformeAvance,
+    request_adicionales: RequestAdicionales,
+    ot_id: number
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvanceAdicionalesYenviar({
+        request_informe_avance,
+        request_adicionales,
+        ot_id,
+      })
+    );
+  }
+
+  // SEND DETALLE INFORME AVANCE
+  // public sendDetalleInformeAvance(ot_id: number): void {
+  //   this.store.dispatch(
+  //     informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+  //   );
+  // }
 
   // ACEPTACION RECHAZO INFORME AVANCE
   public AceptarRechazarInformeAvanceOT(

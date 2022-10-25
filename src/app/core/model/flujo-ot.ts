@@ -21,3 +21,10 @@ export interface RequestAprobarRechazarOperaciones {
   tipo_rechazo_id?: number;
   observacion?: string;
 }
+
+// RECHAZOS
+export interface MotivoRechazo {
+  id: number;
+  motivo: string;
+  tipo: string;
+}

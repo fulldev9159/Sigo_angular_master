@@ -1,4 +1,5 @@
 import {
+  MotivoRechazo,
   PosibleSupervisorTrabajo,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -99,5 +100,21 @@ export const aprobarRechazarOperacionesSuccess = createAction(
 );
 export const aprobarRechazarOperacionesError = createAction(
   '[FLUJO OT] GET aprobarRechazarOperaciones Error',
+  props<{ error: any }>()
+);
+
+// GET ALL MOTIVO RECHAZO
+export const getAllMotivoRechazoOT = createAction(
+  '[FLUJO OT] GET getAllMotivoRechazoOT',
+  props<{ tipo: string }>()
+);
+
+export const getAllMotivoRechazoOTSuccess = createAction(
+  '[FLUJO OT] GET getAllMotivoRechazoOT Success',
+  props<{ motivo_rechazo: MotivoRechazo[] }>()
+);
+
+export const getAllMotivoRechazoOTError = createAction(
+  '[FLUJO OT] GET getAllMotivoRechazoOT Error',
   props<{ error: any }>()
 );

@@ -113,7 +113,7 @@ export const addDirectServiceCarrito = createAction(
   }>()
 );
 
-// SERVICIOS ADICIONALES
+// AGREGAR SERVICIOS ADICIONALES
 export const agregarAdicionales = createAction(
   '[SERVICIOS] GET agregarAdicionales',
   props<{ request: RequestAdicionales }>()
@@ -125,6 +125,33 @@ export const agregarAdicionalesSuccess = createAction(
 );
 export const agregarAdicionalesError = createAction(
   '[SERVICIOS] agregarAdicionales Error',
+  props<{ error: any }>()
+);
+
+// AGREGAR SERVICIOS ADICIONALES Y ENVIAR INFORME DE AVANCE
+
+export const agregarAdicionalesYenviarIA = createAction(
+  '[SERVICIOS] GET agregarAdicionalesYenviarIA',
+  props<{ request: RequestAdicionales; ot_id: number }>()
+);
+
+export const agregarAdicionalesYenviarIAError = createAction(
+  '[SERVICIOS] agregarAdicionalesYenviarIA Error',
+  props<{ error: any }>()
+);
+
+// ELIMINAR SERVICIOS ADICIONALES
+export const eliminarAdicional = createAction(
+  '[SERVICIOS] GET eliminarAdicional',
+  props<{ servicio_adicional: number[]; unidad_obra: number[] }>()
+);
+
+export const eliminarAdicionalSuccess = createAction(
+  '[SERVICIOS] GET eliminarAdicional Success',
+  props<{ response: Response<any> }>()
+);
+export const eliminarAdicionalError = createAction(
+  '[SERVICIOS] eliminarAdicional Error',
   props<{ error: any }>()
 );
 

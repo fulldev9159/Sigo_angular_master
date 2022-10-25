@@ -9,3 +9,8 @@ export const getPosibleSupervisorDeTrabajos = createSelector(
   selectFlujoOT,
   (state: reducer.StateFlujoOT) => state.posibleSupervisorDeTrabajo
 );
+
+export const motivosRechazo = createSelector(
+  selectFlujoOT,
+  (state: reducer.StateFlujoOT) => state.motivosRechazo
+);

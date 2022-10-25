@@ -21,3 +21,18 @@ export interface RequestAutorizarInformeAvance {
   observacion?: string;
   tipo?: number;
 }
+
+export interface RequestUpdateInformeAvance {
+  servicio: ItemSerivioUO[];
+  unidad_obra: ItemSerivioUO[];
+}
+
+export interface ItemSerivioUO {
+  row_id: number;
+  cantidad: number;
+}
+
+export interface ResponseUpdateInformeAvance {
+  servicio: number[];
+  unidad_obra: number[];
+}

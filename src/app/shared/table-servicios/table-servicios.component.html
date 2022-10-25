@@ -37,38 +37,51 @@
                         {{ servicio.servicio_nombre }}
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.tipo_servicio_descripcion }}</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
-                        <div class="container-cantidad">
-                            <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
-                                <p-inputNumber [formControl]="getControlServiceCantidad(servicio.servicio_id)"
-                                    mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
-                                </p-inputNumber>
-                                <p [pTooltip]="servicio.servicio_unidad_descripcion">{{servicio.servicio_unidad_cod}}
-                                </p>
-                                <zwc-input-alert [control]="getControlServiceCantidad(servicio.servicio_id)">
-                                </zwc-input-alert>
-                            </ng-container>
 
-                            <ng-template #cantidad_no_editable>
-                                {{servicio.servicio_cantidad| number}}
-                                <p [pTooltip]="servicio.servicio_unidad_descripcion">{{servicio.servicio_unidad_cod}}
-                                </p>
-                            </ng-template>
+                    <ng-container *ngIf="!servicio?.servicios_adicional_dummy">
+                        <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                            <div class="container-cantidad">
+                                <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
+                                    <p-inputNumber [formControl]="getControlServiceCantidad(servicio.servicio_id)"
+                                        mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                                    </p-inputNumber>
+                                    <p [pTooltip]="servicio.servicio_unidad_descripcion">
+                                        {{servicio.servicio_unidad_cod}}
+                                    </p>
+                                    <zwc-input-alert [control]="getControlServiceCantidad(servicio.servicio_id)">
+                                    </zwc-input-alert>
+                                </ng-container>
 
-                        </div>
-                    </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
-                        {{ +servicio.servicio_precio_final_clp |
-                        currency: 'CLP':'$':'.0-2':'es-CL' }}
-                    </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
-                        {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value |
-                        currency : 'CLP' :
-                        '$':'.0-2':'es-CL'}}
-                    </td>
+                                <ng-template #cantidad_no_editable>
+                                    {{servicio.servicio_cantidad| number}}
+                                    <p [pTooltip]="servicio.servicio_unidad_descripcion">
+                                        {{servicio.servicio_unidad_cod}}
+                                    </p>
+                                </ng-template>
+
+                            </div>
+                        </td>
+                        <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
+                            {{ +servicio.servicio_precio_final_clp |
+                            currency: 'CLP':'$':'.0-2':'es-CL' }}
+                        </td>
+                        <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
+                            {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value
+                            |
+                            currency : 'CLP' :
+                            '$':'.0-2':'es-CL'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container *ngIf="servicio?.servicios_adicional_dummy">
+                        <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                            Su cantidad se debe modificar desde el informe de avance
+                        </td>
+                    </ng-container>
+
                     <td *ngIf="column_acciones" [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         <button *ngIf="accion_delete" (click)="deleteServicioFromCarrito(servicio)"
-                            class="ui button eliminar-color">
+                            class="ui button eliminar-button">
                             <fa-icon [icon]="trashICon"></fa-icon>
                         </button>
 
@@ -130,7 +143,7 @@
                             <td *ngIf="column_acciones">
                                 <ng-container *ngIf="servicio.unidad_obras.length>1 && accion_delete">
                                     <button (click)="deleteUOFromServicioFromCarrito(servicio, uo)"
-                                        class="ui button eliminar-color">
+                                        class="ui button eliminar-button">
                                         <fa-icon [icon]="trashICon"></fa-icon>
                                     </button>
                                 </ng-container>
@@ -167,6 +180,7 @@
     </table>
 </form>
 
-<div class="message" id="alert-carrito-vacio" *ngIf="(data_carrito$|async).length === 0">
+<div class="message" id="alert-carrito-vacio"
+    *ngIf="(data_carrito$|async).length === 0 && mode_source!=='agregar-adicionales-informe-avance'">
     <p-message severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>
 </div>

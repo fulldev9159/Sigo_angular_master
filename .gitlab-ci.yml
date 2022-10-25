@@ -92,8 +92,8 @@ docker:
   script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
     - docker-compose -f docker-compose.yml push deploy
-  # only:
-  #   - develop
+  only:
+    - develop
 
 update-demos-sigo:
   stage: triggers
@@ -109,5 +109,5 @@ update-demos-sigo:
     CI_COMMIT_TITLE: $CI_COMMIT_TITLE
     GITLAB_USER_NAME: $GITLAB_USER_NAME
   trigger: zweicom/cl-movistar/sigo/demos-sigo
-  # only:
-  #   - develop
+  only:
+    - develop

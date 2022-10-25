@@ -187,4 +187,8 @@ export class LoadingsFacade {
       loadingSelector.sendingGetPosibleSupervisorTrabajos
     );
   }
+
+  public sendingSendBorradorInformeAvance$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingSendBorradorInformeAvance);
+  }
 }

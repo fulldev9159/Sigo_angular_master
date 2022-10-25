@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
+  MotivoRechazo,
   PosibleSupervisorTrabajo,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -78,6 +79,16 @@ export class FlujoOtHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/aprobacion_operaciones/update`,
       request
+    );
+  }
+
+  // GET ALL MOTIVO RECHAZO OT
+  getAllMotivoRechazoOT(
+    tipo: string
+  ): Observable<Response<{ items: MotivoRechazo[] }>> {
+    return this.http.post<Response<{ items: MotivoRechazo[] }>>(
+      `${this.API_URL}/configuration/causas_rechazo_tipo/get`,
+      { tipo }
     );
   }
 }

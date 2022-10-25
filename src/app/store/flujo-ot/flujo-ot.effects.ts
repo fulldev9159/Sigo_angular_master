@@ -119,6 +119,25 @@ export class FlujoOTEffects {
     )
   );
 
+  // GET ALL MOTIVO RECHAZO
+  getAllMotivoRechazoOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.getAllMotivoRechazoOT),
+      concatMap(({ tipo }) =>
+        this.flujoOTServiceHttp.getAllMotivoRechazoOT(tipo).pipe(
+          map(response =>
+            flujoOTActions.getAllMotivoRechazoOTSuccess({
+              motivo_rechazo: response.data.items,
+            })
+          ),
+          catchError(error =>
+            of(flujoOTActions.getAllMotivoRechazoOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -143,7 +162,8 @@ export class FlujoOTEffects {
           flujoOTActions.aceptarOTProveedorError,
           flujoOTActions.asignarSupervisorTrabajoError,
           flujoOTActions.solicitarPagoError,
-          flujoOTActions.aprobarRechazarOperacionesError
+          flujoOTActions.aprobarRechazarOperacionesError,
+          flujoOTActions.getAllMotivoRechazoOTError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

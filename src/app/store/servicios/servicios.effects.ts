@@ -6,6 +6,7 @@ import {
   ServiciosAdicionalesHttpService,
 } from '@services';
 import * as serviciosActions from './servicios.actions';
+import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import { catchError, concatMap, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ServiciosHttpService } from 'src/app/core/service/servicios-http.service';
@@ -120,6 +121,44 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR SERVICIOS ADICIONALES Y ENVIAR INFORME DE AVANCE
+  agregarAdicionalesYenviarIA$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYenviarIA),
+      concatMap(({ request, ot_id }) =>
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response =>
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(err =>
+            of(
+              serviciosActions.agregarAdicionalesYenviarIAError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.eliminarAdicional),
+      concatMap(({ servicio_adicional, unidad_obra }) =>
+        this.serviciosAdicionalesHttpService
+          .eliminarAdicional(servicio_adicional, unidad_obra)
+          .pipe(
+            map(response =>
+              serviciosActions.eliminarAdicionalSuccess({ response })
+            ),
+            catchError(err =>
+              of(serviciosActions.eliminarAdicionalError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -127,7 +166,8 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
           serviciosActions.addServicioCarritoSuccess,
-          serviciosActions.agregarAdicionalesSuccess
+          serviciosActions.agregarAdicionalesSuccess,
+          serviciosActions.eliminarAdicionalSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -141,7 +181,9 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
           serviciosActions.addServicioCarritoError,
-          serviciosActions.agregarAdicionalesError
+          serviciosActions.agregarAdicionalesError,
+          serviciosActions.eliminarAdicionalError,
+          serviciosActions.agregarAdicionalesYenviarIAError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

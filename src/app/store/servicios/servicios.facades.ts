@@ -129,6 +129,16 @@ export class ServiciosFacade {
     this.store.dispatch(serviciosActions.agregarAdicionales({ request }));
   }
 
+  //    ELIMINAR SERVICIO ADCIONAL
+  public eliminarAdicional(
+    servicio_adicional: number[],
+    unidad_obra: number[]
+  ): void {
+    this.store.dispatch(
+      serviciosActions.eliminarAdicional({ servicio_adicional, unidad_obra })
+    );
+  }
+
   // RESETS
   public resetServiciosAgenciaContratoProveedor(): void {
     this.store.dispatch(

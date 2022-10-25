@@ -1,1 +1,17 @@
-<p>view-rechazo works!</p>
+<form [formGroup]="formRechazo">
+    <br>
+    <zwc-pdropdown [control]="formRechazoControls.tipo_id" Label="* Tipo Rechazo" dropdown_id="select-tipo-rechazo"
+        [data]="motivosRehazo" Pplaceholder="Selecione un tipo de rechazo"></zwc-pdropdown>
+    <br>
+    <div class="row">
+        <div class="col">
+            <label for="">* Motivo</label>
+
+        </div>
+        <div class="col">
+            <textarea formControlName="motivo" class="form-control" placeholder="" name="observaciones"
+                id="observaciones" cols="30" rows="2"></textarea>
+        </div>
+    </div>
+
+</form>

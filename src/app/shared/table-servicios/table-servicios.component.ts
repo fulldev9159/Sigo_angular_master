@@ -48,8 +48,9 @@ interface ServiceTableCarrito {
 export class TableServiciosComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   data_carrito$: Observable<CarritoService[]> = of([]);
-  @Input() mode_source: string = 'aggregation'; // MODES: aggregation/static
+  @Input() mode_source: string = 'aggregation'; // MODES: aggregation/static/agregar-adicionales-informe-avance
   @Input() data_source: CarritoService[] = null;
+  @Input() informe_avance: CarritoService[] = null;
   // AL ESCOGER MODE aggregation LA FUENTE DE LA DATA SERÁ EL STORE CARRITO QUE SE PODRÁ MANIPULAR DESDE CUALQUIER PARTE
   // PARA QUE LAS CANTIDADES SE MANTENGAN AL AGREGAR O MODIFICAR UN SERVICIO ESTAS DEBEN SER MANEJADAS POR EL COMPONENTE QUE LLAMA A ESTE COMPONENTE
   // AL ESCOGER MODE static LA FUENTE DE LA DATA A DESPLEGAR SERÁ LA QUE SEA ENVIADA EN data_source Y A ESTA NO SE LE PRODRÁ AGREGAR O QUITAR SERVICIOS
@@ -88,6 +89,15 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       this.data_carrito$ = this.loadData(this.serviciosFacade.carrito$());
     if (this.mode_source === 'static')
       this.data_carrito$ = this.loadData(of(this.data_source));
+    else if (this.mode_source === 'agregar-adicionales-informe-avance') {
+      if (this.informe_avance === null)
+        throw Error('Se debe enviar el informe de avance actual');
+
+      this.data_carrito$ = this.loadDataServiciosAdicionales(
+        this.serviciosFacade.carrito$(),
+        this.informe_avance
+      );
+    }
 
     // COLSPAN
     if (!this.canSeePrices()) this.colSpan = this.colSpan - 2;
@@ -153,6 +163,58 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     );
   }
 
+  loadDataServiciosAdicionales(
+    data$: Observable<CarritoService[]>,
+    informe_avance: CarritoService[]
+  ): Observable<CarritoService[]> {
+    return data$.pipe(
+      map(servicios => {
+        let ids_servicios_informe_avance: number[] = informe_avance.map(
+          v => v.servicio_id
+        );
+        let valueInitial: CarritoService[] = [];
+        if (servicios && servicios.length > 0) {
+          // ORDENAR DE MANERA ESTRICTA
+          const carritoReducerEstricto = servicios.reduce((acc, curr) => {
+            let indexService = acc.findIndex(
+              value => value.servicio_id === curr.servicio_id
+            );
+            let existInInformeAvance = ids_servicios_informe_avance.find(
+              v => v === curr.servicio_id
+            );
+            if (indexService === -1) {
+              // SERVICIO NUEVO
+              if (existInInformeAvance === undefined) acc.push(curr);
+              if (existInInformeAvance !== undefined)
+                acc.push({
+                  ...curr,
+                  servicios_adicional_dummy: true,
+                  servicio_cantidad: 0, // VER PORQUE NO MARCA 0
+                });
+            } else {
+              // SERVICIO EXISTE EN ADICIONALES
+              let temp = [
+                ...acc.map(item => ({
+                  ...item,
+                  unidad_obras: [...item.unidad_obras],
+                })),
+              ];
+              temp[indexService].unidad_obras.push(...curr.unidad_obras);
+              acc[indexService] = temp[indexService];
+            }
+
+            return acc;
+          }, valueInitial);
+
+          this.makeForm(carritoReducerEstricto);
+          return carritoReducerEstricto;
+        } else {
+          return [];
+        }
+      })
+    );
+  }
+
   makeForm(servicios: CarritoService[]): void {
     // CREAR FORMULARIO
     servicios.forEach(servicio => {
@@ -166,16 +228,25 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
       // NUEVO SERVICIO
       if (indexServiceFormulario === -1) {
+        let servicio_cantidad_control = new FormControl(
+          servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+          [Validators.required, Validators.min(0.01)]
+        );
+
+        if (
+          servicio.servicio_cantidad !== undefined &&
+          servicio.servicio_cantidad === 0
+        ) {
+          servicio_cantidad_control = new FormControl(0);
+        }
+
         const group = new FormGroup({
           precargado: new FormControl(servicio.precargado ?? false, []),
           servicio_rowid: new FormControl(servicio.servicio_rowid, []),
           servicio_id: new FormControl(servicio.servicio_id, [
             Validators.required,
           ]),
-          servicio_cantidad: new FormControl(
-            servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
-            [Validators.required, Validators.min(0.01)]
-          ),
+          servicio_cantidad: servicio_cantidad_control,
           servicio_precio_final_clp: new FormControl(
             servicio.servicio_precio_final_clp
           ),
