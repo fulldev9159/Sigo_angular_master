@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as reducer from './area.reducer';
+import * as reducer from './area.reducers';
 
 export const selectArea = createFeatureSelector<reducer.StateArea>(
   reducer.Featurekey
