@@ -8,7 +8,7 @@
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('contrato')" Label="*Contrato Marco"
                     dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async"
-                    Pplaceholder="Selecione un contrato marco"></zwc-pdropdown>
+                    Pplaceholder="Seleccione un contrato marco"></zwc-pdropdown>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="formgrid grid">
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('cubicacion_id')" Label="*Cubicación" dropdown_id="select-cubicacion"
-                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"
+                    [data]="cubicacionesContrato$|async" Pplaceholder="Seleccione una cubicación"
                     [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>
             </div>
             <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">
