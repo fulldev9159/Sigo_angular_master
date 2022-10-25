@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AfterHttpService, ContratoHttpService } from '@services';
+import { Router } from '@angular/router';
 import * as contratoActions from './contrato.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -10,7 +11,8 @@ export class ContratoEffects {
   constructor(
     private actions$: Actions,
     private contratoHttpService: ContratoHttpService,
-    private afterHttp: AfterHttpService
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
 
   getAgenciasContrato$ = createEffect(() =>
@@ -154,6 +156,20 @@ export class ContratoEffects {
           contratoActions.activateContratoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSaveContratoSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          //// contratoActions.createContratoSuccess,
+          contratoActions.updateContratoSuccess
+        ),
+        tap(() =>
+          this.router.navigate(['/administracion/contratos/list-contratos'])
+        )
       ),
     { dispatch: false }
   );
