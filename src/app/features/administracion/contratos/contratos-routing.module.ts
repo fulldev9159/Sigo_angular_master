@@ -13,10 +13,10 @@ const routes: Routes = [
         path: 'list-contratos',
         component: ListContratosContainerComponent,
       },
-      {
-        path: 'form-contratos',
-        component: FormContratosContainerComponent,
-      },
+      //// {
+      ////   path: 'form-contratos',
+      ////   component: FormContratosContainerComponent,
+      //// },
       {
         path: 'form-contratos/:id',
         component: FormContratosContainerComponent,

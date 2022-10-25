@@ -89,11 +89,11 @@
         <div class="row">
           <div class="col">
             <form [formGroup]="formAddPerfil">
-              <zwc-pdropdown [control]="formAddControls.perfil_id" Label="Perfil" dropdown_id="perfil-usuario-form" [data]="allPerfiles$|async" Pplaceholder="Selecione perfil" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>
+              <zwc-pdropdown [control]="formAddControls.perfil_id" Label="Perfil" dropdown_id="perfil-usuario-form" [data]="allPerfiles$|async" Pplaceholder="Seleccione perfil" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>
 
               <br>
 
-              <zwc-pdropdown [control]="formAddControls.superior_proxy_id" Label="Superior directo" dropdown_id="superior-perfil-form" [data]="posiblesSuperiores$|async" Pplaceholder="Selecione persona" [loading]="false" optionLabel="dropdown_menu_item_label" optionValue="proxy_id"></zwc-pdropdown>
+              <zwc-pdropdown [control]="formAddControls.superior_proxy_id" Label="Superior directo" dropdown_id="superior-perfil-form" [data]="posiblesSuperiores$|async" Pplaceholder="Seleccione persona" [loading]="false" optionLabel="dropdown_menu_item_label" optionValue="proxy_id"></zwc-pdropdown>
             </form>
           </div>
         </div>

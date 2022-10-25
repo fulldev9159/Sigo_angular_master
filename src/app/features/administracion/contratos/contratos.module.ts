@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ContratosComponent } from './contratos.component';
 import { SharedModule } from '@sharedOT/shared.module';
 import { ListContratosContainerComponent } from './containers/list-contratos-container/list-contratos-container.component';
@@ -12,6 +13,12 @@ import { ContratosRoutingModule } from './contratos-routing.module';
     ListContratosContainerComponent,
     FormContratosContainerComponent,
   ],
-  imports: [CommonModule, ContratosRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ContratosRoutingModule,
+    SharedModule,
+  ],
 })
 export class ContratosModule {}

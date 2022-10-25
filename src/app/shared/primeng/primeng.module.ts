@@ -24,6 +24,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   imports: [
@@ -52,6 +54,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     MenuModule,
     MultiSelectModule,
     InputMaskModule,
+    ConfirmDialogModule,
   ],
   exports: [
     InputTextModule,
@@ -79,6 +82,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     MenuModule,
     MultiSelectModule,
     InputMaskModule,
+    ConfirmDialogModule,
   ],
+  providers: [ConfirmationService],
 })
 export class PrimeNgModule {}

@@ -20,13 +20,13 @@
 
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('proyecto_id')" Label="Proyecto:" dropdown_id="select-proyecto"
-                    [data]="proyectos$|async" Pplaceholder="Selecione un proyecto" [loading]="loadingProyectos$|async">
+                    [data]="proyectos$|async" Pplaceholder="Seleccione un proyecto" [loading]="loadingProyectos$|async">
                 </zwc-pdropdown>
             </div>
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('admin_contrato_id')" Label="*Administrador de Contrato:"
                     dropdown_id="select-admin-contrato" [data]="adminContratoFromCub$|async"
-                    Pplaceholder="Selecione un administrador de contrato"
+                    Pplaceholder="Seleccione un administrador de contrato"
                     [loading]="loadingAdminContratoFromCub$|async">
                 </zwc-pdropdown>
             </div>

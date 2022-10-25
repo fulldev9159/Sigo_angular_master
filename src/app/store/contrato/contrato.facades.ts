@@ -5,6 +5,9 @@ import {
   PerfilesUsuario,
   Response,
   TipoServicioContrato,
+  ContratoMarco,
+  ReqActivarContrato,
+  ReqEditContrato,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -65,5 +68,33 @@ export class ContratoFacade {
   }
   public resetTipoServiciosContrato(): void {
     this.store.dispatch(contratoActions.resetTipoServiciosContrato());
+  }
+
+  public reset(): void {
+    this.store.dispatch(contratoActions.reset());
+  }
+
+  public getAllContratos(): void {
+    this.store.dispatch(contratoActions.getContratos());
+  }
+
+  public getAllContratos$(): Observable<ContratoMarco[]> {
+    return this.store.select(contratoSelectors.getContratos);
+  }
+
+  public getSingleContratoSelected(contrato_id: number): void {
+    this.store.dispatch(contratoActions.getSingleContrato({ contrato_id }));
+  }
+
+  public getSingleContratoSelected$(): Observable<ContratoMarco> {
+    return this.store.select(contratoSelectors.getContratoSelected);
+  }
+
+  public updateContrato(request: ReqEditContrato): void {
+    this.store.dispatch(contratoActions.updateContrato({ request }));
+  }
+
+  public ActivateContrato(request: ReqActivarContrato): void {
+    this.store.dispatch(contratoActions.activateContrato({ request }));
   }
 }
