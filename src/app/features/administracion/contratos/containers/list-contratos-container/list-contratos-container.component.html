@@ -1,1 +1,120 @@
-<p>list-contratos-container works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Contratos Marcos </h1>
+      <span>listado de contratos marcos</span>
+    </div>
+    <div class="col">
+      <!-- <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button> -->
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class=" grid">
+        <div class="field col-12 table-list-contratos">
+          <ng-container *ngIf="contratos$ | async as contratos">
+            <p-table #dt [columns]="['nombre']" [value]="contratos" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+              <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  <h5 class="p-m-0"></h5>
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                  </span>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="nombre">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="fecha_inicio">
+                    Fecha Inicio
+                    <p-sortIcon field="fecha_inicio"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="fecha_fin">
+                    Fecha Fin
+                    <p-sortIcon field="fecha_fin"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tipo_contrato">
+                    Tipo Contrato
+                    <p-sortIcon field="tipo_contrato"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tipo_moneda">
+                    Tipo Moneda
+                    <p-sortIcon field="tipo_moneda"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="aprob_jerarq_inic">
+                    Req. Aprob. Jerarquica
+                    <p-sortIcon field="aprob_jerarq_inic"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="validacion_operaciones">
+                    Req. validacion Oper.
+                    <p-sortIcon field="validacion_operaciones"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tiene_encuesta">
+                    Tiene Encuesta
+                    <p-sortIcon field="tiene_encuesta"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tipo_pago">
+                    Tipo Pago
+                    <p-sortIcon field="tipo_pago"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="costo_max">
+                    Costo Max
+                    <p-sortIcon field="costo_max"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="estado">
+                    Estado
+                    <p-sortIcon field="estado"></p-sortIcon>
+                  </th>
+                  <th></th>
+                <tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                <tr>
+                  <td>
+                    <strong>{{ item.nombre }}</strong>
+                  </td>
+                  <td>{{ item.fecha_inicio | date: 'dd-MM-yyyy' }}</td>
+                  <td>{{ item.fecha_fin | date: 'dd-MM-yyyy' }}</td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.tipo_contrato }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.tipo_moneda }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.aprob_jerarq_inic }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.validacion_operaciones }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.tiene_encuesta }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.tipo_pago }}</span></td>
+                  <td>{{ item.costo_max | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                  <td>
+                    <span *ngIf="item.estado" class="label-table label-activo" style="font-size: 0.8em;">Activo</span>
+                    <span *ngIf="!item.estado" class="label-table label-inactivo" style="font-size: 0.8em;">Bloqueado</span>
+                  </td>
+                  <td style="text-align: right; position: relative">
+                    <div class="ui icon buttons mini basic">
+                      <button class="ui button generic-color" (click)="editar(item)">Editar</button>
+                      <button class="ui button generic-color" (click)="activacion($event, item)">{{ item.estado ? 'Desactivar' : 'Activar' }}</button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  En total hay {{ contratos ? contratos.length : 0 }} elementos.
+                </div>
+              </ng-template>
+            </p-table>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
