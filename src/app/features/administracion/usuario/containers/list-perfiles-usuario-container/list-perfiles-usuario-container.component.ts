@@ -17,9 +17,12 @@ import { map, withLatestFrom } from 'rxjs/operators';
 //// import { ListPerfilesUserTableService } from './list-perfiles-user-table.service';
 import { ListPerfilesUserFormService } from './list-perfiles-user-form.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { LogService } from '@log';
 
-interface PosiblesSuperioresMenuItem extends PosiblesSuperiores {
+interface PosiblesSuperioresMenuItem
+  extends Omit<PosiblesSuperiores, 'proxy_id'> {
   dropdown_menu_item_label: string;
+  proxy_id: number | string; // Override
 }
 
 @Component({
@@ -60,7 +63,8 @@ export class ListPerfilesUsuarioContainerComponent
     private userFacade: UserFacade,
     private route: ActivatedRoute,
     //// private listPerfilesUserTableService: ListPerfilesUserTableService,
-    private listPerfilesUserFormService: ListPerfilesUserFormService
+    private listPerfilesUserFormService: ListPerfilesUserFormService,
+    private logger: LogService
   ) {}
 
   ngOnInit() {
@@ -151,14 +155,21 @@ export class ListPerfilesUsuarioContainerComponent
       })
     );
     this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$().pipe(
-      map(superiores =>
-        superiores.map(superior => ({
+      map(superiores => [
+        {
+          perfil_id: -1,
+          perfil_nombre: '',
+          proxy_id: 'null',
+          usuario_nombre: '',
+          dropdown_menu_item_label: 'No posee superior directo',
+        },
+        ...superiores.map(superior => ({
           ...superior,
           dropdown_menu_item_label: `${superior?.usuario_nombre ?? 'NN'} (${
             superior?.perfil_nombre ?? 'NN'
           })`,
-        }))
-      )
+        })),
+      ])
     );
 
     this.subscription.add(
@@ -185,7 +196,7 @@ export class ListPerfilesUsuarioContainerComponent
     this.subscription.add(
       this.formAddPerfil.get('perfil_id').valueChanges.subscribe(perfil_id => {
         if (perfil_id) {
-          console.log('Cambio');
+          this.logger.debug('Cambio');
           this.formAddPerfil
             .get('superior_proxy_id')
             .enable({ emitEvent: false });
@@ -243,7 +254,7 @@ export class ListPerfilesUsuarioContainerComponent
           : +this.formAddPerfil.get('superior_proxy_id').value,
     };
 
-    console.log(request);
+    this.logger.debug(`request`, request);
 
     this.userFacade.agregarPerfilUsuario(request);
 
