@@ -13,10 +13,10 @@ const routes: Routes = [
         path: 'list-areas',
         component: ListAreasContainerComponent,
       },
-      {
-        path: 'form-areas',
-        component: FormAreasContainerComponent,
-      },
+      //// {
+      ////   path: 'form-areas',
+      ////   component: FormAreasContainerComponent,
+      //// },
       {
         path: 'form-areas/:id',
         component: FormAreasContainerComponent,
