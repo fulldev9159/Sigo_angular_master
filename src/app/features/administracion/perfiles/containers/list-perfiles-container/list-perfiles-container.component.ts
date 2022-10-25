@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
@@ -99,7 +98,7 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
 
     this.perfiles$ = this.profileFacade.getProfile$().pipe(
       map(perfiles =>
-        perfiles.map(perfil => ({
+        perfiles?.map(perfil => ({
           ...perfil,
           rol: perfil.model_rol_id.nombre,
           estado: true,
@@ -139,7 +138,7 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
   }
 
   getPermissionsGroup(permissions: PermisosPerfil[]): PermissionsGroup[] {
-    const data = permissions.map(permit => {
+    const data = permissions?.map(permit => {
       let permitCustom: any;
       if (permit && permit.model_permiso_id.slug) {
         permitCustom = {

@@ -345,7 +345,7 @@ export class FormUsuarioContainerComponent implements OnInit, OnDestroy {
 
   //  --- ENABLED ---
   checkAreaAndEnable(areas: Area[]): void {
-    if (areas.length > 0) {
+    if (areas?.length > 0) {
       this.formUser.get('area_id').enable();
     } else {
       this.formUser.get('area_id').disable();

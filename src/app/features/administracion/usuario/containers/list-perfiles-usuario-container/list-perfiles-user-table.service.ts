@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ListPerfilesUserType, User } from '@data';
@@ -9,11 +8,7 @@ import { ListPerfilesUserType, User } from '@data';
   providedIn: 'root',
 })
 export class ListPerfilesUserTableService {
-  constructor(
-    private router: Router,
-    private userFacade: UserFacade,
-    private confirmationService: ConfirmationService
-  ) {}
+  constructor(private router: Router, private userFacade: UserFacade) {}
   getTableConfig(): any {
     return {
       header: true,

@@ -9,15 +9,7 @@ import { InputTextComponent } from './input-text/input-text.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdropdownComponent } from './pdropdown/pdropdown.component';
 import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agregar-servicios.component';
-import { FormTableServicesComponent } from './form-table-services-deprecated/form-table-services.component';
-import { BaseTdComponent } from './form-table-services-deprecated/components/base-td/base-td.component';
-import { MultiTdComponent } from './form-table-services-deprecated/components/multi-td/multi-td.component';
 import { ViewConfirmacionComponent } from './view-confirmacion/view-confirmacion.component';
-import {
-  ViewServiceTableComponent,
-  ViewTableServicesComponent,
-  ViewUOTableComponent,
-} from './view-table-services-deprecated/view-table-services.component';
 import { ColorPrecargadoDirective } from './directives/color-precargado.directive';
 import { ViewRechazoComponent } from './view-rechazo/view-rechazo.component';
 import { TableServiciosComponent } from './table-servicios/table-servicios.component';
@@ -29,17 +21,11 @@ import { TableServiciosComponent } from './table-servicios/table-servicios.compo
     ContentLayoutComponent,
     InputTextComponent,
     PdropdownComponent,
-    FormAgregarServiciosComponent,
-    FormTableServicesComponent,
-    BaseTdComponent,
-    MultiTdComponent,
-    ViewConfirmacionComponent,
-    ViewTableServicesComponent,
-    ViewUOTableComponent,
-    ViewServiceTableComponent,
     ColorPrecargadoDirective,
     ViewRechazoComponent,
     TableServiciosComponent,
+    ViewConfirmacionComponent,
+    FormAgregarServiciosComponent,
   ],
   imports: [
     CommonModule,
@@ -56,13 +42,11 @@ import { TableServiciosComponent } from './table-servicios/table-servicios.compo
     ContentLayoutComponent,
     InputTextComponent,
     PdropdownComponent,
-    FormAgregarServiciosComponent,
-    FormTableServicesComponent,
-    ViewConfirmacionComponent,
-    ViewTableServicesComponent,
     ColorPrecargadoDirective,
     ViewRechazoComponent,
     TableServiciosComponent,
+    ViewConfirmacionComponent,
+    FormAgregarServiciosComponent,
   ],
 })
 export class SharedModule {

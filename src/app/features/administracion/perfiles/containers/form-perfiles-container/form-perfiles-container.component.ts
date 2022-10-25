@@ -75,7 +75,7 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
     this.formControls = this.formProService.FormConfig();
     this.formPerfil = new FormGroup(this.formControls);
     this.subscription.add(
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap?.subscribe(params => {
         const perfil_id = params.get('id');
         if (perfil_id !== null) {
           this.formPerfil.get('id').setValue(perfil_id);
@@ -275,7 +275,7 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   // }
 
   getPermissionsGroup(permissions: PermisoRol[]): PermissionsGroup[] {
-    const data = permissions.map(permit => {
+    const data = permissions?.map(permit => {
       let permitCustom: any;
       if (permit && permit.model_permiso_id.slug) {
         permitCustom = {

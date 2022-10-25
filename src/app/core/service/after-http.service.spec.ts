@@ -18,6 +18,8 @@ import {
 } from '@mocksOT';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
+import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -27,6 +29,8 @@ describe('AfterHttpService', () => {
   let snackMessage: SnackMessageService;
   let cubicacionFacade: CubicacionFacade;
   let otFacade: OTFacade;
+  let informeAvanceFacade: InformeAvanceFacade;
+  let serviciosFacade: ServiciosFacade;
   beforeEach(() => {
     TestBed.configureTestingModule(StoreModule.forRoot({}));
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
@@ -34,11 +38,15 @@ describe('AfterHttpService', () => {
     authFacade = TestBed.inject(AuthFacade);
     cubicacionFacade = TestBed.inject(CubicacionFacade);
     otFacade = TestBed.inject(OTFacade);
+    informeAvanceFacade = TestBed.inject(InformeAvanceFacade);
+    serviciosFacade = TestBed.inject(ServiciosFacade);
     service = new AfterHttpService(
       routerSpy,
       snakeMessage,
       authFacade,
       cubicacionFacade,
+      serviciosFacade,
+      informeAvanceFacade,
       otFacade
     );
     snackMessage = TestBed.inject(SnackMessageService);
@@ -176,7 +184,7 @@ describe('AfterHttpService', () => {
     expect(snackMessage.showMessage).toHaveBeenCalledWith(
       'Cubicación creada con exito. Cubicación ID:3',
       'Exito',
-      6000
+      2000
     );
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/cubicacion/list-cub']);
   });
@@ -192,7 +200,7 @@ describe('AfterHttpService', () => {
     expect(snackMessage.showMessage).toHaveBeenCalledWith(
       'Clonación realizada con éxito. Nueva Cubicación ID:3',
       'Exito',
-      6000
+      2000
     );
     expect(cubicacionFacade.listarCubicaciones).toHaveBeenCalled();
   });
@@ -208,7 +216,7 @@ describe('AfterHttpService', () => {
     expect(snackMessage.showMessage).toHaveBeenCalledWith(
       'Cubicación ID:6 eliminada con exito',
       'Exito',
-      6000
+      2000
     );
     expect(cubicacionFacade.listarCubicaciones).toHaveBeenCalled();
   });
@@ -223,7 +231,7 @@ describe('AfterHttpService', () => {
     expect(snackMessage.showMessage).toHaveBeenCalledWith(
       'Eliminación exitosa',
       'Exito',
-      6000
+      2000
     );
   });
 });

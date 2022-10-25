@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { ReqActivarContrato, TableListContratosMarcos } from '@model';
-import { ConfirmationService } from 'primeng/api';
 import { LogService } from '@log';
 
 @Component({
@@ -171,7 +170,6 @@ export class ListContratosContainerComponent implements OnInit {
   constructor(
     private contratoFacade: ContratoFacade,
     private router: Router,
-    private confirmationService: ConfirmationService,
     private logger: LogService
   ) {}
 
@@ -233,22 +231,5 @@ export class ListContratosContainerComponent implements OnInit {
         this.contratoFacade.getAllContratos();
       }, 700);
     }
-
-    //// this.confirmationService.confirm({
-    ////   //// target: event.target as EventTarget,
-    ////   message,
-    ////   icon: 'pi pi-exclamation-triangle',
-    ////   acceptLabel: 'Confirmar',
-    ////   rejectLabel: 'Cancelar',
-    ////   accept: () => {
-    ////     const request: ReqActivarContrato = {
-    ////       contrato_marco_id: +item.id,
-    ////       values: {
-    ////         estado: !item.estado,
-    ////       },
-    ////     };
-    ////     this.contratoFacade.ActivateContrato(request);
-    ////   },
-    //// });
   }
 }
