@@ -15,9 +15,9 @@ import { FormPerfilesContainerComponent } from './containers/form-perfiles-conta
   ],
   imports: [
     CommonModule,
-    PerfilesRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    PerfilesRoutingModule,
     SharedModule,
   ],
 })

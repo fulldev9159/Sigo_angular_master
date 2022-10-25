@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
-import { Response, Login,DatabaseVersion } from '@model';
+import { Response, Login, DatabaseVersion, PerfilesUsuario } from '@model';
 @Injectable({
   providedIn: 'root',
 })
@@ -39,6 +39,15 @@ export class AuthHttpService {
   getAPIVersion(): Observable<Response<{ api_version: string }>> {
     return this.http.get<Response<{ api_version: string }>>(
       `${this.API_URL}/configuration/api/version/get`
+    );
+  }
+
+  getPerfilesUser(
+    usuario_id: number
+  ): Observable<Response<{ perfiles: PerfilesUsuario[] }>> {
+    return this.http.post<Response<{ perfiles: PerfilesUsuario[] }>>(
+      `${this.API_URL}/usuario/perfiles/get`,
+      { usuario_id }
     );
   }
 }

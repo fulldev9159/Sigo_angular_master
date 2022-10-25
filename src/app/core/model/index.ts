@@ -27,6 +27,8 @@ export * from './acta';
 export * from './archivo';
 export * from './libro-obras';
 export * from './permiso';
+export * from './guia-subgrupo';
+export * from './area';
 
 export interface Response<T> {
   data: T;
