@@ -81,15 +81,15 @@
             </div>
 
             <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance"
+                <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance" icon="ok"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="autorizarInformeAvance()"
                     [sending]="sendingSendInformeAvance$|async">
                 </zwc-pbutton-sending>
             </div>
             <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance"
-                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalRechazarInformeAvance()"
-                    [sending]="sendingSendInformeAvance$|async">
+                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance" icon="nok"
+                    Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
+                    (click)="displayModalRechazarInformeAvance()" [sending]="sendingSendInformeAvance$|async">
                 </zwc-pbutton-sending>
             </div>
         </div>

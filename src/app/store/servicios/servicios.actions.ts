@@ -2,6 +2,7 @@ import {
   CarritoService,
   DetallesServicioTipoAgenciaContratoProveedor,
   RequestAdicionales,
+  RequestAutorizarInformeAvance,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
   Response,
@@ -137,6 +138,21 @@ export const agregarAdicionalesYenviarIA = createAction(
 
 export const agregarAdicionalesYenviarIAError = createAction(
   '[SERVICIOS] agregarAdicionalesYenviarIA Error',
+  props<{ error: any }>()
+);
+
+// AGREGAR SERVICIOS ADICIONALES Y AUTORIZAR INFORME DE AVANCE
+
+export const agregarAdicionalesYautorizarIA = createAction(
+  '[SERVICIOS] GET agregarAdicionalesYautorizarIA',
+  props<{
+    request: RequestAdicionales;
+    request_autorizacion: RequestAutorizarInformeAvance;
+  }>()
+);
+
+export const agregarAdicionalesYautorizarIAError = createAction(
+  '[SERVICIOS] agregarAdicionalesYautorizarIA Error',
   props<{ error: any }>()
 );
 

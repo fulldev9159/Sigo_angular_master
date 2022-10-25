@@ -145,6 +145,65 @@ export class InformeAvanceEffects {
     )
   );
 
+  // AUTORIZAR INFORME AVANCE
+  // ACTUALIZAR INFORME DE AVANCE, LOS ADICIONALES Y AUTORIZAR EL INFORME
+  actualizarInformeAvanceAdicionalesYautorizarIA$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIA
+      ),
+      concatMap(
+        ({
+          request_informe_avance,
+          request_adicionales,
+          request_autorizacion,
+        }) =>
+          this.informeAvanceHttp
+            .updateInformeAvance(request_informe_avance)
+            .pipe(
+              map(response =>
+                serviciosActions.agregarAdicionalesYautorizarIA({
+                  request: request_adicionales,
+                  request_autorizacion,
+                })
+              ),
+              catchError(error =>
+                of(
+                  informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError(
+                    {
+                      error,
+                    }
+                  )
+                )
+              )
+            )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO INFORME DE AVANCE Y ENVIAR EL INFORME
+  actualizarInformeAvanceYautorizar$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYautorizarIA),
+      concatMap(({ request_informe_avance, request_autorizacion }) =>
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response =>
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.actualizarInformeAvanceYautorizarIAError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // ACEPTAR INFORME AVANCE
   aceptarRechazarInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
@@ -192,7 +251,9 @@ export class InformeAvanceEffects {
           informeAvanceActions.actualizarInformeAvanceYAdicionalesError,
           informeAvanceActions.actualizarInformeAvanceError,
           informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError,
-          informeAvanceActions.actualizarInformeAvanceYenviarError
+          informeAvanceActions.actualizarInformeAvanceYenviarError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError,
+          informeAvanceActions.actualizarInformeAvanceYautorizarIAError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

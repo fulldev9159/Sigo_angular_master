@@ -94,6 +94,33 @@ export class InformeAvanceFacade {
     );
   }
 
+  // ACTUALIZAR INFORME DE AVANCE Y AUTORIZAR INFORME DE AVANCE
+  public actualizarInformeAvanceYautorizar(
+    request_informe_avance: RequestUpdateInformeAvance,
+    request_autorizacion: RequestAutorizarInformeAvance
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvanceYautorizarIA({
+        request_informe_avance,
+        request_autorizacion,
+      })
+    );
+  }
+  // ACTUALIZAR INFORME DE AVANCE, ADICIONALES Y ENVIAR INFORME DE AVANCE
+  public actualizarInformeAvanceAdicionalesYautorizar(
+    request_informe_avance: RequestUpdateInformeAvance,
+    request_adicionales: RequestAdicionales,
+    request_autorizacion: RequestAutorizarInformeAvance
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIA({
+        request_informe_avance,
+        request_adicionales,
+        request_autorizacion,
+      })
+    );
+  }
+
   // SEND DETALLE INFORME AVANCE
   // public sendDetalleInformeAvance(ot_id: number): void {
   //   this.store.dispatch(
