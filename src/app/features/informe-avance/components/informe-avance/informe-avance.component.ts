@@ -23,6 +23,7 @@ import {
   RequestAutorizarInformeAvance,
   RequestUpdateInformeAvance,
   ServicioAdicionalActualizar,
+  SessionData,
   UOAdicionalActualizar,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
@@ -127,6 +128,12 @@ export class InformeAvanceComponent
   // MODAL
   showModalRechazarInformeAvance = false;
   displayModalEnvioInformeAvance = false;
+
+  permisos: string[] = (
+    JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
+  ).permisos.map(value => value.slug);
+
+  totalFinalInformeAvance = 0;
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -302,6 +309,15 @@ export class InformeAvanceComponent
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
+
+    let totalInformeAvance =
+      +this.tableServiciosInformeAvance.totalServicios +
+      +this.tableServiciosInformeAvance.totalUOs;
+    let totalAdicionales =
+      +this.tableServiciosAdicionales.totalServicios +
+      +this.tableServiciosAdicionales.totalUOs;
+
+    this.totalFinalInformeAvance = totalInformeAvance + totalAdicionales;
   }
 
   // 157 TODO: MOVER A UN PLANO GLOBAL
@@ -580,6 +596,10 @@ export class InformeAvanceComponent
     };
 
     this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
+  }
+
+  canSeePrices(): boolean {
+    return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
   ngOnDestroy(): void {
