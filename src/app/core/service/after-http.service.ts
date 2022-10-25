@@ -100,7 +100,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         'No tiene contratos asignados. Favor contactar con el administrador del sistema',
         'info',
-        6000
+        2000
       );
     }
 
@@ -109,7 +109,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Cubicación creada con exito. Cubicación ID:${action.response.data.cubicacion_id}`,
         'Exito',
-        6000
+        2000
       );
       this.router.navigate(['/cubicacion/list-cub']);
     }
@@ -119,7 +119,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Cubicación ID:${action.response.data.cubicacion_id} editada con exito`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/cubicacion/list-cub']);
     }
@@ -129,7 +129,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Clonación realizada con éxito. Nueva Cubicación ID:${action.response.data.cubicacion_id}`,
         'Exito',
-        4000
+        2000
       );
       this.cubicacionFacade.listarCubicaciones();
     }
@@ -139,7 +139,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Cubicación ID:${action.response.data.cubicacion_id} eliminada con exito`,
         'Exito',
-        4000
+        2000
       );
       this.cubicacionFacade.listarCubicaciones();
     }
@@ -154,7 +154,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Orden de trabajo creada con exito. OT ID:${action.response.data.ot_id}`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/ot/list-ot']);
     }
@@ -178,7 +178,7 @@ export class AfterHttpService {
         this.snackMessage.showMessage(
           `Se guarda el informe de avance exitosamente`,
           'Exito',
-          4000
+          2000
         );
 
         this.serviciosFacade.resetCarritoServices();
@@ -213,7 +213,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Informe enviado exitosamente`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/ot/list-ot']);
     }
@@ -226,7 +226,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Acción realizada exitosamente`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/ot/list-ot']);
     }
@@ -236,7 +236,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Acción realizada exitosamente`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/ot/list-ot']);
     }
@@ -246,7 +246,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Acción realizada exitosamente`,
         'Exito',
-        4000
+        2000
       );
       this.router.navigate(['/ot/list-ot']);
     }
@@ -256,7 +256,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Envío de solicitud exitosa`,
         'Exito',
-        4000
+        2000
       );
       this.reloadTableOT();
     }
@@ -266,7 +266,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         `Registro subido exitosamente`,
         'Exito',
-        4000
+        2000
       );
     }
   }

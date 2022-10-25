@@ -232,6 +232,15 @@ describe('APROBAR INFORME AVANCE ADMIN CONTRATISTA', () => {
         table +
           '>zwc-table-servicios>form>table>tfoot>tr>td[id="total-cubicacion-monto"]'
       ).contains(data.total);
+
+      cy.get('.total-final-ia').contains('$3.114.425,24');
     });
+  });
+
+  it('Aprobar informe de avance', () => {
+    cy.get('button[id="aceptar-button"]').click();
+    cy.get('#button-confirmar').click();
+
+    cy.wait(1000);
   });
 });

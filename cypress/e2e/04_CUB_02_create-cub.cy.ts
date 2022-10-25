@@ -20,7 +20,7 @@ describe('Create Cubicacion BUCLE', () => {
     cy.get('input[name="input-nombre-cubicacion"]').type(
       'Cubicacion Bucle Cypress'
     );
-    cy._select_dropdown('#select-tipo-cubicacion', 'Full');
+    cy._select_dropdown('#select-tipo-cubicacion', 'Construcción');
     cy._select_dropdown('#select-contrato_marco', 'BUCLE');
     cy.get('input[name="input-direccion-desde"]').type('a');
     cy.get('input[name="input-altura-desde"]').type('a');
@@ -89,7 +89,7 @@ describe('Create Cubicacion FIJA', () => {
     cy.get('input[name="input-nombre-cubicacion"]').type(
       'Cubicacion FIJA Cypress'
     );
-    cy._select_dropdown('#select-tipo-cubicacion', 'Full');
+    cy._select_dropdown('#select-tipo-cubicacion', 'Construcción');
     cy._select_dropdown('#select-contrato_marco', data.contrato);
     cy.get('textarea[id="input-descripcion"]').type(
       'Una cubicación para realizar pruebas cypress'
@@ -149,7 +149,7 @@ describe('Create Cubicacion ORDINARIO', () => {
     cy.get('input[name="input-nombre-cubicacion"]').type(
       'Cubicacion ORDINARIO Cypress'
     );
-    cy._select_dropdown('#select-tipo-cubicacion', 'Full');
+    cy._select_dropdown('#select-tipo-cubicacion', 'Construcción');
     cy._select_dropdown('#select-contrato_marco', data.contrato);
     cy.get('textarea[id="input-descripcion"]').type(
       'Una cubicación para realizar pruebas cypress'
@@ -209,7 +209,7 @@ describe('Create Cubicacion MOVIL', () => {
     cy.get('input[name="input-nombre-cubicacion"]').type(
       'Cubicacion MOVIL Cypress'
     );
-    cy._select_dropdown('#select-tipo-cubicacion', 'Full');
+    cy._select_dropdown('#select-tipo-cubicacion', 'Construcción');
     cy._select_dropdown('#select-contrato_marco', data.contrato);
     cy.get('textarea[id="input-descripcion"]').type(
       'Una cubicación para realizar pruebas cypress'

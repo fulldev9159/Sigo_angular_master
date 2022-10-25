@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -127,6 +128,7 @@ export class InformeAvanceComponent
   // MODAL
   showModalRechazarInformeAvance = false;
   displayModalEnvioInformeAvance = false;
+  displayModalAprobacionInformeAvance = false;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
@@ -141,7 +143,8 @@ export class InformeAvanceComponent
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
     private flujoOTFacade: FlujoOTFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -275,40 +278,63 @@ export class InformeAvanceComponent
       .disable({ emitEvent: false });
 
     // RESET
-    this.agregarServiciosForm?.formFilter
-      .get('actividad_id')
-      .valueChanges.subscribe(() => {
-        this.contratoFacade.resetTipoServiciosContrato();
-        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
-        this.serviciosFacade.resetServicioSelected();
-        this.serviciosFacade.resetUnidadesObraServicio();
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('actividad_id')
+        .valueChanges.subscribe(() => {
+          this.contratoFacade.resetTipoServiciosContrato();
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.agregarServiciosForm?.formFilter
-          .get('tipo_servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('unidad_obra_cod')
-          .setValue(null, { emitEvent: false });
-      });
+          this.agregarServiciosForm?.formFilter
+            .get('tipo_servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
 
-    this.agregarServiciosForm?.formFilter
-      .get('tipo_servicio_id')
-      .valueChanges.subscribe(() => {
-        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
-        this.serviciosFacade.resetServicioSelected();
-        this.serviciosFacade.resetUnidadesObraServicio();
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('tipo_servicio_id')
+        .valueChanges.subscribe(() => {
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.agregarServiciosForm?.formFilter
-          .get('servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('unidad_obra_cod')
-          .setValue(null, { emitEvent: false });
-      });
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
 
+    this.subscription.add(
+      this.tableServiciosInformeAvance?.formTable
+        .get('table')
+        .valueChanges.subscribe(v => {
+          this.calcularTotalFinal();
+        })
+    );
+
+    this.subscription.add(
+      this.tableServiciosAdicionales?.formTable
+        .get('table')
+        .valueChanges.subscribe(v => {
+          this.calcularTotalFinal();
+        })
+    );
+    this.calcularTotalFinal();
+  }
+
+  calcularTotalFinal(): void {
     let totalInformeAvance =
       +this.tableServiciosInformeAvance.totalServicios +
       +this.tableServiciosInformeAvance.totalUOs;
@@ -678,6 +704,7 @@ export class InformeAvanceComponent
         }
       })
     );
+    this.displayModalAprobacionInformeAvance = false;
   }
 
   canSeePrices(): boolean {

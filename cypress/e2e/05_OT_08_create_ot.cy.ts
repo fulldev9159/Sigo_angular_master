@@ -33,7 +33,7 @@ describe('Create ot bucle', () => {
       cy._select_dropdown('#select-comuna', 'Buin');
       cy.get('#crear-ot').should('be.disabled');
       cy._select_dropdown('#select-tipo-red', 'ATP');
-      cy._select_dropdown('#select-tipo-trabajo', 'FO Empresa');
+      cy._select_dropdown('#select-tipo-trabajo', 'Ampliacion');
       cy._select_dropdown('#select-area-negocio', 'NORMAL');
       cy.get('#crear-ot').should('be.disabled');
       cy.get('input[name="input-nombre-proyectista"]').type(

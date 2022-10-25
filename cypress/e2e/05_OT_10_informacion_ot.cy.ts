@@ -57,7 +57,7 @@ describe('listar las ot', () => {
     ).contains('ATP');
     cy.get(
       '#table-contrato-bucle > tr:nth-child(7) > td:nth-child(2)'
-    ).contains('FO Empresa');
+    ).contains('Ampliacion');
     cy.get(
       '#table-contrato-bucle > tr:nth-child(8) > td:nth-child(2)'
     ).contains('No');
