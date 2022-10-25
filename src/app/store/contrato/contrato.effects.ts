@@ -71,13 +71,71 @@ export class ContratoEffects {
     )
   );
 
+  getContratos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.getContratos),
+      concatMap(() =>
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response => contratoActions.getContratosSuccess({ response })),
+          catchError(error => of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  );
+
+  getSingleContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.getSingleContrato),
+      concatMap(({ contrato_id }) =>
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response =>
+            contratoActions.getSingleContratoSuccess({ contrato_id, response })
+          ),
+          catchError(error => of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  );
+
+  updateContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.updateContrato),
+      concatMap(({ request }) =>
+        this.contratoHttpService.updateContrato(request).pipe(
+          map(response => contratoActions.updateContratoSuccess({ response })),
+          catchError(error =>
+            of(contratoActions.updateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  ActivateContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.activateContrato),
+      concatMap(({ request }) =>
+        this.contratoHttpService.activateContrato(request).pipe(
+          map(response =>
+            contratoActions.activateContratoSuccess({ response })
+          ),
+          catchError(error =>
+            of(contratoActions.activateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           contratoActions.getAgenciasContratoSuccess,
           contratoActions.getActividadesContratoProveedorSuccess,
-          contratoActions.getTipoServiciosContratoSuccess
+          contratoActions.getTipoServiciosContratoSuccess,
+          contratoActions.updateContratoSuccess,
+          contratoActions.activateContratoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -90,7 +148,10 @@ export class ContratoEffects {
         ofType(
           contratoActions.getAgenciasContratoError,
           contratoActions.getActividadesContratoProveedorError,
-          contratoActions.getTipoServiciosContratoError
+          contratoActions.getTipoServiciosContratoError,
+          contratoActions.getContratosError,
+          contratoActions.updateContratoError,
+          contratoActions.activateContratoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

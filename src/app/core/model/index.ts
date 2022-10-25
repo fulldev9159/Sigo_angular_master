@@ -40,6 +40,11 @@ export interface StatusResponse {
   code: number;
 }
 
+export interface IdNombreType {
+  id: number;
+  nombre: string;
+}
+
 export interface Dropdown {
   name: string;
   code: number | string;

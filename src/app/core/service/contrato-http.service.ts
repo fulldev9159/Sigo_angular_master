@@ -6,6 +6,9 @@ import {
   AgenciaContrato,
   Response,
   TipoServicioContrato,
+  ContratoMarco,
+  ReqEditContrato,
+  ReqActivarContrato,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -46,6 +49,27 @@ export class ContratoHttpService {
     return this.http.post<Response<{ items: TipoServicioContrato[] }>>(
       `${this.API_URL}/cubicacion/tipo_servicio/get`,
       { actividad_id, contrato_marco_id }
+    );
+  }
+
+  getAllContratos(): Observable<Response<{ items: ContratoMarco[] }>> {
+    return this.http.post<Response<{ items: ContratoMarco[] }>>(
+      `${this.API_URL}/configuration/contrato_marco/getall`,
+      {}
+    );
+  }
+
+  updateContrato(request: ReqEditContrato): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/configuration/contrato_marco/update`,
+      request
+    );
+  }
+
+  activateContrato(request: ReqActivarContrato): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/configuration/contrato_marco/update`,
+      request
     );
   }
 }
