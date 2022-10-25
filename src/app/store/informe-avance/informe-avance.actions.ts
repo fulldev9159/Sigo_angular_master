@@ -117,3 +117,32 @@ export const actualizarInformeAvanceYenviarError = createAction(
   '[INFORME AVANCE] GET actualizarInformeAvanceYenviar Error',
   props<{ error: any }>()
 );
+
+// ACTUALIZAR INFORME DE AVANCE, LOS ADICIONALES Y AUTORIZAR INFORME AVANCE
+export const actualizarInformeAvanceAdicionalesYautorizarIA = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceAdicionalesYrechazarIA',
+  props<{
+    request_informe_avance: RequestUpdateInformeAvance;
+    request_adicionales: RequestAdicionales;
+    request_autorizacion: RequestAutorizarInformeAvance;
+  }>()
+);
+
+export const actualizarInformeAvanceAdicionalesYautorizarIAError = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceAdicionalesYautorizarIA Error',
+  props<{ error: any }>()
+);
+
+// ACTUALIZAR INFORME DE AVANCE Y RECHAZAR IA
+export const actualizarInformeAvanceYautorizarIA = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceYautorizarIA',
+  props<{
+    request_informe_avance: RequestUpdateInformeAvance;
+    request_autorizacion: RequestAutorizarInformeAvance;
+  }>()
+);
+
+export const actualizarInformeAvanceYautorizarIAError = createAction(
+  '[INFORME AVANCE] GET actualizarInformeAvanceYautorizarIA Error',
+  props<{ error: any }>()
+);

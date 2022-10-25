@@ -140,6 +140,29 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR SERVICIOS ADICIONALES Y AUTOTIZAR INFORME DE AVANCE
+  agregarAdicionalesYautorizarIA$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYautorizarIA),
+      concatMap(({ request, request_autorizacion }) =>
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response =>
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(err =>
+            of(
+              serviciosActions.agregarAdicionalesYautorizarIAError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // ELIMINAR SERVICIOS ADICIONALES
   eliminarAdicionales$ = createEffect(() =>
     this.actions$.pipe(
@@ -183,7 +206,8 @@ export class ServiciosEffects {
           serviciosActions.addServicioCarritoError,
           serviciosActions.agregarAdicionalesError,
           serviciosActions.eliminarAdicionalError,
-          serviciosActions.agregarAdicionalesYenviarIAError
+          serviciosActions.agregarAdicionalesYenviarIAError,
+          serviciosActions.agregarAdicionalesYautorizarIAError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

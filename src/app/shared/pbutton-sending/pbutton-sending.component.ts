@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { faFloppyDisk, faPlay } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFloppyDisk,
+  faPlay,
+  faThumbsDown,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-pbutton-sending',
@@ -26,6 +31,12 @@ export class PbuttonSendingComponent implements OnInit {
     }
     if (this.icon === 'play') {
       this.iconSelected = faPlay;
+    }
+    if (this.icon === 'ok') {
+      this.iconSelected = faThumbsUp;
+    }
+    if (this.icon === 'nok') {
+      this.iconSelected = faThumbsDown;
     }
   }
 

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -57,7 +58,6 @@ interface TableService {
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
 // 105 TODO: VER SI ES MEJOR UX REFRESCAR EL NGRX QUE LA PÁGINA AL GUARDAR BORRADOR
 // 106 TODO: CONFIRMAR: SI EL ADMIN EECC REALIZA MODIFICACIONES AL INFORME DE AVANCE Y LO RECHAZA ESOS CAMBIOS TAMBIÉN SE DEBERAN GUARDAR
-// 107 TODO: MOSTRAR EL TOTAL EN LA VISTA DEL ADMIN EECC
 // 108 TODO: IMPLEMENTAR BOTON RECHAZAR INFORME DE AVANCE
 // 109 TODO: PROBAR QUE OTROS USUARIOS DE OTRAS EMPRESAS NO PUEDAN ACCEDER AL ID DE UNA OT QUE NO ES DE SU EMPRESA
 // 110 TODO: PROBAR SI AL CAMBIAR INFORMACION DEL INFORME Y APROBAR/RECHAZAR GUARDA EL CAMBIO
@@ -128,6 +128,7 @@ export class InformeAvanceComponent
   // MODAL
   showModalRechazarInformeAvance = false;
   displayModalEnvioInformeAvance = false;
+  displayModalAprobacionInformeAvance = false;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
@@ -142,7 +143,8 @@ export class InformeAvanceComponent
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
     private flujoOTFacade: FlujoOTFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -276,40 +278,63 @@ export class InformeAvanceComponent
       .disable({ emitEvent: false });
 
     // RESET
-    this.agregarServiciosForm?.formFilter
-      .get('actividad_id')
-      .valueChanges.subscribe(() => {
-        this.contratoFacade.resetTipoServiciosContrato();
-        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
-        this.serviciosFacade.resetServicioSelected();
-        this.serviciosFacade.resetUnidadesObraServicio();
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('actividad_id')
+        .valueChanges.subscribe(() => {
+          this.contratoFacade.resetTipoServiciosContrato();
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.agregarServiciosForm?.formFilter
-          .get('tipo_servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('unidad_obra_cod')
-          .setValue(null, { emitEvent: false });
-      });
+          this.agregarServiciosForm?.formFilter
+            .get('tipo_servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
 
-    this.agregarServiciosForm?.formFilter
-      .get('tipo_servicio_id')
-      .valueChanges.subscribe(() => {
-        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
-        this.serviciosFacade.resetServicioSelected();
-        this.serviciosFacade.resetUnidadesObraServicio();
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('tipo_servicio_id')
+        .valueChanges.subscribe(() => {
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.agregarServiciosForm?.formFilter
-          .get('servicio_id')
-          .setValue(null, { emitEvent: false });
-        this.agregarServiciosForm?.formFilter
-          .get('unidad_obra_cod')
-          .setValue(null, { emitEvent: false });
-      });
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
 
+    this.subscription.add(
+      this.tableServiciosInformeAvance?.formTable
+        .get('table')
+        .valueChanges.subscribe(v => {
+          this.calcularTotalFinal();
+        })
+    );
+
+    this.subscription.add(
+      this.tableServiciosAdicionales?.formTable
+        .get('table')
+        .valueChanges.subscribe(v => {
+          this.calcularTotalFinal();
+        })
+    );
+    this.calcularTotalFinal();
+  }
+
+  calcularTotalFinal(): void {
     let totalInformeAvance =
       +this.tableServiciosInformeAvance.totalServicios +
       +this.tableServiciosInformeAvance.totalUOs;
@@ -577,25 +602,109 @@ export class InformeAvanceComponent
   }
 
   rechazarInformeAvance(): void {
-    const request: RequestAutorizarInformeAvance = {
-      ot_id: this.ot_id,
-      estado: 'RECHAZADO',
-      observacion:
-        this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
-      tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
-    };
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
 
-    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
-    this.showModalRechazarInformeAvance = true;
+        // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
+        this.eliminarAdicionalesEscogidos();
+
+        // GUARDAR BORRADOR
+        let formularioServiciosAdicionales =
+          this.tableServiciosAdicionales.formTable.get('table')
+            .value as Array<TableService>;
+
+        let formularioInformeAvance =
+          this.tableServiciosInformeAvance.formTable.get('table')
+            .value as Array<TableService>;
+
+        let request_informe_avance: any = this.getRequestUpdateInformeAvance(
+          formularioInformeAvance
+        );
+
+        const request_autorizacion: RequestAutorizarInformeAvance = {
+          ot_id: this.ot_id,
+          estado: 'RECHAZADO',
+          observacion:
+            this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
+          tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
+        };
+
+        if (formularioServiciosAdicionales.length > 0) {
+          //  ACTUALIZAR INFORME DE AVANCE ADICIONALES SI ES QUE EXISTEN ADICIONALES Y ENVIAR IA
+          let request_adicionales: RequestAdicionales =
+            this.getRequestServiciosAdicionales(
+              formularioServiciosAdicionales,
+              carrito
+            );
+
+          this.informeAvanceFacade.actualizarInformeAvanceAdicionalesYautorizar(
+            request_informe_avance,
+            request_adicionales,
+            request_autorizacion
+          );
+        } else {
+          // ACTUALIZAR SOLO EL INFORME DE AVANCE
+          this.informeAvanceFacade.actualizarInformeAvanceYautorizar(
+            request_informe_avance,
+            request_autorizacion
+          );
+        }
+
+        this.showModalRechazarInformeAvance = false;
+      })
+    );
   }
 
   autorizarInformeAvance(): void {
-    const request: RequestAutorizarInformeAvance = {
-      ot_id: this.ot_id,
-      estado: 'APROBADO',
-    };
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
 
-    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
+        // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
+        this.eliminarAdicionalesEscogidos();
+
+        // GUARDAR BORRADOR
+        let formularioServiciosAdicionales =
+          this.tableServiciosAdicionales.formTable.get('table')
+            .value as Array<TableService>;
+
+        let formularioInformeAvance =
+          this.tableServiciosInformeAvance.formTable.get('table')
+            .value as Array<TableService>;
+
+        let request_informe_avance: any = this.getRequestUpdateInformeAvance(
+          formularioInformeAvance
+        );
+
+        const request_autorizacion: RequestAutorizarInformeAvance = {
+          ot_id: this.ot_id,
+          estado: 'APROBADO',
+        };
+
+        if (formularioServiciosAdicionales.length > 0) {
+          //  ACTUALIZAR INFORME DE AVANCE ADICIONALES SI ES QUE EXISTEN ADICIONALES Y ENVIAR IA
+          let request_adicionales: RequestAdicionales =
+            this.getRequestServiciosAdicionales(
+              formularioServiciosAdicionales,
+              carrito
+            );
+
+          this.informeAvanceFacade.actualizarInformeAvanceAdicionalesYautorizar(
+            request_informe_avance,
+            request_adicionales,
+            request_autorizacion
+          );
+        } else {
+          // ACTUALIZAR SOLO EL INFORME DE AVANCE
+          this.informeAvanceFacade.actualizarInformeAvanceYautorizar(
+            request_informe_avance,
+            request_autorizacion
+          );
+        }
+      })
+    );
+    this.displayModalAprobacionInformeAvance = false;
   }
 
   canSeePrices(): boolean {
