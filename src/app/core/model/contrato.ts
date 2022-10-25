@@ -1,3 +1,5 @@
+import { ModelUsuario } from './usuario';
+
 export interface ModelContratoMarco {
   aprob_jerarq_inic: boolean;
   costo_max: number;
@@ -35,3 +37,15 @@ export interface TipoServicioContrato {
   descripcion: string;
   id: number;
 }
+
+// GET CONTRATOS USER
+//// export interface ContratosUser {
+////   contrato_id: 3;
+////   model_contrato_id: ModelContratoMarco;
+////   model_usuario_id: ModelUsuario;
+////   usuario_id: 24;
+//// }
+
+// GET POSIBLES CONTRATOS USER
+// tslint:disable-next-line
+export interface PosiblesContratosUser extends ModelContratoMarco {}

@@ -17,5 +17,7 @@ export class PdropdownComponent {
   @Input() PfilterBy = '';
   @Input() PshowClear = false;
   @Input() Pdisabled = false;
+  @Input() optionLabel = 'name';
+  @Input() optionValue = 'code';
   constructor() {}
 }

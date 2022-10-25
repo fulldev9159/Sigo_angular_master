@@ -21,6 +21,7 @@
     "strictNullChecks": false,
     "paths": {
       "@environment": ["src/environments/environment"],
+      "@log": ["src/app/log"],
       "@model": ["src/app/core/model"],
       "@coreOT": ["src/app/core"],
       "@sharedOT/*": ["src/app/shared/*"],
