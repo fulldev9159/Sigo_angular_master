@@ -83,6 +83,11 @@ import { ActaEffects } from './acta/acta.effects';
 import * as formActaReduce from './acta/acta.reducers';
 // ACTA
 
+// AREA
+import { AreaEffects } from './area/area.effects';
+import * as formAreaReduce from './area/area.reducers';
+// AREA
+
 @NgModule({
   declarations: [],
   imports: [
@@ -193,6 +198,13 @@ import * as formActaReduce from './acta/acta.reducers';
     StoreModule.forFeature(
       formActaReduce.Featurekey,
       formActaReduce.reducerActa
+    ),
+
+    // AREA
+    EffectsModule.forFeature([AreaEffects]),
+    StoreModule.forFeature(
+      formAreaReduce.Featurekey,
+      formAreaReduce.reducerArea
     ),
 
     SharedModule,
