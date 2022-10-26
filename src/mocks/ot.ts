@@ -334,24 +334,144 @@ export let TipoDeTrabajoMOCK200ok: Response<{ items: TipoDeTrabajo[] }> = {
   data: {
     items: [
       {
-        tipo_trabajo_id: 8,
-        tipo_trabajo_codigo: 'FOE',
-        tipo_trabajo_descripcion: 'FO Empresa',
+        tipo_trabajo_id: 1,
+        tipo_trabajo_codigo: 'AMPLIA',
+        tipo_trabajo_descripcion: 'Ampliacion',
       },
       {
-        tipo_trabajo_id: 23,
-        tipo_trabajo_codigo: 'MOVIL_C',
-        tipo_trabajo_descripcion: 'PROYECTO FO MOVIL',
+        tipo_trabajo_id: 2,
+        tipo_trabajo_codigo: 'CTOVERDE',
+        tipo_trabajo_descripcion: 'Ampliacion Cajas Verdes',
       },
       {
-        tipo_trabajo_id: 30,
-        tipo_trabajo_codigo: 'TIEMPO',
-        tipo_trabajo_descripcion: '@TIEMPO',
+        tipo_trabajo_id: 3,
+        tipo_trabajo_codigo: 'AUTO',
+        tipo_trabajo_descripcion: 'Autofinanciados',
       },
       {
-        tipo_trabajo_id: 32,
-        tipo_trabajo_codigo: 'VYAS',
-        tipo_trabajo_descripcion: 'VYAS-VPN',
+        tipo_trabajo_id: 4,
+        tipo_trabajo_codigo: 'CONFI',
+        tipo_trabajo_descripcion: 'Confiabilidad',
+      },
+      {
+        tipo_trabajo_id: 5,
+        tipo_trabajo_codigo: 'DESFTTX',
+        tipo_trabajo_descripcion: 'Despliegue FTTX',
+      },
+      {
+        tipo_trabajo_id: 6,
+        tipo_trabajo_codigo: 'DTHE',
+        tipo_trabajo_descripcion: 'DTH-Empresa',
+      },
+      {
+        tipo_trabajo_id: 7,
+        tipo_trabajo_codigo: 'FOI',
+        tipo_trabajo_descripcion: 'FO Intercentrales',
+      },
+      {
+        tipo_trabajo_id: 9,
+        tipo_trabajo_codigo: 'FOPINT',
+        tipo_trabajo_descripcion: 'FO Planta Interna',
+      },
+      {
+        tipo_trabajo_id: 10,
+        tipo_trabajo_codigo: 'FOMV',
+        tipo_trabajo_descripcion: 'FO Traslado Vial',
+      },
+      {
+        tipo_trabajo_id: 11,
+        tipo_trabajo_codigo: 'FOVDSL',
+        tipo_trabajo_descripcion: 'FO VDSL',
+      },
+      {
+        tipo_trabajo_id: 12,
+        tipo_trabajo_codigo: 'FTTB',
+        tipo_trabajo_descripcion: 'FTTB cobre',
+      },
+      {
+        tipo_trabajo_id: 13,
+        tipo_trabajo_codigo: 'FTTX',
+        tipo_trabajo_descripcion: 'FTTX',
+      },
+      {
+        tipo_trabajo_id: 14,
+        tipo_trabajo_codigo: 'HBTS',
+        tipo_trabajo_descripcion: 'HOTEL BTS',
+      },
+      {
+        tipo_trabajo_id: 15,
+        tipo_trabajo_codigo: 'INFRA',
+        tipo_trabajo_descripcion: 'Infraestructura',
+      },
+      {
+        tipo_trabajo_id: 16,
+        tipo_trabajo_codigo: 'INMOBVDSL',
+        tipo_trabajo_descripcion: 'Inmobiliario VDSL',
+      },
+      {
+        tipo_trabajo_id: 17,
+        tipo_trabajo_codigo: 'INMO',
+        tipo_trabajo_descripcion: 'Inmobiliarios',
+      },
+      {
+        tipo_trabajo_id: 18,
+        tipo_trabajo_codigo: '1INMOBITI',
+        tipo_trabajo_descripcion: 'Inmobiliarios (ITI)',
+      },
+      {
+        tipo_trabajo_id: 19,
+        tipo_trabajo_codigo: 'INMOBFTTA',
+        tipo_trabajo_descripcion: 'Inmobiliarios FTTA',
+      },
+      {
+        tipo_trabajo_id: 20,
+        tipo_trabajo_codigo: 'MFO',
+        tipo_trabajo_descripcion: 'Mejoramiento Fibra Optica',
+      },
+      {
+        tipo_trabajo_id: 21,
+        tipo_trabajo_codigo: 'MINERA',
+        tipo_trabajo_descripcion: 'Mineras',
+      },
+      {
+        tipo_trabajo_id: 22,
+        tipo_trabajo_codigo: 'MINERAS',
+        tipo_trabajo_descripcion: 'Mineras',
+      },
+      {
+        tipo_trabajo_id: 24,
+        tipo_trabajo_codigo: 'OOTT',
+        tipo_trabajo_descripcion: 'OOTT',
+      },
+      {
+        tipo_trabajo_id: 25,
+        tipo_trabajo_codigo: 'Otros',
+        tipo_trabajo_descripcion: 'Otros',
+      },
+      {
+        tipo_trabajo_id: 26,
+        tipo_trabajo_codigo: 'PM',
+        tipo_trabajo_descripcion: 'Proyecto Menor',
+      },
+      {
+        tipo_trabajo_id: 27,
+        tipo_trabajo_codigo: 'PC',
+        tipo_trabajo_descripcion: 'Proyectos Complejos',
+      },
+      {
+        tipo_trabajo_id: 28,
+        tipo_trabajo_codigo: 'REPLIEGUE',
+        tipo_trabajo_descripcion: 'Repliegue de Cobre',
+      },
+      {
+        tipo_trabajo_id: 29,
+        tipo_trabajo_codigo: 'SSPP',
+        tipo_trabajo_descripcion: 'SSPP',
+      },
+      {
+        tipo_trabajo_id: 31,
+        tipo_trabajo_codigo: 'VIAL',
+        tipo_trabajo_descripcion: 'Viales',
       },
     ],
   },
@@ -380,6 +500,7 @@ export let TipoDeNumeroInternoMOCK200ok: Response<{
       { id: 5, nombre: 'N° SOLICITUD' },
       { id: 6, nombre: 'CODIGO DE SITIO' },
       { id: 7, nombre: 'FOLIO PROYECTO' },
+      { id: 8, nombre: 'QUICKBASE' },
     ],
   },
 };
