@@ -16,7 +16,7 @@ describe('APROBAR INFORME AVANCE ADMIN CONTRATISTA', () => {
     cy.get('button[id="play-button"]').click();
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
-    cy.wait('@HTTPRESPONSE').then(() => {
+    cy.wait(2000).then(() => {
       // REVISAR INFORME DE AVANCE
 
       let data = informeAvanceFinalTrabajador;
