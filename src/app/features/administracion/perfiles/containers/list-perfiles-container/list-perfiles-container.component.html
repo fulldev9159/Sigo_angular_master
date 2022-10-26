@@ -5,7 +5,8 @@
       <span>listado de perfiles en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/administracion/perfiles/form-perfiles']" pButton type="button" label="Nuevo Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>
+      <button [routerLink]="['/administracion/perfiles/form-perfiles']" pButton type="button" label="Nuevo Perfil"
+        icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -17,13 +18,16 @@
       <div class=" grid">
         <div class="field col-12 table-list-perfiles">
           <ng-container *ngIf="perfiles$ | async as perfiles">
-            <p-table #dt [columns]="['nombre', 'descripcion', 'created_at', 'superior']" [value]="perfiles" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+            <p-table #dt [columns]="['nombre', 'descripcion', 'created_at', 'superior']" [value]="perfiles" dataKey="id"
+              styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true"
+              [rows]="10">
               <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
                   <h5 class="p-m-0"></h5>
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Buscar..." />
                   </span>
                 </div>
               </ng-template>
@@ -70,7 +74,8 @@
                       <div *ngIf="!item.eliminable" pTooltip="No se puede editar">
                         <button style="height: 100%;" [disabled]="true" class="ui button generic-color">Editar</button>
                       </div>
-                      <button *ngIf="item.eliminable" class="ui button generic-color" (click)="editar(item)">Editar</button>
+                      <button *ngIf="item.eliminable" class="ui button generic-color"
+                        (click)="editar(item)">Editar</button>
 
                       <div *ngIf="!item.eliminable" pTooltip="No se puede eliminar">
                         <button [disabled]="true" class="ui button eliminar-color" style="height: 100%;">
@@ -98,13 +103,16 @@
   </div>
 </div>
 
-<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="true" (onHide)="closeModalPermisosPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="true" (onHide)="closeModalPermisosPerfil()"
+  [modal]="true" [draggable]="false" [resizable]="false">
   <ng-template pTemplate="header">
     Lista de Permisos del perfil
   </ng-template>
   <div class="row" style="width: 87vw;">
-    <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
-      <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive" [disabled]="true">
+    <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
+      id="permisos-modulo-{{item.module}}">
+      <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"
+        [disabled]="true">
         <ng-template pTemplate="header">
           {{item.module}}
         </ng-template>
@@ -112,15 +120,19 @@
     </div>
   </div>
   <div class="row">
-    <button pButton type="button" (click)="closeModalPermisosPerfil()" label="Cerrar" class="p-button-sm mt-5 float-right" id="close-permisos-perfil-button" style="background: #b8b6b6; border: gray;"></button>
+    <button pButton type="button" (click)="closeModalPermisosPerfil()" label="Cerrar"
+      class="p-button-sm mt-5 float-right" id="close-permisos-perfil-button"
+      style="background: #b8b6b6; border: gray;"></button>
   </div>
   <p-footer></p-footer>
 </p-dialog>
 
-<p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true"
+  [draggable]="false" [resizable]="false">
   <div class="row">
     <div class="col">
-      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este perfil?</p>
+      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este
+        perfil?</p>
       <div style="padding: 0 9rem 0 9rem;">
         <div class="row">
           <div class="col">
@@ -129,9 +141,12 @@
         </div>
         <div class="row">
           <div class="col">
-            <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-perfil-user-button" style="background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;"></button>
+            <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash"
+              class="p-button-sm mt-5 float-right" id="delete-perfil-user-button"
+              style="background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;"></button>
             &nbsp;
-            <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar" class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
+            <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar"
+              class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
               border: gray;"></button>
           </div>
         </div>
