@@ -55,6 +55,40 @@
             font-size: var(--size-text-sigo);
         }
 
+        .buttons-operaciones {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+
+            fa-icon {
+                color: white;
+            }
+
+            button {
+                padding: 0.3rem;
+                border-radius: 5px;
+                border: 0;
+                background: #3f51b5;
+                color: white;
+                font-size: 12px;
+                font-weight: 100;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                width: 35%;
+                margin-left: 4px;
+                align-items: center;
+
+                &:hover {
+                    background: #4b5ec5;
+                }
+
+                &:disabled {
+                    background: #3f51b585;
+                }
+            }
+        }
+
     }
 
     .p-datatable.p-datatable-sm .p-datatable-header {

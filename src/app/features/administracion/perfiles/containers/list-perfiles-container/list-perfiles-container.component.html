@@ -54,7 +54,7 @@
                     Fecha Modificación
                     <p-sortIcon field="updated_at"></p-sortIcon>
                   </th>
-                  <th></th>
+                  <th>Operaciones</th>
                 <tr>
               </ng-template>
 
@@ -67,23 +67,19 @@
                   <td>{{ item.descripcion }}</td>
                   <td style="text-align: right;">{{ item.created_at | date:'dd-MM-yyyy' }}</td>
                   <td style="text-align: right;">{{ item.updated_at | date:'dd-MM-yyyy' }}</td>
-                  <td style="text-align: right;">
-                    <div class="ui icon buttons mini basic">
-                      <button class="ui button generic-color" (click)="verPermisos(item)">Ver permisos</button>
-
-                      <div *ngIf="!item.eliminable" pTooltip="No se puede editar">
-                        <button style="height: 100%;" [disabled]="true" class="ui button generic-color">Editar</button>
-                      </div>
-                      <button *ngIf="item.eliminable" class="ui button generic-color"
-                        (click)="editar(item)">Editar</button>
-
-                      <div *ngIf="!item.eliminable" pTooltip="No se puede eliminar">
-                        <button [disabled]="true" class="ui button eliminar-color" style="height: 100%;">
-                          <fa-icon [icon]="trashIcon"></fa-icon>
-                        </button>
-                      </div>
-                      <button *ngIf="item.eliminable" class="ui button eliminar-color" (click)="eliminar(item)">
-                        <fa-icon [icon]="trashIcon"></fa-icon>
+                  <td>
+                    <div class="buttons-operaciones ">
+                      <button (click)="verPermisos(item)" id="button-ver-permisos">
+                        <fa-icon [icon]="permisosIcon"></fa-icon> Ver Permisos
+                      </button>
+                      <button [disabled]="!item.eliminable" [pTooltip]="!item.eliminable?'No es editable':''"
+                        [routerLink]="['/administracion/perfiles/form-perfiles',item.id]" id="button-editar-cubicacion">
+                        <fa-icon [icon]="editIcon"></fa-icon> Editar
+                      </button>
+                      <button [disabled]="!item.eliminable" (click)="eliminar(item)" id="button-eliminar-perfil"
+                        [pTooltip]="!item.eliminable?'No es eliminable':''"
+                        class="bg-red-500 hover:bg-red-300 disabled:bg-red-100">
+                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
                       </button>
                     </div>
                   </td>

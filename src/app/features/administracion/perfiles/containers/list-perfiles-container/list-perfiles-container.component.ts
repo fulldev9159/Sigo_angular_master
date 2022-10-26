@@ -12,7 +12,7 @@ import {
   PermissionsGroup,
 } from '@model';
 //// import { ListProTableService } from './list-pro-table.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-list-perfiles-container',
@@ -39,6 +39,11 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
 
   // EXTRAS
   perfil_id: number | null = null;
+
+  // ICONS
+  permisosIcon = faEye;
+  editIcon = faPencil;
+  trashICon = faTrash;
 
   // CONSTRUCTOR
   constructor(
@@ -160,10 +165,6 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
 
   verPermisos(perfil: ListarPerfil): void {
     this.profileFacade.getPermisosPerfil(perfil.id);
-  }
-
-  editar(perfil: ListarPerfil): void {
-    this.router.navigate([`/administracion/perfiles/form-perfiles`, perfil.id]);
   }
 
   eliminar(perfil: ListarPerfil): void {
