@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '@environment';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
+import { sendingGetPerfiles } from '@storeOT/loadings/loadings.selectors';
 import { modalPermisosPerfil } from '@storeOT/perfil/perfil.selectors';
 
 import { ListPerfilesContainerComponent } from './list-perfiles-container.component';
@@ -25,6 +26,10 @@ describe('ListPerfilesContainerComponent', () => {
           selectors: [
             {
               selector: modalPermisosPerfil,
+              value: null,
+            },
+            {
+              selector: sendingGetPerfiles,
               value: null,
             },
           ],
