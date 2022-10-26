@@ -2,17 +2,17 @@
     <table>
         <thead>
             <tr>
-                <th [attr.colspan]="colSpan">Servicios</th>
+                <th [attr.colspan]="colSpan" style="background: var(--bg-th-servicios)">Servicios</th>
                 <th [attr.colspan]="colSpan">Unidad Obra</th>
             </tr>
             <tr>
-                <th>Cod</th>
-                <th>Descripción</th>
-                <th>Tipo</th>
-                <th>Cantidad</th>
-                <th *ngIf="canSeePrices()">Precio Un.</th>
-                <th *ngIf="canSeePrices()">Total</th>
-                <th *ngIf="column_acciones">Acciones</th>
+                <th style="background: var(--bg-th-servicios)">Cod</th>
+                <th style="background: var(--bg-th-servicios)">Descripción</th>
+                <th style="background: var(--bg-th-servicios)">Tipo</th>
+                <th style="background: var(--bg-th-servicios)">Cantidad</th>
+                <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio Un.</th>
+                <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total</th>
+                <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">Acciones</th>
 
                 <th>Cod</th>
                 <th>Descripción</th>
