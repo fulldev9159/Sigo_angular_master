@@ -8,15 +8,12 @@ describe('APROBAR INFORME AVANCE ADMIN CONTRATISTA', () => {
     cy.viewport(1500, 700);
   });
 
-  it('Acceder al informe de avance"', () => {
+  it('revisión data inicial', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('ccadmincontrato1', 'asdasd');
     cy._select_profile('Administrador EECC');
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('button[id="play-button"]').click();
-  });
-
-  it('revisión data inicial', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait('@HTTPRESPONSE').then(() => {
