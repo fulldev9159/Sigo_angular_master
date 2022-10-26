@@ -3,7 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { cubicacionSelected } from '@storeOT/ot/ot.selectors';
+import { motivosRechazo } from '@storeOT/flujo-ot/flujo-ot.selectors';
+import { getDetalleInformeAvance } from '@storeOT/informe-avance/informe-avance.selectors';
 import { carrito } from '@storeOT/servicios/servicios.selectors';
 
 import { InformeAvanceComponent } from './informe-avance.component';
@@ -24,6 +25,14 @@ describe('InformeAvanceComponent', () => {
           selectors: [
             {
               selector: carrito,
+              value: [],
+            },
+            {
+              selector: getDetalleInformeAvance,
+              value: [],
+            },
+            {
+              selector: motivosRechazo,
               value: [],
             },
           ],

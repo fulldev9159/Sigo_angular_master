@@ -193,7 +193,7 @@ export class InformeAvanceComponent
             this.tableServiciosAdicionales.servicios_eliminar = [];
           }
           // CARGAR CARRITO
-          detalleInforme.many_informe_has_servicio.forEach(service => {
+          detalleInforme?.many_informe_has_servicio?.forEach(service => {
             service.many_informe_has_uob.forEach(uo => {
               let new_service: CarritoService = {
                 precargado: true,
@@ -336,11 +336,11 @@ export class InformeAvanceComponent
 
   calcularTotalFinal(): void {
     let totalInformeAvance =
-      +this.tableServiciosInformeAvance.totalServicios +
-      +this.tableServiciosInformeAvance.totalUOs;
+      +this.tableServiciosInformeAvance?.totalServicios +
+      +this.tableServiciosInformeAvance?.totalUOs;
     let totalAdicionales =
-      +this.tableServiciosAdicionales.totalServicios +
-      +this.tableServiciosAdicionales.totalUOs;
+      +this.tableServiciosAdicionales?.totalServicios +
+      +this.tableServiciosAdicionales?.totalUOs;
 
     this.totalFinalInformeAvance = totalInformeAvance + totalAdicionales;
   }
