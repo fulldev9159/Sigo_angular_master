@@ -99,29 +99,29 @@
   </div>
 </div>
 
-<p-dialog [visible]="DisplayPermisosPerfilModal$|async" [closable]="true" (onHide)="closeModalPermisosPerfil()"
-  [modal]="true" [draggable]="false" [resizable]="false">
-  <ng-template pTemplate="header">
-    Lista de Permisos del perfil
-  </ng-template>
-  <div class="row" style="width: 87vw;">
-    <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
-      id="permisos-modulo-{{item.module}}">
-      <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"
-        [disabled]="true">
-        <ng-template pTemplate="header">
-          {{item.module}}
-        </ng-template>
-      </p-listbox>
+<p-dialog header="Detalles permisos" [(visible)]="DisplayPermisosPerfilModal" [draggable]="false" [modal]="true"
+  (onHide)="closeModalPermisosPerfil()">
+  <ng-container>
+    <div class="loading-modal-content" *ngIf="loadingGetPerfiles$|async  ; else content">
+      <p>Loading...</p>
     </div>
-  </div>
-  <div class="row">
-    <button pButton type="button" (click)="closeModalPermisosPerfil()" label="Cerrar"
-      class="p-button-sm mt-5 float-right" id="close-permisos-perfil-button"
-      style="background: #b8b6b6; border: gray;"></button>
-  </div>
-  <p-footer></p-footer>
+  </ng-container>
+  <ng-template #content>
+    <div class="row" style="width: 87vw;">
+      <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
+        id="permisos-modulo-{{item.module}}">
+        <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"
+          [disabled]="true">
+          <ng-template pTemplate="header">
+            {{item.module}}
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+  </ng-template>
 </p-dialog>
+
+
 
 <p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true"
   [draggable]="false" [resizable]="false">

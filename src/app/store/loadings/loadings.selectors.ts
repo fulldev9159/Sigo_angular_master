@@ -187,3 +187,8 @@ export const sendingSendBorradorInformeAvance = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingSendBorradorInformeAvance
 );
+
+export const sendingGetPerfiles = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetPerfiles
+);

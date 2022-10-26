@@ -52,6 +52,7 @@ export interface StateLoadings {
   sendingGetPosibleSupervisorTrabajos: boolean;
   sendingSendDetalleInformeAvance: boolean;
   sendingSendBorradorInformeAvance: boolean;
+  sendingGetPerfiles: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -93,6 +94,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetPosibleSupervisorTrabajos: false,
   sendingSendDetalleInformeAvance: false,
   sendingSendBorradorInformeAvance: false,
+  sendingGetPerfiles: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -560,6 +562,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingSendBorradorInformeAvance: false,
+    })
+  ),
+  on(perfilActions.getPermisosPerfil, state => ({
+    ...state,
+    sendingGetPerfiles: true,
+  })),
+  on(
+    perfilActions.getPermisosPerfilSuccess,
+    perfilActions.getPermisosPerfilError,
+    state => ({
+      ...state,
+      sendingGetPerfiles: false,
     })
   )
 );

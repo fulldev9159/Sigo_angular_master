@@ -13,6 +13,7 @@ import {
 } from '@model';
 //// import { ListProTableService } from './list-pro-table.service';
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
 @Component({
   selector: 'zwc-list-perfiles-container',
@@ -21,21 +22,29 @@ import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  trashIcon = faTrash;
 
   // DATOS A USAR
-  perfiles$: Observable<ListarPerfil[]>;
-  PermisosPerfil$: Observable<PermissionsGroup[]>;
-  // PermisosPerfil$: Observable<any[]>;
+  perfiles$: Observable<ListarPerfil[]> = this.profileFacade.getProfile$().pipe(
+    map(perfiles =>
+      perfiles?.map(perfil => ({
+        ...perfil,
+        rol: perfil.model_rol_id.nombre,
+        estado: true,
+      }))
+    )
+  );
+
+  PermisosPerfil$: Observable<PermissionsGroup[]> = this.profileFacade
+    .getPermisosPerfil$()
+    .pipe(map(perfiles => this.getPermissionsGroup(perfiles)));
+
+  // LOADINGS
+  loadingGetPerfiles$: Observable<boolean> =
+    this.loadingFacade.sendingGetPerfiles$();
 
   // DISPLAY MODALS
-  DisplayPermisosPerfilModal$: Observable<boolean> = of(false);
+  DisplayPermisosPerfilModal = false;
   displayModalEliminarPerfil = false;
-
-  // FORMULARIO
-
-  // TABLE
-  configTable: any = null;
 
   // EXTRAS
   perfil_id: number | null = null;
@@ -47,84 +56,18 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
 
   // CONSTRUCTOR
   constructor(
-    private router: Router,
-    //// private listProTableService: ListProTableService,
-    private profileFacade: PerfilFacade
+    private profileFacade: PerfilFacade,
+    private loadingFacade: LoadingsFacade
   ) {}
 
   ngOnInit(): void {
-    this.onInitResetInicial();
-    this.onInitGetInitialData();
-    this.onInitSetInitialData();
-    this.onInitAccionesInicialesAdicionales();
-  }
-
-  onInitResetInicial(): void {
     this.profileFacade.resetData();
-  }
-
-  onInitGetInitialData(): void {
     this.profileFacade.getProfile();
   }
 
-  onInitSetInitialData(): void {
-    //// this.configTable = this.listProTableService.getTableConfig();
-    //// (this.configTable.body.actions as Array<any>).push(
-    ////   {
-    ////     type: 'alldisplay',
-    ////     label: 'Ver permisos',
-    ////     onClick: (event: Event, item: ListarPerfil) => {
-    ////       if (item) {
-    ////         this.profileFacade.getPermisosPerfil(item.id);
-    ////       }
-    ////     },
-    ////   },
-    ////   {
-    ////     type: 'alldisplay-eliminable',
-    ////     label: 'Editar',
-    ////     tooltipDisabled: 'No se puede editar',
-    ////     onClick: (event: Event, item: ListarPerfil) => {
-    ////       if (item) {
-    ////         this.router.navigate(['/app/profile/form-pro', item.id]);
-    ////       }
-    ////     },
-    ////   },
-    ////   {
-    ////     type: 'button-delete-eliminable',
-    ////     tooltipDisabled: 'No se puede eliminar',
-    ////     onClick: (event: Event, item: ListarPerfil) => {
-    ////       if (item) {
-    ////         this.displayModalEliminarPerfil = true;
-    ////         this.perfil_id = item.id;
-    ////       }
-    ////     },
-    ////   }
-    //// );
-
-    this.perfiles$ = this.profileFacade.getProfile$().pipe(
-      map(perfiles =>
-        perfiles?.map(perfil => ({
-          ...perfil,
-          rol: perfil.model_rol_id.nombre,
-          estado: true,
-        }))
-      )
-    );
-
-    this.DisplayPermisosPerfilModal$ =
-      this.profileFacade.modalPermisosPerfil$();
-
-    this.PermisosPerfil$ = this.profileFacade.getPermisosPerfil$().pipe(
-      map(perfiles => {
-        return this.getPermissionsGroup(perfiles);
-      })
-    );
-  }
-
-  onInitAccionesInicialesAdicionales(): void {}
-
   closeModalPermisosPerfil(): void {
-    this.profileFacade.modalPermisosPerfil(false);
+    this.profileFacade.resetPermisosPerfil();
+    this.DisplayPermisosPerfilModal = false;
   }
 
   closeModalEliminarPerfil(): void {
@@ -159,16 +102,17 @@ export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
       .value();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   verPermisos(perfil: ListarPerfil): void {
+    this.DisplayPermisosPerfilModal = true;
     this.profileFacade.getPermisosPerfil(perfil.id);
   }
 
   eliminar(perfil: ListarPerfil): void {
     this.displayModalEliminarPerfil = true;
     this.perfil_id = perfil.id;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

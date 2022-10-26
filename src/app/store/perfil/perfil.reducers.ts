@@ -63,5 +63,9 @@ export const reducerPerfil = createReducer(
       ...state,
       permisosRol: response.data.items,
     })
-  )
+  ),
+  on(perfilActions.resetPermisosPerfil, (state, {}) => ({
+    ...state,
+    permisosPerfil: [],
+  }))
 );

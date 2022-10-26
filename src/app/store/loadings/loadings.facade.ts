@@ -191,4 +191,8 @@ export class LoadingsFacade {
   public sendingSendBorradorInformeAvance$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingSendBorradorInformeAvance);
   }
+
+  public sendingGetPerfiles$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetPerfiles);
+  }
 }

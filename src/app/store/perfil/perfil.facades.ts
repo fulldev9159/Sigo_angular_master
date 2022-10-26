@@ -110,4 +110,8 @@ export class PerfilFacade {
   public resetData(): void {
     this.store.dispatch(perfilActions.resetData());
   }
+
+  public resetPermisosPerfil(): void {
+    this.store.dispatch(perfilActions.resetPermisosPerfil());
+  }
 }

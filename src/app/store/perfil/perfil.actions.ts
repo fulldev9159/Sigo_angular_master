@@ -157,3 +157,6 @@ export const updatePerfilError = createAction(
 );
 
 export const resetData = createAction('[ResetData] ResetData');
+export const resetPermisosPerfil = createAction(
+  '[ResetData] resetPermisosPerfil'
+);
