@@ -412,11 +412,11 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
       .eq(0)
       .contains(servicio.nombre.split('-')[1].trim());
 
-    cy.get('.carrito-container>table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(1)
-      .contains(servicio.tipo_servicio);
+    // cy.get('.carrito-container>table')
+    //   .contains('td', servicio.nombre.split('-')[0].trim())
+    //   .siblings()
+    //   .eq(1)
+    //   .contains(servicio.tipo_servicio);
 
     cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
@@ -446,17 +446,16 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
         .eq(0)
         .contains(uo.nombre.split('-')[1].trim());
 
-      if (uo.nombre !== '0 - SIN UO')
-        cy.get('.carrito-container>table')
-          .contains(
-            'td',
-            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-          )
-          .siblings()
-          .eq(1)
-          .contains(servicio.actividad);
-
       if (uo.nombre !== '0 - SIN UO') {
+        // cy.get('.carrito-container>table')
+        //   .contains(
+        //     'td',
+        //     new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+        //   )
+        //   .siblings()
+        //   .eq(1)
+        //   .contains(servicio.actividad);
+
         cy.get('.carrito-container>table')
           .contains(
             'td',
