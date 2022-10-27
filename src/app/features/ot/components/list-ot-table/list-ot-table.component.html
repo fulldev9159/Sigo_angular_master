@@ -1,9 +1,19 @@
 <form [formGroup]="formFilter" [id]="table_id">
-    <p-table #dt [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
-        [paginator]="true" [rows]="10" [globalFilterFields]="['nombre']">
+    <p-table #dt [columns]="['nombre']" [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+        responsiveLayout="scroll" [paginator]="true" [rows]="10" [globalFilterFields]="['nombre']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0"></h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Buscar..." />
+                </span>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <!-- FILTERS -->
-            <tr>
+            <!-- <tr>
                 <th pFrozenColumn style="width:80px">
                     <div>
                         <fa-icon [icon]="filterIcon"></fa-icon>
@@ -27,7 +37,7 @@
                 </th>
                 <th style="width:140px"></th>
                 <th style="width:200px"></th>
-            </tr>
+            </tr> -->
             <!-- HEADERS -->
             <tr>
                 <th style="width:80px" pSortableColumn="id" pFrozenColumn>ID <p-sortIcon field="id">

@@ -14,6 +14,9 @@ describe('APROBAR INFORME AVANCE ADMIN CONTRATISTA', () => {
     cy._select_profile('Administrador EECC');
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('button[id="play-button"]').click();
+    cy.get('#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
+      .clear()
+      .type('jorge');
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
     cy.wait(2000).then(() => {
