@@ -96,7 +96,17 @@ export class ActaEffects {
       )
     )
   );
-
+  getDetalleActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getDetalleActa),
+      concatMap(({ acta_id }) =>
+        this.actaHttp.detallesActa(acta_id).pipe(
+          map(response => actaActions.getDetalleActaSuccess({ response })),
+          catchError(error => of(actaActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

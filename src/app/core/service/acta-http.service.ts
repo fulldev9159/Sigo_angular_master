@@ -124,7 +124,7 @@ export class ActaHttpService {
   // DETALLES DE UN ACTA
   detallesActa(acta_id: number): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.API_URL}/ot/acta/get_by_otid`,
+      `${this.API_URL}/ot/acta/get_detalle_bitacora`,
       {
         acta_id,
       }

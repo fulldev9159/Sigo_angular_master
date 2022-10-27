@@ -13,7 +13,7 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   constructor(private actaFacade: ActaFacade) {}
 
   ngOnInit(): void {
-    this.actaFacade.getDetalleActa(1);
+    this.actaFacade.getDetalleActa(2);
   }
 
   ngOnDestroy(): void {
