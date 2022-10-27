@@ -110,4 +110,24 @@ export class ActaHttpService {
       }
     );
   }
+
+  // LISTAR ACTAS
+  getActas(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/acta/get_by_otid`,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // DETALLES DE UN ACTA
+  detallesActa(acta_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/acta/get_by_otid`,
+      {
+        acta_id,
+      }
+    );
+  }
 }

@@ -18,3 +18,13 @@ export const getActaTipoPago = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.actaTipoPago
 );
+
+export const getActas = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.actas
+);
+
+export const getDetalleActa = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.detalleActa
+);

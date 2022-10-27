@@ -132,3 +132,39 @@ export const getLastActaError = createAction(
   '[ACTA] GET getLastActaError Error',
   props<{ error: any }>()
 );
+
+// GET ACTAS
+export const getActas = createAction(
+  '[ACTA] GET getActas',
+  props<{
+    ot_id: number;
+  }>()
+);
+
+export const getActasSuccess = createAction(
+  '[ACTA] GET getActas Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getActasError = createAction(
+  '[ACTA] GET getActas Error',
+  props<{ error: any }>()
+);
+
+// GET ACTAS
+export const getDetalleActa = createAction(
+  '[ACTA] GET getDetalleActa',
+  props<{
+    acta_id: number;
+  }>()
+);
+
+export const getDetalleActaSuccess = createAction(
+  '[ACTA] GET getDetalleActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getDetalleActaError = createAction(
+  '[ACTA] GET getDetalleActa Error',
+  props<{ error: any }>()
+);

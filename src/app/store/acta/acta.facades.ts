@@ -109,4 +109,33 @@ export class ActaFacade {
   // public getlastActa$(): Observable<ActaTipoPago[]> {
   //   return this.store.select(actaSelectors.getActaTipoPago);
   // }
+
+  // GET ACTAS
+  // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
+  public getActasSuccess(response: Response<LastActa>): void {
+    this.store.dispatch(actaActions.getActasSuccess({ response }));
+  }
+
+  public getActasError(error: any) {
+    this.store.dispatch(actaActions.getActasError({ error }));
+  }
+
+  // GET DETALLE ACTA
+  // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
+
+  public getDetalleActa(acta_id: number): void {
+    this.store.dispatch(actaActions.getDetalleActa({ acta_id }));
+  }
+
+  public getDetalleActaSuccess(response: Response<LastActa>): void {
+    this.store.dispatch(actaActions.getDetalleActaSuccess({ response }));
+  }
+
+  public getDetalleActaError(error: any) {
+    this.store.dispatch(actaActions.getDetalleActaError({ error }));
+  }
+
+  public getDetalleActa$(): Observable<any> {
+    return this.store.select(actaSelectors.getDetalleActa);
+  }
 }
