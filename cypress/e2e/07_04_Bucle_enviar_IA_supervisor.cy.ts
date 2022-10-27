@@ -8,6 +8,9 @@ describe('ENVIAR INFORME DE AVANCE SUPERVISOR DE TRABAJOS', () => {
     cy._login('cctrabajador1', 'asdasd');
     cy._select_profile('Trabajador EECC');
     cy.get('button[id="navbar-list-ot"]').click();
+    cy.get('#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
+      .clear()
+      .type('jorge');
     cy.get('button[id="play-button"]').click();
   });
 
