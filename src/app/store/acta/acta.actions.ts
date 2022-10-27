@@ -3,6 +3,7 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -143,7 +144,7 @@ export const getActas = createAction(
 
 export const getActasSuccess = createAction(
   '[ACTA] GET getActas Success',
-  props<{ response: Response<any> }>()
+  props<{ actas: listarActa[] }>()
 );
 
 export const getActasError = createAction(

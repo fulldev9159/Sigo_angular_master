@@ -6,6 +6,7 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -112,8 +113,8 @@ export class ActaHttpService {
   }
 
   // LISTAR ACTAS
-  getActas(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  getActas(ot_id: number): Observable<Response<{ items: listarActa[] }>> {
+    return this.http.post<Response<{ items: listarActa[] }>>(
       `${this.API_URL}/ot/acta/get_by_otid`,
       {
         ot_id,

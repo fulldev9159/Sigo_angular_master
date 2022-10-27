@@ -4,6 +4,7 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -112,8 +113,8 @@ export class ActaFacade {
 
   // GET ACTAS
   // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
-  public getActasSuccess(response: Response<LastActa>): void {
-    this.store.dispatch(actaActions.getActasSuccess({ response }));
+  public getActasSuccess(actas: listarActa[]): void {
+    this.store.dispatch(actaActions.getActasSuccess({ actas }));
   }
 
   public getActasError(error: any) {

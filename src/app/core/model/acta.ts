@@ -226,3 +226,114 @@ export interface MaterialesLastActa {
   valor_unitario_clp: number;
   model_material_cod: ModelMaterial;
 }
+
+export interface listarActa {
+  id: number;
+  ot_id: number;
+  informe_avance_id: number;
+  obs_fin_trabajos: string;
+  obs_validacion?: any;
+  validacion_usuario_id: number;
+  validacion_estado: string;
+  validacion_fecha: Date;
+  autorizacion_estado: string;
+  autorizacion_fecha?: any;
+  tipo_pago: string;
+  flg_pagado: boolean;
+  tipo_sustento: string;
+  pmo_codigo: number;
+  id_opex?: any;
+  lp: string;
+  cuenta_sap?: any;
+  pep2: string;
+  ceco?: any;
+  imputacion1_estado: string;
+  imputacion1_fecha?: any;
+  imputacion2_estado: string;
+  imputacion2_fecha?: any;
+  flg_pagar_cerrar?: any;
+  created_at: Date;
+  pdf_archivo_id?: any;
+  model_ot_id: OTActa;
+  model_informe_avance_id: ModelInformeAvanceActa;
+  model_validacion_usuario_id: ModelValidacionUsuarioActa;
+}
+
+export interface OTActa {
+  id: number;
+  proyecto_id?: any;
+  propietario_usuario_id: number;
+  responsable_proxy_id: number;
+  tipo_estado_ot_id: number;
+  tipo_etapa_ot_id: number;
+  sce_session: string;
+  flg_quiebre: boolean;
+  aceptacion_inicial_id: number;
+  created_at: Date;
+  nombre: string;
+  cubicacion_id: number;
+  cubicacion_ing_id?: any;
+  observaciones: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  tipo_sustento: string;
+  es_sustento_provisorio: boolean;
+  pmo_codigo: number;
+  id_opex?: any;
+  lp: string;
+  cuenta_sap?: any;
+  pep2: string;
+  ceco?: any;
+  carta_adjudicacion?: any;
+  fecha_adjudicacion?: any;
+  numero_pedido?: any;
+  materia?: any;
+  plan_id?: any;
+  sitio_plan_id?: any;
+  oficina_central_id: number;
+  solicitante_id: number;
+  direccion: string;
+  altura: string;
+  piso: string;
+  departamento: string;
+  comuna_id: number;
+  tipo_red_id: number;
+  tipo_trabajo_id: number;
+  tiene_boleta_garantia: boolean;
+  tiene_permisos: boolean;
+  area_negocio: string;
+  nombre_proyectista: string;
+}
+
+export interface ModelInformeAvanceActa {
+  id: number;
+  ot_id: number;
+  observacion?: any;
+  envio_usuario_id: number;
+  envio_fecha: Date;
+  aprobacion_usuario_id: number;
+  aprobacion_estado: string;
+  aprobacion_fecha: Date;
+  costo: number;
+  created_at: Date;
+}
+
+export interface ModelValidacionUsuarioActa {
+  id: number;
+  username: string;
+  guia_subgrupo_id: number;
+  delegated_auth: boolean;
+  password?: any;
+  rut: string;
+  nombres: string;
+  apellidos: string;
+  celular: string;
+  estado: boolean;
+  proveedor_id: number;
+  area_id: number;
+  email: string;
+  firma_archivo_id?: any;
+  eliminable: boolean;
+  created_at: Date;
+  updated_at: Date;
+}

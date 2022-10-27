@@ -90,7 +90,9 @@ export class ActaEffects {
       ofType(actaActions.getActas),
       concatMap(({ ot_id }) =>
         this.actaHttp.getActas(ot_id).pipe(
-          map(response => actaActions.getActasSuccess({ response })),
+          map(response =>
+            actaActions.getActasSuccess({ actas: response.data.items })
+          ),
           catchError(error => of(actaActions.getActasError({ error })))
         )
       )

@@ -5,13 +5,15 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Response } from '@model';
+import { listarActa, Response } from '@model';
 import { ActaHttpService } from '@services';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ListActasResolver implements Resolve<Response<any>> {
+export class ListActasResolver
+  implements Resolve<Response<{ items: listarActa[] }>>
+{
   constructor(
     private service: ActaHttpService,
     private actaFacade: ActaFacade,
@@ -20,7 +22,9 @@ export class ListActasResolver implements Resolve<Response<any>> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Response<any>> | Promise<Response<any>> {
+  ):
+    | Observable<Response<{ items: listarActa[] }>>
+    | Promise<Response<{ items: listarActa[] }>> {
     const idStr = route.paramMap.get('id');
 
     const id = parseInt(idStr, 10);
@@ -31,7 +35,7 @@ export class ListActasResolver implements Resolve<Response<any>> {
     }
     return this.service.getActas(id).pipe(
       tap(response => {
-        this.actaFacade.getActasSuccess(response);
+        this.actaFacade.getActasSuccess(response.data.items);
       }),
       catchError(error => {
         this.actaFacade.getActasError(error);
