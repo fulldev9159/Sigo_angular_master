@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class=" grid">
-            <div *ngIf="accionExist('OT_SOLIC_INF_TRABAJO_FIN')" class="field col-12">
+            <div *ngIf="accionExist('OT_SOLIC_INF_TRABAJO_FIN') && total_actas>0" class="field col-12">
                 <zwc-pbutton-sending Pid="solicitar-informe-fin-trabajos-button"
                     content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"
                     (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>

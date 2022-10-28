@@ -9,6 +9,7 @@ import { ValidarPagoActaContainerComponent } from './containers/validar-pago-act
 import { ActaTiposPagosResolver } from './resolvers/actaTipoPago.resolver';
 import { LastActaResolver } from './resolvers/lastActa.resolver';
 import { Servicios4ActaResolver } from './resolvers/servicios4acta.resolver';
+import { TotalActasResolver } from './resolvers/totalActas.resolver';
 import { UOs4ActaResolver } from './resolvers/uos4acta.resolver';
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
           servicios4acta: Servicios4ActaResolver,
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
+          totalActas: TotalActasResolver,
         },
       },
       {

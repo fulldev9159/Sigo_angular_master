@@ -85,6 +85,22 @@ export class ActaEffects {
     )
   );
 
+  getTotalActas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getTotalActas),
+      concatMap(({ ot_id }) =>
+        this.actaHttp.getTotalActas(ot_id).pipe(
+          map(response =>
+            actaActions.getTotalActasSuccess({
+              totalActas: response.data.total,
+            })
+          ),
+          catchError(error => of(actaActions.getTotalActasError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -107,7 +123,8 @@ export class ActaEffects {
           actaActions.getUOs4ActaError,
           actaActions.informarTrabajosFinalizadosError,
           actaActions.aceptarRechazarAdcionalesValidarActaError,
-          actaActions.validarActaError
+          actaActions.validarActaError,
+          actaActions.getTotalActasError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

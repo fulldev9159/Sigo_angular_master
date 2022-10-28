@@ -109,4 +109,23 @@ export class ActaFacade {
   // public getlastActa$(): Observable<ActaTipoPago[]> {
   //   return this.store.select(actaSelectors.getActaTipoPago);
   // }
+
+  // GET TOTAL ACTAS
+  public getTotalActas(ot_id: number): void {
+    this.store.dispatch(actaActions.getTotalActas({ ot_id }));
+  }
+
+  public getTotalActasSuccess(response: Response<{ total: number }>): void {
+    this.store.dispatch(
+      actaActions.getTotalActasSuccess({ totalActas: response.data.total })
+    );
+  }
+
+  public getTotalActasError(error: any) {
+    this.store.dispatch(actaActions.getTotalActasError({ error }));
+  }
+
+  public getTotalActas$(): Observable<number> {
+    return this.store.select(actaSelectors.getTotalActas);
+  }
 }
