@@ -8,6 +8,7 @@ import { SharedModule } from '@sharedOT/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ValidarPagoActaContainerComponent } from './containers/validar-pago-acta-container/validar-pago-acta-container.component';
 import { ListActasContainerComponent } from './containers/list-actas-container/list-actas-container.component';
+import { ActaPorServicioFormComponent } from './components/acta-por-servicio-form/acta-por-servicio-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ListActasContainerComponent } from './containers/list-actas-container/l
     ValidarActaContainerComponent,
     ValidarPagoActaContainerComponent,
     ListActasContainerComponent,
+    ActaPorServicioFormComponent,
   ],
   imports: [
     CommonModule,

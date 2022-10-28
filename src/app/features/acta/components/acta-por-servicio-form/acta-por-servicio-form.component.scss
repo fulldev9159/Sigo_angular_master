@@ -1,0 +1,48 @@
+.total-pagar {
+  font-size: 24px;
+}
+
+table {
+  width: 100%;
+
+  th {
+    border: 0;
+    border-width: 0;
+    border-right: 1px solid #f4f4f4 !important;
+    border-bottom: 1px solid #9e9e9e;
+    padding: 0.375rem;
+    background-color: #efefef;
+    font-weight: 500;
+    font-size: 10px;
+  }
+
+  td {
+    padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+    border: 0 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    background: white;
+    font-size: 11px;
+
+    &.label-table {
+      color: white;
+      font-size: 12px;
+      padding: 6px;
+      // border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: 0.06rem;
+      background: #00b5ad;
+    }
+
+    &.data-secundaria {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+  }
+
+  tfoot {
+    td {
+      background-color: #efefef;
+    }
+  }
+}
