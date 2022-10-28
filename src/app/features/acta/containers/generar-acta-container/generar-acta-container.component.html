@@ -13,7 +13,7 @@
     </div>
 
     <p-divider align="center">
-        <span class="p-tag">Observaciones</span>
+        <span class="p-tag">* Observaciones</span>
     </p-divider>
 
     <div class="card">
@@ -24,13 +24,13 @@
                     (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>
             </div>
             <!-- 178 TODO: MEJORAR EL CSS -->
-            <!-- 179 TODO: AGREGAR MENSAJE DE REQUERIDO -->
             <form [formGroup]="formComentario">
                 <div class="col-12" id="control_observaciones">
                     <textarea formControlName="comentarios" class="form-control" placeholder="" name="comentarios"
                         id="comentarios" cols="30" rows="2"></textarea>
                     <br>
                 </div>
+                <zwc-input-alert [control]="formComentario.get('comentarios')"></zwc-input-alert>
             </form>
         </div>
     </div>
