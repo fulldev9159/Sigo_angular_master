@@ -18,3 +18,8 @@ export const getActaTipoPago = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.actaTipoPago
 );
+
+export const getTotalActas = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.totalActas
+);

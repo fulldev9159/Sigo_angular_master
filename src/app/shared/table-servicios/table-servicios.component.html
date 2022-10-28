@@ -32,7 +32,7 @@
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         <ng-container *ngIf="servicio.adicional!=='ORIGINAL' && servicio.adicional!==undefined">
-                            <p-tag value="Servicio Adicional" severity="warning"></p-tag>
+                            <p-tag value="Adicional" severity="warning"></p-tag>
                         </ng-container>
                         {{ servicio.servicio_nombre }}
                     </td>
@@ -99,7 +99,12 @@
                 <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
                     <tr>
                         <td>{{ uo.uo_codigo }}</td>
-                        <td>{{ uo.uo_nombre }}</td>
+                        <td>
+                            <ng-container *ngIf="uo.adicional_existente_ia">
+                                <p-tag value="Adicional" severity="warning"></p-tag>
+                            </ng-container>
+                            {{ uo.uo_nombre }}
+                        </td>
                         <td>{{ uo.actividad_descripcion }}</td>
                         <!-- SIN UO -->
                         <ng-container *ngIf="uo.uo_codigo === '0'">

@@ -132,3 +132,21 @@ export const getLastActaError = createAction(
   '[ACTA] GET getLastActaError Error',
   props<{ error: any }>()
 );
+
+// GET TOTAL ACTAS
+export const getTotalActas = createAction(
+  '[ACTA] GET getTotalActas',
+  props<{
+    ot_id: number;
+  }>()
+);
+
+export const getTotalActasSuccess = createAction(
+  '[ACTA] GET getTotalActas Success',
+  props<{ totalActas: number }>()
+);
+
+export const getTotalActasError = createAction(
+  '[ACTA] GET getTotalActas Error',
+  props<{ error: any }>()
+);

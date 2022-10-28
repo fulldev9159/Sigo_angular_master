@@ -502,8 +502,7 @@ export const adicionalesFinalesIATrabajador = {
       ],
     },
     {
-      nombre:
-        'T057 - Servicio Adicional ACTIVACION DEL AMPLIFICADOR EN DIRECTA ',
+      nombre: 'T057 -  ACTIVACION DEL AMPLIFICADOR EN DIRECTA ',
       precio: '$22.897,64',
       cantidad: '1',
       total: '$22.897,64',
@@ -755,6 +754,18 @@ export const InformeAvanceYadicionalesFinal = {
           cantidad: '80,32',
           total: '$0',
         },
+        {
+          nombre: 'C048 - CABLE 900-26 SUB',
+          precio: '$0',
+          cantidad: '1',
+          total: '$0',
+        },
+        {
+          nombre: 'C870 - CABLE PS 1212-26 SUB.',
+          precio: '$0',
+          cantidad: '1',
+          total: '$0',
+        },
       ],
     },
     {
@@ -829,30 +840,7 @@ export const InformeAvanceYadicionalesFinal = {
       ],
     },
     {
-      nombre: 'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
-      precio: '$471,6',
-      cantidad: '0',
-      total: '0',
-      tipo_servicio: 'LINEAS',
-      actividad: 'MATRIZ',
-      unidad_obras: [
-        {
-          nombre: 'C048 - CABLE 900-26 SUB',
-          precio: '$0',
-          cantidad: '1',
-          total: '$0',
-        },
-        {
-          nombre: 'C870 - CABLE PS 1212-26 SUB.',
-          precio: '$0',
-          cantidad: '1',
-          total: '$0',
-        },
-      ],
-    },
-    {
-      nombre:
-        'T057 - Servicio Adicional ACTIVACION DEL AMPLIFICADOR EN DIRECTA ',
+      nombre: 'T057 - ACTIVACION DEL AMPLIFICADOR EN DIRECTA ',
       precio: '$22.897,64',
       cantidad: '1',
       total: '$22.897,64',

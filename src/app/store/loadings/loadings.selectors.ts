@@ -192,3 +192,8 @@ export const sendingGetPerfiles = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetPerfiles
 );
+
+export const sendingInformarTrabajosFinalizados = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingInformarTrabajosFinalizados
+);

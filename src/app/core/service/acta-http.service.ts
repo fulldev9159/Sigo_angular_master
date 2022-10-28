@@ -110,4 +110,14 @@ export class ActaHttpService {
       }
     );
   }
+
+  // TOTAL ACTAS
+  getTotalActas(ot_id: number): Observable<Response<{ total: number }>> {
+    return this.http.post<Response<{ total: number }>>(
+      `${this.API_URL}/ot/total_actas_procesadas/get`,
+      {
+        ot_id,
+      }
+    );
+  }
 }
