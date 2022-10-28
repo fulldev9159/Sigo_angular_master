@@ -8,6 +8,7 @@ import {
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -128,7 +129,7 @@ export class ActaFacade {
     this.store.dispatch(actaActions.getDetalleActa({ acta_id }));
   }
 
-  public getDetalleActaSuccess(response: Response<LastActa>): void {
+  public getDetalleActaSuccess(response: ResponseDetalleActa): void {
     this.store.dispatch(actaActions.getDetalleActaSuccess({ response }));
   }
 

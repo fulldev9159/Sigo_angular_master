@@ -4,6 +4,7 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   listarActa,
+  ResponseDetalleActa,
 } from '@model';
 import * as ActaActions from './acta.actions';
 
@@ -14,7 +15,7 @@ export interface StateActa {
   uos4acta: DetalleUO4Acta[];
   actaTipoPago: ActaTipoPago[];
   actas: listarActa[];
-  detalleActa: any;
+  detalleActa: ResponseDetalleActa;
 }
 
 export const initialState: StateActa = {
@@ -45,6 +46,6 @@ export const reducerActa = createReducer(
   })),
   on(ActaActions.getDetalleActaSuccess, (state, { response }) => ({
     ...state,
-    detalleActa: response.data.items,
+    detalleActa: response,
   }))
 );

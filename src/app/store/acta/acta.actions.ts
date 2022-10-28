@@ -7,6 +7,7 @@ import {
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -152,7 +153,7 @@ export const getActasError = createAction(
   props<{ error: any }>()
 );
 
-// GET ACTAS
+// GET DETALLES ACTAS
 export const getDetalleActa = createAction(
   '[ACTA] GET getDetalleActa',
   props<{
@@ -162,7 +163,7 @@ export const getDetalleActa = createAction(
 
 export const getDetalleActaSuccess = createAction(
   '[ACTA] GET getDetalleActa Success',
-  props<{ response: Response<any> }>()
+  props<{ response: ResponseDetalleActa }>()
 );
 
 export const getDetalleActaError = createAction(

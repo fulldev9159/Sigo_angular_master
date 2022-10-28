@@ -10,6 +10,7 @@ import {
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -123,8 +124,8 @@ export class ActaHttpService {
   }
 
   // DETALLES DE UN ACTA
-  detallesActa(acta_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  detallesActa(acta_id: number): Observable<ResponseDetalleActa> {
+    return this.http.post<ResponseDetalleActa>(
       `${this.API_URL}/ot/acta/get_detalle_bitacora`,
       {
         acta_id,
