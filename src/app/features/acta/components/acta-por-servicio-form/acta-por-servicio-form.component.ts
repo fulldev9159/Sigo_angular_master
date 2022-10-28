@@ -16,18 +16,18 @@ import { SessionData } from '@model';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { Observable } from 'rxjs';
 
-interface Detalle {
-  servicio: {
-    rowid: number;
-    cantidad: number;
-    porcentaje: number;
-  }[];
-  unidad_obra: {
-    rowid: number;
-    cantidad: number;
-    porcentaje: number;
-  }[];
-}
+//// interface Detalle {
+////   servicio: {
+////     rowid: number;
+////     cantidad: number;
+////     porcentaje: number;
+////   }[];
+////   unidad_obra: {
+////     rowid: number;
+////     cantidad: number;
+////     porcentaje: number;
+////   }[];
+//// }
 
 @Component({
   selector: 'zwc-acta-por-servicio-form',
@@ -39,16 +39,16 @@ export class ActaPorServicioFormComponent implements OnInit, OnDestroy {
   @Input() saving: boolean;
   @Input() totalServicios: number;
   @Input() totalUO: number;
-  @Output() validar = new EventEmitter<{
-    detalle: Detalle;
-    estado: string;
-    observacion?: string;
-  }>();
+  //// @Output() validar = new EventEmitter<{
+  ////   detalle: Detalle;
+  ////   estado: string;
+  ////   observacion?: string;
+  //// }>();
   sessionData$: Observable<SessionData> = this.authFacade.getSessionData$();
-  displayInvalidar = false;
-  formInvalidar: FormGroup = new FormGroup({
-    motivo: new FormControl('', [Validators.required]),
-  });
+  //// displayInvalidar = false;
+  //// formInvalidar: FormGroup = new FormGroup({
+  ////   motivo: new FormControl('', [Validators.required]),
+  //// });
 
   constructor(private authFacade: AuthFacade) {}
 
@@ -74,73 +74,69 @@ export class ActaPorServicioFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  get selected(): number {
-    const values = this.values;
-    return values.servicio.length + values.unidad_obra.length;
-  }
+  //// get selected(): number {
+  ////   const values = this.values;
+  ////   return values.servicio.length + values.unidad_obra.length;
+  //// }
 
-  get valid(): boolean {
-    if (this.form) {
-      return this.form.valid && this.selected > 0;
-    }
-    return false;
-  }
+  //// get valid(): boolean {
+  ////   if (this.form) {
+  ////     return this.form.valid && this.selected > 0;
+  ////   }
+  ////   return false;
+  //// }
 
-  get valuesRaw(): any {
-    if (this.form) {
-      return this.form.getRawValue();
-    }
-    return null;
-  }
+  //// get valuesRaw(): any {
+  ////   if (this.form) {
+  ////     return this.form.getRawValue();
+  ////   }
+  ////   return null;
+  //// }
 
-  get values(): Detalle {
-    if (this.form) {
-      const { servicios, unidades_obra } = this.form.getRawValue();
+  //// get values(): Detalle {
+  ////   if (this.form) {
+  ////     const { servicios, unidades_obra } = this.form.getRawValue();
 
-      return {
-        servicio: servicios
-          .filter((servicio: { selected: boolean }) => servicio.selected)
-          .map((servicio: { id: string; cantidad_a_enviar: string }) => ({
-            rowid: +servicio.id,
-            cantidad: +servicio.cantidad_a_enviar,
-            porcentaje: 100,
-          })),
-        unidad_obra: unidades_obra
-          .filter((uo: { selected: boolean }) => uo.selected)
-          .map((uo: { id: string; cantidad_a_enviar: string }) => ({
-            rowid: +uo.id,
-            cantidad: +uo.cantidad_a_enviar,
-            porcentaje: 100,
-          })),
-      };
-    }
-    return null;
-  }
+  ////     return {
+  ////       servicio: servicios
+  ////         .filter((servicio: { selected: boolean }) => servicio.selected)
+  ////         .map((servicio: { id: string; cantidad_a_enviar: string }) => ({
+  ////           rowid: +servicio.id,
+  ////           cantidad: +servicio.cantidad_a_enviar,
+  ////           porcentaje: 100,
+  ////         })),
+  ////       unidad_obra: unidades_obra
+  ////         .filter((uo: { selected: boolean }) => uo.selected)
+  ////         .map((uo: { id: string; cantidad_a_enviar: string }) => ({
+  ////           rowid: +uo.id,
+  ////           cantidad: +uo.cantidad_a_enviar,
+  ////           porcentaje: 100,
+  ////         })),
+  ////     };
+  ////   }
+  ////   return null;
+  //// }
 
-  validarInt(): void {
-    if (this.valid) {
-      this.validar.emit({ detalle: this.values, estado: 'VALIDADO' });
-    }
-  }
+  //// validarInt(): void {
+  ////   if (this.valid) {
+  ////     this.validar.emit({ detalle: this.values, estado: 'VALIDADO' });
+  ////   }
+  //// }
 
-  showModalInvalidar() {
-    location.reload();
-  }
+  //// showModalInvalidar() {
+  ////   location.reload();
+  //// }
 
-  closeModalInvalidar() {
-    this.displayInvalidar = false;
-  }
-  invalidar(): void {
-    if (this.valid) {
-      this.validar.emit({
-        detalle: this.values,
-        estado: 'INVALIDADO',
-        observacion: this.formInvalidar.get('motivo').value,
-      });
-    }
-  }
-
-  getFormObject(): void {
-    // console.log(this.form);
-  }
+  //// closeModalInvalidar() {
+  ////   this.displayInvalidar = false;
+  //// }
+  //// invalidar(): void {
+  ////   if (this.valid) {
+  ////     this.validar.emit({
+  ////       detalle: this.values,
+  ////       estado: 'INVALIDADO',
+  ////       observacion: this.formInvalidar.get('motivo').value,
+  ////     });
+  ////   }
+  //// }
 }

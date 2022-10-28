@@ -16,6 +16,19 @@ import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { endWith, Observable, Subscription } from 'rxjs';
 import { LogService } from '@log';
 
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+}
+
 // 142 TODO: AGREGAR LAS OBSERVACIONES
 // 143 TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
 // 144 TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCENTAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
@@ -39,11 +52,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   ot_id: number;
 
-  totalServicios = 0;
   totalServicios_servicio = 0;
   totalUO_servicio = 0;
-  totalSadicionales = 0;
-  totalUadicionales = 0;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl(null, [Validators.required]),
@@ -185,25 +195,59 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
   }
 
-  validarActa(): void {
-    let request_validar_acta: RequestValidarActa = {
+  get porServicioDetalle(): Detalle {
+    const {
+      por_servicio: { servicios = [], unidades_obra = [] },
+    } = this.form.getRawValue();
+
+    return {
+      servicio: servicios
+        .filter((servicio: { selected: boolean }) => servicio.selected)
+        .map((servicio: { id: string; cantidad_a_enviar: string }) => ({
+          rowid: +servicio.id,
+          cantidad: +servicio.cantidad_a_enviar,
+          porcentaje: 100,
+        })),
+      unidad_obra: unidades_obra
+        .filter((uo: { selected: boolean }) => uo.selected)
+        .map((uo: { id: string; cantidad_a_enviar: string }) => ({
+          rowid: +uo.id,
+          cantidad: +uo.cantidad_a_enviar,
+          porcentaje: 100,
+        })),
+    };
+  }
+
+  get requestValidarActa(): RequestValidarActa {
+    const tipo_pago = this.form.get('tipo_pago').value;
+    let detalle: Detalle = {
+      servicio: this.servicios.map(v => ({
+        rowid: v.id,
+        cantidad: v.faltante_cantidad,
+        porcentaje: 100,
+      })),
+      unidad_obra: this.uos.map(v => ({
+        rowid: v.id,
+        cantidad: v.faltante_cantidad,
+        porcentaje: 100,
+      })),
+    };
+
+    if (tipo_pago === 'POR_SERVICIO') {
+      detalle = { ...this.porServicioDetalle };
+    }
+
+    return {
       ot_id: this.ot_id,
-      tipo_pago: this.form.get('tipo_pago').value,
+      tipo_pago,
       observacion: '', // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
       estado: 'VALIDADO',
-      detalle: {
-        servicio: this.servicios.map(v => ({
-          rowid: v.id,
-          cantidad: v.faltante_cantidad,
-          porcentaje: 100,
-        })),
-        unidad_obra: this.uos.map(v => ({
-          rowid: v.id,
-          cantidad: v.faltante_cantidad,
-          porcentaje: 100,
-        })),
-      },
+      detalle,
     };
+  }
+
+  validarActa(): void {
+    let request_validar_acta: RequestValidarActa = this.requestValidarActa;
 
     let adicionales_id = this.acta_adicionales.map(v => v.servicio_rowid);
 
@@ -225,10 +269,6 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   get valid(): boolean {
     return this.form.valid;
-  }
-
-  get values(): any {
-    return this.form.getRawValue();
   }
 
   loadServicioForm(

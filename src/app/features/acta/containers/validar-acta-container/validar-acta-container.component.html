@@ -67,20 +67,13 @@
         </ng-container>
 
         <ng-container *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'">
-          <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalSadicionales+totalUadicionales+totalServicios" [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
+          <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalServicios_servicio" [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
         </ng-container>
       </div>
     </div>
   </div>
 
   <p-divider align="center"></p-divider>
-
-  <pre>Total S adicionales: {{ totalSadicionales }}</pre>
-  <pre>Total U adicionales: {{ totalUadicionales }}</pre>
-  <pre>Total Servicios: {{ totalServicios }}</pre>
-  <pre>Total UO servicio: {{ totalUO_servicio }}</pre>
-  <pre>{{ valid | json }}</pre>
-  <pre>{{ values | json }}</pre>
 
   <div class="card">
     <div class=" grid">
