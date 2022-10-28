@@ -8,7 +8,8 @@ import {
   DetalleUO4Acta,
 } from '@model';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
-import { Subscription } from 'rxjs';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { Observable, Subscription } from 'rxjs';
 
 // 124 TODO: CONFIRMAR SI SOLO SE VAN A UTILIZAR LOS ENDPOINTS DE GET SERVICIOS FOR ACTA Y GET UOS FOR ACTA
 // 125 TODO: GENERAR REGLAS PARA DETERMINAR EN QUE CONDICION ESTÁ EL SERVICIO Y LA UO
@@ -32,7 +33,15 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   ot_id: number;
   total_actas: number;
 
-  constructor(private actaFacade: ActaFacade, private route: ActivatedRoute) {}
+  // LOADINGS
+  sendingSendBorradorInformeAvance$: Observable<boolean> =
+    this.loadingsFacade.sendingSendBorradorInformeAvance$();
+
+  constructor(
+    private actaFacade: ActaFacade,
+    private loadingsFacade: LoadingsFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(

@@ -11,6 +11,7 @@ import * as numeroInternoActions from '../numero-interno/numero-interno.actions'
 import * as sustentoFinancieroActions from '../sustento-financiero/sustento-financiero.actions';
 import * as proyectosActions from '../proyectos/proyectos.actions';
 import * as informeAvanceActions from '../informe-avance/informe-avance.actions';
+import * as actaActions from '../acta/acta.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -53,6 +54,7 @@ export interface StateLoadings {
   sendingSendDetalleInformeAvance: boolean;
   sendingSendBorradorInformeAvance: boolean;
   sendingGetPerfiles: boolean;
+  sendingInformarTrabajosFinalizados: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -95,6 +97,7 @@ export const initialStateLoading: StateLoadings = {
   sendingSendDetalleInformeAvance: false,
   sendingSendBorradorInformeAvance: false,
   sendingGetPerfiles: false,
+  sendingInformarTrabajosFinalizados: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -574,6 +577,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetPerfiles: false,
+    })
+  ),
+  on(actaActions.informarTrabajosFinalizados, state => ({
+    ...state,
+    sendingInformarTrabajosFinalizados: true,
+  })),
+  on(
+    actaActions.informarTrabajosFinalizadosSuccess,
+    actaActions.informarTrabajosFinalizadosSuccess,
+    state => ({
+      ...state,
+      sendingInformarTrabajosFinalizados: false,
     })
   )
 );

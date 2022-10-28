@@ -195,4 +195,10 @@ export class LoadingsFacade {
   public sendingGetPerfiles$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetPerfiles);
   }
+
+  public sendingInformarTrabajosFinalizados$(): Observable<boolean> {
+    return this.store.select(
+      loadingSelector.sendingInformarTrabajosFinalizados
+    );
+  }
 }
