@@ -34,8 +34,8 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   total_actas: number;
 
   // LOADINGS
-  sendingSendBorradorInformeAvance$: Observable<boolean> =
-    this.loadingsFacade.sendingSendBorradorInformeAvance$();
+  sendingInformarTrabajosFinalizados$: Observable<boolean> =
+    this.loadingsFacade.sendingInformarTrabajosFinalizados$();
 
   constructor(
     private actaFacade: ActaFacade,

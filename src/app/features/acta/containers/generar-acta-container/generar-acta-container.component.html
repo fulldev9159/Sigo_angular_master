@@ -42,15 +42,16 @@
     <div class="card">
         <div class=" grid">
             <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"
+                    [routerLink]="['/ot']">
                     Atrás
                 </button>
             </div>
             <!-- 180 TODO: AGREGAR EL LOADING -->
-            <div *ngIf="accionExist('OT_GENERAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <div *ngIf=" accionExist('OT_GENERAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
                 <zwc-pbutton-sending Pid="generar-acta-button" content="Generar acta"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="generarActa()"
-                    [sending]="sendingSendBorradorInformeAvance$|async"></zwc-pbutton-sending>
+                    [sending]="sendingInformarTrabajosFinalizados$|async"></zwc-pbutton-sending>
             </div>
         </div>
     </div>
