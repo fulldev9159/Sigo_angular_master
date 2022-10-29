@@ -20,9 +20,9 @@
               Pplaceholder="Seleccione un rol" [loading]="false" optionLabel="nombre" optionValue="id">
             </zwc-pdropdown>
             <div class="mt-4"></div>
-            <label>Detalles:</label>
+            <label>Descripción:</label>
             <textarea [formControl]="formControls.descripcion" class="form-control" id="input-descripcion"
-              placeholder="Agregue algún detalle de la cubicación" cols="30" rows="4"></textarea>
+              placeholder="Agregue una descripción" cols="30" rows="4"></textarea>
             <zwc-input-alert [control]="formControls.descripcion"> </zwc-input-alert>
             <div class="mt-4"></div>
             <p-button label="Guardar" (click)="saveProfile()" [disabled]="!formPerfil.valid" slyle="font-size: 0.83rem;"

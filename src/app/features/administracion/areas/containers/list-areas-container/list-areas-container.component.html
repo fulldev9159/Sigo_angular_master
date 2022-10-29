@@ -2,13 +2,11 @@
   <div class="row">
     <div class="col">
       <h1 class="mt-4">Areas </h1>
-      <span>listado de Areas</span>
     </div>
     <div class="col">
       <!-- <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button> -->
     </div>
     <div class="col-12">
-      <hr>
     </div>
   </div>
 
@@ -17,13 +15,16 @@
       <div class=" grid">
         <div class="field col-12 table-list-areas">
           <ng-container *ngIf="areas$ | async as areas">
-            <p-table #dt [columns]="['nombre']" [value]="areas" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+            <p-table #dt [columns]="['nombre']" [value]="areas" dataKey="id"
+              styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true"
+              [rows]="10">
               <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
                   <h5 class="p-m-0"></h5>
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Buscar..." />
                   </span>
                 </div>
               </ng-template>
@@ -56,10 +57,12 @@
                     <strong>{{ item.nombre }}</strong>
                   </td>
                   <td>{{ item.descripcion }}</td>
-                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'" style="font-size: 0.8em;">{{ item.interno }}</span></td>
+                  <td><span class="label-table " [ngClass]="item.estado ? 'label-activo' : 'label-inactivo'"
+                      style="font-size: 0.8em;">{{ item.interno }}</span></td>
                   <td>
                     <span *ngIf="item.estado" class="label-table label-activo" style="font-size: 0.8em;">Activo</span>
-                    <span *ngIf="!item.estado" class="label-table label-inactivo" style="font-size: 0.8em;">Bloqueado</span>
+                    <span *ngIf="!item.estado" class="label-table label-inactivo"
+                      style="font-size: 0.8em;">Bloqueado</span>
                   </td>
                   <td style="text-align: right; position: relative">
                     <div class="ui icon buttons mini basic">

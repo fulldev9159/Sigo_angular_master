@@ -1,23 +1,34 @@
- .tipoArea {
-   border: 1px solid #cecece;
-   // padding: 8px;
-   // width: 321px;
-   text-align: center;
-   // padding-left: 24px;
- }
+//  .tipoArea {
+//    border: 1px solid #cecece;
+//    // padding: 8px;
+//    // width: 321px;
+//    text-align: center;
+//    // padding-left: 24px;
+//  }
 
- .tipoActivo {
-   border: 1px solid #cecece;
-   margin-top: 20px;
-   padding: 8px;
-   padding-top: 20px;
+//  .tipoActivo {
+//    border: 1px solid #cecece;
+//    margin-top: 20px;
+//    padding: 8px;
+//    padding-top: 20px;
 
-   // width: 321px;
-   text-align: center;
-   // padding-left: 24px;
- }
+//    // width: 321px;
+//    text-align: center;
+//    // padding-left: 24px;
+//  }
 
- .text-center {
-   margin-top: 10px;
-   text-align: center;
- }
+//  .text-center {
+//    margin-top: 10px;
+//    text-align: center;
+//  }
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  font-family: "Inter-Regular", system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: var(--size-text-sigo);
+}
+
+.text-base {
+  font-size: var(--size-text-sigo);
+}
