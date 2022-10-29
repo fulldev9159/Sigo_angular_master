@@ -1,0 +1,20 @@
+textarea {
+    padding: 10px;
+    width: 100%;
+}
+
+:host ::ng-deep {
+    .p-listbox .p-listbox-header:nth-child(1) {
+        background-color: #c2cedb;
+        font-size: var(--size-text-sigo);
+    }
+
+    .p-listbox-filter {
+        height: 44px;
+        font-size: var(--size-text-sigo);
+    }
+
+    .p-listbox-list {
+        font-size: var(--size-text-sigo);
+    }
+}

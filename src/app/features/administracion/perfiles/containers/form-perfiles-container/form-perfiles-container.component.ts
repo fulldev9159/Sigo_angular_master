@@ -26,11 +26,8 @@ import { LogService } from '@log';
 export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
-  // perfilSelected$: Observable<Perfil>;
   allRoles$: Observable<Rol[]>;
-  // permisosRol$: Observable<PermissionsGroup[]>;
   permisosRol: PermissionsGroup[] = [];
-  // permisosPerfil$: Observable<PermisosPerfil[]> = of([]);
   permisosPerfil: PermisosPerfil[];
   // DISPLAY MODALS
 
@@ -42,10 +39,10 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
 
   // EXTRAS
   perfil_id: number | null = null;
+  editMode = false;
+  title = '';
 
   permissions$: Observable<any>;
-
-  // rols$: Observable<Data.Rols[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,18 +54,11 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.onInitResetInicial();
+    this.profileFacade.resetData();
+
     this.onInitGetInitialData();
     this.onInitSetInitialData();
     this.onInitAccionesInicialesAdicionales();
-
-    // this.initObservables();
-    // this.initFormControlsEvents();
-    // this.initData();
-  }
-
-  onInitResetInicial(): void {
-    this.profileFacade.resetData();
   }
 
   onInitGetInitialData(): void {
@@ -78,6 +68,7 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
       this.route.paramMap?.subscribe(params => {
         const perfil_id = params.get('id');
         if (perfil_id !== null) {
+          this.editMode = true;
           this.formPerfil.get('id').setValue(perfil_id);
           this.perfil_id = +perfil_id;
           this.profileFacade.getProfile();
@@ -91,14 +82,6 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   onInitSetInitialData(): void {
     this.allRoles$ = this.profileFacade.getAllRoles4createEditPerfil$();
 
-    // this.PermisosPerfil$ = this.profileFacade.getPermisosPerfil$();
-    // this.permisosRol$ = this.profileFacade.getPermisosRol4CreateEdit$().pipe(
-    //   map(perfiles => {
-    //     console.log('asdasd');
-    //     return this.getPermissionsGroup(perfiles);
-    //   })
-    // );
-
     this.subscription.add(
       this.profileFacade.getPermisosRol4CreateEdit$().subscribe(perfiles => {
         this.permisosRol = this.getPermissionsGroup(perfiles);
@@ -108,64 +91,59 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.profileFacade.getPermisosPerfil$().subscribe(permperfiles => {
-        this.logger.debug('SUB', permperfiles);
+        // this.logger.debug('SUB', permperfiles);
         this.permisosPerfil = permperfiles;
         this.profileFacade.getProfile();
       })
     );
 
     this.subscription.add(
-      this.profileFacade
-        .getProfile$()
-        // .pipe(withLatestFrom(this.PermisosPerfil$))
-        // .subscribe(([perfiles, permisos]) => {
-        .subscribe(perfiles => {
-          if (perfiles && perfiles.length > 0 && this.perfil_id) {
-            const perfil = perfiles.find(perf => perf.id === +this.perfil_id);
-            this.formPerfil.get('nombre').setValue(perfil.nombre);
-            this.formPerfil.get('descripcion').setValue(perfil.descripcion);
-            this.formControls.rol.setValue(perfil.rol_id);
-            // console.log(this.permisosPerfil);
+      this.profileFacade.getProfile$().subscribe(perfiles => {
+        if (perfiles && perfiles.length > 0 && this.perfil_id) {
+          const perfil = perfiles.find(perf => perf.id === +this.perfil_id);
+          this.formPerfil.get('nombre').setValue(perfil.nombre);
+          this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+          this.formControls.rol.setValue(perfil.rol_id);
 
-            const PermissionsModules = this.getPermissionsGroup2(
-              this.permisosPerfil
-            );
-            this.logger.debug('PERMISOS', PermissionsModules);
-            if (PermissionsModules.find(module => module.module === 'OT')) {
-              this.formPerfil
-                .get('permisos_OT')
-                .setValue(
-                  PermissionsModules.find(
-                    module => module.module === 'OT'
-                  ).permissions.map(permiso => permiso.permiso_id)
-                );
+          const PermissionsModules = this.getPermissionsGroup2(
+            this.permisosPerfil
+          );
+          // this.logger.debug('PERMISOS', PermissionsModules);
+          if (PermissionsModules.find(module => module.module === 'OT')) {
+            this.formPerfil
+              .get('permisos_OT')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'OT'
+                ).permissions.map(permiso => permiso.permiso_id)
+              );
 
-              this.detector.detectChanges();
-            }
-            if (
-              PermissionsModules.find(module => module.module === 'CUBICACION')
-            ) {
-              this.formPerfil
-                .get('permisos_CUBICACION')
-                .setValue(
-                  PermissionsModules.find(
-                    module => module.module === 'CUBICACION'
-                  ).permissions.map(permiso => permiso.permiso_id)
-                );
-              this.detector.detectChanges();
-            }
-            if (PermissionsModules.find(module => module.module === 'PERFIL')) {
-              this.formPerfil
-                .get('permisos_PERFIL')
-                .setValue(
-                  PermissionsModules.find(
-                    module => module.module === 'PERFIL'
-                  ).permissions.map(permiso => permiso.permiso_id)
-                );
-              this.detector.detectChanges();
-            }
+            this.detector.detectChanges();
           }
-        })
+          if (
+            PermissionsModules.find(module => module.module === 'CUBICACION')
+          ) {
+            this.formPerfil
+              .get('permisos_CUBICACION')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'CUBICACION'
+                ).permissions.map(permiso => permiso.permiso_id)
+              );
+            this.detector.detectChanges();
+          }
+          if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+            this.formPerfil
+              .get('permisos_PERFIL')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'PERFIL'
+                ).permissions.map(permiso => permiso.permiso_id)
+              );
+            this.detector.detectChanges();
+          }
+        }
+      })
     );
     setTimeout(() => {
       this.detector.detectChanges();
@@ -186,23 +164,6 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  initObservables(): void {
-    // this.permissions$ = this.profileFacade
-    //   .getPermissions$()
-    //   .pipe(
-    //     map((permissions: Data.Permiso[]) =>
-    //       this.getPermissionsGroup(permissions)
-    //     )
-    //   );
-    // this.RolPermissions$ = this.profileFacade
-    //   .getRolPermissions$()
-    //   .pipe(
-    //     map((permissions: Data.Permiso[]) =>
-    //       this.getPermissionsGroup(permissions)
-    //     )
-    //   );
-  }
-
   initRolFromControlEvent(): void {}
 
   ngOnDestroy(): void {
@@ -212,67 +173,9 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   goBack(): void {
     this.profileFacade.resetData();
     this.profileFacade.modalPermisosPerfil(false);
+    this.formPerfil.reset();
     this.router.navigate(['/administracion/perfiles/list-perfiles']);
   }
-
-  initData(): void {
-    // this.profileFacade.getRols();
-    // this.profileFacade.getPermissions();
-    // this.rols$ = this.profileFacade.getRols$();
-    // this.subscription.add(
-    //   this.profileFacade.getProfileSelected$().subscribe(perfil => {
-    //     if (perfil) {
-    //       this.formPerfil.get('nombre').setValue(perfil.nombre);
-    //       this.formPerfil.get('descripcion').setValue(perfil.descripcion);
-    //       this.formControls.rol.setValue(perfil.rol_id);
-    //       // const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
-    //       // if (PermissionsModules.find(module => module.module === 'OT')) {
-    //       //   this.formPerfil
-    //       //     .get('permisos_OT')
-    //       //     .setValue(
-    //       //       PermissionsModules.find(
-    //       //         module => module.module === 'OT'
-    //       //       ).permissions.map(permiso => permiso.id)
-    //       //     );
-    //       // }
-    //       // if (
-    //       //   PermissionsModules.find(module => module.module === 'CUBICACION')
-    //       // ) {
-    //       //   this.formPerfil
-    //       //     .get('permisos_CUBICACION')
-    //       //     .setValue(
-    //       //       PermissionsModules.find(
-    //       //         module => module.module === 'CUBICACION'
-    //       //       ).permissions.map(permiso => permiso.id)
-    //       //     );
-    //       // }
-    //       // if (PermissionsModules.find(module => module.module === 'PERFIL')) {
-    //       //   this.formPerfil
-    //       //     .get('permisos_PERFIL')
-    //       //     .setValue(
-    //       //       PermissionsModules.find(
-    //       //         module => module.module === 'PERFIL'
-    //       //       ).permissions.map(permiso => permiso.id)
-    //       //     );
-    //       // }
-    //     }
-    //   })
-    // );
-  }
-
-  // getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
-  //   const data = permissions.map((permit: Data.Permiso) => {
-  //     let permitCustom: any;
-  //     if (permit && permit.slug) {
-  //       permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-  //     }
-  //     return permitCustom;
-  //   });
-  //   return _.chain(data)
-  //     .groupBy('module')
-  //     .map((value, key) => ({ module: key, permissions: value }))
-  //     .value();
-  // }
 
   getPermissionsGroup(permissions: PermisoRol[]): PermissionsGroup[] {
     const data = permissions?.map(permit => {
@@ -285,12 +188,7 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
       }
       return permitCustom;
     });
-    // console.log(
-    //   _.chain(data)
-    //     .groupBy('module')
-    //     .map((value, key) => ({ module: key, permissions: value }))
-    //     .value()
-    // );
+
     return _.chain(data)
       .groupBy('module')
       .map((value, key) => ({ module: key, permissions: value }))
@@ -308,12 +206,7 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
       }
       return permitCustom;
     });
-    // console.log(
-    //   _.chain(data)
-    //     .groupBy('module')
-    //     .map((value, key) => ({ module: key, permissions: value }))
-    //     .value()
-    // );
+
     return _.chain(data)
       .groupBy('module')
       .map((value, key) => ({ module: key, permissions: value }))
