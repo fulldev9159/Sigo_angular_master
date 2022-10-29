@@ -4,4 +4,17 @@
         color: white;
         font-weight: 500;
     }
+
+    .p-inputtext {
+        height: 11px;
+        font-size: 0.7rem;
+    }
+
+    .delete-button {
+        background-color: #d20000db !important;
+
+        &:disabled {
+            background-color: #fb6262 !important
+        }
+    }
 }

@@ -77,8 +77,7 @@
                         <fa-icon [icon]="editIcon"></fa-icon> Editar
                       </button>
                       <button [disabled]="!item.eliminable" (click)="eliminar(item)" id="button-eliminar-perfil"
-                        [pTooltip]="!item.eliminable?'No es eliminable':''"
-                        class="bg-red-500 hover:bg-red-300 disabled:bg-red-100">
+                        [pTooltip]="!item.eliminable?'No es eliminable':''" class="delete-button">
                         <fa-icon [icon]="trashICon"></fa-icon>Eliminar
                       </button>
                     </div>
