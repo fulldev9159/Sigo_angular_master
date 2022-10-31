@@ -131,7 +131,79 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
           if (servicios && servicios.length > 0) {
             this.ot_id = servicios[0].ot_id;
-            servicios.forEach(service => {
+
+            let servicios_originales = servicios.filter(
+              v => v.adicional_aceptacion_estado === 'ORIGINAL'
+            );
+            let uos_originales = uob.filter(
+              v => v.servicio_adicional_aceptacion_estado === 'ORIGINAL'
+            );
+
+            let servicios_adicionales = servicios.filter(
+              v => v.adicional_aceptacion_estado !== 'ORIGINAL'
+            );
+
+            let uos_adicionales = uob.filter(
+              v => v.servicio_adicional_aceptacion_estado !== 'ORIGINAL'
+            );
+
+            // SERVICIOS ADICIONALES
+            servicios_adicionales.forEach(service => {
+              let servicioCarrito: CarritoService = {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                servicios_adicional_dummy:
+                  servicios_originales.find(
+                    v =>
+                      v.servicio_numero_producto ===
+                      service.servicio_numero_producto
+                  ) !== undefined,
+                unidad_obras: [],
+              };
+
+              uos_adicionales
+                .filter(
+                  v =>
+                    v.servicio_numero_producto ===
+                    service.servicio_numero_producto
+                )
+                .map(uo =>
+                  this.acta_adicionales.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
+
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: 'TODO',
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                        adicional_existente_ia:
+                          servicioCarrito.servicios_adicional_dummy,
+                      },
+                    ],
+                  })
+                );
+            });
+
+            // CUBICADOS
+            servicios_originales.forEach(service => {
               let servicioCarrito: CarritoService = {
                 precargado: true,
                 servicio_rowid: service.id,
@@ -149,43 +221,44 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 unidad_obras: [],
               };
 
-              let uobs = uob.filter(
-                v =>
-                  v.servicio_numero_producto ===
-                  service.servicio_numero_producto
-              );
-              uobs.map(uo =>
-                this.acta.push({
-                  ...servicioCarrito,
-                  unidad_obras: [
-                    {
-                      precargado: true,
-                      uo_rowid: uo.id,
-                      uo_cantidad: uo.faltante_cantidad,
+              uos_originales
+                .filter(
+                  v =>
+                    v.servicio_numero_producto ===
+                    service.servicio_numero_producto
+                )
+                .map(uo =>
+                  this.acta_originales.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
 
-                      uo_codigo: uo.unidad_obra_cod,
-                      uo_nombre: uo.unidad_obra_desc,
-                      uo_precio_total_clp: uo.valor_unitario_clp,
-                      actividad_descripcion: 'TODO',
-                      actividad_id: -1,
-                      uob_unidad_medida_cod: uo.unidad_codigo,
-                      uob_unidad_medida_descripcion: uo.unidad_obra_desc,
-                    },
-                  ],
-                })
-              );
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: 'TODO',
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                      },
+                    ],
+                  })
+                );
             });
           }
 
-          this.logger.debug('acta', this.acta);
-          this.acta_originales = this.acta.filter(
-            v => v.adicional === 'ORIGINAL'
-          );
-          this.logger.debug('original', this.acta_originales);
-          this.acta_adicionales = this.acta.filter(
-            v => v.adicional !== 'ORIGINAL'
-          );
-          this.logger.debug('adicionales', this.acta_adicionales);
+          // this.logger.debug('acta', this.acta);
+          // this.acta_originales = this.acta.filter(
+          //   v => v.adicional === 'ORIGINAL'
+          // );
+          // this.logger.debug('original', this.acta_originales);
+          // this.acta_adicionales = this.acta.filter(
+          //   v => v.adicional !== 'ORIGINAL'
+          // );
+          // this.logger.debug('adicionales', this.acta_adicionales);
         }
       )
     );
