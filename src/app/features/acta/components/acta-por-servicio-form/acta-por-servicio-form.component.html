@@ -27,18 +27,22 @@
                     <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
                     <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
                     <td>{{ servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'?'ADICIONAL':'ORIGINAL' }}</td>
-                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}</td>
-                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
+                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}
+                    </td>
+                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value -
+                      servicio.get('cantidad_max_a_enviar').value }}</td>
                     <td>
                       <input [formControl]="servicio.get('cantidad_a_enviar')" type="number">
                     </td>
-                    <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                    <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' :
+                      '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value *
+                      +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
 
                   <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
                     <ng-container *ngFor="let uo of unidadesObra.controls">
-                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
+                      <tr *ngIf="uo.get('servicio_numero_producto').value===servicio.get('numero_producto').value">
                         <td style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">
                           <input type="checkbox" [formControl]="uo.get('selected')">
@@ -48,12 +52,15 @@
                         <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
                         <td></td>
                         <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
-                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
+                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value -
+                          uo.get('cantidad_max_a_enviar').value }}</td>
                         <td>
                           <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
                         </td>
-                        <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                        <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *  +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
+                          '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *
+                          +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                       </tr>
                     </ng-container>
                   </ng-container>
