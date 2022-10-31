@@ -250,15 +250,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
             });
           }
 
-          // this.logger.debug('acta', this.acta);
-          // this.acta_originales = this.acta.filter(
-          //   v => v.adicional === 'ORIGINAL'
-          // );
-          // this.logger.debug('original', this.acta_originales);
-          // this.acta_adicionales = this.acta.filter(
-          //   v => v.adicional !== 'ORIGINAL'
-          // );
-          // this.logger.debug('adicionales', this.acta_adicionales);
+          this.acta = [...this.acta_originales, ...this.acta_adicionales];
         }
       )
     );
@@ -360,7 +352,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       unidadesObraForm.clear();
 
       (servicios ?? []).forEach(servicio => {
-        if (+servicio.cantidad_total > 0) {
+        if (+servicio.faltante_cantidad > 0) {
           serviciosForm.push(
             new FormGroup({
               id: new FormControl(`${servicio.id}`, []),
@@ -418,8 +410,10 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         )
       );
 
+      console.log('io', unidades_obra);
+
       (unidades_obra ?? []).forEach(uo => {
-        if (+uo.cantidad_total > 0) {
+        if (+uo.faltante_cantidad > 0) {
           unidadesObraForm.push(
             new FormGroup({
               id: new FormControl(`${uo.id}`, []),
@@ -448,6 +442,10 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
               ),
               informe_has_servicio_id: new FormControl(
                 `${uo.informe_has_servicio_id}`,
+                []
+              ),
+              servicio_numero_producto: new FormControl(
+                uo.servicio_numero_producto,
                 []
               ),
               selected: new FormControl(false, []),
