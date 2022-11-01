@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import * as CustomValidators from '@sharedOT/validators';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +21,7 @@ import {
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { endWith, Observable, Subscription } from 'rxjs';
 import { LogService } from '@log';
+import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 
 interface Detalle {
   servicio: {
@@ -41,9 +48,17 @@ interface Detalle {
   selector: 'zwc-validar-acta-container',
   templateUrl: './validar-acta-container.component.html',
   styleUrls: ['./validar-acta-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
+
+  @ViewChild('tableServiciosAutorizarAdicionales', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServiciosAutorizarAdicionales: TableServiciosComponent;
+
   acta: CarritoService[] = [];
   acta_originales: CarritoService[] = [];
   acta_adicionales: CarritoService[] = [];
@@ -57,9 +72,6 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl(null, [Validators.required]),
-    // tipo_pago: new FormControl({ value: '', disabled: true }, [
-    //   Validators.required,
-    // ]),
     porcentaje: new FormControl(100), // 149 TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
 
     por_servicio: new FormGroup({
@@ -328,10 +340,6 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
   get valid(): boolean {
     return this.form.valid;
   }
@@ -409,8 +417,6 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
             })
         )
       );
-
-      console.log('io', unidades_obra);
 
       (unidades_obra ?? []).forEach(uo => {
         if (+uo.faltante_cantidad > 0) {
@@ -552,5 +558,28 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       //// form.at(index).get('cantidad_a_enviar').clearValidators();
       form.at(index).get('cantidad_a_enviar').disable();
     }
+  }
+
+  serviciosAdicionalesAprobados(): boolean {
+    if (this.tableServiciosAutorizarAdicionales?.formTable) {
+      let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+        .value as Array<{
+        validar_adicional: boolean;
+      }>;
+      if (form.length > 0) {
+        let serviciosRechazados = form.filter(
+          servicio => servicio.validar_adicional
+        );
+
+        return serviciosRechazados.length === 0;
+      } else {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

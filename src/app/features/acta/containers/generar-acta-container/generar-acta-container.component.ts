@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -20,6 +25,7 @@ import { Observable, Subscription } from 'rxjs';
   selector: 'zwc-generar-acta-container',
   templateUrl: './generar-acta-container.component.html',
   styleUrls: ['./generar-acta-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
