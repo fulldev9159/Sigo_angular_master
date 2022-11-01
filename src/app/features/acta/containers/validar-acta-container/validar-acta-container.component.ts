@@ -19,9 +19,11 @@ import {
   RequestValidarActa,
 } from '@model';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
-import { endWith, Observable, Subscription } from 'rxjs';
+import { endWith, map, Observable, Subscription } from 'rxjs';
 import { LogService } from '@log';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
+import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
+import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 
 interface Detalle {
   servicio: {
@@ -59,6 +61,12 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   })
   tableServiciosAutorizarAdicionales: TableServiciosComponent;
 
+  @ViewChild('rechazoActaForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoActaForm: ViewRechazoComponent;
+
   acta: CarritoService[] = [];
   acta_originales: CarritoService[] = [];
   acta_adicionales: CarritoService[] = [];
@@ -83,10 +91,29 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   servicios: DetalleServicio4Acta[] = [];
   uos: DetalleUO4Acta[] = [];
 
+  motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.motivo > b.motivo ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.motivo,
+          code: value.id,
+        }))
+      )
+    );
+
+  // MODAL
+  showModalRechazarActa = false;
+
   constructor(
     private actaFacade: ActaFacade,
     private route: ActivatedRoute,
-    private logger: LogService
+    private logger: LogService,
+    private flujoOTFacade: FlujoOTFacade
   ) {}
 
   ngOnInit(): void {
@@ -295,8 +322,9 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     };
   }
 
-  get requestValidarActa(): RequestValidarActa {
-    const tipo_pago = this.form.get('tipo_pago').value;
+  requestValidarActa(aprobacion: string): RequestValidarActa {
+    let tipo_pago = this.form.get('tipo_pago').value;
+    if (tipo_pago === null) tipo_pago = 'TOTAL';
     let detalle: Detalle = {
       servicio: this.servicios.map(v => ({
         rowid: v.id,
@@ -317,27 +345,10 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     return {
       ot_id: this.ot_id,
       tipo_pago,
-      observacion: '', // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
-      estado: 'VALIDADO',
+      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value, // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
+      estado: aprobacion,
       detalle,
     };
-  }
-
-  validarActa(): void {
-    let request_validar_acta: RequestValidarActa = this.requestValidarActa;
-
-    let adicionales_id = this.acta_adicionales.map(v => v.servicio_rowid);
-
-    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
-      ot_id: this.ot_id,
-      adicionales_aceptados: [...new Set(adicionales_id)],
-      adicionales_rechazados: [],
-    };
-
-    this.actaFacade.aceptarRechazarAdicionales(
-      request_validar_acta,
-      request_aprobar_adicionales
-    );
   }
 
   get valid(): boolean {
@@ -577,6 +588,73 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       }
     }
     return true;
+  }
+
+  displayModalRechazarActa(): void {
+    this.flujoOTFacade.getMotivosRechazo('ACTA');
+    this.showModalRechazarActa = true;
+  }
+
+  closeModalRechazarActa(): void {
+    this.showModalRechazarActa = false;
+    this.rechazoActaForm.formRechazo.reset();
+  }
+
+  rechazarActa(): void {
+    // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+    let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+      .value as Array<{
+      servicio_rowid: number;
+      validar_adicional: boolean;
+    }>;
+
+    let adicionales_aprobados_id = form
+      .filter(v => !v.validar_adicional)
+      .map(v => v.servicio_rowid);
+    let adicionales_rechazados_id = form
+      .filter(v => v.validar_adicional)
+      .map(v => v.servicio_rowid);
+
+    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+      adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
+      causas_rechazo_id: this.rechazoActaForm?.formRechazo.get('tipo_id').value,
+    };
+
+    // REQUEST PARA RECHAZAR EL ACTA
+    let request_validar_acta: RequestValidarActa =
+      this.requestValidarActa('INVALIDADO');
+
+    console.log('req ad', request_aprobar_adicionales);
+    console.log('req in', request_validar_acta);
+
+    this.rechazoActaForm.formRechazo.reset();
+    // INVOCAR AMBOS
+    this.actaFacade.aceptarRechazarAdicionales(
+      request_validar_acta,
+      request_aprobar_adicionales
+    );
+  }
+
+  validarActa(): void {
+    let request_validar_acta: RequestValidarActa =
+      this.requestValidarActa('VALIDADO');
+
+    let adicionales_id = this.acta_adicionales.map(v => v.servicio_rowid);
+
+    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_aceptados: [...new Set(adicionales_id)],
+      adicionales_rechazados: [],
+    };
+
+    this.rechazoActaForm.formRechazo.reset();
+    this.actaFacade.aceptarRechazarAdicionales(
+      request_validar_acta,
+      request_aprobar_adicionales
+    );
   }
 
   ngOnDestroy(): void {

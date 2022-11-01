@@ -72,8 +72,21 @@
     .p-tag {
         font-size: 0.5rem;
         letter-spacing: 0.02rem;
+    }
+
+    .p-tag.pendiente {
         background-color: #F2D7A9 !important;
         color: #ac7619;
+    }
+
+    .p-tag.aceptado {
+        background-color: #9bd18c !important;
+        color: #2a7815;
+    }
+
+    .p-tag.rechazado {
+        background-color: #f6a3a3 !important;
+        color: #a42929;
     }
 }
 

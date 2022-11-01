@@ -32,7 +32,15 @@
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         <ng-container *ngIf="servicio.adicional!=='ORIGINAL' && servicio.adicional!==undefined">
-                            <p-tag value="Adicional" severity="warning"></p-tag>
+                            <p-tag *ngIf="servicio.adicional==='PENDIENTE'" styleClass="pendiente" value="Adicional"
+                                severity="warning">
+                            </p-tag>
+                            <p-tag *ngIf="servicio.adicional==='ACEPTADO'" styleClass="aceptado"
+                                value="Adicional aprobado" severity="success">
+                            </p-tag>
+                            <p-tag *ngIf="servicio.adicional==='RECHAZADO'" styleClass="rechazado"
+                                value="Adicional rechazado">
+                            </p-tag>
                         </ng-container>
                         {{ servicio.servicio_nombre }}
                     </td>
@@ -102,7 +110,7 @@
                         <td>{{ uo.uo_codigo }}</td>
                         <td>
                             <ng-container *ngIf="uo.adicional_existente_ia">
-                                <p-tag value="Adicional" severity="warning"></p-tag>
+                                <p-tag value="Adicional" severity="warning" styleClass="pendiente"> </p-tag>
                             </ng-container>
                             {{ uo.uo_nombre }}
                         </td>

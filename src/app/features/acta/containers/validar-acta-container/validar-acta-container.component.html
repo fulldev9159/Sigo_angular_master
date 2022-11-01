@@ -88,14 +88,36 @@
   <div class="card">
     <div class=" grid">
       <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-        <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+        <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined" [routerLink]="['/ot']">
           Atrás
         </button>
       </div>
-      <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-        <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta"
+      <div *ngIf="accionExist('OT_VALIDAR_ACTA') && serviciosAdicionalesAprobados() "
+        class="field col-12 md:col-4 lg:col-4 xl:col-4">
+        <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta" icon="ok"
           Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()"></zwc-pbutton-sending>
+      </div>
+      <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+        <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar Acta" icon="nok"
+          Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
+          (click)="displayModalRechazarActa()">
+        </zwc-pbutton-sending>
       </div>
     </div>
   </div>
 </div>
+
+
+<p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
+  <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalRechazarActa()">
+      Cancelar
+    </button>
+    <button pButton type="button" id="button-confirmar" (click)="rechazarActa()"
+      [disabled]="!rechazoActaForm.formRechazo.valid">
+      Rechazar acta
+    </button>
+  </ng-template>
+</p-dialog>
