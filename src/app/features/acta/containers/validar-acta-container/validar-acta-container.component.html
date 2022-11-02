@@ -108,7 +108,8 @@
       <div *ngIf="accionExist('OT_VALIDAR_ACTA') && serviciosAdicionalesAprobados() "
         class="field col-12 md:col-4 lg:col-4 xl:col-4">
         <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta" icon="ok"
-          Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()" [Pdisabled]="!this.valid">
+          Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionActa=true"
+          [Pdisabled]="!this.valid">
         </zwc-pbutton-sending>
       </div>
       <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
@@ -134,4 +135,12 @@
       Rechazar acta
     </button>
   </ng-template>
+</p-dialog>
+
+<p-dialog header="Confirmar aprobación y forma de pago del acta" [(visible)]="displayModalAprobacionActa"
+  [draggable]="false" [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+  <zwc-view-confirmacion pregunta='¿Desea confirmar el acta?' (cancelar)="displayModalAprobacionActa=false"
+    (confirmar)="validarActa()" textConfirmar="Aprobar acta">
+  </zwc-view-confirmacion>
 </p-dialog>

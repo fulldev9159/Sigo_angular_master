@@ -129,6 +129,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   // MODAL
   showModalRechazarActa = false;
+  displayModalAprobacionActa = false;
 
   constructor(
     private actaFacade: ActaFacade,
@@ -355,20 +356,28 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       por_servicio: { servicios = [], unidades_obra = [] },
     } = this.form.getRawValue();
 
+    this.detector.detectChanges();
+
     return {
       servicio: servicios
         .filter((servicio: { selected: boolean }) => servicio.selected)
         .map((servicio: { id: string; cantidad_a_enviar: string }) => ({
           rowid: +servicio.id,
           cantidad: +servicio.cantidad_a_enviar,
-          porcentaje: 100,
+          porcentaje:
+            this.form.get('tipo_pago').value === 'PORCENTAJE'
+              ? this.form.get('porcentaje').value
+              : 100,
         })),
       unidad_obra: unidades_obra
         .filter((uo: { selected: boolean }) => uo.selected)
         .map((uo: { id: string; cantidad_a_enviar: string }) => ({
           rowid: +uo.id,
           cantidad: +uo.cantidad_a_enviar,
-          porcentaje: 100,
+          porcentaje:
+            this.form.get('tipo_pago').value === 'PORCENTAJE'
+              ? this.form.get('porcentaje').value
+              : 100,
         })),
     };
   }
@@ -380,12 +389,18 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       servicio: this.servicios.map(v => ({
         rowid: v.id,
         cantidad: v.faltante_cantidad,
-        porcentaje: 100,
+        porcentaje:
+          this.form.get('tipo_pago').value === 'PORCENTAJE'
+            ? this.form.get('porcentaje').value
+            : 100,
       })),
       unidad_obra: this.uos.map(v => ({
         rowid: v.id,
         cantidad: v.faltante_cantidad,
-        porcentaje: 100,
+        porcentaje:
+          this.form.get('tipo_pago').value === 'PORCENTAJE'
+            ? this.form.get('porcentaje').value
+            : 100,
       })),
     };
 
@@ -696,18 +711,37 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   }
 
   validarActa(): void {
-    let request_validar_acta: RequestValidarActa =
-      this.requestValidarActa('VALIDADO');
+    // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+    let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+      .value as Array<{
+      servicio_rowid: number;
+      validar_adicional: boolean;
+    }>;
 
-    let adicionales_id = this.acta_adicionales.map(v => v.servicio_rowid);
+    let adicionales_aprobados_id = form
+      .filter(v => !v.validar_adicional)
+      .map(v => v.servicio_rowid);
+    let adicionales_rechazados_id = form
+      .filter(v => v.validar_adicional)
+      .map(v => v.servicio_rowid);
 
     let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
       ot_id: this.ot_id,
-      adicionales_aceptados: [...new Set(adicionales_id)],
-      adicionales_rechazados: [],
+      adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+      adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
+      causas_rechazo_id: this.rechazoActaForm?.formRechazo.get('tipo_id').value,
     };
 
+    // REQUEST PARA RECHAZAR EL ACTA
+    let request_validar_acta: RequestValidarActa =
+      this.requestValidarActa('VALIDADO');
+
+    console.log('req ad', request_aprobar_adicionales);
+    console.log('req in', request_validar_acta);
+
     this.rechazoActaForm.formRechazo.reset();
+    // INVOCAR AMBOS
     this.actaFacade.aceptarRechazarAdicionales(
       request_validar_acta,
       request_aprobar_adicionales
