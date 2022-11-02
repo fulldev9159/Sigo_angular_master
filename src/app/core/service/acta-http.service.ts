@@ -120,4 +120,15 @@ export class ActaHttpService {
       }
     );
   }
+
+  // OBTENER COMENTARIOS FINALIZACION DE TRABAJOS
+  getComentatiosfinalizacionTrabajos(
+    ot_id: number
+  ): Observable<
+    Response<{ ot_id: number; acta_id: number; observacion: string }>
+  > {
+    return this.http.post<
+      Response<{ ot_id: number; acta_id: number; observacion: string }>
+    >(`${this.API_URL}/ot/acta/trabajo/finalizado/observacion/get`, { ot_id });
+  }
 }

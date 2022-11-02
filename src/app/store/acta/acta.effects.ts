@@ -101,6 +101,29 @@ export class ActaEffects {
     )
   );
 
+  // COMENTARIOS TRABAJOS FINALIZADOS
+  getComentariosTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getComentariosFinalizacionTrabajos),
+      concatMap(({ ot_id }) =>
+        this.actaHttp.getComentatiosfinalizacionTrabajos(ot_id).pipe(
+          map(response =>
+            actaActions.getComentariosFinalizacionTrabajosSuccess({
+              comentariosFinalizacionTrabajos: response.data.observacion,
+            })
+          ),
+          catchError(err =>
+            of(
+              actaActions.getComentariosFinalizacionTrabajosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -124,7 +147,8 @@ export class ActaEffects {
           actaActions.informarTrabajosFinalizadosError,
           actaActions.aceptarRechazarAdcionalesValidarActaError,
           actaActions.validarActaError,
-          actaActions.getTotalActasError
+          actaActions.getTotalActasError,
+          actaActions.getComentariosFinalizacionTrabajosError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

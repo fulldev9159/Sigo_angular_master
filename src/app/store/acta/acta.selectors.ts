@@ -23,3 +23,8 @@ export const getTotalActas = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.totalActas
 );
+
+export const getComentariosFinalizacionTrabajos = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.comentariosFinalizacionTrabajos
+);

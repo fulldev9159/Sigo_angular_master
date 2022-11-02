@@ -123,6 +123,10 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   total_a_pagar = 0;
 
+  comentarioInforme$: Observable<string> = this.actaFacade
+    .getComentariosFinalizacionTrabajos$()
+    .pipe(map(value => value.replace(/\n/g, '<br>')));
+
   // MODAL
   showModalRechazarActa = false;
 

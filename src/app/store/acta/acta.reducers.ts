@@ -9,6 +9,7 @@ export interface StateActa {
   uos4acta: DetalleUO4Acta[];
   actaTipoPago: ActaTipoPago[];
   totalActas: number;
+  comentariosFinalizacionTrabajos: string;
 }
 
 export const initialState: StateActa = {
@@ -16,6 +17,7 @@ export const initialState: StateActa = {
   uos4acta: [],
   actaTipoPago: [],
   totalActas: null,
+  comentariosFinalizacionTrabajos: null,
 };
 
 export const reducerActa = createReducer(
@@ -35,5 +37,12 @@ export const reducerActa = createReducer(
   on(ActaActions.getTotalActasSuccess, (state, { totalActas }) => ({
     ...state,
     totalActas,
-  }))
+  })),
+  on(
+    ActaActions.getComentariosFinalizacionTrabajosSuccess,
+    (state, { comentariosFinalizacionTrabajos }) => ({
+      ...state,
+      comentariosFinalizacionTrabajos,
+    })
+  )
 );

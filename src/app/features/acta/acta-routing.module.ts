@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccionesOTResolver } from 'src/app/core/resolvers/accionesOT.resolver';
+import { ObservacionesTrabajosResolver } from 'src/app/core/resolvers/observacionesTrabajos.resolver';
 import { ActaComponent } from './acta.component';
 import { GenerarActaContainerComponent } from './containers/generar-acta-container/generar-acta-container.component';
 import { ListActasContainerComponent } from './containers/list-actas-container/list-actas-container.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
           actaTiposPagos: ActaTiposPagosResolver,
+          observacionesTrabajo: ObservacionesTrabajosResolver,
         },
       },
       {

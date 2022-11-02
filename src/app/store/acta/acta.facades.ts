@@ -128,4 +128,30 @@ export class ActaFacade {
   public getTotalActas$(): Observable<number> {
     return this.store.select(actaSelectors.getTotalActas);
   }
+
+  // GET COMENTARIOS FINALIZACION TRABAJOS
+  public getComentariosFinalizacionTrabajos(ot_id: number): void {
+    this.store.dispatch(
+      actaActions.getComentariosFinalizacionTrabajos({ ot_id })
+    );
+  }
+  public getComentariosFinalizacionTrabajosSuccess(
+    comentariosFinalizacionTrabajos: string
+  ): void {
+    this.store.dispatch(
+      actaActions.getComentariosFinalizacionTrabajosSuccess({
+        comentariosFinalizacionTrabajos,
+      })
+    );
+  }
+
+  public getComentariosFinalizacionTrabajosError(error: any): void {
+    this.store.dispatch(
+      actaActions.getComentariosFinalizacionTrabajosError({ error })
+    );
+  }
+
+  public getComentariosFinalizacionTrabajos$(): Observable<string> {
+    return this.store.select(actaSelectors.getComentariosFinalizacionTrabajos);
+  }
 }

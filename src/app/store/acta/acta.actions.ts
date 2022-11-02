@@ -150,3 +150,20 @@ export const getTotalActasError = createAction(
   '[ACTA] GET getTotalActas Error',
   props<{ error: any }>()
 );
+
+//  COMENTARIOS FINALIZACION DE TRABAJOS
+export const getComentariosFinalizacionTrabajos = createAction(
+  '[ACTA] GET getComentariosFinalizacionTrabajos',
+  props<{ ot_id: number }>()
+);
+
+export const getComentariosFinalizacionTrabajosSuccess = createAction(
+  '[ACTA] GET getComentariosFinalizacionTrabajos Success',
+  props<{
+    comentariosFinalizacionTrabajos: string;
+  }>()
+);
+export const getComentariosFinalizacionTrabajosError = createAction(
+  '[ACTA] GET getComentariosFinalizacionTrabajos Error',
+  props<{ error: any }>()
+);
