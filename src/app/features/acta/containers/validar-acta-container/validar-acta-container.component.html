@@ -61,22 +61,25 @@
         <div class="field col-12 ">
           <h2>Resumen del acta a aprobar</h2>
 
-          <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL'">
-            <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
-              [column_acciones]="false"></zwc-table-servicios>
-          </ng-container>
-
-          <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
-            <label>Porcentaje a pagar</label>
-            <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"></p-inputNumber>
-            <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
-              [column_acciones]="false"></zwc-table-servicios>
+          <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL' ||form.get('tipo_pago').value==='PORCENTAJE' ">
+            <zwc-table-servicios #tableServicesTotal mode_source="static" [data_source]="acta"
+              [cantidad_editable]="false" [column_acciones]="false">
+            </zwc-table-servicios>
           </ng-container>
 
           <ng-container *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'">
             <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalServicios_servicio"
               [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
           </ng-container>
+        </div>
+
+        <div class="field col-12">
+          <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
+            <label>Porcentaje a pagar</label>
+            <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"></p-inputNumber>
+            <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
+          </ng-container>
+          Total a pagar: {{total_a_pagar|currency : 'CLP' : '$':'.0-2':'es-CL'}}
         </div>
       </div>
     </div>
@@ -107,7 +110,7 @@
   </div>
 </div>
 
-
+<!-- MODALS -->
 <p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
   <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
   <ng-template pTemplate="footer">

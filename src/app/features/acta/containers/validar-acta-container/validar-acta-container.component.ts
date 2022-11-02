@@ -1,6 +1,9 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  OnChanges,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -61,6 +64,12 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   })
   tableServiciosAutorizarAdicionales: TableServiciosComponent;
 
+  @ViewChild('tableServicesTotal', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServicesTotal: TableServiciosComponent;
+
   @ViewChild('rechazoActaForm', {
     read: ViewRechazoComponent,
     static: false,
@@ -106,6 +115,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       )
     );
 
+  total_a_pagar = 0;
+
   // MODAL
   showModalRechazarActa = false;
 
@@ -113,35 +124,11 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     private actaFacade: ActaFacade,
     private route: ActivatedRoute,
     private logger: LogService,
-    private flujoOTFacade: FlujoOTFacade
+    private flujoOTFacade: FlujoOTFacade,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // TODO no funciona la validación del porcentaje
-    //// this.subscription.add(
-    ////   this.form.get('tipo_pago').valueChanges.subscribe(tipoPago => {
-    ////     if (tipoPago === 'PORCENTAJE') {
-    ////       this.logger.debug(`tipo_pago ${tipoPago}, set porcentaje validators`);
-    ////       this.form
-    ////         .get('porcentaje')
-    ////         .setValidators([
-    ////           Validators.required,
-    ////           CustomValidators.NoWhitespace,
-    ////           CustomValidators.NonZero,
-    ////           Validators.min(0),
-    ////           Validators.max(100),
-    ////         ]);
-    ////     } else {
-    ////       this.logger.debug(
-    ////         `tipo_pago ${tipoPago}, clear porcentaje validators`
-    ////       );
-    ////       this.form.get('porcentaje').clearValidators();
-    ////     }
-
-    ////     this.form.updateValueAndValidity();
-    ////   })
-    //// );
-
     this.subscription.add(
       this.route.data.subscribe(
         ({ servicios4acta, uos4acta, accionesOT, actaTiposPagos }) => {
@@ -208,6 +195,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                       v.servicio_numero_producto ===
                       service.servicio_numero_producto
                   ) !== undefined,
+                faltante_porcentaje_entero: service.faltante_porcentaje_entero,
                 unidad_obras: [],
               };
 
@@ -257,6 +245,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 tipo_servicio_id: -1,
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
+                faltante_porcentaje_entero: service.faltante_porcentaje_entero,
                 unidad_obras: [],
               };
 
@@ -292,6 +281,50 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           this.acta = [...this.acta_originales, ...this.acta_adicionales];
         }
       )
+    );
+
+    // OBTENER EL TOTAL A PAGAR DEPENDIENDO DEL TIPO DE PAGO
+    // CONFIGURAR PORCENTAJE FORM
+    this.subscription.add(
+      this.form.get('tipo_pago').valueChanges.subscribe(tipo_pago => {
+        this.detector.detectChanges();
+        if (tipo_pago) {
+          if (tipo_pago === 'TOTAL' || tipo_pago === 'PORCENTAJE')
+            this.total_a_pagar =
+              +this.tableServicesTotal?.totalServicios +
+              +this.tableServicesTotal?.totalUOs;
+
+          if (tipo_pago === 'PORCENTAJE') {
+            // Toma el porcentaje faltante de alguno de los items, y ése será el
+            // tope para la siguiente iteración
+            // Ej: si a la primera iteración se pagó 25%, el valor para el porcentaje
+            // se moverá entre 0 a 75
+            // Si no hay items, se deja en 0 y se deshabilita
+
+            this.form.get('porcentaje').setValidators([
+              Validators.required,
+              // this.noWhitespace,
+              // this.mustBeANumber,
+              // this.nonZero,
+              Validators.min(0),
+              Validators.max(this.acta[0].faltante_porcentaje_entero),
+            ]);
+            this.form
+              .get('porcentaje')
+              .setValue(`${this.acta[0].faltante_porcentaje_entero}`);
+          }
+        }
+      })
+    );
+
+    // CALCULAR PORCENTAJE
+    this.subscription.add(
+      this.form.get('porcentaje').valueChanges.subscribe(porcentaje => {
+        this.detector.detectChanges();
+        if (porcentaje) {
+          this.total_a_pagar = +this.total_a_pagar * (+porcentaje / 100);
+        }
+      })
     );
   }
 

@@ -15,6 +15,7 @@ export interface CarritoService {
   servicio_nombre: string;
   tipo_servicio_descripcion: string;
   tipo_servicio_id: number;
+  faltante_porcentaje_entero?: number;
 
   unidad_obras: CarritoUO[];
 }
