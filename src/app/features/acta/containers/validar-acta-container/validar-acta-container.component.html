@@ -81,16 +81,18 @@
             <div style="text-align: center;">
               <span style="color: #015682;font-weight: 700;">Total a pagar:</span> {{total_a_pagar|currency : 'CLP' :
               '$':'.0-2':'es-CL'}}
+
+              <div class="message" style="margin-top:10px"
+                *ngIf="form.get('tipo_pago').value==='POR_SERVICIO' && !tablePagoPorServicio?.valid ">
+                <p-message severity="error" text="Debe escoger al menos un servicio o unidad de obra" styleClass="mr-2">
+                </p-message>
+              </div>
             </div>
           </div>
         </ng-container>
       </div>
     </div>
   </ng-container>
-
-
-
-
 
 
   <p-divider align="center"></p-divider>

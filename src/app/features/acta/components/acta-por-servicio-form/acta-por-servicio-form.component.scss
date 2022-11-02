@@ -22,27 +22,51 @@ table {
     border-right: 1px solid #d8d8d8 !important;
     border-bottom: 1px solid #d8d8d8 !important;
     background: white;
-    font-size: 11px;
+    font-size: var(--size-text-sigo);
 
-    &.label-table {
-      color: white;
-      font-size: 12px;
-      padding: 6px;
-      // border-radius: 4px;
-      font-weight: 500;
-      letter-spacing: 0.06rem;
-      background: #00b5ad;
-    }
+    // &.label-table {
+    //   color: white;
+    //   font-size: 12px;
+    //   padding: 6px;
+    //   // border-radius: 4px;
+    //   font-weight: 500;
+    //   letter-spacing: 0.06rem;
+    //   background: #00b5ad;
+    // }
 
-    &.data-secundaria {
-      font-size: 0.9rem;
-      font-weight: 400;
-    }
+    // &.data-secundaria {
+    //   font-size: 0.9rem;
+    //   font-weight: 400;
+    // }
   }
 
   tfoot {
     td {
       background-color: #efefef;
     }
+  }
+}
+
+
+
+:host ::ng-deep {
+  .p-tag {
+    font-size: 0.5rem;
+    letter-spacing: 0.02rem;
+  }
+
+  .p-tag.pendiente {
+    background-color: #F2D7A9 !important;
+    color: #ac7619;
+  }
+
+  .p-tag.aceptado {
+    background-color: #9bd18c !important;
+    color: #2a7815;
+  }
+
+  .p-tag.rechazado {
+    background-color: #f6a3a3 !important;
+    color: #a42929;
   }
 }
