@@ -12,7 +12,17 @@
                 <th style="background: var(--bg-th-servicios)">Cantidad</th>
                 <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio Un.</th>
                 <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total</th>
-                <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">Acciones</th>
+                <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
+                    Acciones
+                    <ng-container *ngIf="accion_aprobacion_servicio_adic">
+                        <div style="display:flex;flex-direction: column;align-items: center;color:white;"
+                            [ngClass]="formAprobarTodos.get('all').value?'recha-color':'aprob-color'">
+                            {{formAprobarTodos.get('all').value?'Rechazada':'Aprobada'}}
+                            <p-inputSwitch [formControl]="formAprobarTodos.get('all')">
+                            </p-inputSwitch>
+                        </div>
+                    </ng-container>
+                </th>
 
                 <th>Cod</th>
                 <th>Descripción</th>

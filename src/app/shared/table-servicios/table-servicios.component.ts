@@ -60,6 +60,9 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() accion_aprobacion_servicio_adic = false;
 
   formTable: FormGroup = new FormGroup({ table: new FormArray([]) });
+  formAprobarTodos: FormGroup = new FormGroup({
+    all: new FormControl(false),
+  });
 
   totalServicios = 0;
   totalUOs = 0;
@@ -123,6 +126,16 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
             this.totalUOs = this.totalUOs + precio_total_uo;
           });
         }
+      })
+    );
+
+    // OBSERVAR APROBACION DE TODOS LOS ADICIONALES
+    this.subscription.add(
+      this.formAprobarTodos.get('all').valueChanges.subscribe(value => {
+        const serviciosForm = this.formTable.get('table') as FormArray;
+        serviciosForm.controls.map(control =>
+          control.get('validar_adicional').setValue(value)
+        );
       })
     );
   }
