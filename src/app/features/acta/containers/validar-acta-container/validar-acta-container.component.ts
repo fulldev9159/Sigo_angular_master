@@ -27,6 +27,7 @@ import { LogService } from '@log';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
+import { ActaPorServicioFormComponent } from '../../components/acta-por-servicio-form/acta-por-servicio-form.component';
 
 interface Detalle {
   servicio: {
@@ -70,6 +71,12 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   })
   tableServicesTotal: TableServiciosComponent;
 
+  @ViewChild('tablePagoPorServicio', {
+    read: ActaPorServicioFormComponent,
+    static: false,
+  })
+  tablePagoPorServicio: ActaPorServicioFormComponent;
+
   @ViewChild('rechazoActaForm', {
     read: ViewRechazoComponent,
     static: false,
@@ -89,8 +96,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl(null, [Validators.required]),
-    porcentaje: new FormControl(100), // 149 TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
-
+    porcentaje: new FormControl(100),
     por_servicio: new FormGroup({
       servicios: new FormArray([]),
       unidades_obra: new FormArray([]),
@@ -287,13 +293,21 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     // CONFIGURAR PORCENTAJE FORM
     this.subscription.add(
       this.form.get('tipo_pago').valueChanges.subscribe(tipo_pago => {
+        this.form.get('porcentaje').clearValidators();
+        this.form.get('porcentaje').updateValueAndValidity();
         this.detector.detectChanges();
         if (tipo_pago) {
+          // OBTENER EL TOTAL A PAGAR
           if (tipo_pago === 'TOTAL' || tipo_pago === 'PORCENTAJE')
             this.total_a_pagar =
               +this.tableServicesTotal?.totalServicios +
               +this.tableServicesTotal?.totalUOs;
 
+          if (tipo_pago === 'POR_SERVICIO')
+            this.total_a_pagar =
+              +this.totalServicios_servicio + +this.totalUO_servicio;
+
+          // CONFIGURAR FORM PAGO
           if (tipo_pago === 'PORCENTAJE') {
             // Toma el porcentaje faltante de alguno de los items, y ése será el
             // tope para la siguiente iteración
@@ -385,6 +399,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   }
 
   get valid(): boolean {
+    if (this.form.get('tipo_pago').value === 'POR_SERVICIO')
+      return this.form.valid && this.tablePagoPorServicio?.valid;
     return this.form.valid;
   }
 
@@ -551,6 +567,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         }
       }
     );
+
+    this.total_a_pagar = +this.totalServicios_servicio + +this.totalUO_servicio;
   }
 
   updateTotalUO(): void {
@@ -574,6 +592,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         }
       }
     );
+
+    this.total_a_pagar = +this.totalServicios_servicio + +this.totalUO_servicio;
   }
 
   updateCantidadEnviar(

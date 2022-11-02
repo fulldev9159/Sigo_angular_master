@@ -56,7 +56,7 @@
 
             <ng-container *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'">
               <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalServicios_servicio"
-                [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
+                [totalUO]="totalUO_servicio" #tablePagoPorServicio></zwc-acta-por-servicio-form>
             </ng-container>
           </div>
 
@@ -100,7 +100,8 @@
       <div *ngIf="accionExist('OT_VALIDAR_ACTA') && serviciosAdicionalesAprobados() "
         class="field col-12 md:col-4 lg:col-4 xl:col-4">
         <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta" icon="ok"
-          Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()"></zwc-pbutton-sending>
+          Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()" [Pdisabled]="!this.valid">
+        </zwc-pbutton-sending>
       </div>
       <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
         <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar Acta" icon="nok"
