@@ -30,16 +30,6 @@
     </div>
   </div>
 
-  <p-divider align="center">
-    <span class="p-tag">Observaciones</span>
-  </p-divider>
-
-  <div class="card">
-    <div class=" grid"></div>
-  </div>
-
-
-  <!-- 181 TODO: QUE LA SELECCION DE TIPO DE PAGO APAREZCA SOLO SI APRUEBA TODOS LOS ADICIONALES -->
 
   <ng-container *ngIf="serviciosAdicionalesAprobados()">
     <p-divider align="center">
@@ -48,45 +38,57 @@
 
 
     <div class="card">
-      <div class=" grid">
+      <div class=" grid" style="justify-content: center;">
         <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
           <zwc-pdropdown [control]="form.get('tipo_pago')" Label="*Tipo de pago" dropdown_id="select-tipo-pago"
             [data]="actaTipoPago" Pplaceholder="Seleccione un tipo pago"></zwc-pdropdown>
         </div>
-      </div>
-    </div>
 
-    <div class="card" *ngIf="form.get('tipo_pago').value!==null">
-      <div class=" grid">
-        <div class="field col-12 ">
-          <h2>Resumen del acta a aprobar</h2>
+        <ng-container *ngIf="form.get('tipo_pago').value!==null">
+          <div class="field col-12 ">
+            <h2 style="text-align: center;color: #015682;">Resumen del acta a pagar</h2>
+            <br>
+            <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL' ||form.get('tipo_pago').value==='PORCENTAJE' ">
+              <zwc-table-servicios #tableServicesTotal mode_source="static" [data_source]="acta"
+                [cantidad_editable]="false" [column_acciones]="false">
+              </zwc-table-servicios>
+            </ng-container>
 
-          <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL' ||form.get('tipo_pago').value==='PORCENTAJE' ">
-            <zwc-table-servicios #tableServicesTotal mode_source="static" [data_source]="acta"
-              [cantidad_editable]="false" [column_acciones]="false">
-            </zwc-table-servicios>
-          </ng-container>
+            <ng-container *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'">
+              <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalServicios_servicio"
+                [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
+            </ng-container>
+          </div>
 
-          <ng-container *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'">
-            <zwc-acta-por-servicio-form [form]="form.get('por_servicio')" [totalServicios]="totalServicios_servicio"
-              [totalUO]="totalUO_servicio"></zwc-acta-por-servicio-form>
-          </ng-container>
-        </div>
-
-        <div class="field col-12">
-          <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
-            <label>Porcentaje a pagar</label>
-            <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"></p-inputNumber>
-            <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
-          </ng-container>
-          Total a pagar: {{total_a_pagar|currency : 'CLP' : '$':'.0-2':'es-CL'}}
-        </div>
+          <div class="field col-12">
+            <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
+              <label>Porcentaje a pagar</label>
+              <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"></p-inputNumber>
+              <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
+            </ng-container>
+            <div style="text-align: center;">
+              <span style="color: #015682;font-weight: 700;">Total a pagar:</span> {{total_a_pagar|currency : 'CLP' :
+              '$':'.0-2':'es-CL'}}
+            </div>
+          </div>
+        </ng-container>
       </div>
     </div>
   </ng-container>
 
 
+
+
+  <p-divider align="center">
+    <span class="p-tag">Observaciones</span>
+  </p-divider>
+
+  <div class="card">
+    <div class=" grid"></div>
+  </div>
+
   <p-divider align="center"></p-divider>
+
 
   <div class="card">
     <div class=" grid">

@@ -1,0 +1,18 @@
+.container-acta {
+    padding: 10px;
+
+    textarea {
+        width: 86vw;
+        height: 154px;
+        padding: 10px;
+        border: 0.07rem solid #bcbfc1;
+    }
+}
+
+:host ::ng-deep {
+    .p-inputnumber-input {
+        height: 70%;
+        width: 98px;
+        margin-left: 10px;
+    }
+}
