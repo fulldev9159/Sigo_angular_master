@@ -1,0 +1,38 @@
+<div class="container-acta">
+    <h1>Validación del Acta</h1>
+
+    <p-divider align="center">
+        <span class="p-tag">Servicios</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-autorizar-adicionales">
+                <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
+                    [column_acciones]="false">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Observaciones</span>
+    </p-divider>
+
+    <p-divider align="center">
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                    Atrás
+                </button>
+            </div>
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar pago del acta"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarPagoActa()"></zwc-pbutton-sending>
+            </div>
+        </div>
+    </div>
+</div>
