@@ -118,3 +118,18 @@ export const getAllMotivoRechazoOTError = createAction(
   '[FLUJO OT] GET getAllMotivoRechazoOT Error',
   props<{ error: any }>()
 );
+
+//  CONFIRMAR RECHAZO OBRAS
+export const confirmarRechazoObras = createAction(
+  '[FLUJO OT] GET ConfirmarRechazoObras',
+  props<{ ot_id: number }>()
+);
+
+export const confirmarRechazoObrasSuccess = createAction(
+  '[FLUJO OT] GET ConfirmarRechazoObras Success',
+  props<{ response: Response<any> }>()
+);
+export const confirmarRechazoObrasError = createAction(
+  '[FLUJO OT] GET confirmarRechazoObras Error',
+  props<{ error: any }>()
+);

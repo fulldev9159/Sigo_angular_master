@@ -91,4 +91,12 @@ export class FlujoOtHttpService {
       { tipo }
     );
   }
+
+  // CONFIRMAR RECHAZO OBRAS
+  confirmarRechazoObras(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_confirma_rechazo_operaciones/update`,
+      { ot_id }
+    );
+  }
 }

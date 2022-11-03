@@ -1,14 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
   CarritoService,
   DetalleServicioLastActa,
   DetalleUnidadObraLastActa,
+  Dropdown,
   LastActa,
+  RequestAprobarRechazarOperaciones,
 } from '@model';
-import { ActaFacade } from '@storeOT/acta/acta.facades';
-import { Subscription } from 'rxjs';
+import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
+import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
+import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-validar-acta-operaciones-container',
@@ -20,23 +23,54 @@ export class ValidarActaOperacionesContainerComponent
 {
   subscription: Subscription = new Subscription();
 
-  accionesOT: Accion[] = [];
+  @ViewChild('rechazoActaForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoActaForm: ViewRechazoComponent;
 
+  accionesOT: Accion[] = [];
   acta: CarritoService[] = [];
 
   ot_id: number;
+  tipo_pago: string;
 
-  constructor(private actaFacade: ActaFacade, private route: ActivatedRoute) {}
+  motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.motivo > b.motivo ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.motivo,
+          code: value.id,
+        }))
+      )
+    );
+
+  // MODALS
+  displayModalAprobacionOperaciones = false;
+  showModalRechazarActa = false;
+
+  constructor(
+    private flujoOTFacade: FlujoOTFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ accionesOT, lastActa }) => {
         console.log(accionesOT);
         if (accionesOT) this.accionesOT = accionesOT;
+
         let lastActaData: LastActa = lastActa?.data;
-        console.log(lastActaData);
 
         this.ot_id = lastActaData?.ot_id;
+        this.tipo_pago = lastActaData?.tipo_pago;
+
+        // PROCESAR DATA SERVICIOS PARA TABLA
         let servicios: DetalleServicioLastActa[] =
           lastActaData?.many_acta_detalle_servicio;
         let uob: DetalleUnidadObraLastActa[] =
@@ -259,9 +293,41 @@ export class ValidarActaOperacionesContainerComponent
     );
   }
 
+  accionExist(accion: string): boolean {
+    return this.accionesOT.find(v => v.slug === accion) !== undefined;
+  }
+
+  aprobarActaOperaciones(): void {
+    const request: RequestAprobarRechazarOperaciones = {
+      ot_id: this.ot_id,
+      estado: 'APROBAR',
+    };
+    this.flujoOTFacade.aprobarRechazarOperaciones(request);
+    this.displayModalAprobacionOperaciones = false;
+  }
+
+  displayModalRechazarActa(): void {
+    this.flujoOTFacade.getMotivosRechazo('VALIDACION_OPERACIONES');
+    this.showModalRechazarActa = true;
+  }
+
+  closeModalRechazarActa(): void {
+    this.showModalRechazarActa = false;
+    this.rechazoActaForm.formRechazo.reset();
+  }
+
+  rechazarActa(): void {
+    const request: RequestAprobarRechazarOperaciones = {
+      ot_id: this.ot_id,
+      estado: 'RECHAZAR',
+      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
+      tipo_rechazo_id: this.rechazoActaForm?.formRechazo.get('tipo_id').value,
+    };
+    this.flujoOTFacade.aprobarRechazarOperaciones(request);
+    this.showModalRechazarActa = false;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-  validarPagoActa(): void {}
 }
