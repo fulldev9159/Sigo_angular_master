@@ -18,15 +18,17 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   registrosListActas: listarActa[] = [];
   registrosDetallActa: ResponseDetalleActa;
   actaIdentify: number = 0;
+  titleArray: {[key: string]: string}
 
   constructor(private actaFacade: ActaFacade, private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {    
     this.subscription.add(
       this.route.data.subscribe( ({listActas}) => {        
-        this.registrosListActas = listActas?.data?.items;      
+        this.registrosListActas = listActas?.data?.items;
       })
     );
+    this.titleArray = {VALIDACION_ACTA: "Validacion del Acta", INF_TRAB_FIN_ACTA: "Informe de trabajos finalizados"};    
   }
 
   OnDetallActa(acta_id:number): void {
@@ -34,10 +36,19 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
     if (this.actaIdentify != acta_id)
       this.actaFacade.getDetalleActa(acta_id);
       
-    this.store.select<ResponseDetalleActa>(getDetalleActa).subscribe( detallActa => {
-      this.registrosDetallActa = detallActa;
+    this.store.select<ResponseDetalleActa>(getDetalleActa).subscribe( detallActa => {      
+      
+      this.registrosDetallActa = {...detallActa, data: {...detallActa?.data, items: detallActa?.data?.items?.map(item => ({
+        ...item,
+        observacion: JSON.parse(item.metadata)?.observacion
+      }))}};    
+
       this.actaIdentify = acta_id;
     });
+  }
+
+  OnDescargarActa(): void {
+    
   }
 
   ngOnDestroy(): void {

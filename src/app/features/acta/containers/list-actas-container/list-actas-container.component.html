@@ -10,7 +10,7 @@
 
                 <ul *ngFor="let acta of registrosListActas" class="actas-list">
                     <li id={{acta.id}} (click)="OnDetallActa(acta.id)">
-                        {{acta.created_at}}
+                        {{acta.created_at | date:'yyyy-MM-dd hh:mm:ss'}}
                     </li>
                 </ul>
             </div>
@@ -18,41 +18,32 @@
                 <p-divider align="center">
                     <span class="p-tag">Detalle Actas</span>
                 </p-divider>
-                <input type="button" class="p-button" value="Descargar Acta">
-
-
+                <div *ngIf="registrosDetallActa?.pdf_acta?.size>0" class="p-button">
+                    <img src="https://img.icons8.com/ios/2x/export-pdf-2.png" class="download-pdf-icon">
+                    <input type="button" class="download-label" value="Descargar Acta" />
+                </div>
                 <div class="content-detail">
-                    <div class="item-group">
-                        <h4>Fechas</h4>
-                        <div class="item-row grid-container">
-                            <span>Fechas Creación:</span>
-                            <label>{{registrosDetallActa?.acta?.created_at}}</label>
-                            <span>Fechas Termino Estimada:</span>
-                            <label>{{registrosDetallActa?.acta?.validacion_fecha}}</label>
+                    <div class="content-head">
+                        <div class="item-group">
+                            <h4>Fechas</h4>
+                            <div class="item-row grid-container">
+                                <span>Fechas Creación:</span>
+                                <label>{{registrosDetallActa?.acta?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</label>
+                                <span>Fechas Termino Estimada:</span>
+                                <label>{{registrosDetallActa?.acta?.validacion_fecha | date:'yyyy-MM-dd
+                                    hh:mm:ss'}}</label>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="item-group">
-                        <h4>Observaciones con Proveedor</h4>
-                        <div class="item-row">
-                            <span class="item-tab">Se genera acta final</span>
-                            <label class="item-descript">por: {{registrosDetallActa?.acta?.autorizacion_estado}} en
-                                {{registrosDetallActa?.acta?.created_at}}</label>
-                        </div>
-                    </div>
-
-                    <div class="item-group">
-                        <h4>Observaciones con Gerencia</h4>
-                        <div class="item-row">
-                            <span class="item-tab">Se asigna otec</span>
-                            <label class="item-descript">por:CONSTANZA MACARENA ADASME HERRERA en 22-11-2021
-                                11:12:05
-                                a.m.</label>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-tab">Servicio validado OK</span>
-                            <label class="item-descript">por: Mitchel Vergara Villablanca en 22-11-2021 4:16:35
-                                p.m.</label>
+                    <div class="content-body" *ngFor="let it of registrosDetallActa?.data?.items">
+                        <div class="item-group">
+                            <h4>{{titleArray[it.evento]}}</h4>
+                            <div class="item-row">
+                                <span class="item-tab">{{it.mensaje}}</span>
+                                <label class="item-metadata">{{it.observacion}}</label>
+                                <label class="item-descript">por: {{registrosDetallActa?.acta?.autorizacion_estado}} en
+                                    {{registrosDetallActa?.acta?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
+                            </div>
                         </div>
                     </div>
                 </div>
