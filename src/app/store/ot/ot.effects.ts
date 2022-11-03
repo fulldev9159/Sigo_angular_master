@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import {
   AfterHttpService,
   NumeroInternoHttpService,
@@ -8,6 +8,7 @@ import {
 import * as otActions from './ot.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { OTFacade } from './ot.facades';
 
 @Injectable()
 export class OTEffects {
@@ -15,7 +16,8 @@ export class OTEffects {
     private actions$: Actions,
     private otHttpService: OtHttpService,
     private afterHttp: AfterHttpService,
-    private numeroInternoHttp: NumeroInternoHttpService
+    private numeroInternoHttp: NumeroInternoHttpService,
+    private ot: OTFacade
   ) {}
 
   // CREATE OT
@@ -145,13 +147,22 @@ export class OTEffects {
   getBandejaOTEjecucion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getBandejaOTEjecucion),
-      concatMap(({ request }) =>
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response => otActions.getBandejaOTEjecucionSuccess({ response })),
-          catchError(error =>
-            of(otActions.getBandejaOTEjecucionError({ error }))
+      concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) =>
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: 'EN_EJECUCION',
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response =>
+              otActions.getBandejaOTEjecucionSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getBandejaOTEjecucionError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -160,13 +171,22 @@ export class OTEffects {
   getBandejaOTAbiertas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAbiertas),
-      concatMap(({ request }) =>
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response => otActions.getBandejaOTAbiertasSuccess({ response })),
-          catchError(error =>
-            of(otActions.getBandejaOTAbiertasError({ error }))
+      concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) =>
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: 'ABIERTAS',
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response =>
+              otActions.getBandejaOTAbiertasSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getBandejaOTAbiertasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -175,13 +195,22 @@ export class OTEffects {
   getBandejaOTCerradas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getBandejaOTCerradas),
-      concatMap(({ request }) =>
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response => otActions.getBandejaOTCerradasSuccess({ response })),
-          catchError(error =>
-            of(otActions.getBandejaOTCerradasError({ error }))
+      concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) =>
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: 'CERRADAS',
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response =>
+              otActions.getBandejaOTCerradasSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getBandejaOTCerradasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -190,13 +219,22 @@ export class OTEffects {
   getBandejaOTAnuladas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAnuladas),
-      concatMap(({ request }) =>
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response => otActions.getBandejaOTAnuladasSuccess({ response })),
-          catchError(error =>
-            of(otActions.getBandejaOTAnuladasError({ error }))
+      concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) =>
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: 'ANULADAS',
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response =>
+              otActions.getBandejaOTAnuladasSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getBandejaOTAnuladasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -205,13 +243,22 @@ export class OTEffects {
   getBandejaOTQuebradas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getBandejaOTQuebradas),
-      concatMap(({ request }) =>
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response => otActions.getBandejaOTQuebradasSuccess({ response })),
-          catchError(error =>
-            of(otActions.getBandejaOTQuebradasError({ error }))
+      concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) =>
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: 'EN_TRAMITE',
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response =>
+              otActions.getBandejaOTQuebradasSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getBandejaOTQuebradasError({ error }))
+            )
           )
-        )
       )
     )
   );
