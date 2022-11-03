@@ -28,6 +28,11 @@ export interface StateOT {
   planDeProyecto: PlanProyecto[];
   sitioPlan: Sitio[];
 
+  filtrosOT: {
+    filtro_propietario: string;
+    filtro_tipo: number;
+  };
+
   // BANDEJAS
   bandejaOTEjecucion: OT[];
   bandejaOTAbiertas: OT[];
@@ -46,6 +51,12 @@ export const initialState: StateOT = {
   areaDeNegocio: [],
   planDeProyecto: [],
   sitioPlan: [],
+
+  filtrosOT: {
+    filtro_propietario: 'TODAS',
+    filtro_tipo: 0,
+  },
+
   bandejaOTEjecucion: [],
   bandejaOTAbiertas: [],
   bandejaOTCerradas: [],

@@ -43,30 +43,11 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
     ];
 
     // GET BANDEJAS
-    let filtros = {
-      filtro_propietario: 'TODAS',
-      filtro_tipo: 0,
-    };
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'EN_EJECUCION',
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'ABIERTAS',
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'CERRADAS',
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'ANULADAS',
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'EN_TRAMITE',
-      ...filtros,
-    });
+    this.otFacade.getBandejaOT('EN_EJECUCION');
+    this.otFacade.getBandejaOT('ABIERTAS');
+    this.otFacade.getBandejaOT('CERRADAS');
+    this.otFacade.getBandejaOT('ANULADAS');
+    this.otFacade.getBandejaOT('EN_TRAMITE');
   }
 
   ngOnDestroy(): void {

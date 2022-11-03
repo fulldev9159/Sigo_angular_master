@@ -50,6 +50,12 @@ export const getSitioPlanProyecto = createSelector(
   (state: reducer.StateOT) => state.sitioPlan
 );
 
+// FILTROS OT
+export const getFiltrosOT = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.filtrosOT
+);
+
 // BANDEJAS
 export const getBandejaOTEjecucion = createSelector(
   selectOT,

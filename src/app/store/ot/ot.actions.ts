@@ -43,10 +43,7 @@ export const createOTError = createAction(
 
 // BANDEJA OT EJECUCION
 export const getBandejaOTEjecucion = createAction(
-  '[OT] GET getBandejaOTEjecucion',
-  props<{
-    request: RequestBandejaOT;
-  }>()
+  '[OT] GET getBandejaOTEjecucion'
 );
 
 export const getBandejaOTEjecucionSuccess = createAction(
@@ -61,10 +58,7 @@ export const getBandejaOTEjecucionError = createAction(
 
 // BANDEJA OT ABIERTAS
 export const getBandejaOTAbiertas = createAction(
-  '[OT] GET getBandejaOTAbiertas',
-  props<{
-    request: RequestBandejaOT;
-  }>()
+  '[OT] GET getBandejaOTAbiertas'
 );
 
 export const getBandejaOTAbiertasSuccess = createAction(
@@ -79,10 +73,7 @@ export const getBandejaOTAbiertasError = createAction(
 
 // BANDEJA OT CERRADAS
 export const getBandejaOTCerradas = createAction(
-  '[OT] GET getBandejaOTCerradas',
-  props<{
-    request: RequestBandejaOT;
-  }>()
+  '[OT] GET getBandejaOTCerradas'
 );
 
 export const getBandejaOTCerradasSuccess = createAction(
@@ -97,10 +88,7 @@ export const getBandejaOTCerradasError = createAction(
 
 // BANDEJA OT ANULADAS
 export const getBandejaOTAnuladas = createAction(
-  '[OT] GET getBandejaOTAnuladas',
-  props<{
-    request: RequestBandejaOT;
-  }>()
+  '[OT] GET getBandejaOTAnuladas'
 );
 
 export const getBandejaOTAnuladasSuccess = createAction(
@@ -115,10 +103,7 @@ export const getBandejaOTAnuladasError = createAction(
 
 // BANDEJA OT QUEBRADAS
 export const getBandejaOTQuebradas = createAction(
-  '[OT] GET getBandejaOTQuebradas',
-  props<{
-    request: RequestBandejaOT;
-  }>()
+  '[OT] GET getBandejaOTQuebradas'
 );
 
 export const getBandejaOTQuebradasSuccess = createAction(
