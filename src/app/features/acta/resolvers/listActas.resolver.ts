@@ -35,6 +35,7 @@ export class ListActasResolver
     }
     return this.service.getActas(id).pipe(
       tap(response => {
+        console.log(response)
         this.actaFacade.getActasSuccess(response.data.items);
       }),
       catchError(error => {

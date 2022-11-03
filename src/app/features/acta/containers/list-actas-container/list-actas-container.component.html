@@ -1,1 +1,63 @@
-<p>list-actas-container works!</p>
+<div class="container-acta">
+    <h1>Acta</h1>
+    <div class="card">
+        <div class="formgrid grid info-base">
+
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <p-divider align="center">
+                    <span class="p-tag">Actas</span>
+                </p-divider>
+
+                <ul *ngFor="let acta of registrosListActas" class="actas-list">
+                    <li id={{acta.id}} (click)="OnDetallActa(acta.id)">
+                        {{acta.created_at}}
+                    </li>
+                </ul>
+            </div>
+            <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+                <p-divider align="center">
+                    <span class="p-tag">Detalle Actas</span>
+                </p-divider>
+                <input type="button" class="p-button" value="Descargar Acta">
+
+
+                <div class="content-detail">
+                    <div class="item-group">
+                        <h4>Fechas</h4>
+                        <div class="item-row grid-container">
+                            <span>Fechas Creación:</span>
+                            <label>{{registrosDetallActa?.acta?.created_at}}</label>
+                            <span>Fechas Termino Estimada:</span>
+                            <label>{{registrosDetallActa?.acta?.validacion_fecha}}</label>
+                        </div>
+                    </div>
+
+                    <div class="item-group">
+                        <h4>Observaciones con Proveedor</h4>
+                        <div class="item-row">
+                            <span class="item-tab">Se genera acta final</span>
+                            <label class="item-descript">por: {{registrosDetallActa?.acta?.autorizacion_estado}} en
+                                {{registrosDetallActa?.acta?.created_at}}</label>
+                        </div>
+                    </div>
+
+                    <div class="item-group">
+                        <h4>Observaciones con Gerencia</h4>
+                        <div class="item-row">
+                            <span class="item-tab">Se asigna otec</span>
+                            <label class="item-descript">por:CONSTANZA MACARENA ADASME HERRERA en 22-11-2021
+                                11:12:05
+                                a.m.</label>
+                        </div>
+                        <div class="item-row">
+                            <span class="item-tab">Servicio validado OK</span>
+                            <label class="item-descript">por: Mitchel Vergara Villablanca en 22-11-2021 4:16:35
+                                p.m.</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

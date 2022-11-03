@@ -28,3 +28,5 @@ export const getDetalleActa = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.detalleActa
 );
+
+

@@ -26,6 +26,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
     '.xls': 'pi-file-excel',
     '.csv': 'pi-file-excel',
   };
+
   constructor(private route: ActivatedRoute) {
     this.API_URL = environment.api;
   }
