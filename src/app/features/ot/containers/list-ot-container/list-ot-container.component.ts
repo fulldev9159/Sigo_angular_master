@@ -53,4 +53,23 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  reloadBandeja({
+    filtro_propietario,
+    filtro_tipo,
+  }: {
+    filtro_propietario: string;
+    filtro_tipo: number;
+  }): void {
+    // GET BANDEJAS
+    this.otFacade.updateFiltros({
+      filtro_propietario,
+      filtro_tipo,
+    });
+    this.otFacade.getBandejaOT('EN_EJECUCION');
+    this.otFacade.getBandejaOT('ABIERTAS');
+    this.otFacade.getBandejaOT('CERRADAS');
+    this.otFacade.getBandejaOT('ANULADAS');
+    this.otFacade.getBandejaOT('EN_TRAMITE');
+  }
 }

@@ -1,6 +1,6 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
   <div content>
-    <zwc-list-ot-filtros></zwc-list-ot-filtros>
+    <zwc-list-ot-filtros (valueChanges)="reloadBandeja($event)"></zwc-list-ot-filtros>
 
     <div class="card" style="margin-top: 10px;padding: 0;">
       <p-tabView>

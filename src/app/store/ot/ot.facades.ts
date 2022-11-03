@@ -120,6 +120,21 @@ export class OTFacade {
   }
 
   // FILTROS OT
+  public updateFiltros({
+    filtro_propietario,
+    filtro_tipo,
+  }: {
+    filtro_propietario: string;
+    filtro_tipo: number;
+  }): void {
+    this.store.dispatch(
+      otActions.updateFiltrosOT({
+        filtro_propietario,
+        filtro_tipo,
+      })
+    );
+  }
+
   public getFiltrosOT$(): Observable<{
     filtro_propietario: string;
     filtro_tipo: number;

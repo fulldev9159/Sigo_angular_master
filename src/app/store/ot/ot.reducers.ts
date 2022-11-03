@@ -121,5 +121,15 @@ export const reducerOT = createReducer(
   on(OTActions.getBandejaOTQuebradasSuccess, (state, { response }) => ({
     ...state,
     bandejaOTQuebradas: response.data.items,
-  }))
+  })),
+  on(
+    OTActions.updateFiltrosOT,
+    (state, { filtro_propietario, filtro_tipo }) => ({
+      ...state,
+      filtrosOT: {
+        filtro_propietario,
+        filtro_tipo,
+      },
+    })
+  )
 );

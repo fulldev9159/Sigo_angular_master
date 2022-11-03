@@ -41,6 +41,15 @@ export const createOTError = createAction(
   props<{ error: any }>()
 );
 
+// FILTROS OT
+export const updateFiltrosOT = createAction(
+  '[OT] update filtros OT',
+  props<{
+    filtro_propietario: string;
+    filtro_tipo: number;
+  }>()
+);
+
 // BANDEJA OT EJECUCION
 export const getBandejaOTEjecucion = createAction(
   '[OT] GET getBandejaOTEjecucion'
