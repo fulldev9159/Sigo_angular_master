@@ -3,9 +3,11 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -141,6 +143,14 @@ export const getTotalActas = createAction(
   }>()
 );
 
+// GET ACTAS
+export const getActas = createAction(
+  '[ACTA] GET getActas',
+  props<{
+    ot_id: number;
+  }>()
+);
+
 export const getTotalActasSuccess = createAction(
   '[ACTA] GET getTotalActas Success',
   props<{ totalActas: number }>()
@@ -165,5 +175,33 @@ export const getComentariosFinalizacionTrabajosSuccess = createAction(
 );
 export const getComentariosFinalizacionTrabajosError = createAction(
   '[ACTA] GET getComentariosFinalizacionTrabajos Error',
+  props<{ error: any }>()
+);
+
+export const getActasSuccess = createAction(
+  '[ACTA] GET getActas Success',
+  props<{ actas: listarActa[] }>()
+);
+
+export const getActasError = createAction(
+  '[ACTA] GET getActas Error',
+  props<{ error: any }>()
+);
+
+// GET DETALLES ACTAS
+export const getDetalleActa = createAction(
+  '[ACTA] GET getDetalleActa',
+  props<{
+    acta_id: number;
+  }>()
+);
+
+export const getDetalleActaSuccess = createAction(
+  '[ACTA] GET getDetalleActa Success',
+  props<{ response: ResponseDetalleActa }>()
+);
+
+export const getDetalleActaError = createAction(
+  '[ACTA] GET getDetalleActa Error',
   props<{ error: any }>()
 );

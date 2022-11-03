@@ -6,9 +6,11 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -121,6 +123,16 @@ export class ActaHttpService {
     );
   }
 
+  // LISTAR ACTAS
+  getActas(ot_id: number): Observable<Response<{ items: listarActa[] }>> {
+    return this.http.post<Response<{ items: listarActa[] }>>(
+      `${this.API_URL}/ot/acta/get_by_otid`,
+      {
+        ot_id,
+      }
+    );
+  }
+
   // OBTENER COMENTARIOS FINALIZACION DE TRABAJOS
   getComentatiosfinalizacionTrabajos(
     ot_id: number
@@ -130,5 +142,15 @@ export class ActaHttpService {
     return this.http.post<
       Response<{ ot_id: number; acta_id: number; observacion: string }>
     >(`${this.API_URL}/ot/acta/trabajo/finalizado/observacion/get`, { ot_id });
+  }
+
+  // DETALLES DE UN ACTA
+  detallesActa(acta_id: number): Observable<ResponseDetalleActa> {
+    return this.http.post<ResponseDetalleActa>(
+      `${this.API_URL}/ot/acta/get_detalle_bitacora`,
+      {
+        acta_id,
+      }
+    );
   }
 }

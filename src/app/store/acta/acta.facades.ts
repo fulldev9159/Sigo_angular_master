@@ -4,9 +4,11 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -153,5 +155,34 @@ export class ActaFacade {
 
   public getComentariosFinalizacionTrabajos$(): Observable<string> {
     return this.store.select(actaSelectors.getComentariosFinalizacionTrabajos);
+  }
+
+  // GET ACTAS
+  // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
+  public getActasSuccess(actas: listarActa[]): void {
+    this.store.dispatch(actaActions.getActasSuccess({ actas }));
+  }
+
+  public getActasError(error: any) {
+    this.store.dispatch(actaActions.getActasError({ error }));
+  }
+
+  // GET DETALLE ACTA
+  // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
+
+  public getDetalleActa(acta_id: number): void {
+    this.store.dispatch(actaActions.getDetalleActa({ acta_id }));
+  }
+
+  public getDetalleActaSuccess(response: ResponseDetalleActa): void {
+    this.store.dispatch(actaActions.getDetalleActaSuccess({ response }));
+  }
+
+  public getDetalleActaError(error: any) {
+    this.store.dispatch(actaActions.getDetalleActaError({ error }));
+  }
+
+  public getDetalleActa$(): Observable<any> {
+    return this.store.select(actaSelectors.getDetalleActa);
   }
 }
