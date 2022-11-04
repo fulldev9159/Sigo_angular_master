@@ -15,7 +15,7 @@ describe('APROBAR INFORME AVANCE ADMIN CONTRATISTA', () => {
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
       .clear()
-      .type('jorge');
+      .type('OT Test Bucle Cypress');
     cy.get('button[id="play-button"]').click();
 
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
