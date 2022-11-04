@@ -5,6 +5,7 @@ import {
   DetalleUO4Acta,
   LastActa,
   listarActa,
+  QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -184,5 +185,22 @@ export class ActaFacade {
 
   public getDetalleActa$(): Observable<any> {
     return this.store.select(actaSelectors.getDetalleActa);
+  }
+
+  // QUIEN AUTORIZO PAGO
+  public quienAutorizoPago(ot_id: number): void {
+    this.store.dispatch(actaActions.quienAutorizoPago({ ot_id }));
+  }
+
+  public quienAutorizoPagoSuccess(quienAautorizado: QuienAutorizoActa[]): void {
+    this.store.dispatch(
+      actaActions.quienAutorizoPagoSuccess({ quienAautorizado })
+    );
+  }
+  public quienAutorizoPagoError(error: any): void {
+    this.store.dispatch(actaActions.quienAutorizoPagoError({ error }));
+  }
+  public quienAutorizoPago$(): Observable<any[]> {
+    return this.store.select(actaSelectors.quienAutorizoPago);
   }
 }

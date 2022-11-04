@@ -2,11 +2,14 @@
     <h1>Validación del pago del Acta</h1>
 
     <p-divider align="center">
-        <span class="p-tag">Servicios</span>
+        <span class="p-tag">Servicios del acta</span>
     </p-divider>
     <div class="card">
         <div class=" grid">
-            <div class="field col-12 table-autorizar-adicionales">
+            <div class="field col-12" style="text-align: center">
+                <span> <strong>Tipo pago:</strong> {{tipo_pago}}</span>
+            </div>
+            <div class="field col-12 ">
                 <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
                     [column_acciones]="false">
                 </zwc-table-servicios>
@@ -16,12 +19,27 @@
     </div>
 
     <p-divider align="center">
-        <span class="p-tag">Observaciones</span>
+        <span class="p-tag">Personas que han aprobado el acta</span>
     </p-divider>
 
-    <p-divider align="center">
-        <span class="p-tag">Personas que han aprobado el informe</span>
-    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 ">
+                <table style="width: 100%;font-size: 0.7rem;">
+                    <tr>
+                        <th>
+                            Usuario
+                        </th>
+                    </tr>
+                    <tr *ngFor="let item of (quienAutorizoPago$| async) ? (quienAutorizoPago$| async) : []">
+                        <td>{{item.model_proxy_id.model_usuario_id.nombres}}
+                            {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
 
     <p-divider align="center">
     </p-divider>

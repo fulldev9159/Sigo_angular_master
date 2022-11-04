@@ -93,7 +93,8 @@
 
                     <ng-container *ngIf="servicio?.servicios_adicional_dummy">
                         <td [attr.rowspan]="+servicio.unidad_obras.length + 1" [attr.colspan]="canSeePrices()?3:1">
-                            {{accion_aprobacion_servicio_adic? 'Se le han agregado uos adicionales a este servicio
+                            {{accion_aprobacion_servicio_adic || !column_acciones? 'Se le han agregado uos adicionales a
+                            este servicio
                             existente en la cubicación' : 'Su cantidad se debe modificar desde el informe de avance'}}
                         </td>
                     </ng-container>

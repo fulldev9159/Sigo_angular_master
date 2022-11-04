@@ -150,6 +150,25 @@ export class ActaEffects {
     )
   );
 
+  // QUIEN AUTORIZO PAGO
+  quienAutorizoPagoOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.quienAutorizoPago),
+      concatMap(({ ot_id }) =>
+        this.actaHttp.quienAutorizoPago(ot_id).pipe(
+          map(response =>
+            actaActions.quienAutorizoPagoSuccess({
+              quienAautorizado: response.data.items,
+            })
+          ),
+          catchError(err =>
+            of(actaActions.quienAutorizoPagoError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -174,7 +193,8 @@ export class ActaEffects {
           actaActions.aceptarRechazarAdcionalesValidarActaError,
           actaActions.validarActaError,
           actaActions.getTotalActasError,
-          actaActions.getComentariosFinalizacionTrabajosError
+          actaActions.getComentariosFinalizacionTrabajosError,
+          actaActions.quienAutorizoPagoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

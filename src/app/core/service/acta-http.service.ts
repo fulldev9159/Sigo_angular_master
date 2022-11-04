@@ -7,6 +7,7 @@ import {
   DetalleUO4Acta,
   LastActa,
   listarActa,
+  QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -150,6 +151,18 @@ export class ActaHttpService {
       `${this.API_URL}/ot/acta/get_detalle_bitacora`,
       {
         acta_id,
+      }
+    );
+  }
+
+  // SOLICITAR PAGO
+  quienAutorizoPago(
+    ot_id: number
+  ): Observable<Response<{ items: QuienAutorizoActa[] }>> {
+    return this.http.post<Response<{ items: QuienAutorizoActa[] }>>(
+      `${this.API_URL}/ot/ot_autorizacion_pago_otid/get`,
+      {
+        ot_id,
       }
     );
   }

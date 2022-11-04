@@ -4,6 +4,7 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   listarActa,
+  QuienAutorizoActa,
   ResponseDetalleActa,
 } from '@model';
 import * as ActaActions from './acta.actions';
@@ -18,6 +19,7 @@ export interface StateActa {
   comentariosFinalizacionTrabajos: string;
   actas: listarActa[];
   detalleActa: ResponseDetalleActa;
+  quienAautorizado: QuienAutorizoActa[];
 }
 
 export const initialState: StateActa = {
@@ -28,6 +30,7 @@ export const initialState: StateActa = {
   comentariosFinalizacionTrabajos: null,
   actas: [],
   detalleActa: null,
+  quienAautorizado: [],
 };
 
 export const reducerActa = createReducer(
@@ -62,5 +65,9 @@ export const reducerActa = createReducer(
   on(ActaActions.getDetalleActaSuccess, (state, { response }) => ({
     ...state,
     detalleActa: response,
+  })),
+  on(ActaActions.quienAutorizoPagoSuccess, (state, { quienAautorizado }) => ({
+    ...state,
+    quienAautorizado,
   }))
 );

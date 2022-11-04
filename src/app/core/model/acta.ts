@@ -1,4 +1,4 @@
-import { StatusResponse } from '@model';
+import { StatusResponse, ModelUsuario } from '@model';
 import { ModelMaterial } from './material';
 import { ModelServicio } from './servicio';
 import { ModelUnidadObra } from './unidad-obra';
@@ -473,4 +473,88 @@ export interface OTDetalleActa {
   tiene_permisos: boolean;
   area_negocio: string;
   nombre_proyectista: string;
+}
+
+export interface QuienAutorizoActa {
+  ot_id: number;
+  acta_id: number;
+  proxy_id: number;
+  ot_total: number;
+  monto_max: number;
+  created_at: Date;
+  model_acta_id: {
+    id: number;
+    ot_id: number;
+    informe_avance_id: number;
+    observacion?: any;
+    validacion_usuario_id: number;
+    validacion_estado: string;
+    validacion_fecha: Date;
+    autorizacion_estado: string;
+    autorizacion_fecha: Date;
+    tipo_pago: string;
+    flg_pagado: boolean;
+    tipo_sustento: string;
+    pmo_codigo: number;
+    id_opex?: any;
+    lp: string;
+    cuenta_sap?: any;
+    pep2: string;
+    ceco?: any;
+    created_at: Date;
+  };
+  model_ot_id: {
+    id: number;
+    proyecto_id?: any;
+    propietario_usuario_id: number;
+    responsable_proxy_id: number;
+    tipo_estado_ot_id: number;
+    tipo_etapa_ot_id: number;
+    sce_session: string;
+    flg_quiebre: boolean;
+    aceptacion_inicial_id: number;
+    created_at: Date;
+    nombre: string;
+    cubicacion_id: number;
+    observaciones: string;
+    fecha_inicio: Date;
+    fecha_fin: Date;
+    tipo_sustento: string;
+    es_sustento_provisorio: boolean;
+    pmo_codigo: number;
+    id_opex?: any;
+    lp: string;
+    cuenta_sap?: any;
+    pep2: string;
+    ceco?: any;
+    carta_adjudicacion?: any;
+    fecha_adjudicacion?: any;
+    numero_pedido?: any;
+    materia?: any;
+    plan_id?: any;
+    sitio_plan_id?: any;
+    oficina_central_id: number;
+    solicitante_id: number;
+    direccion: string;
+    altura: string;
+    piso: string;
+    departamento: string;
+    comuna_id: number;
+    tipo_red_id: number;
+    tipo_trabajo_id: number;
+    tiene_boleta_garantia?: any;
+    tiene_permisos?: any;
+    area_negocio: string;
+    nombre_proyectista: string;
+  };
+  model_proxy_id: {
+    id: number;
+    usuario_orig: number;
+    usuario_id: number;
+    perfil_id: number;
+    superior_proxy_id: number;
+    created_at: Date;
+    updated_at: Date;
+    model_usuario_id: ModelUsuario;
+  };
 }

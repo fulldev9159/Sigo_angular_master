@@ -37,3 +37,8 @@ export const getDetalleActa = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.detalleActa
 );
+
+export const quienAutorizoPago = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.quienAautorizado
+);

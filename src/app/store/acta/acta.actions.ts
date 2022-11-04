@@ -4,6 +4,7 @@ import {
   DetalleUO4Acta,
   LastActa,
   listarActa,
+  QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -203,5 +204,21 @@ export const getDetalleActaSuccess = createAction(
 
 export const getDetalleActaError = createAction(
   '[ACTA] GET getDetalleActa Error',
+  props<{ error: any }>()
+);
+
+//  QUIEN AUTORIZO PAGO
+export const quienAutorizoPago = createAction(
+  '[OT] GET quienAutorizoPago',
+  props<{ ot_id: number }>()
+);
+
+export const quienAutorizoPagoSuccess = createAction(
+  '[OT] GET  quienAutorizoPago Success',
+  props<{ quienAautorizado: QuienAutorizoActa[] }>()
+);
+
+export const quienAutorizoPagoError = createAction(
+  '[OT] GET  quienAutorizoPago Error',
   props<{ error: any }>()
 );
