@@ -82,4 +82,9 @@ export class FlujoOTFacade {
   public getMotivosRechazo$(): Observable<MotivoRechazo[]> {
     return this.store.select(flujoOTSelectors.motivosRechazo);
   }
+
+  // CONFIRMAR RECHAZO OBRAS
+  public confirmarRechazoObras(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.confirmarRechazoObras({ ot_id }));
+  }
 }

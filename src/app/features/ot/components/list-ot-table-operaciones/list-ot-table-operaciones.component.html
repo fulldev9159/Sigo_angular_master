@@ -45,7 +45,13 @@
 
     <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
     <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion('OT_APROBACION_OPERACIONES')"
-        (click)="displayModalAprobacionOperaciones=true">
+        [routerLink]="['/acta/validar-acta-operaciones',ot_id]">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR -->
+    <button id="play-button" pTooltip="Confirmar rechazo obras" *ngIf="findAccion('OT_CONFIRMAR_RECHAZO_OBRAS')"
+        (click)="displayModalRechazoObras=true">
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
@@ -129,8 +135,6 @@
     </div>
 </p-dialog>
 
-
-
 <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
 <p-dialog header="Solicitud de pago" [(visible)]="displayModalSolicitudPago" [draggable]="false" [modal]="true">
     Order de trabajo ID: {{ot_id}}
@@ -139,6 +143,13 @@
     </zwc-view-confirmacion>
 </p-dialog>
 
+<!-- OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR -->
+<p-dialog header="Rechazo de obras" [(visible)]="displayModalRechazoObras" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Comfirma rechazo de obras?' (cancelar)="displayModalRechazoObras=false"
+        (confirmar)="confirmarRechazoObras()" textConfirmar="Confirmar">
+    </zwc-view-confirmacion>
+</p-dialog>
 
 <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
 <p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">

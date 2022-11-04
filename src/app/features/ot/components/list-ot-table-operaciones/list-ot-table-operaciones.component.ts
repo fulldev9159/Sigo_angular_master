@@ -57,6 +57,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalAceptarProveedor = false;
   displayModalSolicitudPago = false;
   displayModalAprobacionOperaciones = false;
+  displayModalRechazoObras = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -178,6 +179,11 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
       this.displayModalAgregarRegistroLibroDeObras = false;
     }
+  }
+
+  confirmarRechazoObras(): void {
+    this.displayModalRechazoObras = false;
+    this.flujoOTFacade.confirmarRechazoObras(this.ot_id);
   }
 
   ngOnDestroy(): void {

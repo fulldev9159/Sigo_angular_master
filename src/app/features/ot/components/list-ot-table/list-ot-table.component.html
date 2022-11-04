@@ -71,8 +71,12 @@
                 <td style="width:80px" pFrozenColumn>{{item.id}}</td>
                 <td style="width:200px">{{item.nombre}}</td>
                 <td style="width:140px">
-                    <ng-container
-                        *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_INICIAL'|| item.etapa_slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'|| item.etapa_slug==='OT_ET_PAGO_SOLICITUD_PAGO'||item.etapa_slug==='OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES'|| item.etapa_slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO'">
+                    <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_INICIAL'|| 
+                               item.etapa_slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'|| 
+                               item.etapa_slug==='OT_ET_PAGO_SOLICITUD_PAGO'|| 
+                               item.etapa_slug==='OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES'||
+                               item.etapa_slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO'||
+                               item.etapa_slug==='OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR'">
                         <p-chip [label]="item.etapa_otdesc" image="assets/images/logo.png"></p-chip>
                     </ng-container>
                     <ng-container

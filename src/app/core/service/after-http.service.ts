@@ -189,20 +189,25 @@ export class AfterHttpService {
 
     // ACEPTAR OT INICIAL
     if (action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
-      this.snackMessage.showMessage(`Aprobación exitosa`, 'Exito', 6000);
+      this.snackMessage.showMessage(`Aprobación exitosa`, 'Exito', 4000);
       this.reloadTableOT();
     }
 
     // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR
     if (action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type) {
-      this.snackMessage.showMessage(`Asignación exitosa`, 'Exito', 6000);
+      this.snackMessage.showMessage(`Asignación exitosa`, 'Exito', 4000);
+      this.reloadTableOT();
+    }
+
+    // CONFIRMAR RECHAZO OPERACIONES
+    if (action.type === flujoOTActions.confirmarRechazoObrasSuccess.type) {
+      this.snackMessage.showMessage(`Confirmación exitosa`, 'Exito', 4000);
       this.reloadTableOT();
     }
 
     // 70 TODO: AGREGAR UN MENSAJE
     // if (
     //   action.type === flujoOTActions.solicitarPagoSuccess.type ||
-    //   action.type === flujoOTActions.aprobarRechazarOperacionesSuccess.type
     // ) {
     // }
 
@@ -243,6 +248,16 @@ export class AfterHttpService {
 
     // APROBAR/RECHAZAR ACTA Y VALIDAR ACTA
     if (action.type === actaActions.validarActaSuccess.type) {
+      this.snackMessage.showMessage(
+        `Acción realizada exitosamente`,
+        'Exito',
+        4000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
+
+    // APROBAR RECHAZAR OPERACIONES
+    if (action.type === flujoOTActions.aprobarRechazarOperacionesSuccess.type) {
       this.snackMessage.showMessage(
         `Acción realizada exitosamente`,
         'Exito',

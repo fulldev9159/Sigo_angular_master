@@ -7,6 +7,7 @@ import { ActaComponent } from './acta.component';
 import { GenerarActaContainerComponent } from './containers/generar-acta-container/generar-acta-container.component';
 import { ListActasContainerComponent } from './containers/list-actas-container/list-actas-container.component';
 import { ValidarActaContainerComponent } from './containers/validar-acta-container/validar-acta-container.component';
+import { ValidarActaOperacionesContainerComponent } from './containers/validar-acta-operaciones-container/validar-acta-operaciones-container.component';
 import { ValidarPagoActaContainerComponent } from './containers/validar-pago-acta-container/validar-pago-acta-container.component';
 import { ActaTiposPagosResolver } from './resolvers/actaTipoPago.resolver';
 import { LastActaResolver } from './resolvers/lastActa.resolver';
@@ -53,6 +54,14 @@ const routes: Routes = [
       {
         path: 'validar-pago-acta/:id',
         component: ValidarPagoActaContainerComponent,
+        resolve: {
+          accionesOT: AccionesOTResolver,
+          lastActa: LastActaResolver,
+        },
+      },
+      {
+        path: 'validar-acta-operaciones/:id',
+        component: ValidarActaOperacionesContainerComponent,
         resolve: {
           accionesOT: AccionesOTResolver,
           lastActa: LastActaResolver,
