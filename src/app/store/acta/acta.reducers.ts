@@ -1,5 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { ActaTipoPago, DetalleServicio4Acta, DetalleUO4Acta } from '@model';
+import {
+  ActaTipoPago,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  listarActa,
+  ResponseDetalleActa,
+} from '@model';
 import * as ActaActions from './acta.actions';
 
 export const Featurekey = 'acta';
@@ -10,6 +16,8 @@ export interface StateActa {
   actaTipoPago: ActaTipoPago[];
   totalActas: number;
   comentariosFinalizacionTrabajos: string;
+  actas: listarActa[];
+  detalleActa: ResponseDetalleActa;
 }
 
 export const initialState: StateActa = {
@@ -18,6 +26,8 @@ export const initialState: StateActa = {
   actaTipoPago: [],
   totalActas: null,
   comentariosFinalizacionTrabajos: null,
+  actas: [],
+  detalleActa: null,
 };
 
 export const reducerActa = createReducer(
@@ -44,5 +54,13 @@ export const reducerActa = createReducer(
       ...state,
       comentariosFinalizacionTrabajos,
     })
-  )
+  ),
+  on(ActaActions.getActasSuccess, (state, { actas: response }) => ({
+    ...state,
+    actas: response,
+  })),
+  on(ActaActions.getDetalleActaSuccess, (state, { response }) => ({
+    ...state,
+    detalleActa: response,
+  }))
 );

@@ -1,13 +1,39 @@
-<div style="font-size: 1rem;
-padding: 37px;
-border: 1px dashed #adb1b5;
-font-weight: 200;
-color: #4f4343;
-width: 94%;
-display: flex;
-justify-content: center;
-margin-left: 29px;
-margin-top: 8px;
-background-color: #f9f9f9;">
-    Pendiente filtros
+<div class="card">
+  <form [formGroup]="form">
+    <label>¿Qué OTs desea listar?</label>
+    <div class="row">
+      <div class="p-field-radiobutton col-xs-12 col-md-3">
+        <p-radioButton id="mias" name="filtro_propietario" value="MIAS" [formControl]="form.get('filtro_propietario')"></p-radioButton>
+        <label for="mias">Mis OTs</label>
+      </div>
+      <div class="p-field-radiobutton col-xs-12 col-md-4">
+        <p-radioButton id="otros" name="filtro_propietario" value="OTRAS" [formControl]="form.get('filtro_propietario')"></p-radioButton>
+        <label for="otros">OTs de otros</label>
+      </div>
+      <div class="p-field-radiobutton col-xs-12 col-md-5">
+        <p-radioButton id="todas" name="filtro_propietario" value="TODAS" [formControl]="form.get('filtro_propietario')"></p-radioButton>
+        <label for="mias">Todas las OTs</label>
+      </div>
+    </div>
+
+    <label>Tipo de OT</label>
+    <div class="row">
+      <div class="p-field-radiobutton col-xs-12 col-md-3">
+        <p-radioButton id="OT" name="filtro_tipo" value="1" [formControl]="form.get('filtro_tipo')"></p-radioButton>
+        <label for="OT">OT</label>
+      </div>
+      <div class="p-field-radiobutton col-xs-12 col-md-3">
+        <p-radioButton id="AP" name="filtro_tipo" value="2" [formControl]="form.get('filtro_tipo')"></p-radioButton>
+        <label for="AP">AP</label>
+      </div>
+      <div class="p-field-radiobutton col-xs-12 col-md-3">
+        <p-radioButton id="FULL" name="filtro_tipo" value="3" [formControl]="form.get('filtro_tipo')"></p-radioButton>
+        <label for="FULL">FULL</label>
+      </div>
+      <div class="p-field-radiobutton col-xs-12 col-md-3">
+        <p-radioButton id="TODAS" name="filtro_tipo" value="0" [formControl]="form.get('filtro_tipo')"></p-radioButton>
+        <label for="TODAS">Todas</label>
+      </div>
+    </div>
+  </form>
 </div>

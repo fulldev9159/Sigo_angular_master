@@ -101,6 +101,20 @@ export class ActaEffects {
     )
   );
 
+  getActas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getActas),
+      concatMap(({ ot_id }) =>
+        this.actaHttp.getActas(ot_id).pipe(
+          map(response =>
+            actaActions.getActasSuccess({ actas: response.data.items })
+          ),
+          catchError(error => of(actaActions.getActasError({ error })))
+        )
+      )
+    )
+  );
+
   // COMENTARIOS TRABAJOS FINALIZADOS
   getComentariosTrabajosFinalizados$ = createEffect(() =>
     this.actions$.pipe(
@@ -119,6 +133,18 @@ export class ActaEffects {
               })
             )
           )
+        )
+      )
+    )
+  );
+
+  getDetalleActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getDetalleActa),
+      concatMap(({ acta_id }) =>
+        this.actaHttp.detallesActa(acta_id).pipe(
+          map(response => actaActions.getDetalleActaSuccess({ response })),
+          catchError(error => of(actaActions.getDetalleActaError({ error })))
         )
       )
     )

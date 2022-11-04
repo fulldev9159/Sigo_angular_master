@@ -288,17 +288,7 @@ export class AfterHttpService {
 
   // 71 TODO: USAR BIEN LOS FILTROS
   reloadTableOT(): void {
-    let filtros = {
-      filtro_propietario: 'TODAS',
-      filtro_tipo: 0,
-    };
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'EN_EJECUCION',
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: 'ABIERTAS',
-      ...filtros,
-    });
+    this.otFacade.getBandejaOT('EN_EJECUCION');
+    this.otFacade.getBandejaOT('ABIERTAS');
   }
 }

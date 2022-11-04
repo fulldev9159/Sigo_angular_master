@@ -119,18 +119,41 @@ export class OTFacade {
     return this.store.select(otSelectors.getSitioPlanProyecto);
   }
 
+  // FILTROS OT
+  public updateFiltros({
+    filtro_propietario,
+    filtro_tipo,
+  }: {
+    filtro_propietario: string;
+    filtro_tipo: number;
+  }): void {
+    this.store.dispatch(
+      otActions.updateFiltrosOT({
+        filtro_propietario,
+        filtro_tipo,
+      })
+    );
+  }
+
+  public getFiltrosOT$(): Observable<{
+    filtro_propietario: string;
+    filtro_tipo: number;
+  }> {
+    return this.store.select(otSelectors.getFiltrosOT);
+  }
+
   // BANDEJAS
-  public getBandejaOT(request: RequestBandejaOT): void {
-    if (request.filtro_pestania === 'EN_EJECUCION')
-      this.store.dispatch(otActions.getBandejaOTEjecucion({ request }));
-    else if (request.filtro_pestania === 'ABIERTAS')
-      this.store.dispatch(otActions.getBandejaOTAbiertas({ request }));
-    else if (request.filtro_pestania === 'CERRADAS')
-      this.store.dispatch(otActions.getBandejaOTCerradas({ request }));
-    else if (request.filtro_pestania === 'ANULADAS')
-      this.store.dispatch(otActions.getBandejaOTAnuladas({ request }));
-    else if (request.filtro_pestania === 'EN_TRAMITE')
-      this.store.dispatch(otActions.getBandejaOTQuebradas({ request }));
+  public getBandejaOT(filtro_pestania: string): void {
+    if (filtro_pestania === 'EN_EJECUCION')
+      this.store.dispatch(otActions.getBandejaOTEjecucion());
+    else if (filtro_pestania === 'ABIERTAS')
+      this.store.dispatch(otActions.getBandejaOTAbiertas());
+    else if (filtro_pestania === 'CERRADAS')
+      this.store.dispatch(otActions.getBandejaOTCerradas());
+    else if (filtro_pestania === 'ANULADAS')
+      this.store.dispatch(otActions.getBandejaOTAnuladas());
+    else if (filtro_pestania === 'EN_TRAMITE')
+      this.store.dispatch(otActions.getBandejaOTQuebradas());
   }
 
   public getBandejaOTEjecucion$(): Observable<OT[]> {
