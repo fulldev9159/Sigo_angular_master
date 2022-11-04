@@ -9,6 +9,7 @@ import {
   listarActa,
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobacionRechazoSolicitudPago,
   RequestValidarActa,
   Response,
   ResponseDetalleActa,
@@ -164,6 +165,16 @@ export class ActaHttpService {
       {
         ot_id,
       }
+    );
+  }
+
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago(
+    request: RequestAprobacionRechazoSolicitudPago
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_autorizacion_pago/autorizar`,
+      request
     );
   }
 }

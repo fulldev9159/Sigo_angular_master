@@ -558,3 +558,12 @@ export interface QuienAutorizoActa {
     model_usuario_id: ModelUsuario;
   };
 }
+
+export interface RequestAprobacionRechazoSolicitudPago {
+  ot_id: number;
+  acta_id: number;
+  ot_total: number;
+  autoriza_pago: string; // AUTORIZADO, NO_AUTORIZADO
+  tipo_rechazo?: number;
+  observacion: string;
+}

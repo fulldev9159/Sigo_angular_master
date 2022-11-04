@@ -169,6 +169,23 @@ export class ActaEffects {
     )
   );
 
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.aprobarRechazarSolicitudPago),
+      concatMap(({ request }) =>
+        this.actaHttp.aprobarRechazarSolicitudPago(request).pipe(
+          map(response =>
+            actaActions.aprobarRechazarSolicitudPagoSuccess({ response })
+          ),
+          catchError(error =>
+            of(actaActions.aprobarRechazarSolicitudPagoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -194,7 +211,8 @@ export class ActaEffects {
           actaActions.validarActaError,
           actaActions.getTotalActasError,
           actaActions.getComentariosFinalizacionTrabajosError,
-          actaActions.quienAutorizoPagoError
+          actaActions.quienAutorizoPagoError,
+          actaActions.aprobarRechazarSolicitudPagoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

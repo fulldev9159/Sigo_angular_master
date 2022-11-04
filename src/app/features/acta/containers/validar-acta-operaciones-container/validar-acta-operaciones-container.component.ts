@@ -100,11 +100,11 @@ export class ValidarActaOperacionesContainerComponent
                 .adicional_aceptacion_estado !== 'ORIGINAL'
           );
 
-          console.log('servicios_orginales', servicios_originales);
-          console.log('uos_originales', uos_originales);
+          // console.log('servicios_orginales', servicios_originales);
+          // console.log('uos_originales', uos_originales);
 
-          console.log('servicios_ad', servicios_adicionales);
-          console.log('uos_ad', uos_adicionales);
+          // console.log('servicios_ad', servicios_adicionales);
+          // console.log('uos_ad', uos_adicionales);
 
           servicios_originales.forEach(service => {
             let servicioCarrito: CarritoService = {

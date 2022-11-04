@@ -47,14 +47,53 @@
     <div class="card">
         <div class=" grid">
             <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"
+                    [routerLink]="['/ot']">
                     Atrás
                 </button>
             </div>
-            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar pago del acta"
-                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarPagoActa()"></zwc-pbutton-sending>
+            <div *ngIf="accionExist('OT_AUTORIZAR_PAGOS')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Validar Pago del Acta" icon="ok"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionPago=true">
+                </zwc-pbutton-sending>
+            </div>
+            <div *ngIf="accionExist('OT_AUTORIZAR_PAGOS')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar Pago del Acta" icon="nok"
+                    Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
+                    (click)="displayModalRechazarActa()">
+                </zwc-pbutton-sending>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- MODALS -->
+
+<p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionPago" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+    <form [formGroup]="formAprobarActa">
+        <label for="">Comentario</label>
+        <textarea formControlName="detalle" class="form-control" placeholder="" name="observaciones" id="observaciones"
+            cols="30" rows="2"></textarea>
+    </form>
+
+    <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="displayModalAprobacionPago=false"
+        (confirmar)="validarPagoActa()" textConfirmar="Aprobar Acta">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+<p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="closeModalRechazarActa()">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="rechazarActa()"
+            [disabled]="!rechazoActaForm.formRechazo.valid">
+            Rechazar acta
+        </button>
+    </ng-template>
+</p-dialog>

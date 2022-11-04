@@ -205,11 +205,14 @@ export class AfterHttpService {
       this.reloadTableOT();
     }
 
-    // 70 TODO: AGREGAR UN MENSAJE
-    // if (
-    //   action.type === flujoOTActions.solicitarPagoSuccess.type ||
-    // ) {
-    // }
+    if (action.type === actaActions.aprobarRechazarSolicitudPagoSuccess.type) {
+      this.snackMessage.showMessage(
+        `Acción realizada exitosamente`,
+        'Exito',
+        4000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
 
     // ENVÍO DE INFORME DE AVANCE
     if (

@@ -6,6 +6,7 @@ import {
   listarActa,
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobacionRechazoSolicitudPago,
   RequestValidarActa,
   Response,
   ResponseDetalleActa,
@@ -220,5 +221,20 @@ export const quienAutorizoPagoSuccess = createAction(
 
 export const quienAutorizoPagoError = createAction(
   '[OT] GET  quienAutorizoPago Error',
+  props<{ error: any }>()
+);
+
+//  APROBAR RECHAZAR SOLICITUD PAGO
+export const aprobarRechazarSolicitudPago = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago',
+  props<{ request: RequestAprobacionRechazoSolicitudPago }>()
+);
+
+export const aprobarRechazarSolicitudPagoSuccess = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago Success',
+  props<{ response: Response<any> }>()
+);
+export const aprobarRechazarSolicitudPagoError = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago Error',
   props<{ error: any }>()
 );

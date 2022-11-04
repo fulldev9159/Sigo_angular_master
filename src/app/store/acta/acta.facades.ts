@@ -7,6 +7,7 @@ import {
   listarActa,
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobacionRechazoSolicitudPago,
   RequestValidarActa,
   Response,
   ResponseDetalleActa,
@@ -202,5 +203,12 @@ export class ActaFacade {
   }
   public quienAutorizoPago$(): Observable<any[]> {
     return this.store.select(actaSelectors.quienAutorizoPago);
+  }
+
+  // ACEPTAR O RECHAZAR SOLICITUD PAGO
+  public aprobarRechazarSolicitudPago(
+    request: RequestAprobacionRechazoSolicitudPago
+  ): void {
+    this.store.dispatch(actaActions.aprobarRechazarSolicitudPago({ request }));
   }
 }
