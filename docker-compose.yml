@@ -36,7 +36,7 @@ services:
   sftp:
     image: atmoz/sftp
     volumes:
-      - /tmp:/tmp:rw
+      - ./sftp:/home/sigo
     ports:
       - "2222:22"
     command: "sigo:!Integracion$$::"  # OJO: se escapa el simbolo $
@@ -84,7 +84,7 @@ services:
       SFTP_ADDRESS: sftp:22
       SFTP_USERNAME: "sigo"
       SFTP_PASSWORD: "!Integracion$$"
-      SFTP_ACTAS_PDF_DEST_DIR: "."
+      SFTP_ACTAS_PDF_DEST_DIR: "/ACTAS_PDF"
     restart: always
     ports:
       - 4041:4040
