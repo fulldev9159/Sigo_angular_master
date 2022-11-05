@@ -32,7 +32,7 @@
                         </th>
                     </tr>
                     <tr *ngFor="let item of (quienAutorizoPago$| async) ? (quienAutorizoPago$| async) : []">
-                        <td>{{item.model_proxy_id.model_usuario_id.nombres}}
+                        <td style="text-align: center;">{{item.model_proxy_id.model_usuario_id.nombres}}
                             {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
                     </tr>
                 </table>
@@ -72,9 +72,10 @@
 
 <p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionPago" [draggable]="false" [modal]="true">
     Order de trabajo ID: {{ot_id}}
-
+    <br>
     <form [formGroup]="formAprobarActa">
         <label for="">Comentario</label>
+        <br>
         <textarea formControlName="detalle" class="form-control" placeholder="" name="observaciones" id="observaciones"
             cols="30" rows="2"></textarea>
     </form>

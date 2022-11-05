@@ -24,23 +24,23 @@ variables:
 #     - npm ci
 #     - ng lint
 
-# restart test environment:
-#   stage: restart test environment
-#   when: manual
-#   image: tmaier/docker-compose:latest
-#   script:
-#     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
-#     - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
-#     - echo "deploying to google cloud"
-#     - sudo systemctl status docker
-#     - sudo docker-compose ps
-#     - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
-#     - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
-#     - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
-#     - sudo docker-compose ps
-#   tags:
-#     - gcloud_tpb
-#   environment: google cloud tpb
+restart test environment:
+  stage: restart test environment
+  when: manual
+  image: tmaier/docker-compose:latest
+  script:
+    - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
+    - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
+    - echo "deploying to google cloud"
+    - sudo systemctl status docker
+    - sudo docker-compose ps
+    - sudo docker-compose stop sftp mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose rm -f  sftp mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose up -d sftp mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose ps
+  tags:
+    - gcloud_tpb
+  environment: google cloud tpb
 
 # reset database testing:
 #   stage: reset testing database sigo

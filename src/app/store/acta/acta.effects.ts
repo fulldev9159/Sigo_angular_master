@@ -193,7 +193,8 @@ export class ActaEffects {
           actaActions.getServicios4ActaSuccess,
           actaActions.getUOs4ActaSuccess,
           actaActions.informarTrabajosFinalizadosSuccess,
-          actaActions.validarActaSuccess
+          actaActions.validarActaSuccess,
+          actaActions.aprobarRechazarSolicitudPagoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),

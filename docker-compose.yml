@@ -33,6 +33,14 @@ services:
       -wait tcp://mcl_test_sigo_db:3306
 
     # OTEC TEST
+  sftp:
+    image: atmoz/sftp
+    volumes:
+      - ./sftp:/home/sigo
+    ports:
+      - "2222:22"
+    command: "sigo:!Integracion$$::"  # OJO: se escapa el simbolo $
+
   mcl_otec_db_testing:
     image: gcr.io/zwcsce/mcl-otec-db:latest
     restart: always
@@ -73,12 +81,17 @@ services:
       MOCKUP_PATH: /go/bin/mockups/
       TREEOT: mcl_OT_testing
       DEPLOY: test
+      SFTP_ADDRESS: sftp:22
+      SFTP_USERNAME: "sigo"
+      SFTP_PASSWORD: "!Integracion$$"
+      SFTP_ACTAS_PDF_DEST_DIR: "/ACTAS_PDF"
     restart: always
     ports:
       - 4041:4040
     volumes:
       - /tmp:/tmp
     depends_on:
+      - sftp
       - mcl_otec_db_testing
 
 volumes:
