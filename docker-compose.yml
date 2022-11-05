@@ -36,7 +36,7 @@ services:
   sftp:
     image: atmoz/sftp
     volumes:
-      - ./sftp:/home/sigo
+      - ./tmp:/tmp
     ports:
       - "2222:22"
     command: "sigo:!Integracion$$::"  # OJO: se escapa el simbolo $
