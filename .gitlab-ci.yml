@@ -26,7 +26,7 @@ variables:
 
 restart test environment:
   stage: restart test environment
-  when: manual
+  # when: manual
   image: tmaier/docker-compose:latest
   script:
     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test

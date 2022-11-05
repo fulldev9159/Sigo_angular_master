@@ -201,4 +201,8 @@ export class LoadingsFacade {
       loadingSelector.sendingInformarTrabajosFinalizados
     );
   }
+
+  public sendingAprobacionPago$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingAprobacionPago);
+  }
 }

@@ -13,6 +13,7 @@ import {
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -62,9 +63,14 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
   displayModalAprobacionPago = false;
   showModalRechazarActa = false;
 
+  // LOADINGS
+  sendingAprobacionPago$: Observable<boolean> =
+    this.loadingsFacade.sendingAprobacionPago$();
+
   constructor(
     private actaFacade: ActaFacade,
     private flujoOTFacade: FlujoOTFacade,
+    private loadingsFacade: LoadingsFacade,
     private route: ActivatedRoute
   ) {}
 

@@ -55,6 +55,7 @@ export interface StateLoadings {
   sendingSendBorradorInformeAvance: boolean;
   sendingGetPerfiles: boolean;
   sendingInformarTrabajosFinalizados: boolean;
+  sendingAprobacionPago: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -98,6 +99,7 @@ export const initialStateLoading: StateLoadings = {
   sendingSendBorradorInformeAvance: false,
   sendingGetPerfiles: false,
   sendingInformarTrabajosFinalizados: false,
+  sendingAprobacionPago: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -589,6 +591,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingInformarTrabajosFinalizados: false,
+    })
+  ),
+  on(actaActions.aprobarRechazarSolicitudPago, state => ({
+    ...state,
+    sendingAprobacionPago: true,
+  })),
+  on(
+    actaActions.aprobarRechazarSolicitudPagoSuccess,
+    actaActions.aprobarRechazarSolicitudPagoError,
+    state => ({
+      ...state,
+      sendingAprobacionPago: false,
     })
   )
 );
