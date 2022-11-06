@@ -81,7 +81,7 @@ services:
       MOCKUP_PATH: /go/bin/mockups/
       TREEOT: mcl_OT_testing
       DEPLOY: test
-      SFTP_ADDRESS: sftp:2222
+      SFTP_ADDRESS: sftp:22
       SFTP_USERNAME: "sigo"
       SFTP_PASSWORD: "!Integracion$$"
       SFTP_ACTAS_PDF_DEST_DIR: "/ACTAS_PDF"
