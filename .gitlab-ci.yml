@@ -85,7 +85,7 @@ restart test environment:
 docker:
   <<: *connect_gcr
   stage: deployment
-  # when: manual
+  when: manual
   # needs:
   #   - e2e test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
