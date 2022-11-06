@@ -20,7 +20,8 @@
                 </p-divider>
                 <div *ngIf="registrosDetallActa?.pdf_acta?.size>0" class="p-button">
                     <img src="https://img.icons8.com/ios/2x/export-pdf-2.png" class="download-pdf-icon">
-                    <input type="button" class="download-label" value="Descargar Acta" />
+                    <a [href]="registrosDetallActa?.pdf_acta?.url"
+                        [download]="registrosDetallActa?.pdf_acta?.nombre_original">Descargar</a>
                 </div>
                 <div class="content-detail">
                     <div class="content-head">
