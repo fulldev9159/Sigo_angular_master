@@ -602,58 +602,69 @@ export class InformeAvanceComponent
   }
 
   rechazarInformeAvance(): void {
-    this.subscription.add(
-      this.carrito$.pipe(take(1)).subscribe(carrito => {
-        // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
+    const request: RequestAutorizarInformeAvance = {
+      ot_id: this.ot_id,
+      estado: 'RECHAZADO',
+      observacion:
+        this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
+      tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
+    };
 
-        // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
-        this.eliminarAdicionalesEscogidos();
+    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
+    this.showModalRechazarInformeAvance = false;
 
-        // GUARDAR BORRADOR
-        let formularioServiciosAdicionales =
-          this.tableServiciosAdicionales.formTable.get('table')
-            .value as Array<TableService>;
+    // this.subscription.add(
+    //   this.carrito$.pipe(take(1)).subscribe(carrito => {
+    //     // GUARDAR CAMBIOS Y ENVIAR INFORME AVANCE
 
-        let formularioInformeAvance =
-          this.tableServiciosInformeAvance.formTable.get('table')
-            .value as Array<TableService>;
+    //     // ELIMINAR ADICIONALES ESCOGIDOS PARA ELIMINAR
+    //     this.eliminarAdicionalesEscogidos();
 
-        let request_informe_avance: any = this.getRequestUpdateInformeAvance(
-          formularioInformeAvance
-        );
+    //     // GUARDAR BORRADOR
+    //     let formularioServiciosAdicionales =
+    //       this.tableServiciosAdicionales.formTable.get('table')
+    //         .value as Array<TableService>;
 
-        const request_autorizacion: RequestAutorizarInformeAvance = {
-          ot_id: this.ot_id,
-          estado: 'RECHAZADO',
-          observacion:
-            this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
-          tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
-        };
+    //     let formularioInformeAvance =
+    //       this.tableServiciosInformeAvance.formTable.get('table')
+    //         .value as Array<TableService>;
 
-        if (formularioServiciosAdicionales.length > 0) {
-          //  ACTUALIZAR INFORME DE AVANCE ADICIONALES SI ES QUE EXISTEN ADICIONALES Y ENVIAR IA
-          let request_adicionales: RequestAdicionales =
-            this.getRequestServiciosAdicionales(
-              formularioServiciosAdicionales,
-              carrito
-            );
+    //     let request_informe_avance: any = this.getRequestUpdateInformeAvance(
+    //       formularioInformeAvance
+    //     );
 
-          this.informeAvanceFacade.actualizarInformeAvanceAdicionalesYautorizar(
-            request_informe_avance,
-            request_adicionales,
-            request_autorizacion
-          );
-        } else {
-          // ACTUALIZAR SOLO EL INFORME DE AVANCE
-          this.informeAvanceFacade.actualizarInformeAvanceYautorizar(
-            request_informe_avance,
-            request_autorizacion
-          );
-        }
+    //     const request_autorizacion: RequestAutorizarInformeAvance = {
+    //       ot_id: this.ot_id,
+    //       estado: 'RECHAZADO',
+    //       observacion:
+    //         this.rechazoInformeAvanceForm.formRechazo.get('motivo').value,
+    //       tipo: +this.rechazoInformeAvanceForm.formRechazo.get('tipo_id').value,
+    //     };
 
-        this.showModalRechazarInformeAvance = false;
-      })
-    );
+    //     if (formularioServiciosAdicionales.length > 0) {
+    //       //  ACTUALIZAR INFORME DE AVANCE ADICIONALES SI ES QUE EXISTEN ADICIONALES Y ENVIAR IA
+    //       let request_adicionales: RequestAdicionales =
+    //         this.getRequestServiciosAdicionales(
+    //           formularioServiciosAdicionales,
+    //           carrito
+    //         );
+
+    //       this.informeAvanceFacade.actualizarInformeAvanceAdicionalesYautorizar(
+    //         request_informe_avance,
+    //         request_adicionales,
+    //         request_autorizacion
+    //       );
+    //     } else {
+    //       // ACTUALIZAR SOLO EL INFORME DE AVANCE
+    //       this.informeAvanceFacade.actualizarInformeAvanceYautorizar(
+    //         request_informe_avance,
+    //         request_autorizacion
+    //       );
+    //     }
+
+    //     this.showModalRechazarInformeAvance = false;
+    //   })
+    // );
   }
 
   autorizarInformeAvance(): void {
