@@ -7,6 +7,7 @@ import { ResponseDetalleActa } from '@model';
 import { Subscription } from 'rxjs';
 import { getDetalleActa } from '@storeOT/acta/acta.selectors';
 import { NumericDictionaryIteratee } from 'lodash';
+import { environment } from '@environment';
 
 @Component({
   selector: 'zwc-list-actas-container',
@@ -18,38 +19,51 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   registrosListActas: listarActa[] = [];
   registrosDetallActa: ResponseDetalleActa;
   actaIdentify: number = 0;
-  titleArray: {[key: string]: string}
+  titleArray: { [key: string]: string };
+  API_URL = '';
 
-  constructor(private actaFacade: ActaFacade, private route: ActivatedRoute, private store: Store) {}
+  constructor(
+    private actaFacade: ActaFacade,
+    private route: ActivatedRoute,
+    private store: Store
+  ) {
+    this.API_URL = environment.api;
+  }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.subscription.add(
-      this.route.data.subscribe( ({listActas}) => {        
+      this.route.data.subscribe(({ listActas }) => {
         this.registrosListActas = listActas?.data?.items;
       })
     );
-    this.titleArray = {VALIDACION_ACTA: "Validacion del Acta", INF_TRAB_FIN_ACTA: "Informe de trabajos finalizados"};    
+    this.titleArray = {
+      VALIDACION_ACTA: 'Validacion del Acta',
+      INF_TRAB_FIN_ACTA: 'Informe de trabajos finalizados',
+    };
   }
 
-  OnDetallActa(acta_id:number): void {
+  OnDetallActa(acta_id: number): void {
+    if (this.actaIdentify != acta_id) this.actaFacade.getDetalleActa(acta_id);
 
-    if (this.actaIdentify != acta_id)
-      this.actaFacade.getDetalleActa(acta_id);
-      
-    this.store.select<ResponseDetalleActa>(getDetalleActa).subscribe( detallActa => {      
-      
-      this.registrosDetallActa = {...detallActa, data: {...detallActa?.data, items: detallActa?.data?.items?.map(item => ({
-        ...item,
-        observacion: JSON.parse(item.metadata)?.observacion
-      }))}};    
+    this.store
+      .select<ResponseDetalleActa>(getDetalleActa)
+      .subscribe(detallActa => {
+        this.registrosDetallActa = {
+          ...detallActa,
+          data: {
+            ...detallActa?.data,
+            items: detallActa?.data?.items?.map(item => ({
+              ...item,
+              observacion: JSON.parse(item.metadata)?.observacion,
+            })),
+          },
+        };
 
-      this.actaIdentify = acta_id;
-    });
+        this.actaIdentify = acta_id;
+      });
   }
 
-  OnDescargarActa(): void {
-    
-  }
+  OnDescargarActa(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

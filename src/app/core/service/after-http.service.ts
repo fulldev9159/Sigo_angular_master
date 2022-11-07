@@ -287,11 +287,17 @@ export class AfterHttpService {
         4000
       );
     }
+
+    // CERRAR OT
+    if (action.type === flujoOTActions.cerrarOTSuccess.type) {
+      this.snackMessage.showMessage(`Cierre de OT exitoso`, 'Exito', 4000);
+      this.reloadTableOT();
+    }
   }
 
-  // 71 TODO: USAR BIEN LOS FILTROS
   reloadTableOT(): void {
     this.otFacade.getBandejaOT('EN_EJECUCION');
     this.otFacade.getBandejaOT('ABIERTAS');
+    this.otFacade.getBandejaOT('CERRADAS');
   }
 }

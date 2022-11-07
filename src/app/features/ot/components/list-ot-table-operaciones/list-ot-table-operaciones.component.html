@@ -61,6 +61,11 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <!-- OT_ET_PENDIENTE_CIERRE -->
+    <button id="play-button" pTooltip="Cerrar OT" *ngIf="findAccion('OT_CERRAR')" (click)="displayModalCerrarOT=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
         <fa-icon [icon]="infoIcon"></fa-icon>
@@ -157,5 +162,14 @@
 
     <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="rechazarActaOperaciones()"
         textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+<!-- OT_ET_PENDIENTE_CIERRE -->
+<p-dialog header="Cerrar OT" [(visible)]="displayModalCerrarOT" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+    <zwc-view-confirmacion pregunta='¿Confirma que desea cerrar la OT?' (cancelar)="displayModalCerrarOT=false"
+        (confirmar)="cerrarOT()" textConfirmar="Confirmar">
     </zwc-view-confirmacion>
 </p-dialog>

@@ -87,4 +87,9 @@ export class FlujoOTFacade {
   public confirmarRechazoObras(ot_id: number): void {
     this.store.dispatch(flujoOTActions.confirmarRechazoObras({ ot_id }));
   }
+
+  // CERRAR OT
+  public cerrarOT(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.cerrarOT({ ot_id }));
+  }
 }

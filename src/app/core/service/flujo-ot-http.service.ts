@@ -99,4 +99,11 @@ export class FlujoOtHttpService {
       { ot_id }
     );
   }
+
+  // SOLICITAR PAGO
+  cerrarOT(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.API_URL}/ot/ot/cerrar`, {
+      ot_id,
+    });
+  }
 }

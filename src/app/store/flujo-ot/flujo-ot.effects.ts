@@ -155,6 +155,19 @@ export class FlujoOTEffects {
     )
   );
 
+  // CERRAR OT
+  cerrarOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.cerrarOT),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.cerrarOT(ot_id).pipe(
+          map(response => flujoOTActions.cerrarOTSuccess({ response })),
+          catchError(error => of(flujoOTActions.cerrarOTError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -164,7 +177,8 @@ export class FlujoOTEffects {
           flujoOTActions.asignarSupervisorTrabajoSuccess,
           flujoOTActions.solicitarPagoSuccess,
           flujoOTActions.aprobarRechazarOperacionesSuccess,
-          flujoOTActions.confirmarRechazoObrasSuccess
+          flujoOTActions.confirmarRechazoObrasSuccess,
+          flujoOTActions.cerrarOTSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -182,7 +196,8 @@ export class FlujoOTEffects {
           flujoOTActions.solicitarPagoError,
           flujoOTActions.aprobarRechazarOperacionesError,
           flujoOTActions.getAllMotivoRechazoOTError,
-          flujoOTActions.confirmarRechazoObrasError
+          flujoOTActions.confirmarRechazoObrasError,
+          flujoOTActions.cerrarOTError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
