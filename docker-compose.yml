@@ -38,7 +38,7 @@ services:
     volumes:
       - /tmp:/home/sigo
     ports:
-      - "2222:22"
+      - "2223:22"
     command: "sigo:!Integracion$$::"  # OJO: se escapa el simbolo $
 
   mcl_otec_db_testing:
