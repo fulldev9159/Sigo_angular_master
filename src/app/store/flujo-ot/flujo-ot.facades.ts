@@ -101,4 +101,9 @@ export class FlujoOTFacade {
   public cerrarOT(ot_id: number): void {
     this.store.dispatch(flujoOTActions.cerrarOT({ ot_id }));
   }
+
+  // ANULAR OT
+  public anularOT(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.anularOT({ ot_id }));
+  }
 }

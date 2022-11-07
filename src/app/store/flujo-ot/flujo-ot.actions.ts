@@ -170,3 +170,18 @@ export const cerrarOTError = createAction(
   '[FLUJO OT] GET CerrarOT Error',
   props<{ error: any }>()
 );
+
+//  ANULAR OT
+export const anularOT = createAction(
+  '[FLUJO OT] GET anularOT',
+  props<{ ot_id: number }>()
+);
+
+export const anularOTSuccess = createAction(
+  '[FLUJO OT] GET anularOT Success',
+  props<{ response: Response<any> }>()
+);
+export const anularOTError = createAction(
+  '[FLUJO OT] GET anularOT Error',
+  props<{ error: any }>()
+);

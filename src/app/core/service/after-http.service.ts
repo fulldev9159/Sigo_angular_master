@@ -299,6 +299,16 @@ export class AfterHttpService {
       this.snackMessage.showMessage(`Cierre de OT exitoso`, 'Exito', 4000);
       this.reloadTableOT();
     }
+
+    // ANULAR OT
+    if (action.type === flujoOTActions.anularOTSuccess.type) {
+      this.snackMessage.showMessage(
+        `Anulación de la OT exitosa`,
+        'Exito',
+        4000
+      );
+      this.reloadTableOT();
+    }
   }
 
   reloadTableOT(): void {

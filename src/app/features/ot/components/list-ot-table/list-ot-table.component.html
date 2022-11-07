@@ -96,6 +96,10 @@
                         <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-up"></p-chip>
                     </ng-container>
 
+                    <ng-container *ngIf="item.etapa_slug==='OT_ET_ANULADA_POR_RECHAZO_PROV'">
+                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-down"></p-chip>
+                    </ng-container>
+
                 </td>
                 <td style="width:100px">{{item.fecha_inicio| date: 'dd/MM/yyyy'}}</td>
                 <td style="width:100px">{{item.fecha_termino| date: 'dd/MM/yyyy'}}</td>

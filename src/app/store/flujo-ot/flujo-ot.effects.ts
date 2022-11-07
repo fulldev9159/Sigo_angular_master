@@ -87,6 +87,18 @@ export class FlujoOTEffects {
     )
   );
 
+  anularOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.anularOT),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.anularOT(ot_id).pipe(
+          map(response => flujoOTActions.anularOTSuccess({ response })),
+          catchError(error => of(flujoOTActions.anularOTError({ error })))
+        )
+      )
+    )
+  );
+
   asignarSupervisorTrabajo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(flujoOTActions.asignarSupervisorTrabajo),
