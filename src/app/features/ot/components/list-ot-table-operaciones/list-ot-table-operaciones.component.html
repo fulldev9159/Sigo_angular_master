@@ -146,13 +146,27 @@
     <!-- 102 TODO: AGREGAR LA VALIDACION AL BOTON ACEPTAR ORDEN -->
     <div class="container-button-confirmar">
         <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-            (click)="rechazarOrdenProveedor()">
+            (click)="displayModalrechazarOrdenProveedor()">
             Rechazar Orden
         </button>
         <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">
             Aceptar Orden
         </button>
     </div>
+</p-dialog>
+
+<p-dialog header="Rechazo de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false" [modal]="true">
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoProveeodrForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="closeModalRechazoProveedor()">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="rechazarOrdenProveedor()"
+            [disabled]="!rechazoProveeodrForm.formRechazo.valid">
+            Rechazar OT
+        </button>
+    </ng-template>
 </p-dialog>
 
 <!-- OT_ET_PAGO_SOLICITUD_PAGO -->

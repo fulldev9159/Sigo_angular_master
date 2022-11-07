@@ -51,6 +51,15 @@ export class FlujoOTFacade {
     );
   }
 
+  // RECHAZAR OT PROVEDOR
+  public rechazarOTProveedor(request: RequestAceptarRechazarOT): void {
+    this.store.dispatch(
+      flujoOTActions.rechazarOTProveedor({
+        request,
+      })
+    );
+  }
+
   // ASIGNAR SUPERVISOR DE TRABAJOS
   public asignarSupervisorTrabajo(
     ot_id: number,

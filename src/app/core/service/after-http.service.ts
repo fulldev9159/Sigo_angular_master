@@ -199,6 +199,12 @@ export class AfterHttpService {
       this.reloadTableOT();
     }
 
+    // RECHAZAR OT PROVEEDOR
+    if (action.type === flujoOTActions.rechazarOTProveedorSuccess.type) {
+      this.snackMessage.showMessage(`Rechazo exitoso`, 'Exito', 4000);
+      this.reloadTableOT();
+    }
+
     // CONFIRMAR RECHAZO OPERACIONES
     if (action.type === flujoOTActions.confirmarRechazoObrasSuccess.type) {
       this.snackMessage.showMessage(`Confirmación exitosa`, 'Exito', 4000);

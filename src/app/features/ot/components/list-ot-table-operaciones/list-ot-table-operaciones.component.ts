@@ -49,6 +49,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   })
   rechazoInicialForm: ViewRechazoComponent;
 
+  @ViewChild('rechazoProveeodrForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoProveeodrForm: ViewRechazoComponent;
+
   @ViewChild(RegistrarLibroObrasComponent)
   registrarLibroObraForm: RegistrarLibroObrasComponent;
 
@@ -164,8 +170,29 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     this.flujoOTFacade.getPosibleSupervisorDeTrabajos(this.ot_id);
   }
 
-  rechazarOrdenProveedor(): void {
+  displayModalrechazarOrdenProveedor(): void {
+    this.flujoOTFacade.getMotivosRechazo('ACEPTACION_OT_EECC');
     this.displayModalRechazoOrdenDeTrabajo = true;
+  }
+
+  closeModalRechazoProveedor(): void {
+    this.displayModalRechazoOrdenDeTrabajo = false;
+    this.displayModalAceptarProveedor = false;
+    this.rechazoProveeodrForm.formRechazo.reset();
+  }
+
+  rechazarOrdenProveedor(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'RECHAZADO',
+        observacion: this.rechazoProveeodrForm.formRechazo.get('motivo').value,
+        tipo: +this.rechazoProveeodrForm.formRechazo.get('tipo_id').value,
+      },
+    };
+
+    this.flujoOTFacade.rechazarOTProveedor(request);
+    this.closeModalRechazoProveedor();
   }
 
   aceptarOrdenProveedor(): void {
@@ -183,6 +210,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     );
     this.displayModalAceptarProveedor = false;
   }
+
+  //
 
   findAccion(accion: string): boolean {
     return (

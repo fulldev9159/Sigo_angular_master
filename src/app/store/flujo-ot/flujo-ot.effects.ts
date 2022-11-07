@@ -71,6 +71,22 @@ export class FlujoOTEffects {
     )
   );
 
+  rechazarOTProveedor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.rechazarOTProveedor),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.aceptarRechazarOTProveedor(request).pipe(
+          map(response =>
+            flujoOTActions.rechazarOTProveedorSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.rechazarOTProveedorError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   asignarSupervisorTrabajo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(flujoOTActions.asignarSupervisorTrabajo),

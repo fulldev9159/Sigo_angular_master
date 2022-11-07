@@ -55,6 +55,28 @@ export const aceptarOTProveedorError = createAction(
   props<{ error: any }>()
 );
 
+// RECHAZAR OT PROVEEDOR
+export const rechazarOTProveedor = createAction(
+  '[FLUJO OT] GET rechazarOTProveedor',
+  props<{
+    request: RequestAceptarRechazarOT;
+  }>()
+);
+
+export const rechazarOTProveedorSuccess = createAction(
+  '[FLUJO OT] GET rechazarOTProveedor Success',
+  props<{
+    response: any;
+  }>()
+);
+
+export const rechazarOTProveedorError = createAction(
+  '[FLUJO OT] GET rechazarOTProveedor Error',
+  props<{
+    error: any;
+  }>()
+);
+
 //  ASIGNAR SUPERVISOR DE TRABAJOS
 export const asignarSupervisorTrabajo = createAction(
   '[FLUJO OT] GET asignarSupervisorTrabajo',
