@@ -91,7 +91,7 @@ services:
     volumes:
       - /tmp:/tmp
     depends_on:
-      - sftp
+      - sftp_testing
       - mcl_otec_db_testing
 
 volumes:
