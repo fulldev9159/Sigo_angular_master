@@ -221,7 +221,7 @@ export class InformeAvanceComponent
                     uo_nombre: uo.model_unidad_obra_cod.descripcion,
                     uo_precio_total_clp: uo.valor_unitario_clp,
                     actividad_descripcion: 'TODO',
-                    actividad_id: -1,
+                    actividad_id: service.actividad_id,
                     uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                     uob_unidad_medida_descripcion:
                       uo.model_unidad_id.descripcion,

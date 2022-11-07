@@ -298,7 +298,7 @@ export class FormCubContainerComponent
                       uo_precio_total_clp: uo.valor_unitario_clp,
                       actividad_descripcion:
                         service.model_actividad_id.descripcion,
-                      actividad_id: -1,
+                      actividad_id: service.actividad_id,
                       uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                       uob_unidad_medida_descripcion:
                         uo.model_unidad_id.descripcion,
