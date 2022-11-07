@@ -66,6 +66,11 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <!-- OT_ET_PENDIENTE_CIERRE -->
+    <button id="play-button" pTooltip="Anular OT" *ngIf="findAccion('OT_ANULAR')" (click)="displayModalAnularOT=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
         <fa-icon [icon]="infoIcon"></fa-icon>
@@ -104,14 +109,24 @@
     [modal]="true">
     Order de trabajo ID: {{ot_id}}
     <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?'
-        (cancelar)="rechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
+        (cancelar)="ShowModelrechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
         textConfirmar="Aceptar OT">
     </zwc-view-confirmacion>
 </p-dialog>
 
-<p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"
+<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false"
     [modal]="true">
-    <zwc-view-rechazo></zwc-view-rechazo>
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInicialForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="closeModalRechazoInicial()">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()"
+            [disabled]="!rechazoInicialForm.formRechazo.valid">
+            Rechazar OT
+        </button>
+    </ng-template>
 </p-dialog>
 
 
@@ -173,3 +188,12 @@
         (confirmar)="cerrarOT()" textConfirmar="Confirmar">
     </zwc-view-confirmacion>
 </p-dialog>
+
+<!-- OT_ET_PENDIENTE_CIERRE -->
+<!-- <p-dialog header="Anular OT" [(visible)]="displayModalAnularOT" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+    <zwc-view-confirmacion pregunta='¿Confirma que desea anular la OT?' (cancelar)="displayModalAnularOT=false"
+        (confirmar)="anularOT()" textConfirmar="Confirmar">
+    </zwc-view-confirmacion>
+</p-dialog> -->

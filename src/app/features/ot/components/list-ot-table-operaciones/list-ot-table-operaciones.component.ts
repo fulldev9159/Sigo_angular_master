@@ -15,6 +15,7 @@ import {
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
 } from '@model';
+import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
@@ -42,6 +43,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   @Input() acciones: Accion[];
   @Input() ot_id: number;
 
+  @ViewChild('rechazoInicialForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoInicialForm: ViewRechazoComponent;
+
   @ViewChild(RegistrarLibroObrasComponent)
   registrarLibroObraForm: RegistrarLibroObrasComponent;
 
@@ -54,6 +61,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalAgregarRegistroLibroDeObras = false;
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
+  displayModalRechazoOrdenDeTrabajoInicial = false;
   displayModalAceptarProveedor = false;
   displayModalSolicitudPago = false;
   displayModalAprobacionOperaciones = false;
@@ -71,6 +79,22 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
       map(values =>
         values.map(value => ({
           name: value.nombre,
+          code: value.id,
+        }))
+      )
+    );
+
+  //
+  motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.motivo > b.motivo ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.motivo,
           code: value.id,
         }))
       )
@@ -105,11 +129,33 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     };
 
     this.flujoOTFacade.aceptarRechazarIncialOT(request);
-    this.displayModalRechazoOrdenDeTrabajo = false;
+    this.displayModalRechazoOrdenDeTrabajoInicial = false;
+    this.displayModalAceptarInicial = false;
   }
 
-  rechazarOTInicial(): void {
-    this.displayModalRechazoOrdenDeTrabajo = true;
+  ShowModelrechazarOTInicial(): void {
+    this.flujoOTFacade.getMotivosRechazo('ACTA');
+    this.displayModalRechazoOrdenDeTrabajoInicial = true;
+  }
+
+  closeModalRechazoInicial(): void {
+    this.displayModalRechazoOrdenDeTrabajoInicial = false;
+    this.displayModalAceptarInicial = false;
+    this.rechazoInicialForm.formRechazo.reset();
+  }
+
+  RechazarOTInicial(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'RECHAZADO',
+        observacion: this.rechazoInicialForm.formRechazo.get('motivo').value,
+        tipo: +this.rechazoInicialForm.formRechazo.get('tipo_id').value,
+      },
+    };
+
+    this.flujoOTFacade.aceptarRechazarIncialOT(request);
+    this.closeModalRechazoInicial();
   }
 
   // ACCIONES ETAPA: OT_ET_AUTORIZACION_PROVEEDOR

@@ -189,7 +189,7 @@ export class AfterHttpService {
 
     // ACEPTAR OT INICIAL
     if (action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
-      this.snackMessage.showMessage(`Aprobación exitosa`, 'Exito', 4000);
+      this.snackMessage.showMessage(`Acción exitosa`, 'Exito', 4000);
       this.reloadTableOT();
     }
 
