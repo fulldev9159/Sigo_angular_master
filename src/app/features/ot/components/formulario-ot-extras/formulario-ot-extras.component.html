@@ -1,42 +1,41 @@
 <p-divider align="left">
-    <span class="p-tag">Información adicional</span>
+  <span class="p-tag">Información adicional</span>
 </p-divider>
 
 <form [formGroup]="form">
-    <div class="card">
-        <div class="formgrid grid">
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <label class="mr-1" for="">Fecha inicio</label>
-                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}"
-                    inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot"
-                    name="fecha-inicio-ot" dateFormat="dd/mm/yy"></p-calendar>
-            </div>
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <label for="">Fecha termino</label>
-                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}"
-                    inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot"
-                    name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
-            </div>
+  <div class="card">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <label class="mr-1" for="">Fecha inicio</label>
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <label for="">Fecha termino</label>
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
 
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <zwc-pdropdown [control]="form.get('proyecto_id')" Label="Proyecto:" dropdown_id="select-proyecto"
-                    [data]="proyectos$|async" Pplaceholder="Seleccione un proyecto" [loading]="loadingProyectos$|async">
-                </zwc-pdropdown>
-            </div>
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <zwc-pdropdown [control]="form.get('admin_contrato_id')" Label="*Administrador de Contrato:"
-                    dropdown_id="select-admin-contrato" [data]="adminContratoFromCub$|async"
-                    Pplaceholder="Seleccione un administrador de contrato"
-                    [loading]="loadingAdminContratoFromCub$|async">
-                </zwc-pdropdown>
-            </div>
+      <ng-container *ngIf="form.get('fecha_inicio').errors === null && form.get('fecha_fin').errors === null">
+        <ng-container *ngIf="form.errors?.dategreaterorequal">
+          <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+            La fecha de fin no puede ser inferior a la fecha de inicio
+          </div>
+        </ng-container>
+      </ng-container>
 
-            <div class="field col-12" style="display: flex;
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <zwc-pdropdown [control]="form.get('proyecto_id')" Label="Proyecto:" dropdown_id="select-proyecto" [data]="proyectos$|async" Pplaceholder="Seleccione un proyecto" [loading]="loadingProyectos$|async">
+        </zwc-pdropdown>
+      </div>
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <zwc-pdropdown [control]="form.get('admin_contrato_id')" Label="*Administrador de Contrato:" dropdown_id="select-admin-contrato" [data]="adminContratoFromCub$|async" Pplaceholder="Seleccione un administrador de contrato" [loading]="loadingAdminContratoFromCub$|async">
+        </zwc-pdropdown>
+      </div>
+
+      <div class="field col-12" style="display: flex;
             flex-direction: column;">
-                <label for="">Observaciones</label>
-                <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
-                    id="observaciones" cols="30" rows="10"></textarea>
-            </div>
-        </div>
+        <label for="">Observaciones</label>
+        <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="10"></textarea>
+      </div>
     </div>
+  </div>
 </form>
