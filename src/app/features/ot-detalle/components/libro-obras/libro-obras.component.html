@@ -48,11 +48,30 @@
         <ng-container *ngIf="registro.tipo_item==='BITACORA'">
             <div class="registro"
                 [ngClass]="registro.evento==='CAMBIO_ESTADO'?'registro-cambio-estado':'registro-accion'">
-                <span class="titulo-registro">Registro de Evento</span>
+                <span class="titulo-registro" *ngIf="registro.evento==='CAMBIO_ESTADO'">
+                    <fa-icon [icon]="playIcon"></fa-icon>
+                    Registro de Evento
+                </span>
+                <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_INICIAL'">
+                    <fa-icon [icon]="inboxIcon"></fa-icon>
+                    Aceptación Incial de OT
+                </span>
+
                 <br>
-                <span> {{registro.created_at| date:'medium'}}</span>
+                <span style="margin-right: 10px;"> {{registro.created_at| date:'medium'}}</span>
+
                 <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
-                    <span>{{getMetadata(registro.evento,registro.metadata)}}</span>
+                    <span>{{getText(registro.evento,registro.metadata)}}</span>
+                </ng-container>
+                <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'">
+                    <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
+                    <fa-icon [icon]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?xmark:okmark"
+                        [ngClass]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                    </fa-icon>
+                    <span *ngIf="getMetadata(registro.metadata).values.estado==='RECHAZADO'">Se ha rechazado la OT con
+                        la siguiente observación:</span>
+                    <br>
+                    <q>{{getMetadata(registro.metadata).values.observacion}}</q>
                 </ng-container>
             </div>
         </ng-container>

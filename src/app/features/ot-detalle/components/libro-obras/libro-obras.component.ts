@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environment';
+import {
+  faCircleCheck,
+  faCircleXmark,
+  faInbox,
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { Accion, InfoOT, RegistroLibroDeObras } from '@model';
 import { Subscription } from 'rxjs';
 
@@ -17,6 +23,10 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   registrosLibroDeObras: RegistroLibroDeObras[] = [];
   API_URL: string;
+  playIcon = faPlay;
+  inboxIcon = faInbox;
+  xmark = faCircleXmark;
+  okmark = faCircleCheck;
 
   icons = {
     '.docx': 'pi-file',
@@ -69,7 +79,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  getMetadata(evento: string, metadata: string): string {
+  getText(evento: string, metadata: string): string {
     // console.log(JSON.parse(metadata));
     const objMeta = JSON.parse(metadata);
     if (evento === 'CAMBIO_ESTADO') {
@@ -79,8 +89,14 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
           : objMeta.from.tipo_etapa.nombre
       } a la etapa ${objMeta.to.tipo_etapa.nombre}`;
     }
+    if (evento === 'ACEPTACION_INICIAL') {
+    }
 
     return '';
+  }
+
+  getMetadata(metadata: string): object {
+    return JSON.parse(metadata);
   }
 
   ngOnDestroy(): void {

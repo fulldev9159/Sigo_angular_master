@@ -8,6 +8,7 @@
         padding: 4px;
         padding-left: 10px;
         border-radius: 6px;
+        margin-bottom: 10px;
 
         span.titulo-registro {
             font-size: 0.8rem;
@@ -19,9 +20,26 @@
             font-size: 0.7rem;
             margin-left: 10px;
         }
+
+        fa-icon {
+            font-size: 0.7rem;
+        }
+
+        .iconRechazo {
+            color: red;
+            font-size: 1rem;
+        }
+
+        q {
+            font-size: 0.7rem;
+        }
     }
 
     .registro-cambio-estado {
         background-color: #eeeded;
+    }
+
+    .registro-accion {
+        background-color: white;
     }
 }
