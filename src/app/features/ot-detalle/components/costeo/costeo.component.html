@@ -4,6 +4,88 @@
         <zwc-table-servicios mode_source="static" [data_source]="detalleCubicacion$|async" [cantidad_editable]="false"
             [column_acciones]="false">
         </zwc-table-servicios>
-
     </ng-container>
+
+
+
+    <div class="card">
+        <div class="formgrid grid info-base">
+            <div class="field col-12">
+                <p-divider align="center">
+                    <span class="p-tag">Sustento Financiero</span>
+                </p-divider>
+                <table style="width: 100%;" class="table-info">
+                    <ng-container *ngIf="dataOT && dataOT.tipo_sustento==='CAPEX'">
+                        <tr>
+                            <td>
+                                PMO
+                            </td>
+                            <td>
+                                {{dataOT.pmo_codigo}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Línea Presupuestaria
+                            </td>
+                            <td>
+                                {{dataOT.lp}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                PEP2
+                            </td>
+                            <td>
+                                {{dataOT.pep2}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                PEP2 provisorio
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="dataOT && dataOT.tipo_sustento==='OPEX'">
+                        <tr>
+                            <td>
+                                ID OPEX
+                            </td>
+                            <td>
+                                {{dataOT.id_opex}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cuenta SAP
+                            </td>
+                            <td>
+                                {{dataOT.cuenta_sap}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                CECO
+                            </td>
+                            <td>
+                                {{dataOT.ceco}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                CECO provisorio
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

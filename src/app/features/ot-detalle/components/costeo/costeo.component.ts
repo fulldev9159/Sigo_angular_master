@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarritoService, DetalleCubicacion } from '@model';
+import { CarritoService, DetalleCubicacion, DetalleOT, InfoOT } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { map, Observable, Subscription, tap } from 'rxjs';
 
@@ -12,6 +12,8 @@ import { map, Observable, Subscription, tap } from 'rxjs';
 })
 export class CosteoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+
+  dataOT: InfoOT;
 
   detalleCubicacion$: Observable<CarritoService[]> = this.cubicacionFacade
     .detalleCubicacion$()
@@ -68,6 +70,8 @@ export class CosteoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ detalleOT }) => {
+        console.log(detalleOT);
+        this.dataOT = detalleOT.data.ot;
         this.cubicacionFacade.detalleCubicacion(
           detalleOT.data.ot.cubicacion_id
         );
