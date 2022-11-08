@@ -33,6 +33,12 @@ export class OtDetalleHttpService {
         `${this.API_URL}/ot/bandeja/get`,
         request
       )
-      .pipe(map(value => value.data.items.find(v => v.id === ot_id).acciones));
+      .pipe(
+        map(value =>
+          value.data.items.find(v => v.id === ot_id)
+            ? value.data.items.find(v => v.id === ot_id).acciones
+            : []
+        )
+      );
   }
 }

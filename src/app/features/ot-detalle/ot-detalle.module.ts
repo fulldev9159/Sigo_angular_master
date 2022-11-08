@@ -7,9 +7,16 @@ import { LibroObrasComponent } from './components/libro-obras/libro-obras.compon
 import { InformacionComponent } from './components/informacion/informacion.component';
 import { AnexosComponent } from './components/anexos/anexos.component';
 import { CosteoComponent } from './components/costeo/costeo.component';
+import { OtModule } from '../ot/ot.module';
 
 @NgModule({
-  declarations: [OtDetalleComponent, LibroObrasComponent, InformacionComponent, AnexosComponent, CosteoComponent],
-  imports: [CommonModule, OtDetalleRoutingModule, SharedModule],
+  declarations: [
+    OtDetalleComponent,
+    LibroObrasComponent,
+    InformacionComponent,
+    AnexosComponent,
+    CosteoComponent,
+  ],
+  imports: [CommonModule, OtDetalleRoutingModule, SharedModule, OtModule],
 })
 export class OtDetalleModule {}

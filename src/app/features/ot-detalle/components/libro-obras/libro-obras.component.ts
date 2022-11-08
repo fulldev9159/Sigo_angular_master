@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environment';
-import { RegistroLibroDeObras } from '@model';
+import { Accion, InfoOT, RegistroLibroDeObras } from '@model';
 import { Subscription } from 'rxjs';
 
 // 172 TODO: MEJORAR CSS
@@ -11,6 +11,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./libro-obras.component.scss'],
 })
 export class LibroObrasComponent implements OnInit, OnDestroy {
+  // PARA PODER AGREGAR EL BOTON DE AGREGAR REGISTRO DEL LIBRO DE OBRAS PRIMERO SE DEBE CONOCER SI EL USUARIO TIENE EL PERMISO PARA REALIZAR ESA ACCION SOBRE DICHA OT.
+  // PERO ACTUALMENTE SOLO SE PUEDE SABER LAS ACCIONES SOBRE LA OT SOLO SI SE SABE EN QUE PESTAÑA DEBERÏA ESTAR, ES DECIR, QUE PARA OBTENER LA ACCION DEBO INVOCAR 5 VECES EL GET BANDEJA HASTA ENCONTRAR LA OT Y VER SUS PERMISOS
+
   subscription: Subscription = new Subscription();
   registrosLibroDeObras: RegistroLibroDeObras[] = [];
   API_URL: string;
@@ -33,7 +36,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.route.data.subscribe(({ registroLibroObras }) => {
+      this.route.data.subscribe(({ registroLibroObras, detalleOT }) => {
         this.registrosLibroDeObras = registroLibroObras?.data;
       })
     );
@@ -67,10 +70,14 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   }
 
   getMetadata(evento: string, metadata: string): string {
-    console.log(JSON.parse(metadata));
+    // console.log(JSON.parse(metadata));
     const objMeta = JSON.parse(metadata);
     if (evento === 'CAMBIO_ESTADO') {
-      return `desde ${objMeta.from.tipo_etapa.nombre} a ${objMeta.to.tipo_etapa.nombre}`;
+      return `Hubo un cambio de estado desde la etapa ${
+        objMeta.from.tipo_etapa.nombre === 'Etapa Desconocida'
+          ? 'Creación de OT'
+          : objMeta.from.tipo_etapa.nombre
+      } a la etapa ${objMeta.to.tipo_etapa.nombre}`;
     }
 
     return '';

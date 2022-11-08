@@ -43,5 +43,6 @@ import { RegistrarLibroObrasComponent } from './components/registrar-libro-obras
     FormsModule,
     ReactiveFormsModule,
   ],
+  exports: [ListOtTableOperacionesComponent],
 })
 export class OtModule {}

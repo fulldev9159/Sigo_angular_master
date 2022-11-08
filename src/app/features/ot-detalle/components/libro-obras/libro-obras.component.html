@@ -1,9 +1,8 @@
 <div class="container-component">
     <h1>Libro de Obras</h1>
-    <div class="row" style="padding: 15px;">
-        <div class="col-12" *ngFor="let registro of registrosLibroDeObras">
-            <p-panel>
-                <ng-template pTemplate="header">
+    <ng-container *ngFor="let registro of registrosLibroDeObras">
+        <!-- <p-panel>
+                <ng-template pTemplate="header" *ngIf="registro.tipo_item==='ENTRADA_LIBRO_OBRA'">
                     <strong>Autor:</strong>
                     <span class="nombre-usuario-registro">{{registro.usuario_nombre}}</span>
                     <strong style="margin-left: 10px;">Perfil: </strong>
@@ -11,7 +10,6 @@
                     <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}
                 </ng-template>
                 <ng-container *ngIf="registro.tipo_item==='ENTRADA_LIBRO_OBRA'">
-
                     <div class="row">
                         <div class="col-7 obervacion-registro"
                             style="border-right: 3px solid #dde8ea;color: #666565;white-space: pre-line;">
@@ -37,20 +35,26 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="registro.tipo_item==='BITACORA'" style="padding: 11px;
-                    background: #eaeaea;
-                    border-radius: 13px;
-                    font-size: 10px;
-                    margin-bottom:10px">
+                <ng-container *ngIf="registro.tipo_item==='BITACORA'">
+
                     {{registro.created_at| date:'medium'}} - <strong>Status:</strong> <span
                         class="nivel-registro">{{registro.nivel}}</span> <strong style="margin-left: 10px;">Evento:
                     </strong> <span class="evento-registro">{{registro.evento}}</span> <strong
                         style="margin-left: 10px;">mensaje:</strong> <span
                         class="mensaje-registro">{{getMetadata(registro.evento,registro.metadata)}}</span>
                 </ng-container>
-            </p-panel>
+            </p-panel> -->
 
-
-        </div>
-    </div>
+        <ng-container *ngIf="registro.tipo_item==='BITACORA'">
+            <div class="registro"
+                [ngClass]="registro.evento==='CAMBIO_ESTADO'?'registro-cambio-estado':'registro-accion'">
+                <span class="titulo-registro">Registro de Evento</span>
+                <br>
+                <span> {{registro.created_at| date:'medium'}}</span>
+                <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
+                    <span>{{getMetadata(registro.evento,registro.metadata)}}</span>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>
 </div>

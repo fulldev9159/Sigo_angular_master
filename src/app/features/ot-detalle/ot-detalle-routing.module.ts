@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccionesOTResolver } from 'src/app/core/resolvers/accionesOT.resolver';
 import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
 import { RegistroLibroLobrasResolver } from 'src/app/core/resolvers/registrosLibroObras.resolver';
 import { DetalleCubicacionResolver } from '../cubicacion/resolvers/detalle-cubicacion.resolver';
@@ -20,6 +21,7 @@ const routes: Routes = [
         component: InformacionComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
+          accionesOT: AccionesOTResolver,
         },
       },
       {
