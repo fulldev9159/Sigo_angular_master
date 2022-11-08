@@ -4,7 +4,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown, OTFromNumeroInterno } from '@model';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { NumeroInternoFacade } from '@storeOT/numero-interno/numero-interno.facades';
-import { map, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'zwc-formulario-ot-fijo',

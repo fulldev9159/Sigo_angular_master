@@ -26,6 +26,7 @@ import { FormularioOtFijoComponent } from '../../components/formulario-ot-fijo/f
 import { FormularioOtMovilComponent } from '../../components/formulario-ot-movil/formulario-ot-movil.component';
 import { FormularioOtOrdinarioComponent } from '../../components/formulario-ot-ordinario/formulario-ot-ordinario.component';
 import { FormularioOtSustentoFinancieroComponent } from '../../components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
+import { LogService } from '@log';
 
 // 89 TODO: VERIFICAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
 // 90 TODO: PROBAR LAS DEMAS CREACIONES DE OT
@@ -118,6 +119,13 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
+      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      numero_interno: new FormControl('', [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      ots_numero_interno: new FormControl([]),
     }),
     ordinario: new FormGroup({
       carta_adjudicacion: new FormControl(null, [
@@ -136,6 +144,13 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
+      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      numero_interno: new FormControl('', [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      ots_numero_interno: new FormControl([]),
     }),
     fijo: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
@@ -181,7 +196,8 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private otFacade: OTFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private logger: LogService
   ) {}
 
   ngOnInit(): void {
@@ -307,6 +323,9 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           sitio_plan_id: +sitio_id,
         },
       };
+
+      this.logger.debug(`contrato movil`, request);
+
       return request;
     } else if (contrato === 'Fijo') {
       const {
@@ -323,6 +342,9 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           ),
         },
       };
+
+      this.logger.debug(`contrato fijo`, request);
+
       return request;
     } else if (contrato === 'Ordinario') {
       const {
@@ -331,6 +353,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           fecha_adjudicacion,
           numero_pedido,
           materia,
+          tipo_numero_interno_id,
         },
       } = this.form.getRawValue();
       let request: RequestCreateOTOrdinario = {
@@ -341,7 +364,16 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           numero_pedido: numero_pedido.trim(),
           materia: materia.trim(),
         },
+        ot_numero_interno: {
+          tipo_numero_interno_id: +tipo_numero_interno_id,
+          numero_interno: this.ordinarioForm.OTsNumetoInterno.map(
+            numeros => numeros.numero_interno
+          ),
+        },
       };
+
+      this.logger.debug(`contrato ordinario`, request);
+
       return request;
     } else if (contrato === 'Bucle') {
       const {
@@ -359,6 +391,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           tiene_permisos,
           area_negocio,
           nombre_proyectista,
+          tipo_numero_interno_id,
         },
       } = this.form.getRawValue();
       let request: RequestCreateOTBucle = {
@@ -378,11 +411,24 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           area_negocio: area_negocio.toString(),
           nombre_proyectista: nombre_proyectista.trim(),
         },
+        ot_numero_interno: {
+          tipo_numero_interno_id: +tipo_numero_interno_id,
+          numero_interno: this.bucleForm.OTsNumetoInterno.map(
+            numeros => numeros.numero_interno
+          ),
+        },
       };
+
+      this.logger.debug(`contrato bucle`, request);
+
       return request;
     } else {
       return undefined;
     }
+  }
+
+  get values(): any {
+    return this.form.getRawValue();
   }
 
   ngOnDestroy(): void {

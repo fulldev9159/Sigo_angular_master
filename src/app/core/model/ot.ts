@@ -48,6 +48,10 @@ export interface CreateOTBucle extends CreateOTBase {
 
 export interface RequestCreateOTOrdinario {
   ot_datos: CreateOTOrdinario;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
 }
 export interface RequestCreateOTMovil {
   ot_datos: CreateOTMovil;
@@ -55,6 +59,10 @@ export interface RequestCreateOTMovil {
 
 export interface RequestCreateOTBucle {
   ot_datos: CreateOTBucle;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
 }
 
 export interface RequestCreateOTFijo {
