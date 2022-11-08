@@ -141,7 +141,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   }
 
   ShowModelrechazarOTInicial(): void {
-    this.flujoOTFacade.getMotivosRechazo('ACTA');
+    this.flujoOTFacade.getMotivosRechazo('PAGO_JERARQUICO');
     this.displayModalRechazoOrdenDeTrabajoInicial = true;
   }
 

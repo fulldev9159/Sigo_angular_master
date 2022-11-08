@@ -1,1 +1,9 @@
-<p>costeo works!</p>
+<div class="container-component">
+    <h1>Servicios Cubicados</h1>
+    <ng-container *ngIf="(detalleCubicacion$|async).length>0 ">
+        <zwc-table-servicios mode_source="static" [data_source]="detalleCubicacion$|async" [cantidad_editable]="false"
+            [column_acciones]="false">
+        </zwc-table-servicios>
+
+    </ng-container>
+</div>

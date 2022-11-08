@@ -2,7 +2,7 @@
     font-size: var(--size-text-sigo);
     padding: 12px;
     display: flex;
-    height: 74px;
+    height: 88px;
     background: #085b48;
     flex-direction: column;
     justify-content: space-evenly;
@@ -13,6 +13,8 @@
 
     span p {
         font-weight: 700;
+        margin-top: 6px;
+        margin-bottom: 2px;
     }
 }
 

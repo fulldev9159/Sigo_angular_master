@@ -107,7 +107,7 @@
 <!-- OT_ET_AUTORIZACION_INICIAL -->
 <p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"
     [modal]="true">
-    Order de trabajo ID: {{ot_id}}
+    <p>Order de trabajo ID: {{ot_id}}</p>
     <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?'
         (cancelar)="ShowModelrechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
         textConfirmar="Aceptar OT">

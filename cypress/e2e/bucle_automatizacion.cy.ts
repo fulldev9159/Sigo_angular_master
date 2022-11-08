@@ -18,9 +18,7 @@ describe('Create Cubicacion BUCLE', () => {
     cy.viewport(1500, 1700);
     const data = crearCubicacion;
     // FORMULARIO
-    cy.get('input[name="input-nombre-cubicacion"]').type(
-      'Cubicacion Bucle Cypress'
-    );
+    cy.get('input[name="input-nombre-cubicacion"]').type(nombreCubicacion);
     cy._select_dropdown('#select-tipo-cubicacion', 'Construcción');
     cy._select_dropdown('#select-contrato_marco', 'BUCLE');
     cy.get('input[name="input-direccion-desde"]').type('a');
