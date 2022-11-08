@@ -1,19 +1,17 @@
 <form [formGroup]="formFilter" [id]="table_id">
-    <p-table #dt [columns]="['nombre']" [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
-        responsiveLayout="scroll" [paginator]="true" [rows]="10" [globalFilterFields]="['nombre']">
-        <ng-template pTemplate="caption">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                <h5 class="p-m-0"></h5>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Buscar..." />
-                </span>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <!-- FILTERS -->
-            <!-- <tr>
+  <p-table #dt [columns]="['nombre']" [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true" [rows]="10" [globalFilterFields]="['nombre']">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0"></h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <!-- FILTERS -->
+      <!-- <tr>
                 <th pFrozenColumn style="width:80px">
                     <div>
                         <fa-icon [icon]="filterIcon"></fa-icon>
@@ -38,40 +36,38 @@
                 <th style="width:140px"></th>
                 <th style="width:200px"></th>
             </tr> -->
-            <!-- HEADERS -->
-            <tr>
-                <th style="width:80px" pSortableColumn="id" pFrozenColumn>ID <p-sortIcon field="id">
-                    </p-sortIcon>
-                </th>
-                <th style="width:200px" pSortableColumn="nombre">Nombre <p-sortIcon field="nombre">
-                    </p-sortIcon>
-                </th>
-                <th style="width:140px">Etapa</th>
-                <th style="width:100px" pSortableColumn="fecha_inicio">Fecha Inicio
-                    <p-sortIcon field="fecha_inicio"></p-sortIcon>
-                </th>
-                <th style="width:100px" pSortableColumn="fecha_termino">Fecha Termino
-                    <p-sortIcon field="fecha_termino"></p-sortIcon>
-                </th>
-                <th style="width:120px" pSortableColumn="contrato_marco_nombre">Contrato <p-sortIcon
-                        field="contrato_marco_nombre"></p-sortIcon>
-                </th>
-                <th style="width:140px" pSortableColumn="proveedor_nombre">Proveedor<p-sortIcon
-                        field="proveedor_nombre">
-                    </p-sortIcon>
-                </th>
-                <th style="width:140px" pSortableColumn="usuario_nombre">Gestor<p-sortIcon field="usuario_nombre">
-                    </p-sortIcon>
-                </th>
-                <th style="width:200px">Operaciones</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-item>
-            <tr>
-                <td style="width:80px" pFrozenColumn>{{item.id}}</td>
-                <td style="width:200px">{{item.nombre}}</td>
-                <td style="width:140px">
-                    <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_INICIAL'|| 
+      <!-- HEADERS -->
+      <tr>
+        <th style="width:80px" pSortableColumn="id" pFrozenColumn>ID <p-sortIcon field="id">
+          </p-sortIcon>
+        </th>
+        <th style="width:200px" pSortableColumn="nombre">Nombre <p-sortIcon field="nombre">
+          </p-sortIcon>
+        </th>
+        <th style="width:140px">Etapa</th>
+        <th style="width:100px" pSortableColumn="fecha_inicio">Fecha Inicio
+          <p-sortIcon field="fecha_inicio"></p-sortIcon>
+        </th>
+        <th style="width:100px" pSortableColumn="fecha_termino">Fecha Termino
+          <p-sortIcon field="fecha_termino"></p-sortIcon>
+        </th>
+        <th style="width:120px" pSortableColumn="contrato_marco_nombre">Contrato <p-sortIcon field="contrato_marco_nombre"></p-sortIcon>
+        </th>
+        <th style="width:140px" pSortableColumn="proveedor_nombre">Proveedor<p-sortIcon field="proveedor_nombre">
+          </p-sortIcon>
+        </th>
+        <th style="width:140px" pSortableColumn="usuario_nombre">Gestor<p-sortIcon field="usuario_nombre">
+          </p-sortIcon>
+        </th>
+        <th style="width:200px">Operaciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td style="width:80px" pFrozenColumn>{{item.id}}</td>
+        <td style="width:200px">{{item.nombre}}</td>
+        <td style="width:140px">
+          <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_INICIAL'|| 
                                item.etapa_slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'|| 
                                item.etapa_slug==='OT_ET_PAGO_SOLICITUD_PAGO'|| 
                                item.etapa_slug==='OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES'||
@@ -80,43 +76,43 @@
                                item.etapa_slug==='OT_ET_PENDIENTE_CIERRE'||
                                item.etapa_slug==='OT_ET_ANULACION_POR_RECHAZO_INICIAL'||
                                item.etapa_slug==='OT_ET_ANULACION_POR_RECHAZO_PROV'">
-                        <p-chip [label]="item.etapa_otdesc" image="assets/images/logo.png"></p-chip>
-                    </ng-container>
-                    <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_PROVEEDOR'||
+            <p-chip [label]="item.etapa_otdesc" image="assets/images/logo.png"></p-chip>
+          </ng-container>
+          <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_PROVEEDOR'||
                                item.etapa_slug==='OT_ET_EJECUCION_TRABAJOS'||
                                item.etapa_slug==='OT_ET_PAGO_ACEPTACION_IA'|| 
                                item.etapa_slug==='OT_ET_PAGO_GENERACION_ACTA' ">
-                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-building"></p-chip>
-                    </ng-container>
-                    <ng-container *ngIf="item.etapa_slug==='OT_ET_EJECUCION_TRABAJOS_ESPERA_IMPUTACION'">
-                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-pause"></p-chip>
-                    </ng-container>
+            <p-chip [label]="item.etapa_otdesc" icon="pi pi-building"></p-chip>
+          </ng-container>
+          <ng-container *ngIf="item.etapa_slug==='OT_ET_EJECUCION_TRABAJOS_ESPERA_IMPUTACION'">
+            <p-chip [label]="item.etapa_otdesc" icon="pi pi-pause"></p-chip>
+          </ng-container>
 
-                    <ng-container *ngIf="item.etapa_slug==='OT_ET_FINALIZADA'">
-                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-up"></p-chip>
-                    </ng-container>
+          <ng-container *ngIf="item.etapa_slug==='OT_ET_FINALIZADA'">
+            <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-up"></p-chip>
+          </ng-container>
 
-                    <ng-container *ngIf="item.etapa_slug==='OT_ET_ANULADA_POR_RECHAZO_PROV'">
-                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-down"></p-chip>
-                    </ng-container>
+          <ng-container *ngIf="item.etapa_slug==='OT_ET_ANULADA_POR_RECHAZO_PROV'">
+            <p-chip [label]="item.etapa_otdesc" icon="pi pi-thumbs-down"></p-chip>
+          </ng-container>
 
-                </td>
-                <td style="width:100px">{{item.fecha_inicio| date: 'dd/MM/yyyy'}}</td>
-                <td style="width:100px">{{item.fecha_termino| date: 'dd/MM/yyyy'}}</td>
-                <td style="width:120px">{{item.contrato_marco_nombre}}</td>
-                <td style="width:140px">{{item.proveedor_nombre}}</td>
-                <td style="width:140px">{{item.usuario_nombre}}</td>
-                <td style="width:200px">
-                    <zwc-list-ot-table-operaciones [acciones]="item.acciones" [ot_id]="item.id">
-                    </zwc-list-ot-table-operaciones>
-                </td>
-            </tr>
-        </ng-template>
+        </td>
+        <td style="width:100px">{{item.fecha_inicio| date: 'dd/MM/yyyy'}}</td>
+        <td style="width:100px">{{item.fecha_termino| date: 'dd/MM/yyyy'}}</td>
+        <td style="width:120px">{{item.contrato_marco_nombre}}</td>
+        <td style="width:140px">{{item.proveedor_nombre}}</td>
+        <td style="width:140px">{{item.usuario_nombre}}</td>
+        <td style="width:200px">
+          <zwc-list-ot-table-operaciones [acciones]="item.acciones" [ot_id]="item.id">
+          </zwc-list-ot-table-operaciones>
+        </td>
+      </tr>
+    </ng-template>
 
-        <ng-template pTemplate="summary">
-            <div class="p-d-flex p-ai-center p-jc-between">
-                En total hay {{data ? data.length : 0 }} elementos.
-            </div>
-        </ng-template>
-    </p-table>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{data ? data.length : 0 }} elementos.
+      </div>
+    </ng-template>
+  </p-table>
 </form>
