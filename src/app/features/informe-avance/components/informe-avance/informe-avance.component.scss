@@ -9,3 +9,12 @@
     letter-spacing: 2px;
     color: #353434;
 }
+
+:host ::ng-deep {
+    textarea {
+        width: 86vw;
+        height: 154px;
+        padding: 10px;
+        border: 0.07rem solid #bcbfc1;
+    }
+}
