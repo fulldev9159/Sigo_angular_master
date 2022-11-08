@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as CustomValidators from '@sharedOT/validators';
 import {
   CreateOTBase,
   CubicacionContrato,
@@ -162,13 +163,16 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       ceco_codigo: new FormControl(null, []),
       ceco_provisorio: new FormControl(null, []),
     }),
-    extras: new FormGroup({
-      fecha_inicio: new FormControl(null, [Validators.required]),
-      fecha_fin: new FormControl(null, [Validators.required]),
-      proyecto_id: new FormControl(null, []),
-      observaciones: new FormControl(null, []),
-      admin_contrato_id: new FormControl(null, [Validators.required]),
-    }),
+    extras: new FormGroup(
+      {
+        fecha_inicio: new FormControl(null, [Validators.required]),
+        fecha_fin: new FormControl(null, [Validators.required]),
+        proyecto_id: new FormControl(null, []),
+        observaciones: new FormControl(null, []),
+        admin_contrato_id: new FormControl(null, [Validators.required]),
+      },
+      [CustomValidators.DateGreaterOrEqualThan('fecha_fin', 'fecha_inicio')]
+    ),
   });
 
   // LOADINGS
