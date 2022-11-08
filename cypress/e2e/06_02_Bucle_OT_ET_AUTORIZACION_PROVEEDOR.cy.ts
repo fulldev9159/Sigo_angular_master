@@ -1,6 +1,6 @@
 import { cubicacionContratoMOCK200ok } from '@mocksOT';
 
-describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
+describe('OT_ET_AUTORIZACION_PROVEEDOR BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
