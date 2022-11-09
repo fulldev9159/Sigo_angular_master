@@ -107,12 +107,22 @@
                   <button (click)="showClonarCubicacion(item.cubicacion_id)" id="button-clonar-cubicacion">
                     <fa-icon [icon]="cloneIcon"></fa-icon> Clonar
                   </button>
-                  <button [routerLink]="['/cubicacion/form-cub',item.cubicacion_id]" id="button-editar-cubicacion">
-                    <fa-icon [icon]="editIcon"></fa-icon> Editar
-                  </button>
-                  <button style="background-color: #d32f2f;" (click)="showEliminarCubicacion(item.cubicacion_id)" id="button-eliminar-cubicacion">
-                    <fa-icon [icon]="trashICon"></fa-icon>Eliminar
-                  </button>
+                  <ng-container *ngIf="item.asignado; else noAsignado">
+                    <button id="button-editar-cubicacion" class="disabled">
+                      <fa-icon [icon]="editIcon"></fa-icon> Editar
+                    </button>
+                    <button style="background-color: #d32f2f;" id="button-eliminar-cubicacion" class="disabled">
+                      <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                    </button>
+                  </ng-container>
+                  <ng-template #noAsignado>
+                    <button [routerLink]="['/cubicacion/form-cub',item.cubicacion_id]" id="button-editar-cubicacion">
+                      <fa-icon [icon]="editIcon"></fa-icon> Editar
+                    </button>
+                    <button style="background-color: #d32f2f;" (click)="showEliminarCubicacion(item.cubicacion_id)" id="button-eliminar-cubicacion">
+                      <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                    </button>
+                  </ng-template>
                 </div>
               </td>
             </tr>
