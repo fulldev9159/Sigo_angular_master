@@ -1,2 +1,2 @@
-export let nombreCubicacion = 'testCub2';
-export let nombreOT = 'OT Testing2';
+export let nombreCubicacion = 'testCub4';
+export let nombreOT = 'OT Testing4';

@@ -55,11 +55,16 @@
                 </span>
                 <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_INICIAL'">
                     <fa-icon [icon]="inboxIcon"></fa-icon>
-                    Aceptación Incial de OT
+                    Aprobación Incial de OT
                 </span>
                 <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
                     <fa-icon [icon]="banIcon"></fa-icon>
                     Anulación de la OT
+                </span>
+                <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_EECC'">
+                    <fa-icon [icon]="inboxIcon"></fa-icon>
+                    Aprobación de la OT por Proveedor (Pendiente back retorne en metadata el estado y la observacion
+                    como lo hacen en rechazo/aprobacion inicial)
                 </span>
 
                 <br>
@@ -69,6 +74,7 @@
                 <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
                     <span>{{getText(registro.evento,registro.metadata)}}</span>
                 </ng-container>
+
                 <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'">
                     <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
                     <fa-icon [icon]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?xmark:okmark"
@@ -76,6 +82,8 @@
                     </fa-icon>
                     <span *ngIf="getMetadata(registro.metadata).values.estado==='RECHAZADO'">Se ha rechazado la OT con
                         la siguiente observación:</span>
+                    <span *ngIf="getMetadata(registro.metadata).values.estado==='ACEPTADO'">Se ha aceptado la orden de
+                        trabajo</span>
                     <br>
                     <q>{{getMetadata(registro.metadata).values.observacion}}</q>
                 </ng-container>
@@ -85,6 +93,18 @@
                     <fa-icon [icon]="banIcon"></fa-icon>
                     <span>{{registro.mensaje}}</span>
                 </ng-container>
+
+                <!-- <ng-container *ngIf="registro.evento==='ACEPTACION_EECC'">
+                    <fa-icon [icon]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?xmark:okmark"
+                        [ngClass]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                    </fa-icon>
+                    <span *ngIf="getMetadata(registro.metadata).values.estado==='RECHAZADO'">Se ha rechazado la OT con
+                        la siguiente observación:</span>
+                    <span *ngIf="getMetadata(registro.metadata).values.estado==='ACEPTADO'">Se ha aceptado la orden de
+                        trabajo</span>
+                    <br>
+                    <q>{{getMetadata(registro.metadata).values.observacion}}</q>
+                </ng-container> -->
             </div>
         </ng-container>
     </ng-container>

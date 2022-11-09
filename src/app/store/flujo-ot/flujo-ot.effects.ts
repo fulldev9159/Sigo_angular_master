@@ -206,7 +206,9 @@ export class FlujoOTEffects {
           flujoOTActions.solicitarPagoSuccess,
           flujoOTActions.aprobarRechazarOperacionesSuccess,
           flujoOTActions.confirmarRechazoObrasSuccess,
-          flujoOTActions.cerrarOTSuccess
+          flujoOTActions.cerrarOTSuccess,
+          flujoOTActions.anularOTSuccess,
+          flujoOTActions.rechazarOTProveedorSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -225,7 +227,9 @@ export class FlujoOTEffects {
           flujoOTActions.aprobarRechazarOperacionesError,
           flujoOTActions.getAllMotivoRechazoOTError,
           flujoOTActions.confirmarRechazoObrasError,
-          flujoOTActions.cerrarOTError
+          flujoOTActions.cerrarOTError,
+          flujoOTActions.anularOTError,
+          flujoOTActions.rechazarOTProveedorError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -5,7 +5,7 @@ import {
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacionBUCLE';
 
-describe.skip('Create Cubicacion BUCLE', () => {
+describe('Create Cubicacion BUCLE', () => {
   it('should let enter to create cubicacion', () => {
     cy.viewport(1500, 1700);
     cy.visit('http://localhost:4206/login/auth');
@@ -154,7 +154,7 @@ describe('Create ot bucle', () => {
   });
 });
 
-describe.skip('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
+describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
