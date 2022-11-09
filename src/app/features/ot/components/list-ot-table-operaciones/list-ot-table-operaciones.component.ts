@@ -197,19 +197,21 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   }
 
   aceptarOrdenProveedor(): void {
-    const request: RequestAceptarRechazarOT = {
-      ot_id: this.ot_id,
-      values: {
-        estado: 'ACEPTADO',
-      },
-    };
-    this.flujoOTFacade.aceptarOTProveedor(
-      request,
-      this.ot_id,
-      +this.form.get('trabajador_id').value,
-      'SUPERVISOR_DE_TRABAJOS'
-    );
-    this.displayModalAceptarProveedor = false;
+    if (this.formValid) {
+      const request: RequestAceptarRechazarOT = {
+        ot_id: this.ot_id,
+        values: {
+          estado: 'ACEPTADO',
+        },
+      };
+      this.flujoOTFacade.aceptarOTProveedor(
+        request,
+        this.ot_id,
+        +this.form.get('trabajador_id').value,
+        'SUPERVISOR_DE_TRABAJOS'
+      );
+      this.displayModalAceptarProveedor = false;
+    }
   }
 
   //
@@ -276,5 +278,9 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get formValid(): boolean {
+    return this.form?.valid ?? false;
   }
 }
