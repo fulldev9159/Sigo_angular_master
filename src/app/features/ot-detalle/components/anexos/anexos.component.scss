@@ -1,0 +1,29 @@
+.container-component {
+    padding: 10px;
+
+    h1 span {
+        font-size: 1.5rem;
+    }
+
+    table.table-anexos {
+        width: 100%;
+
+        th {
+            border: 0;
+            border-width: 0;
+            padding: 0.275rem;
+            background-color: #dedcdc;
+            font-weight: 600;
+            text-align: center;
+            padding-right: 10px;
+            width: auto;
+            border-right: 1px solid #bdbbbb
+        }
+
+        td {
+            text-align: center;
+            font-size: var(--size-text-sigo);
+            padding: 0.275rem;
+        }
+    }
+}

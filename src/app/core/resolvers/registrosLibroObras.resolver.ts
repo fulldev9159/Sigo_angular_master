@@ -34,7 +34,7 @@ export class RegistroLibroLobrasResolver
       return null;
     }
     return this.service.getLibroObras(id).pipe(
-      tap(response => {
+      tap(response => {        
         this.OTDetalleFacade.getLibroObrassSuccess(response.data);
       }),
       catchError(error => {
