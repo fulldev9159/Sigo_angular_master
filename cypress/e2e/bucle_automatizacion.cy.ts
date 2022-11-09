@@ -5,7 +5,7 @@ import {
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacionBUCLE';
 
-describe('Create Cubicacion BUCLE', () => {
+describe.skip('Create Cubicacion BUCLE', () => {
   it('should let enter to create cubicacion', () => {
     cy.viewport(1500, 1700);
     cy.visit('http://localhost:4206/login/auth');

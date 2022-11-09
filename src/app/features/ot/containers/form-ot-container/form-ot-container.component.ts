@@ -121,7 +121,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       ]),
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
       numero_interno: new FormControl('', [
-        Validators.required,
+        // Validators.required,
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
