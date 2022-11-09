@@ -144,7 +144,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     }),
     fijo: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      ots_numero_interno: new FormArray([]),
+      ots_numero_interno: new FormArray([], [Validators.required]),
     }),
     movil: new FormGroup({
       plan_proyecto_id: new FormControl(null, [Validators.required]),

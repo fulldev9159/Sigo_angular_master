@@ -6,7 +6,13 @@ import {
   SimpleChanges,
   OnDestroy,
 } from '@angular/core';
-import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormArray,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { OTFromNumeroInterno } from '@model';
 import * as CustomValidators from '@sharedOT/validators';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
