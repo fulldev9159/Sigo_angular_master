@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environment';
 import {
+  faBan,
   faCircleCheck,
   faCircleXmark,
   faInbox,
@@ -27,6 +28,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   inboxIcon = faInbox;
   xmark = faCircleXmark;
   okmark = faCircleCheck;
+  banIcon = faBan;
 
   icons = {
     '.docx': 'pi-file',

@@ -48,6 +48,7 @@
         <ng-container *ngIf="registro.tipo_item==='BITACORA'">
             <div class="registro"
                 [ngClass]="registro.evento==='CAMBIO_ESTADO'?'registro-cambio-estado':'registro-accion'">
+                <!-- TITULOS -->
                 <span class="titulo-registro" *ngIf="registro.evento==='CAMBIO_ESTADO'">
                     <fa-icon [icon]="playIcon"></fa-icon>
                     Registro de Evento
@@ -56,10 +57,15 @@
                     <fa-icon [icon]="inboxIcon"></fa-icon>
                     Aceptación Incial de OT
                 </span>
+                <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
+                    <fa-icon [icon]="banIcon"></fa-icon>
+                    Anulación de la OT
+                </span>
 
                 <br>
                 <span style="margin-right: 10px;"> {{registro.created_at| date:'medium'}}</span>
 
+                <!-- MENSAJES -->
                 <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
                     <span>{{getText(registro.evento,registro.metadata)}}</span>
                 </ng-container>
@@ -72,6 +78,12 @@
                         la siguiente observación:</span>
                     <br>
                     <q>{{getMetadata(registro.metadata).values.observacion}}</q>
+                </ng-container>
+
+                <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
+                    <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
+                    <fa-icon [icon]="banIcon"></fa-icon>
+                    <span>{{registro.mensaje}}</span>
                 </ng-container>
             </div>
         </ng-container>
