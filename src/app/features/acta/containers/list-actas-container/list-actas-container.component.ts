@@ -33,7 +33,7 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ listActas }) => {
-        this.registrosListActas = listActas?.data?.items;
+        this.registrosListActas = listActas?.data?.items;        
       })
     );
     this.titleArray = {

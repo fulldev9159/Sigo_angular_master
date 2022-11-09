@@ -1,1 +1,32 @@
-<p>anexos works!</p>
+<div class="container-component">
+    <h1>Anexos Documentos</h1>
+    <div class="row" style="padding: 15px;">
+        <div class="col-12">
+            <p-panel>
+
+                <table class="table-anexos">
+                    <thead>
+                        <th>Autor</th>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Extensión</th>
+                        <th>Peso</th>
+                        <th>Descargar</th>
+                    </thead>
+                    <tbody *ngFor="let LibroDeObras of registrosLibroDeObras">
+                        <tr *ngFor="let item of LibroDeObras?.archivos">
+                            <td>{{LibroDeObras?.usuario_nombre}}</td>
+                            <td>{{item?.categoria_id}}</td>
+                            <td>{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+                            <td>{{item?.extension}}</td>
+                            <td style="text-align: right;">{{item?.human_size}}</td>
+                            <td><a [href]="API_URL + item?.url" [download]="item?.nombre_original">Descargar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </p-panel>
+        </div>
+    </div>
+</div>
