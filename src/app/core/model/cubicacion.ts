@@ -144,6 +144,60 @@ export interface DetalleCubicacionWithContratoModel
     'many_cubicacion_has_servicio' | 'valor_total_clp'
   > {
   model_contrato_id: ContratoMarconWithTipoContratoModel;
+  model_tipo_cubicacion_id: {
+    id: number;
+    slug: string;
+    descripcion: string;
+  };
+  model_proveedor_id: {
+    id: number;
+    rut: number;
+    dv: string;
+    nombre: string;
+    email: string;
+    telefono: string;
+    direccion: string;
+    estado: boolean;
+    interno: boolean;
+    representante_legal: string;
+    numero_contrato: number;
+    vigencia_garantia: number;
+    razon_social: string;
+    tipo_proveedor_id: number;
+    created_at: Date;
+    updated_at: Date;
+  };
+  model_agencia_id: {
+    id: number;
+    region_id: number;
+    codigo: string;
+    nombre: string;
+    estado: boolean;
+    model_region_id: {
+      id: number;
+      nombre: string;
+      codigo: string;
+    };
+  };
+  model_usuario_creador_id: {
+    id: number;
+    username: string;
+    guia_subgrupo_id: number;
+    delegated_auth: boolean;
+    password?: any;
+    rut: string;
+    nombres: string;
+    apellidos: string;
+    celular: string;
+    estado: boolean;
+    proveedor_id: number;
+    area_id: number;
+    email: string;
+    firma_archivo_id?: any;
+    eliminable: boolean;
+    created_at: Date;
+    updated_at: Date;
+  };
 }
 
 // CUBICACIONES DE UN CONTRATO ESPECIFICO

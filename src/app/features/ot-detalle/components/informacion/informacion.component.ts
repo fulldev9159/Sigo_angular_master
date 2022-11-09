@@ -25,9 +25,6 @@ export class InformacionComponent implements OnDestroy, OnInit {
 
   accionesOT: Accion[] = [];
 
-  detalleCubicacionFromList$: Observable<Cubicacion> =
-    this.cubicacionFacade.getDetalleCubFromList$();
-
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private route: ActivatedRoute
@@ -40,10 +37,6 @@ export class InformacionComponent implements OnDestroy, OnInit {
         this.infoOT = detalleOT?.data?.ot;
         this.numeros_internos = detalleOT?.data?.numeros_interno;
         this.usuarios_involucrados = detalleOT?.data?.usuarios_involucrados;
-        if (detalleOT)
-          this.cubicacionFacade.getDetalleCubFromList(
-            detalleOT.data.ot.cubicacion_id
-          );
       })
     );
   }

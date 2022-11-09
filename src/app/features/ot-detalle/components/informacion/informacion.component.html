@@ -39,12 +39,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Propietario</td>
+                        <td>Gestor Propietario (creador de la OT)</td>
                         <td>{{infoOT?.model_propietario_usuario_id.nombres + '
                             ' + infoOT?.model_propietario_usuario_id.apellidos }}</td>
                     </tr>
                     <tr>
-                        <td>Responsable</td>
+                        <td>Gestor Responsable</td>
                         <td>{{infoOT?.model_responsable_proxy_id.model_usuario_id.nombres + ' ' +
                             infoOT?.model_responsable_proxy_id.model_usuario_id.apellidos }}</td>
                     </tr>
@@ -53,7 +53,6 @@
                         <td>{{infoOT?.observaciones }}</td>
                     </tr>
                 </table>
-
 
                 <p-divider align="center">
                     <span class="p-tag">Información Cubicación</span>
@@ -65,7 +64,7 @@
                     </tr>
                     <tr>
                         <td>Tipo Cubicación</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.tipo_cubicacion_descripcion }}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.model_tipo_cubicacion_id.descripcion }}</td>
                     </tr>
                     <tr>
                         <td>Cubicación Nombre</td>
@@ -83,43 +82,44 @@
                     </tr>
                     <tr>
                         <td>Agencia</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.agencia_nombre}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.model_agencia_id.nombre}}</td>
                     </tr>
                     <tr>
                         <td>Región</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.agencia_region_nombre}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.model_agencia_id.model_region_id.nombre}}</td>
                     </tr>
                     <tr>
                         <td>Proveedor</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.proveedor_nombre}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.model_proveedor_id.nombre}}</td>
                     </tr>
                     <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
                         <td>Direccion Desde</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.direccion_desde}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.direccion_desde}}</td>
                     </tr>
                     <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
                         <td>Altura Desde</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.altura_desde}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.altura_desde}}</td>
                     </tr>
                     <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
                         <td>Direccion Hasta</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.direccion_hasta}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.direccion_hasta}}</td>
                     </tr>
                     <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
                         <td>Altura Hasta</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.altura_hasta}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.altura_hasta}}</td>
                     </tr>
                     <tr>
                         <td>Creado el</td>
-                        <td>{{infoOT?.model_cubicacion_id.created_at|date }}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.created_at|date }}</td>
                     </tr>
                     <tr>
                         <td>Creado por</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.creador_usuario_nombre }}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.model_usuario_creador_id.nombres}}
+                            {{infoOT?.model_cubicacion_id?.model_usuario_creador_id.apellidos}}</td>
                     </tr>
                     <tr>
                         <td>Observaciones</td>
-                        <td>{{(detalleCubicacionFromList$|async)?.cubicacion_descripcion}}</td>
+                        <td>{{infoOT?.model_cubicacion_id?.descripcion}}</td>
                     </tr>
                 </table>
 

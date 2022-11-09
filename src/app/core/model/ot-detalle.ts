@@ -114,4 +114,11 @@ export interface InfoOT {
     causas_rechazo_id: number;
     observacion: string;
   };
+
+  flg_cierre_adm: boolean;
+  cubicacion_ing_id?: any;
+  numero_derivada?: any;
+  fecha_derivada?: any;
+  numero_hem?: any;
+  fecha_cont_hem?: any;
 }

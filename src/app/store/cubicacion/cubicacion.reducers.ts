@@ -22,7 +22,6 @@ export interface StateCubicacion {
   detalleCubicacion: DetalleCubicacion;
   cubicacionesContrato: CubicacionContrato[];
   adminContratoFromCub: AdminContratoFromCub[];
-  detalleCubicacionFromList: Cubicacion;
 }
 
 export const initialState: StateCubicacion = {
@@ -34,7 +33,6 @@ export const initialState: StateCubicacion = {
   detalleCubicacion: null,
   cubicacionesContrato: [],
   adminContratoFromCub: [],
-  detalleCubicacionFromList: null,
 };
 
 export const reducerCubicacion = createReducer(
@@ -78,13 +76,6 @@ export const reducerCubicacion = createReducer(
     (state, { response }) => ({
       ...state,
       adminContratoFromCub: response.data.items,
-    })
-  ),
-  on(
-    cubicacionActions.getDetalleCubFromListCubSuccess,
-    (state, { detalleCubicacionFromList }) => ({
-      ...state,
-      detalleCubicacionFromList,
     })
   ),
   // RESETS

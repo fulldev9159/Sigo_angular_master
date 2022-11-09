@@ -97,15 +97,4 @@ export class CubicacionHttpService {
       { cubicacion_id }
     );
   }
-
-  getDetalleCubFromList(cubicacion_id: number): Observable<Cubicacion> {
-    return this.http
-      .post<Response<{ items: Cubicacion[] }>>(
-        `${this.API_URL}/cubicacion/table_cubicaciones/get`,
-        {}
-      )
-      .pipe(
-        map(v => v.data.items.find(f => f.cubicacion_id === cubicacion_id))
-      );
-  }
 }
