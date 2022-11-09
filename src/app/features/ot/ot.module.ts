@@ -14,6 +14,7 @@ import { FormularioOtFijoComponent } from './components/formulario-ot-fijo/formu
 import { FormularioOtMovilComponent } from './components/formulario-ot-movil/formulario-ot-movil.component';
 import { FormularioOtSustentoFinancieroComponent } from './components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
 import { FormularioOtExtrasComponent } from './components/formulario-ot-extras/formulario-ot-extras.component';
+import { FormularioOtNumeroInternoComponent } from './components/formulario-ot-numero-interno/formulario-ot-numero-interno.component';
 import { ListOtFiltrosComponent } from './components/list-ot-filtros/list-ot-filtros.component';
 import { ListOtTableComponent } from './components/list-ot-table/list-ot-table.component';
 import { ListOtTableOperacionesComponent } from './components/list-ot-table-operaciones/list-ot-table-operaciones.component';
@@ -31,6 +32,7 @@ import { RegistrarLibroObrasComponent } from './components/registrar-libro-obras
     FormularioOtMovilComponent,
     FormularioOtSustentoFinancieroComponent,
     FormularioOtExtrasComponent,
+    FormularioOtNumeroInternoComponent,
     ListOtFiltrosComponent,
     ListOtTableComponent,
     ListOtTableOperacionesComponent,

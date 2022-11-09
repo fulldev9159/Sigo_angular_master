@@ -28,7 +28,7 @@ export const getTipoDeNumeroInternoError = createAction(
 // CREATE OT CONTRATO FIJO : GET OT FROM NUMERO INTERNO
 export const getOTFromNumeroInterno = createAction(
   '[NUMERO INTERNO] getOTFromNumeroInterno ',
-  props<{ numero_interno: string }>()
+  props<{ tipo_numero_interno_id: number; numero_interno: string }>()
 );
 export const getOTFromNumeroInternoSuccess = createAction(
   '[NUMERO INTERNO] getOTFromNumeroInterno Success',

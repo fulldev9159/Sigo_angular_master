@@ -21,9 +21,15 @@ export class NumeroInternoFacade {
   }
 
   // CREATE OT CONTRATO FIJO : GET OT FROM NUMERO INTERNO
-  public getOTFromNumeroInterno(numero_interno: string): void {
+  public getOTFromNumeroInterno(
+    tipo_numero_interno_id: number,
+    numero_interno: string
+  ): void {
     this.store.dispatch(
-      numeroInternoActions.getOTFromNumeroInterno({ numero_interno })
+      numeroInternoActions.getOTFromNumeroInterno({
+        tipo_numero_interno_id,
+        numero_interno,
+      })
     );
   }
 

@@ -75,37 +75,8 @@
         <zwc-pdropdown [control]="form.get('tipo_numero_interno_id')" Label="*Tipo de numero interno:" dropdown_id="select-tipo-numero-interno" [data]="tiposNumeroInterno$|async" Pplaceholder="Seleccione un tipo de numero interno" [loading]="loadingTipoNumeroInterno$|async">
         </zwc-pdropdown>
       </div>
-      <div class="field col-12 md:col-5 lg:col-5 xl:col-5">
-        <zwc-input-text Label="*Nro Interno:" [control]="form.get('numero_interno')" name_input="input-numero-interno">
-        </zwc-input-text>
-      </div>
-      <div class="field col-12 md:col-2 lg:col-2 xl:col-2">
-        <zwc-pbutton-sending Pid="agregar-numero-interno" content="Agregar" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!numeroInternoControlsValid" [sending]="loadingOTsFromNumeroInterno$ | async" (call)="agregarNumeroInterno()">
-        </zwc-pbutton-sending>
-      </div>
     </div>
 
-    <table>
-      <thead>
-        <th>Número interno</th>
-        <th>OT asociada</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of OTsNumetoInterno; let i= index">
-          <td>{{item.numero_interno}}</td>
-          <td>
-            <span>
-              {{ item.ot_ids.length>0? item.ot_ids: 'Sin usar'}}
-            </span>
-          </td>
-          <td>
-            <button (click)="deleteNumeroInterno(item.numero_interno)" class="ui button eliminar-color">
-              <fa-icon [icon]="trashICon"></fa-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <zwc-formulario-ot-numero-interno [tipoNumeroInternoFormControl]="form.get('tipo_numero_interno_id')" [otsNumeroInternoFormArray]="form.get('ots_numero_interno')"></zwc-formulario-ot-numero-interno>
   </div>
 </form>

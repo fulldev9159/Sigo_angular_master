@@ -39,15 +39,17 @@ export class NumeroInternoEffects {
   getOTFromNumeroInterno$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOTFromNumeroInterno),
-      concatMap(({ numero_interno }) =>
-        this.numeroInternoHttp.getOTFromNumeroInterno(numero_interno).pipe(
-          map(response =>
-            otActions.getOTFromNumeroInternoSuccess({ response })
-          ),
-          catchError(error =>
-            of(otActions.getOTFromNumeroInternoError({ error }))
+      concatMap(({ tipo_numero_interno_id, numero_interno }) =>
+        this.numeroInternoHttp
+          .getOTFromNumeroInterno(tipo_numero_interno_id, numero_interno)
+          .pipe(
+            map(response =>
+              otActions.getOTFromNumeroInternoSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.getOTFromNumeroInternoError({ error }))
+            )
           )
-        )
       )
     )
   );
