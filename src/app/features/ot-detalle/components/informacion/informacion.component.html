@@ -12,30 +12,12 @@
                 <zwc-list-ot-table-operaciones [acciones]="accionesOT" [ot_id]="infoOT?.id">
                 </zwc-list-ot-table-operaciones>
                 <p-divider align="center">
-                    <span class="p-tag">Información general</span>
+                    <span class="p-tag">Información OT</span>
                 </p-divider>
                 <table style="width: 100%;" class="table-info">
                     <tr>
                         <td>OT ID:</td>
                         <td>{{infoOT?.id}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tipo Contrato</td>
-                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Nombre Contrato</td>
-                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.nombre}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cubicación ID</td>
-                        <td>{{infoOT?.cubicacion_id }}</td>
-                    </tr>
-                    <tr>
-                        <td>Cubicación Nombre</td>
-                        <td>{{infoOT?.model_cubicacion_id.nombre}}
                         </td>
                     </tr>
                     <tr>
@@ -71,6 +53,76 @@
                         <td>{{infoOT?.observaciones }}</td>
                     </tr>
                 </table>
+
+
+                <p-divider align="center">
+                    <span class="p-tag">Información Cubicación</span>
+                </p-divider>
+                <table style="width: 100%;" class="table-info">
+                    <tr>
+                        <td>Cubicación ID</td>
+                        <td>{{infoOT?.cubicacion_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tipo Cubicación</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.tipo_cubicacion_descripcion }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cubicación Nombre</td>
+                        <td>{{infoOT?.model_cubicacion_id.nombre}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tipo Contrato</td>
+                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Contrato</td>
+                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Agencia</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.agencia_nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Región</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.agencia_region_nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Proveedor</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.proveedor_nombre}}</td>
+                    </tr>
+                    <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                        <td>Direccion Desde</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.direccion_desde}}</td>
+                    </tr>
+                    <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                        <td>Altura Desde</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.altura_desde}}</td>
+                    </tr>
+                    <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                        <td>Direccion Hasta</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.direccion_hasta}}</td>
+                    </tr>
+                    <tr *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                        <td>Altura Hasta</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.altura_hasta}}</td>
+                    </tr>
+                    <tr>
+                        <td>Creado el</td>
+                        <td>{{infoOT?.model_cubicacion_id.created_at|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Creado por</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.creador_usuario_nombre }}</td>
+                    </tr>
+                    <tr>
+                        <td>Observaciones</td>
+                        <td>{{(detalleCubicacionFromList$|async)?.cubicacion_descripcion}}</td>
+                    </tr>
+                </table>
+
                 <p-divider align="center">
                     <span class="p-tag">Fechas</span>
                 </p-divider>
@@ -101,8 +153,31 @@
                         </tr>
                         <tr>
                             <td>Sitio</td>
-                            <td>{{infoOT?.model_sitio_plan_id.nombre }}
-                            </td>
+                            <td>{{infoOT?.model_sitio_plan_id.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td>Código</td>
+                            <td>{{infoOT?.model_sitio_plan_id.codigo }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nemonico</td>
+                            <td>{{infoOT?.model_sitio_plan_id.nemonico }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>{{infoOT?.model_sitio_plan_id.direccion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Comuna</td>
+                            <td>{{infoOT?.model_sitio_plan_id.comuna }}</td>
+                        </tr>
+                        <tr>
+                            <td>Latitud</td>
+                            <td>{{infoOT?.model_sitio_plan_id.geo_lat }}</td>
+                        </tr>
+                        <tr>
+                            <td>Longitud</td>
+                            <td>{{infoOT?.model_sitio_plan_id.geo_lon }}</td>
                         </tr>
                     </table>
                 </ng-container>
@@ -204,12 +279,15 @@
                 </ng-container>
 
 
-                <ng-container
-                    *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Fijo'">
+                <ng-container *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Fijo'|| 
+                          infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Ordinario'|| 
+                          infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                    <br>
                     <table class="table-info" style="width: 100%;" id="table-tipo-num-interno">
                         <tr>
                             <td>Tipo Número Interno</td>
-                            <td>{{numeros_internos[0].model_tipo_numero_interno_id.nombre }}</td>
+                            <td *ngIf="numeros_internos[0]">{{numeros_internos[0].model_tipo_numero_interno_id.nombre }}
+                            </td>
                         </tr>
                     </table>
                     <br>

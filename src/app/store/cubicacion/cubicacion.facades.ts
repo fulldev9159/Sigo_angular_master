@@ -162,6 +162,17 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.getAdminContratoFromCub);
   }
 
+  // GET DETELLE CUBICACION FROM LIST
+  public getDetalleCubFromList(cubicacion_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.getDetalleCubFromList({ cubicacion_id })
+    );
+  }
+
+  public getDetalleCubFromList$(): Observable<Cubicacion> {
+    return this.store.select(cubicacionSelectors.getDetalleCubFromList);
+  }
+
   // RESETS
   public resetContratoSelected(): void {
     this.store.dispatch(cubicacionActions.resetContratoSelected());

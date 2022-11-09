@@ -44,3 +44,8 @@ export const getAdminContratoFromCub = createSelector(
   selectCubicacion,
   (state: reducer.StateCubicacion) => state.adminContratoFromCub
 );
+
+export const getDetalleCubFromList = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.detalleCubicacionFromList
+);

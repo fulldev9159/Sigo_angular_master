@@ -172,6 +172,20 @@ export const getAdminContratoFromCubError = createAction(
   props<{ error: any }>()
 );
 
+// GET DETALLE CUBICACION FROM LIST
+export const getDetalleCubFromList = createAction(
+  '[CUBICACION] getDetalleCubFromList ',
+  props<{ cubicacion_id: number }>()
+);
+export const getDetalleCubFromListCubSuccess = createAction(
+  '[CUBICACION] getDetalleCubFromList Success',
+  props<{ detalleCubicacionFromList: Cubicacion }>()
+);
+export const getDetalleCubFromListError = createAction(
+  '[CUBICACION] getDetalleCubFromList Error',
+  props<{ error: any }>()
+);
+
 // RESETS
 export const resetContratoSelected = createAction(
   '[CUBICACION] resetContratoSelected '

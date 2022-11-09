@@ -1,4 +1,4 @@
-describe('Create ot bucle', () => {
+describe('Create ot', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });

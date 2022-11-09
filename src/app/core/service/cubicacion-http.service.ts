@@ -8,7 +8,7 @@ import {
   CubicacionContrato,
   AdminContratoFromCub,
 } from '@model';
-import { delay, Observable } from 'rxjs';
+import { delay, map, Observable } from 'rxjs';
 import {
   DetalleCubicacion,
   RequestCreateCubicacion,
@@ -96,5 +96,16 @@ export class CubicacionHttpService {
       `${this.API_URL}/ot/posibles_administradores/get`,
       { cubicacion_id }
     );
+  }
+
+  getDetalleCubFromList(cubicacion_id: number): Observable<Cubicacion> {
+    return this.http
+      .post<Response<{ items: Cubicacion[] }>>(
+        `${this.API_URL}/cubicacion/table_cubicaciones/get`,
+        {}
+      )
+      .pipe(
+        map(v => v.data.items.find(f => f.cubicacion_id === cubicacion_id))
+      );
   }
 }

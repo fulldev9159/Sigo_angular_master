@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
+  Cubicacion,
   DetalleOT,
   InfoOT,
   NumeroInterno,
   UsuarioInvolucrado,
 } from '@model';
-import { Subscription } from 'rxjs';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { Observable, Subscription } from 'rxjs';
 
 // 171 TODO: VERIFICAR LAS FECHAS
 @Component({
@@ -23,7 +25,13 @@ export class InformacionComponent implements OnDestroy, OnInit {
 
   accionesOT: Accion[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  detalleCubicacionFromList$: Observable<Cubicacion> =
+    this.cubicacionFacade.getDetalleCubFromList$();
+
+  constructor(
+    private cubicacionFacade: CubicacionFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -32,6 +40,10 @@ export class InformacionComponent implements OnDestroy, OnInit {
         this.infoOT = detalleOT?.data?.ot;
         this.numeros_internos = detalleOT?.data?.numeros_interno;
         this.usuarios_involucrados = detalleOT?.data?.usuarios_involucrados;
+        if (detalleOT)
+          this.cubicacionFacade.getDetalleCubFromList(
+            detalleOT.data.ot.cubicacion_id
+          );
       })
     );
   }

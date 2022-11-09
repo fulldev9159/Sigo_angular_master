@@ -116,6 +116,15 @@ describe('Create ot bucle', () => {
       );
       cy.get('#crear-ot').should('be.disabled');
 
+      // FIJA
+      cy._select_dropdown('#select-tipo-numero-interno', '@TIEMPOS');
+      cy.get('input[name="input-numero-interno"]').type('123456');
+      cy.get('#agregar-numero-interno').click();
+      cy.wait(2000).then(() => {
+        cy.get('input[name="input-numero-interno"]').type('12Acao');
+        cy.get('#agregar-numero-interno').click();
+      });
+
       cy._select_dropdown('#select-pmo', '25');
       cy._select_dropdown('#select-linea-presupuestaria', 'CHI100');
 
