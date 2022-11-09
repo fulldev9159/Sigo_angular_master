@@ -77,6 +77,7 @@ export class FormularioOtOrdinarioComponent implements OnInit, OnDestroy {
 
   agregarNumeroInterno(): void {
     this.numeroInternoFacade.getOTFromNumeroInterno(
+      +this.form.get('tipo_numero_interno_id').value,
       this.form.get('numero_interno').value
     );
   }

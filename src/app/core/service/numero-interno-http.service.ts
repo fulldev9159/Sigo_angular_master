@@ -27,11 +27,12 @@ export class NumeroInternoHttpService {
   }
 
   getOTFromNumeroInterno(
+    tipo_numero_interno_id: number,
     numero_interno: string
   ): Observable<Response<{ items: OTFromNumeroInterno[] }>> {
     return this.http.post<Response<{ items: OTFromNumeroInterno[] }>>(
       `${this.API_URL}/ot/ot_has_numero_interno_niid/get`,
-      { numero_interno }
+      { tipo_numero_interno_id, numero_interno }
     );
   }
 }
