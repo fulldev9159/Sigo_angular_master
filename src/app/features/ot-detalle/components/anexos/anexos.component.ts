@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RegistroLibroDeObras } from '@model';
@@ -10,9 +10,8 @@ import { environment } from '@environment';
   templateUrl: './anexos.component.html',
   styleUrls: ['./anexos.component.scss'],
 })
-export class AnexosComponent {
-
-  subscription : Subscription = new Subscription();
+export class AnexosComponent implements OnDestroy, OnInit {
+  subscription: Subscription = new Subscription();
   registrosLibroDeObras: RegistroLibroDeObras[] = [];
   API_URL = '';
 
@@ -22,15 +21,13 @@ export class AnexosComponent {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.route.data.subscribe(({ registroLibroObras }) => {        
-        this.registrosLibroDeObras = registroLibroObras?.data;        
+      this.route.data.subscribe(({ registroLibroObras }) => {
+        this.registrosLibroDeObras = registroLibroObras?.data;
       })
     );
   }
 
   ngOnDestroy(): void {
-
-
+    this.subscription.unsubscribe();
   }
-
 }

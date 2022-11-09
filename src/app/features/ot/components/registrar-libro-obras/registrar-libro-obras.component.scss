@@ -2,6 +2,10 @@
     span.p-ripple {
         font-size: 0.7rem;
     }
+
+    textarea {
+        padding: 10px;
+    }
 }
 
 :host ::ng-deep {
