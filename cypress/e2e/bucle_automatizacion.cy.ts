@@ -154,7 +154,7 @@ describe('Create ot bucle', () => {
   });
 });
 
-describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
+describe.skip('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });

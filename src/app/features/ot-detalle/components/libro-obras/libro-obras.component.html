@@ -59,7 +59,11 @@
                 </span>
                 <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
                     <fa-icon [icon]="banIcon"></fa-icon>
-                    Anulación de la OT
+                    Anulación de la OT en etapa inicial
+                </span>
+                <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_PROVEEDOR_OT'">
+                    <fa-icon [icon]="banIcon"></fa-icon>
+                    Anulación de la OT por proveedor
                 </span>
                 <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_EECC'">
                     <fa-icon [icon]="inboxIcon"></fa-icon>
@@ -88,7 +92,8 @@
                     <q>{{getMetadata(registro.metadata).values.observacion}}</q>
                 </ng-container>
 
-                <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
+                <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'|| 
+                           registro.evento==='ANULACION_PROVEEDOR_OT'">
                     <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
                     <fa-icon [icon]="banIcon"></fa-icon>
                     <span>{{registro.mensaje}}</span>
