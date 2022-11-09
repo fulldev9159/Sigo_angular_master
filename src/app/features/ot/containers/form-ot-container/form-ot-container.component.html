@@ -25,6 +25,8 @@
       <zwc-formulario-ot-extras [form]="form.get('extras')"></zwc-formulario-ot-extras>
     </ng-container>
 
+    <pre>{{ values | json }}</pre>
+
     <zwc-pbutton-sending Pid="crear-ot" content="Crear nueva Orden de Trabajo" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="sendingCreateOT$|async" (call)="createOT()"></zwc-pbutton-sending>
   </div>
 </zwc-content-layout>

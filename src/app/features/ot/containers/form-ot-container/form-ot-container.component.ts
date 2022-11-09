@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import * as CustomValidators from '@sharedOT/validators';
 import {
   CreateOTBase,
@@ -120,12 +120,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         Validators.maxLength(255),
       ]),
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      numero_interno: new FormControl('', [
-        // Validators.required,
-        // this.noWhitespace,
-        Validators.maxLength(255),
-      ]),
-      ots_numero_interno: new FormControl([]),
+      ots_numero_interno: new FormArray([]),
     }),
     ordinario: new FormGroup({
       carta_adjudicacion: new FormControl(null, [
@@ -145,21 +140,11 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         Validators.maxLength(255),
       ]),
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      numero_interno: new FormControl('', [
-        Validators.required,
-        // this.noWhitespace,
-        Validators.maxLength(255),
-      ]),
-      ots_numero_interno: new FormControl([]),
+      ots_numero_interno: new FormArray([]),
     }),
     fijo: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      numero_interno: new FormControl('', [
-        Validators.required,
-        // this.noWhitespace,
-        Validators.maxLength(255),
-      ]),
-      ots_numero_interno: new FormControl([]),
+      ots_numero_interno: new FormArray([]),
     }),
     movil: new FormGroup({
       plan_proyecto_id: new FormControl(null, [Validators.required]),
@@ -329,7 +314,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       return request;
     } else if (contrato === 'Fijo') {
       const {
-        fijo: { tipo_numero_interno_id },
+        fijo: { tipo_numero_interno_id, ots_numero_interno },
       } = this.form.getRawValue();
       let request: RequestCreateOTFijo = {
         ot_datos: {
@@ -337,8 +322,8 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         },
         ot_numero_interno: {
           tipo_numero_interno_id: +tipo_numero_interno_id,
-          numero_interno: this.fijaForm.OTsNumetoInterno.map(
-            numeros => numeros.numero_interno
+          numero_interno: ots_numero_interno.map(
+            (numeros: { numero_interno: string }) => numeros.numero_interno
           ),
         },
       };
@@ -354,6 +339,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           numero_pedido,
           materia,
           tipo_numero_interno_id,
+          ots_numero_interno,
         },
       } = this.form.getRawValue();
       let request: RequestCreateOTOrdinario = {
@@ -366,8 +352,8 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         },
         ot_numero_interno: {
           tipo_numero_interno_id: +tipo_numero_interno_id,
-          numero_interno: this.ordinarioForm.OTsNumetoInterno.map(
-            numeros => numeros.numero_interno
+          numero_interno: ots_numero_interno.map(
+            (numeros: { numero_interno: string }) => numeros.numero_interno
           ),
         },
       };
@@ -392,6 +378,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           area_negocio,
           nombre_proyectista,
           tipo_numero_interno_id,
+          ots_numero_interno,
         },
       } = this.form.getRawValue();
       let request: RequestCreateOTBucle = {
@@ -413,8 +400,8 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         },
         ot_numero_interno: {
           tipo_numero_interno_id: +tipo_numero_interno_id,
-          numero_interno: this.bucleForm.OTsNumetoInterno.map(
-            numeros => numeros.numero_interno
+          numero_interno: ots_numero_interno.map(
+            (numeros: { numero_interno: string }) => numeros.numero_interno
           ),
         },
       };

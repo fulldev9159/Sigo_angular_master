@@ -1,0 +1,38 @@
+<div class="formgrid grid">
+  <div class="field col-12 md:col-10 lg:col-10 xl:col-10">
+    <zwc-input-text Label="*Nro Interno:" [control]="form.get('numero_interno')" name_input="input-numero-interno">
+    </zwc-input-text>
+  </div>
+  <div class="field col-12 md:col-2 lg:col-2 xl:col-2">
+    <zwc-pbutton-sending Pid="agregar-numero-interno" content="Agregar" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!form.valid" [sending]="loadingOTsFromNumeroInterno$ | async" (call)="agregarNumeroInterno()">
+    </zwc-pbutton-sending>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <th>Número interno</th>
+    <th>OT asociada</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="otsNumeroInternoFormArray && otsNumeroInternoFormArray.length > 0; else noData">
+      <ng-container *ngFor="let control of otsNumeroInternoFormArray.controls; let i = index;">
+        <tr>
+          <td>{{ control.get('numero_interno').value }}</td>
+          <td>{{ control.get('ot_ids').value.length > 0 ? control.get('ot_ids').value : 'Sin usar' }}</td>
+          <td>
+            <button (click)="deleteNumeroInterno(i)" class="ui button eliminar-color">
+              <fa-icon [icon]="trashICon"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    <ng-template #noData>
+      <tr>
+        <td colspan="3" style="text-align: center">No hay datos</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
