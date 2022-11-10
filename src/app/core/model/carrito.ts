@@ -1,3 +1,5 @@
+import { MaterialesManoObra } from './material';
+
 export interface CarritoService {
   precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
   servicio_rowid?: number;
@@ -35,4 +37,6 @@ export interface CarritoUO {
   uo_precio_total_clp: number;
   actividad_descripcion: string;
   actividad_id: number;
+
+  material_arr?: MaterialesManoObra[];
 }

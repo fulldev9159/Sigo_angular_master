@@ -303,6 +303,8 @@ export class FormCubContainerComponent
                       uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                       uob_unidad_medida_descripcion:
                         uo.model_unidad_id.descripcion,
+
+                      //// material_arr: uo.many_cubicacion_has_material,
                     },
                   ],
                 };
@@ -549,6 +551,7 @@ export class FormCubContainerComponent
     servicio: CarritoService;
     uo: CarritoUO;
   }): void {
-    console.log('detalle', servicio, uo);
+    console.log('servicio', JSON.stringify(servicio, null, 2));
+    console.log('uo', JSON.stringify(uo, null, 2));
   }
 }
