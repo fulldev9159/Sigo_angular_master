@@ -9,7 +9,7 @@
             </div>
 
             <div class="field col-12">
-                <zwc-pdropdown [control]="form.get('categoria')" Label="* Categoria del archivo:"
+                <zwc-pdropdown [control]="form.get('categoria')" Label=" Categoria del archivo:"
                     dropdown_id="select-cubicacion" [data]="categoriaArchivos" Pplaceholder="Seleccione una categoria">
                 </zwc-pdropdown>
             </div>
@@ -18,6 +18,7 @@
                 <label>Adjuntar evidencias</label>
                 <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true"
                     (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple"
+                    (onRemove)="removeFile($event)"
                     accept=".docx,.doc,.gif,.json,.jpg,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain"
                     maxFileSize="50000000">
                 </p-fileUpload>

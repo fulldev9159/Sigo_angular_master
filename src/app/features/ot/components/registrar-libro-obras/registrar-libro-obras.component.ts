@@ -17,7 +17,7 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
 
   formControls = {
     observaciones: new FormControl('', [Validators.required]),
-    categoria: new FormControl('', [Validators.required]),
+    categoria: new FormControl('', []),
     files: new FormControl([]),
   };
 
@@ -46,7 +46,16 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
   }
 
   onUpload(event: any): void {
+    this.form.get('categoria').setValidators([Validators.required]);
+    this.form.get('categoria').updateValueAndValidity();
     this.uploadedFiles = event;
+  }
+
+  removeFile(event: any): void {
+    if (this.uploadedFiles['files'].length === 0) {
+      this.form.get('categoria').clearValidators();
+      this.form.get('categoria').updateValueAndValidity();
+    }
   }
 
   get valid(): boolean {

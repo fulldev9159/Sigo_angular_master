@@ -248,13 +248,14 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
           this.registrarLibroObraForm.form.get('observaciones').value,
       };
 
-      this.registrarLibroObraForm.filesform.clear();
-
       this.otDetalleFacade.subirArchivoLibroObrasYregistrarLibroObras(
         +this.registrarLibroObraForm.form.get('categoria').value,
         this.registrarLibroObraForm.uploadedFiles['files'],
         request_registrar_libroObras
       );
+
+      this.registrarLibroObraForm.filesform.clear();
+      this.registrarLibroObraForm.form.reset();
 
       this.displayModalAgregarRegistroLibroDeObras = false;
     }
