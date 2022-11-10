@@ -45,30 +45,16 @@
                 </ng-container>
             </p-panel> -->
 
-        <ng-container *ngIf="registro.tipo_item==='BITACORA'">
+        <ng-container
+            *ngIf="registro.tipo_item==='BITACORA' && registro.evento!=='SOLICITUD_SERVICIOS_ADICIONALES' && registro.evento!=='APROBACION/RECHAZO_SERVICIOS_ADICIONALES'">
             <div class="registro"
                 [ngClass]="registro.evento==='CAMBIO_ESTADO'?'registro-cambio-estado':'registro-accion'">
                 <!-- TITULOS -->
-                <span class="titulo-registro" *ngIf="registro.evento==='CAMBIO_ESTADO'">
-                    <fa-icon [icon]="playIcon"></fa-icon>
-                    Registro de Evento
-                </span>
-                <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_INICIAL'">
-                    <fa-icon [icon]="inboxIcon"></fa-icon>
-                    Aprobación Incial de OT
-                </span>
-                <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_INICIAL_OT'">
-                    <fa-icon [icon]="banIcon"></fa-icon>
-                    Anulación de la OT en etapa inicial
-                </span>
-                <span class="titulo-registro" *ngIf="registro.evento==='ANULACION_PROVEEDOR_OT'">
-                    <fa-icon [icon]="banIcon"></fa-icon>
-                    Anulación de la OT por proveedor
-                </span>
-                <span class="titulo-registro" *ngIf="registro.evento==='ACEPTACION_EECC'">
-                    <fa-icon [icon]="inboxIcon"></fa-icon>
-                    Aprobación de la OT por Proveedor (Pendiente back retorne en metadata el estado y la observacion
-                    como lo hacen en rechazo/aprobacion inicial)
+                <span class="titulo-registro">
+                    <fa-icon [icon]="titleArray[registro.evento]?.icon?titleArray[registro.evento].icon:banIcon">
+                    </fa-icon>
+                    {{titleArray[registro.evento]?.text?titleArray[registro.evento].text:'evento no
+                    definido'}}
                 </span>
 
                 <br>
@@ -79,8 +65,8 @@
                     <span>{{getText(registro.evento,registro.metadata)}}</span>
                 </ng-container>
 
-                <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'">
-                    <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
+                <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'|| 
+                                     registro.evento==='ACEPTACION_EECC'">
                     <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
                         [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
                     </fa-icon>
@@ -93,23 +79,45 @@
                 </ng-container>
 
                 <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'|| 
-                           registro.evento==='ANULACION_PROVEEDOR_OT'">
-                    <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
+                                     registro.evento==='ANULACION_PROVEEDOR_OT'">
                     <fa-icon [icon]="banIcon"></fa-icon>
                     <span>{{registro.mensaje}}</span>
                 </ng-container>
 
-                <!-- <ng-container *ngIf="registro.evento==='ACEPTACION_EECC'">
-                    <fa-icon [icon]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?xmark:okmark"
-                        [ngClass]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                <ng-container *ngIf="registro.evento==='ENVIAR_INFORME_AVANCE'">
+                    <fa-icon [icon]="fileIcon"></fa-icon>
+                    <span>{{registro.mensaje}}</span>
+                </ng-container>
+
+                <ng-container *ngIf="registro.evento==='CONFIRMAR_RECHAZO_OPERACIONES'">
+                    <span>{{registro.mensaje}}</span>
+                </ng-container>
+
+                <ng-container *ngIf="registro.evento==='APROBACION_INFORME_AVANCE'">
+                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
                     </fa-icon>
-                    <span *ngIf="getMetadata(registro.metadata).values.estado==='RECHAZADO'">Se ha rechazado la OT con
+                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado el informe de
+                        avance con
                         la siguiente observación:</span>
-                    <span *ngIf="getMetadata(registro.metadata).values.estado==='ACEPTADO'">Se ha aceptado la orden de
+                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado el informe de
+                        avance</span>
+                    <br>
+                    <q>{{getMetadata(registro.metadata).observacion}}</q>
+                </ng-container>
+
+                <ng-container *ngIf="registro.evento==='APROBACION_OPERACIONES'">
+                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZAR'?xmark:okmark"
+                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZAR'?'iconRechazo':'iconAprobado'">
+                    </fa-icon>
+                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZAR'">Se ha rechazado la OT con
+                        la siguiente observación:</span>
+                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTAR'">Se ha aceptado la orden de
                         trabajo</span>
                     <br>
-                    <q>{{getMetadata(registro.metadata).values.observacion}}</q>
-                </ng-container> -->
+                    <q>{{getMetadata(registro.metadata).observacion}}</q>
+                </ng-container>
+
             </div>
         </ng-container>
     </ng-container>

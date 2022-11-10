@@ -182,7 +182,7 @@ export class AfterHttpService {
         );
 
         this.serviciosFacade.resetCarritoServices();
-        this.informeAvanceFacade.getDetalleInformeAvance(+ot_id);
+        // this.informeAvanceFacade.getDetalleInformeAvance(+ot_id);
       }
       location.reload();
     }

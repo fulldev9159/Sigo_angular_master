@@ -5,8 +5,10 @@ import {
   faBan,
   faCircleCheck,
   faCircleXmark,
+  faFileImport,
   faInbox,
   faPlay,
+  IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { Accion, InfoOT, RegistroLibroDeObras } from '@model';
 import { Subscription } from 'rxjs';
@@ -29,6 +31,14 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   xmark = faCircleXmark;
   okmark = faCircleCheck;
   banIcon = faBan;
+  fileIcon = faFileImport;
+
+  titleArray: {
+    [key: string]: {
+      icon: IconDefinition;
+      text: string;
+    };
+  };
 
   icons = {
     '.docx': 'pi-file',
@@ -52,6 +62,49 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         this.registrosLibroDeObras = registroLibroObras?.data;
       })
     );
+
+    this.titleArray = {
+      CAMBIO_ESTADO: {
+        icon: this.playIcon,
+        text: 'Registro de Evento',
+      },
+      ACEPTACION_INICIAL: {
+        icon: this.inboxIcon,
+        text: 'Aprobación Incial de OT',
+      },
+      ANULACION_INICIAL_OT: {
+        icon: this.banIcon,
+        text: 'Anulación de la OT en etapa inicial',
+      },
+      ANULACION_PROVEEDOR_OT: {
+        icon: this.banIcon,
+        text: 'Anulación de la OT por proveedor',
+      },
+      ACEPTACION_EECC: {
+        icon: this.inboxIcon,
+        text: ' Aprobación de la OT por proveedor',
+      },
+      ENVIAR_INFORME_AVANCE: {
+        icon: this.fileIcon,
+        text: 'Envío de informe de avance',
+      },
+      APROBACION_INFORME_AVANCE: {
+        icon: this.inboxIcon,
+        text: 'Aprobación del informe de avance',
+      },
+      INF_TRAB_FIN_ACTA: {
+        icon: this.fileIcon,
+        text: 'Generación de Acta',
+      },
+      APROBACION_OPERACIONES: {
+        icon: this.inboxIcon,
+        text: ' Aprobación de la OT por operaciones',
+      },
+      CONFIRMAR_RECHAZO_OPERACIONES: {
+        icon: this.inboxIcon,
+        text: 'Confirmación de rechazo operaciones',
+      },
+    };
   }
 
   getUrl(url: string): string {
