@@ -10,6 +10,7 @@ import { ValidarActaContainerComponent } from './containers/validar-acta-contain
 import { ValidarActaOperacionesContainerComponent } from './containers/validar-acta-operaciones-container/validar-acta-operaciones-container.component';
 import { ValidarPagoActaContainerComponent } from './containers/validar-pago-acta-container/validar-pago-acta-container.component';
 import { ActaTiposPagosResolver } from './resolvers/actaTipoPago.resolver';
+import { DetalleInformeAvanceResolver } from './resolvers/detalle-informe-avance.resolver';
 import { LastActaResolver } from './resolvers/lastActa.resolver';
 import { ListActasResolver } from './resolvers/listActas.resolver';
 import { Servicios4ActaResolver } from './resolvers/servicios4acta.resolver';
@@ -66,7 +67,7 @@ const routes: Routes = [
         component: ValidarActaOperacionesContainerComponent,
         resolve: {
           accionesOT: AccionesOTResolver,
-          lastActa: LastActaResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
         },
       },
     ],
