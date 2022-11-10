@@ -232,7 +232,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  createOT(): void {
+  get requestBase(): CreateOTBase {
     const {
       base: { nombre, tipo, cubicacion_id },
       sustentoFinanciero: {
@@ -257,7 +257,9 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       },
     } = this.form.getRawValue();
 
-    let requestBase: CreateOTBase = {
+    const tipo_sustento = costos.toUpperCase();
+
+    const requestBase: CreateOTBase = {
       adm_contrato_proxy_id: +admin_contrato_id,
       proyecto_id: proyecto_id === null ? null : +proyecto_id,
       nombre: nombre.trim(),
@@ -265,19 +267,35 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       observaciones: observaciones === null ? '' : observaciones.trim(),
       fecha_inicio,
       fecha_fin,
-      tipo_sustento: costos.toUpperCase(),
+      tipo_sustento,
       es_sustento_provisorio:
-        costos.toUpperCase() === 'CAPEX' ? pep2_provisorio : ceco_provisorio,
-      pmo_codigo: costos.toUpperCase() === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+        tipo_sustento === 'CAPEX'
+          ? pep2_capex_id === 'capex_provisorio'
+          : ceco_codigo === 'ceco_provisorio',
+      pmo_codigo: tipo_sustento === 'CAPEX' ? +pmo_codigo : pmo_codigo,
       id_opex: id_opex_codigo,
       lp: lp_codigo,
       cuenta_sap:
-        costos.toUpperCase() === 'CAPEX'
-          ? cuenta_sap_codigo
-          : +cuenta_sap_codigo,
-      pep2: pep2_capex_id,
-      ceco: ceco_codigo,
+        tipo_sustento === 'CAPEX' ? cuenta_sap_codigo : +cuenta_sap_codigo,
+      pep2:
+        tipo_sustento === 'CAPEX'
+          ? pep2_capex_id === 'capex_provisorio'
+            ? pep2_provisorio
+            : pep2_capex_id
+          : pep2_capex_id,
+      ceco:
+        tipo_sustento === 'OPEX'
+          ? ceco_codigo === 'ceco_provisorio'
+            ? ceco_provisorio
+            : ceco_codigo
+          : ceco_codigo,
     };
+
+    return requestBase;
+  }
+
+  createOT(): void {
+    const requestBase = this.requestBase;
 
     if (this.cubicacionSelected)
       this.otFacade.createOT(
