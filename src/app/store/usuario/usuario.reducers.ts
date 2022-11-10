@@ -132,5 +132,9 @@ export const reducerUsuario = createReducer(
       ...state,
       posiblesContratosUSer: response.data.items,
     })
-  )
+  ),
+  on(usuarioActions.resetContratos, (state, {}) => ({
+    ...state,
+    contratosUsuario: [],
+  }))
 );

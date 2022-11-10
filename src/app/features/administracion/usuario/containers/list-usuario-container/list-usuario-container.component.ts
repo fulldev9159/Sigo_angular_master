@@ -18,7 +18,7 @@ import {
 } from '@model';
 //// import { ListUserTableService } from './list-user-table.service';
 import { LogService } from '@log';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-list-usuario-container',
@@ -28,21 +28,16 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class ListUsuarioContainerComponent implements OnInit, OnDestroy {
   @ViewChild('filesform', { static: true }) filesform: any;
   subscription: Subscription = new Subscription();
-  trashIcon = faTrash;
 
   // DATOS A USAR
   usersTableData$: Observable<TableUserData[]>;
   contratosUser$: Observable<ContratosUser[]>;
+
   // DISPLAY MODALS
   displayModalDeleteUser = false;
   displayModalActivarUser = false;
   displayModalVerContratos = false;
   displayModalFirma = false;
-
-  // FORMULARIO
-
-  // TABLE
-  //// configTable: any = null;
 
   // EXTRAS
   usuario_id: any = null;
@@ -54,92 +49,25 @@ export class ListUsuarioContainerComponent implements OnInit, OnDestroy {
   };
   form: FormGroup = new FormGroup(this.formControls);
 
-  // CONSTRUCTOR
+  verIcon = faEye;
+  editIcon = faPencil;
+  trashICon = faTrash;
+
   constructor(
     private userFacade: UserFacade,
-    //// private listUserTableService: ListUserTableService,
     private router: Router,
     private logger: LogService
   ) {}
 
   ngOnInit(): void {
-    this.onInitResetInicial();
-    this.onInitGetInitialData();
-    this.onInitSetInitialData();
-    this.onInitAccionesInicialesAdicionales();
-  }
-
-  onInitResetInicial(): void {
     this.userFacade.resetData();
-  }
 
-  onInitGetInitialData(): void {
     this.userFacade.getAllUsers();
+
+    this.onInitSetInitialData();
   }
 
   onInitSetInitialData(): void {
-    //// this.configTable = this.listUserTableService.getTableConfig();
-    //// (this.configTable.body.actions as Array<any>).push(
-    ////   {
-    ////     icon: ' pi pi-pencil',
-    ////     class: 'p-button-text p-button-sm',
-    ////     label: 'Editar',
-    ////     onClick: (event: Event, item: User) => {
-    ////       if (item) {
-    ////         this.router.navigate(['/app/user/form-user', item.id]);
-    ////       }
-    ////     },
-    ////   },
-    ////   {
-    ////     icon: 'pi pi-eye',
-    ////     class: 'p-button-text p-button-sm',
-    ////     label: 'Ver contratos',
-    ////     onClick: (event: Event, item: User) => {
-    ////       this.displayModalVerContratos = true;
-    ////       this.userFacade.getContratosUser(item.id);
-    ////     },
-    ////   },
-    ////   {
-    ////     icon: 'pi pi-trash',
-    ////     class: 'p-button-text p-button-danger p-button-sm',
-    ////     label: 'Eliminar',
-    ////     onClick: (event: Event, item: User) => {
-    ////       this.displayModalDeleteUser = true;
-    ////       this.usuario_id = item.id;
-    ////     },
-    ////   },
-    ////   {
-    ////     icon: ' pi pi-ban',
-    ////     class: 'p-button-text p-button-danger p-button-sm',
-    ////     labelVariable: true,
-    ////     label: 'estado',
-    ////     onClick: (event: Event, item: User) => {
-    ////       this.displayModalActivarUser = true;
-    ////       this.usuario_id = item.id;
-    ////       this.txt_activar = item.estado ? 'bloquear' : 'activar';
-    ////       this.estado_usuario = item.estado;
-    ////     },
-    ////   },
-    ////   {
-    ////     icon: ' pi pi-id-card',
-    ////     labelVariable: true,
-    ////     label: 'firma',
-    ////     onClick: (event: Event, item: User) => {
-    ////       this.displayModalFirma = true;
-    ////       this.usuario_id = item.id;
-    ////     },
-    ////   },
-    ////   {
-    ////     icon: ' pi pi-plus',
-    ////     class: 'p-button-text p-button-danger p-button-sm',
-    ////     label: 'Administrar Perfiles',
-    ////     onClick: (event: Event, item: User) => {
-    ////       if (item) {
-    ////         this.router.navigate(['/app/user/list-perfiles-user', item.id]);
-    ////       }
-    ////     },
-    ////   }
-    //// );
     this.usersTableData$ = this.userFacade.getAllUsers$().pipe(
       map(usuarios => {
         if (usuarios) {
@@ -168,8 +96,6 @@ export class ListUsuarioContainerComponent implements OnInit, OnDestroy {
     this.contratosUser$ = this.userFacade.getContratosUsuario$();
   }
 
-  onInitAccionesInicialesAdicionales(): void {}
-
   closeModalDeleteUser(): void {
     this.displayModalDeleteUser = false;
     this.usuario_id = null;
@@ -181,6 +107,7 @@ export class ListUsuarioContainerComponent implements OnInit, OnDestroy {
   }
 
   closeModalVerContratos(): void {
+    this.userFacade.resetContratos();
     this.displayModalVerContratos = false;
     this.usuario_id = null;
   }
@@ -237,10 +164,6 @@ export class ListUsuarioContainerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  editar(item: TableUserData): void {
-    this.router.navigate(['/administracion/usuarios/form-usuario', item.id]);
   }
 
   verContratos(item: TableUserData): void {

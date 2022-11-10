@@ -106,7 +106,7 @@
     </div>
   </ng-container>
   <ng-template #content>
-    <div class="row" style="width: 87vw;">
+    <div class="row">
       <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
         id="permisos-modulo-{{item.module}}">
         <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"

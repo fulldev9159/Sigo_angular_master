@@ -347,7 +347,9 @@ export class UsuarioEffects {
           usuarioActions.editarSuperiorPerfilUsuarioSuccess,
           usuarioActions.addFirmaUserSuccess,
           usuarioActions.createUserSuccess,
-          usuarioActions.updateUserSuccess
+          usuarioActions.updateUserSuccess,
+          usuarioActions.deleteUserSuccess,
+          usuarioActions.activateUserSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -367,7 +369,8 @@ export class UsuarioEffects {
           usuarioActions.upFirmaUserError,
           usuarioActions.createUserError,
           usuarioActions.updateUserError,
-          usuarioActions.getAllAreas4CreateUserError
+          usuarioActions.getAllAreas4CreateUserError,
+          usuarioActions.deleteUserError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -309,6 +309,21 @@ export class AfterHttpService {
       );
       this.reloadTableOT();
     }
+
+    // ELMINAR USUARIO
+    if (action.type === usuarioActions.deleteUserSuccess.type) {
+      this.snackMessage.showMessage(`Se ha eliminado con éxito`, 'Exito', 2000);
+      location.reload();
+    }
+
+    // ACTIVAR USUARIO
+    if (action.type === usuarioActions.activateUserSuccess.type) {
+      this.snackMessage.showMessage(
+        `Acción realizada con éxito`,
+        'Exito',
+        2000
+      );
+    }
   }
 
   reloadTableOT(): void {

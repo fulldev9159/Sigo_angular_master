@@ -5,7 +5,8 @@
       <span>listado de usuarios en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/administracion/usuarios/form-usuario']" pButton type="button" label="Nuevo Usuario" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-button"></button>
+      <button [routerLink]="['/administracion/usuarios/form-usuario']" pButton type="button" label="Nuevo Usuario"
+        icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -17,13 +18,16 @@
       <div class=" grid">
         <div class="field col-12 table-list-usuarios">
           <ng-container *ngIf="usersTableData$ | async as usersTableData">
-            <p-table #dt [columns]="['username', 'rut', 'nombres', 'apellidos', 'proveedor_nombre']" [value]="usersTableData" [rows]="10" [paginator]="true" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+            <p-table #dt [columns]="['username', 'rut', 'nombres', 'apellidos', 'proveedor_nombre']"
+              [value]="usersTableData" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+              responsiveLayout="scroll" [paginator]="true" [rows]="10">
               <ng-template pTemplate="caption">
                 <div class="p-d-flex p-ai-center p-jc-between">
                   <h5 class="p-m-0"></h5>
                   <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Buscar..." />
                   </span>
                 </div>
               </ng-template>
@@ -98,22 +102,31 @@
                   <td>{{ item.update_at | date: 'dd-MM-yyyy' }}</td>
                   <td>
                     <span *ngIf="item.firma" class="label-table label-activo" style="font-size: 0.8em;">Con firma</span>
-                    <span *ngIf="!item.firma" class="label-table label-inactivo" style="font-size: 0.8em;">Sin firma</span>
+                    <span *ngIf="!item.firma" class="label-table label-inactivo" style="font-size: 0.8em;">Sin
+                      firma</span>
                   </td>
                   <td>
                     <span *ngIf="item.estado" class="label-table label-activo" style="font-size: 0.8em;">Activo</span>
-                    <span *ngIf="!item.estado" class="label-table label-inactivo" style="font-size: 0.8em;">Bloqueado</span>
+                    <span *ngIf="!item.estado" class="label-table label-inactivo"
+                      style="font-size: 0.8em;">Bloqueado</span>
                   </td>
-                  <td style="text-align: right; position: relative">
-                    <div class="ui icon buttons mini basic">
-                      <button class="ui button generic-color" (click)="editar(item)">Editar</button>
-                      <button class="ui button generic-color" (click)="verContratos(item)">Ver contratos</button>
-                      <button class="ui button generic-color" (click)="eliminar(item)">
-                        <fa-icon [icon]="trashIcon"></fa-icon>
+                  <td>
+                    <div class="buttons-operaciones ">
+                      <button [routerLink]="['/administracion/usuarios/form-usuario',item.id]">
+                        <fa-icon [icon]="editIcon"></fa-icon> Editar
                       </button>
-                      <button class="ui button generic-color" (click)="estadoAccion(item)">{{ item.estado ? 'Bloquear' : 'Activar' }}</button>
-                      <button class="ui button generic-color" (click)="firmaAccion(item)">{{ item.firma ? 'Actualizar Firma' : 'Cargar Firma' }}</button>
-                      <button class="ui button generic-color" (click)="administrarPerfiles(item)">Administrar perfiles</button>
+                      <button (click)="verContratos(item)">
+                        <fa-icon [icon]="verIcon"></fa-icon> Ver Contratos
+                      </button>
+                      <button (click)="eliminar(item)" [disabled]="item.id===1" class="delete-button">
+                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                      </button>
+                      <button class="ui button generic-color" (click)="estadoAccion(item)">{{ item.estado ? 'Bloquear' :
+                        'Activar' }}</button>
+                      <button class="ui button generic-color" (click)="firmaAccion(item)">{{ item.firma ? 'Actualizar
+                        Firma' : 'Cargar Firma' }}</button>
+                      <button class="ui button generic-color" (click)="administrarPerfiles(item)">Administrar
+                        perfiles</button>
                     </div>
                   </td>
                 </tr>
@@ -132,10 +145,12 @@
   </div>
 </div>
 
-<p-dialog [visible]="displayModalDeleteUser" [closable]="false" (onHide)="closeModalDeleteUser()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog header="Eliminar usuario" [visible]="displayModalDeleteUser" [closable]="false"
+  (onHide)="closeModalDeleteUser()" [modal]="true" [draggable]="false" [resizable]="false">
   <div class="row">
     <div class="col">
-      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este Usuario?</p>
+      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este
+        Usuario?</p>
       <div style="padding: 0 9rem 0 9rem;">
         <div class="row">
           <div class="col">
@@ -144,11 +159,13 @@
         </div>
         <div class="row">
           <div class="col">
-            <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+            <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-trash"
+              class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
               border: #b36161;
               margin-left: 10px;
               color: #412727;"></button>&nbsp;
-            <button pButton type="button" (click)="closeModalDeleteUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+            <button pButton type="button" (click)="closeModalDeleteUser()" label="Cancelar"
+              class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
               border: gray;"></button>
           </div>
         </div>
@@ -158,10 +175,12 @@
   <p-footer></p-footer>
 </p-dialog>
 
-<p-dialog [visible]="displayModalActivarUser" [closable]="false" (onHide)="closeModalActivarUser()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [visible]="displayModalActivarUser" [closable]="false" (onHide)="closeModalActivarUser()" [modal]="true"
+  [draggable]="false" [resizable]="false">
   <div class="row">
     <div class="col">
-      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea {{txt_activar}} este Usuario?</p>
+      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea
+        {{txt_activar}} este Usuario?</p>
       <div style="padding: 0 9rem 0 9rem;">
         <div class="row">
           <div class="col">
@@ -170,15 +189,18 @@
         </div>
         <div class="row">
           <div class="col">
-            <button pButton *ngIf="txt_activar==='bloquear'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-ban" class="p-button-sm mt-5 float-right" id="activate-user-button" style="    background: #ffb6b6;
+            <button pButton *ngIf="txt_activar==='bloquear'" type="button" (click)="ActivarUsuario()" label="Si "
+              icon="pi pi-ban" class="p-button-sm mt-5 float-right" id="activate-user-button" style="    background: #ffb6b6;
               border: #b36161;
               margin-left: 10px;
               color: #412727;"></button>
-            <button pButton *ngIf="txt_activar==='activar'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-check" class="p-button-sm mt-5 float-right" id="activate-user-button" style="        background: #b6d6ff;
+            <button pButton *ngIf="txt_activar==='activar'" type="button" (click)="ActivarUsuario()" label="Si "
+              icon="pi pi-check" class="p-button-sm mt-5 float-right" id="activate-user-button" style="        background: #b6d6ff;
               border: #6181b3;
               margin-left: 10px;
               color: #272b41;"></button>
-            <button pButton type="button" (click)="closeModalActivarUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+            <button pButton type="button" (click)="closeModalActivarUser()" label="Cancelar"
+              class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
               border: gray;"></button>
           </div>
         </div>
@@ -188,20 +210,23 @@
   <p-footer></p-footer>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalVerContratos" [closable]="true" (onHide)="closeModalVerContratos()" [modal]="true" [draggable]="false" [resizable]="false">
-  <p-listbox [options]="contratosUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
+<p-dialog [(visible)]="displayModalVerContratos" [closable]="true" (onHide)="closeModalVerContratos()" [modal]="true"
+  [draggable]="false" [resizable]="false">
+  <p-listbox [options]="contratosUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}"
+    optionDisabled="inactive" [disabled]="true">
     <ng-template let-contrato pTemplate="item">
-      <div class="perfil-item">
-        <div> {{contrato.model_contrato_id.nombre}}</div>
-      </div>
+      {{contrato.model_contrato_id.nombre}}
     </ng-template>
   </p-listbox>
 </p-dialog>
 
-<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true"
+  [draggable]="false" [resizable]="false">
   <ng-template pTemplate="header">Adjuntar Firma</ng-template>
   <form novalidate autocomplete="off" [formGroup]="form">
-    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
+    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true"
+      (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true"
+      accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
     </p-fileUpload>
 
     <label style="color: #464646;font-weight: 400;">
@@ -211,11 +236,13 @@
     </label>
   </form>
   <p-footer>
-    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
+    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus"
+      class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
     border: #6181b3;
     margin-left: 10px;
     color: #272b41;"></button>
-    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
+    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right"
+      id="close-addFirma-button" style="background: #b8b6b6;
     border: gray;"></button>
   </p-footer>
 </p-dialog>
