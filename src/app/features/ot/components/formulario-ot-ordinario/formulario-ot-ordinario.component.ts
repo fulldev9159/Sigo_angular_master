@@ -22,12 +22,16 @@ export class FormularioOtOrdinarioComponent implements OnInit, OnDestroy {
         let tmp = [...values];
         return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
       }),
-      map(values =>
-        values.map(value => ({
+      map(values => [
+        {
+          name: 'Sin números',
+          code: null,
+        },
+        ...values.map(value => ({
           name: value.nombre,
           code: value.id,
-        }))
-      )
+        })),
+      ])
     );
 
   // LOADINGS
