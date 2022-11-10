@@ -119,7 +119,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
-      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      tipo_numero_interno_id: new FormControl(null, []),
       ots_numero_interno: new FormArray([]),
     }),
     ordinario: new FormGroup({
@@ -139,7 +139,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
-      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      tipo_numero_interno_id: new FormControl(null, []),
       ots_numero_interno: new FormArray([]),
     }),
     fijo: new FormGroup({
@@ -368,12 +368,16 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           numero_pedido: numero_pedido.trim(),
           materia: materia.trim(),
         },
-        ot_numero_interno: {
-          tipo_numero_interno_id: +tipo_numero_interno_id,
-          numero_interno: ots_numero_interno.map(
-            (numeros: { numero_interno: string }) => numeros.numero_interno
-          ),
-        },
+        ot_numero_interno:
+          tipo_numero_interno_id === null
+            ? null
+            : {
+                tipo_numero_interno_id: +tipo_numero_interno_id,
+                numero_interno: ots_numero_interno.map(
+                  (numeros: { numero_interno: string }) =>
+                    numeros.numero_interno
+                ),
+              },
       };
 
       this.logger.debug(`contrato ordinario`, request);
@@ -416,12 +420,16 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           area_negocio: area_negocio.toString(),
           nombre_proyectista: nombre_proyectista.trim(),
         },
-        ot_numero_interno: {
-          tipo_numero_interno_id: +tipo_numero_interno_id,
-          numero_interno: ots_numero_interno.map(
-            (numeros: { numero_interno: string }) => numeros.numero_interno
-          ),
-        },
+        ot_numero_interno:
+          tipo_numero_interno_id === null
+            ? null
+            : {
+                tipo_numero_interno_id: +tipo_numero_interno_id,
+                numero_interno: ots_numero_interno.map(
+                  (numeros: { numero_interno: string }) =>
+                    numeros.numero_interno
+                ),
+              },
       };
 
       this.logger.debug(`contrato bucle`, request);

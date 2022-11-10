@@ -89,8 +89,12 @@ export class FormularioOtNumeroInternoComponent implements OnInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tipoNumeroInternoFormControl']) {
       this.subscription.add(
-        this.tipoNumeroInternoFormControl.valueChanges.subscribe(() => {
-          this.form.get('numero_interno').enable();
+        this.tipoNumeroInternoFormControl.valueChanges.subscribe(tipo => {
+          if (tipo === null) {
+            this.form.get('numero_interno').disable();
+          } else {
+            this.form.get('numero_interno').enable();
+          }
 
           if (this.otsNumeroInternoFormArray) {
             while (this.otsNumeroInternoFormArray.length > 0) {
