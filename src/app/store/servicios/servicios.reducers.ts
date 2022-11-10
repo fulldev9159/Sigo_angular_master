@@ -83,6 +83,8 @@ export const reducerServicios = createReducer(
               uob_unidad_medida_cod: responseUnidadObra.data.uo_unidad_codigo,
               uob_unidad_medida_descripcion:
                 responseUnidadObra.data.uo_unidad_descripcion,
+
+              material_arr: responseUnidadObra.data.material_arr,
             },
           ],
         },

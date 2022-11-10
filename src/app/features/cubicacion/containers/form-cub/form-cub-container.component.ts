@@ -19,6 +19,7 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { combineLatest, Observable, Subscription, take } from 'rxjs';
 import {
   CarritoService,
+  CarritoUO,
   DetalleCubicacion,
   NuevoServicio,
   NuevoUO,
@@ -28,6 +29,7 @@ import {
   ServicioUOActualizar,
   SessionData,
   UOAgregar,
+  MaterialesManoObra,
 } from '@model';
 import { ActivatedRoute, Route } from '@angular/router';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -69,6 +71,9 @@ export class FormCubContainerComponent
   editMode = false;
   cubicacion_id: number;
   title: string;
+
+  materialesSelected: MaterialesManoObra[] | null;
+  displayModalMateriales = false;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -302,6 +307,8 @@ export class FormCubContainerComponent
                       uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                       uob_unidad_medida_descripcion:
                         uo.model_unidad_id.descripcion,
+
+                      //// material_arr: uo.many_cubicacion_has_material,
                     },
                   ],
                 };
@@ -539,5 +546,21 @@ export class FormCubContainerComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  showMateriales({
+    servicio,
+    uo,
+  }: {
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }): void {
+    this.materialesSelected = [...uo.material_arr];
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = null;
+    this.displayModalMateriales = false;
   }
 }
