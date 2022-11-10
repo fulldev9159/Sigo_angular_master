@@ -3,6 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
+  Output,
+  EventEmitter,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -33,7 +35,6 @@ interface ServiceTableCarrito {
   ];
 }
 
-// 129 TODO: AGREGAR BOTON DETALLES
 // 173 TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
 // 174 TODO: MEJORAR CSS DEL SWITCH
 // 175 TODO: VER MEJOR MANERA DE REPREENTAR LA EDICIÓN DE SERVICIOS EXISTENTES UX
@@ -56,8 +57,14 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() cantidad_editable: boolean = true;
   @Input() column_acciones: boolean = true;
   @Input() accion_delete: boolean = true;
+  @Input() accion_detalle_uo: boolean = false;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
+
+  @Output() detallesUOClicked = new EventEmitter<{
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }>();
 
   formTable: FormGroup = new FormGroup({ table: new FormArray([]) });
   formAprobarTodos: FormGroup = new FormGroup({
@@ -402,6 +409,16 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     );
 
     table_unidad_obrasFormArray.removeAt(index_uo);
+  }
+
+  viewDetallesUOFromServicioFromCarrito(
+    servicio: CarritoService,
+    uo: CarritoUO
+  ): void {
+    this.detallesUOClicked.emit({
+      servicio,
+      uo,
+    });
   }
 
   canSeePrices(): boolean {

@@ -19,6 +19,7 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { combineLatest, Observable, Subscription, take } from 'rxjs';
 import {
   CarritoService,
+  CarritoUO,
   DetalleCubicacion,
   NuevoServicio,
   NuevoUO,
@@ -539,5 +540,15 @@ export class FormCubContainerComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  showUODetails({
+    servicio,
+    uo,
+  }: {
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }): void {
+    console.log('detalle', servicio, uo);
   }
 }
