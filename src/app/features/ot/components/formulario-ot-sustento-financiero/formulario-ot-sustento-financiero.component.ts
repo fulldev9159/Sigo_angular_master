@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Dropdown } from '@model';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
@@ -54,12 +60,16 @@ export class FormularioOtSustentoFinancieroComponent
       let tmp = [...values];
       return tmp.sort((a, b) => (a.pep2 > b.pep2 ? 1 : -1));
     }),
-    map(values =>
-      values.map(value => ({
+    map(values => [
+      {
+        name: 'PEP2 provisorio',
+        code: 'capex_provisorio',
+      },
+      ...values.map(value => ({
         name: value.pep2,
         code: value.pep2,
-      }))
-    )
+      })),
+    ])
   );
 
   opex$: Observable<Dropdown[]> = this.sustentoFinancieroFacade
@@ -97,12 +107,16 @@ export class FormularioOtSustentoFinancieroComponent
       let tmp = [...values];
       return tmp.sort((a, b) => (a.ceco > b.ceco ? 1 : -1));
     }),
-    map(values =>
-      values.map(value => ({
+    map(values => [
+      {
+        name: 'CECO provisorio',
+        code: 'ceco_provisorio',
+      },
+      ...values.map(value => ({
         name: value.ceco.toString(),
         code: value.ceco,
-      }))
-    )
+      })),
+    ])
   );
 
   // LOADINGS
@@ -115,7 +129,8 @@ export class FormularioOtSustentoFinancieroComponent
 
   constructor(
     private sustentoFinancieroFacade: SustentoFinancieroFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -148,6 +163,16 @@ export class FormularioOtSustentoFinancieroComponent
     );
 
     this.subscription.add(
+      this.form.get('pep2_capex_id').valueChanges.subscribe(pep2_capex_id => {
+        if (pep2_capex_id === 'capex_provisorio') {
+          this.form.get('pep2_provisorio').setValidators([Validators.required]);
+        } else {
+          this.form.get('pep2_provisorio').setValidators(null);
+        }
+      })
+    );
+
+    this.subscription.add(
       this.form.get('id_opex_codigo').valueChanges.subscribe(id_opex_codigo => {
         if (id_opex_codigo !== null && id_opex_codigo !== undefined) {
           this.sustentoFinancieroFacade.getCuentaSAP(id_opex_codigo);
@@ -167,6 +192,16 @@ export class FormularioOtSustentoFinancieroComponent
           }
         })
     );
+
+    this.subscription.add(
+      this.form.get('ceco_codigo').valueChanges.subscribe(ceco_codigo => {
+        if (ceco_codigo === 'ceco_provisorio') {
+          this.form.get('ceco_provisorio').setValidators([Validators.required]);
+        } else {
+          this.form.get('ceco_provisorio').setValidators(null);
+        }
+      })
+    );
   }
 
   configCapex(): void {
@@ -182,6 +217,9 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('cuenta_sap_codigo').reset();
     this.form.get('ceco_codigo').reset();
     this.form.get('ceco_provisorio').reset();
+
+    this.form.updateValueAndValidity();
+    this.detector.detectChanges();
   }
 
   configOpex(): void {
@@ -196,6 +234,9 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('pmo_codigo').reset();
     this.form.get('lp_codigo').reset();
     this.form.get('pep2_capex_id').reset();
+
+    this.form.updateValueAndValidity();
+    this.detector.detectChanges();
   }
 
   get valid(): boolean {
