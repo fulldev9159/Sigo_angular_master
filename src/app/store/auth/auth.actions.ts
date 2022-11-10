@@ -87,3 +87,32 @@ export const getAPIVersionError = createAction(
   '[AUTH]  getAPIVersion Error',
   props<{ error: any }>()
 );
+
+// GET NOTIFICACIONES
+export const getNotificaciones = createAction('[AUTH] getNotificaciones');
+
+export const getNotificacionesSuccess = createAction(
+  '[AUTH] getNotificaciones Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getNotificacionesError = createAction(
+  '[AUTH] POST getNotificaciones Error',
+  props<{ error: any }>()
+);
+
+// MARCAR NOTIFICACIONES
+export const marcarNotificaciones = createAction(
+  '[AUTH] marcarNotificaciones',
+  props<{ id: number[] }>()
+);
+
+export const marcarNotificacionesSuccess = createAction(
+  '[AUTH] marcarNotificaciones Success',
+  props<{ response: Response<any> }>()
+);
+
+export const marcarNotificacionesError = createAction(
+  '[AUTH] marcarNotificaciones Error',
+  props<{ error: any }>()
+);

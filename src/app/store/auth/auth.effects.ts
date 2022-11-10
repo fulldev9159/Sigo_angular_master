@@ -90,6 +90,36 @@ export class AuthEffects {
     )
   );
 
+  getNotificaciones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getNotificaciones),
+      concatMap(() =>
+        this.authHttpService.getNotificaciones().pipe(
+          map(response => authActions.getNotificacionesSuccess({ response })),
+          catchError(error => {
+            return of(authActions.getNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  marcarNotificaciones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.marcarNotificaciones),
+      concatMap(({ id }) =>
+        this.authHttpService.marcarNotificaciones(id).pipe(
+          map(response =>
+            authActions.marcarNotificacionesSuccess({ response })
+          ),
+          catchError(error => {
+            return of(authActions.marcarNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -112,7 +142,9 @@ export class AuthEffects {
           authActions.refreshLoginError,
           authActions.getPermisosPerfilUsuario4LoginError,
           authActions.getDatabaseVersionError,
-          authActions.getAPIVersionError
+          authActions.getAPIVersionError,
+          authActions.getNotificacionesError,
+          authActions.marcarNotificacionesError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

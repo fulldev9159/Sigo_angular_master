@@ -79,4 +79,18 @@ export class AuthFacade {
   public getAPIVersion$(): Observable<string> {
     return this.store.select(authSelectors.getAPIVersion);
   }
+
+  // GET NOTIFICACIONES
+  public getNotificaciones(): void {
+    this.store.dispatch(authActions.getNotificaciones());
+  }
+
+  public getNotificaciones$(): Observable<any> {
+    return this.store.select(authSelectors.getNotificaciones);
+  }
+
+  // MARCAR NOTIFICACIONES
+  public marcarNotificaciones(id: number[]): void {
+    this.store.dispatch(authActions.marcarNotificaciones({ id }));
+  }
 }

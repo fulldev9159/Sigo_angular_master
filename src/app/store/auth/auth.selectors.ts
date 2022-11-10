@@ -29,3 +29,8 @@ export const getAPIVersion = createSelector(
   selectAuth,
   (state: reducer.StateAuth) => state.apiVersion
 );
+
+export const getNotificaciones = createSelector(
+  selectAuth,
+  (state: reducer.StateAuth) => state.notificaciones
+);

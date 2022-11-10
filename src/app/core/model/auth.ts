@@ -27,3 +27,22 @@ export interface DatabaseVersion {
   type: string;
   version: string;
 }
+
+export interface Notificacion {
+  id: number;
+  proxy_id: number;
+  permiso_slug: string;
+  mensaje: string;
+  metadata: string;
+  created_at: Date;
+  checked_at?: any;
+  model_proxy_id: {
+    id: number;
+    usuario_orig: number;
+    usuario_id: number;
+    perfil_id: number;
+    superior_proxy_id: number;
+    created_at: Date;
+    updated_at: Date;
+  };
+}

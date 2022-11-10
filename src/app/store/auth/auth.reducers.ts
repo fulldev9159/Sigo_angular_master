@@ -11,6 +11,7 @@ export interface StateAuth {
   showMenuDetalleOT: boolean;
   databaseVersion: DatabaseVersion;
   apiVersion: string;
+  notificaciones: any;
 }
 
 export const initialState: StateAuth = {
@@ -19,6 +20,7 @@ export const initialState: StateAuth = {
   showMenuDetalleOT: false,
   databaseVersion: null,
   apiVersion: null,
+  notificaciones: null,
 };
 
 export const reducerAuth = createReducer(
@@ -75,5 +77,9 @@ export const reducerAuth = createReducer(
   on(authActions.getAPIVersionSuccess, (state, { response }) => ({
     ...state,
     apiVersion: response.data.api_version,
+  })),
+  on(authActions.getNotificacionesSuccess, (state, { response }) => ({
+    ...state,
+    notificaciones: response.data.api_version,
   }))
 );

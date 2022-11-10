@@ -14,6 +14,7 @@ import {
   faMoneyCheckDollar,
   faPersonDigging,
 } from '@fortawesome/free-solid-svg-icons';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 @Component({
   selector: 'zwc-navbar',
@@ -21,7 +22,7 @@ import {
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();
   @Output() changePerfil = new EventEmitter<void>();
@@ -29,7 +30,11 @@ export class NavbarComponent {
   faOT = faPersonDigging;
   faCub = faDollarSign;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private authFacade: AuthFacade) {}
+
+  ngOnInit(): void {
+    this.authFacade.getNotificaciones();
+  }
 
   toggleInt(): void {
     this.toggle.emit();

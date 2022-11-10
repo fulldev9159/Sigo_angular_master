@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
-import { Response, Login, DatabaseVersion, PerfilesUsuario } from '@model';
+import {
+  Response,
+  Login,
+  DatabaseVersion,
+  PerfilesUsuario,
+  Notificacion,
+} from '@model';
 @Injectable({
   providedIn: 'root',
 })
@@ -48,6 +54,20 @@ export class AuthHttpService {
     return this.http.post<Response<{ perfiles: PerfilesUsuario[] }>>(
       `${this.API_URL}/usuario/perfiles/get`,
       { usuario_id }
+    );
+  }
+
+  getNotificaciones(): Observable<Response<{ items: Notificacion[] }>> {
+    return this.http.post<Response<{ items: Notificacion[] }>>(
+      `${this.API_URL}/usuario/bandeja_notificacion/get`,
+      {}
+    );
+  }
+
+  marcarNotificaciones(id: number[]): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/usuario/bandeja_notificacion/check`,
+      { id }
     );
   }
 }
