@@ -29,6 +29,7 @@ import {
   ServicioUOActualizar,
   SessionData,
   UOAgregar,
+  MaterialesManoObra,
 } from '@model';
 import { ActivatedRoute, Route } from '@angular/router';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -70,6 +71,9 @@ export class FormCubContainerComponent
   editMode = false;
   cubicacion_id: number;
   title: string;
+
+  materialesSelected: MaterialesManoObra[] | null;
+  displayModalMateriales = false;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -544,14 +548,19 @@ export class FormCubContainerComponent
     this.subscription.unsubscribe();
   }
 
-  showUODetails({
+  showMateriales({
     servicio,
     uo,
   }: {
     servicio: CarritoService;
     uo: CarritoUO;
   }): void {
-    console.log('servicio', JSON.stringify(servicio, null, 2));
-    console.log('uo', JSON.stringify(uo, null, 2));
+    this.materialesSelected = [...uo.material_arr];
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = null;
+    this.displayModalMateriales = false;
   }
 }

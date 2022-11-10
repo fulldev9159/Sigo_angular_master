@@ -11,7 +11,7 @@
         </zwc-form-agregar-servicios>
       </div>
       <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
-        <zwc-table-servicios #tableServicios [accion_detalle_uo]="true" (detallesUOClicked)="showUODetails($event)"></zwc-table-servicios>
+        <zwc-table-servicios #tableServicios [accion_detalle_uo]="true" (detallesUOClicked)="showMateriales($event)"></zwc-table-servicios>
       </div>
     </div>
     <ng-container *ngIf="editMode;else createModeButton">
@@ -22,3 +22,26 @@
     </ng-template>
   </div>
 </zwc-content-layout>
+
+<p-dialog header="Lista de Materiales" [(visible)]="displayModalMateriales" [draggable]="false" [modal]="true" (onHide)="closeModalMateriales()">
+  <div class="row" style="width: 87vw;">
+    <table style=" width: 100%;">
+      <thead>
+        <tr>
+          <th>Cod</th>
+          <th>Nombre</th>
+          <th>Origen</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of materialesSelected">
+          <td class="label-table">{{item.material_codigo}}</td>
+          <td class="data-primaria">{{item.material_nombre}}</td>
+          <td class="label-table">{{item.material_origen}}</td>
+          <td class="data-primaria">{{item.material_precio_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-dialog>
