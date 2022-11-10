@@ -22,17 +22,7 @@ export interface DetalleOT {
   numeros_interno?: NumeroInterno[]; // FIJO;
   ot: InfoOT;
   // FLUJO OT
-  pdf_inicial: {
-    concepto: string;
-    categoria_id: number;
-    categoria_nombre: string;
-    extension: string;
-    nombre_original: string;
-    size: number;
-    human_size: string;
-    url: string;
-    created_at: Date;
-  };
+  pdf_inicial: PDFInicial;
   usuarios_involucrados: UsuarioInvolucrado[];
 }
 
@@ -121,4 +111,16 @@ export interface InfoOT {
   fecha_derivada?: any;
   numero_hem?: any;
   fecha_cont_hem?: any;
+}
+
+export interface PDFInicial {
+  concepto: string;
+  categoria_id: number;
+  categoria_nombre: string;
+  extension: string;
+  nombre_original: string;
+  size: number;
+  human_size: string;
+  url: string;
+  created_at: Date;
 }

@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '@environment';
 import {
   Accion,
   Cubicacion,
   DetalleOT,
   InfoOT,
   NumeroInterno,
+  PDFInicial,
   UsuarioInvolucrado,
 } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
@@ -22,13 +24,18 @@ export class InformacionComponent implements OnDestroy, OnInit {
   infoOT: InfoOT;
   numeros_internos: NumeroInterno[] = [];
   usuarios_involucrados: UsuarioInvolucrado[] = [];
+  PDFInicial: PDFInicial;
+
+  API_URL = '';
 
   accionesOT: Accion[] = [];
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.API_URL = environment.api;
+  }
 
   ngOnInit(): void {
     this.subscription.add(
@@ -37,6 +44,7 @@ export class InformacionComponent implements OnDestroy, OnInit {
         this.infoOT = detalleOT?.data?.ot;
         this.numeros_internos = detalleOT?.data?.numeros_interno;
         this.usuarios_involucrados = detalleOT?.data?.usuarios_involucrados;
+        this.PDFInicial = detalleOT?.data?.pdf_inicial;
       })
     );
   }
