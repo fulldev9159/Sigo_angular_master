@@ -150,11 +150,12 @@ describe('Create ot bucle', () => {
       cy.get('#crear-ot').click();
 
       cy.wait(1000);
+      cy.get('button[id="logout"]').click();
     });
   });
 });
 
-describe.skip('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
+describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
@@ -193,7 +194,7 @@ describe.skip('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   });
 });
 
-describe.skip('OT_ET_AUTORIZACION_PROVEEDOR BUCLE', () => {
+describe('OT_ET_AUTORIZACION_PROVEEDOR BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });

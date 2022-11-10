@@ -81,15 +81,15 @@
 
                 <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'">
                     <!-- <pre>{{getMetadata(registro.metadata)|json}}</pre> -->
-                    <fa-icon [icon]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?xmark:okmark"
-                        [ngClass]="getMetadata(registro.metadata).values.estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
                     </fa-icon>
-                    <span *ngIf="getMetadata(registro.metadata).values.estado==='RECHAZADO'">Se ha rechazado la OT con
+                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado la OT con
                         la siguiente observación:</span>
-                    <span *ngIf="getMetadata(registro.metadata).values.estado==='ACEPTADO'">Se ha aceptado la orden de
+                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado la orden de
                         trabajo</span>
                     <br>
-                    <q>{{getMetadata(registro.metadata).values.observacion}}</q>
+                    <q>{{getMetadata(registro.metadata).observacion}}</q>
                 </ng-container>
 
                 <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'|| 

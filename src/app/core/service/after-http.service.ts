@@ -184,7 +184,7 @@ export class AfterHttpService {
         this.serviciosFacade.resetCarritoServices();
         this.informeAvanceFacade.getDetalleInformeAvance(+ot_id);
       }
-      // location.reload();
+      location.reload();
     }
 
     // ACEPTAR OT INICIAL
@@ -330,5 +330,7 @@ export class AfterHttpService {
     this.otFacade.getBandejaOT('EN_EJECUCION');
     this.otFacade.getBandejaOT('ABIERTAS');
     this.otFacade.getBandejaOT('CERRADAS');
+    this.otFacade.getBandejaOT('ANULADAS');
+    this.otFacade.getBandejaOT('EN_TRAMITE');
   }
 }
