@@ -212,6 +212,7 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('id_opex_codigo').setValidators(null);
     this.form.get('cuenta_sap_codigo').setValidators(null);
     this.form.get('ceco_codigo').setValidators(null);
+    this.form.get('ceco_provisorio').setValidators(null);
 
     this.form.get('id_opex_codigo').reset();
     this.form.get('cuenta_sap_codigo').reset();
@@ -226,6 +227,7 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('pmo_codigo').setValidators(null);
     this.form.get('lp_codigo').setValidators(null);
     this.form.get('pep2_capex_id').setValidators(null);
+    this.form.get('pep2_provisorio').setValidators(null);
 
     this.form.get('id_opex_codigo').setValidators([Validators.required]);
     this.form.get('cuenta_sap_codigo').setValidators([Validators.required]);
@@ -234,6 +236,7 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('pmo_codigo').reset();
     this.form.get('lp_codigo').reset();
     this.form.get('pep2_capex_id').reset();
+    this.form.get('pep2_provisorio').reset();
 
     this.form.updateValueAndValidity();
     this.detector.detectChanges();
