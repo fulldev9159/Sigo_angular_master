@@ -6,6 +6,7 @@ stages:
   - e2e test
   - deployment
   - triggers
+  - update production
 
 variables:
   CLI_VERSION: 14.1.0
