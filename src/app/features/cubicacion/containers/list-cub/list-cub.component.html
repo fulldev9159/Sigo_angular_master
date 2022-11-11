@@ -6,13 +6,16 @@
         [loading]="getCubicacioneSending$|async" 
         [totalRecords]="(cubicaciones$|async).length" -->
       <form [formGroup]="formFilter">
-        <p-table #dt [columns]="['cubicacion_nombre']" [value]="cubicaciones$|async" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true" [rows]="10" scrollDirection="both" [scrollable]="true" [globalFilterFields]="['cubicacion_nombre']">
+        <p-table #dt [columns]="['cubicacion_nombre']" [value]="cubicaciones$|async" dataKey="id"
+          styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+          scrollDirection="both" [scrollable]="true" [globalFilterFields]="['cubicacion_nombre']">
           <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
               <h5 class="p-m-0"></h5>
               <span class="p-input-icon-left ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Buscar..." />
               </span>
             </div>
           </ng-template>
@@ -64,20 +67,24 @@
             -->
             <!-- HEADERS -->
             <tr>
-              <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon field="cubicacion_id"></p-sortIcon>
+              <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon field="cubicacion_id">
+                </p-sortIcon>
               </th>
-              <th style="width:200px" pSortableColumn="cubicacion_nombre">Nombre <p-sortIcon field="cubicacion_nombre"></p-sortIcon>
+              <th style="width:200px" pSortableColumn="cubicacion_nombre">Nombre <p-sortIcon field="cubicacion_nombre">
+                </p-sortIcon>
               </th>
               <th style="width:200px">Descripcion</th>
               <th style="width:140px" pSortableColumn="tipo_cubicacion_descripcion">Tipo Cubicación
                 <p-sortIcon field="tipo_cubicacion_descripcion"></p-sortIcon>
               </th>
-              <th style="width:180px" pSortableColumn="contrato_marco_nombre">Contrato Marco <p-sortIcon field="contrato_marco_nombre"></p-sortIcon>
+              <th style="width:180px" pSortableColumn="contrato_marco_nombre">Contrato Marco <p-sortIcon
+                  field="contrato_marco_nombre"></p-sortIcon>
               </th>
               <th style="width:180px" pSortableColumn="agencia_nombre">Agencia <p-sortIcon field="agencia_nombre">
                 </p-sortIcon>
               </th>
-              <th style="width:200px" pSortableColumn="creador_usuario_nombre">Creado Por <p-sortIcon field="creador_usuario_nombre"></p-sortIcon>
+              <th style="width:200px" pSortableColumn="creador_usuario_nombre">Creado Por <p-sortIcon
+                  field="creador_usuario_nombre"></p-sortIcon>
               </th>
               <th style="width:140px" pSortableColumn="cubicacion_fecha_creacion">Fecha creación
                 <p-sortIcon field="cubicacion_fecha_creacion"></p-sortIcon>
@@ -101,7 +108,7 @@
               <td style="width:100px">{{item.total| currency: 'CLP':'$':'.0-2':'es-CL'}}</td>
               <td style="width:300px">
                 <div class="buttons-operaciones ">
-                  <button (click)="showDetalleCubicacion(item.cubicacion_id)" id="button-detalle-cubicacion">
+                  <button (click)="showDetalleCubicacion(item)" id="button-detalle-cubicacion">
                     <fa-icon [icon]="infoIcon"></fa-icon> Detalles
                   </button>
                   <button (click)="showClonarCubicacion(item.cubicacion_id)" id="button-clonar-cubicacion">
@@ -119,7 +126,8 @@
                     <button [routerLink]="['/cubicacion/form-cub',item.cubicacion_id]" id="button-editar-cubicacion">
                       <fa-icon [icon]="editIcon"></fa-icon> Editar
                     </button>
-                    <button style="background-color: #d32f2f;" (click)="showEliminarCubicacion(item.cubicacion_id)" id="button-eliminar-cubicacion">
+                    <button style="background-color: #d32f2f;" (click)="showEliminarCubicacion(item.cubicacion_id)"
+                      id="button-eliminar-cubicacion">
                       <fa-icon [icon]="trashICon"></fa-icon>Eliminar
                     </button>
                   </ng-template>
@@ -140,7 +148,8 @@
   </div>
 </zwc-content-layout>
 
-<p-dialog header="Detalles de Cubicación" [(visible)]="displayModalDetalleCubicacion" [draggable]="false" [modal]="true" (onHide)="closeModalDetalleCubicacion()">
+<p-dialog header="Detalles de Cubicación" [(visible)]="displayModalDetalleCubicacion" [draggable]="false" [modal]="true"
+  (onHide)="closeModalDetalleCubicacion()">
   <ng-container>
     <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else content">
       <p>Loading...</p>
@@ -148,7 +157,7 @@
   </ng-container>
   <ng-template #content>
     <!-- 101 TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
-    <ng-container *ngIf="detalleCubicacion?.contrato_id===9">
+    <ng-container *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
       <p-divider align="left">
         <span class="p-tag">Detales de dirección</span>
       </p-divider>
@@ -171,23 +180,27 @@
       <span class="p-tag">Cubicación</span>
     </p-divider>
     <!-- <zwc-view-table-services></zwc-view-table-services> -->
-    <zwc-table-servicios mode_source="static" [data_source]="servicios" [cantidad_editable]="false" [column_acciones]="false">
+    <zwc-table-servicios mode_source="static" [data_source]="servicios" [cantidad_editable]="false"
+      [column_acciones]="false">
     </zwc-table-servicios>
   </ng-template>
 </p-dialog>
 
 
-<p-dialog header="Clonar Cubicación" [(visible)]="displayModalClonarCubicacion" [draggable]="false" [modal]="true" (onHide)="closeModalClonarCubicacion()">
+<p-dialog header="Clonar Cubicación" [(visible)]="displayModalClonarCubicacion" [draggable]="false" [modal]="true"
+  (onHide)="closeModalClonarCubicacion()">
   <ng-container>
     <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else contentClonar">
       <p>Loading...</p>
     </div>
   </ng-container>
   <ng-template #contentClonar>
-    <zwc-clonador-cubicacion [detalleCubicacion]="detalleCubicacion" (closeModalDetalleCubicacionEmit)="closeModalClonarCubicacion()"></zwc-clonador-cubicacion>
+    <zwc-clonador-cubicacion [detalleCubicacion]="detalleCubicacion"
+      (closeModalDetalleCubicacionEmit)="closeModalClonarCubicacion()"></zwc-clonador-cubicacion>
   </ng-template>
 </p-dialog>
 
 <p-dialog header="Eliminar Cubicación" [(visible)]="displayModalEliminarCubicacion" [draggable]="false" [modal]="true">
-  <zwc-view-confirmacion [pregunta]='mensajeConfirmacion' (cancelar)="closeModalEliminarCubicacion()" (confirmar)="confirmarEliminarCubicacion()"></zwc-view-confirmacion>
+  <zwc-view-confirmacion [pregunta]='mensajeConfirmacion' (cancelar)="closeModalEliminarCubicacion()"
+    (confirmar)="confirmarEliminarCubicacion()"></zwc-view-confirmacion>
 </p-dialog>

@@ -102,6 +102,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     })
   );
   cubicacion_id: number;
+  cubicacionSelected: Cubicacion;
 
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
@@ -342,10 +343,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
 
   // DETALLE CUBICACION
-  showDetalleCubicacion(cubicacion_id: number): void {
+  showDetalleCubicacion(cubicacion: Cubicacion): void {
     this.displayModalDetalleCubicacion = true;
+    this.cubicacionSelected = cubicacion;
     this.serviciosFacade.resetCarritoServices();
-    this.cubicacionFacade.detalleCubicacion(cubicacion_id);
+    this.cubicacionFacade.detalleCubicacion(cubicacion.cubicacion_id);
   }
 
   closeModalDetalleCubicacion(): void {
