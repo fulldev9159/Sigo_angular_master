@@ -166,8 +166,10 @@ export class FormularioOtSustentoFinancieroComponent
       this.form.get('pep2_capex_id').valueChanges.subscribe(pep2_capex_id => {
         if (pep2_capex_id === 'capex_provisorio') {
           this.form.get('pep2_provisorio').setValidators([Validators.required]);
+          this.form.get('pep2_provisorio').updateValueAndValidity();
         } else {
           this.form.get('pep2_provisorio').setValidators(null);
+          this.form.get('pep2_provisorio').updateValueAndValidity();
         }
       })
     );
@@ -197,8 +199,10 @@ export class FormularioOtSustentoFinancieroComponent
       this.form.get('ceco_codigo').valueChanges.subscribe(ceco_codigo => {
         if (ceco_codigo === 'ceco_provisorio') {
           this.form.get('ceco_provisorio').setValidators([Validators.required]);
+          this.form.get('ceco_provisorio').updateValueAndValidity();
         } else {
           this.form.get('ceco_provisorio').setValidators(null);
+          this.form.get('ceco_provisorio').updateValueAndValidity();
         }
       })
     );
