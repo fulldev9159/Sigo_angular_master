@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faPassport } from '@fortawesome/free-solid-svg-icons';
 import { OT } from '@model';
 import { Subscription } from 'rxjs';
 
@@ -33,6 +33,8 @@ export class ListOtTableComponent implements OnDestroy {
   };
 
   formFilter: FormGroup = new FormGroup(this.formFilterControl);
+
+  actasIcon = faPassport;
 
   constructor() {}
 

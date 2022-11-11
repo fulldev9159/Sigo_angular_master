@@ -1,6 +1,6 @@
 <div class="container-acta">
     <h1>Acta</h1>
-    <div class="card">
+    <div class="card" *ngIf="registrosListActas.length>0">
         <div class="formgrid grid info-base">
 
             <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
@@ -51,5 +51,9 @@
 
             </div>
         </div>
+    </div>
+
+    <div *ngIf="registrosListActas.length===0" style="padding: 10px; font-size:0.7rem">
+        Aún no se ha generado algun acta
     </div>
 </div>

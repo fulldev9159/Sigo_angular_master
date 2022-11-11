@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { getDetalleActa } from '@storeOT/acta/acta.selectors';
 import { NumericDictionaryIteratee } from 'lodash';
 import { environment } from '@environment';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 @Component({
   selector: 'zwc-list-actas-container',
@@ -24,6 +25,7 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private actaFacade: ActaFacade,
+    private authFacade: AuthFacade,
     private route: ActivatedRoute,
     private store: Store
   ) {
@@ -33,34 +35,38 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ listActas }) => {
-        this.registrosListActas = listActas?.data?.items;        
+        if (listActas) this.registrosListActas = listActas.data.items;
       })
     );
     this.titleArray = {
       VALIDACION_ACTA: 'Validacion del Acta',
       INF_TRAB_FIN_ACTA: 'Informe de trabajos finalizados',
     };
+
+    this.authFacade.showMenuDetalleOT(true);
   }
 
   OnDetallActa(acta_id: number): void {
     if (this.actaIdentify != acta_id) this.actaFacade.getDetalleActa(acta_id);
 
-    this.store
-      .select<ResponseDetalleActa>(getDetalleActa)
-      .subscribe(detallActa => {
-        this.registrosDetallActa = {
-          ...detallActa,
-          data: {
-            ...detallActa?.data,
-            items: detallActa?.data?.items?.map(item => ({
-              ...item,
-              observacion: JSON.parse(item.metadata)?.observacion,
-            })),
-          },
-        };
+    this.subscription.add(
+      this.store
+        .select<ResponseDetalleActa>(getDetalleActa)
+        .subscribe(detallActa => {
+          this.registrosDetallActa = {
+            ...detallActa,
+            data: {
+              ...detallActa?.data,
+              items: detallActa?.data?.items?.map(item => ({
+                ...item,
+                observacion: JSON.parse(item.metadata)?.observacion,
+              })),
+            },
+          };
 
-        this.actaIdentify = acta_id;
-      });
+          this.actaIdentify = acta_id;
+        })
+    );
   }
 
   OnDescargarActa(): void {}
