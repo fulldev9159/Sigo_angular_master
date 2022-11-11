@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
@@ -65,6 +66,7 @@ interface TableService {
 // 156 TODO: EL MENSAJE DE SERVICIO YA EXISTENTE PARECE PERO DESAPARECE SI VUELVO A ESCOGER OTRO SERVICIO YA EXISTENTE
 @Component({
   selector: 'zwc-informe-avance',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './informe-avance.component.html',
   styleUrls: ['./informe-avance.component.scss'],
 })

@@ -16,6 +16,7 @@ export class FormularioService {
   }
 
   errorMessageFn(errors: any): string {
+    console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.minlength) {
@@ -28,6 +29,10 @@ export class FormularioService {
       return `Valor no debe ser mayor a ${errors.max.max}`;
     } else if (errors.min) {
       return `No puede ser negativo`;
+    } else if (errors.decimals) {
+      return `No puede exceder los ${errors.decimals.maxdigits.max} dígitos`;
+    } else if (errors.decimals) {
+      return `No puede exceder el máximo de decimales ${errors.decimals.maxdecimals.max}`;
     }
     return 'Error sin mensaje definido';
   }
