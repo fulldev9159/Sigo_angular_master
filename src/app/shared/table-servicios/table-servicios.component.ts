@@ -27,6 +27,7 @@ interface ServiceTableCarrito {
   servicio_id: number;
   servicio_cantidad: number;
   servicio_precio_final_clp: number;
+  puntos_baremos: number;
   unidad_obras: [
     {
       uo_codigo: string;
@@ -75,6 +76,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
   totalServicios = 0;
   totalUOs = 0;
+  totalBaremos = 0;
 
   servicios_eliminar: number[] = [];
   uos_eliminar: number[] = [];
@@ -132,6 +134,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       this.formTable.get('table').valueChanges.subscribe(table => {
         this.totalServicios = 0;
         this.totalUOs = 0;
+        this.totalBaremos = 0;
 
         if (table.length > 0) {
           table.forEach((servicioTable: ServiceTableCarrito) => {
@@ -144,6 +147,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
               servicioTable.servicio_precio_final_clp *
               servicioTable.servicio_cantidad;
 
+            let precio_total_baremos =
+              servicioTable.puntos_baremos * servicioTable.servicio_cantidad;
+
+            this.totalBaremos = this.totalBaremos + precio_total_baremos;
             this.totalServicios = this.totalServicios + precio_total_servicio;
             this.totalUOs = this.totalUOs + precio_total_uo;
           });
@@ -289,6 +296,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
             servicio.servicio_precio_final_clp
           ),
           validar_adicional: new FormControl(false),
+          puntos_baremos: new FormControl(servicio.puntos_baremos),
           unidad_obras: new FormArray(
             servicio.unidad_obras.map(uo => this.makeUOForm(uo))
           ),

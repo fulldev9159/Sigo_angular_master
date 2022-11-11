@@ -122,5 +122,3 @@ UpdateDocker&Restart:
   tags:
     - repo-machine
   allow_failure: false
-  when: manual
-

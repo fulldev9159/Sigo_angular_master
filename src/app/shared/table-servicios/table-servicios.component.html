@@ -189,13 +189,21 @@
       <tr>
         <td></td>
         <td *ngIf="column_acciones"></td>
-        <td *ngIf="contratoMarco==='Bucle'"></td>
-        <td>Total Servicios</td>
-        <td colspan="2" id="total-servicio-monto">{{totalServicios>99999999999999999999999?0:totalServicios| currency :
+        <td></td>
+        <td colspan="2" id="total-servicio-monto">
+          Total Servicios
+          {{totalServicios>99999999999999999999999?0:totalServicios| currency :
           'CLP' :
           '$':'.0-2':'es-CL'}}</td>
-        <td>Total Unidades Obra</td>
-        <td colspan="2" id="total-uo-monto">{{totalUOs>99999999999999999999999?0:totalUOs| currency : 'CLP' :
+        <td *ngIf="contratoMarco==='Bucle'">
+          Total Baremos: {{this.totalBaremos| currency :
+          'CLP' :
+          '$':'.0-2':'es-CL'}}
+        </td>
+        <td></td>
+        <td colspan="2" id="total-uo-monto">
+          Total Unidades Obra
+          {{totalUOs>99999999999999999999999?0:totalUOs| currency : 'CLP' :
           '$':'.0-2':'es-CL'}}</td>
         <td></td>
         <td>Total:</td>
