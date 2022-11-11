@@ -56,8 +56,9 @@
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
               <div class="container-cantidad">
                 <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
-                  <p-inputNumber [formControl]="getControlServiceCantidad(servicio.servicio_id)" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                  <p-inputNumber [formControl]="getControlServiceCantidad(servicio.servicio_id)" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="maxDecimals">
                   </p-inputNumber>
+                  <span style="color: red">{{ getControlServiceCantidad(servicio.servicio_id).errors | json }}</span>
                   <p [pTooltip]="servicio.servicio_unidad_descripcion">
                     {{servicio.servicio_unidad_cod}}
                   </p>
@@ -127,8 +128,9 @@
               <td>
                 <div class="container-cantidad">
                   <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
-                    <p-inputNumber [formControl]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                    <p-inputNumber [formControl]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="maxDecimals">
                     </p-inputNumber>
+                    <span style="color: red">{{ getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).errors | json }}</span>
                     <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">
                       {{uo.uob_unidad_medida_cod }}
                     </p>

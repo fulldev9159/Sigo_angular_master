@@ -21,6 +21,7 @@ import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, of, Subscription } from 'rxjs';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { registerLocaleData } from '@angular/common';
+import * as CustomValidators from '@sharedOT/validators';
 
 interface ServiceTableCarrito {
   servicio_id: number;
@@ -80,6 +81,9 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   trashICon = faTrash;
 
   colSpan = 7;
+
+  maxDigits = 10;
+  maxDecimals = 1;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
@@ -249,7 +253,11 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       if (indexServiceFormulario === -1) {
         let servicio_cantidad_control = new FormControl(
           servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
-          [Validators.required, Validators.min(0.01)]
+          [
+            Validators.required,
+            Validators.min(0.01),
+            CustomValidators.Decimals(this.maxDigits, this.maxDecimals),
+          ]
         );
 
         if (
@@ -312,6 +320,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
+        CustomValidators.Decimals(this.maxDigits, this.maxDecimals),
       ]),
       uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp),
     });
