@@ -22,6 +22,7 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
   actaIdentify: number = 0;
   titleArray: { [key: string]: string };
   API_URL = '';
+  actaSelected: listarActa;
 
   constructor(
     private actaFacade: ActaFacade,
@@ -41,13 +42,15 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
     this.titleArray = {
       VALIDACION_ACTA: 'Validacion del Acta',
       INF_TRAB_FIN_ACTA: 'Informe de trabajos finalizados',
+      AUTORIZACION_PAGO: 'Autorización de pago',
+      PRIMERA_INTEGRACION_PAGO: 'Envío a imputación',
     };
 
     this.authFacade.showMenuDetalleOT(true);
   }
 
-  OnDetallActa(acta_id: number): void {
-    if (this.actaIdentify != acta_id) this.actaFacade.getDetalleActa(acta_id);
+  OnDetallActa(acta: listarActa): void {
+    if (this.actaIdentify != acta.id) this.actaFacade.getDetalleActa(acta.id);
 
     this.subscription.add(
       this.store
@@ -60,13 +63,15 @@ export class ListActasContainerComponent implements OnInit, OnDestroy {
               items: detallActa?.data?.items?.map(item => ({
                 ...item,
                 observacion: JSON.parse(item.metadata)?.observacion,
+                evente: JSON.parse(item.metadata)?.evento,
               })),
             },
           };
 
-          this.actaIdentify = acta_id;
+          this.actaIdentify = acta.id;
         })
     );
+    this.actaSelected = acta;
   }
 
   OnDescargarActa(): void {}

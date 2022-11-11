@@ -9,8 +9,11 @@
                 </p-divider>
 
                 <ul *ngFor="let acta of registrosListActas" class="actas-list">
-                    <li id={{acta.id}} (click)="OnDetallActa(acta.id)">
-                        {{acta.created_at | date:'yyyy-MM-dd hh:mm:ss'}}
+                    <li id={{acta.id}} (click)="OnDetallActa(acta)"
+                        [ngClass]="acta.validacion_estado==='INVALIDADO'?'acta-invalida':acta.validacion_estado==='NONE'?'acta-pendiente':'acta-valida'">
+                        <span>ID: {{acta.id}}</span>
+                        <span>{{acta.validacion_estado==='NONE'?'PENDIENTE VALIDACIÓN':acta.validacion_estado}}</span>
+                        <span>{{acta.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
                     </li>
                 </ul>
             </div>
@@ -18,21 +21,15 @@
                 <p-divider align="center">
                     <span class="p-tag">Detalle Actas</span>
                 </p-divider>
-                <div *ngIf="registrosDetallActa?.pdf_acta?.size>0" class="p-button">
-                    <img src="https://img.icons8.com/ios/2x/export-pdf-2.png" class="download-pdf-icon">
-                    <a [href]="API_URL + registrosDetallActa?.pdf_acta?.url"
-                        [download]="registrosDetallActa?.pdf_acta?.nombre_original">Descargar</a>
-                </div>
-                <div class="content-detail">
+                <a *ngIf="registrosDetallActa?.pdf_acta?.size>0"
+                    [href]="API_URL + registrosDetallActa?.pdf_acta?.url">Descargar pdf </a>
+                <div class="content-detail" *ngIf="registrosDetallActa" style="font-size: 0.7rem;">
                     <div class="content-head">
                         <div class="item-group">
                             <h4>Fechas</h4>
                             <div class="item-row grid-container">
                                 <span>Fechas Creación:</span>
                                 <label>{{registrosDetallActa?.acta?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</label>
-                                <span>Fechas Termino Estimada:</span>
-                                <label>{{registrosDetallActa?.acta?.validacion_fecha | date:'yyyy-MM-dd
-                                    hh:mm:ss'}}</label>
                             </div>
                         </div>
                     </div>
@@ -42,8 +39,23 @@
                             <div class="item-row">
                                 <span class="item-tab">{{it.mensaje}}</span>
                                 <label class="item-metadata">{{it.observacion}}</label>
-                                <label class="item-descript">por: {{registrosDetallActa?.acta?.autorizacion_estado}} en
+                                <label class="item-metadata"
+                                    *ngIf="it.evento==='VALIDACION_ACTA'">{{actaSelected.obs_validacion}}</label>
+                                <br>
+                                <span *ngIf="it.evento==='AUTORIZACION_PAGO'">{{it.estado}}</span>
+                                <label class="item-descript">
                                     {{it?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <div class="item-group">
+                            <h4>Generación del acta</h4>
+                            <div class="item-row">
+                                <span class="item-tab">{{actaSelected.obs_fin_trabajos}}</span>
+                                <br>
+                                <label class="item-descript">
+                                    {{actaSelected?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
                             </div>
                         </div>
                     </div>
