@@ -5,7 +5,7 @@ import {
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacionBUCLE';
 
-describe('Create Cubicacion BUCLE', () => {
+describe.skip('Create Cubicacion BUCLE', () => {
   it('should let enter to create cubicacion', () => {
     cy.viewport(1500, 1700);
     cy.visit('http://localhost:4206/login/auth');
@@ -73,7 +73,7 @@ describe('Create Cubicacion BUCLE', () => {
   });
 });
 
-describe('Create ot bucle', () => {
+describe.skip('Create ot bucle', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
@@ -155,7 +155,7 @@ describe('Create ot bucle', () => {
   });
 });
 
-describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
+describe.skip('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
@@ -210,7 +210,8 @@ describe('OT_ET_AUTORIZACION_PROVEEDOR BUCLE', () => {
     cy.intercept('POST', '/ot/posibles_trabajadores/get').as('HTTPRESPONSE');
     cy.get('#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
       .clear()
-      .type(nombreOT);
+      .type(`${nombreOT}`);
+    cy.wait(1000);
     cy.get('button[id="play-button"]').click();
     cy.wait('@HTTPRESPONSE').then(() => {
       cy._select_dropdown(
@@ -223,7 +224,7 @@ describe('OT_ET_AUTORIZACION_PROVEEDOR BUCLE', () => {
   });
 });
 
-describe.skip('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
+describe('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   beforeEach(() => {
     cy.viewport(1500, 700);
   });
@@ -478,7 +479,7 @@ describe.skip('GUARDAR BORRADOR ADICIONALES INFORME DE AVANCE', () => {
   });
 });
 
-describe.skip('ENVIAR INFORME DE AVANCE SUPERVISOR DE TRABAJOS', () => {
+describe('ENVIAR INFORME DE AVANCE SUPERVISOR DE TRABAJOS', () => {
   beforeEach(() => {
     cy.viewport(1500, 700);
   });

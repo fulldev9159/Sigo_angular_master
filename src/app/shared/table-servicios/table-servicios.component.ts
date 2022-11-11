@@ -83,7 +83,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   colSpan = 7;
 
   maxDigits = 10;
-  maxDecimals = 1;
+  maxDecimals = 2;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
