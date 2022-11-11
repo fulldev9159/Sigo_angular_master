@@ -157,25 +157,53 @@
   </ng-container>
   <ng-template #content>
     <!-- 101 TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
-    <ng-container *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
-      <p-divider align="left">
-        <span class="p-tag">Detales de dirección</span>
-      </p-divider>
-      <table class="info-bucle-direccion">
-        <tr>
-          <td style="background: #efefef;"><strong>Direccion desde</strong></td>
-          <td>{{detalleCubicacion?.direccion_desde}}</td>
-          <td style="background: #efefef;"><strong>Altura</strong> </td>
-          <td>{{detalleCubicacion?.altura_desde}}</td>
-        </tr>
-        <tr>
-          <td style="background: #efefef;"><strong>Direccion Hasta</strong> </td>
-          <td>{{detalleCubicacion?.direccion_hasta}}</td>
-          <td style="background: #efefef;"><strong>Altura</strong> </td>
-          <td>{{detalleCubicacion?.altura_hasta}}</td>
-        </tr>
-      </table>
-    </ng-container>
+    <div class="grid">
+      <div class="col" *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
+        <p-divider align="left">
+          <span class="p-tag">Detales de dirección</span>
+        </p-divider>
+        <table class="info-bucle-direccion">
+          <tr>
+            <td style="background: #efefef;"><strong>Direccion desde</strong></td>
+            <td>{{detalleCubicacion?.direccion_desde}}</td>
+            <td style="background: #efefef;"><strong>Altura</strong> </td>
+            <td>{{detalleCubicacion?.altura_desde}}</td>
+          </tr>
+          <tr>
+            <td style="background: #efefef;"><strong>Direccion Hasta</strong> </td>
+            <td>{{detalleCubicacion?.direccion_hasta}}</td>
+            <td style="background: #efefef;"><strong>Altura</strong> </td>
+            <td>{{detalleCubicacion?.altura_hasta}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <p-divider align="left">
+          <span class="p-tag">Detales de la cubicación </span>
+        </p-divider>
+        <table class="info-bucle-direccion">
+          <tr>
+            <td style="background: #efefef;"><strong>Código</strong></td>
+            <td>{{cubicacionSelected?.codigo_acuerdo}}</td>
+          </tr>
+          <tr>
+            <td style="background: #efefef;"><strong>Agencia</strong> </td>
+            <td>{{cubicacionSelected?.agencia_nombre}}</td>
+          </tr>
+          <tr>
+            <td style="background: #efefef;"><strong>Agencia Región</strong> </td>
+            <td>{{cubicacionSelected?.agencia_region_nombre}}</td>
+          </tr>
+          <tr>
+            <td style="background: #efefef;"><strong>Contrato</strong> </td>
+            <td>{{cubicacionSelected?.contrato_marco_nombre}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+
     <p-divider align="center">
       <span class="p-tag">Cubicación</span>
     </p-divider>
