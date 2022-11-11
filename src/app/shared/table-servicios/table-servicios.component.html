@@ -2,16 +2,18 @@
   <table>
     <thead>
       <tr>
-        <th [attr.colspan]="colSpan" style="background: var(--bg-th-servicios)">Servicios</th>
-        <th [attr.colspan]="colSpan">Unidad Obra</th>
+        <th [attr.colspan]="colSpanServicios" style="background: var(--bg-th-servicios)">Servicios</th>
+        <th [attr.colspan]="colSpanUOs">Unidad Obra</th>
       </tr>
       <tr>
         <th style="background: var(--bg-th-servicios)">Cod</th>
         <th style="background: var(--bg-th-servicios)">Descripción</th>
         <th style="background: var(--bg-th-servicios)">Tipo</th>
         <th style="background: var(--bg-th-servicios)">Cantidad</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='Bucle'">P.B</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio Un.</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='Bucle'">Total Baremos</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total Pesos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
           Acciones
           <ng-container *ngIf="accion_aprobacion_servicio_adic">
@@ -79,11 +81,18 @@
 
               </div>
             </td>
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="contratoMarco==='Bucle'"
+              style="text-align:right;">
+              {{servicio.puntos_baremos}}</td>
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
-              {{ +servicio.servicio_precio_final_clp |
+              {{ +servicio.prov_has_serv_precio |
               currency: 'CLP':'$':'.0-2':'es-CL' }}
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="contratoMarco==='Bucle'"
+              style="text-align:right;">
+              {{+servicio.puntos_baremos
+              *+getControlServiceCantidad(servicio.servicio_id).value | number : '1.2-2'}}</td>
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()" style="text-align:right;">
               {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value
               |
               currency : 'CLP' :
@@ -180,6 +189,7 @@
       <tr>
         <td></td>
         <td *ngIf="column_acciones"></td>
+        <td *ngIf="contratoMarco==='Bucle'"></td>
         <td>Total Servicios</td>
         <td colspan="2" id="total-servicio-monto">{{totalServicios>99999999999999999999999?0:totalServicios| currency :
           'CLP' :
@@ -188,13 +198,13 @@
         <td colspan="2" id="total-uo-monto">{{totalUOs>99999999999999999999999?0:totalUOs| currency : 'CLP' :
           '$':'.0-2':'es-CL'}}</td>
         <td></td>
-
         <td>Total:</td>
         <td colspan="2" id="total-cubicacion-monto">
-          {{totalServicios>99999999999999999999999?0:totalServicios+totalUOs>99999999999999999999999?0:totalUOs|
+          {{totalServicios+totalUOs|
           currency :
           'CLP' : '$':'.0-2':'es-CL'}}</td>
         <td *ngIf="column_acciones"></td>
+        <td *ngIf="contratoMarco==='Bucle'"></td>
         <td></td>
       </tr>
     </tfoot>

@@ -18,6 +18,8 @@ export interface CarritoService {
   tipo_servicio_descripcion: string;
   tipo_servicio_id: number;
   faltante_porcentaje_entero?: number;
+  prov_has_serv_precio?: number;
+  puntos_baremos?: number;
 
   unidad_obras: CarritoUO[];
 }

@@ -61,6 +61,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() accion_detalle_uo: boolean = false;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
+  @Input() contratoMarco = '';
 
   @Output() detallesUOClicked = new EventEmitter<{
     servicio: CarritoService;
@@ -80,7 +81,8 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
   trashICon = faTrash;
 
-  colSpan = 7;
+  colSpanServicios = 7;
+  colSpanUOs = 7;
 
   maxDigits = 10;
   maxDecimals = 2;
@@ -113,8 +115,17 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     }
 
     // COLSPAN
-    if (!this.canSeePrices()) this.colSpan = this.colSpan - 2;
-    if (!this.column_acciones) this.colSpan = this.colSpan - 1;
+    if (!this.canSeePrices()) {
+      this.colSpanServicios = this.colSpanServicios - 2;
+      this.colSpanUOs = this.colSpanUOs - 2;
+    }
+    if (!this.column_acciones) {
+      this.colSpanServicios = this.colSpanServicios - 1;
+      this.colSpanUOs = this.colSpanUOs - 1;
+    }
+    if (this.contratoMarco === 'Bucle') {
+      this.colSpanServicios = this.colSpanServicios + 2;
+    }
 
     // CALCULAR TOTALES
     this.subscription.add(
