@@ -1,10 +1,11 @@
 <p id="mensaje-confirmacion">{{pregunta}}</p>
 
 <div class="container-button-confirmar">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="cancelarInt()">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="cancelarInt()"
+        style="width: 29%;">
         {{textCancel}}
     </button>
-    <button pButton type="button" id="button-confirmar" (click)="confirmarInt()" style="margin-left: 10px;">
+    <button pButton type="button" id="button-confirmar" (click)="confirmarInt()" style="margin-left: 10px;width: 29%;">
         {{textConfirmar}}
     </button>
 </div>

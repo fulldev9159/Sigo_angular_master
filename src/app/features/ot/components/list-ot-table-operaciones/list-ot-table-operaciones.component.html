@@ -148,12 +148,12 @@
       Rechazar Orden
     </button>
     <ng-container *ngIf="formValid; else formInvalid">
-      <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">
+      <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()" style="width: 29%;">
         Aceptar Orden
       </button>
     </ng-container>
     <ng-template #formInvalid>
-      <button pButton type="button" id="button-confirmar" disabled="true">
+      <button pButton type="button" id="button-confirmar" disabled="true" style="width: 29%;">
         Aceptar Orden
       </button>
     </ng-template>
@@ -164,11 +164,11 @@
   <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoProveeodrForm></zwc-view-rechazo>
   <ng-template pTemplate="footer">
     <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-      (click)="closeModalRechazoProveedor()">
+      (click)="closeModalRechazoProveedor()" style="width: 29%;">
       Cancelar
     </button>
     <button pButton type="button" id="button-confirmar" (click)="rechazarOrdenProveedor()"
-      [disabled]="!rechazoProveeodrForm.formRechazo.valid">
+      [disabled]="!rechazoProveeodrForm.formRechazo.valid" style="width: 29%;">
       Rechazar OT
     </button>
   </ng-template>
