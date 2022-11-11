@@ -80,6 +80,6 @@ export const reducerAuth = createReducer(
   })),
   on(authActions.getNotificacionesSuccess, (state, { response }) => ({
     ...state,
-    notificaciones: response.data.api_version,
+    notificaciones: response.data.items,
   }))
 );

@@ -25,6 +25,42 @@
     </div>
 
     <div class="menu">
+        <li class="notification" (click)="onToggleNotificationes($event);" #notificationes>
+
+            <span class="span-notification">
+                <fa-icon [icon]="faBell"></fa-icon>
+                <span *ngIf="Notificationes?.length>0" class="span-new-notice"></span>
+            </span>
+            <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright" #dropdownmenu>
+                <div class="dropdown-toolbar">
+                    <div class="row">
+                        <div class="col-sm-6" style="float:left;">
+                            <div class="h3 dropdown-toolbar-title"><span>Notificaciones</span>
+                                <!---->
+                            </div>
+                        </div>
+                        <!--div class="col-sm-6 text-right">
+                            <a href="https://www.workana.com/users/notifications">
+                                <span>Ver todo</span>
+                            </a>
+                        </div-->
+                    </div>
+                </div>
+
+                <ul *ngIf="Notificationes?.length==0" class="dropdown-menu notifications">
+                    <li class="empty">
+                        <span>No Notificaciones</span>
+                    </li>
+                </ul>
+                <ul *ngFor="let item of Notificationes" class="dropdown-menu notifications"
+                    (click)="onMessageRead($event)">
+                    <li data-id="{{item?.id}}" class="empty">
+                        <span class="message">{{item?.mensaje}}</span>
+                        <span class="description">{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+                    </li>
+                </ul>
+            </div>
+        </li>
         <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">
             Cambiar perfil
         </button>
