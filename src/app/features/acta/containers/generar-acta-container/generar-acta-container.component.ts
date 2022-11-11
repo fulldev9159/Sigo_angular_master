@@ -104,6 +104,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
                 tipo_servicio_id: -1,
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
+                prov_has_serv_precio: service.prov_has_serv_precio,
                 unidad_obras: [],
               };
 

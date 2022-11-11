@@ -102,6 +102,7 @@ export class ValidarActaOperacionesContainerComponent
                 servicio_unidad_cod: service.model_unidad_id.codigo,
                 servicio_unidad_descripcion:
                   service.model_unidad_id.descripcion,
+                prov_has_serv_precio: service.prov_has_serv_precio,
                 unidad_obras: [
                   {
                     precargado: true,
