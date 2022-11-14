@@ -199,6 +199,8 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
               servicio_nombre:
                 service.model_informe_has_servicio_id.model_servicio_id
                   .descripcion,
+              prov_has_serv_precio:
+                service.model_informe_has_servicio_id.prov_has_serv_precio,
               tipo_servicio_descripcion: 'TODO',
               tipo_servicio_id: -1,
               servicio_unidad_cod: 'TODO',
