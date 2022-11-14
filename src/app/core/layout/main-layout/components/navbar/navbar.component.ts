@@ -21,7 +21,7 @@ import {
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { Store } from '@ngrx/store';
 import { StateAuth } from '@storeOT/auth/auth.reducers';
-import { getNotificaciones } from '@storeOT/auth/auth.selectors'
+import { getNotificaciones } from '@storeOT/auth/auth.selectors';
 
 @Component({
   selector: 'zwc-navbar',
@@ -33,13 +33,7 @@ export class NavbarComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();
   @Output() changePerfil = new EventEmitter<void>();
-  @Output() notificationesToggle = new EventEmitter<void>();
-
-  name = "Angular " + VERSION.major;
-  @ViewChild("notificationes") liNotification: ElementRef<HTMLElement>;
-  @ViewChild("dropdownmenu") dropdownmenu: ElementRef<HTMLElement>;
-  
-
+      
   faBars = faBars;
   faOT = faPersonDigging;
   faCub = faDollarSign;
@@ -47,21 +41,19 @@ export class NavbarComponent implements OnInit {
 
   NotificationesOpen: boolean = false;
   Notificationes: any[] = [];
-
+  
   constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     this.authFacade.getNotificaciones();
-    
     this.authFacade.getNotificaciones$().subscribe(Notificationes => {      
-      this.Notificationes = Notificationes;
-    });
-    
+      this.Notificationes = Notificationes;     
+      console.log(this.Notificationes);
+    });    
   }
 
   onToggleNotificationes(e: any): void {
-    this.NotificationesOpen = !this.NotificationesOpen;    
+    this.NotificationesOpen = !this.NotificationesOpen;
   }
 
   onMessageRead(e: any): void{
@@ -77,9 +69,9 @@ export class NavbarComponent implements OnInit {
       id[0] = Number(cur.id);
     }
 
-    if (id.length>0)  {
-      this.authFacade.marcarNotificaciones(id);
-      this.authFacade.getNotificaciones();      
+    if (id.length>0)  {      
+      this.authFacade.marcarNotificaciones(id);                   
+      this.ngOnInit();
     }
   }
 
