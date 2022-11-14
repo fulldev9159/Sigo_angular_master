@@ -30,7 +30,7 @@
                 </button>
             </div>
             <div *ngIf="accionExist('OT_APROBACION_OPERACIONES')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar trabajo" icon="ok"
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar trabajos" icon="ok"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionOperaciones=true">
                 </zwc-pbutton-sending>
             </div>
@@ -47,11 +47,12 @@
 
 <!-- MODALS -->
 
-<p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">
+<p-dialog header="Aceptación de trabajos" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false"
+    [modal]="true">
     Order de trabajo ID: {{ot_id}}
 
     <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="displayModalAprobacionOperaciones=false"
-        (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
+        (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar trabajos">
     </zwc-view-confirmacion>
 </p-dialog>
 
