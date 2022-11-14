@@ -122,12 +122,12 @@ export class ValidarActaOperacionesContainerComponent
                 ],
               };
 
-              // PARA CARGAR INFORME DE AVANCE
-              if (new_service.adicional === 'ORIGINAL')
-                this.acta.push(new_service);
+              // // PARA CARGAR INFORME DE AVANCE
+              // if (new_service.adicional === 'ORIGINAL')
+              this.acta.push(new_service);
               // PARA PRE CARGAR SERVICIOS ADICIONALES
-              if (new_service.adicional !== 'ORIGINAL')
-                this.serviciosFacade.addDirectServiceCarrito(new_service);
+              // if (new_service.adicional !== 'ORIGINAL')
+              //   this.serviciosFacade.addDirectServiceCarrito(new_service);
             });
           });
           let valueInitial: CarritoService[] = [];
