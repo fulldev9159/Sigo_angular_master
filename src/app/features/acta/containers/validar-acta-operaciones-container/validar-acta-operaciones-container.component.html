@@ -1,8 +1,8 @@
 <div class="container-acta">
-    <h1>Validación del Acta</h1>
+    <h1>Validación de trabajos</h1>
 
     <p-divider align="center">
-        <span class="p-tag">Servicios del acta</span>
+        <span class="p-tag">Servicios</span>
     </p-divider>
     <div class="card">
         <div class=" grid">
@@ -30,12 +30,12 @@
                 </button>
             </div>
             <div *ngIf="accionExist('OT_APROBACION_OPERACIONES')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar Acta" icon="ok"
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Aprobar trabajo" icon="ok"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionOperaciones=true">
                 </zwc-pbutton-sending>
             </div>
             <div *ngIf="accionExist('OT_APROBACION_OPERACIONES')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar Acta" icon="nok"
+                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar trabajo" icon="nok"
                     Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
                     (click)="displayModalRechazarActa()">
                 </zwc-pbutton-sending>
@@ -55,7 +55,7 @@
     </zwc-view-confirmacion>
 </p-dialog>
 
-<p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
+<p-dialog header="Rechazo de trabajos" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
     <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
@@ -64,7 +64,7 @@
         </button>
         <button pButton type="button" id="button-confirmar" (click)="rechazarActa()"
             [disabled]="!rechazoActaForm.formRechazo.valid">
-            Rechazar acta
+            Rechazar trabajos
         </button>
     </ng-template>
 </p-dialog>

@@ -63,7 +63,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'validar-acta-operaciones/:id',
+        path: 'validar-trabajos-operaciones/:id',
         component: ValidarActaOperacionesContainerComponent,
         resolve: {
           accionesOT: AccionesOTResolver,

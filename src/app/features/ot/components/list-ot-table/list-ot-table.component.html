@@ -40,7 +40,7 @@
             </tr> -->
       <!-- HEADERS -->
       <tr>
-        <th>Actas</th>
+        <th style="width:10px">Actas</th>
         <th style="width:80px" pSortableColumn="id" pFrozenColumn>ID <p-sortIcon field="id">
           </p-sortIcon>
         </th>
@@ -68,9 +68,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-item>
       <tr>
-        <td>
+        <td style="width: 10px;">
           <button pTooltip="Actas" [routerLink]="['/acta/listar-actas',item.id]">
-            <fa-icon [icon]="actasIcon "></fa-icon>
+            <fa-icon [icon]="actasIcon " style="font-size: 21px;"></fa-icon>
           </button>
         </td>
         <td style="width:80px" pFrozenColumn>{{item.id}}</td>
