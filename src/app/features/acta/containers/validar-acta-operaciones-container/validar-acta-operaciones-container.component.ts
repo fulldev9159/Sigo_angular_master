@@ -84,6 +84,7 @@ export class ValidarActaOperacionesContainerComponent
           ////   this.tableServiciosAdicionales.servicios_eliminar = [];
           //// }
           // CARGAR CARRITO
+          this.ot_id = detalleInforme.ot_id;
           detalleInforme?.many_informe_has_servicio?.forEach(service => {
             service.many_informe_has_uob.forEach(uo => {
               let new_service: CarritoService = {
