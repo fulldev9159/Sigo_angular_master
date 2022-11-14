@@ -20,8 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { Store } from '@ngrx/store';
-import { StateAuth } from '@storeOT/auth/auth.reducers';
-import { getNotificaciones } from '@storeOT/auth/auth.selectors';
+import { AuthEffects } from '@storeOT/auth/auth.effects';
 
 @Component({
   selector: 'zwc-navbar',
@@ -42,21 +41,25 @@ export class NavbarComponent implements OnInit {
   NotificationesOpen: boolean = false;
   Notificationes: any[] = [];
   
-  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store) {}
+  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects) {
+    
+  }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+
     this.authFacade.getNotificaciones();
     this.authFacade.getNotificaciones$().subscribe(Notificationes => {      
       this.Notificationes = Notificationes;     
       console.log(this.Notificationes);
-    });    
+    });
+
   }
 
   onToggleNotificationes(e: any): void {
     this.NotificationesOpen = !this.NotificationesOpen;
   }
 
-  onMessageRead(e: any): void{
+  async onMessageRead(e: any): Promise<void>{
     
     var cur: HTMLElement;    
     var id: number[] = [];
@@ -68,10 +71,11 @@ export class NavbarComponent implements OnInit {
     if (cur.tagName == "LI")  {
       id[0] = Number(cur.id);
     }
-
-    if (id.length>0)  {      
-      this.authFacade.marcarNotificaciones(id);                   
+    try {
+      await this.authFacade.marcarNotificaciones(id);
       this.ngOnInit();
+    }catch{
+      console.log('error')
     }
   }
 

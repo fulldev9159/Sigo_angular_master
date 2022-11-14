@@ -9,7 +9,9 @@ import * as authActions from './auth.actions';
   providedIn: 'root',
 })
 export class AuthFacade {
-  constructor(private store: Store<SessionData>) {}
+  constructor(private store: Store<SessionData>) {
+    
+  }
 
   // SESSION
   public getSessionData$(): Observable<SessionData> {
@@ -93,4 +95,5 @@ export class AuthFacade {
   public marcarNotificaciones(id: number[]): void {
     this.store.dispatch(authActions.marcarNotificaciones({ id }));  
   }
+
 }
