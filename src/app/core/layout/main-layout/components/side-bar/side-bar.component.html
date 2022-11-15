@@ -1,34 +1,62 @@
 <div class="layout-sidebar">
-    <div class="img-container">
-        <img src="./assets/images/logo-movistar.png" alt="Logo empresa">
+  <div class="img-container">
+    <img src="./assets/images/logo-movistar.png" alt="Logo empresa">
+  </div>
+  <div class="sesion-container">
+    <div class="icon-session">
+      <fa-icon [icon]="faUser"></fa-icon>
     </div>
-    <div class="sesion-container">
-        <div class="icon-session">
-            <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>
-        <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>
-        <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
-    </div>
-    <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
-    <ng-container *ngIf="showMenuDetalleOT$|async">
-        <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
-    </ng-container>
+    <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>
+    <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>
+    <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
+  </div>
 
-    <div class="versiones-container">
-        <table>
-            <tr>
-                <td>Web</td>
-                <td>1.0.27</td>
-            </tr>
-            <tr>
-                <td>DB</td>
-                <td>{{(databaseVersion$|async)?.version}}</td>
-            </tr>
-            <tr>
-                <td>API</td>
-                <td>{{apiVersion$|async}}</td>
-            </tr>
-        </table>
-    </div>
+  <div style="padding: 1em 1em 0 1em; text-align: center;">
+    <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm" id="usuario-addFirma-button"></button>
+  </div>
+
+  <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
+  <ng-container *ngIf="showMenuDetalleOT$|async">
+    <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
+  </ng-container>
+
+  <div class="versiones-container">
+    <table>
+      <tr>
+        <td>Web</td>
+        <td>1.0.27</td>
+      </tr>
+      <tr>
+        <td>DB</td>
+        <td>{{(databaseVersion$|async)?.version}}</td>
+      </tr>
+      <tr>
+        <td>API</td>
+        <td>{{apiVersion$|async}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
+
+<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true" [draggable]="false" [resizable]="false">
+  <ng-template pTemplate="header">Adjuntar Firma</ng-template>
+  <form novalidate autocomplete="off" [formGroup]="form">
+    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
+    </p-fileUpload>
+
+    <label style="color: #464646;font-weight: 400;">
+      <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+      <!-- <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span> -->
+      <span style="word-spacing: 5px">.jpeg,.pjpeg,.png</span>
+    </label>
+  </form>
+
+  <p-footer>
+    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
+    border: #6181b3;
+    margin-left: 10px;
+    color: #272b41;"></button>
+    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
+    border: gray;"></button>
+  </p-footer>
+</p-dialog>

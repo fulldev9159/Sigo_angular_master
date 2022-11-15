@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { RouterModule } from '@angular/router';
 import { StoreSIGOModule } from '@storeOT/store.module';
@@ -21,6 +22,8 @@ import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-det
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     StoreSIGOModule,
     HttpClientModule,
