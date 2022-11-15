@@ -1,0 +1,13 @@
+.two-factor-authentication-container {
+  display: flex;
+  flex-direction: column;
+  height: 22rem;
+  justify-content: space-around;
+
+  .two-factor-authentication-titulo {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 23px;
+    align-self: center;
+  }
+}

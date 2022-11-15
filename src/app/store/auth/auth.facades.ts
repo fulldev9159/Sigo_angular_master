@@ -27,6 +27,11 @@ export class AuthFacade {
     return this.store.select(authSelectors.isLoggin);
   }
 
+  // TWO FACTOR AUTHENTICATION
+  public Login2FA(code: string): void {
+    this.store.dispatch(authActions.login2FA({ code }));
+  }
+
   // LOGOUT
   public Logout(): void {
     this.store.dispatch(authActions.ClearSession());

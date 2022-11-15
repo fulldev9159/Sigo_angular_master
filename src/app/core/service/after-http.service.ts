@@ -61,6 +61,10 @@ export class AfterHttpService {
   successHandler(action: ActionSuccess): void {
     // LOGIN
     if (action.type === authActions.loginSuccess.type) {
+      this.router.navigate(['/login/two-factor-authentication']);
+    }
+    // LOGIN
+    if (action.type === authActions.login2FASuccess.type) {
       this.router.navigate(['/login/perfil-select']);
     }
     // LOGOUT

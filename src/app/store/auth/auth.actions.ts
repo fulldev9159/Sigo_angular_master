@@ -17,6 +17,19 @@ export const loginError = createAction(
   props<{ error: any }>()
 );
 
+// TWO FACTOR AUTHENTICATION
+export const login2FA = createAction(
+  '[AUTH] POST Login 2FA',
+  props<{ code: string }>()
+);
+
+export const login2FASuccess = createAction('[AUTH] POST Login 2FA Success');
+
+export const login2FAError = createAction(
+  '[AUTH] POST Login 2FA Error',
+  props<{ error: any }>()
+);
+
 // LOGOUT
 export const ClearSession = createAction('[AUTH] ClearSession');
 export const Logout = createAction('[AUTH] Logout');

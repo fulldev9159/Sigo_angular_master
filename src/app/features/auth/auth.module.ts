@@ -11,9 +11,15 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { SharedModule } from '@sharedOT/shared.module';
 import { environment } from '@environment';
 import { PerfilSelectComponent } from './components/perfil-select/perfil-select.component';
+import { TwoFactorAuthenticationComponent } from './components/two-factor-authentication/two-factor-authentication.component';
 
 @NgModule({
-  declarations: [AuthComponent, LoginFormComponent, PerfilSelectComponent],
+  declarations: [
+    AuthComponent,
+    LoginFormComponent,
+    PerfilSelectComponent,
+    TwoFactorAuthenticationComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,

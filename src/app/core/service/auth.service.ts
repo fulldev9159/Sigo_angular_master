@@ -26,6 +26,11 @@ export class AuthService {
     }
   }
 
+  is2FALoggedIn(): boolean {
+    const json = JSON.parse(localStorage.getItem('auth'));
+    return json?.twoFA ?? false;
+  }
+
   isProfiled(): boolean {
     const sessionData = JSON.parse(localStorage.getItem('auth')).sessionData;
     if (sessionData) {

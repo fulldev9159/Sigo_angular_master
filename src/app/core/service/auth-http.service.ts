@@ -26,6 +26,15 @@ export class AuthHttpService {
     });
   }
 
+  logIn2FA(two_fa_code: string): Observable<Response<any>> {
+    return this.http.post<Response<Login>>(
+      `${this.API_URL}/login/two_fa_validation`,
+      {
+        two_fa_code,
+      }
+    );
+  }
+
   refeshLogin(proxy_id: number): Observable<Response<{ token: string }>> {
     return this.http.post<Response<{ token: string }>>(
       `${this.API_URL}/login/refresh`,
