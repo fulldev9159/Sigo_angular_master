@@ -32,6 +32,19 @@ export class AuthEffects {
     )
   );
 
+  // TWO FACTOR AUTHENTICATION
+  Login2FA$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.login2FA),
+      concatMap(({ code }) =>
+        this.loginService.logIn2FA(code).pipe(
+          map(response => authActions.login2FASuccess()),
+          catchError(error => of(authActions.login2FAError({ error })))
+        )
+      )
+    )
+  );
+
   // REFRESH LOGIIN
   refreshLogin$ = createEffect(() =>
     this.actions$.pipe(
@@ -125,6 +138,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(
           authActions.loginSuccess,
+          authActions.login2FASuccess,
           authActions.Logout,
           authActions.refreshLoginSuccess,
           authActions.getPermisosPerfilUsuario4LoginSuccess
@@ -139,6 +153,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(
           authActions.loginError,
+          authActions.login2FAError,
           authActions.refreshLoginError,
           authActions.getPermisosPerfilUsuario4LoginError,
           authActions.getDatabaseVersionError,

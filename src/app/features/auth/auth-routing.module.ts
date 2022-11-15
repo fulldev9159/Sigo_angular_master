@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfiledGuard } from '@coreOT';
+import { ProfiledGuard, IsNot2FAGuard } from '@coreOT';
 import { AuthTokenGuard } from 'src/app/core/guard/auth.guard';
 import { AuthComponent } from './auth.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PerfilesUsuarioResolver } from './components/login-form/resolvers/perfiles-usuario.resolver';
 import { PerfilSelectComponent } from './components/perfil-select/perfil-select.component';
+import { TwoFactorAuthenticationComponent } from './components/two-factor-authentication/two-factor-authentication.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
         path: 'auth',
         component: LoginFormComponent,
         canActivate: [AuthTokenGuard],
+      },
+      {
+        path: 'two-factor-authentication',
+        component: TwoFactorAuthenticationComponent,
+        canActivate: [IsNot2FAGuard],
       },
       {
         path: 'perfil-select',

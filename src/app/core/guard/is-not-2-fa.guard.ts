@@ -14,54 +14,42 @@ import { AuthService } from '../service/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthTokenGuard implements CanActivate, CanLoad {
+export class IsNot2FAGuard implements CanActivate, CanLoad {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean> | boolean | UrlTree {
-    const isLoggin = this.authService.isLoggin();
-    const isAuth = this.authService.isAuth();
     const is2FALoggedIn = this.authService.is2FALoggedIn();
+    const isAuth = this.authService.isAuth();
 
-    if (isLoggin) {
+    if (is2FALoggedIn && isAuth) {
       this.router.navigate(['/home']);
       return of(false);
     } else {
-      if (isAuth) {
-        if (is2FALoggedIn) {
-          this.router.navigate(['/login/perfil-select']);
-          return of(false);
-        } else {
-          this.router.navigate(['/login/two-factor-authentication']);
-          return of(false);
-        }
-      } else {
+      if (!is2FALoggedIn && isAuth) {
         return of(true);
+      } else {
+        this.router.navigate(['/login/auth']);
+        return of(false);
       }
     }
   }
 
   canLoad(route: Route): Observable<boolean> {
-    const isLoggin = this.authService.isLoggin();
-    const isAuth = this.authService.isAuth();
     const is2FALoggedIn = this.authService.is2FALoggedIn();
+    const isAuth = this.authService.isAuth();
 
-    if (isLoggin) {
+    if (is2FALoggedIn && isAuth) {
       this.router.navigate(['/home']);
       return of(false);
     } else {
-      if (isAuth) {
-        if (is2FALoggedIn) {
-          this.router.navigate(['/login/perfil-select']);
-          return of(false);
-        } else {
-          this.router.navigate(['/login/two-factor-authentication']);
-          return of(false);
-        }
-      } else {
+      if (!is2FALoggedIn && isAuth) {
         return of(true);
+      } else {
+        this.router.navigate(['/login/auth']);
+        return of(false);
       }
     }
   }

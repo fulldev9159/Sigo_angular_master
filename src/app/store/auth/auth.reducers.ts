@@ -8,6 +8,7 @@ export const Featurekey = 'auth';
 export interface StateAuth {
   sessionData: SessionData;
   isLoggin: boolean;
+  twoFA: boolean;
   showMenuDetalleOT: boolean;
   databaseVersion: DatabaseVersion;
   apiVersion: string;
@@ -17,6 +18,7 @@ export interface StateAuth {
 export const initialState: StateAuth = {
   sessionData: null,
   isLoggin: false,
+  twoFA: false,
   showMenuDetalleOT: false,
   databaseVersion: null,
   apiVersion: null,
@@ -28,6 +30,10 @@ export const reducerAuth = createReducer(
   on(authActions.loginSuccess, (state, { response }) => ({
     ...state,
     sessionData: response.data,
+  })),
+  on(authActions.login2FASuccess, state => ({
+    ...state,
+    twoFA: true,
   })),
   on(authActions.refreshLogin, (state, { proxy_id, nombre_perfil, rol }) => ({
     ...state,
