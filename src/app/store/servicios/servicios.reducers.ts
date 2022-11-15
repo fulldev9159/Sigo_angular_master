@@ -71,6 +71,7 @@ export const reducerServicios = createReducer(
             responseService.data.items[0].servicio_unidad_codigo,
           servicio_unidad_descripcion:
             responseService.data.items[0].servicio_unidad_descripcion,
+          prov_has_serv_precio: responseService.data.items[0].precio_proveedor,
           unidad_obras: [
             {
               uo_codigo: responseUnidadObra.data.uo_codigo,
