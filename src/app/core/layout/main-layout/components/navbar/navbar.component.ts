@@ -1,6 +1,6 @@
 import {
   Component,
-  VERSION,
+  VERSION,  
   ViewChild,
   ElementRef,
   EventEmitter,
@@ -9,6 +9,8 @@ import {
   HostListener,
   ViewEncapsulation,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Store } from '@ngrx/store';
 import {
   faBars,
   faBasketShopping,
@@ -19,9 +21,7 @@ import {
   faBell,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
-import { Store } from '@ngrx/store';
-import { StateAuth } from '@storeOT/auth/auth.reducers';
-import { getNotificaciones } from '@storeOT/auth/auth.selectors'
+import { AuthEffects } from '@storeOT/auth/auth.effects';
 
 @Component({
   selector: 'zwc-navbar',
@@ -29,17 +29,25 @@ import { getNotificaciones } from '@storeOT/auth/auth.selectors'
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class NavbarComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();
   @Output() changePerfil = new EventEmitter<void>();
-  @Output() notificationesToggle = new EventEmitter<void>();
 
-  name = "Angular " + VERSION.major;
-  @ViewChild("notificationes") liNotification: ElementRef<HTMLElement>;
-  @ViewChild("dropdownmenu") dropdownmenu: ElementRef<HTMLElement>;
-  
+  @ViewChild('dropdownmenu') dropdownMenu: ElementRef<HTMLDivElement>;
 
+  @HostListener ('document:click', ['$event'])  
+  clickout(event:any)  {    
+    
+    if (this.NotificationesOpen)  {
+      if (!this.dropdownMenu?.nativeElement.contains(event.target))  {      
+        this.NotificationesOpen = false;
+      }      
+    }    
+    
+  } 
+      
   faBars = faBars;
   faOT = faPersonDigging;
   faCub = faDollarSign;
@@ -47,26 +55,26 @@ export class NavbarComponent implements OnInit {
 
   NotificationesOpen: boolean = false;
   Notificationes: any[] = [];
-
-  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store) {}
+  
+  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects, private eRef: ElementRef) {
+    
+  }
 
   ngOnInit(): void {
-    
+
     this.authFacade.getNotificaciones();
-    
     this.authFacade.getNotificaciones$().subscribe(Notificationes => {      
       this.Notificationes = Notificationes;
     });
-    
   }
 
-  onToggleNotificationes(e: any): void {
-    this.NotificationesOpen = !this.NotificationesOpen;    
+  onToggleNotificationes(e: any): void {    
+    this.NotificationesOpen = !this.NotificationesOpen;
   }
 
-  onMessageRead(e: any): void{
+  async onMessageRead(e: any): Promise<void>{
     
-    var cur: HTMLElement;    
+    var cur: HTMLElement;
     var id: number[] = [];
     cur = e.target;    
     if (cur.tagName != "LI")  {
@@ -77,10 +85,12 @@ export class NavbarComponent implements OnInit {
       id[0] = Number(cur.id);
     }
 
-    if (id.length>0)  {
-      this.authFacade.marcarNotificaciones(id);
-      this.authFacade.getNotificaciones();      
+    try {
+      await this.authFacade.marcarNotificaciones(id);
+    }catch{
+      console.log('error')
     }
+
   }
 
   toggleInt(): void {

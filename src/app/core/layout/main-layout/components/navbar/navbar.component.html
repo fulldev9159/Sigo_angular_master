@@ -25,13 +25,17 @@
     </div>
 
     <div class="menu">
-        <li class="notification" (click)="onToggleNotificationes($event);" #notificationes>
+        <div #dropdownmenu>
 
-            <span class="span-notification">
-                <fa-icon [icon]="faBell"></fa-icon>
-                <span *ngIf="Notificationes?.length>0" class="span-new-notice"></span>
-            </span>
-            <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright" #dropdownmenu>
+            <li class="notification" (click)="onToggleNotificationes($event);">
+
+                <span class="span-notification">
+                    <fa-icon [icon]="faBell"></fa-icon>
+                    <span *ngIf="Notificationes?.length>0" class="span-new-notice"></span>
+                </span>
+            </li>
+
+            <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright">
                 <div class="dropdown-toolbar">
                     <div class="row">
                         <div class="col-sm-6" style="float:left;">
@@ -39,11 +43,6 @@
                                 <!---->
                             </div>
                         </div>
-                        <!--div class="col-sm-6 text-right">
-                            <a href="https://www.workana.com/users/notifications">
-                                <span>Ver todo</span>
-                            </a>
-                        </div-->
                     </div>
                 </div>
 
@@ -60,7 +59,8 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </div>
+
         <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">
             Cambiar perfil
         </button>
