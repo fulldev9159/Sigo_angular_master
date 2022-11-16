@@ -51,6 +51,8 @@ const routes: Routes = [
           accionesOT: AccionesOTResolver,
           actaTiposPagos: ActaTiposPagosResolver,
           observacionesTrabajo: ObservacionesTrabajosResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
+          lastActa: LastActaResolver,
         },
       },
       {

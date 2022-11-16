@@ -60,7 +60,7 @@
           <div class="field col-12 ">
             <h2 style="text-align: center;color: #015682;">Resumen del acta a pagar</h2>
             <br>
-            <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL' ||form.get('tipo_pago').value==='PORCENTAJE' ">
+            <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL'">
               <zwc-table-servicios #tableServicesTotal mode_source="static" [data_source]="acta"
                 [cantidad_editable]="false" [column_acciones]="false">
               </zwc-table-servicios>
@@ -72,14 +72,48 @@
             </ng-container>
           </div>
 
-          <div class="field col-12">
-            <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
-              <label>Porcentaje a pagar</label>
-              <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"></p-inputNumber>
-              <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
-            </ng-container>
+          <div class="field col-12" *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
+            <div class="grid">
+              <div class="col-2"></div>
+              <div class="col-8" style="display: flex;
+              align-content: center;
+              justify-content: center;">
+                <table class="table-info">
+                  <tr>
+                    <td>Total informe avance</td>
+                    <td>{{total_informe_avance|currency : 'CLP' :'$':'.0-2':'es-CL'}}</td>
+                  </tr>
+                  <tr>
+                    <td>% Pagado</td>
+                    <td>{{por_acta_pagado-100}}%</td>
+                  </tr>
+                  <tr>
+                    <td>% a pagar</td>
+                    <td>
+                      <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100">
+                      </p-inputNumber>
+                      <br>
+                      <span>Ya se ha pagado el {{por_acta_pagado-100}}% por lo que tu límite a escoger es
+                        {{por_acta_pagado}}%</span>
+                      <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total a pagar CLP</td>
+                    <td>{{total_informe_avance* (+form.get('porcentaje').value/ 100)|currency : 'CLP'
+                      :'$':'.0-2':'es-CL'}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-2"></div>
+            </div>
+          </div>
+
+          <div class="col-12"
+            *ngIf="form.get('tipo_pago').value==='POR_SERVICIO'||form.get('tipo_pago').value==='TOTAL'">
             <div style="text-align: center;">
-              <span style="color: #015682;font-weight: 700;">Total a pagar:</span> {{total_a_pagar|currency : 'CLP' :
+              <span style="color: #015682;font-weight: 700;">Total a pagar:</span> {{total_a_pagar|currency : 'CLP'
+              :
               '$':'.0-2':'es-CL'}}
 
               <div class="message" style="margin-top:10px"

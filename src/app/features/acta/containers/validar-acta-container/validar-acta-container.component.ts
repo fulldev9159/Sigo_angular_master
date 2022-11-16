@@ -92,6 +92,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   ot_id: number;
 
   totalServicios_servicio = 0;
+  por_acta_pagado = 0;
   totalUO_servicio = 0;
 
   form: FormGroup = new FormGroup({
@@ -121,6 +122,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       )
     );
 
+  total_informe_avance = 0;
   total_a_pagar = 0;
 
   comentarioInforme$: Observable<string> = this.actaFacade
@@ -142,8 +144,17 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(
-        ({ servicios4acta, uos4acta, accionesOT, actaTiposPagos }) => {
-          this.logger.debug(accionesOT);
+        ({
+          servicios4acta,
+          uos4acta,
+          accionesOT,
+          actaTiposPagos,
+          detalleInformeAvance,
+          lastActa,
+        }) => {
+          if (detalleInformeAvance)
+            this.total_informe_avance =
+              detalleInformeAvance.data.valor_total_clp;
           if (accionesOT) this.accionesOT = accionesOT;
           if (actaTiposPagos)
             this.actaTipoPago = (
@@ -292,6 +303,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           }
 
           this.acta = [...this.acta_originales, ...this.acta_adicionales];
+          this.por_acta_pagado = this.acta[0].faltante_porcentaje_entero;
         }
       )
     );
@@ -339,14 +351,14 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     );
 
     // CALCULAR PORCENTAJE
-    this.subscription.add(
-      this.form.get('porcentaje').valueChanges.subscribe(porcentaje => {
-        this.detector.detectChanges();
-        if (porcentaje) {
-          this.total_a_pagar = +this.total_a_pagar * (+porcentaje / 100);
-        }
-      })
-    );
+    // this.subscription.add(
+    //   this.form.get('porcentaje').valueChanges.subscribe(porcentaje => {
+    //     this.detector.detectChanges();
+    //     if (porcentaje) {
+    //       this.total_a_pagar = +this.total_a_pagar * (+porcentaje / 100);
+    //     }
+    //   })
+    // );
   }
 
   accionExist(accion: string): boolean {
