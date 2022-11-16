@@ -12,7 +12,8 @@
   </div>
 
   <div style="padding: 1em 1em 0 1em; text-align: center;">
-    <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm" id="usuario-addFirma-button"></button>
+    <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm"
+      id="usuario-addFirma-button"></button>
   </div>
 
   <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
@@ -24,7 +25,7 @@
     <table>
       <tr>
         <td>Web</td>
-        <td>1.0.27</td>
+        <td>1.0.28</td>
       </tr>
       <tr>
         <td>DB</td>
@@ -38,10 +39,13 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true"
+  [draggable]="false" [resizable]="false">
   <ng-template pTemplate="header">Adjuntar Firma</ng-template>
   <form novalidate autocomplete="off" [formGroup]="form">
-    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
+    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true"
+      (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true"
+      accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
     </p-fileUpload>
 
     <label style="color: #464646;font-weight: 400;">
@@ -52,11 +56,13 @@
   </form>
 
   <p-footer>
-    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
+    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus"
+      class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
     border: #6181b3;
     margin-left: 10px;
     color: #272b41;"></button>
-    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
+    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right"
+      id="close-addFirma-button" style="background: #b8b6b6;
     border: gray;"></button>
   </p-footer>
 </p-dialog>
