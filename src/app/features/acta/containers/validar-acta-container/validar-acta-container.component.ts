@@ -258,6 +258,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
                 faltante_porcentaje_entero: service.faltante_porcentaje_entero,
+                prov_has_serv_precio: service.prov_has_serv_precio,
                 unidad_obras: [],
               };
 
