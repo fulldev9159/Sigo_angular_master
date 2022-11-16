@@ -1,6 +1,6 @@
 import {
   Component,
-  VERSION,
+  VERSION,  
   ViewChild,
   ElementRef,
   EventEmitter,
@@ -9,6 +9,8 @@ import {
   HostListener,
   ViewEncapsulation,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Store } from '@ngrx/store';
 import {
   faBars,
   faBasketShopping,
@@ -19,7 +21,6 @@ import {
   faBell,
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
-import { Store } from '@ngrx/store';
 import { AuthEffects } from '@storeOT/auth/auth.effects';
 
 @Component({
@@ -28,10 +29,24 @@ import { AuthEffects } from '@storeOT/auth/auth.effects';
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
+
 export class NavbarComponent implements OnInit {
   @Output() toggle = new EventEmitter<void>();
   @Output() logout = new EventEmitter<void>();
   @Output() changePerfil = new EventEmitter<void>();
+
+  @ViewChild('dropdownmenu') dropdownMenu: ElementRef<HTMLDivElement>;
+
+  @HostListener ('document:click', ['$event'])  
+  clickout(event:any)  {    
+    
+    if (this.NotificationesOpen)  {
+      if (!this.dropdownMenu?.nativeElement.contains(event.target))  {      
+        this.NotificationesOpen = false;
+      }      
+    }    
+    
+  } 
       
   faBars = faBars;
   faOT = faPersonDigging;
@@ -41,7 +56,7 @@ export class NavbarComponent implements OnInit {
   NotificationesOpen: boolean = false;
   Notificationes: any[] = [];
   
-  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects) {
+  constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects, private eRef: ElementRef) {
     
   }
 
@@ -49,19 +64,17 @@ export class NavbarComponent implements OnInit {
 
     this.authFacade.getNotificaciones();
     this.authFacade.getNotificaciones$().subscribe(Notificationes => {      
-      this.Notificationes = Notificationes;     
-      console.log(this.Notificationes);
+      this.Notificationes = Notificationes;
     });
-
   }
 
-  onToggleNotificationes(e: any): void {
+  onToggleNotificationes(e: any): void {    
     this.NotificationesOpen = !this.NotificationesOpen;
   }
 
   async onMessageRead(e: any): Promise<void>{
     
-    var cur: HTMLElement;    
+    var cur: HTMLElement;
     var id: number[] = [];
     cur = e.target;    
     if (cur.tagName != "LI")  {
@@ -71,12 +84,13 @@ export class NavbarComponent implements OnInit {
     if (cur.tagName == "LI")  {
       id[0] = Number(cur.id);
     }
+
     try {
       await this.authFacade.marcarNotificaciones(id);
-      this.ngOnInit();
     }catch{
       console.log('error')
     }
+
   }
 
   toggleInt(): void {

@@ -92,7 +92,8 @@ export class AuthEffects {
 
   getNotificaciones$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(authActions.getNotificaciones),
+      ofType(authActions.getNotificaciones,
+        authActions.marcarNotificacionesSuccess),
       concatMap(() =>
         this.authHttpService.getNotificaciones().pipe(
           map(response => authActions.getNotificacionesSuccess({ response })),
