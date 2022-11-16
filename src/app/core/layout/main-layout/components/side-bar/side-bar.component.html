@@ -7,13 +7,11 @@
       <fa-icon [icon]="faUser"></fa-icon>
     </div>
     <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>
-    <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>
     <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
-  </div>
-
-  <div style="padding: 1em 1em 0 1em; text-align: center;">
-    <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm"
-      id="usuario-addFirma-button"></button>
+    <div style="margin-top:10px; text-align: center;">
+      <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm firma-button"
+        id="usuario-addFirma-button"></button>
+    </div>
   </div>
 
   <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
@@ -25,7 +23,7 @@
     <table>
       <tr>
         <td>Web</td>
-        <td>1.0.28</td>
+        <td>1.0.29</td>
       </tr>
       <tr>
         <td>DB</td>
