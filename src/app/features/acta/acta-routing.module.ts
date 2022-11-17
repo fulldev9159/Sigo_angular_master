@@ -40,6 +40,7 @@ const routes: Routes = [
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
           totalActas: TotalActasResolver,
+          observacionesTrabajo: ObservacionesTrabajosResolver,
         },
       },
       {

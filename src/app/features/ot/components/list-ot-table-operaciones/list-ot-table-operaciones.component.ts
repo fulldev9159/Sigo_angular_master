@@ -16,6 +16,7 @@ import {
   RequestCreateRegistroLibroObra,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
+import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
@@ -27,7 +28,7 @@ import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar
   templateUrl: './list-ot-table-operaciones.component.html',
   styleUrls: ['./list-ot-table-operaciones.component.scss'],
 })
-export class ListOtTableOperacionesComponent implements OnDestroy {
+export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
 
   // 86 TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
@@ -74,6 +75,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalRechazoObras = false;
   displayModalCerrarOT = false;
   displayModalAnularOT = false;
+  displayModalInformeTrabajosFinalizados = false;
+  displayModalSendInformeTrabajosFinalizados = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -113,6 +116,10 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   };
   form: FormGroup = new FormGroup(this.formControls);
 
+  formTrabajosFinalizados: FormGroup = new FormGroup({
+    informe: new FormControl('', [Validators.required]),
+  });
+
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
@@ -123,8 +130,17 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   constructor(
     private flujoOTFacade: FlujoOTFacade,
     private otDetalleFacade: OTDetalleFacade,
+    private actaFacade: ActaFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.actaFacade
+        .getComentariosFinalizacionTrabajos$()
+        .subscribe(v => this.formTrabajosFinalizados.get('informe').setValue(v))
+    );
+  }
 
   // ACCIONES ETAPA: OT_ET_AUTORIZACION_INICIAL
   confirmarAceptacionOTInicial(): void {
@@ -275,6 +291,24 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   anularOT(): void {
     this.flujoOTFacade.anularOT(this.ot_id);
     this.displayModalAnularOT = false;
+  }
+
+  // OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS
+  displayInformeTrabajosFinalizados(): void {
+    this.actaFacade.getComentariosFinalizacionTrabajos(this.ot_id);
+    this.displayModalInformeTrabajosFinalizados = true;
+  }
+
+  closeModalInformeTrabajosFinalizados(): void {
+    this.formTrabajosFinalizados.reset();
+    this.displayModalInformeTrabajosFinalizados = false;
+  }
+
+  sendInformeTrabajosFinalizados(): void {
+    this.actaFacade.informarTrabajosFinalizados(
+      this.ot_id,
+      this.formTrabajosFinalizados.get('informe').value
+    );
   }
 
   ngOnDestroy(): void {

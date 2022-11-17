@@ -85,7 +85,7 @@
                   </tr>
                   <tr>
                     <td>% Pagado</td>
-                    <td>{{por_acta_pagado-100}}%</td>
+                    <td>{{100-por_acta_pagado}}%</td>
                   </tr>
                   <tr>
                     <td>% a pagar</td>
@@ -93,7 +93,7 @@
                       <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100">
                       </p-inputNumber>
                       <br>
-                      <span>Ya se ha pagado el {{por_acta_pagado-100}}% por lo que tu límite a escoger es
+                      <span>Ya se ha pagado el {{100-por_acta_pagado}}% por lo que tu límite a escoger es
                         {{por_acta_pagado}}%</span>
                       <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
                     </td>

@@ -210,31 +210,46 @@ export const getDetalleActaError = createAction(
 
 //  QUIEN AUTORIZO PAGO
 export const quienAutorizoPago = createAction(
-  '[OT] GET quienAutorizoPago',
+  '[ACTA] GET quienAutorizoPago',
   props<{ ot_id: number }>()
 );
 
 export const quienAutorizoPagoSuccess = createAction(
-  '[OT] GET  quienAutorizoPago Success',
+  '[ACTA] GET  quienAutorizoPago Success',
   props<{ quienAautorizado: QuienAutorizoActa[] }>()
 );
 
 export const quienAutorizoPagoError = createAction(
-  '[OT] GET  quienAutorizoPago Error',
+  '[ACTA] GET  quienAutorizoPago Error',
   props<{ error: any }>()
 );
 
 //  APROBAR RECHAZAR SOLICITUD PAGO
 export const aprobarRechazarSolicitudPago = createAction(
-  '[OT] GET AprobarRechazarSolicitudPago',
+  '[ACTA] GET AprobarRechazarSolicitudPago',
   props<{ request: RequestAprobacionRechazoSolicitudPago }>()
 );
 
 export const aprobarRechazarSolicitudPagoSuccess = createAction(
-  '[OT] GET AprobarRechazarSolicitudPago Success',
+  '[ACTA] GET AprobarRechazarSolicitudPago Success',
   props<{ response: Response<any> }>()
 );
 export const aprobarRechazarSolicitudPagoError = createAction(
-  '[OT] GET AprobarRechazarSolicitudPago Error',
+  '[ACTA] GET AprobarRechazarSolicitudPago Error',
+  props<{ error: any }>()
+);
+
+// SOLICITAR INFORME TRABAJOS FINALIZADOS
+export const solicitarInformeTrabajosFinalizados = createAction(
+  '[ACTA] GET solicitarInformeTrabajosFinalizados',
+  props<{ ot_id: number }>()
+);
+
+export const solicitarInformeTrabajosFinalizadosSuccess = createAction(
+  '[ACTA] GET solicitarInformeTrabajosFinalizados Success',
+  props<{ response: Response<any> }>()
+);
+export const solicitarInformeTrabajosFinalizadosError = createAction(
+  '[ACTA] GET solicitarInformeTrabajosFinalizados Error',
   props<{ error: any }>()
 );

@@ -71,6 +71,13 @@
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
+
+  <!-- OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS -->
+  <button id="play-button" pTooltip="Informe trabajos finalizados" *ngIf="findAccion('OT_INF_TRABAJO_FIN')"
+    (click)="displayInformeTrabajosFinalizados()">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
+
   <!-- ACCIONES FIJAS -->
   <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
     <fa-icon [icon]="infoIcon"></fa-icon>
@@ -214,5 +221,38 @@
 
   <zwc-view-confirmacion pregunta='¿Confirma que desea anular la OT?' (cancelar)="displayModalAnularOT=false"
     (confirmar)="anularOT()" textConfirmar="Confirmar">
+  </zwc-view-confirmacion>
+</p-dialog>
+
+<!-- OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS -->
+<p-dialog header="Informe trabajos finalizados" [(visible)]="displayModalInformeTrabajosFinalizados" [draggable]="false"
+  [modal]="true">
+
+  <form [formGroup]="formTrabajosFinalizados">
+    <div class="col-12" id="control_observaciones">
+      <br>
+      <textarea formControlName="informe" class="form-control" name="comentarios" id="comentarios" cols="30"
+        rows="2"></textarea>
+      <br>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalInformeTrabajosFinalizados()">
+      Cancelar
+    </button>
+    <button pButton type="button" id="button-confirmar" (click)="displayModalSendInformeTrabajosFinalizados=true"
+      [disabled]="!formTrabajosFinalizados.valid">
+      Enviar Informe
+    </button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog header="Confirmación del envío" [(visible)]="displayModalSendInformeTrabajosFinalizados" [draggable]="false"
+  [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+
+  <zwc-view-confirmacion pregunta='¿Confirma el envío?' (cancelar)="displayModalSendInformeTrabajosFinalizados=false"
+    (confirmar)="sendInformeTrabajosFinalizados()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>

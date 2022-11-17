@@ -186,6 +186,27 @@ export class ActaEffects {
     )
   );
 
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  solicitarInformeTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.solicitarInformeTrabajosFinalizados),
+      concatMap(({ ot_id }) =>
+        this.actaHttp.solicitarInformeTrabajosFinalizados(ot_id).pipe(
+          map(response =>
+            actaActions.solicitarInformeTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err =>
+            of(
+              actaActions.solicitarInformeTrabajosFinalizadosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -194,7 +215,8 @@ export class ActaEffects {
           actaActions.getUOs4ActaSuccess,
           actaActions.informarTrabajosFinalizadosSuccess,
           actaActions.validarActaSuccess,
-          actaActions.aprobarRechazarSolicitudPagoSuccess
+          actaActions.aprobarRechazarSolicitudPagoSuccess,
+          actaActions.solicitarInformeTrabajosFinalizadosSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -213,7 +235,8 @@ export class ActaEffects {
           actaActions.getTotalActasError,
           actaActions.getComentariosFinalizacionTrabajosError,
           actaActions.quienAutorizoPagoError,
-          actaActions.aprobarRechazarSolicitudPagoError
+          actaActions.aprobarRechazarSolicitudPagoError,
+          actaActions.solicitarInformeTrabajosFinalizadosError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

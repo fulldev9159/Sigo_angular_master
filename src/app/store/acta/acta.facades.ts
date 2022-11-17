@@ -211,4 +211,11 @@ export class ActaFacade {
   ): void {
     this.store.dispatch(actaActions.aprobarRechazarSolicitudPago({ request }));
   }
+
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  public solicitarInformeTrabajosFinalizados(ot_id: number): void {
+    this.store.dispatch(
+      actaActions.solicitarInformeTrabajosFinalizados({ ot_id })
+    );
+  }
 }

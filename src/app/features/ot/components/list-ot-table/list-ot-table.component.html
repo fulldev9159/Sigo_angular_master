@@ -90,7 +90,8 @@
           <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_PROVEEDOR'||
                                item.etapa_slug==='OT_ET_EJECUCION_TRABAJOS'||
                                item.etapa_slug==='OT_ET_PAGO_ACEPTACION_IA'|| 
-                               item.etapa_slug==='OT_ET_PAGO_GENERACION_ACTA' ">
+                               item.etapa_slug==='OT_ET_PAGO_GENERACION_ACTA'||
+                               item.etapa_slug==='OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS' ">
             <p-chip [label]="item.etapa_otdesc" icon="pi pi-building"></p-chip>
           </ng-container>
           <ng-container *ngIf="item.etapa_slug==='OT_ET_EJECUCION_TRABAJOS_ESPERA_IMPUTACION'">

@@ -21,7 +21,7 @@
             <div *ngIf="accionExist('OT_SOLIC_INF_TRABAJO_FIN') && total_actas>0" class="field col-12">
                 <zwc-pbutton-sending Pid="solicitar-informe-fin-trabajos-button"
                     content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"
-                    (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>
+                    (click)="displayModalsolicitarInformeFinDeTrabajos=true"></zwc-pbutton-sending>
             </div>
             <!-- 178 TODO: MEJORAR EL CSS -->
             <form [formGroup]="formComentario">
@@ -55,3 +55,12 @@
             </div>
         </div>
     </div>
+</div>
+
+<p-dialog header="Confirmar solicitud de informe fin de trabajos"
+    [(visible)]="displayModalsolicitarInformeFinDeTrabajos" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Desea confirmar la solicitud?'
+        (cancelar)="displayModalsolicitarInformeFinDeTrabajos=false" (confirmar)="solicitarInformeFinDeTrabajos()">
+    </zwc-view-confirmacion>
+</p-dialog>

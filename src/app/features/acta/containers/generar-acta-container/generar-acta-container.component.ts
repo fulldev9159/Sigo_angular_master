@@ -43,6 +43,9 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   sendingInformarTrabajosFinalizados$: Observable<boolean> =
     this.loadingsFacade.sendingInformarTrabajosFinalizados$();
 
+  // MODAL
+  displayModalsolicitarInformeFinDeTrabajos = false;
+
   constructor(
     private actaFacade: ActaFacade,
     private loadingsFacade: LoadingsFacade,
@@ -196,6 +199,12 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
         }
       )
     );
+
+    this.subscription.add(
+      this.actaFacade
+        .getComentariosFinalizacionTrabajos$()
+        .subscribe(v => this.formComentario.get('comentarios').setValue(v))
+    );
   }
 
   accionExist(accion: string): boolean {
@@ -207,6 +216,10 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
       this.ot_id,
       this.formComentario.get('comentarios').value
     );
+  }
+
+  solicitarInformeFinDeTrabajos(): void {
+    this.actaFacade.solicitarInformeTrabajosFinalizados(this.ot_id);
   }
 
   ngOnDestroy(): void {

@@ -328,6 +328,21 @@ export class AfterHttpService {
         2000
       );
     }
+
+    // SOLICITAR INFORME TRABAJOS FINALIZADOS
+    if (
+      action.type ===
+      actaActions.solicitarInformeTrabajosFinalizadosSuccess.type
+    ) {
+      this.snackMessage.showMessage(`Solicitud exitosa`, 'Exito', 4000);
+      this.router.navigate(['/ot/list-ot']);
+    }
+
+    // ENVIO INFORME TRABAJOS FINALIZADOS
+    if (action.type === actaActions.informarTrabajosFinalizadosSuccess.type) {
+      this.snackMessage.showMessage(`Envío exitoso`, 'Exito', 4000);
+      this.router.navigate(['/ot/list-ot']);
+    }
   }
 
   reloadTableOT(): void {
