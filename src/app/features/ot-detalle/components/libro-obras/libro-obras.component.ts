@@ -104,6 +104,10 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         icon: this.inboxIcon,
         text: 'Confirmación de rechazo operaciones',
       },
+      SOLICITUD_INFORME_FIN_TRABAJO: {
+        icon: this.inboxIcon,
+        text: 'Solicitud de Informe de fin de trabajos',
+      },
     };
   }
 
@@ -138,16 +142,28 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
     // console.log(JSON.parse(metadata));
     const objMeta = JSON.parse(metadata);
     if (evento === 'CAMBIO_ESTADO') {
-      return `Hubo un cambio de estado desde la etapa ${
+      return `Hubo un cambio de estado desde la etapa <strong><i>${
         objMeta.from.tipo_etapa.nombre === 'Etapa Desconocida'
           ? 'Creación de OT'
-          : objMeta.from.tipo_etapa.nombre
-      } a la etapa ${objMeta.to.tipo_etapa.nombre}`;
+          : objMeta.from.tipo_etapa.nombre.toUpperCase()
+      }</i></strong> a la etapa <strong><i>${objMeta.to.tipo_etapa.nombre.toUpperCase()}</i></strong>`;
     }
-    if (evento === 'ACEPTACION_INICIAL') {
+    return '';
+  }
+
+  getTitulo(evento: string, rol: number): string {
+    let titulo = '';
+    if (evento === 'INF_TRAB_FIN_ACTA' && rol === 3) {
+      titulo = 'Generación de acta';
+    } else if (evento === 'INF_TRAB_FIN_ACTA' && rol === 5) {
+      titulo = 'Envío de Informe de trabajos finalizados';
+    } else {
+      titulo = this.titleArray[evento]?.text
+        ? this.titleArray[evento].text
+        : 'evento no definido';
     }
 
-    return '';
+    return titulo;
   }
 
   getMetadata(metadata: string): object {

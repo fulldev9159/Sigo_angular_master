@@ -43,78 +43,97 @@
 
         </ng-container>
 
-        <ng-container
-            *ngIf="registro.tipo_item==='BITACORA' && registro.evento!=='SOLICITUD_SERVICIOS_ADICIONALES' && registro.evento!=='APROBACION/RECHAZO_SERVICIOS_ADICIONALES'">
+        <ng-container *ngIf="registro.tipo_item==='BITACORA' && 
+                   registro.evento!=='SOLICITUD_SERVICIOS_ADICIONALES' && 
+                   registro.evento!=='APROBACION/RECHAZO_SERVICIOS_ADICIONALES'">
+
             <div class="registro"
                 [ngClass]="registro.evento==='CAMBIO_ESTADO'?'registro-cambio-estado':'registro-accion'">
                 <!-- TITULOS -->
                 <span class="titulo-registro">
-                    <fa-icon [icon]="titleArray[registro.evento]?.icon?titleArray[registro.evento].icon:banIcon">
+                    <fa-icon style="font-size: 0.5rem;"
+                        [icon]="titleArray[registro.evento]?.icon?titleArray[registro.evento].icon:banIcon">
                     </fa-icon>
-                    {{registro.id}} - {{titleArray[registro.evento]?.text?titleArray[registro.evento].text:'evento no
-                    definido'}}
+                    {{registro.id}} - {{getTitulo(registro.evento,registro?.model_perfil_id?.rol_id)}}
                 </span>
 
-                <br>
-                <span style="margin-right: 10px;"> {{registro.created_at| date:'medium'}}</span>
-
-                <!-- MENSAJES -->
-                <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
-                    <span>{{getText(registro.evento,registro.metadata)}}</span>
+                <ng-container *ngIf="registro.evento!=='CAMBIO_ESTADO'">
+                    <div style="display: flex;font-size: 0.7rem;margin-top: 5px;">
+                        <p style="margin-left: 10px;"><strong>Usuario:</strong> {{registro.model_usuario_id.nombres}}
+                            {{registro.model_usuario_id.apellidos}}</p>
+                        <p style="margin-left: 10px;"><strong>Perfil:</strong> {{registro.model_perfil_id.nombre}} </p>
+                    </div>
                 </ng-container>
 
-                <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'|| 
-                                     registro.evento==='ACEPTACION_EECC'">
-                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
-                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
-                    </fa-icon>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado la OT con
-                        la siguiente observación:</span>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado la orden de
-                        trabajo</span>
-                    <br>
-                    <q>{{getMetadata(registro.metadata).observacion}}</q>
-                </ng-container>
+                <div style="display: flex;margin-top: 5px;">
+                    <span style="margin-right: 10px;"> {{registro.created_at| date:'medium'}}</span>
 
-                <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'|| 
-                                     registro.evento==='ANULACION_PROVEEDOR_OT'">
-                    <fa-icon [icon]="banIcon"></fa-icon>
-                    <span>{{registro.mensaje}}</span>
-                </ng-container>
+                    <!-- MENSAJES -->
+                    <ng-container *ngIf="registro.evento==='CAMBIO_ESTADO'">
+                        <span [innerHTML]="getText(registro.evento,registro.metadata)"></span>
+                    </ng-container>
 
-                <ng-container *ngIf="registro.evento==='ENVIAR_INFORME_AVANCE'">
-                    <fa-icon [icon]="fileIcon"></fa-icon>
-                    <span>{{registro.mensaje}}</span>
-                </ng-container>
+                    <ng-container *ngIf="registro.evento==='ACEPTACION_INICIAL'|| 
+                                         registro.evento==='ACEPTACION_EECC'">
+                        <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                            [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                        </fa-icon>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado la OT con
+                            la siguiente observación:</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado la orden de
+                            trabajo</span>
+                        <br>
+                        <q
+                            *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
 
-                <ng-container *ngIf="registro.evento==='CONFIRMAR_RECHAZO_OPERACIONES'">
-                    <span>{{registro.mensaje}}</span>
-                </ng-container>
+                    <ng-container *ngIf="registro.evento==='ANULACION_INICIAL_OT'|| 
+                                         registro.evento==='ANULACION_PROVEEDOR_OT'">
+                        <fa-icon [icon]="banIcon"></fa-icon>
+                        <span>{{registro.mensaje}}</span>
+                    </ng-container>
 
-                <ng-container *ngIf="registro.evento==='APROBACION_INFORME_AVANCE'">
-                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
-                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
-                    </fa-icon>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado el informe de
-                        avance con
-                        la siguiente observación:</span>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado el informe de
-                        avance</span>
-                    <br>
-                    <q>{{getMetadata(registro.metadata).observacion}}</q>
-                </ng-container>
+                    <ng-container *ngIf="registro.evento==='ENVIAR_INFORME_AVANCE'">
+                        <fa-icon [icon]="fileIcon"></fa-icon>
+                        <span>{{registro.mensaje}}</span>
+                    </ng-container>
 
-                <ng-container *ngIf="registro.evento==='APROBACION_OPERACIONES'">
-                    <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZAR'?xmark:okmark"
-                        [ngClass]="getMetadata(registro.metadata).estado==='RECHAZAR'?'iconRechazo':'iconAprobado'">
-                    </fa-icon>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZAR'">Se ha rechazado la OT con
-                        la siguiente observación:</span>
-                    <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTAR'">Se ha aceptado la orden de
-                        trabajo</span>
-                    <br>
-                    <q>{{getMetadata(registro.metadata).observacion}}</q>
-                </ng-container>
+                    <ng-container *ngIf="registro.evento==='CONFIRMAR_RECHAZO_OPERACIONES'">
+                        <span>{{registro.mensaje}}</span>
+                    </ng-container>
+
+                    <ng-container *ngIf="registro.evento==='APROBACION_INFORME_AVANCE'">
+                        <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                            [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                        </fa-icon>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado el informe de
+                            avance con
+                            la siguiente observación:</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado el informe de
+                            avance</span>
+                        <br>
+                        <q
+                            *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
+
+                    <ng-container *ngIf="registro.evento==='APROBACION_OPERACIONES'">
+                        <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZAR'?xmark:okmark"
+                            [ngClass]="getMetadata(registro.metadata).estado==='RECHAZAR'?'iconRechazo':'iconAprobado'">
+                        </fa-icon>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZAR'">Se ha rechazado la OT con
+                            la siguiente observación:</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTAR'">Se ha aceptado la orden de
+                            trabajo</span>
+                        <br>
+                        <q
+                            *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
+
+                    <ng-container *ngIf="registro.evento==='INF_TRAB_FIN_ACTA'">
+                        <q>{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
+
+                </div>
 
             </div>
         </ng-container>
