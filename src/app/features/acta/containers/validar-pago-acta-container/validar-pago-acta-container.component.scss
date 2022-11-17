@@ -17,6 +17,28 @@
     strong {
         color: #015682;
     }
+}
 
+:host ::ng-deep {
+    table td {
+        font-size: var(--size-text-sigo);
+    }
 
+    .table-info tr>td:nth-child(1) {
+        border: 0;
+        border-width: 0;
+        padding: 0.275rem;
+        background-color: #dedcdc;
+        font-weight: 600;
+        text-align: right;
+        padding-right: 10px;
+        width: 28%;
+        border-right: 1px solid #bdbbbb
+    }
+
+    .table-info tr>td:nth-child(2) {
+        font-weight: 400;
+        padding-left: 5px;
+        background-color: rgb(244, 243, 243);
+    }
 }

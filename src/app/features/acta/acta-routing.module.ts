@@ -62,6 +62,7 @@ const routes: Routes = [
           accionesOT: AccionesOTResolver,
           lastActa: LastActaResolver,
           quienAutorizoPago: QuienAutorizoPagoResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
         },
       },
       {
