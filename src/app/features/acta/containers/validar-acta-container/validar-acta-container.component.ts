@@ -443,7 +443,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         cantidad: v.faltante_cantidad,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
-            ? this.form.get('porcentaje').value
+            ? +this.form.get('porcentaje').value
             : 100,
       })),
       unidad_obra: this.uos.map(v => ({
@@ -451,7 +451,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         cantidad: v.faltante_cantidad,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
-            ? this.form.get('porcentaje').value
+            ? +this.form.get('porcentaje').value
             : 100,
       })),
     };
