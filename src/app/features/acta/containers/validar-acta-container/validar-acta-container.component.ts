@@ -725,79 +725,98 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   }
 
   rechazarActa(): void {
-    // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
-    let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
-      .value as Array<{
-      servicio_rowid: number;
-      validar_adicional: boolean;
-    }>;
+    if (this.total_actas === 0) {
+      // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+      let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+        .value as Array<{
+        servicio_rowid: number;
+        validar_adicional: boolean;
+      }>;
 
-    let adicionales_aprobados_id = form
-      .filter(v => !v.validar_adicional)
-      .map(v => v.servicio_rowid);
-    let adicionales_rechazados_id = form
-      .filter(v => v.validar_adicional)
-      .map(v => v.servicio_rowid);
+      let adicionales_aprobados_id = form
+        .filter(v => !v.validar_adicional)
+        .map(v => v.servicio_rowid);
+      let adicionales_rechazados_id = form
+        .filter(v => v.validar_adicional)
+        .map(v => v.servicio_rowid);
 
-    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
-      ot_id: this.ot_id,
-      adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
-      adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
-      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
-      causas_rechazo_id: this.rechazoActaForm?.formRechazo.get('tipo_id').value,
-    };
+      let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
+        ot_id: this.ot_id,
+        adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+        adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+        observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
+        causas_rechazo_id:
+          this.rechazoActaForm?.formRechazo.get('tipo_id').value,
+      };
 
-    // REQUEST PARA RECHAZAR EL ACTA
-    let request_validar_acta: RequestValidarActa =
-      this.requestValidarActa('INVALIDADO');
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa =
+        this.requestValidarActa('INVALIDADO');
 
-    console.log('req ad', request_aprobar_adicionales);
-    console.log('req in', request_validar_acta);
+      console.log('req ad', request_aprobar_adicionales);
+      console.log('req in', request_validar_acta);
 
-    this.rechazoActaForm.formRechazo.reset();
-    // INVOCAR AMBOS
-    this.actaFacade.aceptarRechazarAdicionales(
-      request_validar_acta,
-      request_aprobar_adicionales
-    );
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.aceptarRechazarAdicionales(
+        request_validar_acta,
+        request_aprobar_adicionales
+      );
+    } else {
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa =
+        this.requestValidarActa('INVALIDADO');
+
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.validarActa(request_validar_acta);
+    }
   }
 
   validarActa(): void {
     // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
-    let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
-      .value as Array<{
-      servicio_rowid: number;
-      validar_adicional: boolean;
-    }>;
+    if (this.total_actas === 0) {
+      let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+        .value as Array<{
+        servicio_rowid: number;
+        validar_adicional: boolean;
+      }>;
 
-    let adicionales_aprobados_id = form
-      .filter(v => !v.validar_adicional)
-      .map(v => v.servicio_rowid);
-    let adicionales_rechazados_id = form
-      .filter(v => v.validar_adicional)
-      .map(v => v.servicio_rowid);
+      let adicionales_aprobados_id = form
+        .filter(v => !v.validar_adicional)
+        .map(v => v.servicio_rowid);
+      let adicionales_rechazados_id = form
+        .filter(v => v.validar_adicional)
+        .map(v => v.servicio_rowid);
 
-    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
-      ot_id: this.ot_id,
-      adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
-      adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
-      observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
-      causas_rechazo_id: this.rechazoActaForm?.formRechazo.get('tipo_id').value,
-    };
+      let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
+        ot_id: this.ot_id,
+        adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+        adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+        observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
+        causas_rechazo_id:
+          this.rechazoActaForm?.formRechazo.get('tipo_id').value,
+      };
 
-    // REQUEST PARA RECHAZAR EL ACTA
-    let request_validar_acta: RequestValidarActa =
-      this.requestValidarActa('VALIDADO');
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa =
+        this.requestValidarActa('VALIDADO');
 
-    console.log('req ad', request_aprobar_adicionales);
-    console.log('req in', request_validar_acta);
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.aceptarRechazarAdicionales(
+        request_validar_acta,
+        request_aprobar_adicionales
+      );
+    } else {
+      // REQUEST PARA APROBAR EL ACTA
+      let request_validar_acta: RequestValidarActa =
+        this.requestValidarActa('VALIDADO');
 
-    this.rechazoActaForm.formRechazo.reset();
-    // INVOCAR AMBOS
-    this.actaFacade.aceptarRechazarAdicionales(
-      request_validar_acta,
-      request_aprobar_adicionales
-    );
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR
+      this.actaFacade.validarActa(request_validar_acta);
+    }
   }
 
   ngOnDestroy(): void {

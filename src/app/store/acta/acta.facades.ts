@@ -100,6 +100,15 @@ export class ActaFacade {
     );
   }
 
+  //  VALIDAR ACTA
+  public validarActa(request: RequestValidarActa): void {
+    this.store.dispatch(
+      actaActions.validarActa({
+        request,
+      })
+    );
+  }
+
   // GET LAST ACTA
   // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
   public getLastActaSuccess(response: Response<LastActa>): void {
