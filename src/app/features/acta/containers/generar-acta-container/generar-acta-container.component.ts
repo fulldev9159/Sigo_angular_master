@@ -55,7 +55,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
         ({ servicios4acta, uos4acta, accionesOT, totalActas }) => {
           console.log(accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
-          if (totalActas) this.total_actas = totalActas;
+          if (totalActas) this.total_actas = totalActas.data.total;
 
           // ORGANIZAR DATA PARA TABLA
           // 138 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
