@@ -36,6 +36,9 @@
   </ng-container>
 
   <ng-container *ngIf="total_actas>0">
+    <p-divider align="center">
+      <span class="p-tag">Detalle servicios por pagar</span>
+    </p-divider>
     <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
       [column_acciones]="false">
     </zwc-table-servicios>
