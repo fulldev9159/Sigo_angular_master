@@ -1,34 +1,45 @@
 <div class="container-acta">
   <h1>Validación del Acta</h1>
+  <ng-container *ngIf="total_actas===0">
+    <p-divider align="center">
+      <span class="p-tag">Autorizar Adicionales</span>
+    </p-divider>
+    <div class="card">
+      <div class=" grid">
+        <div class="field col-12 table-autorizar-adicionales">
+          <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static" [data_source]="acta_adicionales"
+            [cantidad_editable]="false" [column_acciones]="true" [accion_delete]="false"
+            [accion_aprobacion_servicio_adic]="true">
+          </zwc-table-servicios>
+          <div class="field col-12 table-autorizar-adicionales" *ngIf="!acta_adicionales.length>0"
+            style="font-size: 0.7rem;">
+            No existen servicios adicionales
+          </div>
+        </div>
 
-  <p-divider align="center">
-    <span class="p-tag">Autorizar Adicionales</span>
-  </p-divider>
-  <div class="card">
-    <div class=" grid">
-      <div class="field col-12 table-autorizar-adicionales">
-        <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static" [data_source]="acta_adicionales"
-          [cantidad_editable]="false" [column_acciones]="true" [accion_delete]="false"
-          [accion_aprobacion_servicio_adic]="true">
-        </zwc-table-servicios>
       </div>
-
     </div>
-  </div>
 
-  <p-divider align="center">
-    <span class="p-tag">Servicios cubicados</span>
-  </p-divider>
-  <div class="card">
-    <div class=" grid">
-      <div class="field col-12 table-servicios-cubicados">
-        <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"
-          [cantidad_editable]="false" [column_acciones]="false">
-        </zwc-table-servicios>
+    <p-divider align="center">
+      <span class="p-tag">Servicios cubicados</span>
+    </p-divider>
+    <div class="card">
+      <div class=" grid">
+        <div class="field col-12 table-servicios-cubicados">
+          <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"
+            [cantidad_editable]="false" [column_acciones]="false">
+          </zwc-table-servicios>
+        </div>
+
       </div>
-
     </div>
-  </div>
+  </ng-container>
+
+  <ng-container *ngIf="total_actas>0">
+    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
+      [column_acciones]="false">
+    </zwc-table-servicios>
+  </ng-container>
 
   <p-divider align="center">
     <span class="p-tag">Observaciones</span>
@@ -93,7 +104,7 @@
                       <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100">
                       </p-inputNumber>
                       <br>
-                      <span>Ya se ha pagado el {{100-por_acta_pagado}}% por lo que tu límite a escoger es
+                      <span>Ya se ha pagado el {{100-por_acta_pagado}}%. Puedes escoger hasta el
                         {{por_acta_pagado}}%</span>
                       <zwc-input-alert [control]="form.get('porcentaje')"> </zwc-input-alert>
                     </td>

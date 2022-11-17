@@ -54,6 +54,7 @@ const routes: Routes = [
           observacionesTrabajo: ObservacionesTrabajosResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
           lastActa: LastActaResolver,
+          totalActas: TotalActasResolver,
         },
       },
       {

@@ -125,6 +125,10 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   total_informe_avance = 0;
   total_a_pagar = 0;
 
+  total_actas = 0;
+
+  tipo_pago: string;
+
   comentarioInforme$: Observable<string> = this.actaFacade
     .getComentariosFinalizacionTrabajos$()
     .pipe(map(value => value.replace(/\n/g, '<br>')));
@@ -151,6 +155,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           actaTiposPagos,
           detalleInformeAvance,
           lastActa,
+          totalActas,
         }) => {
           if (detalleInformeAvance)
             this.total_informe_avance =
@@ -163,6 +168,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
               name: value.descripcion,
               code: value.descripcion,
             }));
+          if (totalActas) this.total_actas = totalActas.data.total;
 
           // ORGANIZAR DATA PARA TABLA
           // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
@@ -303,7 +309,49 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           }
 
           this.acta = [...this.acta_originales, ...this.acta_adicionales];
+
           this.por_acta_pagado = this.acta[0].faltante_porcentaje_entero;
+
+          if (lastActa) this.tipo_pago = lastActa.data?.tipo_pago;
+          if (this.tipo_pago) {
+            this.form.get('tipo_pago').setValue(this.tipo_pago);
+            this.form.get('tipo_pago').disable();
+            this.form.get('porcentaje').clearValidators();
+            this.form.get('porcentaje').updateValueAndValidity();
+            this.detector.detectChanges();
+            if (this.tipo_pago) {
+              // OBTENER EL TOTAL A PAGAR
+              if (this.tipo_pago === 'TOTAL')
+                this.total_a_pagar =
+                  +this.tableServicesTotal?.totalServicios +
+                  +this.tableServicesTotal?.totalUOs;
+
+              if (this.tipo_pago === 'POR_SERVICIO')
+                this.total_a_pagar =
+                  +this.totalServicios_servicio + +this.totalUO_servicio;
+
+              // CONFIGURAR FORM PAGO
+              if (this.tipo_pago === 'PORCENTAJE') {
+                // Toma el porcentaje faltante de alguno de los items, y ése será el
+                // tope para la siguiente iteración
+                // Ej: si a la primera iteración se pagó 25%, el valor para el porcentaje
+                // se moverá entre 0 a 75
+                // Si no hay items, se deja en 0 y se deshabilita
+
+                this.form.get('porcentaje').setValidators([
+                  Validators.required,
+                  // this.noWhitespace,
+                  // this.mustBeANumber,
+                  // this.nonZero,
+                  Validators.min(0),
+                  Validators.max(this.acta[0].faltante_porcentaje_entero),
+                ]);
+                this.form
+                  .get('porcentaje')
+                  .setValue(`${this.acta[0].faltante_porcentaje_entero}`);
+              }
+            }
+          }
         }
       )
     );
@@ -349,16 +397,6 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         }
       })
     );
-
-    // CALCULAR PORCENTAJE
-    // this.subscription.add(
-    //   this.form.get('porcentaje').valueChanges.subscribe(porcentaje => {
-    //     this.detector.detectChanges();
-    //     if (porcentaje) {
-    //       this.total_a_pagar = +this.total_a_pagar * (+porcentaje / 100);
-    //     }
-    //   })
-    // );
   }
 
   accionExist(accion: string): boolean {
