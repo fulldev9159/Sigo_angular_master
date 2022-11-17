@@ -31,6 +31,7 @@ import {
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
@@ -145,11 +146,13 @@ export class InformeAvanceComponent
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
     private flujoOTFacade: FlujoOTFacade,
+    private authFacade: AuthFacade,
     private route: ActivatedRoute,
     private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
     this.serviciosFacade.resetCarritoServices();
     this.subscription.add(
       this.route.data.subscribe(

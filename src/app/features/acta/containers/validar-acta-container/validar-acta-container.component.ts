@@ -28,6 +28,7 @@ import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servici
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaPorServicioFormComponent } from '../../components/acta-por-servicio-form/acta-por-servicio-form.component';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 interface Detalle {
   servicio: {
@@ -142,10 +143,12 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     private route: ActivatedRoute,
     private logger: LogService,
     private flujoOTFacade: FlujoOTFacade,
+    private authFacade: AuthFacade,
     private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
         ({

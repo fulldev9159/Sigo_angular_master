@@ -16,6 +16,7 @@ import { map, Observable, Subscription } from 'rxjs';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { LogService } from '@log';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 @Component({
   selector: 'zwc-validar-acta-operaciones-container',
@@ -65,10 +66,13 @@ export class ValidarActaOperacionesContainerComponent
     private route: ActivatedRoute,
     private informeAvanceFacade: InformeAvanceFacade,
     private serviciosFacade: ServiciosFacade,
+    private authFacade: AuthFacade,
     private logger: LogService
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
+
     this.subscription.add(
       this.route.data.subscribe(({ accionesOT }) => {
         this.logger.debug(accionesOT);

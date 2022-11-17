@@ -41,6 +41,7 @@ const routes: Routes = [
           accionesOT: AccionesOTResolver,
           totalActas: TotalActasResolver,
           observacionesTrabajo: ObservacionesTrabajosResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
       {
@@ -55,6 +56,7 @@ const routes: Routes = [
           detalleInformeAvance: DetalleInformeAvanceResolver,
           lastActa: LastActaResolver,
           totalActas: TotalActasResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
       {
@@ -65,6 +67,7 @@ const routes: Routes = [
           lastActa: LastActaResolver,
           quienAutorizoPago: QuienAutorizoPagoResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
       {
@@ -73,6 +76,7 @@ const routes: Routes = [
         resolve: {
           accionesOT: AccionesOTResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
     ],

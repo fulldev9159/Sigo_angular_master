@@ -13,6 +13,7 @@ import {
   DetalleUO4Acta,
 } from '@model';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { Observable, Subscription } from 'rxjs';
 
@@ -49,10 +50,12 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   constructor(
     private actaFacade: ActaFacade,
     private loadingsFacade: LoadingsFacade,
+    private authFacade: AuthFacade,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
         ({ servicios4acta, uos4acta, accionesOT, totalActas }) => {

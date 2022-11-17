@@ -12,6 +12,7 @@ import {
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { map, Observable, Subscription } from 'rxjs';
@@ -76,10 +77,12 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
     private actaFacade: ActaFacade,
     private flujoOTFacade: FlujoOTFacade,
     private loadingsFacade: LoadingsFacade,
+    private authFacade: AuthFacade,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
         ({ accionesOT, lastActa, quienAutorizoPago, detalleInformeAvance }) => {
