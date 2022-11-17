@@ -27,9 +27,8 @@
     <div class="menu">
         <div #dropdownmenu>
 
-            <li class="notification" (click)="onToggleNotificationes($event);">
-
-                <span class="span-notification">
+            <li class="menu-item" (click)="onToggleNotificationes($event);">
+                <span class="span-menu-item">
                     <fa-icon [icon]="faBell"></fa-icon>
                     <span *ngIf="Notificationes?.length>0" class="span-new-notice"></span>
                 </span>
@@ -38,35 +37,65 @@
             <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright">
                 <div class="dropdown-toolbar">
                     <div class="row">
-                        <div class="col-sm-6" style="float:left;">
-                            <div class="h3 dropdown-toolbar-title"><span>Notificaciones</span>
-                                <!---->
-                            </div>
+                        <div class="col-sm-12" style="float:left;">
+                            <span class="span-title">
+                                <fa-icon [icon]="faBell"></fa-icon>
+                                Notificaciones
+                            </span>
+                            <span class="span-back">
+                                <fa-icon [icon]="faArrowLeft" (click)="OnGoBackNotifications();"></fa-icon>
+                                Notificaciones
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <ul *ngIf="Notificationes?.length==0">
+                        <li class="empty">
+                            <span>No Notificaciones</span>
+                        </li>
+                    </ul>
+                    <ul *ngFor="let item of Notificationes" (click)="onMessageRead($event)">
+                        <li data-id="{{item?.id}}" class="empty">
+                            <span class="message">{{item?.mensaje}}</span>
+                            <span class="description">{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div #userpanel>
+            <li class="menu-item" (click)="onToggleUserPanel($event);">
+                <span class="span-menu-item">
+                    <fa-icon [icon]="faUser"></fa-icon>
+                </span>
+            </li>
+            <div *ngIf="userPanelOpen" class="dropdown-container dropdown-position-bottomright userpanel">
+                <div class="dropdown-toolbar">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="span-title">
+                                <fa-icon [icon]="faUser"></fa-icon>
+                                Nombre completo
+                            </span>
+                            <span class="span-back">
+                                <fa-icon [icon]="faArrowLeft" (click)="OnGoBackUserPanel();"></fa-icon>
+                                Nombre completo
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                <ul *ngIf="Notificationes?.length==0" class="dropdown-menu notifications">
-                    <li class="empty">
-                        <span>No Notificaciones</span>
+                <ul class="dropdown-menu">
+                    <li class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">
+                        Cambiar perfil
                     </li>
-                </ul>
-                <ul *ngFor="let item of Notificationes" class="dropdown-menu notifications"
-                    (click)="onMessageRead($event)">
-                    <li data-id="{{item?.id}}" class="empty">
-                        <span class="message">{{item?.mensaje}}</span>
-                        <span class="description">{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+                    <li class="p-button-text" (click)="logoutInt()" id="logout">
+                        Logout
                     </li>
                 </ul>
             </div>
         </div>
-
-        <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">
-            Cambiar perfil
-        </button>
-        <button pButton pRipple class="p-button-text" (click)="logoutInt()" id="logout">
-            Logout
-        </button>
     </div>
 
 </nav>

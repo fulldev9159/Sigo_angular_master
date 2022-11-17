@@ -29,13 +29,12 @@
         display: flex;
         font-family: "Inter-Regular", system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
 
-        li.notification {
+        li.menu-item {
 
-            width: 40px;
             cursor: pointer;
             color: #0b5e8a;
             list-style: none;
-            padding: 9px;
+            padding: 10px 15px;
             margin-right: 10px;
             border-radius: 4px;
 
@@ -56,17 +55,11 @@
         }
 
         .dropdown-container {
-            width: 400px;
-            min-width: 350px;
-            max-width: 450px;
             position: absolute;
-            cursor: pointer;
             top: 100%;
-            right: 13.5%;
             z-index: 1000;
             float: left;
             margin: 2px 0 0;
-            list-style: none;
             font-size: 14px;
             background-color: #fff;
             -webkit-box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
@@ -76,31 +69,48 @@
             -webkit-border-radius: 10px;
             -moz-border-radius: 10px;
             border-radius: 10px;
+            width: 400px;
+            min-width: 280px;
+            right: 80px;
 
-            max-height: 500px;
-            overflow-y: auto;
+
+            fa-icon {
+                margin-right: 10px;
+            }
+
+            .span-title {
+                color: #505050;
+                display: block;
+            }
+
+            .span-back {
+                color: #505050;
+                display: none;
+            }
 
             .dropdown-toolbar {
                 background-color: #fff;
                 border-bottom: 1px solid #ded2ff;
                 border-radius: 4px 4px 0 0;
-                padding: 6px 20px 5px;
+                padding: 10px 20px;
                 height: 35px;
                 font-weight: bold;
+                cursor: default;
             }
 
             .dropdown-menu {
-                width: auto;
+                width: 100%;
                 position: static;
                 z-index: 1000;
                 float: none !important;
-                list-style: none;
                 margin: 0;
                 border: 0;
                 background: 0 0;
                 border-radius: 0;
                 -webkit-box-shadow: none;
                 box-shadow: none;
+                max-height: calc(100vh - 300px);
+                overflow-y: auto;
 
                 .message {
                     font-weight: 400;
@@ -115,6 +125,8 @@
 
                 li {
                     padding: 10px 20px;
+                    cursor: pointer;
+                    list-style: none;
                 }
 
                 .button-recycle {
@@ -125,16 +137,62 @@
 
                 li:hover {
                     background-color: #ebebeb;
-
-
                 }
             }
         }
 
+        .userpanel {
+            width: 200px;
+            min-width: 200px;
+            right: 22px;
+        }
 
 
 
+        @media only screen and (max-width: 768px) {
+            .dropdown-container {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                left: 0;
+                top: 0;
+                z-index: 1000;
+                font-size: 14px;
+                background-color: #fff;
+                border: 0;
 
+                .span-title {
+                    color: #505050;
+                    display: none;
+                }
+
+                .span-back {
+                    color: #505050;
+                    display: block;
+                }
+
+                @media only screen and (max-width: 768px) {
+                    .dropdown-menu {
+                        width: 100%;
+                        height: 100%;
+                        position: static;
+                        z-index: 1000;
+                        margin: 0;
+                        border: 0;
+                        background: 0 0;
+                        border-radius: 0;
+                        -webkit-box-shadow: none;
+                        box-shadow: none;
+                        max-height: max-content;
+                        overflow-y: auto;
+                    }
+                }
+            }
+
+            .userpanel {
+                width: 100vw;
+            }
+        }
 
         button {
             // color: #eff3f7;
@@ -182,16 +240,40 @@
     }
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 768px) {
     .navbar-container {
-        padding: 0rem 1rem;
+        padding: 0rem 0.5rem;
 
         .buttons-principales-container {
-            width: 39vw;
 
             .button-menu {
                 button {
-                    width: 76px;
+                    width: 50px;
+                }
+            }
+        }
+
+        .p-button {
+            min-width: 0rem;
+        }
+
+        .menu {
+            button {
+                padding: 9px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .navbar-container {
+        padding: 0rem 0.5rem;
+
+        .buttons-principales-container {
+
+            .button-menu {
+                button {
+                    width: 70px;
                 }
             }
         }
