@@ -440,7 +440,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     let detalle: Detalle = {
       servicio: this.servicios.map(v => ({
         rowid: v.id,
-        cantidad: v.faltante_cantidad,
+        cantidad: v.cantidad_total,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
             ? +this.form.get('porcentaje').value
@@ -448,7 +448,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       })),
       unidad_obra: this.uos.map(v => ({
         rowid: v.id,
-        cantidad: v.faltante_cantidad,
+        cantidad: v.cantidad_total,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
             ? +this.form.get('porcentaje').value
