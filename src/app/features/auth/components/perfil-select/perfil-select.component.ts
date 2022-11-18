@@ -56,7 +56,8 @@ export class PerfilSelectComponent {
     this.authFacade.refreshLogin(
       proxy_id_selected,
       perfil_selected.model_perfil_id.nombre,
-      perfil_selected.model_perfil_id.model_rol_id.nombre
+      perfil_selected.model_perfil_id.model_rol_id.nombre,
+      perfil_selected.model_perfil_id.model_rol_id.slug
     );
   }
 
