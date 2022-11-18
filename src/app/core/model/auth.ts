@@ -12,6 +12,7 @@ export interface SessionData extends Login {
   perfil_proxy_id?: number;
   multiperfiles?: boolean;
   rol?: string;
+  rol_slug?: string;
 }
 
 // GET DATABASE VERSION

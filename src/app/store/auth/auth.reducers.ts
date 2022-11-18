@@ -35,15 +35,19 @@ export const reducerAuth = createReducer(
     ...state,
     twoFA: true,
   })),
-  on(authActions.refreshLogin, (state, { proxy_id, nombre_perfil, rol }) => ({
-    ...state,
-    sessionData: {
-      ...state.sessionData,
-      perfil_proxy_id: proxy_id,
-      nombre_perfil_select: nombre_perfil,
-      rol,
-    },
-  })),
+  on(
+    authActions.refreshLogin,
+    (state, { proxy_id, nombre_perfil, rol, rol_slug }) => ({
+      ...state,
+      sessionData: {
+        ...state.sessionData,
+        perfil_proxy_id: proxy_id,
+        nombre_perfil_select: nombre_perfil,
+        rol,
+        rol_slug,
+      },
+    })
+  ),
   on(authActions.refreshLoginSuccess, (state, { response }) => ({
     ...state,
     sessionData: {

@@ -38,6 +38,7 @@ export class SideBarComponent implements OnInit {
     this.authFacade.showMenuDetalleOT$();
 
   // Firma
+  allowedRoles = ['SUPERVISOR', 'JEFE_AREA', 'SUBGERENTE', 'GERENTE'];
   @ViewChild('filesform', { static: true }) filesform: any;
   displayModalFirma = false;
   uploadedFiles: any[] = [];
@@ -82,5 +83,12 @@ export class SideBarComponent implements OnInit {
     };
     this.userFacade.upFirmaUser(usuario_id, request);
     this.closeModalFirma();
+  }
+
+  get canUploadFirma(): boolean {
+    const rol_slug = this.sessionData?.rol_slug ?? undefined;
+    return rol_slug === undefined
+      ? false
+      : this.allowedRoles.includes(rol_slug);
   }
 }

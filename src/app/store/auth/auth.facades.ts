@@ -9,9 +9,7 @@ import * as authActions from './auth.actions';
   providedIn: 'root',
 })
 export class AuthFacade {
-  constructor(private store: Store<SessionData>) {
-    
-  }
+  constructor(private store: Store<SessionData>) {}
 
   // SESSION
   public getSessionData$(): Observable<SessionData> {
@@ -44,10 +42,11 @@ export class AuthFacade {
   public refreshLogin(
     proxy_id: number,
     nombre_perfil: string,
-    rol: string
+    rol: string,
+    rol_slug: string
   ): void {
     this.store.dispatch(
-      authActions.refreshLogin({ proxy_id, nombre_perfil, rol })
+      authActions.refreshLogin({ proxy_id, nombre_perfil, rol, rol_slug })
     );
   }
 
@@ -88,17 +87,16 @@ export class AuthFacade {
   }
 
   // GET NOTIFICACIONES
-  public getNotificaciones(): void {    
+  public getNotificaciones(): void {
     this.store.dispatch(authActions.getNotificaciones());
   }
 
-  public getNotificaciones$(): Observable<any> {    
+  public getNotificaciones$(): Observable<any> {
     return this.store.select(authSelectors.getNotificaciones);
   }
 
   // MARCAR NOTIFICACIONES
   public marcarNotificaciones(id: number[]): void {
-    this.store.dispatch(authActions.marcarNotificaciones({ id }));  
+    this.store.dispatch(authActions.marcarNotificaciones({ id }));
   }
-
 }
