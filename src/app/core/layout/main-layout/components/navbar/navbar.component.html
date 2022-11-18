@@ -25,8 +25,70 @@
     </div>
 
     <div class="menu">
-        <div #dropdownmenu>
+        <div #costeopanel class="mobile-principales-container">
+            <li class="menu-item" *ngxPermissionsOnly="['CUBICACION_LISTAR','CUBICACION_CREAR']"
+                (click)="onToggleCosteoPanel($event);">
+                <span class="span-menu-item">
+                    <fa-icon [icon]="faCub"></fa-icon>
+                </span>
+            </li>
+            <div *ngIf="costeoPanelOpen" class="dropdown-container dropdown-position-bottomright costeopanel">
+                <div class="dropdown-toolbar">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="span-title">
+                                <fa-icon [icon]="faCub"></fa-icon>
+                                Costeo
+                            </span>
+                            <span class="span-back">
+                                <fa-icon [icon]="faArrowLeft" (click)="OnGoBackCosteoPanel();"></fa-icon>
+                                Costeo
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
+                <ul class="dropdown-menu" (click)="costeoPanelOpen = false;">
+                    <li class="p-button-text" *ngxPermissionsOnly="['CUBICACION_LISTAR']" [routerLink]="['cubicacion']"
+                        id="navbar-list-cub">Listar</li>
+                    <li class="p-button-text" *ngxPermissionsOnly="['CUBICACION_CREAR']"
+                        [routerLink]="['/cubicacion/form-cub']" id="navbar-create-cub">Crear</li>
+                </ul>
+            </div>
+        </div>
+        <div #otpanel class="mobile-principales-container">
+            <li class="menu-item" *ngxPermissionsOnly="['OT_LISTAR','OT_CREAR']" (click)="onToggleOTPanel($event);">
+                <span class="span-menu-item">
+                    <fa-icon [icon]="faOT"></fa-icon>
+                </span>
+            </li>
+            <div *ngIf="otPanelOpen" class="dropdown-container dropdown-position-bottomright otpanel">
+                <div class="dropdown-toolbar">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="span-title">
+                                <fa-icon [icon]="faOT"></fa-icon>
+                                OT
+                            </span>
+                            <span class="span-back">
+                                <fa-icon [icon]="faArrowLeft" (click)="OnGoBackOtPanel();"></fa-icon>
+                                OT
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="dropdown-menu" (click)="otPanelOpen = false;">
+                    <li class="p-button-text" *ngxPermissionsOnly="['OT_LISTAR']" [routerLink]="['/ot']"
+                        id="navbar-list-ot">Listar
+                    </li>
+                    <li class="p-button-text" *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/ot/form-ot']"
+                        id="navbar-create-ot">Crear
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div #dropdownmenu>
             <li class="menu-item" (click)="onToggleNotificationes($event);">
                 <span class="span-menu-item">
                     <fa-icon [icon]="faBell"></fa-icon>

@@ -39,6 +39,8 @@ export class NavbarComponent implements OnInit {
 
   @ViewChild('dropdownmenu') dropdownMenu: ElementRef<HTMLDivElement>;
   @ViewChild('userpanel') userPanel: ElementRef<HTMLDivElement>;
+  @ViewChild('costeopanel') costeoPanel: ElementRef<HTMLDivElement>;
+  @ViewChild('otpanel') otPanel: ElementRef<HTMLDivElement>;
 
   @HostListener ('document:click', ['$event'])  
   clickout(event:any)  {        
@@ -53,6 +55,18 @@ export class NavbarComponent implements OnInit {
         this.userPanelOpen = false;
       }      
     }
+
+    if (this.costeoPanelOpen)  {
+      if (!this.costeoPanel?.nativeElement.contains(event.target))  {      
+        this.costeoPanelOpen = false;
+      }            
+    }
+
+    if (this.otPanelOpen)  {
+      if (!this.otPanel?.nativeElement.contains(event.target))  {      
+        this.otPanelOpen = false;
+      }      
+    }
  }
 
       
@@ -65,6 +79,9 @@ export class NavbarComponent implements OnInit {
 
   NotificationesOpen: boolean = false;
   userPanelOpen: boolean = false;
+  costeoPanelOpen: boolean = false;
+  otPanelOpen: boolean = false;
+
   Notificationes: any[] = [];
   
   constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects, private eRef: ElementRef) {
@@ -85,6 +102,14 @@ export class NavbarComponent implements OnInit {
 
   onToggleUserPanel(e: any) :void {
     this.userPanelOpen = !this.userPanelOpen;
+  }
+
+  onToggleCosteoPanel(e: any) :void {
+    this.costeoPanelOpen = !this.costeoPanelOpen;
+  }
+
+  onToggleOTPanel(e: any) :void {
+    this.otPanelOpen = !this.otPanelOpen;
   }
 
   async onMessageRead(e: any): Promise<void>{
@@ -127,4 +152,14 @@ export class NavbarComponent implements OnInit {
   OnGoBackUserPanel(): void {
     this.userPanelOpen = false;
   }
+
+  OnGoBackCosteoPanel(): void {
+    this.costeoPanelOpen = false;
+  }
+
+  OnGoBackOtPanel(): void {
+    this.otPanelOpen = false;
+  }
+
+  
 }

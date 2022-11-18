@@ -26,6 +26,7 @@
     }
 
     .menu {
+
         display: flex;
         font-family: "Inter-Regular", system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
 
@@ -35,7 +36,7 @@
             color: #0b5e8a;
             list-style: none;
             padding: 10px 15px;
-            margin-right: 10px;
+            margin-right: 4px;
             border-radius: 4px;
 
             span.span-new-notice {
@@ -52,6 +53,10 @@
             &:hover {
                 background-color: #d6d4d4;
             }
+        }
+
+        .mobile-principales-container {
+            display: none;
         }
 
         .dropdown-container {
@@ -245,6 +250,7 @@
         padding: 0rem 0.5rem;
 
         .buttons-principales-container {
+            display: none;
 
             .button-menu {
                 button {
@@ -257,7 +263,15 @@
             min-width: 0rem;
         }
 
+        #costeo {
+            display: block;
+        }
+
         .menu {
+            .mobile-principales-container {
+                display: block;
+            }
+
             button {
                 padding: 9px;
             }
