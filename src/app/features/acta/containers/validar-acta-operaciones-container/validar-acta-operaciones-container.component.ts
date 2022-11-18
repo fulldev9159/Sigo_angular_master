@@ -102,7 +102,7 @@ export class ValidarActaOperacionesContainerComponent
                 numero_producto: service.numero_producto,
                 servicio_precio_final_clp: service.valor_unitario_clp,
                 servicio_nombre: service.model_servicio_id.descripcion,
-                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_descripcion: 'TO-DO',
                 tipo_servicio_id: service.tipo_servicio_id,
                 servicio_unidad_cod: service.model_unidad_id.codigo,
                 servicio_unidad_descripcion:
@@ -117,7 +117,7 @@ export class ValidarActaOperacionesContainerComponent
                     uo_codigo: uo.unidad_obra_cod,
                     uo_nombre: uo.model_unidad_obra_cod.descripcion,
                     uo_precio_total_clp: uo.valor_unitario_clp,
-                    actividad_descripcion: 'TODO',
+                    actividad_descripcion: 'TO-DO',
                     actividad_id: service.actividad_id,
                     uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                     uob_unidad_medida_descripcion:

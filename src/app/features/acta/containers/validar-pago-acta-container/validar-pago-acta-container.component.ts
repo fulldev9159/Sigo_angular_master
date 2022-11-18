@@ -156,10 +156,10 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                     .descripcion,
                 prov_has_serv_precio:
                   service.model_informe_has_servicio_id.prov_has_serv_precio,
-                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_descripcion: 'TO-DO',
                 tipo_servicio_id: -1,
-                servicio_unidad_cod: 'TODO',
-                servicio_unidad_descripcion: 'TODO',
+                servicio_unidad_cod: 'TO-DO',
+                servicio_unidad_descripcion: 'TO-DO',
                 unidad_obras: [],
               };
 
@@ -187,10 +187,10 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                             .descripcion,
                         uo_precio_total_clp:
                           uo.model_informe_has_uob_id.valor_unitario_clp,
-                        actividad_descripcion: 'TODO',
+                        actividad_descripcion: 'TO-DO',
                         actividad_id: -1,
-                        uob_unidad_medida_cod: 'TODO',
-                        uob_unidad_medida_descripcion: 'TODO',
+                        uob_unidad_medida_cod: 'TO-DO',
+                        uob_unidad_medida_descripcion: 'TO-DO',
                       },
                     ],
                   })
@@ -216,10 +216,10 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                     .descripcion,
                 prov_has_serv_precio:
                   service.model_informe_has_servicio_id.prov_has_serv_precio,
-                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_descripcion: 'TO-DO',
                 tipo_servicio_id: -1,
-                servicio_unidad_cod: 'TODO',
-                servicio_unidad_descripcion: 'TODO',
+                servicio_unidad_cod: 'TO-DO',
+                servicio_unidad_descripcion: 'TO-DO',
                 servicios_adicional_dummy:
                   servicios_originales.find(
                     v =>
@@ -253,10 +253,10 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                             .descripcion,
                         uo_precio_total_clp:
                           uo.model_informe_has_uob_id.valor_unitario_clp,
-                        actividad_descripcion: 'TODO',
+                        actividad_descripcion: 'TO-DO',
                         actividad_id: -1,
-                        uob_unidad_medida_cod: 'TODO',
-                        uob_unidad_medida_descripcion: 'TODO',
+                        uob_unidad_medida_cod: 'TO-DO',
+                        uob_unidad_medida_descripcion: 'TO-DO',
                         adicional_existente_ia:
                           servicioCarrito.servicios_adicional_dummy,
                       },
