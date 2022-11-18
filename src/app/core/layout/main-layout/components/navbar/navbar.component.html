@@ -25,14 +25,15 @@
     </div>
 
     <div class="menu">
-        <div #costeopanel class="mobile-principales-container">
+        <div #costeopanel class="mobile-container">
             <li class="menu-item" *ngxPermissionsOnly="['CUBICACION_LISTAR','CUBICACION_CREAR']"
                 (click)="onToggleCosteoPanel($event);">
                 <span class="span-menu-item">
                     <fa-icon [icon]="faCub"></fa-icon>
                 </span>
             </li>
-            <div *ngIf="costeoPanelOpen" class="dropdown-container dropdown-position-bottomright costeopanel">
+            <div *ngIf="costeoPanelOpen"
+                class="dropdown-principales-container dropdown-position-bottomright costeopanel">
                 <div class="dropdown-toolbar">
                     <div class="row">
                         <div class="col-sm-12">
@@ -56,13 +57,13 @@
                 </ul>
             </div>
         </div>
-        <div #otpanel class="mobile-principales-container">
+        <div #otpanel class="mobile-container">
             <li class="menu-item" *ngxPermissionsOnly="['OT_LISTAR','OT_CREAR']" (click)="onToggleOTPanel($event);">
                 <span class="span-menu-item">
                     <fa-icon [icon]="faOT"></fa-icon>
                 </span>
             </li>
-            <div *ngIf="otPanelOpen" class="dropdown-container dropdown-position-bottomright otpanel">
+            <div *ngIf="otPanelOpen" class="dropdown-principales-container dropdown-position-bottomright otpanel">
                 <div class="dropdown-toolbar">
                     <div class="row">
                         <div class="col-sm-12">
@@ -96,7 +97,7 @@
                 </span>
             </li>
 
-            <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright">
+            <div *ngIf="NotificationesOpen" class="dropdown-container dropdown-position-bottomright notifications">
                 <div class="dropdown-toolbar">
                     <div class="row">
                         <div class="col-sm-12" style="float:left;">
@@ -126,13 +127,13 @@
                 </div>
             </div>
         </div>
-        <div #userpanel>
+        <div #userpanel class="mobile-container">
             <li class="menu-item" (click)="onToggleUserPanel($event);">
                 <span class="span-menu-item">
                     <fa-icon [icon]="faUser"></fa-icon>
                 </span>
             </li>
-            <div *ngIf="userPanelOpen" class="dropdown-container dropdown-position-bottomright userpanel">
+            <div *ngIf="userPanelOpen" class="dropdown-principales-container dropdown-position-bottomright userpanel">
                 <div class="dropdown-toolbar">
                     <div class="row">
                         <div class="col-sm-12">
@@ -157,6 +158,13 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="button-user-container">
+            <button class="p-button" (click)="changePerfilInt()" id="cambiar-perfil">
+                Cambiar perfil</button>
+
+            <button class="p-button" (click)="logoutInt()" id="logout">
+                Logout</button>
         </div>
     </div>
 
