@@ -198,8 +198,8 @@ export class ActaFacade {
   }
 
   // QUIEN AUTORIZO PAGO
-  public quienAutorizoPago(ot_id: number): void {
-    this.store.dispatch(actaActions.quienAutorizoPago({ ot_id }));
+  public quienAutorizoPago(ot_id: number, acta_id: number): void {
+    this.store.dispatch(actaActions.quienAutorizoPago({ ot_id, acta_id }));
   }
 
   public quienAutorizoPagoSuccess(quienAautorizado: QuienAutorizoActa[]): void {

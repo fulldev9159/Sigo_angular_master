@@ -85,7 +85,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
     this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
-        ({ accionesOT, lastActa, quienAutorizoPago, detalleInformeAvance }) => {
+        ({ accionesOT, lastActa, detalleInformeAvance }) => {
           console.log(accionesOT);
           if (detalleInformeAvance)
             this.total_informe_avance =
@@ -265,6 +265,8 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                 );
             });
           }
+
+          this.actaFacade.quienAutorizoPago(this.ot_id, this.acta_id);
         }
       )
     );

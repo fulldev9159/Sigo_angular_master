@@ -158,12 +158,14 @@ export class ActaHttpService {
 
   // SOLICITAR PAGO
   quienAutorizoPago(
-    ot_id: number
+    ot_id: number,
+    acta_id: number
   ): Observable<Response<{ items: QuienAutorizoActa[] }>> {
     return this.http.post<Response<{ items: QuienAutorizoActa[] }>>(
       `${this.API_URL}/ot/ot_autorizacion_pago_otid/get`,
       {
         ot_id,
+        acta_id,
       }
     );
   }

@@ -211,7 +211,7 @@ export const getDetalleActaError = createAction(
 //  QUIEN AUTORIZO PAGO
 export const quienAutorizoPago = createAction(
   '[ACTA] GET quienAutorizoPago',
-  props<{ ot_id: number }>()
+  props<{ ot_id: number; acta_id: number }>()
 );
 
 export const quienAutorizoPagoSuccess = createAction(

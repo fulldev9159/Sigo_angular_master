@@ -154,8 +154,8 @@ export class ActaEffects {
   quienAutorizoPagoOT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actaActions.quienAutorizoPago),
-      concatMap(({ ot_id }) =>
-        this.actaHttp.quienAutorizoPago(ot_id).pipe(
+      concatMap(({ ot_id, acta_id }) =>
+        this.actaHttp.quienAutorizoPago(ot_id, acta_id).pipe(
           map(response =>
             actaActions.quienAutorizoPagoSuccess({
               quienAautorizado: response.data.items,

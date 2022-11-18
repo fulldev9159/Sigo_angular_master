@@ -16,7 +16,7 @@ import { ListActasResolver } from './resolvers/listActas.resolver';
 import { Servicios4ActaResolver } from './resolvers/servicios4acta.resolver';
 import { TotalActasResolver } from './resolvers/totalActas.resolver';
 import { UOs4ActaResolver } from './resolvers/uos4acta.resolver';
-import { QuienAutorizoPagoResolver } from './resolvers/quienAutorizoPago.resolver';
+// import { QuienAutorizoPagoResolver } from './resolvers/quienAutorizoPago.resolver';
 
 const routes: Routes = [
   {
@@ -65,7 +65,7 @@ const routes: Routes = [
         resolve: {
           accionesOT: AccionesOTResolver,
           lastActa: LastActaResolver,
-          quienAutorizoPago: QuienAutorizoPagoResolver,
+          // quienAutorizoPago: QuienAutorizoPagoResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
           detalleOT: DetalleOTResolver,
         },
