@@ -6,6 +6,7 @@
         <th [attr.colspan]="colSpanUOs">Unidad Obra</th>
       </tr>
       <tr>
+        <th></th>
         <th style="background: var(--bg-th-servicios)">Cod</th>
         <th style="background: var(--bg-th-servicios)">Descripción</th>
         <th style="background: var(--bg-th-servicios)">Tipo</th>
@@ -26,6 +27,7 @@
           </ng-container>
         </th>
 
+        <th></th>
         <th>Cod</th>
         <th>Descripción</th>
         <th>Actividad</th>
@@ -39,6 +41,7 @@
       <ng-container *ngFor="let servicio of data_carrito$|async;let i = index">
         <!-- TODOCOMENT: VER COMO MEJORAR ESTE WA PARA LA VISUALIZACIÓN RESPONSIVA DE LA TABLA CON UNA UO -->
         <tr style="height: 0.01rem;">
+          <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{servicio.servicio_rowid}}</td>
           <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
             {{ servicio.numero_producto }}
           </td>
@@ -126,6 +129,7 @@
         </tr>
         <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
           <tr>
+            <td>{{uo.uo_rowid}}</td>
             <td>{{ uo.uo_codigo }}</td>
             <td>
               <ng-container *ngIf="uo.adicional_existente_ia">
