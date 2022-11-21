@@ -184,6 +184,9 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           this.servicios = servicios;
           this.uos = uob;
 
+          console.log('s', this.servicios);
+          console.log('u', this.uos);
+
           this.loadServicioForm(this.servicios, this.uos);
 
           if (servicios && servicios.length > 0) {
