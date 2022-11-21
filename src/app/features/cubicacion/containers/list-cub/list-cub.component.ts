@@ -139,6 +139,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    
     this.navbarHeader = [
       { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
       {
@@ -156,9 +157,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
         routerLink: ['/cubicacion/form-cub'],
       },
     ];
+    
     this.subscription.add(this.detalleCubicacion$.subscribe());
 
     this.observerFilters();
+    
   }
 
   observerFilters(): void {
@@ -224,7 +227,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 const pattern = new RegExp(
                   `^${(nombre as string).toLowerCase()}`,
                   'g'
-                );
+                );                
                 return pattern.test(value.cubicacion_nombre.toLowerCase())
                   ? true
                   : false;
@@ -382,6 +385,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalEliminarCubicacion(): void {
     this.displayModalEliminarCubicacion = false;
+  }
+
+  OnResponseText(nombre: string): string {   
+    return nombre;
   }
 
   ngOnDestroy(): void {
