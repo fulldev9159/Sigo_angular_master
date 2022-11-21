@@ -1,29 +1,26 @@
-import {
-  Component,
-  VERSION,  
-  ViewChild,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  Output,
-  HostListener,
-  ViewEncapsulation,
-} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Store } from '@ngrx/store';
 import {
-  faBars,
-  faBasketShopping,
-  faDollarSign,
+  Component, ElementRef,
+  EventEmitter, HostListener, OnInit,
+  Output, VERSION,
+  ViewChild, ViewEncapsulation
+} from '@angular/core';
+import {
+  faArrowLeft, faBars,
+  faBasketShopping, faBell, faDollarSign,
   faMoneyCheckAlt,
   faMoneyCheckDollar,
-  faPersonDigging,
-  faBell,
-  faUser,
-  faArrowLeft
+  faPersonDigging, faUser
 } from '@fortawesome/free-solid-svg-icons';
-import { AuthFacade } from '@storeOT/auth/auth.facades';
+
+import { Store } from '@ngrx/store';
 import { AuthEffects } from '@storeOT/auth/auth.effects';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
+
+import { LogService } from '@log';
+import { RequestUpFirmaUser, SessionData } from '@model';
+import { UsuarioFacade as UserFacade } from '@storeOT/usuario/usuario.facades';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'zwc-navbar',
@@ -41,6 +38,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('userpanel') userPanel: ElementRef<HTMLDivElement>;
   @ViewChild('costeopanel') costeoPanel: ElementRef<HTMLDivElement>;
   @ViewChild('otpanel') otPanel: ElementRef<HTMLDivElement>;
+  @ViewChild('filesform', { static: true }) filesform: any;
 
   @HostListener ('document:click', ['$event'])  
   clickout(event:any)  {        
@@ -69,7 +67,16 @@ export class NavbarComponent implements OnInit {
     }
  }
 
-      
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth')).sessionData;
+  allowedRoles = ['SUPERVISOR', 'JEFE_AREA', 'SUBGERENTE', 'GERENTE'];   
+  uploadedFiles: any[] = []; 
+  logger: LogService;
+  userFacade: UserFacade;
+  formControls = {
+    files: new FormControl([]),
+  };
+  form: FormGroup = new FormGroup(this.formControls);
+
   faBars = faBars;
   faOT = faPersonDigging;
   faCub = faDollarSign;
@@ -77,11 +84,11 @@ export class NavbarComponent implements OnInit {
   faUser = faUser;
   faArrowLeft = faArrowLeft;
 
+  displayModalFirma = false;
   NotificationesOpen: boolean = false;
   userPanelOpen: boolean = false;
   costeoPanelOpen: boolean = false;
   otPanelOpen: boolean = false;
-
   Notificationes: any[] = [];
   
   constructor(private el: ElementRef, private authFacade: AuthFacade, private store: Store, private authEffects: AuthEffects, private eRef: ElementRef) {
@@ -133,6 +140,41 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  get canUploadFirma(): boolean {    
+    const rol_slug = this.sessionData?.rol_slug ?? undefined; 
+    return rol_slug === undefined
+      ? false
+      : this.allowedRoles.includes(rol_slug);
+  }
+
+  openCargarFirma(): void {    
+    this.displayModalFirma = true;
+    this.userPanelOpen = false;
+  }
+
+  closeModalFirma(): void {
+    this.displayModalFirma = false;
+    this.uploadedFiles = [];
+    this.filesform.clear();
+  }
+
+  onUpload(event: any): void {
+    this.logger.debug('ADD', event);
+    this.uploadedFiles = event;
+  }
+
+  onDeleteFile(event: any): void {}
+
+  EnviarFirma(): void {
+    const usuario_id = this.sessionData.usuario_id;
+    const index: any = 'files';
+    const request: RequestUpFirmaUser = {
+      files: this.uploadedFiles[index],
+    };
+    this.userFacade.upFirmaUser(usuario_id, request);
+    this.closeModalFirma();
+  }
+
   toggleInt(): void {
     this.toggle.emit();
   }
@@ -160,6 +202,5 @@ export class NavbarComponent implements OnInit {
   OnGoBackOtPanel(): void {
     this.otPanelOpen = false;
   }
-
   
 }

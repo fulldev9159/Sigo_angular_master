@@ -87,6 +87,7 @@ export class SideBarComponent implements OnInit {
 
   get canUploadFirma(): boolean {
     const rol_slug = this.sessionData?.rol_slug ?? undefined;
+    return true;
     return rol_slug === undefined
       ? false
       : this.allowedRoles.includes(rol_slug);
