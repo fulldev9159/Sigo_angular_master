@@ -118,11 +118,20 @@
                             <span>No Notificaciones</span>
                         </li>
                     </ul>
-                    <ul *ngFor="let item of Notificationes" (click)="onMessageRead($event)">
-                        <li data-id="{{item?.id}}" class="empty">
-                            <span class="message">{{item?.mensaje}}</span>
-                            <span class="description">{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+
+                    <ul>
+                        <li *ngFor="let item of Notificationes" class="notification">
+                            <div>
+                                <span class="notification-title">
+                                    {{item?.mensaje}}
+                                </span>
+                                <p class="notification-desc">{{item?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</p>
+                            </div>
+                            <div class="notification-actions">
+                                <fa-icon [icon]="faTrash" (click)="onMessageRead(item?.id)"></fa-icon>
+                            </div>
                         </li>
+
                     </ul>
                 </div>
             </div>

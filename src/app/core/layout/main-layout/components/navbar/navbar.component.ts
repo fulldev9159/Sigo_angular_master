@@ -20,7 +20,8 @@ import {
   faPersonDigging,
   faBell,
   faUser,
-  faArrowLeft
+  faArrowLeft,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { AuthEffects } from '@storeOT/auth/auth.effects';
@@ -76,6 +77,7 @@ export class NavbarComponent implements OnInit {
   faBell = faBell;  
   faUser = faUser;
   faArrowLeft = faArrowLeft;
+  faTrash = faTrash;
 
   NotificationesOpen: boolean = false;
   userPanelOpen: boolean = false;
@@ -112,18 +114,11 @@ export class NavbarComponent implements OnInit {
     this.otPanelOpen = !this.otPanelOpen;
   }
 
-  async onMessageRead(e: any): Promise<void>{
-    
-    var cur: HTMLElement;
+  async onMessageRead(strId: any): Promise<void>{    
+   
     var id: number[] = [];
-    cur = e.target;    
-    if (cur.tagName != "LI")  {
-      cur = cur.parentElement;
-    }
+    id[0] = Number(strId);
 
-    if (cur.tagName == "LI")  {
-      id[0] = Number(cur.id);
-    }
 
     try {
       await this.authFacade.marcarNotificaciones(id);
