@@ -497,51 +497,48 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       unidadesObraForm.clear();
 
       (servicios ?? []).forEach(servicio => {
-        if (+servicio.faltante_cantidad > 0) {
-          serviciosForm.push(
-            new FormGroup({
-              id: new FormControl(`${servicio.id}`, []),
-              servicio_codigo: new FormControl(
-                `${servicio.servicio_codigo}`,
-                []
-              ),
-              numero_producto: new FormControl(
-                `${servicio.servicio_numero_producto}`,
-                []
-              ),
-              descripcion: new FormControl(
-                `${servicio.servicio_descripcion}`,
-                []
-              ),
-              cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
-              precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
-              precio_total_servicio: new FormControl(
-                +servicio.valor_unitario_clp * +servicio.cantidad_total,
-                []
-              ),
-              cantidad_max_a_enviar: new FormControl(
-                `${servicio.faltante_cantidad}`,
-                []
-              ),
-              cantidad_a_enviar: new FormControl(
-                { value: `${servicio.faltante_cantidad}`, disabled: true },
-                [
-                  Validators.required,
-                  CustomValidators.NoWhitespace,
-                  // this.mustBeANumber,
-                  CustomValidators.NonZero,
-                  Validators.min(0.1),
-                  Validators.max(servicio.faltante_cantidad),
-                ]
-              ),
-              selected: new FormControl(false, []),
-              adicional_aceptacion_estado: new FormControl(
-                `${servicio.adicional_aceptacion_estado}`,
-                []
-              ),
-            })
-          );
-        }
+        // if (+servicio.faltante_cantidad > 0) {
+        serviciosForm.push(
+          new FormGroup({
+            id: new FormControl(`${servicio.id}`, []),
+            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
+            numero_producto: new FormControl(
+              `${servicio.servicio_numero_producto}`,
+              []
+            ),
+            descripcion: new FormControl(
+              `${servicio.servicio_descripcion}`,
+              []
+            ),
+            cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +servicio.valor_unitario_clp * +servicio.cantidad_total,
+              []
+            ),
+            cantidad_max_a_enviar: new FormControl(
+              `${servicio.faltante_cantidad}`,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(
+              { value: `${servicio.faltante_cantidad}`, disabled: true },
+              [
+                Validators.required,
+                CustomValidators.NoWhitespace,
+                // this.mustBeANumber,
+                CustomValidators.NonZero,
+                Validators.min(0.1),
+                Validators.max(servicio.faltante_cantidad),
+              ]
+            ),
+            selected: new FormControl(false, []),
+            adicional_aceptacion_estado: new FormControl(
+              `${servicio.adicional_aceptacion_estado}`,
+              []
+            ),
+          })
+        );
+        // }
       });
 
       serviciosForm.controls.forEach((group, index) =>
