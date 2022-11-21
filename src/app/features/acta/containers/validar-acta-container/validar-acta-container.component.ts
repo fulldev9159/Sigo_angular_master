@@ -553,45 +553,49 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
       );
 
       (unidades_obra ?? []).forEach(uo => {
-        if (+uo.faltante_cantidad > 0) {
-          unidadesObraForm.push(
-            new FormGroup({
-              id: new FormControl(`${uo.id}`, []),
-              descripcion: new FormControl(`${uo.unidad_obra_desc}`, []),
-              uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
-              cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
-              cantidad_max_a_enviar: new FormControl(
-                `${uo.faltante_cantidad}`,
-                []
-              ),
-              precio_unitario: new FormControl(uo.valor_unitario_clp, []),
-              precio_total_servicio: new FormControl(
-                +uo.valor_unitario_clp * +uo.cantidad_total,
-                []
-              ),
-              cantidad_a_enviar: new FormControl(
-                { value: `${uo.faltante_cantidad}`, disabled: true },
-                [
-                  Validators.required,
-                  CustomValidators.NoWhitespace,
-                  // this.mustBeANumber,
-                  CustomValidators.NonZero,
-                  Validators.min(0.01),
-                  Validators.max(uo.faltante_cantidad),
-                ]
-              ),
-              informe_has_servicio_id: new FormControl(
-                `${uo.informe_has_servicio_id}`,
-                []
-              ),
-              servicio_numero_producto: new FormControl(
-                uo.servicio_numero_producto,
-                []
-              ),
-              selected: new FormControl(false, []),
-            })
-          );
-        }
+        // if (+uo.faltante_cantidad > 0) {
+        unidadesObraForm.push(
+          new FormGroup({
+            id: new FormControl(`${uo.id}`, []),
+            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []),
+            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
+            cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
+            cantidad_max_a_enviar: new FormControl(
+              `${uo.faltante_cantidad}`,
+              []
+            ),
+            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +uo.valor_unitario_clp * +uo.cantidad_total,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(
+              { value: `${uo.faltante_cantidad}`, disabled: true },
+              [
+                Validators.required,
+                CustomValidators.NoWhitespace,
+                // this.mustBeANumber,
+                CustomValidators.NonZero,
+                Validators.min(0.01),
+                Validators.max(uo.faltante_cantidad),
+              ]
+            ),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
+            ),
+            servicio_numero_producto: new FormControl(
+              uo.servicio_numero_producto,
+              []
+            ),
+            servicio_adicional_aceptacion_estado: new FormControl(
+              uo.servicio_adicional_aceptacion_estado,
+              []
+            ),
+            selected: new FormControl(false, []),
+          })
+        );
+        // }
       });
 
       unidadesObraForm.controls.forEach((group, index) =>
