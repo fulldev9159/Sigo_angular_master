@@ -57,39 +57,4 @@ export class SideBarComponent implements OnInit {
     this.authFacade.getDatabaseVersion();
     this.authFacade.getAPIVersion();
   }
-
-  openCargarFirma(): void {
-    this.displayModalFirma = true;
-  }
-
-  closeModalFirma(): void {
-    this.displayModalFirma = false;
-    this.uploadedFiles = [];
-    this.filesform.clear();
-  }
-
-  onUpload(event: any): void {
-    this.logger.debug('ADD', event);
-    this.uploadedFiles = event;
-  }
-
-  onDeleteFile(event: any): void {}
-
-  EnviarFirma(): void {
-    const usuario_id = this.sessionData.usuario_id;
-    const index: any = 'files';
-    const request: RequestUpFirmaUser = {
-      files: this.uploadedFiles[index],
-    };
-    this.userFacade.upFirmaUser(usuario_id, request);
-    this.closeModalFirma();
-  }
-
-  get canUploadFirma(): boolean {
-    const rol_slug = this.sessionData?.rol_slug ?? undefined;
-    return true;
-    return rol_slug === undefined
-      ? false
-      : this.allowedRoles.includes(rol_slug);
-  }
 }

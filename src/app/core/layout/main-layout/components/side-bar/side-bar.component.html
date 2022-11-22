@@ -8,11 +8,6 @@
     </div>
     <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>
     <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
-    <!-- <ng-container *ngIf="canUploadFirma">
-      <div style="margin-top:10px; margin-bottom:10px; text-align: center;">
-        <button pButton type="button" (click)="openCargarFirma()" label="Cargar Firma" class="p-button-sm firma-button" id="usuario-addFirma-button"></button>
-      </div>
-    </ng-container> -->
   </div>
 
   <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
@@ -24,7 +19,7 @@
     <table>
       <tr>
         <td>Web</td>
-        <td>1.0.34</td>
+        <td>1.0.35</td>
       </tr>
       <tr>
         <td>DB</td>
@@ -37,25 +32,3 @@
     </table>
   </div>
 </div>
-<!-- 
-<p-dialog [(visible)]="displayModalFirma" [closable]="true" (onHide)="closeModalFirma()" [modal]="true" [draggable]="false" [resizable]="false">
-  <ng-template pTemplate="header">Adjuntar Firma</ng-template>
-  <form novalidate autocomplete="off" [formGroup]="form">
-    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
-    </p-fileUpload>
-
-    <label style="color: #464646;font-weight: 400;">
-      <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
-      <span style="word-spacing: 5px">.jpeg,.pjpeg,.png</span>
-    </label>
-  </form>
-
-  <p-footer>
-    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
-    border: #6181b3;
-    margin-left: 10px;
-    color: #272b41;"></button>
-    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
-    border: gray;"></button>
-  </p-footer>
-</p-dialog> -->

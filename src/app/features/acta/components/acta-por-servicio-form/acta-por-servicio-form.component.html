@@ -1,4 +1,11 @@
 <div class="row">
+
+  <!-- <pre>
+    {{form.get('servicios').value|json}}
+  </pre>
+  <pre>
+    {{form.get('unidades_obra').value|json}}
+  </pre> -->
   <ng-container *ngIf="form">
     <ng-container *ngIf="form.get('servicios') as servicios">
       <div class="col-xs-12 col-md-12">
@@ -8,9 +15,9 @@
               <thead>
                 <tr>
                   <th></th>
+                  <th></th>
                   <th>Cod.</th>
                   <th>Descripción</th>
-                  <!-- <th>Servicio</th> -->
                   <th style="text-align: right">Cant. informe av.</th>
                   <th style="text-align: right">Cant. Pagada</th>
                   <th style="text-align: right">Cant. a Enviar</th>
@@ -20,64 +27,196 @@
               </thead>
               <tbody>
                 <ng-container *ngFor="let servicio of servicios.controls">
-                  <tr>
-                    <td class="label-table">
-                      <input type="checkbox" [formControl]="servicio.get('selected')">
-                    </td>
-                    <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
-                    <td class="data-secundaria">
-                      <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
-                        <p-tag styleClass="pendiente" value="Adicional" severity="warning">
-                        </p-tag>
+                  <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value==='ORIGINAL'">
+                    <tr>
+                      <td>{{servicio.get('id').value}}</td>
+                      <!-- SELECTED -->
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value===0">
+                        <td class="label-table"></td>
                       </ng-container>
-                      {{ servicio.get('descripcion').value |titlecase}}
-                    </td>
-                    <!-- <tdc>{{ servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'?'ADICIONAL':'ORIGINAL' }}</td> -->
-                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}
-                    </td>
-                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value -
-                      servicio.get('cantidad_max_a_enviar').value }}</td>
-                    <td>
-                      <input [formControl]="servicio.get('cantidad_a_enviar')" type="number">
-                      <zwc-input-alert [control]="servicio.get('cantidad_a_enviar')"></zwc-input-alert>
-
-                    </td>
-                    <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' :
-                      '$':'.0-2':'es-CL' }}</td>
-                    <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value *
-                      +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                  </tr>
-
-                  <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
-                    <ng-container *ngFor="let uo of unidadesObra.controls">
-                      <tr *ngIf="uo.get('servicio_numero_producto').value===servicio.get('numero_producto').value">
-                        <td style="
-                        padding-left: 22px !important;">
-                          <input type="checkbox" [formControl]="uo.get('selected')">
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value>0">
+                        <td class="label-table">
+                          <input type="checkbox" [formControl]="servicio.get('selected')">
                         </td>
-                        <td class="label-table" style="
-                        padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
-                        <td class="data-secundaria">
-                          <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
-                            <p-tag styleClass="pendiente" value="Adicional" severity="warning">
-                            </p-tag>
-                          </ng-container>
-                          {{ uo.get('descripcion').value|titlecase }}
+                      </ng-container>
+
+                      <!-- NUM PRODUCTO -->
+                      <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
+
+                      <!-- DECRIPCION -->
+                      <td class="data-secundaria">
+                        {{ servicio.get('descripcion').value |titlecase}}
+                      </td>
+
+                      <!-- CANTIDADES Y TOTALES -->
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value===0">
+                        <td colspan="5">$Pagado</td>
+                      </ng-container>
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value>0">
+                        <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}
                         </td>
-                        <!-- <td></td> -->
-                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
-                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value -
-                          uo.get('cantidad_max_a_enviar').value }}</td>
+                        <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value -
+                          servicio.get('cantidad_max_a_enviar').value }}</td>
                         <td>
-                          <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
+                          <input [formControl]="servicio.get('cantidad_a_enviar')" type="number">
+                          <zwc-input-alert [control]="servicio.get('cantidad_a_enviar')"></zwc-input-alert>
+
                         </td>
-                        <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
+                        <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' :
                           '$':'.0-2':'es-CL' }}</td>
-                        <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *
-                          +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                      </tr>
+                        <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value *
+                          +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                      </ng-container>
+
+                    </tr>
+
+                    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+                      <ng-container *ngFor="let uo of unidadesObra.controls">
+                        <tr
+                          *ngIf="uo.get('servicio_numero_producto').value===servicio.get('numero_producto').value && uo.get('servicio_adicional_aceptacion_estado').value ==='ORIGINAL' ">
+
+                          <td>{{uo.get('id').value}}</td>
+
+                          <!-- SELECTED -->
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value===0">
+                            <td class="label-table"></td>
+                          </ng-container>
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value>0">
+                            <td style="padding-left: 22px !important;">
+                              <input type="checkbox" [formControl]="uo.get('selected')">
+                            </td>
+                          </ng-container>
+
+
+                          <td class="label-table" style="padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}
+                          </td>
+                          <td class="data-secundaria">
+                            <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
+                              <p-tag styleClass="pendiente" value="Adicional" severity="warning">
+                              </p-tag>
+                            </ng-container>
+                            {{ uo.get('descripcion').value|titlecase }}
+                          </td>
+
+                          <!-- CANTIDADES Y TOTALES -->
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value===0">
+                            <td colspan="5">$Pagado</td>
+                          </ng-container>
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value>0">
+                            <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}
+                            </td>
+                            <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value -
+                              uo.get('cantidad_max_a_enviar').value }}</td>
+                            <td>
+                              <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
+                            </td>
+                            <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
+                              '$':'.0-2':'es-CL' }}</td>
+                            <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *
+                              +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          </ng-container>
+                        </tr>
+                      </ng-container>
                     </ng-container>
                   </ng-container>
+
+                  <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
+                    <tr>
+                      <td>{{servicio.get('id').value}}</td>
+
+                      <!-- SELECTED -->
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value===0">
+                        <td></td>
+                      </ng-container>
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value>0">
+                        <td> <input type="checkbox" [formControl]="servicio.get('selected')">
+                        </td>
+                      </ng-container>
+
+                      <!-- NUM PRODUCTO -->
+                      <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
+
+                      <!-- DECRIPCION -->
+                      <td class="data-secundaria">
+                        <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
+                          <p-tag styleClass="pendiente" value="Adicional" severity="warning">
+                          </p-tag>
+                        </ng-container>
+                        {{ servicio.get('descripcion').value |titlecase}}
+                      </td>
+
+
+                      <!-- CANTIDADES Y TOTALES -->
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value===0">
+                        <td colspan="5">$Pagado</td>
+                      </ng-container>
+                      <ng-container *ngIf="+servicio.get('cantidad_max_a_enviar').value>0">
+                        <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}
+                        </td>
+                        <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value -
+                          servicio.get('cantidad_max_a_enviar').value }}</td>
+                        <td>
+                          <input [formControl]="servicio.get('cantidad_a_enviar')" type="number">
+                          <zwc-input-alert [control]="servicio.get('cantidad_a_enviar')"></zwc-input-alert>
+
+                        </td>
+                        <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' :
+                          '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value *
+                          +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                      </ng-container>
+                    </tr>
+
+                    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+                      <ng-container *ngFor="let uo of unidadesObra.controls">
+                        <tr
+                          *ngIf="uo.get('servicio_numero_producto').value===servicio.get('numero_producto').value && uo.get('servicio_adicional_aceptacion_estado').value !=='ORIGINAL' ">
+
+                          <td>{{uo.get('id').value}}</td>
+
+                          <!-- SELECTED -->
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value===0">
+                            <td class="label-table"></td>
+                          </ng-container>
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value>0">
+                            <td style="padding-left: 22px !important;">
+                              <input type="checkbox" [formControl]="uo.get('selected')">
+                            </td>
+                          </ng-container>
+
+
+                          <td class="label-table" style="padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}
+                          </td>
+                          <td class="data-secundaria">
+                            <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'">
+                              <p-tag styleClass="pendiente" value="Adicional" severity="warning">
+                              </p-tag>
+                            </ng-container>
+                            {{ uo.get('descripcion').value|titlecase }}
+                          </td>
+
+                          <!-- CANTIDADES Y TOTALES -->
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value===0">
+                            <td colspan="5">$Pagado</td>
+                          </ng-container>
+                          <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value>0">
+                            <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}
+                            </td>
+                            <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value -
+                              uo.get('cantidad_max_a_enviar').value }}</td>
+                            <td>
+                              <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
+                            </td>
+                            <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
+                              '$':'.0-2':'es-CL' }}</td>
+                            <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *
+                              +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          </ng-container>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+
                 </ng-container>
               </tbody>
             </table>

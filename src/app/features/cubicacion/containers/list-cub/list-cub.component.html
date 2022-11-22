@@ -149,7 +149,7 @@
 </zwc-content-layout>
 
 <p-dialog header="Detalles de Cubicación" [(visible)]="displayModalDetalleCubicacion" [draggable]="false" [modal]="true"
-  (onHide)="closeModalDetalleCubicacion()">
+  (onHide)="closeModalDetalleCubicacion()" [style]="{width: '80vw'}">
   <ng-container>
     <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else content">
       <p>Loading...</p>

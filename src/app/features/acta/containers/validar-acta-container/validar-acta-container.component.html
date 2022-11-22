@@ -35,7 +35,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="total_actas>0">
+  <ng-container *ngIf="total_actas>0 && form.get('tipo_pago').value!=='POR_SERVICIO'">
     <p-divider align="center">
       <span class="p-tag">Detalle servicios por pagar</span>
     </p-divider>

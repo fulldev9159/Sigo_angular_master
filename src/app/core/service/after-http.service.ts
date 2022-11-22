@@ -346,10 +346,12 @@ export class AfterHttpService {
   }
 
   reloadTableOT(): void {
-    this.otFacade.getBandejaOT('EN_EJECUCION');
-    this.otFacade.getBandejaOT('ABIERTAS');
-    this.otFacade.getBandejaOT('CERRADAS');
-    this.otFacade.getBandejaOT('ANULADAS');
-    this.otFacade.getBandejaOT('EN_TRAMITE');
+    location.reload();
+    // CAMBIADO DEBIDO A QUE AHORA SE USA LA BOTONERA TAMBIÉN EN INFORMACIONES
+    // this.otFacade.getBandejaOT('EN_EJECUCION');
+    // this.otFacade.getBandejaOT('ABIERTAS');
+    // this.otFacade.getBandejaOT('CERRADAS');
+    // this.otFacade.getBandejaOT('ANULADAS');
+    // this.otFacade.getBandejaOT('EN_TRAMITE');
   }
 }
