@@ -5,6 +5,7 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
+import { PrimeNGConfig } from 'primeng/api';
 import { map, Observable, Subscription } from 'rxjs';
 
 // 77 TODO: MIGRAR VALIDACIONES DE FECHA
@@ -58,7 +59,8 @@ export class FormularioOtExtrasComponent implements OnInit, OnDestroy {
     private cubicacionFacade: CubicacionFacade,
     private otFacade: OTFacade,
     private proyectosFacade: ProyectosFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +73,14 @@ export class FormularioOtExtrasComponent implements OnInit, OnDestroy {
         this.proyectosFacade.getProyectos();
       })
     );
+
+    this.config.setTranslation({
+      monthNames:[
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+      ],
+      dayNamesMin:['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+    });
   }
 
   get valid(): boolean {

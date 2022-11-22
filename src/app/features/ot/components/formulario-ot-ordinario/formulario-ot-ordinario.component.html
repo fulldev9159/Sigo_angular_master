@@ -6,12 +6,15 @@
   <div class="card">
     <div class="formgrid grid">
       <div class="field col-12 ">
-        <zwc-input-text Label="*Número carta" [control]="form.get('carta_adjudicacion')" name_input="input-numero-carta">
+        <zwc-input-text Label="*Número carta" [control]="form.get('carta_adjudicacion')"
+          name_input="input-numero-carta">
         </zwc-input-text>
       </div>
       <div class="field col-12 ">
-        <label class="mr-1" for="">Fecha adjudicación</label>
-        <p-calendar [style]="{'width':'100%'}" inputStyleClass="form-control d-block" [inputStyle]="{'width':'100%','height':'2.5rem'}" formControlName="fecha_adjudicacion" id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
+        <label class="mr-1" for="">*Fecha adjudicación</label>
+        <p-calendar [style]="{'width':'100%'}" inputStyleClass="form-control d-block"
+          [inputStyle]="{'width':'100%','height':'2.5rem'}" formControlName="fecha_adjudicacion" id="fecha-adjudicacion"
+          name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
       </div>
       <div class="field col-12 ">
         <zwc-input-text Label="*Número pedido" [control]="form.get('numero_pedido')" name_input="input-numero-pedido">
@@ -25,11 +28,14 @@
 
     <div class="formgrid grid">
       <div class="field col-12 md:col-5 lg:col-5 xl:col-5">
-        <zwc-pdropdown [control]="form.get('tipo_numero_interno_id')" Label="Tipo de numero interno:" dropdown_id="select-tipo-numero-interno" [data]="tiposNumeroInterno$|async" Pplaceholder="Seleccione un tipo de numero interno" [loading]="loadingTipoNumeroInterno$|async">
+        <zwc-pdropdown [control]="form.get('tipo_numero_interno_id')" Label="Tipo de numero interno:"
+          dropdown_id="select-tipo-numero-interno" [data]="tiposNumeroInterno$|async"
+          Pplaceholder="Seleccione un tipo de numero interno" [loading]="loadingTipoNumeroInterno$|async">
         </zwc-pdropdown>
       </div>
     </div>
 
-    <zwc-formulario-ot-numero-interno [tipoNumeroInternoFormControl]="form.get('tipo_numero_interno_id')" [otsNumeroInternoFormArray]="form.get('ots_numero_interno')"></zwc-formulario-ot-numero-interno>
+    <zwc-formulario-ot-numero-interno [tipoNumeroInternoFormControl]="form.get('tipo_numero_interno_id')"
+      [otsNumeroInternoFormArray]="form.get('ots_numero_interno')"></zwc-formulario-ot-numero-interno>
   </div>
 </form>

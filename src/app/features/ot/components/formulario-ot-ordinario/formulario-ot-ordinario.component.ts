@@ -4,6 +4,7 @@ import { Dropdown, OTFromNumeroInterno } from '@model';
 import { NumeroInternoFacade } from '@storeOT/numero-interno/numero-interno.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { Observable, Subscription } from 'rxjs';
+import { PrimeNGConfig } from 'primeng/api';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -40,11 +41,19 @@ export class FormularioOtOrdinarioComponent implements OnInit, OnDestroy {
 
   constructor(
     private numeroInternoFacade: NumeroInternoFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
     this.numeroInternoFacade.getTipoDeNumeroInterno();
+    this.config.setTranslation({
+      monthNames:[
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+      ],
+      dayNamesMin:['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+    });
   }
 
   get valid(): boolean {
