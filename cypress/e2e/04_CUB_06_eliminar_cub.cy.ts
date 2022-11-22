@@ -11,7 +11,6 @@ describe('Eliminar Cubicacion', () => {
   });
 
   it('eliminar Cubicacion', () => {
-    cy.get(`input[name='filter-nombre-cubicacion']`).clear();
     cy._filter_table(
       'filter-nombre-cubicacion',
       'Cloned Cubicacion Bucle Cypress'
@@ -24,7 +23,6 @@ describe('Eliminar Cubicacion', () => {
     );
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(2500);
-    cy.get(`input[name='filter-nombre-cubicacion']`).clear();
     cy._filter_table(
       'filter-nombre-cubicacion',
       'Cloned Cubicacion Bucle Cypress'

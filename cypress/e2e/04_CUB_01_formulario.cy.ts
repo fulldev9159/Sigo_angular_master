@@ -399,6 +399,7 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       cy.get(
         '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
       ).should('not.exist');
+      cy._logout();
     });
 
     it('should add service and displayed into carrito', () => {
@@ -577,10 +578,10 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
 
     it('delete items carrito', () => {
       cy.get(
-        '.carrito-container> table > tbody > tr:nth-child(2) > td:nth-child(7)>button'
+        '.carrito-container> table > tbody > tr:nth-child(2) > td:nth-child(7)>button:nth-child(1)'
       ).click();
       cy.get(
-        '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(7)>button'
+        '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(7)>button:nth-child(1)'
       ).click();
 
       // TODO: VER PQ FALLA EN PIPELINE

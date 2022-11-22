@@ -10,12 +10,12 @@ describe('listar las ot', () => {
     cy.get('button[id="navbar-list-ot"]').click();
   });
 
-  it('informacion ot BUCLE', () => {
+  it.skip('informacion ot BUCLE', () => {
     cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test Bucle Cypress')
       .siblings()
-      .eq(7)
+      .eq(8)
       .find('button[id="info-button"]')
       .click();
 
@@ -80,13 +80,13 @@ describe('listar las ot', () => {
     ).contains('Luk COBRA CHILE Antonella');
   });
 
-  it('informacion ot FIJO', () => {
+  it.skip('informacion ot FIJO', () => {
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test FIJA Cypress')
       .siblings()
-      .eq(7)
+      .eq(8)
       .find('button[id="info-button"]')
       .click();
 
@@ -121,13 +121,13 @@ describe('listar las ot', () => {
     ).contains('Luk GENERATEL SPA Antonella');
   });
 
-  it('informacion ot ORDINARIO', () => {
+  it.skip('informacion ot ORDINARIO', () => {
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test ORDINARIO Cypress')
       .siblings()
-      .eq(7)
+      .eq(8)
       .find('button[id="info-button"]')
       .click();
 
@@ -162,13 +162,13 @@ describe('listar las ot', () => {
     ).contains('Jack ZWEICOM SPA Shephard');
   });
 
-  it('informacion ot MOVIL', () => {
+  it.skip('informacion ot MOVIL', () => {
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test MOVIL Cypress')
       .siblings()
-      .eq(7)
+      .eq(8)
       .find('button[id="info-button"]')
       .click();
 

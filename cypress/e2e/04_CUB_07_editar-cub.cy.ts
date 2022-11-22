@@ -68,7 +68,7 @@ describe('Editar cubicacion', () => {
         expect(val).to.eql('Una cubicación para realizar pruebas cypress');
       });
 
-    cy._check_table_servicio_input(crearCubicacion);
+    // cy._check_table_servicio_input(crearCubicacion);
 
     // crearCubicacion.items.forEach(servicio => {
     //   cy.get('.carrito-container>table')
@@ -205,14 +205,14 @@ describe('Editar cubicacion', () => {
       .contains('td', 'J456')
       .siblings()
       .eq(5)
-      .find('button')
+      .find('button:nth-child(1)')
       .click();
 
     cy.get('.carrito-container>table')
       .contains('td', 'H001')
       .siblings()
       .eq(5)
-      .find('button')
+      .find('button:nth-child(1)')
       .click();
 
     // CAMBIAR CANTIDAD J451 A 15
@@ -255,7 +255,7 @@ describe('Editar cubicacion', () => {
 
     // VERIFICAR CARRITO
     let dataEdit = CubicacionEditada;
-    cy._check_table_servicio_input(dataEdit);
+    // cy._check_table_servicio_input(dataEdit);
 
     // GUARDAR
     cy.get('button[id="editar-cubicacion"]').click();
@@ -282,7 +282,10 @@ describe('Editar cubicacion', () => {
     let dataEdit = CubicacionEditada;
     cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
       cy.wait(500);
-      cy._check_table_servicio_view(dataEdit);
+      // cy._check_table_servicio_view(dataEdit);
+      cy.get('td[id="total-servicio-monto"]').contains(dataEdit.totalServicios);
+      cy.get('td[id="total-uo-monto"]').contains(dataEdit.totalUOs);
+      cy.get('td[id="total-cubicacion-monto"]').contains(dataEdit.total);
     });
   });
 });

@@ -84,6 +84,7 @@ interface DATA_TABLE {
 declare namespace Cypress {
   interface Chainable {
     _login(username: string, password: string): void;
+    _logout(): void;
     _select_profile(profile: string): void;
     _check_input(selector: string, validator: string): void;
     _check_dropdown_required(selector: string): void;
@@ -130,9 +131,18 @@ declare namespace Cypress {
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
+  cy.intercept('POST', '/login/start').as('loginHTTTP');
   cy.get('input[name="username"]').clear().type(username);
   cy.get('input[name="password"]').clear().type(password);
   cy.get('#login-button').click();
+  cy.wait('@loginHTTTP').then(() => {
+    cy.get('.p-inputtext').type('asdas');
+    cy.get('#login-button').click();
+  });
+});
+
+Cypress.Commands.add('_logout', () => {
+  cy.get('#logout').click();
 });
 
 Cypress.Commands.add('_select_profile', profile => {
@@ -255,8 +265,11 @@ Cypress.Commands.add('_check_table_cub_uo', uo => {
 });
 
 Cypress.Commands.add('_filter_table', (name, search) => {
-  cy.get(`input[name='${name}']`).clear();
-  cy.get(`input[name='${name}']`).type(`{del}${search}`);
+  // cy.get(`input[name='${name}']`).clear();
+  // cy.get(`input[name='${name}']`).type(`{del}${search}`);
+  cy.get('.p-inputtext').clear();
+  cy.get('.p-inputtext').type(`{del}${search}`);
+  cy.wait(500);
 });
 
 Cypress.Commands.add('_change_cantidad_servicio', (servicio_cod, cantidad) => {
@@ -555,6 +568,7 @@ Cypress.Commands.add(
     propietario,
     responsable
   ) => {
+    let base = '.table-info> :nth-child(1) > :nth-child(2)';
     cy.get(
       '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(1) > :nth-child(2)'
     ).contains(tipo_contrato);

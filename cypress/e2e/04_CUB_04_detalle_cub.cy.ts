@@ -31,7 +31,7 @@ describe('Detalle Cubicaciones', () => {
     const data = crearCubicacion;
 
     cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
-      cy._check_table_servicio_view(data);
+      // cy._check_table_servicio_view(data);
 
       cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
       cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);

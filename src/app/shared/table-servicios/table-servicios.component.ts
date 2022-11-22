@@ -457,6 +457,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     return (this.formTable.get('table') as FormArray).length > 0;
   }
 
+  getTotal(n: string): string {
+    return parseFloat(n).toFixed(2);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

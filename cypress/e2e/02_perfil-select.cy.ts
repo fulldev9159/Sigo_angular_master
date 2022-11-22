@@ -21,9 +21,7 @@ describe('02_PERFIL_SPEC', () => {
   describe('Perfil Select form', () => {
     beforeEach(() => {
       cy.visit('http://localhost:4206/login/auth');
-      cy.get('input[name="username"]').clear().type('mgestor1');
-      cy.get('input[name="password"]').clear().type('sdasd');
-      cy.get('#login-button').click();
+      cy._login('mgestor1', 'asdasd');
     });
 
     it('should redirect to login auth if press logouth', () => {
@@ -55,9 +53,7 @@ describe('02_PERFIL_SPEC', () => {
   describe('Perfil Select sin perfil', () => {
     it('should display errr message for user doesnt exist and keep in login page', () => {
       cy.visit('http://localhost:4206/login/auth');
-      cy.get('input[name="username"]').type('mtestsinperfil');
-      cy.get('input[name="password"]').type('sdasd');
-      cy.get('#login-button').click();
+      cy._login('mtestsinperfil', 'asdasd');
       cy.get('.snackbar-container').should('exist');
     });
   });
