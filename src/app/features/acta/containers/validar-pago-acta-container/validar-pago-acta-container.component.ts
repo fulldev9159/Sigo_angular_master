@@ -277,6 +277,8 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
   }
 
   validarPagoActa(): void {
+    console.log(this.ot_id);
+    console.log(this.acta_id);
     const request: RequestAprobacionRechazoSolicitudPago = {
       ot_id: this.ot_id,
       acta_id: this.acta_id,
@@ -287,6 +289,8 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
 
     this.actaFacade.aprobarRechazarSolicitudPago(request);
     this.displayModalAprobacionPago = false;
+
+    console.log(request);
   }
 
   displayModalRechazarActa(): void {
