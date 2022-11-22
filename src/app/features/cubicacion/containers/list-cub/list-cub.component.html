@@ -157,6 +157,7 @@
   </ng-container>
   <ng-template #content>
     <!-- 101 TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
+    <h4 style="word-break: break-word;">{{cubicacionSelected?.cubicacion_nombre}}</h4>
     <div class="grid">
       <div class="col" *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
         <p-divider align="left">
