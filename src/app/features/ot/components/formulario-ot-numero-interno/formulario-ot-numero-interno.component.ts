@@ -26,7 +26,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './formulario-ot-numero-interno.component.html',
   styleUrls: ['./formulario-ot-numero-interno.component.scss'],
 })
-export class FormularioOtNumeroInternoComponent implements OnInit, OnDestroy {
+export class FormularioOtNumeroInternoComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   trashICon = faTrash;
 
   subscription: Subscription = new Subscription();
