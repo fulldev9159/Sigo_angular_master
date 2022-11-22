@@ -87,14 +87,15 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
       this.route.data.subscribe(
         ({ accionesOT, lastActa, detalleInformeAvance }) => {
           console.log(accionesOT);
+          let lastActaData: LastActa = lastActa?.data;
+
           if (detalleInformeAvance)
             this.total_informe_avance =
               detalleInformeAvance.data.valor_total_clp;
           if (accionesOT) this.accionesOT = accionesOT;
-          if (lastActa)
+          if (lastActa && lastActaData?.tipo_pago === 'PORCENTAJE')
             this.porc_a_pagar =
               lastActa.data.many_acta_detalle_servicio[0].pago_porcentaje * 100;
-          let lastActaData: LastActa = lastActa?.data;
 
           this.ot_id = lastActaData?.ot_id;
           this.tipo_pago = lastActaData?.tipo_pago;
@@ -102,10 +103,12 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
           this.ot_total = lastActaData?.valor_total_clp;
 
           // PROCESAR DATA SERVICIOS PARA TABLA
-          let servicios: DetalleServicioLastActa[] =
-            lastActaData?.many_acta_detalle_servicio;
-          let uob: DetalleUnidadObraLastActa[] =
-            lastActaData?.many_acta_detalle_uob;
+          let servicios: DetalleServicioLastActa[] = [];
+          let uob: DetalleUnidadObraLastActa[] = [];
+          if (lastActaData?.many_acta_detalle_servicio)
+            servicios = lastActaData?.many_acta_detalle_servicio;
+          if (lastActaData?.many_acta_detalle_uob)
+            uob = lastActaData?.many_acta_detalle_uob;
 
           if (servicios && servicios.length > 0) {
             let servicios_originales = servicios.filter(
