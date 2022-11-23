@@ -74,8 +74,8 @@ reset database testing:
 e2e test:
   image: cypress/browsers:node14.15.0-chrome96-ff94
   stage: e2e test
-  needs:
-    - unit test
+  # needs:
+  #   - unit test
   # when: manual
   script:
     # install dependencies
