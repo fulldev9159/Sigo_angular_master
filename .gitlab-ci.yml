@@ -27,38 +27,38 @@ linter:
   except:
     - master
 
-restart test environment:
-  stage: restart test environment
-  # when: manual
-  image: tmaier/docker-compose:latest
-  script:
-    - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
-    - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
-    - echo "deploying to google cloud"
-    - sudo systemctl status docker
-    - sudo docker-compose ps
-    - sudo docker-compose stop sftp_testing mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker-compose rm -f  sftp_testing mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker-compose up -d sftp_testing mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker-compose ps
-  tags:
-    - gcloud_tpb
-  environment: google cloud tpb
+# restart test environment:
+#   stage: restart test environment
+#   # when: manual
+#   image: tmaier/docker-compose:latest
+#   script:
+#     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
+#     - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
+#     - echo "deploying to google cloud"
+#     - sudo systemctl status docker
+#     - sudo docker-compose ps
+#     - sudo docker-compose stop sftp_testing mcl_otec_db_testing mcl_api_otec_test
+#     - sudo docker-compose rm -f  sftp_testing mcl_otec_db_testing mcl_api_otec_test
+#     - sudo docker-compose up -d sftp_testing mcl_otec_db_testing mcl_api_otec_test
+#     - sudo docker-compose ps
+#   tags:
+#     - gcloud_tpb
+#   environment: google cloud tpb
 
-reset database testing:
-  stage: reset testing database sigo
-  # when: manual
-  needs:
-    - restart test environment
-  script:
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
-    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh 3311"
-    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && mysql -uroot -ppass -h127.0.0.1 -P3311 OTEC -e 'source testing_script/data_testing.sql'"
-  tags:
-    - repo-machine
-  except:
-    - master
+# reset database testing:
+#   stage: reset testing database sigo
+#   # when: manual
+#   needs:
+#     - restart test environment
+#   script:
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
+#     - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh 3311"
+#     - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && mysql -uroot -ppass -h127.0.0.1 -P3311 OTEC -e 'source testing_script/data_testing.sql'"
+#   tags:
+#     - repo-machine
+#   except:
+#     - master
 
 # unit test:
 #   stage: unit test
