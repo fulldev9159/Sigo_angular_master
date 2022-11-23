@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './registrar-libro-obras.component.html',
   styleUrls: ['./registrar-libro-obras.component.scss'],
 })
+
 export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   @ViewChild('filesform', { static: true }) filesform: any;
@@ -18,7 +19,7 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
   formControls = {
     observaciones: new FormControl('', [Validators.required]),
     categoria: new FormControl('', []),
-    files: new FormControl([]),
+    files: new FormControl('', [Validators.required]),
   };
 
   form: FormGroup = new FormGroup(this.formControls);
@@ -34,7 +35,7 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
         let data = categoriaArchivos
           ? (categoriaArchivos?.data.items as CategoriaArchivo[])
           : [];
-        let tmp = [...data];
+        let tmp = [...data];        
         this.categoriaArchivos = tmp
           .sort((a, b) => (a.nombre > b.nombre ? 1 : -1))
           .map(value => ({
@@ -43,6 +44,7 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
           }));
       })
     );
+
   }
 
   onUpload(event: any): void {
@@ -56,11 +58,11 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
       this.form.get('categoria').clearValidators();
       this.form.get('categoria').updateValueAndValidity();
     }
-  }
+  }  
 
   get valid(): boolean {
     return this.form.valid;
-  }
+  } 
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
