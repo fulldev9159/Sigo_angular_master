@@ -55,7 +55,9 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) =>
-          a.cubicacion_nombre > b.cubicacion_nombre ? 1 : -1
+          a.cubicacion_nombre.localeCompare(b.cubicacion_nombre, 'es', {
+            sensitivity: 'base',
+          })
         );
       }),
       map(values =>
