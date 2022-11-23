@@ -13,6 +13,12 @@ describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   });
 
   it('aceptar ot supervisor', () => {
+    cy.get('#table-ejecucion>p-table>div>div>table>tbody')
+      .contains('OT Test Bucle Cypress')
+      .siblings()
+      .eq(8)
+      .find('button[id="play-button"]')
+      .click();
     cy.get('button[id="play-button"]').click();
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(1000);
@@ -26,6 +32,12 @@ describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
   });
 
   it('aceptar ot jefe area', () => {
+    cy.get('#table-ejecucion>p-table>div>div>table>tbody')
+      .contains('OT Test Bucle Cypress')
+      .siblings()
+      .eq(8)
+      .find('button[id="play-button"]')
+      .click();
     cy.get('button[id="play-button"]').click();
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(1000);

@@ -32,11 +32,17 @@ describe('02_PERFIL_SPEC', () => {
       }
     );
 
-    it('button select should be disabled', () => {
-      cy.visit('http://localhost:4206/login/auth');
-      cy._login('mgestor1', 'asdasd');
-      cy.get('#perfil-select-button').should('be.disabled');
-    });
+    it(
+      'button select should be disabled',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.visit('http://localhost:4206/login/auth');
+        cy._login('mgestor1', 'asdasd');
+        cy.get('#perfil-select-button').should('be.disabled');
+      }
+    );
 
     it(
       'if touch select and not select perfil should display requiered message',
