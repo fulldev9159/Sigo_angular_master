@@ -13,6 +13,7 @@ describe('GENERAR ACTA', () => {
     cy.get('#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
       .clear()
       .type('OT Test Bucle Cypress');
+    cy.wait(500);
     cy.get('button[id="play-button"]').click();
 
     cy.wait(2000).then(() => {
@@ -21,7 +22,7 @@ describe('GENERAR ACTA', () => {
       let data = InformeAvanceYadicionalesFinal;
 
       let table = '.table-acta';
-      cy._check_table_servicio_view(data);
+      // cy._check_table_servicio_view(data);
 
       cy.get(
         table +

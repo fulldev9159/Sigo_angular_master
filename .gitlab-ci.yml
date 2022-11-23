@@ -60,22 +60,22 @@ linter:
 #   except:
 #     - master
 
-# unit test:
-#   stage: unit test
-#   # when: manual
-#   needs:
-#     - reset database testing
-#   image: trion/ng-cli-karma:${CLI_VERSION}
-#   script:
-#     - npm ci
-#     - ng test --code-coverage --progress false --watch false
-#   coverage: '/^Statements\s*:\s*([^%]+)/'
+# # unit test:
+# #   stage: unit test
+# #   # when: manual
+# #   needs:
+# #     - reset database testing
+# #   image: trion/ng-cli-karma:${CLI_VERSION}
+# #   script:
+# #     - npm ci
+# #     - ng test --code-coverage --progress false --watch false
+# #   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 # e2e test:
 #   image: cypress/browsers:node14.15.0-chrome96-ff94
 #   stage: e2e test
-#   needs:
-#     - unit test
+#   # needs:
+#   #   - unit test
 #   # when: manual
 #   script:
 #     # install dependencies
@@ -125,3 +125,5 @@ UpdateDocker&Restart:
   tags:
     - repo-machine
   allow_failure: false
+  only:
+    - master

@@ -19,42 +19,74 @@ describe('02_PERFIL_SPEC', () => {
   });
 
   describe('Perfil Select form', () => {
-    beforeEach(() => {
-      cy.visit('http://localhost:4206/login/auth');
-      cy._login('mgestor1', 'asdasd');
-    });
+    it(
+      'should redirect to login auth if press logouth',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.visit('http://localhost:4206/login/auth');
+        cy._login('mgestor1', 'asdasd');
+        cy.get('#logout').click();
+        cy.location('pathname').should('eq', '/login/auth');
+      }
+    );
 
-    it('should redirect to login auth if press logouth', () => {
-      cy.get('#logout').click();
-      cy.location('pathname').should('eq', '/login/auth');
-    });
+    it(
+      'button select should be disabled',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.visit('http://localhost:4206/login/auth');
+        cy._login('mgestor1', 'asdasd');
+        cy.get('#perfil-select-button').should('be.disabled');
+      }
+    );
 
-    it('button select shoulf be disabled', () => {
-      cy.get('#perfil-select-button').should('be.disabled');
-    });
+    it(
+      'if touch select and not select perfil should display requiered message',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.visit('http://localhost:4206/login/auth');
+        cy._login('mgestor1', 'asdasd');
+        cy.get('#perfil-select-button').should('be.disabled');
+        cy.get('p-dropdown').click();
+        cy.get('.perfil-select-titulo').click();
+        cy.get('#input-dropdown+zwc-input-alert>small').contains(
+          'Este campo es requerido'
+        );
+      }
+    );
 
-    it('if touch select and not select perfil should display requiered message', () => {
-      cy.get('#perfil-select-button').should('be.disabled');
-      cy.get('p-dropdown').click();
-      cy.get('.perfil-select-titulo').click();
-      cy.get('#input-dropdown+zwc-input-alert>small').contains(
-        'Este campo es requerido'
-      );
-    });
+    it(
+      'should redirect to home if select perfil',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.get('p-dropdown').click();
+        cy.get('.p-ripple').click();
+        cy.get('#perfil-select-button').click();
+        cy.location('pathname').should('eq', '/home');
+        cy.get('#logout').click();
+      }
+    );
 
-    it('should redirect to home if select perfil', () => {
-      cy.get('p-dropdown').click();
-      cy.get('.p-ripple').click();
-      cy.get('#perfil-select-button').click();
-      cy.location('pathname').should('eq', '/home');
-    });
-  });
-
-  describe('Perfil Select sin perfil', () => {
-    it('should display errr message for user doesnt exist and keep in login page', () => {
-      cy.visit('http://localhost:4206/login/auth');
-      cy._login('mtestsinperfil', 'asdasd');
-      cy.get('.snackbar-container').should('exist');
-    });
+    it(
+      'should display errr message for user doesnt exist and keep in login page',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.visit('http://localhost:4206/login/auth');
+        cy.get('input[name="username"]').clear().type('asdas');
+        cy.get('input[name="password"]').clear().type('password');
+        cy.get('#login-button').click();
+        cy.get('.snackbar-container').should('exist');
+      }
+    );
   });
 });

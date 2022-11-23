@@ -48,11 +48,17 @@ describe('03_HOME_SPEC', () => {
       cy.location('pathname').should('eq', '/login/auth');
     });
 
-    it('should redirect to perfil select if press cambiar perfil', () => {
-      cy._login('mgestor1', 'asdasd');
-      cy._select_profile('Gestor/JP');
-      cy.get('#cambiar-perfil').click();
-      cy.location('pathname').should('eq', '/login/perfil-select');
-    });
+    it(
+      'should redirect to perfil select if press cambiar perfil',
+      {
+        retries: 2,
+      },
+      () => {
+        cy._login('mgestor1', 'asdasd');
+        cy._select_profile('Gestor/JP');
+        cy.get('#cambiar-perfil').click();
+        cy.location('pathname').should('eq', '/login/perfil-select');
+      }
+    );
   });
 });

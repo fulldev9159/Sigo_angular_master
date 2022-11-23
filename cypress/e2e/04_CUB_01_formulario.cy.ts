@@ -336,13 +336,19 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
   });
 
   describe('Tabla carrito', () => {
-    it('ingresar', () => {
-      cy.viewport(1500, 1700);
-      cy.get('#logout').click();
-      cy._login('mgestor1', 'asdasd');
-      cy._select_profile('Gestor/JP');
-      cy.get('button[id="navbar-create-cub"]').click();
-    });
+    it(
+      'ingresar',
+      {
+        retries: 2,
+      },
+      () => {
+        cy.viewport(1500, 1700);
+        cy.get('#logout').click();
+        cy._login('mgestor1', 'asdasd');
+        cy._select_profile('Gestor/JP');
+        cy.get('button[id="navbar-create-cub"]').click();
+      }
+    );
 
     it('El botón agregar servicio debería habilitarse solo si tiene todos los campos requeridos', () => {
       cy.get('#agregar-button').should('be.disabled');

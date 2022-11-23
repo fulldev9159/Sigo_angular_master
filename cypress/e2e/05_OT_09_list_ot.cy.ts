@@ -1,4 +1,4 @@
-describe('listar las ot', () => {
+describe.skip('listar las ot', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
@@ -10,7 +10,7 @@ describe('listar las ot', () => {
     cy.get('button[id="navbar-list-ot"]').click();
   });
 
-  it('list ot', () => {
+  it.skip('list ot', () => {
     // PESTAÑA EJECUCION
     cy.get('#table-ejecucion>p-table>div>div>table>tbody')
       .find('tr')

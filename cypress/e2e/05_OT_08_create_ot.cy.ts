@@ -148,7 +148,7 @@ describe('Create ot', () => {
       cy.get(
         '#fecha-adjudicacion > span > div > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(2)> span'
       ).click();
-      cy.get('input[name="input-numero-pedido"]').type('Pedido#2333');
+      // cy.get('input[name="input-numero-pedido"]').type('Pedido#2333');
       cy.get('input[name="input-materia"]').type('M32');
 
       cy.get('#crear-ot').should('be.disabled');
