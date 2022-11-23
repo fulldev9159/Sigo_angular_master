@@ -130,7 +130,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       ]),
       fecha_adjudicacion: new FormControl(null, [Validators.required]),
       numero_pedido: new FormControl(null, [
-        Validators.required,
+        //Validators.required,
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
@@ -354,7 +354,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         ordinario: {
           carta_adjudicacion,
           fecha_adjudicacion,
-          numero_pedido,
+          //numero_pedido,
           materia,
           tipo_numero_interno_id,
           ots_numero_interno,
@@ -365,7 +365,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
           ...base,
           carta_adjudicacion: carta_adjudicacion.trim(),
           fecha_adjudicacion,
-          numero_pedido: numero_pedido.trim(),
+          //numero_pedido: numero_pedido.trim(),
           materia: materia.trim(),
         },
         ot_numero_interno:

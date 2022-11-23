@@ -22,7 +22,7 @@ export interface CreateOTBase {
 export interface CreateOTOrdinario extends CreateOTBase {
   carta_adjudicacion: string;
   fecha_adjudicacion: Date;
-  numero_pedido: string;
+  //numero_pedido: string;
   materia: string;
 }
 export interface CreateOTMovil extends CreateOTBase {
