@@ -153,7 +153,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onUpload(event: any): void {
-    this.logger.debug('ADD', event);
+    // this.logger.debug('ADD', event);
     this.uploadedFiles = event;
   }
 
