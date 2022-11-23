@@ -19,7 +19,6 @@ describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
       .eq(8)
       .find('button[id="play-button"]')
       .click();
-    cy.get('button[id="play-button"]').click();
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(1000);
   });
@@ -38,7 +37,6 @@ describe('OT_ET_AUTORIZACION_INICIAL BUCLE', () => {
       .eq(8)
       .find('button[id="play-button"]')
       .click();
-    cy.get('button[id="play-button"]').click();
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(1000);
   });
