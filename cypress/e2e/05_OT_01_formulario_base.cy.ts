@@ -22,7 +22,7 @@ describe('Visibilidad e Interacción Inicial', () => {
     cy.get('#select-cubicacion>div').should('have.class', 'p-disabled');
   });
 
-  let selector = '#select-cubicacion';
+  // let selector = '#select-cubicacion';
 
   // TODO: MEJORAR VERIFICACION PARA QUE REVISE LAS NUEVAS CUBICACIONES AGREGADAS A MANO SERÍA ACTUALIZAR EL MOCK
 

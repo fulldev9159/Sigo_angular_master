@@ -20,7 +20,6 @@ describe('Formulario sección Contrato ORDINARIO', () => {
     );
 
     cy._check_input('input[name="input-numero-carta"]', 'required');
-    cy._check_input('input[name="input-numero-pedido"]', 'required');
     cy._check_input('input[name="input-materia"]', 'required');
   });
 });

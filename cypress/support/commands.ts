@@ -138,6 +138,7 @@ Cypress.Commands.add('_login', (username, password) => {
   cy.wait('@loginHTTTP').then(() => {
     cy.get('.p-inputtext').type('asdas');
     cy.get('#login-button').click();
+    cy.wait(500);
   });
 });
 
