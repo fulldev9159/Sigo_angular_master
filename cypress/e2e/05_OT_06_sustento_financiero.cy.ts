@@ -47,15 +47,15 @@ describe('Formulario serccion Sustento Financiero', () => {
         )
         .map(value => value.linea_presupuestaria_codigo)
     );
-    cy._check_dropdown_async(
-      '/ot/sustento_financiero_capex_pmolp/get',
-      '#select-linea-presupuestaria',
-      'CHI100',
-      '#select-pep2',
-      PEP2MOCK200ok.data.items
-        .sort((a, b) => (a.pep2 > b.pep2 ? 1 : -1))
-        .map(value => value.pep2)
-    );
+    // cy._check_dropdown_async(
+    //   '/ot/sustento_financiero_capex_pmolp/get',
+    //   '#select-linea-presupuestaria',
+    //   'CHI100',
+    //   '#select-pep2',
+    //   PEP2MOCK200ok.data.items
+    //     .sort((a, b) => (a.pep2 > b.pep2 ? 1 : -1))
+    //     .map(value => value.pep2)
+    // );
 
     // OPEX
     cy.get('[label="Opex"] > .p-radiobutton > .p-radiobutton-box').click();
@@ -78,14 +78,14 @@ describe('Formulario serccion Sustento Financiero', () => {
     //     .map(value => value.cuenta_sap.toString())
     // );
     cy._select_dropdown('#select-opex', '00-01820');
-    cy._check_dropdown_async(
-      '/ot/sustento_financiero_opex_opxsap/get',
-      '#select-cuenta-sap',
-      '6052561',
-      '#select-ceco',
-      CECOMOCK200ok.data.items
-        .sort((a, b) => (a.ceco > b.ceco ? 1 : -1))
-        .map(value => value.ceco)
-    );
+    // cy._check_dropdown_async(
+    //   '/ot/sustento_financiero_opex_opxsap/get',
+    //   '#select-cuenta-sap',
+    //   '6052561',
+    //   '#select-ceco',
+    //   CECOMOCK200ok.data.items
+    //     .sort((a, b) => (a.ceco > b.ceco ? 1 : -1))
+    //     .map(value => value.ceco)
+    // );
   });
 });

@@ -6,7 +6,7 @@
         <th [attr.colspan]="colSpanUOs">Unidad Obra</th>
       </tr>
       <tr>
-        <th></th>
+        <!-- <th></th> -->
         <th style="background: var(--bg-th-servicios)">Cod</th>
         <th style="background: var(--bg-th-servicios)">Descripción</th>
         <th style="background: var(--bg-th-servicios)">Tipo</th>
@@ -27,7 +27,7 @@
           </ng-container>
         </th>
 
-        <th></th>
+        <!-- <th></th> -->
         <th>Cod</th>
         <th>Descripción</th>
         <th>Actividad</th>
@@ -41,7 +41,7 @@
       <ng-container *ngFor="let servicio of data_carrito$|async;let i = index">
         <!-- TODOCOMENT: VER COMO MEJORAR ESTE WA PARA LA VISUALIZACIÓN RESPONSIVA DE LA TABLA CON UNA UO -->
         <tr style="height: 0.01rem;">
-          <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{servicio.servicio_rowid}}</td>
+          <!-- <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{servicio.servicio_rowid}}</td> -->
           <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
             {{ servicio.numero_producto }}
           </td>
@@ -96,7 +96,7 @@
               {{+servicio.puntos_baremos
               *+getControlServiceCantidad(servicio.servicio_id).value | number : '1.2-2'}}</td>
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()" style="text-align:right;">
-              {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value
+              {{getTotal(+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value)
               |
               currency : 'CLP' :
               '$':'.0-2':'es-CL'}}
@@ -129,7 +129,7 @@
         </tr>
         <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
           <tr>
-            <td>{{uo.uo_rowid}}</td>
+            <!-- <td>{{uo.uo_rowid}}</td> -->
             <td>{{ uo.uo_codigo }}</td>
             <td>
               <ng-container *ngIf="uo.adicional_existente_ia">
@@ -190,7 +190,7 @@
       </ng-container>
     </tbody>
     <tfoot *ngIf="canSeePrices()">
-      <tr>
+      <!-- <tr>
         <td></td>
         <td *ngIf="column_acciones"></td>
         <td></td>
@@ -218,6 +218,42 @@
         <td *ngIf="column_acciones"></td>
         <td *ngIf="contratoMarco==='Bucle'"></td>
         <td></td>
+      </tr> -->
+      <tr>
+        <ng-container *ngIf="contratoMarco==='Bucle'">
+          <td [colSpan]="5"></td>
+          <td>Total Baremos:</td>
+          <td>
+            {{this.totalBaremos| currency :
+            'CLP' :
+            '$':'.0-2':'es-CL'}}
+          </td>
+          <td [colSpan]="3"></td>
+        </ng-container>
+        <ng-container *ngIf="contratoMarco!=='Bucle'">
+          <td [colSpan]="(+colSpanServicios-2) + (+colSpanUOs-2)"></td>
+        </ng-container>
+
+        <td [colSpan]="2">Total Servicios</td>
+        <td [colSpan]="2" style="text-align:right" id="total-servicio-monto">
+          {{totalServicios>99999999999999999999999?0:totalServicios| currency
+          :
+          'CLP' :
+          '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td [colSpan]="(+colSpanServicios-2) + (+colSpanUOs-2)"></td>
+        <td [colSpan]="2">Total Unidades Obras</td>
+        <td [colSpan]="2" style="text-align:right" id="total-uo-monto"> {{totalUOs>99999999999999999999999?0:totalUOs|
+          currency : 'CLP' :
+          '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td [colSpan]="(+colSpanServicios-2) + (+colSpanUOs-2)"></td>
+        <td [colSpan]="2">Total Final</td>
+        <td [colSpan]="2" style="text-align:right" id="total-cubicacion-monto"> {{totalServicios+totalUOs|
+          currency :
+          'CLP' : '$':'.0-2':'es-CL'}}</td>
       </tr>
     </tfoot>
   </table>

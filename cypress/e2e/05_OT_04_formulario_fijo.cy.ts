@@ -32,7 +32,7 @@ describe('Formulario serccion Contrato FIJO', () => {
 
     cy.get('input[name="input-numero-interno"]').should('be.disabled');
     cy.get('#agregar-numero-interno').should('be.disabled');
-    cy.get('tbody').find('tr').should('have.length', 0);
+    cy.get('tbody').find('tr').should('have.length', 1);
   });
 
   describe('comportamiento', () => {
