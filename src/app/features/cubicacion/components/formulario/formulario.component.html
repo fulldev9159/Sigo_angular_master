@@ -1,80 +1,56 @@
 <p-divider align="left">
-    <span class="p-tag">Datos de la cubicación</span>
+  <span class="p-tag">Datos de la cubicación</span>
 </p-divider>
 
 <form [formGroup]="formCub">
-    <div class="card">
-        <div class="formgrid grid">
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <zwc-input-text Label="*Nombre de la Cubicación" [control]="formCubControl.nombre" name_input="input-nombre-cubicacion"></zwc-input-text>
-            </div>
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                <zwc-pdropdown 
-                     [control]="formCubControl.tipocubicacion" 
-                     Label="*Tipo Cubicación" 
-                     dropdown_id="select-tipo-cubicacion" 
-                     [data]="tipoCubicacion$|async" 
-                     Pplaceholder="Seleccione un tipo"
-                     ></zwc-pdropdown>
-            </div>
-        </div>
+  <div class="card">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <zwc-input-text Label="*Nombre de la Cubicación" [control]="formCubControl.nombre" name_input="input-nombre-cubicacion"></zwc-input-text>
+      </div>
+      <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+        <zwc-pdropdown [control]="formCubControl.tipocubicacion" Label="*Tipo Cubicación" dropdown_id="select-tipo-cubicacion" [data]="tipoCubicacion$|async" Pplaceholder="Seleccione un tipo"></zwc-pdropdown>
+      </div>
     </div>
+  </div>
 
-    <div class="grid mt-1">
-        <div class="col-12  md:col-6 lg:col-6 xl:col-6">
-            <div class="card">
-                <div class="field">
-                    <zwc-pdropdown 
-                        [control]="formCubControl.contrato" 
-                        Label="*Contrato Marco" 
-                        dropdown_id="select-contrato_marco" 
-                        [data]="contratoUsuarios$|async" 
-                        Pplaceholder="Seleccione un contrato marco"></zwc-pdropdown>
-                </div>
-                <div class="field">
-                    <zwc-pdropdown 
-                        [control]="formCubControl.agencia_id" 
-                        Label="*Agencia" 
-                        dropdown_id="select-agencia" 
-                        [data]="agenciasContrato$|async" 
-                        Pplaceholder="Seleccione una agencia" 
-                        [loading]="getAgenciaContratoLoading$|async"></zwc-pdropdown>
-                </div>
-                <div class="field">
-                    <zwc-pdropdown 
-                        [control]="formCubControl.cmarcoproveedor_id" 
-                        Label="*Proveedor" 
-                        dropdown_id="select-proveedor" 
-                        [data]="proveedoresAgenciaContrato$|async" 
-                        Pplaceholder="Seleccione un proveedor" 
-                        [loading]="getProveedoresAgenciaContratoLoading$|async"></zwc-pdropdown>
-                </div>
-            </div>
+  <div class="grid mt-1">
+    <div class="col-12  md:col-6 lg:col-6 xl:col-6">
+      <div class="card">
+        <div class="field">
+          <zwc-pdropdown [control]="formCubControl.contrato" Label="*Contrato Marco" dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async" Pplaceholder="Seleccione un contrato marco" [Pdisabled]="disableContratos"></zwc-pdropdown>
         </div>
-        <div class="col-12  md:col-6 lg:col-6 xl:col-6">
-            <div class="card">
-                <div id="bucle-direccion" *ngIf="contrato_selected && contrato_selected.model_contrato_id.tipo_contrato_id===4">
-                    <div class="formgrid grid">
-                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                            <zwc-input-text Label="*Dirección desde:" [control]="formCubControl.direcciondesde" name_input="input-direccion-desde"></zwc-input-text>
-                        </div>
-                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                            <zwc-input-text Label="*Altura:" [control]="formCubControl.direcciondesdealtura" name_input="input-altura-desde"></zwc-input-text>
-                        </div>
-                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                            <zwc-input-text Label="*Dirección hasta:" [control]="formCubControl.direccionhasta" name_input="input-direccion-hasta"></zwc-input-text>
-                        </div>
-                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-                            <zwc-input-text Label="*Altura:" [control]="formCubControl.direccionhastaaltura" name_input="input-altura-hasta"></zwc-input-text>
-                        </div>
-                    </div>
-                </div>
-                <div class="detalles">
-                    <label>Detalles:</label>
-                    <textarea [formControl]="formCubControl.descripcion" class="form-control" id="input-descripcion" placeholder="Agregue algún detalle de la cubicación" cols="30" rows="4"></textarea>
-                </div>
-               
-            </div>
+        <div class="field">
+          <zwc-pdropdown [control]="formCubControl.agencia_id" Label="*Agencia" dropdown_id="select-agencia" [data]="agenciasContrato$|async" Pplaceholder="Seleccione una agencia" [loading]="getAgenciaContratoLoading$|async" [Pdisabled]="disableContratos"></zwc-pdropdown>
         </div>
+        <div class="field">
+          <zwc-pdropdown [control]="formCubControl.cmarcoproveedor_id" Label="*Proveedor" dropdown_id="select-proveedor" [data]="proveedoresAgenciaContrato$|async" Pplaceholder="Seleccione un proveedor" [loading]="getProveedoresAgenciaContratoLoading$|async" [Pdisabled]="disableContratos"></zwc-pdropdown>
+        </div>
+      </div>
     </div>
+    <div class="col-12  md:col-6 lg:col-6 xl:col-6">
+      <div class="card">
+        <div id="bucle-direccion" *ngIf="contrato_selected && contrato_selected.model_contrato_id.tipo_contrato_id===4">
+          <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+              <zwc-input-text Label="*Dirección desde:" [control]="formCubControl.direcciondesde" name_input="input-direccion-desde"></zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+              <zwc-input-text Label="*Altura:" [control]="formCubControl.direcciondesdealtura" name_input="input-altura-desde"></zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+              <zwc-input-text Label="*Dirección hasta:" [control]="formCubControl.direccionhasta" name_input="input-direccion-hasta"></zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+              <zwc-input-text Label="*Altura:" [control]="formCubControl.direccionhastaaltura" name_input="input-altura-hasta"></zwc-input-text>
+            </div>
+          </div>
+        </div>
+        <div class="detalles">
+          <label>Detalles:</label>
+          <textarea [formControl]="formCubControl.descripcion" class="form-control" id="input-descripcion" placeholder="Agregue algún detalle de la cubicación" cols="30" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>

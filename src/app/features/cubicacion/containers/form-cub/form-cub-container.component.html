@@ -1,7 +1,7 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
   <div content>
     <h1>{{editMode?title:'Creación de una nueva Cubicación/Costeo' }}</h1>
-    <zwc-formulario #formulario></zwc-formulario>
+    <zwc-formulario #formulario [disableContratos]="tableServicios.hasElements"></zwc-formulario>
     <p-divider align="center">
       <span class="p-tag">Agregar Servicios</span>
     </p-divider>

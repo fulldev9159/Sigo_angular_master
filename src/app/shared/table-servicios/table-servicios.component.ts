@@ -453,8 +453,12 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
-  get valid(): boolean {
+  get hasElements(): boolean {
     return (this.formTable.get('table') as FormArray).length > 0;
+  }
+
+  get valid(): boolean {
+    return this.hasElements;
   }
 
   getTotal(n: string): string {

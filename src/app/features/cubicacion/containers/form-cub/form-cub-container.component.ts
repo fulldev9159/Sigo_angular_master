@@ -272,6 +272,18 @@ export class FormCubContainerComponent
               this.formulario.formCub
                 .get('cmarcoproveedor_id')
                 .setValue(cubicacion.cmarco_has_proveedor_id);
+
+              if (this.tableServicios.hasElements) {
+                this.formulario.formCub
+                  .get('contrato')
+                  .disable({ emitEvent: false });
+                this.formulario.formCub
+                  .get('agencia_id')
+                  .disable({ emitEvent: false });
+                this.formulario.formCub
+                  .get('cmarcoproveedor_id')
+                  .disable({ emitEvent: false });
+              }
             }, 1500);
 
             cubicacion.many_cubicacion_has_servicio.forEach(service => {
