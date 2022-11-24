@@ -16,17 +16,20 @@
 
             <div class="field col-12">
                 <label>Adjuntar evidencias</label>
-                <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true"
+                <p-fileUpload chooseLabel="Agregar documento" name="files[]" #filesform auto="true"
                     (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple"
                     (onRemove)="removeFile($event)"
-                    accept=".docx,.doc,.gif,.json,.jpg,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain"
-                    maxFileSize="50000000">
+                    accept=".docx,.doc,.gif,.json,.jpg,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain"
+                    maxFileSize="50000000" [invalidFileTypeMessageSummary]="'{0}: Tipo de archivo inválido,'"
+                    [invalidFileTypeMessageDetail]="'Solo se permiten los siguientes: {0}'"
+                    [invalidFileSizeMessageSummary]="'{0}: Tamaño de archivo no válido,'"
+                    [invalidFileSizeMessageDetail]="'El tamaño máximo de carga es de {0}.'">
                 </p-fileUpload>
                 <label style="color: #464646;font-weight: 400;">
                     <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
                     <span style="word-spacing: 5px">.docx .doc .gif .json .jpg .jpeg .pjpeg .png .txt .pdf .gzip .zip
                         .rar
-                        .7zip zip .dwg .csv .xls .ppt .pptx </span>
+                        .7zip .dwg .csv .xls .ppt .pptx </span>
                 </label>
             </div>
 
