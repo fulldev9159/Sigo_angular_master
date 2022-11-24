@@ -349,8 +349,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   // DETALLE CUBICACION
   showDetalleCubicacion(cubicacion: Cubicacion): void {
-    this.displayModalDetalleCubicacion = true;
-    this.cubicacionSelected = cubicacion;
+    this.displayModalDetalleCubicacion = true;   
+
+    this.cubicacionSelected = {
+      ...cubicacion, 
+      codigo_acuerdo: cubicacion.codigo_acuerdo + " - AJ INGENIEROS S.A.",
+    };
+    
     this.serviciosFacade.resetCarritoServices();
     this.cubicacionFacade.detalleCubicacion(cubicacion.cubicacion_id);
   }
