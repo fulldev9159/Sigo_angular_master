@@ -310,6 +310,8 @@ export class FormCubContainerComponent
                   servicio_unidad_descripcion:
                     service.model_unidad_id.descripcion,
                   prov_has_serv_precio: service.prov_has_serv_precio,
+                  puntos_baremos: service.puntos_baremos,
+
                   unidad_obras: [
                     {
                       precargado: true,

@@ -11,7 +11,7 @@
         </zwc-form-agregar-servicios>
       </div>
       <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
-        <zwc-table-servicios #tableServicios [accion_detalle_uo]="true" (detallesUOClicked)="showMateriales($event)"></zwc-table-servicios>
+        <zwc-table-servicios #tableServicios [contratoMarco]="formulario?.contrato_selected?.model_contrato_id?.nombre ?? ''" [accion_detalle_uo]="true" (detallesUOClicked)="showMateriales($event)"></zwc-table-servicios>
       </div>
     </div>
     <ng-container *ngIf="editMode;else createModeButton">

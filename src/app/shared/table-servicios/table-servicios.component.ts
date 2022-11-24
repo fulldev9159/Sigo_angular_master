@@ -125,7 +125,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       this.colSpanServicios = this.colSpanServicios - 1;
       this.colSpanUOs = this.colSpanUOs - 1;
     }
-    if (this.contratoMarco === 'Bucle') {
+    if (this.contratoMarco === 'BUCLE') {
       this.colSpanServicios = this.colSpanServicios + 2;
     }
 

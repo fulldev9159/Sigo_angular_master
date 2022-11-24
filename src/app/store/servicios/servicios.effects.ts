@@ -81,6 +81,7 @@ export class ServiciosEffects {
                     serviciosActions.addServicioCarritoSuccess({
                       responseService,
                       responseUnidadObra,
+                      puntos_baremos: 0,
                     })
                   ),
                   catchError(error =>
