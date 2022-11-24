@@ -357,7 +357,7 @@ export class FormCubContainerComponent
             contrato,
             agencia_id,
             cmarcoproveedor_id,
-          } = this.formulario.formCub.value;
+          } = this.formulario.formCub.getRawValue();
 
           // 155 TODO: UNIFICAR TIPO FORMULARIO
           const formTableArray = this.tableServicios?.formTable
@@ -444,7 +444,7 @@ export class FormCubContainerComponent
             contrato,
             agencia_id,
             cmarcoproveedor_id,
-          } = this.formulario.formCub.value;
+          } = this.formulario.formCub.getRawValue();
 
           const isLocal = (item: { precargado?: boolean }) =>
             item.precargado === undefined || item.precargado === false;
