@@ -458,7 +458,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   }
 
   get valid(): boolean {
-    return this.hasElements;
+    return this.formTable.valid && this.hasElements;
   }
 
   getTotal(n: string): string {
