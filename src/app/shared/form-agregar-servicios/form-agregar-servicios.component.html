@@ -19,6 +19,15 @@
     <div class="formgrid grid">
       <div class="field col-12 ">
         <zwc-pdropdown [control]="formFilterControls.servicio_id" Label="Servicio" dropdown_id="select-servicio" [data]="serviciosAgenciaContratoProveedor$|async" Pplaceholder="Seleccione un servicio" [loading]="loadingGetServiciosAgenciaContratoProveedor$|async" [Pfilter]="true" PfilterBy="name" [PshowClear]="true"></zwc-pdropdown>
+        <ng-container *ngIf="reglasDeAgregacion === 'Cubicacion'">
+          <ng-container *ngIf="formFilterControls.servicio_id.valid">
+            <ng-container *ngIf="serviciosAgenciaContratoProveedor$|async as servicios">
+              <ng-container *ngIf="findServicio(servicios, formFilterControls.servicio_id.value) as servicio">
+                <div style="margin-top: 2px"><small>Precio unitario: {{ servicio.precio | currency: 'CLP':'$':'.0-2':'es-CL' }}</small></div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
       </div>
       <div class="field col-12">
         <zwc-pdropdown [control]="formFilterControls.unidad_obra_cod" Label="Unidad de Obra" dropdown_id="select-unidad-obra" [data]="unidadesObraServicio$|async" Pplaceholder="Seleccione una unidad de obra" [loading]="loadingGetUnidadesObraServicio$|async" [Pfilter]="true" PfilterBy="name" [PshowClear]="true"></zwc-pdropdown>
