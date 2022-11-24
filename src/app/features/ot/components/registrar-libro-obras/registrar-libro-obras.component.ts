@@ -19,7 +19,7 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
   formControls = {
     observaciones: new FormControl('', [Validators.required]),
     categoria: new FormControl('', []),
-    files: new FormControl('', [Validators.required]),
+    files: new FormControl([]),
   };
 
   form: FormGroup = new FormGroup(this.formControls);
