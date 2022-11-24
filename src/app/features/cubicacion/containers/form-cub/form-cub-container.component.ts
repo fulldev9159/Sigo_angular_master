@@ -90,6 +90,8 @@ export class FormCubContainerComponent
   }
 
   ngOnInit(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     this.navbarHeader = [
       { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
       {
@@ -238,6 +240,8 @@ export class FormCubContainerComponent
 
     this.subscription.add(
       this.route.data.subscribe(({ detalleCubicacion }) => {
+        this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
         if (detalleCubicacion) {
           const detalle = detalleCubicacion.data;
 
@@ -335,6 +339,8 @@ export class FormCubContainerComponent
   }
 
   createCubicacion(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     this.subscription.add(
       combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))
@@ -409,6 +415,8 @@ export class FormCubContainerComponent
   }
 
   editarCubicacion(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
     if (
       this.tableServicios.servicios_eliminar.length > 0 ||
