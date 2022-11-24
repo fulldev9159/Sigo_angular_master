@@ -159,25 +159,6 @@
     <!-- 101 TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
     <h4 style="word-break: break-word;">{{cubicacionSelected?.cubicacion_nombre}}</h4>
     <div class="grid">
-      <div class="col" *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
-        <p-divider align="left">
-          <span class="p-tag">Detales de dirección</span>
-        </p-divider>
-        <table class="info-bucle-direccion">
-          <tr>
-            <td style="background: #efefef;"><strong>Direccion desde</strong></td>
-            <td>{{detalleCubicacion?.direccion_desde}}</td>
-            <td style="background: #efefef;"><strong>Altura</strong> </td>
-            <td>{{detalleCubicacion?.altura_desde}}</td>
-          </tr>
-          <tr>
-            <td style="background: #efefef;"><strong>Direccion Hasta</strong> </td>
-            <td>{{detalleCubicacion?.direccion_hasta}}</td>
-            <td style="background: #efefef;"><strong>Altura</strong> </td>
-            <td>{{detalleCubicacion?.altura_hasta}}</td>
-          </tr>
-        </table>
-      </div>
       <div class="col">
         <p-divider align="left">
           <span class="p-tag">Detales de la cubicación </span>
@@ -198,6 +179,25 @@
           <tr>
             <td style="background: #efefef;"><strong>Contrato</strong> </td>
             <td>{{cubicacionSelected?.contrato_marco_nombre}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col" *ngIf="cubicacionSelected?.contrato_marco_tipo_nombre==='Bucle'">
+        <p-divider align="left">
+          <span class="p-tag">Detales de dirección</span>
+        </p-divider>
+        <table class="info-bucle-direccion">
+          <tr>
+            <td style="background: #efefef;"><strong>Direccion desde</strong></td>
+            <td>{{detalleCubicacion?.direccion_desde}}</td>
+            <td style="background: #efefef;"><strong>Altura</strong> </td>
+            <td>{{detalleCubicacion?.altura_desde}}</td>
+          </tr>
+          <tr>
+            <td style="background: #efefef;"><strong>Direccion Hasta</strong> </td>
+            <td>{{detalleCubicacion?.direccion_hasta}}</td>
+            <td style="background: #efefef;"><strong>Altura</strong> </td>
+            <td>{{detalleCubicacion?.altura_hasta}}</td>
           </tr>
         </table>
       </div>
