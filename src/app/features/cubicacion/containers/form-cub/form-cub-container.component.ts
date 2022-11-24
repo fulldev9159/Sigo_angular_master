@@ -31,7 +31,7 @@ import {
   UOAgregar,
   MaterialesManoObra,
 } from '@model';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 
 @Component({
@@ -84,7 +84,8 @@ export class FormCubContainerComponent
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
     private loadingFacade: LoadingsFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
@@ -583,5 +584,9 @@ export class FormCubContainerComponent
   closeModalMateriales(): void {
     this.materialesSelected = null;
     this.displayModalMateriales = false;
+  }
+
+  goBack(): void {
+    this.router.navigate(['/cubicacion/list-cub'], {});
   }
 }
