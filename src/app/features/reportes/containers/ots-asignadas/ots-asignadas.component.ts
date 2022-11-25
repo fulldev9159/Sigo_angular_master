@@ -1,10 +1,8 @@
 import { registerLocaleData } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
@@ -19,7 +17,7 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
   templateUrl: './ots-asignadas.component.html',
   styleUrls: ['./ots-asignadas.component.scss'],
 })
-export class OtsAsignadasComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OtsAsignadasComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
   form: FormGroup = new FormGroup(
@@ -42,10 +40,6 @@ export class OtsAsignadasComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
-
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
