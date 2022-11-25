@@ -331,17 +331,17 @@ export class FormCubContainerComponent
                       // TODO Revisar
                       material_arr: uo.many_cubicacion_has_material.map(m => {
                         return {
-                          material_cantidad: m.cantidad,
                           material_codigo: m.material_cod,
-                          material_nombre: '--', // ?
+                          material_nombre: m.model_material_cod.descripcion,
                           material_origen: m.origen,
-                          material_precio: m.valor, // ?
                           material_precio_clp: m.valor_unitario_clp, // ?
+
+                          material_cantidad: m.cantidad,
+                          material_precio: m.valor, // ?
                           material_tipo_moneda_id: m.model_tipo_moneda_id.id,
                           material_unidad_id: m.model_unidad_id.id,
                           material_unidad_medida_cod: '--', // ?
                           material_valor: m.valor,
-
                           material_unidad_codigo: m.model_unidad_id.codigo,
                           material_unidad_descripcion:
                             m.model_unidad_id.descripcion,

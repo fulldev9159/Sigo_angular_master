@@ -12,7 +12,7 @@
         <th style="background: var(--bg-th-servicios)">Tipo</th>
         <th style="background: var(--bg-th-servicios)">Cantidad</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='BUCLE'">Puntos Baremos</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio Especialidad</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio {{ contratoMarco === 'BUCLE' ? 'Especialidad' : 'Unitario' }}</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='BUCLE'">Total Baremos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total Pesos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
