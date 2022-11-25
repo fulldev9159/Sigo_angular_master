@@ -5,7 +5,6 @@ function daysDiff(date1: Date, date2: Date): number {
   const time2 = date2.getTime();
 
   const diff = Math.abs(time1 - time2);
-  console.log('diff', diff);
 
   return diff / (1000 * 60 * 60 * 24);
 }
