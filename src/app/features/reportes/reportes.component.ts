@@ -1,15 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-//// import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'zwc-reportes',
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.scss'],
 })
-export class ReportesComponent implements OnInit {
+export class ReportesComponent {
   constructor() {}
-
-  ngOnInit(): void {
-    //// this.authFacade.showMenuDetalleOT(false);
-  }
 }
