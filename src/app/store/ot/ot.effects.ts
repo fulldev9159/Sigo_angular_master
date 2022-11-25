@@ -291,13 +291,17 @@ export class OTEffects {
       this.actions$.pipe(
         ofType(otActions.downloadOTsAsignadasSuccess),
         tap(({ filename, data }) => {
-          console.log('downloaded', { filename, data });
-          //// const blob = new Blob([data], { type: 'application/ms-excel' });
-          //// const url = window.URL.createObjectURL(blob);
-          //// const pwa = window.open(url);
-          //// if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-          ////   console.error('Please disable your Pop-up blocker and try again.');
-          //// }
+          const link = document.createElement('a');
+          link.style.display = 'none';
+          document.body.appendChild(link);
+
+          const blob = new Blob([data], { type: 'application/ms-excel' });
+          const objectURL = URL.createObjectURL(blob);
+
+          link.href = objectURL;
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
         })
       ),
     { dispatch: false }
