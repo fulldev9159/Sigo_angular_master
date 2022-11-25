@@ -65,6 +65,13 @@ const routes: Routes = [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: 'reportes',
+    loadChildren: () =>
+      import('./features/reportes/reportes.module').then(m => m.ReportesModule),
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({

@@ -11,6 +11,7 @@ import { NavbarComponent } from './layout/main-layout/components/navbar/navbar.c
 import { MenuAdminComponent } from './layout/main-layout/components/menu-admin/menu-admin.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-detalle-ot/menu-detalle-ot.component';
+import { MenuReportesComponent } from './layout/main-layout/components/menu-reportes/menu-reportes.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-det
     NavbarComponent,
     MenuAdminComponent,
     MenuDetalleOtComponent,
+    MenuReportesComponent,
   ],
   imports: [
     BrowserModule,

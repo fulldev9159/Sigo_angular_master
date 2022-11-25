@@ -13,6 +13,11 @@
   <zwc-menu-admin *ngIf="sessionData.nombre_perfil_select==='Admin'"></zwc-menu-admin>
   <ng-container *ngIf="showMenuDetalleOT$|async">
     <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
+    <br>
+  </ng-container>
+
+  <ng-container *ngxPermissionsOnly="['OT_LISTAR']">
+    <zwc-menu-reportes></zwc-menu-reportes>
   </ng-container>
 
   <div class="versiones-container">

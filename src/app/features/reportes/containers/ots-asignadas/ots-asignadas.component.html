@@ -1,0 +1,103 @@
+<zwc-content-layout [navbarHeader]="[]">
+  <div content>
+    <h1>Reporte de OTs Asignadas</h1>
+
+    <form [formGroup]="form">
+      <div class="card">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <label class="mr-1" for="">*Fecha inicio</label>
+            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio" name="fecha-inicio" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <label for="">*Fecha término</label>
+            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino" name="fecha-termino" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+
+          <ng-container *ngIf="form.get('fecha_inicio').errors === null && form.get('fecha_fin').errors === null">
+            <ng-container *ngIf="form.errors?.dategreaterorequal">
+              <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+                <small class="p-error block">La fecha de fin no puede ser inferior a la fecha de inicio</small>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+
+    <zwc-pbutton-sending Pid="generar-reporte" content="Generar reporte" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="false" (call)="generarReporte()"></zwc-pbutton-sending>
+    <!--
+    <zwc-formulario #formulario [disableContratos]="tableServicios.hasElements"></zwc-formulario>
+    <p-divider align="center">
+      <span class="p-tag">Agregar Servicios</span>
+    </p-divider>
+    <div class="grid">
+      <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+        <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="Cubicacion">
+        </zwc-form-agregar-servicios>
+      </div>
+      <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+        <zwc-table-servicios #tableServicios [contratoMarco]="formulario?.contrato_selected?.model_contrato_id?.nombre ?? ''" [accion_detalle_uo]="true" (detallesUOClicked)="showMateriales($event)"></zwc-table-servicios>
+      </div>
+    </div>
+    <ng-container *ngIf="editMode;else createModeButton">
+      <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios" Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async" [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0" (call)="editarCubicacion()"></zwc-pbutton-sending>
+    </ng-container>
+    <ng-template #createModeButton>
+      <zwc-pbutton-sending Pid="crear-cubicacion" content="Crear nueva cubicación" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0" [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>
+    </ng-template>
+    <zwc-pbutton-sending Pid="cancelar-cubicacion" content="Cancelar" Pclass="p-button-secondary p-button-sm mt-4 w-full" (call)="goBack()"></zwc-pbutton-sending>
+    -->
+  </div>
+</zwc-content-layout>
+
+<!--
+<zwc-content-layout [navbarHeader]="navbarHeader">
+  <div content>
+    <h1>{{editMode?title:'Creación de una nueva Cubicación/Costeo' }}</h1>
+    <zwc-formulario #formulario [disableContratos]="tableServicios.hasElements"></zwc-formulario>
+    <p-divider align="center">
+      <span class="p-tag">Agregar Servicios</span>
+    </p-divider>
+    <div class="grid">
+      <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+        <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="Cubicacion">
+        </zwc-form-agregar-servicios>
+      </div>
+      <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+        <zwc-table-servicios #tableServicios [contratoMarco]="formulario?.contrato_selected?.model_contrato_id?.nombre ?? ''" [accion_detalle_uo]="true" (detallesUOClicked)="showMateriales($event)"></zwc-table-servicios>
+      </div>
+    </div>
+    <ng-container *ngIf="editMode;else createModeButton">
+      <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios" Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async" [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0" (call)="editarCubicacion()"></zwc-pbutton-sending>
+    </ng-container>
+    <ng-template #createModeButton>
+      <zwc-pbutton-sending Pid="crear-cubicacion" content="Crear nueva cubicación" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0" [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>
+    </ng-template>
+    <zwc-pbutton-sending Pid="cancelar-cubicacion" content="Cancelar" Pclass="p-button-secondary p-button-sm mt-4 w-full" (call)="goBack()"></zwc-pbutton-sending>
+  </div>
+</zwc-content-layout>
+
+<p-dialog header="Lista de Materiales" [(visible)]="displayModalMateriales" [draggable]="false" [modal]="true" (onHide)="closeModalMateriales()">
+  <div class="row" style="width: 87vw;">
+    <table style=" width: 100%;">
+      <thead>
+        <tr>
+          <th>Cod</th>
+          <th>Nombre</th>
+          <th>Origen</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of materialesSelected">
+          <td class="label-table">{{item.material_codigo}}</td>
+          <td class="data-primaria">{{item.material_nombre}}</td>
+          <td class="label-table">{{item.material_origen}}</td>
+          <td class="data-primaria">{{item.material_precio_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-dialog>
+-->

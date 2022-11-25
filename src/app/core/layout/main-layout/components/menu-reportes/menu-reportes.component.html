@@ -1,0 +1,15 @@
+<div class="reportes-container">
+  <span>Reportes</span>
+</div>
+
+<div class="sidebar-menu">
+  <ul>
+    <ng-container *ngxPermissionsOnly="['OT_LISTAR']">
+      <li routerLinkActive="active" id="reportes-ot">
+        <a [routerLink]="['/reportes/ot']">
+          <span><small>OTs Asignadas</small></span>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+</div>
