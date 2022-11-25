@@ -140,7 +140,8 @@ export class OtHttpService {
           const hh = today.getHours();
           const MM = today.getMinutes();
           const ss = today.getSeconds();
-          const ms = today.getMilliseconds();
+          let ms = `${today.getMilliseconds()}00`;
+          ms = ms.slice(0, 3);
 
           const filename = `reporte_base_${yyyy}_${mm}_${dd}_${hh}_${MM}_${ss}_${ms}.xlsx`;
           return {
