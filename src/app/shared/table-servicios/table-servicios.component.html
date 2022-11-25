@@ -149,7 +149,7 @@
                     </ng-container>
                     <!-- <span style="color: red">{{ getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).errors | json
                       }}</span> -->
-                    <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">
+                    <p [pTooltip]="uo.uob_unidad_medida_descripcion">
                       {{uo.uob_unidad_medida_cod }}
                     </p>
                     <zwc-input-alert [control]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)">
@@ -157,7 +157,7 @@
                   </ng-container>
                   <ng-template #cantidad_no_editable>
                     {{uo.uo_cantidad| number}}
-                    <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">
+                    <p [pTooltip]="uo.uob_unidad_medida_descripcion">
                       {{uo.uob_unidad_medida_cod }}
                     </p>
                   </ng-template>
