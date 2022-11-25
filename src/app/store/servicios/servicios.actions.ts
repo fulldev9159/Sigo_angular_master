@@ -74,7 +74,6 @@ export const addServicioCarritoSuccess = createAction(
       items: DetallesServicioTipoAgenciaContratoProveedor[];
     }>;
     responseUnidadObra: Response<DetallesUnidadObraServicio>;
-    puntos_baremos: number;
   }>()
 );
 export const addServicioCarritoError = createAction(

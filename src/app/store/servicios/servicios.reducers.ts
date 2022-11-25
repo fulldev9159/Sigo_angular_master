@@ -53,7 +53,7 @@ export const reducerServicios = createReducer(
   })),
   on(
     serviciosActions.addServicioCarritoSuccess,
-    (state, { responseService, responseUnidadObra, puntos_baremos }) => ({
+    (state, { responseService, responseUnidadObra }) => ({
       ...state,
       carritoServices: [
         ...state.carritoServices,
@@ -72,7 +72,7 @@ export const reducerServicios = createReducer(
           servicio_unidad_descripcion:
             responseService.data.items[0].servicio_unidad_descripcion,
           prov_has_serv_precio: responseService.data.items[0].precio_proveedor,
-          puntos_baremos,
+          puntos_baremos: responseService.data.items[0].servicio_baremos ?? 0,
           unidad_obras: [
             {
               uo_codigo: responseUnidadObra.data.uo_codigo,
