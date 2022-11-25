@@ -27,7 +27,10 @@ export class OtsAsignadasComponent implements OnInit, AfterViewInit, OnDestroy {
       fecha_inicio: new FormControl(null, [Validators.required]),
       fecha_fin: new FormControl(null, [Validators.required]),
     },
-    [CustomValidators.DateGreaterOrEqualThan('fecha_fin', 'fecha_inicio')]
+    [
+      CustomValidators.DateGreaterOrEqualThan('fecha_fin', 'fecha_inicio'),
+      CustomValidators.MaxDateDiffInDays('fecha_fin', 'fecha_inicio', 365),
+    ]
   );
 
   sendingDownloadOTsAsignadas$: Observable<boolean> =
