@@ -50,6 +50,7 @@ export interface StateLoadings {
   sendingGetAdminContratoFromCub: boolean;
   sendingGetProyectos: boolean;
   sendingCreateOT: boolean;
+  sendingDownloadOTsAsignadas: boolean;
   sendingGetPosibleSupervisorTrabajos: boolean;
   sendingSendDetalleInformeAvance: boolean;
   sendingSendBorradorInformeAvance: boolean;
@@ -94,6 +95,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAdminContratoFromCub: false,
   sendingGetProyectos: false,
   sendingCreateOT: false,
+  sendingDownloadOTsAsignadas: false,
   sendingGetPosibleSupervisorTrabajos: false,
   sendingSendDetalleInformeAvance: false,
   sendingSendBorradorInformeAvance: false,
@@ -603,6 +605,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingAprobacionPago: false,
+    })
+  ),
+
+  on(otActions.downloadOTsAsignadas, state => ({
+    ...state,
+    sendingDownloadOTsAsignadas: true,
+  })),
+  on(
+    otActions.downloadOTsAsignadasSuccess,
+    otActions.downloadOTsAsignadasError,
+    state => ({
+      ...state,
+      sendingDownloadOTsAsignadas: false,
     })
   )
 );

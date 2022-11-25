@@ -171,4 +171,16 @@ export class OTFacade {
   public getBandejaOTQuebradas$(): Observable<OT[]> {
     return this.store.select(otSelectors.getBandejaOTQuebradas);
   }
+
+  public downloadOTsAsignadas(
+    fecha_inicio_real_ot__desde: string,
+    fecha_inicio_real_ot__hasta: string
+  ): void {
+    this.store.dispatch(
+      otActions.downloadOTsAsignadas({
+        fecha_inicio_real_ot__desde,
+        fecha_inicio_real_ot__hasta,
+      })
+    );
+  }
 }

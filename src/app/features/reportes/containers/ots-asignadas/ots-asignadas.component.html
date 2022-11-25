@@ -25,7 +25,7 @@
       </div>
     </form>
 
-    <zwc-pbutton-sending Pid="generar-reporte" content="Generar reporte" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="false" (call)="generarReporte()"></zwc-pbutton-sending>
+    <zwc-pbutton-sending Pid="generar-reporte" content="Generar reporte" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="sendingDownloadOTsAsignadas$|async" (call)="generarReporte()"></zwc-pbutton-sending>
     <!--
     <zwc-formulario #formulario [disableContratos]="tableServicios.hasElements"></zwc-formulario>
     <p-divider align="center">
