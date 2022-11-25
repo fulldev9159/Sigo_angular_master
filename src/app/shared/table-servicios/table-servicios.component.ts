@@ -83,9 +83,6 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
   trashICon = faTrash;
 
-  colSpanServicios = 7;
-  colSpanUOs = 7;
-
   maxDigits = 10;
   maxDecimals = 2;
 
@@ -114,19 +111,6 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
         this.serviciosFacade.carrito$(),
         this.informe_avance
       );
-    }
-
-    // COLSPAN
-    if (!this.canSeePrices()) {
-      this.colSpanServicios = this.colSpanServicios - 2;
-      this.colSpanUOs = this.colSpanUOs - 2;
-    }
-    if (!this.column_acciones) {
-      this.colSpanServicios = this.colSpanServicios - 1;
-      this.colSpanUOs = this.colSpanUOs - 1;
-    }
-    if (this.contratoMarco === 'BUCLE') {
-      this.colSpanServicios = this.colSpanServicios + 2;
     }
 
     // CALCULAR TOTALES
@@ -449,7 +433,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     });
   }
 
-  canSeePrices(): boolean {
+  get canSeePrices(): boolean {
     return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
@@ -478,5 +462,34 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get colSpanServicios(): number {
+    let base = 4;
+
+    if (this.canSeePrices) {
+      base = base + 2;
+    }
+    if (this.column_acciones) {
+      base = base + 1;
+    }
+    if (this.contratoMarco === 'BUCLE') {
+      base = base + 2;
+    }
+
+    return base;
+  }
+
+  get colSpanUOs(): number {
+    let base = 4;
+
+    if (this.canSeePrices) {
+      base = base + 2;
+    }
+    if (this.column_acciones) {
+      base = base + 1;
+    }
+
+    return base;
   }
 }

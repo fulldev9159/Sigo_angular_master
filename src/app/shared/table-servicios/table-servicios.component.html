@@ -12,9 +12,9 @@
         <th style="background: var(--bg-th-servicios)">Tipo</th>
         <th style="background: var(--bg-th-servicios)">Cantidad</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='BUCLE'">Puntos Baremos</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Precio {{ contratoMarco === 'BUCLE' ? 'Especialidad' : 'Unitario' }}</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Precio {{ contratoMarco === 'BUCLE' ? 'Especialidad' : 'Unitario' }}</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="contratoMarco==='BUCLE'">Total Baremos</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices()">Total Pesos</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Total Pesos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
           Acciones
           <ng-container *ngIf="accion_aprobacion_servicio_adic">
@@ -31,8 +31,8 @@
         <th>Descripción</th>
         <th>Actividad</th>
         <th>Cantidad</th>
-        <th *ngIf="canSeePrices()">Precio Un.</th>
-        <th *ngIf="canSeePrices()">Total</th>
+        <th *ngIf="canSeePrices">Precio Un.</th>
+        <th *ngIf="canSeePrices">Total</th>
         <th *ngIf="column_acciones">Acciones</th>
       </tr>
     </thead>
@@ -85,7 +85,7 @@
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="contratoMarco==='BUCLE'" style="text-align:right;">
               {{servicio.puntos_baremos}}
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices">
               {{ +servicio.prov_has_serv_precio |
               currency: 'CLP':'$':'.0-2':'es-CL' }}
             </td>
@@ -93,7 +93,7 @@
               {{+servicio.puntos_baremos
               *+getControlServiceCantidad(servicio.servicio_id).value | number : '1.2-2'}}
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()" style="text-align:right;">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices" style="text-align:right;">
               {{getTotal(+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value)
               |
               currency : 'CLP' :
@@ -102,7 +102,7 @@
           </ng-container>
 
           <ng-container *ngIf="servicio?.servicios_adicional_dummy">
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" [attr.colspan]="canSeePrices()?3:1">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" [attr.colspan]="canSeePrices?3:1">
               {{accion_aprobacion_servicio_adic || !column_acciones? 'Se le han agregado uos adicionales a
               este servicio
               existente en la cubicación' : 'Su cantidad se debe modificar desde el informe de avance'}}
@@ -163,10 +163,10 @@
                   </ng-template>
                 </div>
               </td>
-              <td *ngIf="canSeePrices()">
+              <td *ngIf="canSeePrices">
                 {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
               </td>
-              <td *ngIf="canSeePrices()">
+              <td *ngIf="canSeePrices">
                 {{uo.uo_precio_total_clp*+getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).value|
                 currency : 'CLP' : '$':'.0-2':'es-CL'}}
               </td>
@@ -185,7 +185,7 @@
         </ng-container>
       </ng-container>
     </tbody>
-    <tfoot *ngIf="canSeePrices()">
+    <tfoot *ngIf="canSeePrices">
       <!-- <tr>
         <td></td>
         <td *ngIf="column_acciones"></td>
