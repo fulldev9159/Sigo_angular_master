@@ -263,6 +263,50 @@ export class OTEffects {
     )
   );
 
+  // DOWNLOAD Ots ASIGNADAS
+  requestDownloadOTsAsignadas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.downloadOTsAsignadas),
+      concatMap(
+        ({ fecha_inicio_real_ot__desde, fecha_inicio_real_ot__hasta }) =>
+          this.otHttpService
+            .downloadOTsAsignadas(
+              fecha_inicio_real_ot__desde,
+              fecha_inicio_real_ot__hasta
+            )
+            .pipe(
+              map(({ filename, data }) =>
+                otActions.downloadOTsAsignadasSuccess({ filename, data })
+              ),
+              catchError(error =>
+                of(otActions.downloadOTsAsignadasError({ error }))
+              )
+            )
+      )
+    )
+  );
+
+  downloadOTsAsignadas$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.downloadOTsAsignadasSuccess),
+        tap(({ filename, data }) => {
+          const link = document.createElement('a');
+          link.style.display = 'none';
+          document.body.appendChild(link);
+
+          const blob = new Blob([data], { type: 'application/ms-excel' });
+          const objectURL = URL.createObjectURL(blob);
+
+          link.href = objectURL;
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
+        })
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -304,7 +348,8 @@ export class OTEffects {
           otActions.getBandejaOTAbiertasError,
           otActions.getBandejaOTCerradasError,
           otActions.getBandejaOTAnuladasError,
-          otActions.getBandejaOTQuebradasError
+          otActions.getBandejaOTQuebradasError,
+          otActions.downloadOTsAsignadasError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

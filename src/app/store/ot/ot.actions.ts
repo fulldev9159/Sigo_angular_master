@@ -230,3 +230,20 @@ export const getSitioPlanProyectoError = createAction(
   '[OT] getSitioPlanProyecto Error',
   props<{ error: any }>()
 );
+
+// DOWNLOAD OTs ASIGNADAS
+export const downloadOTsAsignadas = createAction(
+  '[OT] downloadOTsAsignadas',
+  props<{
+    fecha_inicio_real_ot__desde: string;
+    fecha_inicio_real_ot__hasta: string;
+  }>()
+);
+export const downloadOTsAsignadasSuccess = createAction(
+  '[OT] downloadOTsAsignadas Success',
+  props<{ filename: string; data: ArrayBuffer }>()
+);
+export const downloadOTsAsignadasError = createAction(
+  '[OT] downloadOTsAsignadas Error',
+  props<{ error: any }>()
+);

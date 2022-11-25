@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
@@ -20,6 +20,7 @@ import {
   TipoNumeroInterno,
 } from '@model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -111,5 +112,42 @@ export class OtHttpService {
       `${this.API_URL}/ot/sitio_plan_plid/get`,
       { plan_id }
     );
+  }
+
+  downloadOTsAsignadas(
+    fecha_inicio_real_ot__desde: string,
+    fecha_inicio_real_ot__hasta: string
+  ): Observable<{ filename: string; data: ArrayBuffer }> {
+    return this.http
+      .post<HttpResponse<ArrayBuffer>>(
+        `${this.API_URL}/reportes/reporte_base/download`,
+        { fecha_inicio_real_ot__desde, fecha_inicio_real_ot__hasta },
+        {
+          observe: 'response' as 'body',
+          responseType: 'arraybuffer' as 'json',
+        }
+      )
+      .pipe(
+        map((response: HttpResponse<ArrayBuffer>) => {
+          //// const contentDisposition = response.headers.get(
+          ////   'content-disposition'
+          //// );
+
+          const today = new Date();
+          const dd = String(today.getDate()).padStart(2, '0');
+          const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          const yyyy = today.getFullYear();
+          const hh = today.getHours();
+          const MM = today.getMinutes();
+          const ss = today.getSeconds();
+          const ms = today.getMilliseconds();
+
+          const filename = `reporte_base_${yyyy}_${mm}_${dd}_${hh}_${MM}_${ss}_${ms}.xlsx`;
+          return {
+            filename,
+            data: response.body,
+          };
+        })
+      );
   }
 }

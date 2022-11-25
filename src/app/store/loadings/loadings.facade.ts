@@ -182,6 +182,10 @@ export class LoadingsFacade {
     return this.store.select(loadingSelector.sendingCreateOT);
   }
 
+  public sendingDownloadOTsAsignadas$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingDownloadOTsAsignadas);
+  }
+
   public sendingGetPosibleSupervisorTrabajos$(): Observable<boolean> {
     return this.store.select(
       loadingSelector.sendingGetPosibleSupervisorTrabajos

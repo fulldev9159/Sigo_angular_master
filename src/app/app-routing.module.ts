@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigoGuard } from '@coreOT';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -64,6 +65,18 @@ const routes: Routes = [
       ),
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
+  },
+  {
+    path: 'reportes',
+    loadChildren: () =>
+      import('./features/reportes/reportes.module').then(m => m.ReportesModule),
+    // canLoad: [SigoGuard],
+    data: {
+      permissions: {
+        only: 'REPORTE_BASE',
+      },
+    },
+    canActivate: [SigoGuard, NgxPermissionsGuard],
   },
 ];
 
