@@ -125,7 +125,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       this.colSpanServicios = this.colSpanServicios - 1;
       this.colSpanUOs = this.colSpanUOs - 1;
     }
-    if (this.contratoMarco === 'Bucle') {
+    if (this.contratoMarco === 'BUCLE') {
       this.colSpanServicios = this.colSpanServicios + 2;
     }
 
@@ -453,8 +453,23 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
-  get valid(): boolean {
+  cantidadChanged(control: FormControl, { value }: { value: number }): void {
+    const previous = +control.value;
+    if (value !== previous) {
+      control.setValue(value, { emitEvent: true });
+      control.updateValueAndValidity({ emitEvent: true });
+      this.formTable.updateValueAndValidity({ emitEvent: true });
+      this.detector.detectChanges();
+      this.detector.markForCheck();
+    }
+  }
+
+  get hasElements(): boolean {
     return (this.formTable.get('table') as FormArray).length > 0;
+  }
+
+  get valid(): boolean {
+    return this.formTable.valid && this.hasElements;
   }
 
   getTotal(n: string): string {

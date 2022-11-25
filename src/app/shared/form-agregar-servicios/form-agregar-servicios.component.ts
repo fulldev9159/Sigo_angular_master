@@ -26,6 +26,7 @@ import { FormularioService } from 'src/app/core/service/formulario.service';
 interface Dropdown {
   name: string;
   code: number | string;
+  precio?: number;
 }
 
 // 94 TODO: MEJORAR LÓGICA
@@ -128,6 +129,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       map(values =>
         values.map(value => ({
           name: `${value.numero_producto} - ${value.descripcion}`,
+          precio: value.precio,
           code: value.id,
         }))
       )
@@ -557,5 +559,9 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  findServicio(servicios: Dropdown[], code: number): Dropdown {
+    return servicios.find(servicio => servicio.code === code);
   }
 }

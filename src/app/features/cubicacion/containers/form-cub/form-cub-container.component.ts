@@ -31,7 +31,7 @@ import {
   UOAgregar,
   MaterialesManoObra,
 } from '@model';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 
 @Component({
@@ -84,12 +84,15 @@ export class FormCubContainerComponent
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
     private loadingFacade: LoadingsFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
 
   ngOnInit(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     this.navbarHeader = [
       { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
       {
@@ -238,6 +241,8 @@ export class FormCubContainerComponent
 
     this.subscription.add(
       this.route.data.subscribe(({ detalleCubicacion }) => {
+        this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
         if (detalleCubicacion) {
           const detalle = detalleCubicacion.data;
 
@@ -272,6 +277,18 @@ export class FormCubContainerComponent
               this.formulario.formCub
                 .get('cmarcoproveedor_id')
                 .setValue(cubicacion.cmarco_has_proveedor_id);
+
+              if (this.tableServicios.hasElements) {
+                this.formulario.formCub
+                  .get('contrato')
+                  .disable({ emitEvent: false });
+                this.formulario.formCub
+                  .get('agencia_id')
+                  .disable({ emitEvent: false });
+                this.formulario.formCub
+                  .get('cmarcoproveedor_id')
+                  .disable({ emitEvent: false });
+              }
             }, 1500);
 
             cubicacion.many_cubicacion_has_servicio.forEach(service => {
@@ -293,6 +310,8 @@ export class FormCubContainerComponent
                   servicio_unidad_descripcion:
                     service.model_unidad_id.descripcion,
                   prov_has_serv_precio: service.prov_has_serv_precio,
+                  puntos_baremos: service.puntos_baremos,
+
                   unidad_obras: [
                     {
                       precargado: true,
@@ -309,7 +328,25 @@ export class FormCubContainerComponent
                       uob_unidad_medida_descripcion:
                         uo.model_unidad_id.descripcion,
 
-                      //// material_arr: uo.many_cubicacion_has_material,
+                      // TODO Revisar
+                      material_arr: uo.many_cubicacion_has_material.map(m => {
+                        return {
+                          material_codigo: m.material_cod,
+                          material_nombre: m.model_material_cod.descripcion,
+                          material_origen: m.origen,
+                          material_precio_clp: m.valor_unitario_clp, // ?
+
+                          material_cantidad: m.cantidad,
+                          material_precio: m.valor, // ?
+                          material_tipo_moneda_id: m.model_tipo_moneda_id.id,
+                          material_unidad_id: m.model_unidad_id.id,
+                          material_unidad_medida_cod: '--', // ?
+                          material_valor: m.valor,
+                          material_unidad_codigo: m.model_unidad_id.codigo,
+                          material_unidad_descripcion:
+                            m.model_unidad_id.descripcion,
+                        };
+                      }),
                     },
                   ],
                 };
@@ -323,6 +360,8 @@ export class FormCubContainerComponent
   }
 
   createCubicacion(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     this.subscription.add(
       combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))
@@ -338,7 +377,7 @@ export class FormCubContainerComponent
             contrato,
             agencia_id,
             cmarcoproveedor_id,
-          } = this.formulario.formCub.value;
+          } = this.formulario.formCub.getRawValue();
 
           // 155 TODO: UNIFICAR TIPO FORMULARIO
           const formTableArray = this.tableServicios?.formTable
@@ -397,6 +436,8 @@ export class FormCubContainerComponent
   }
 
   editarCubicacion(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
     // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
     if (
       this.tableServicios.servicios_eliminar.length > 0 ||
@@ -423,7 +464,7 @@ export class FormCubContainerComponent
             contrato,
             agencia_id,
             cmarcoproveedor_id,
-          } = this.formulario.formCub.value;
+          } = this.formulario.formCub.getRawValue();
 
           const isLocal = (item: { precargado?: boolean }) =>
             item.precargado === undefined || item.precargado === false;
@@ -556,12 +597,16 @@ export class FormCubContainerComponent
     servicio: CarritoService;
     uo: CarritoUO;
   }): void {
-    this.materialesSelected = [...uo.material_arr];
+    this.materialesSelected = [...(uo?.material_arr ?? [])];
     this.displayModalMateriales = true;
   }
 
   closeModalMateriales(): void {
     this.materialesSelected = null;
     this.displayModalMateriales = false;
+  }
+
+  goBack(): void {
+    this.router.navigate(['/cubicacion/list-cub'], {});
   }
 }

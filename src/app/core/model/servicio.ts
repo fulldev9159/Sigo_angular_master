@@ -37,6 +37,7 @@ export interface ServicioAgenciaContratoProveedor {
   unidad_desripcion: string;
   unidad_id: number;
   numero_producto: string;
+  precio: number;
 }
 
 // GET DETALLES DE UN SERVICIO DE UN TIPO DE UNA GENCIA/CONTRATO

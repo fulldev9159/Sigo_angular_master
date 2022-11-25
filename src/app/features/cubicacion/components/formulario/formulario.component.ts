@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  Input,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
@@ -44,6 +45,8 @@ interface Dropdown {
 })
 export class FormularioComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
+  @Input() disableContratos = false;
+
   // DATOS A USAR
   contratosUsuario: ContratosUser[];
   contrato_selected: ContratosUser;

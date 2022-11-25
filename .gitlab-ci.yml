@@ -1,9 +1,9 @@
 stages:
   - linter
-  - restart test environment
+# - restart test environment
   - reset testing database sigo
   - unit test
-  - e2e test
+# - e2e test
   - deployment
   - triggers
   - update production
