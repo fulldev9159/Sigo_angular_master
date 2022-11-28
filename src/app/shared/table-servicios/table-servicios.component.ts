@@ -62,7 +62,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() accion_detalle_uo: boolean = false;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
-  @Input() contratoMarco = '';
+  @Input() contratoMarco = -1;
 
   @Output() detallesUOClicked = new EventEmitter<{
     servicio: CarritoService;
@@ -473,7 +473,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     if (this.column_acciones) {
       base = base + 1;
     }
-    if (this.contratoMarco === 'BUCLE') {
+    if (this.isBucle) {
       base = base + 2;
     }
 
@@ -491,5 +491,9 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     }
 
     return base;
+  }
+
+  get isBucle(): boolean {
+    return this.contratoMarco === 4;
   }
 }
