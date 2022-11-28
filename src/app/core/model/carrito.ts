@@ -31,6 +31,7 @@ export interface CarritoUO {
   uo_cantidad?: number;
   uob_unidad_medida_cod?: string;
   uob_unidad_medida_descripcion?: string;
+  adicional?: string;
   adicional_existente_ia?: boolean;
 
   // Data response http API

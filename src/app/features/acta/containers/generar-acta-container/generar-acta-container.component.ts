@@ -189,6 +189,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
                         actividad_id: -1,
                         uob_unidad_medida_cod: uo.unidad_codigo,
                         uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                        adicional: service.adicional_aceptacion_estado,
                         adicional_existente_ia:
                           servicioCarrito.servicios_adicional_dummy,
                       },

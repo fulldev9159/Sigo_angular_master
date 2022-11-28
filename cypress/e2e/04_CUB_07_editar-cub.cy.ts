@@ -204,7 +204,7 @@ describe('Editar cubicacion', () => {
     cy.get('.carrito-container>table')
       .contains('td', 'J456')
       .siblings()
-      .eq(5)
+      .eq(7)
       .find('button:nth-child(1)')
       .click();
 
