@@ -150,7 +150,7 @@
             <td>{{ uo.actividad_descripcion }}</td>
             <!-- SIN UO -->
             <ng-container *ngIf="uo.uo_codigo === '0'">
-              <td colspan="5" align="center">No Aplica</td>
+              <td [attr.colspan]="column_acciones?5:3" align="center">No Aplica</td>
             </ng-container>
             <!-- CON UO -->
             <ng-container *ngIf="uo.uo_codigo !== '0'">
@@ -202,47 +202,18 @@
       </ng-container>
     </tbody>
     <tfoot *ngIf="canSeePrices">
-      <!-- <tr>
-        <td></td>
-        <td *ngIf="column_acciones"></td>
-        <td></td>
-        <td colspan="2" id="total-servicio-monto">
-          Total Servicios
-          {{totalServicios>99999999999999999999999?0:totalServicios| currency :
-          'CLP' :
-          '$':'.0-2':'es-CL'}}</td>
-        <td *ngIf="isBucle">
-          Total Baremos: {{this.totalBaremos| currency :
-          'CLP' :
-          '$':'.0-2':'es-CL'}}
-        </td>
-        <td></td>
-        <td colspan="2" id="total-uo-monto">
-          Total Unidades Obra
-          {{totalUOs>99999999999999999999999?0:totalUOs| currency : 'CLP' :
-          '$':'.0-2':'es-CL'}}</td>
-        <td></td>
-        <td>Total:</td>
-        <td colspan="2" id="total-cubicacion-monto">
-          {{totalServicios+totalUOs|
-          currency :
-          'CLP' : '$':'.0-2':'es-CL'}}</td>
-        <td *ngIf="column_acciones"></td>
-        <td *ngIf="isBucle"></td>
-        <td></td>
-      </tr> -->
       <tr>
         <ng-container *ngIf="isBucle">
-          <td [colSpan]="5"></td>
+          <td [attr.colSpan]="column_acciones?5:4"></td>
           <td>Total Baremos:</td>
-          <td>
+          <td style="text-align:right">
             {{this.totalBaremos| currency :
             'CLP' :
             '$':'.0-2':'es-CL'}}
           </td>
-          <td [colSpan]="3"></td>
+          <td [attr.colSpan]="column_acciones?5:4"></td>
         </ng-container>
-        <ng-container *ngIf="isBucle">
+        <ng-container *ngIf="!isBucle">
           <td [colSpan]="(+colSpanServicios-2) + (+colSpanUOs-2)"></td>
         </ng-container>
 
