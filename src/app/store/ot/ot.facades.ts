@@ -15,6 +15,9 @@ import {
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
+  FiltroPropietarioOT,
+  FiltroTipoOT,
+  FiltroPestaniaOT,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -124,8 +127,8 @@ export class OTFacade {
     filtro_propietario,
     filtro_tipo,
   }: {
-    filtro_propietario: string;
-    filtro_tipo: number;
+    filtro_propietario: FiltroPropietarioOT;
+    filtro_tipo: FiltroTipoOT;
   }): void {
     this.store.dispatch(
       otActions.updateFiltrosOT({
@@ -135,24 +138,33 @@ export class OTFacade {
     );
   }
 
+  public updateFiltrosPestania(filtro_pestania: FiltroPestaniaOT): void {
+    this.store.dispatch(
+      otActions.updateFiltrosPestaniaOT({
+        filtro_pestania,
+      })
+    );
+  }
+
   public getFiltrosOT$(): Observable<{
-    filtro_propietario: string;
-    filtro_tipo: number;
+    filtro_propietario: FiltroPropietarioOT;
+    filtro_tipo: FiltroTipoOT;
+    filtro_pestania: FiltroPestaniaOT;
   }> {
     return this.store.select(otSelectors.getFiltrosOT);
   }
 
   // BANDEJAS
-  public getBandejaOT(filtro_pestania: string): void {
-    if (filtro_pestania === 'EN_EJECUCION')
+  public getBandejaOT(filtro_pestania: FiltroPestaniaOT): void {
+    if (filtro_pestania === FiltroPestaniaOT.EN_EJECUCION)
       this.store.dispatch(otActions.getBandejaOTEjecucion());
-    else if (filtro_pestania === 'ABIERTAS')
+    else if (filtro_pestania === FiltroPestaniaOT.ABIERTAS)
       this.store.dispatch(otActions.getBandejaOTAbiertas());
-    else if (filtro_pestania === 'CERRADAS')
+    else if (filtro_pestania === FiltroPestaniaOT.CERRADAS)
       this.store.dispatch(otActions.getBandejaOTCerradas());
-    else if (filtro_pestania === 'ANULADAS')
+    else if (filtro_pestania === FiltroPestaniaOT.ANULADAS)
       this.store.dispatch(otActions.getBandejaOTAnuladas());
-    else if (filtro_pestania === 'EN_TRAMITE')
+    else if (filtro_pestania === FiltroPestaniaOT.EN_TRAMITE)
       this.store.dispatch(otActions.getBandejaOTQuebradas());
   }
 

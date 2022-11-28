@@ -10,6 +10,9 @@ import {
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
+  FiltroPropietarioOT,
+  FiltroTipoOT,
+  FiltroPestaniaOT,
 } from '@model';
 import * as OTActions from './ot.actions';
 
@@ -29,8 +32,9 @@ export interface StateOT {
   sitioPlan: Sitio[];
 
   filtrosOT: {
-    filtro_propietario: string;
-    filtro_tipo: number;
+    filtro_propietario: FiltroPropietarioOT;
+    filtro_tipo: FiltroTipoOT;
+    filtro_pestania: FiltroPestaniaOT;
   };
 
   // BANDEJAS
@@ -53,8 +57,9 @@ export const initialState: StateOT = {
   sitioPlan: [],
 
   filtrosOT: {
-    filtro_propietario: 'TODAS',
-    filtro_tipo: 0,
+    filtro_propietario: FiltroPropietarioOT.TODAS,
+    filtro_tipo: FiltroTipoOT.TODAS,
+    filtro_pestania: FiltroPestaniaOT.EN_EJECUCION,
   },
 
   bandejaOTEjecucion: [],
@@ -127,9 +132,17 @@ export const reducerOT = createReducer(
     (state, { filtro_propietario, filtro_tipo }) => ({
       ...state,
       filtrosOT: {
+        ...state.filtrosOT,
         filtro_propietario,
         filtro_tipo,
       },
     })
-  )
+  ),
+  on(OTActions.updateFiltrosPestaniaOT, (state, { filtro_pestania }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      filtro_pestania,
+    },
+  }))
 );

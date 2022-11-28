@@ -16,6 +16,9 @@ import {
   TipoDeRed,
   TipoDeTrabajo,
   TipoNumeroInterno,
+  FiltroPropietarioOT,
+  FiltroTipoOT,
+  FiltroPestaniaOT,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -45,8 +48,15 @@ export const createOTError = createAction(
 export const updateFiltrosOT = createAction(
   '[OT] update filtros OT',
   props<{
-    filtro_propietario: string;
-    filtro_tipo: number;
+    filtro_propietario: FiltroPropietarioOT;
+    filtro_tipo: FiltroTipoOT;
+  }>()
+);
+
+export const updateFiltrosPestaniaOT = createAction(
+  '[OT] update filtros pestania OT',
+  props<{
+    filtro_pestania: FiltroPestaniaOT;
   }>()
 );
 
