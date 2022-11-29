@@ -1,71 +1,73 @@
 <div class="container-acta">
-    <h1>Acta</h1>
-    <div class="card" *ngIf="registrosListActas.length>0">
-        <div class="formgrid grid info-base">
+  <button pButton type="button" class="p-button-outlined p-button-sm mt-4" [routerLink]="'/ot/list-ot'">
+    <i class="pi pi-arrow-left"></i>&nbsp;&nbsp;Volver a listado de OTs
+  </button>
+</div>
+<div class="container-acta">
+  <h1>Acta</h1>
+  <div class="card" *ngIf="registrosListActas.length>0">
+    <div class="formgrid grid info-base">
 
-            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
-                <p-divider align="center">
-                    <span class="p-tag">Actas</span>
-                </p-divider>
+      <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+        <p-divider align="center">
+          <span class="p-tag">Actas</span>
+        </p-divider>
 
-                <ul *ngFor="let acta of registrosListActas" class="actas-list">
-                    <li id={{acta.id}} (click)="OnDetallActa(acta)"
-                        [ngClass]="acta.validacion_estado==='INVALIDADO'?'acta-invalida':acta.validacion_estado==='NONE'?'acta-pendiente':'acta-valida'">
-                        <span>ID: {{acta.id}}</span>
-                        <span>{{acta.validacion_estado==='NONE'?'PENDIENTE VALIDACIÓN':acta.validacion_estado}}</span>
-                        <span>{{acta.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
-                    </li>
-                </ul>
+        <ul *ngFor="let acta of registrosListActas" class="actas-list">
+          <li id={{acta.id}} (click)="OnDetallActa(acta)" [ngClass]="acta.validacion_estado==='INVALIDADO'?'acta-invalida':acta.validacion_estado==='NONE'?'acta-pendiente':'acta-valida'">
+            <span>ID: {{acta.id}}</span>
+            <span>{{acta.validacion_estado==='NONE'?'PENDIENTE VALIDACIÓN':acta.validacion_estado}}</span>
+            <span>{{acta.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+        <p-divider align="center">
+          <span class="p-tag">Detalle Actas</span>
+        </p-divider>
+        <a *ngIf="registrosDetallActa?.pdf_acta?.size>0" [href]="API_URL + registrosDetallActa?.pdf_acta?.url">Descargar pdf </a>
+        <div class="content-detail" *ngIf="registrosDetallActa" style="font-size: 0.7rem;">
+          <div class="content-head">
+            <div class="item-group">
+              <h4>Fechas</h4>
+              <div class="item-row grid-container">
+                <span>Fechas Creación:</span>
+                <label>{{registrosDetallActa?.acta?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</label>
+              </div>
             </div>
-            <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
-                <p-divider align="center">
-                    <span class="p-tag">Detalle Actas</span>
-                </p-divider>
-                <a *ngIf="registrosDetallActa?.pdf_acta?.size>0"
-                    [href]="API_URL + registrosDetallActa?.pdf_acta?.url">Descargar pdf </a>
-                <div class="content-detail" *ngIf="registrosDetallActa" style="font-size: 0.7rem;">
-                    <div class="content-head">
-                        <div class="item-group">
-                            <h4>Fechas</h4>
-                            <div class="item-row grid-container">
-                                <span>Fechas Creación:</span>
-                                <label>{{registrosDetallActa?.acta?.created_at | date:'yyyy-MM-dd hh:mm:ss'}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-body" *ngFor="let it of registrosDetallActa?.data?.items">
-                        <div class="item-group">
-                            <h4>{{titleArray[it.evento]}}</h4>
-                            <div class="item-row">
-                                <span class="item-tab">{{it.mensaje}}</span>
-                                <label class="item-metadata">{{it.observacion}}</label>
-                                <label class="item-metadata"
-                                    *ngIf="it.evento==='VALIDACION_ACTA'">{{actaSelected.obs_validacion}}</label>
-                                <br>
-                                <span *ngIf="it.evento==='AUTORIZACION_PAGO'">{{it.estado}}</span>
-                                <label class="item-descript">
-                                    {{it?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-body">
-                        <div class="item-group">
-                            <h4>Generación del acta</h4>
-                            <div class="item-row">
-                                <span class="item-tab">{{actaSelected.obs_fin_trabajos}}</span>
-                                <br>
-                                <label class="item-descript">
-                                    {{actaSelected?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+          </div>
+          <div class="content-body" *ngFor="let it of registrosDetallActa?.data?.items">
+            <div class="item-group">
+              <h4>{{titleArray[it.evento]}}</h4>
+              <div class="item-row">
+                <span class="item-tab">{{it.mensaje}}</span>
+                <label class="item-metadata">{{it.observacion}}</label>
+                <label class="item-metadata" *ngIf="it.evento==='VALIDACION_ACTA'">{{actaSelected.obs_validacion}}</label>
+                <br>
+                <span *ngIf="it.evento==='AUTORIZACION_PAGO'">{{it.estado}}</span>
+                <label class="item-descript">
+                  {{it?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
+              </div>
             </div>
+          </div>
+          <div class="content-body">
+            <div class="item-group">
+              <h4>Generación del acta</h4>
+              <div class="item-row">
+                <span class="item-tab">{{actaSelected.obs_fin_trabajos}}</span>
+                <br>
+                <label class="item-descript">
+                  {{actaSelected?.created_at | date:'yyyy-MM-dd hh:mm:ss a'}}</label>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
 
-    <div *ngIf="registrosListActas.length===0" style="padding: 10px; font-size:0.7rem">
-        Aún no se ha validado un acta
+      </div>
     </div>
+  </div>
+
+  <div *ngIf="registrosListActas.length===0" style="padding: 10px; font-size:0.7rem">
+    Aún no se ha validado un acta
+  </div>
 </div>

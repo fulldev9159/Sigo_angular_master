@@ -73,11 +73,32 @@ export interface RequestCreateOTFijo {
   };
 }
 
+export enum FiltroPropietarioOT {
+  MIAS = 'MIAS',
+  OTRAS = 'OTRAS',
+  TODAS = 'TODAS',
+}
+
+export enum FiltroTipoOT {
+  OT = 1,
+  AP = 2,
+  FULL = 3,
+  TODAS = 0,
+}
+
+export enum FiltroPestaniaOT {
+  EN_EJECUCION = 'EN_EJECUCION',
+  ABIERTAS = 'ABIERTAS',
+  CERRADAS = 'CERRADAS',
+  ANULADAS = 'ANULADAS',
+  EN_TRAMITE = 'EN_TRAMITE',
+}
+
 // FILTROS OT
 export interface RequestBandejaOT {
-  filtro_pestania: string;
-  filtro_propietario: string;
-  filtro_tipo: number;
+  filtro_propietario: FiltroPropietarioOT;
+  filtro_tipo: FiltroTipoOT;
+  filtro_pestania: FiltroPestaniaOT;
 }
 // BANDEJA OT
 export interface OT {

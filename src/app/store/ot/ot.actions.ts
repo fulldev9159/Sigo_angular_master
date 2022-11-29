@@ -16,6 +16,9 @@ import {
   TipoDeRed,
   TipoDeTrabajo,
   TipoNumeroInterno,
+  FiltroPropietarioOT,
+  FiltroTipoOT,
+  FiltroPestaniaOT,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -45,8 +48,15 @@ export const createOTError = createAction(
 export const updateFiltrosOT = createAction(
   '[OT] update filtros OT',
   props<{
-    filtro_propietario: string;
-    filtro_tipo: number;
+    filtro_propietario: FiltroPropietarioOT;
+    filtro_tipo: FiltroTipoOT;
+  }>()
+);
+
+export const updateFiltrosPestaniaOT = createAction(
+  '[OT] update filtros pestania OT',
+  props<{
+    filtro_pestania: FiltroPestaniaOT;
   }>()
 );
 
@@ -246,4 +256,25 @@ export const downloadOTsAsignadasSuccess = createAction(
 export const downloadOTsAsignadasError = createAction(
   '[OT] downloadOTsAsignadas Error',
   props<{ error: any }>()
+);
+
+export const setPageEjecucion = createAction(
+  '[OT] setPageEjecucion',
+  props<{ page: number }>()
+);
+export const setPageAbiertas = createAction(
+  '[OT] setPageAbiertas',
+  props<{ page: number }>()
+);
+export const setPageCerradas = createAction(
+  '[OT] setPageCerradas',
+  props<{ page: number }>()
+);
+export const setPageAnuladas = createAction(
+  '[OT] setPageAnuladas',
+  props<{ page: number }>()
+);
+export const setPageQuebradas = createAction(
+  '[OT] setPageQuebradas',
+  props<{ page: number }>()
 );

@@ -5,10 +5,12 @@ import {
   NumeroInternoHttpService,
   OtHttpService,
 } from '@services';
+import { FiltroPestaniaOT } from '@model';
 import * as otActions from './ot.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { OTFacade } from './ot.facades';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class OTEffects {
@@ -17,7 +19,8 @@ export class OTEffects {
     private otHttpService: OtHttpService,
     private afterHttp: AfterHttpService,
     private numeroInternoHttp: NumeroInternoHttpService,
-    private ot: OTFacade
+    private ot: OTFacade,
+    private router: Router
   ) {}
 
   // CREATE OT
@@ -151,7 +154,7 @@ export class OTEffects {
       concatMap(([, { filtro_propietario, filtro_tipo }]) =>
         this.otHttpService
           .getBandejaOT({
-            filtro_pestania: 'EN_EJECUCION',
+            filtro_pestania: FiltroPestaniaOT.EN_EJECUCION,
             filtro_propietario,
             filtro_tipo,
           })
@@ -175,7 +178,7 @@ export class OTEffects {
       concatMap(([, { filtro_propietario, filtro_tipo }]) =>
         this.otHttpService
           .getBandejaOT({
-            filtro_pestania: 'ABIERTAS',
+            filtro_pestania: FiltroPestaniaOT.ABIERTAS,
             filtro_propietario,
             filtro_tipo,
           })
@@ -199,7 +202,7 @@ export class OTEffects {
       concatMap(([, { filtro_propietario, filtro_tipo }]) =>
         this.otHttpService
           .getBandejaOT({
-            filtro_pestania: 'CERRADAS',
+            filtro_pestania: FiltroPestaniaOT.CERRADAS,
             filtro_propietario,
             filtro_tipo,
           })
@@ -223,7 +226,7 @@ export class OTEffects {
       concatMap(([, { filtro_propietario, filtro_tipo }]) =>
         this.otHttpService
           .getBandejaOT({
-            filtro_pestania: 'ANULADAS',
+            filtro_pestania: FiltroPestaniaOT.ANULADAS,
             filtro_propietario,
             filtro_tipo,
           })
@@ -247,7 +250,7 @@ export class OTEffects {
       concatMap(([, { filtro_propietario, filtro_tipo }]) =>
         this.otHttpService
           .getBandejaOT({
-            filtro_pestania: 'EN_TRAMITE',
+            filtro_pestania: FiltroPestaniaOT.EN_TRAMITE,
             filtro_propietario,
             filtro_tipo,
           })
