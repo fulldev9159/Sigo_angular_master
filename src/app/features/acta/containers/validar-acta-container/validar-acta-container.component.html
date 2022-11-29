@@ -131,7 +131,7 @@
               '$':'.0-2':'es-CL'}}
 
               <div class="message" style="margin-top:10px"
-                *ngIf="form.get('tipo_pago').value==='POR_SERVICIO' && !tablePagoPorServicio?.valid ">
+                *ngIf="form.get('tipo_pago').value==='POR_SERVICIO' && !tablePagoPorServicio?.hasElements ">
                 <p-message severity="error" text="Debe escoger al menos un servicio o unidad de obra" styleClass="mr-2">
                 </p-message>
               </div>

@@ -47,9 +47,13 @@ export class ActaPorServicioFormComponent {
     return values.servicio.length + values.unidad_obra.length;
   }
 
+  get hasElements(): boolean {
+    return this.selected > 0;
+  }
+
   get valid(): boolean {
     if (this.form) {
-      return this.form.valid && this.selected > 0;
+      return this.form.valid && this.hasElements;
     }
     return false;
   }
@@ -83,5 +87,9 @@ export class ActaPorServicioFormComponent {
       };
     }
     return null;
+  }
+
+  redondeo(x: number): number {
+    return +Number.parseFloat(x + '').toFixed(2);
   }
 }

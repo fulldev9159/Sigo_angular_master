@@ -60,7 +60,6 @@
                         <td>
                           <input [formControl]="servicio.get('cantidad_a_enviar')" type="number">
                           <zwc-input-alert [control]="servicio.get('cantidad_a_enviar')"></zwc-input-alert>
-
                         </td>
                         <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' :
                           '$':'.0-2':'es-CL' }}</td>
@@ -105,10 +104,12 @@
                           <ng-container *ngIf="+uo.get('cantidad_max_a_enviar').value>0">
                             <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}
                             </td>
-                            <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value -
-                              uo.get('cantidad_max_a_enviar').value }}</td>
+                            <td style="text-align: right" class="data-secundaria">{{
+                              redondeo(uo.get('cantidad_total').value -
+                              uo.get('cantidad_max_a_enviar').value)}}</td>
                             <td>
                               <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
+                              <zwc-input-alert [control]="uo.get('cantidad_a_enviar')"></zwc-input-alert>
                             </td>
                             <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
                               '$':'.0-2':'es-CL' }}</td>
@@ -206,6 +207,7 @@
                               uo.get('cantidad_max_a_enviar').value }}</td>
                             <td>
                               <input [formControl]="uo.get('cantidad_a_enviar')" type="number">
+                              <zwc-input-alert [control]="uo.get('cantidad_a_enviar')"></zwc-input-alert>
                             </td>
                             <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' :
                               '$':'.0-2':'es-CL' }}</td>

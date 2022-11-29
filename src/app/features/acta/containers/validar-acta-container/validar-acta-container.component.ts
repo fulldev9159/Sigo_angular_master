@@ -459,7 +459,11 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         cantidad: v.cantidad_total,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
-            ? +this.form.get('porcentaje').value
+            ? v.cantidad_total === 0
+              ? 0
+              : +this.form.get('porcentaje').value
+            : v.cantidad_total === 0
+            ? 0
             : 100,
       })),
       unidad_obra: this.uos.map(v => ({
@@ -467,7 +471,11 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
         cantidad: v.cantidad_total,
         porcentaje:
           this.form.get('tipo_pago').value === 'PORCENTAJE'
-            ? +this.form.get('porcentaje').value
+            ? v.cantidad_total === 0
+              ? 0
+              : +this.form.get('porcentaje').value
+            : v.cantidad_total === 0
+            ? 0
             : 100,
       })),
     };
@@ -536,8 +544,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 Validators.required,
                 CustomValidators.NoWhitespace,
                 // this.mustBeANumber,
-                CustomValidators.NonZero,
-                Validators.min(0.1),
+                // CustomValidators.NonZero,
+                Validators.min(0.01),
                 Validators.max(servicio.faltante_cantidad),
               ]
             ),
@@ -585,7 +593,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 Validators.required,
                 CustomValidators.NoWhitespace,
                 // this.mustBeANumber,
-                CustomValidators.NonZero,
+                // CustomValidators.NonZero,
                 Validators.min(0.01),
                 Validators.max(uo.faltante_cantidad),
               ]
