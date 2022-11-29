@@ -37,6 +37,7 @@ export class CosteoComponent implements OnInit, OnDestroy {
                 servicio_unidad_descripcion:
                   service.model_unidad_id.descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 unidad_obras: [
                   {
                     uo_codigo: uo.unidad_obra_cod,
