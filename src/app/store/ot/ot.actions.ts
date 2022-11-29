@@ -257,3 +257,24 @@ export const downloadOTsAsignadasError = createAction(
   '[OT] downloadOTsAsignadas Error',
   props<{ error: any }>()
 );
+
+export const setPageEjecucion = createAction(
+  '[OT] setPageEjecucion',
+  props<{ page: number }>()
+);
+export const setPageAbiertas = createAction(
+  '[OT] setPageAbiertas',
+  props<{ page: number }>()
+);
+export const setPageCerradas = createAction(
+  '[OT] setPageCerradas',
+  props<{ page: number }>()
+);
+export const setPageAnuladas = createAction(
+  '[OT] setPageAnuladas',
+  props<{ page: number }>()
+);
+export const setPageQuebradas = createAction(
+  '[OT] setPageQuebradas',
+  props<{ page: number }>()
+);

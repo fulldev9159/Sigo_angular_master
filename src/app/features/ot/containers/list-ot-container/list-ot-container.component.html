@@ -1,36 +1,36 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
   <div content>
-    <zwc-list-ot-filtros [filters]="filtrosOTs$ | async" (valueChanges)="reloadBandeja($event)"></zwc-list-ot-filtros>
+    <ng-container *ngIf="filtrosOTs$ | async as filtros">
+      <zwc-list-ot-filtros [filters]="filtros" (valueChanges)="reloadBandeja($event)"></zwc-list-ot-filtros>
 
-    <div class="card" style="margin-top: 10px;padding: 0;">
-      <p-tabView [(activeIndex)]="activeTabIndex" (onChange)="bandejaItemSelected($event)">
-        <p-tabPanel header="Ejecución" leftIcon="pi pi-play">
-          <ng-template pTemplate="header">
-            <fa-icon [icon]="playIcon"></fa-icon>
-            Ejecución
-            <p-tag [value]="(bandejaOTEjecucion$|async).length"></p-tag>
-          </ng-template>
-          <zwc-list-ot-table [data]="bandejaOTEjecucion$|async" table_id="table-ejecucion">
-          </zwc-list-ot-table>
-        </p-tabPanel>
-        <p-tabPanel header="Abiertas">
-          <ng-template pTemplate="header">
-            Abiertas
-            <p-tag [value]="(bandejaOTAbiertas$|async).length"></p-tag>
-          </ng-template>
-          <zwc-list-ot-table [data]="bandejaOTAbiertas$|async" table_id="table-abiertas"></zwc-list-ot-table>
-        </p-tabPanel>
-        <p-tabPanel header="Cerradas">
-          <zwc-list-ot-table [data]="bandejaOTCerradas$|async" table_id="table-cerradas"></zwc-list-ot-table>
-        </p-tabPanel>
-        <p-tabPanel header="Anuladas">
-          <zwc-list-ot-table [data]="bandejaOTAnuladas$|async" table_id="table-anuladas"></zwc-list-ot-table>
-        </p-tabPanel>
-        <p-tabPanel header="Quebradas">
-          <zwc-list-ot-table [data]="bandejaOTQuebradas$|async" table_id="table-quebradas">
-          </zwc-list-ot-table>
-        </p-tabPanel>
-      </p-tabView>
-    </div>
+      <div class="card" style="margin-top: 10px;padding: 0;">
+        <p-tabView [(activeIndex)]="activeTabIndex" (onChange)="bandejaItemSelected($event)">
+          <p-tabPanel header="Ejecución" leftIcon="pi pi-play">
+            <ng-template pTemplate="header">
+              <fa-icon [icon]="playIcon"></fa-icon>
+              Ejecución
+              <p-tag [value]="(bandejaOTEjecucion$|async).length"></p-tag>
+            </ng-template>
+            <zwc-list-ot-table [data]="bandejaOTEjecucion$|async" table_id="table-ejecucion" [currentPage]="filtros.currentPageEjecucion" (pageChanged)="ejecucionPageChanged($event)"></zwc-list-ot-table>
+          </p-tabPanel>
+          <p-tabPanel header="Abiertas">
+            <ng-template pTemplate="header">
+              Abiertas
+              <p-tag [value]="(bandejaOTAbiertas$|async).length"></p-tag>
+            </ng-template>
+            <zwc-list-ot-table [data]="bandejaOTAbiertas$|async" table_id="table-abiertas" [currentPage]="filtros.currentPageAbiertas" (pageChanged)="abiertasPageChanged($event)"></zwc-list-ot-table>
+          </p-tabPanel>
+          <p-tabPanel header="Cerradas">
+            <zwc-list-ot-table [data]="bandejaOTCerradas$|async" table_id="table-cerradas" [currentPage]="filtros.currentPageCerradas" (pageChanged)="cerradasPageChanged($event)"></zwc-list-ot-table>
+          </p-tabPanel>
+          <p-tabPanel header="Anuladas">
+            <zwc-list-ot-table [data]="bandejaOTAnuladas$|async" table_id="table-anuladas" [currentPage]="filtros.currentPageAnuladas" (pageChanged)="anuladasPageChanged($event)"></zwc-list-ot-table>
+          </p-tabPanel>
+          <p-tabPanel header="Quebradas">
+            <zwc-list-ot-table [data]="bandejaOTQuebradas$|async" table_id="table-quebradas" [currentPage]="filtros.currentPageQuebradas" (pageChanged)="quebradasPageChanged($event)"></zwc-list-ot-table>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </ng-container>
   </div>
 </zwc-content-layout>

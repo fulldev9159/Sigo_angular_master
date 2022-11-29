@@ -150,6 +150,11 @@ export class OTFacade {
     filtro_propietario: FiltroPropietarioOT;
     filtro_tipo: FiltroTipoOT;
     filtro_pestania: FiltroPestaniaOT;
+    currentPageEjecucion: number;
+    currentPageAbiertas: number;
+    currentPageCerradas: number;
+    currentPageAnuladas: number;
+    currentPageQuebradas: number;
   }> {
     return this.store.select(otSelectors.getFiltrosOT);
   }
@@ -166,6 +171,42 @@ export class OTFacade {
       this.store.dispatch(otActions.getBandejaOTAnuladas());
     else if (filtro_pestania === FiltroPestaniaOT.EN_TRAMITE)
       this.store.dispatch(otActions.getBandejaOTQuebradas());
+  }
+
+  public setPageEjecucion(page: number): void {
+    this.store.dispatch(
+      otActions.setPageEjecucion({
+        page,
+      })
+    );
+  }
+  public setPageAbiertas(page: number): void {
+    this.store.dispatch(
+      otActions.setPageAbiertas({
+        page,
+      })
+    );
+  }
+  public setPageCerradas(page: number): void {
+    this.store.dispatch(
+      otActions.setPageCerradas({
+        page,
+      })
+    );
+  }
+  public setPageAnuladas(page: number): void {
+    this.store.dispatch(
+      otActions.setPageAnuladas({
+        page,
+      })
+    );
+  }
+  public setPageQuebradas(page: number): void {
+    this.store.dispatch(
+      otActions.setPageQuebradas({
+        page,
+      })
+    );
   }
 
   public getBandejaOTEjecucion$(): Observable<OT[]> {

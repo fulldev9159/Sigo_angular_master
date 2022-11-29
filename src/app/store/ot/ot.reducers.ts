@@ -35,6 +35,12 @@ export interface StateOT {
     filtro_propietario: FiltroPropietarioOT;
     filtro_tipo: FiltroTipoOT;
     filtro_pestania: FiltroPestaniaOT;
+
+    currentPageEjecucion: number;
+    currentPageAbiertas: number;
+    currentPageCerradas: number;
+    currentPageAnuladas: number;
+    currentPageQuebradas: number;
   };
 
   // BANDEJAS
@@ -60,6 +66,12 @@ export const initialState: StateOT = {
     filtro_propietario: FiltroPropietarioOT.TODAS,
     filtro_tipo: FiltroTipoOT.TODAS,
     filtro_pestania: FiltroPestaniaOT.EN_EJECUCION,
+
+    currentPageEjecucion: 0,
+    currentPageAbiertas: 0,
+    currentPageCerradas: 0,
+    currentPageAnuladas: 0,
+    currentPageQuebradas: 0,
   },
 
   bandejaOTEjecucion: [],
@@ -135,6 +147,12 @@ export const reducerOT = createReducer(
         ...state.filtrosOT,
         filtro_propietario,
         filtro_tipo,
+
+        currentPageEjecucion: 0,
+        currentPageAbiertas: 0,
+        currentPageCerradas: 0,
+        currentPageAnuladas: 0,
+        currentPageQuebradas: 0,
       },
     })
   ),
@@ -143,6 +161,41 @@ export const reducerOT = createReducer(
     filtrosOT: {
       ...state.filtrosOT,
       filtro_pestania,
+    },
+  })),
+  on(OTActions.setPageEjecucion, (state, { page }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      currentPageEjecucion: page,
+    },
+  })),
+  on(OTActions.setPageAbiertas, (state, { page }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      currentPageAbiertas: page,
+    },
+  })),
+  on(OTActions.setPageCerradas, (state, { page }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      currentPageCerradas: page,
+    },
+  })),
+  on(OTActions.setPageAnuladas, (state, { page }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      currentPageAnuladas: page,
+    },
+  })),
+  on(OTActions.setPageQuebradas, (state, { page }) => ({
+    ...state,
+    filtrosOT: {
+      ...state.filtrosOT,
+      currentPageQuebradas: page,
     },
   }))
 );

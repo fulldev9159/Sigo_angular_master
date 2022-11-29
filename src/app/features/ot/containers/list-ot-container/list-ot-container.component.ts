@@ -11,6 +11,7 @@ import { MenuItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
 import { take, map, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { DeepEqual } from '@sharedOT/utils';
 
 @Component({
   selector: 'zwc-list-ot-container',
@@ -33,6 +34,11 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
     filtro_propietario: FiltroPropietarioOT;
     filtro_tipo: FiltroTipoOT;
     filtro_pestania: FiltroPestaniaOT;
+    currentPageEjecucion: number;
+    currentPageAbiertas: number;
+    currentPageCerradas: number;
+    currentPageAnuladas: number;
+    currentPageQuebradas: number;
   }> = this.otFacade.getFiltrosOT$();
 
   // ICONS
@@ -61,7 +67,8 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
           map(({ filtro_propietario, filtro_tipo }) => ({
             filtro_propietario,
             filtro_tipo,
-          }))
+          })),
+          distinctUntilChanged((a, b) => DeepEqual(a, b))
         )
         .subscribe(({ filtro_propietario, filtro_tipo }) => this.getBandejas())
     );
@@ -140,5 +147,25 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
         this.otFacade.updateFiltrosPestania(FiltroPestaniaOT.EN_TRAMITE);
         break;
     }
+  }
+
+  ejecucionPageChanged(page: number): void {
+    this.otFacade.setPageEjecucion(page);
+  }
+
+  abiertasPageChanged(page: number): void {
+    this.otFacade.setPageAbiertas(page);
+  }
+
+  cerradasPageChanged(page: number): void {
+    this.otFacade.setPageCerradas(page);
+  }
+
+  anuladasPageChanged(page: number): void {
+    this.otFacade.setPageAnuladas(page);
+  }
+
+  quebradasPageChanged(page: number): void {
+    this.otFacade.setPageQuebradas(page);
   }
 }
