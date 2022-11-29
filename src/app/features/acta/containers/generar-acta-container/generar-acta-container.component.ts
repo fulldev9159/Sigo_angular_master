@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
   CarritoService,
+  DetalleOT,
   DetalleServicio4Acta,
   DetalleUO4Acta,
 } from '@model';
@@ -39,6 +40,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
 
   ot_id: number;
   total_actas: number;
+  contrato: any;
 
   // LOADINGS
   sendingInformarTrabajosFinalizados$: Observable<boolean> =
@@ -58,10 +60,23 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
     this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
-        ({ servicios4acta, uos4acta, accionesOT, totalActas }) => {
+        ({
+          servicios4acta,
+          uos4acta,
+          accionesOT,
+          totalActas,
+          observaciontrabajos,
+          detalleOT,
+        }) => {
           console.log(accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
           if (totalActas) this.total_actas = totalActas.data.total;
+
+          if (detalleOT) {
+            const ot = detalleOT.data as DetalleOT;
+            this.contrato =
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+          }
 
           // ORGANIZAR DATA PARA TABLA
           // 138 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
@@ -111,6 +126,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 unidad_obras: [],
               };
 
@@ -158,6 +174,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 servicios_adicional_dummy:
                   servicios_originales.find(
                     v =>

@@ -120,6 +120,7 @@ export class InformeAvanceComponent
     );
   accionesOT: Accion[] = [];
   ot_id: number;
+  contrato: any;
 
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
@@ -161,6 +162,8 @@ export class InformeAvanceComponent
           if (accionesOT) this.accionesOT = accionesOT;
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
+            this.contrato =
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
 
             this.ot_id = ot.ot.id;
 
@@ -217,6 +220,7 @@ export class InformeAvanceComponent
                 servicio_unidad_descripcion:
                   service.model_unidad_id.descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 unidad_obras: [
                   {
                     precargado: true,

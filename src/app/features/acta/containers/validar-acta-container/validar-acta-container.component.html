@@ -9,7 +9,7 @@
         <div class="field col-12 table-autorizar-adicionales">
           <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static" [data_source]="acta_adicionales"
             [cantidad_editable]="false" [column_acciones]="true" [accion_delete]="false"
-            [accion_aprobacion_servicio_adic]="true">
+            [accion_aprobacion_servicio_adic]="true" [contratoMarco]="contrato">
           </zwc-table-servicios>
           <div class="field col-12 table-autorizar-adicionales" *ngIf="!acta_adicionales.length>0"
             style="font-size: 0.7rem;">
@@ -27,7 +27,7 @@
       <div class=" grid">
         <div class="field col-12 table-servicios-cubicados">
           <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"
-            [cantidad_editable]="false" [column_acciones]="false">
+            [cantidad_editable]="false" [column_acciones]="false" [contratoMarco]="contrato">
           </zwc-table-servicios>
         </div>
 
@@ -39,8 +39,8 @@
     <p-divider align="center">
       <span class="p-tag">Detalle servicios por pagar</span>
     </p-divider>
-    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
-      [column_acciones]="false">
+    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false" [column_acciones]="false"
+      [contratoMarco]="contrato">
     </zwc-table-servicios>
   </ng-container>
 
@@ -76,7 +76,7 @@
             <br>
             <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL'">
               <zwc-table-servicios #tableServicesTotal mode_source="static" [data_source]="acta"
-                [cantidad_editable]="false" [column_acciones]="false">
+                [cantidad_editable]="false" [column_acciones]="false" [contratoMarco]="contrato">
               </zwc-table-servicios>
             </ng-container>
 

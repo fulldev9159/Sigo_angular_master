@@ -15,6 +15,7 @@ import {
   Accion,
   ActaTipoPago,
   CarritoService,
+  DetalleOT,
   DetalleServicio4Acta,
   DetalleUO4Acta,
   Dropdown,
@@ -130,6 +131,8 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   tipo_pago: string;
 
+  contrato: any;
+
   comentarioInforme$: Observable<string> = this.actaFacade
     .getComentariosFinalizacionTrabajos$()
     .pipe(map(value => value.replace(/\n/g, '<br>')));
@@ -159,6 +162,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           detalleInformeAvance,
           lastActa,
           totalActas,
+          detalleOT,
         }) => {
           if (detalleInformeAvance)
             this.total_informe_avance =
@@ -172,7 +176,11 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
               code: value.descripcion,
             }));
           if (totalActas) this.total_actas = totalActas.data.total;
-
+          if (detalleOT) {
+            const ot = detalleOT.data as DetalleOT;
+            this.contrato =
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+          }
           // ORGANIZAR DATA PARA TABLA
           // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
           // 151 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
@@ -224,6 +232,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 servicio_unidad_cod: service.unidad_codigo,
                 servicio_unidad_descripcion: service.unidad_descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 servicios_adicional_dummy:
                   servicios_originales.find(
                     v =>
@@ -282,6 +291,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
                 servicio_unidad_descripcion: service.unidad_descripcion,
                 faltante_porcentaje_entero: service.faltante_porcentaje_entero,
                 prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
                 unidad_obras: [],
               };
 
