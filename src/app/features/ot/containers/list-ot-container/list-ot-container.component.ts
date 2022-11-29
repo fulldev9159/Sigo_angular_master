@@ -9,7 +9,7 @@ import {
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, map, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -56,56 +56,24 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
     ];
 
     this.subscription.add(
-      this.route.queryParams.subscribe(
-        (params: {
-          filtro_propietario?: string;
-          filtro_tipo?: string;
-          filtro_pestania?: string;
-        }) => {
-          let filtro_propietario: FiltroPropietarioOT;
-          let filtro_tipo: FiltroTipoOT;
-          let filtro_pestania: FiltroPestaniaOT;
-
-          if (
-            Object.values(FiltroPropietarioOT).includes(
-              params.filtro_propietario as unknown as FiltroPropietarioOT
-            )
-          ) {
-            filtro_propietario =
-              params.filtro_propietario as unknown as FiltroPropietarioOT;
-          }
-
-          if (
-            Object.values(FiltroTipoOT).includes(
-              +params.filtro_tipo as unknown as FiltroTipoOT
-            )
-          ) {
-            filtro_tipo = +params.filtro_tipo as unknown as FiltroTipoOT;
-          }
-
-          if (
-            Object.values(FiltroPestaniaOT).includes(
-              params.filtro_pestania as unknown as FiltroPestaniaOT
-            )
-          ) {
-            filtro_pestania =
-              params.filtro_pestania as unknown as FiltroPestaniaOT;
-          }
-
-          filtro_propietario = filtro_propietario ?? FiltroPropietarioOT.TODAS;
-          filtro_tipo = filtro_tipo ?? FiltroTipoOT.TODAS;
-          filtro_pestania = filtro_pestania ?? FiltroPestaniaOT.EN_EJECUCION;
-
-          this.otFacade.updateFiltros({
+      this.filtrosOTs$
+        .pipe(
+          map(({ filtro_propietario, filtro_tipo }) => ({
             filtro_propietario,
             filtro_tipo,
-          });
-          this.setBandeja(filtro_pestania);
-          this.otFacade.updateFiltrosPestania(filtro_pestania);
+          }))
+        )
+        .subscribe(({ filtro_propietario, filtro_tipo }) => this.getBandejas())
+    );
 
-          this.getBandejas();
-        }
-      )
+    this.subscription.add(
+      this.filtrosOTs$
+        .pipe(
+          map(({ filtro_pestania }) => ({
+            filtro_pestania,
+          }))
+        )
+        .subscribe(({ filtro_pestania }) => this.setBandeja(filtro_pestania))
     );
   }
 
@@ -132,8 +100,6 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
       filtro_propietario,
       filtro_tipo,
     });
-
-    //// this.getBandejas();
   }
 
   setBandeja(filtro_pestania: FiltroPestaniaOT): void {
@@ -157,7 +123,6 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
   }
 
   bandejaItemSelected({ index }: { index: number }): void {
-    console.log('bandeja item selected', index);
     switch (index) {
       case 0:
         this.otFacade.updateFiltrosPestania(FiltroPestaniaOT.EN_EJECUCION);

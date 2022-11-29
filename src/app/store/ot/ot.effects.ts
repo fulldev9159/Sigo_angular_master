@@ -266,24 +266,6 @@ export class OTEffects {
     )
   );
 
-  refreshRouterAfterFiltersChanged$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.updateFiltrosOT, otActions.updateFiltrosPestaniaOT),
-        concatLatestFrom(() => [this.ot.getFiltrosOT$()]),
-        tap(([, { filtro_propietario, filtro_tipo, filtro_pestania }]) => {
-          this.router.navigate([`/ot/list-ot`], {
-            queryParams: {
-              filtro_propietario,
-              filtro_tipo,
-              filtro_pestania,
-            },
-          });
-        })
-      ),
-    { dispatch: false }
-  );
-
   // DOWNLOAD Ots ASIGNADAS
   requestDownloadOTsAsignadas$ = createEffect(() =>
     this.actions$.pipe(
