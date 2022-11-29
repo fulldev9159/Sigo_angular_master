@@ -1,6 +1,10 @@
 import { StatusResponse, ModelUsuario } from '@model';
 import { ModelMaterial } from './material';
-import { ModelServicio } from './servicio';
+import {
+  ModelActividadId,
+  ModelServicio,
+  ModelServicioWithTipo,
+} from './servicio';
 import { ModelUnidadObra } from './unidad-obra';
 
 export interface DetalleServicio4Acta {
@@ -32,6 +36,9 @@ export interface DetalleServicio4Acta {
   servicio_descripcion: string;
 
   valor_unitario_clp: number;
+
+  actividad_descripcion: string;
+  tipo_servicio_descripcion: string;
 }
 
 export interface DetalleUO4Acta {
@@ -153,7 +160,7 @@ export interface DetalleServicioLastActa {
     factor_conversion_precio: number;
     id: number;
     informe_avance_id: number;
-    model_servicio_id: ModelServicio;
+    // model_servicio_id: ModelServicio;
     precio_tipo_moneda_id: number;
     prov_has_serv_precio: number;
     puntos_baremos: number;
@@ -162,6 +169,8 @@ export interface DetalleServicioLastActa {
     tipo_servicio_id: number;
     unidad_id: number;
     valor_unitario_clp: number;
+    model_servicio_id: ModelServicioWithTipo;
+    model_actividad_id: ModelActividadId;
   };
   pago_cantidad: number;
   pago_porcentaje: number;

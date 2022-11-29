@@ -19,6 +19,10 @@ export interface ModelServicio {
   requiere_evidencia: boolean;
 }
 
+export interface ModelServicioWithTipo extends ModelServicio {
+  model_tipo_servicio_id: ModelTipoServicioId;
+}
+
 //  GET SERVICIOS DE UNA AGENCIA/CONTRATO
 export interface RequestGetServicioTipoAgenciaContratoProveedor {
   agencia_id: number;
@@ -119,15 +123,16 @@ export interface DetalleServicioCubicacion {
   many_cubicacion_has_uob: DetalleUOCubicacion[];
 
   model_actividad_id: Actividad;
-  model_tipo_servicio_id: {
-    id: number;
-    codigo: string;
-    descripcion: string;
-    estado: boolean;
-    contrato_marco_id: number;
-  };
+  model_tipo_servicio_id: ModelTipoServicioId;
 }
 
+export interface ModelTipoServicioId {
+  id: number;
+  codigo: string;
+  descripcion: string;
+  estado: boolean;
+  contrato_marco_id: number;
+}
 // INFORME AVANCE
 export interface ServicioFromInfomeAvance {
   id: number;
@@ -150,10 +155,15 @@ export interface ServicioFromInfomeAvance {
   evidencia_id: number;
   valor_unitario_clp: number;
 
-  model_servicio_id: ModelServicio;
+  model_servicio_id: ModelServicioWithTipo;
   model_unidad_id: Unidad;
   model_precio_tipo_moneda_id: TipoMoneda;
-
+  model_actividad_id: ModelActividadId;
   numero_producto: string;
   many_informe_has_uob: UnidadObraFromInformeAvance[];
+}
+
+export interface ModelActividadId {
+  id: number;
+  descripcion: string;
 }

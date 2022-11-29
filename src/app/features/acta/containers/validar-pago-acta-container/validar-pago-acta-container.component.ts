@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
   CarritoService,
+  DetalleOT,
   DetalleServicioLastActa,
   DetalleUnidadObraLastActa,
   Dropdown,
@@ -43,6 +44,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
   total_a_pagar = 0;
   por_acta_pagado = 0;
   porc_a_pagar = 0;
+  contrato: any;
 
   quienAutorizoPago$ = this.actaFacade.quienAutorizoPago$();
 
@@ -85,7 +87,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
     this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
-        ({ accionesOT, lastActa, detalleInformeAvance }) => {
+        ({ accionesOT, lastActa, detalleInformeAvance, detalleOT }) => {
           console.log(accionesOT);
           let lastActaData: LastActa = lastActa?.data;
 
@@ -97,6 +99,11 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
             this.porc_a_pagar =
               lastActa.data.many_acta_detalle_servicio[0].pago_porcentaje * 100;
 
+          if (detalleOT) {
+            const ot = detalleOT.data as DetalleOT;
+            this.contrato =
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+          }
           this.ot_id = lastActaData?.ot_id;
           this.tipo_pago = lastActaData?.tipo_pago;
           this.acta_id = lastActaData?.id;
@@ -159,10 +166,15 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                     .descripcion,
                 prov_has_serv_precio:
                   service.model_informe_has_servicio_id.prov_has_serv_precio,
-                tipo_servicio_descripcion: 'TO-DO',
+                tipo_servicio_descripcion:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_tipo_servicio_id?.descripcion,
                 tipo_servicio_id: -1,
                 servicio_unidad_cod: 'TO-DO',
                 servicio_unidad_descripcion: 'TO-DO',
+                puntos_baremos:
+                  service.model_informe_has_servicio_id.puntos_baremos,
+
                 unidad_obras: [],
               };
 
@@ -190,7 +202,9 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                             .descripcion,
                         uo_precio_total_clp:
                           uo.model_informe_has_uob_id.valor_unitario_clp,
-                        actividad_descripcion: 'TO-DO',
+                        actividad_descripcion:
+                          service.model_informe_has_servicio_id
+                            .model_actividad_id.descripcion,
                         actividad_id: -1,
                         uob_unidad_medida_cod: 'TO-DO',
                         uob_unidad_medida_descripcion: 'TO-DO',
@@ -219,10 +233,14 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                     .descripcion,
                 prov_has_serv_precio:
                   service.model_informe_has_servicio_id.prov_has_serv_precio,
-                tipo_servicio_descripcion: 'TO-DO',
+                tipo_servicio_descripcion:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_tipo_servicio_id?.descripcion,
                 tipo_servicio_id: -1,
                 servicio_unidad_cod: 'TO-DO',
                 servicio_unidad_descripcion: 'TO-DO',
+                puntos_baremos:
+                  service.model_informe_has_servicio_id.puntos_baremos,
                 servicios_adicional_dummy:
                   servicios_originales.find(
                     v =>
@@ -256,7 +274,9 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                             .descripcion,
                         uo_precio_total_clp:
                           uo.model_informe_has_uob_id.valor_unitario_clp,
-                        actividad_descripcion: 'TO-DO',
+                        actividad_descripcion:
+                          service.model_informe_has_servicio_id
+                            .model_actividad_id.descripcion,
                         actividad_id: -1,
                         uob_unidad_medida_cod: 'TO-DO',
                         uob_unidad_medida_descripcion: 'TO-DO',

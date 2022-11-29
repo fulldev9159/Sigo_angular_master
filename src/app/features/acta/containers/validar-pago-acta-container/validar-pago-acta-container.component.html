@@ -48,7 +48,7 @@
                 <ng-container *ngIf="tipo_pago==='POR_SERVICIO'"></ng-container>
                 <ng-container *ngIf="tipo_pago==='TOTAL'">
                     <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
-                        [column_acciones]="false">
+                        [column_acciones]="false" [contratoMarco]="contrato">
                     </zwc-table-servicios>
                 </ng-container>
 
