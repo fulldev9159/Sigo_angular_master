@@ -44,7 +44,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
   total_a_pagar = 0;
   por_acta_pagado = 0;
   porc_a_pagar = 0;
-  contrato: any;
+  contrato: string;
 
   quienAutorizoPago$ = this.actaFacade.quienAutorizoPago$();
 
@@ -102,7 +102,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
             this.contrato =
-              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
           }
           this.ot_id = lastActaData?.ot_id;
           this.tipo_pago = lastActaData?.tipo_pago;

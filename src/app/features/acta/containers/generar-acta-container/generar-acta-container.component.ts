@@ -40,7 +40,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
 
   ot_id: number;
   total_actas: number;
-  contrato: any;
+  contrato: string;
 
   // LOADINGS
   sendingInformarTrabajosFinalizados$: Observable<boolean> =
@@ -75,7 +75,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
             this.contrato =
-              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
           }
 
           // ORGANIZAR DATA PARA TABLA

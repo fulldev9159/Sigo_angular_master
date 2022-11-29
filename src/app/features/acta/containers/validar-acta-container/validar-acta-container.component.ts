@@ -131,7 +131,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   tipo_pago: string;
 
-  contrato: any;
+  contrato: string;
 
   comentarioInforme$: Observable<string> = this.actaFacade
     .getComentariosFinalizacionTrabajos$()
@@ -179,7 +179,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
             this.contrato =
-              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
           }
           // ORGANIZAR DATA PARA TABLA
           // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS

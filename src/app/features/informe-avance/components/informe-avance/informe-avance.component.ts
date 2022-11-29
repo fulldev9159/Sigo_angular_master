@@ -120,7 +120,7 @@ export class InformeAvanceComponent
     );
   accionesOT: Accion[] = [];
   ot_id: number;
-  contrato: any;
+  contrato: string;
 
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
@@ -163,7 +163,7 @@ export class InformeAvanceComponent
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
             this.contrato =
-              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.id;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
 
             this.ot_id = ot.ot.id;
 
