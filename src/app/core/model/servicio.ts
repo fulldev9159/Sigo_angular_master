@@ -23,6 +23,15 @@ export interface ModelServicioWithTipo extends ModelServicio {
   model_tipo_servicio_id: ModelTipoServicioId;
 }
 
+export interface ModelServicioWithTipoAndUnidad extends ModelServicioWithTipo {
+  model_unidad_id: {
+    id: number;
+    codigo: string;
+    descripcion: string;
+    estado: boolean;
+  };
+}
+
 //  GET SERVICIOS DE UNA AGENCIA/CONTRATO
 export interface RequestGetServicioTipoAgenciaContratoProveedor {
   agencia_id: number;

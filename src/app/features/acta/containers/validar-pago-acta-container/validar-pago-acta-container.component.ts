@@ -170,8 +170,12 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                   service.model_informe_has_servicio_id.model_servicio_id
                     .model_tipo_servicio_id?.descripcion,
                 tipo_servicio_id: -1,
-                servicio_unidad_cod: 'TO-DO',
-                servicio_unidad_descripcion: 'TO-DO',
+                servicio_unidad_cod:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_unidad_id.codigo,
+                servicio_unidad_descripcion:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_unidad_id.descripcion,
                 puntos_baremos:
                   service.model_informe_has_servicio_id.puntos_baremos,
 
@@ -206,8 +210,11 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                           service.model_informe_has_servicio_id
                             .model_actividad_id.descripcion,
                         actividad_id: -1,
-                        uob_unidad_medida_cod: 'TO-DO',
-                        uob_unidad_medida_descripcion: 'TO-DO',
+                        uob_unidad_medida_cod:
+                          uo.model_informe_has_uob_id.model_unidad_id.codigo,
+                        uob_unidad_medida_descripcion:
+                          uo.model_informe_has_uob_id.model_unidad_id
+                            .descripcion,
                       },
                     ],
                   })
@@ -237,8 +244,12 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                   service.model_informe_has_servicio_id.model_servicio_id
                     .model_tipo_servicio_id?.descripcion,
                 tipo_servicio_id: -1,
-                servicio_unidad_cod: 'TO-DO',
-                servicio_unidad_descripcion: 'TO-DO',
+                servicio_unidad_cod:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_unidad_id.codigo,
+                servicio_unidad_descripcion:
+                  service.model_informe_has_servicio_id.model_servicio_id
+                    .model_unidad_id.descripcion,
                 puntos_baremos:
                   service.model_informe_has_servicio_id.puntos_baremos,
                 servicios_adicional_dummy:
@@ -278,8 +289,11 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
                           service.model_informe_has_servicio_id
                             .model_actividad_id.descripcion,
                         actividad_id: -1,
-                        uob_unidad_medida_cod: 'TO-DO',
-                        uob_unidad_medida_descripcion: 'TO-DO',
+                        uob_unidad_medida_cod:
+                          uo.model_informe_has_uob_id.model_unidad_id.codigo,
+                        uob_unidad_medida_descripcion:
+                          uo.model_informe_has_uob_id.model_unidad_id
+                            .descripcion,
                         adicional_existente_ia:
                           servicioCarrito.servicios_adicional_dummy,
                       },

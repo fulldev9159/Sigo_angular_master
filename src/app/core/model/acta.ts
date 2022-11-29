@@ -4,6 +4,7 @@ import {
   ModelActividadId,
   ModelServicio,
   ModelServicioWithTipo,
+  ModelServicioWithTipoAndUnidad,
 } from './servicio';
 import { ModelUnidadObra } from './unidad-obra';
 
@@ -169,7 +170,7 @@ export interface DetalleServicioLastActa {
     tipo_servicio_id: number;
     unidad_id: number;
     valor_unitario_clp: number;
-    model_servicio_id: ModelServicioWithTipo;
+    model_servicio_id: ModelServicioWithTipoAndUnidad;
     model_actividad_id: ModelActividadId;
   };
   pago_cantidad: number;
@@ -193,6 +194,12 @@ export interface DetalleUnidadObraLastActa {
     clave: string;
     model_informe_has_servicio_id: ModelInformeHasServicio;
     model_unidad_obra_cod: ModelUnidadObra;
+    model_unidad_id: {
+      id: number;
+      codigo: string;
+      descripcion: string;
+      estado: boolean;
+    };
     many_informe_has_material: MaterialesLastActa[];
     valor_unitario_clp: number;
   };
