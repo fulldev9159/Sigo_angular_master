@@ -128,6 +128,16 @@ export class AfterHttpService {
       this.router.navigate(['/cubicacion/list-cub']);
     }
 
+    // EDITAR CUBICACIÓN
+    if (action.type === cubicacionActions.editCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        `Cubicación actualizada con éxito`,
+        'Exito',
+        4000
+      );
+      location.reload();
+    }
+
     // CLONAR CUBICACIÓN
     if (action.type === cubicacionActions.clonarCubicacionSuccess.type) {
       this.snackMessage.showMessage(

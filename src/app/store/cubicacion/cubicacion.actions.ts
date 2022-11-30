@@ -103,6 +103,20 @@ export const editCubicacionError = createAction(
   props<{ error: any }>()
 );
 
+// EDIT CUBICACION INGENIRIA
+export const editCubicacionIngenieria = createAction(
+  '[CUBICACION] editCubicacionIngenieria ',
+  props<{ request: RequestEditCubicacion }>()
+);
+export const editCubicacionIngenieriaSuccess = createAction(
+  '[CUBICACION] editCubicacionIngenieria Success',
+  props<{ response: Response<{ cubicacion_id: number }> }>()
+);
+export const editCubicacionIngenieriaError = createAction(
+  '[CUBICACION] editCubicacionIngenieria Error',
+  props<{ error: any }>()
+);
+
 // LISTAR CUBICACIONES
 export const listarCubicaciones = createAction(
   '[CUBICACION] listarCubicaciones '
