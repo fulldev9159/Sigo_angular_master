@@ -1,1 +1,126 @@
-<p>resultado-ingenieria-container works!</p>
+<div class="container-box">
+    <h1>Resultado ingeniería</h1>
+    <!-- <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-informe-avance">
+                <zwc-table-servicios #tableServiciosInformeAvance mode_source="static"
+                    [data_source]="serviciosInformeAvance" [cantidad_editable]="true" [column_acciones]="false"
+                    [contratoMarco]="contrato">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Servicios Adicionales</span>
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-agregar-servicios-adicionales">
+                <p-divider align="center">
+                    <span class="p-tag">Agregar Servicios</span>
+                </p-divider>
+                <div class="grid">
+                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                        <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="ServiciosAdicionales"
+                            [informeAvance]="serviciosInformeAvance">
+                        </zwc-form-agregar-servicios>
+                    </div>
+                    <div class="field col-12 md:col-9 lg:col-9 xl:col-9 table-adicionales">
+    <zwc-table-servicios mode_source="agregar-adicionales-informe-avance" [informe_avance]="serviciosInformeAvance"
+        [contratoMarco]="contrato" #tableServiciosAdicionales>
+    </zwc-table-servicios>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card" *ngIf="canSeePrices()">
+    <div class=" grid">
+        <div class="field col-12 table-agregar-servicios-adicionales">
+            <p-divider align="center">
+                <span class="p-tag">Total</span>
+            </p-divider>
+            <div class="grid">
+                <div class="field col-12 md:col-3 lg:col-3 xl:col-3 total-final-ia">
+                    {{totalFinalInformeAvance|
+                    currency : 'CLP' : '$':'.0-2':'es-CL'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-divider align="center">
+</p-divider>
+
+<div class="card">
+    <div class=" grid">
+        <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined" [routerLink]="['/ot']">
+                Atrás
+            </button>
+        </div>
+        <div *ngIf="accionExist('OT_EDITAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador" icon="save"
+                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"
+                [sending]="sendingSendBorradorInformeAvance$|async"></zwc-pbutton-sending>
+        </div>
+
+        <div *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <zwc-pbutton-sending Pid="enviar-button" content="Enviar informe de avance" icon="play"
+                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalEnvioInformeAvance=true"
+                [sending]="sendingSendInformeAvance$|async">
+            </zwc-pbutton-sending>
+        </div>
+
+        <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance" icon="ok"
+                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionInformeAvance=true"
+                [sending]="sendingSendInformeAvance$|async">
+            </zwc-pbutton-sending>
+        </div>
+        <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance" icon="nok"
+                Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
+                (click)="displayModalRechazarInformeAvance()" [sending]="sendingSendInformeAvance$|async">
+            </zwc-pbutton-sending>
+        </div>
+    </div>
+</div> -->
+</div>
+<!-- <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"
+    [modal]="true">
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInformeAvanceForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="showModalRechazarInformeAvance=false">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="rechazarInformeAvance()"
+            [disabled]="!rechazoInformeAvanceForm.formRechazo.valid">
+            Rechazar informe de avance
+        </button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Confirmar envío del Informe de Avance" [(visible)]="displayModalEnvioInformeAvance"
+    [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Desea confirmar el envío del informe de avance?'
+        (cancelar)="displayModalEnvioInformeAvance=false" (confirmar)="enviarInformeAvance()"
+        textConfirmar="Enviar Informe de Avance">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+<p-dialog header="Confirmar aprobación del Informe de Avance" [(visible)]="displayModalAprobacionInformeAvance"
+    [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Desea confirmar la aprobación del informe de avance?'
+        (cancelar)="displayModalAprobacionInformeAvance=false" (confirmar)="autorizarInformeAvance()"
+        textConfirmar="Aprobar Informe de Avance">
+    </zwc-view-confirmacion>
+</p-dialog> -->
