@@ -34,7 +34,7 @@
                     </div>
                     <div class="field col-12 md:col-9 lg:col-9 xl:col-9 table-adicionales">
                         <zwc-table-servicios mode_source="agregar-adicionales-informe-avance"
-                            [informe_avance]="dataCubicacion" [contratoMarco]="contrato" #tableServiciosAdicionales>
+                            [informe_avance]="dataCubicacion" [contratoMarco]="contrato" #tableServicios>
                         </zwc-table-servicios>
                     </div>
                 </div>
@@ -57,44 +57,24 @@
             </div>
         </div>
     </div>
-    <!-- 
-<p-divider align="center">
-</p-divider>
 
-<div class="card">
-    <div class=" grid">
-        <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined" [routerLink]="['/ot']">
-                Atrás
-            </button>
-        </div>
-        <div *ngIf="accionExist('OT_EDITAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador" icon="save"
-                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"
-                [sending]="sendingSendBorradorInformeAvance$|async"></zwc-pbutton-sending>
-        </div>
+    <p-divider align="center">
+    </p-divider>
 
-        <div *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <zwc-pbutton-sending Pid="enviar-button" content="Enviar informe de avance" icon="play"
-                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalEnvioInformeAvance=true"
-                [sending]="sendingSendInformeAvance$|async">
-            </zwc-pbutton-sending>
-        </div>
-
-        <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance" icon="ok"
-                Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacionInformeAvance=true"
-                [sending]="sendingSendInformeAvance$|async">
-            </zwc-pbutton-sending>
-        </div>
-        <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance" icon="nok"
-                Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
-                (click)="displayModalRechazarInformeAvance()" [sending]="sendingSendInformeAvance$|async">
-            </zwc-pbutton-sending>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"
+                    [routerLink]="['/ot']">
+                    Atrás
+                </button>
+            </div>
+            <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"
+                Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"
+                [Pdisabled]="!tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
+                (call)="editarCubicacion()"></zwc-pbutton-sending>
         </div>
     </div>
-</div> -->
 </div>
 <!-- <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"
     [modal]="true">

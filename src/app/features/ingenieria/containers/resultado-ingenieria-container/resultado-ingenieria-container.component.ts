@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
@@ -7,35 +14,66 @@ import {
   ContratosUser,
   DetalleServicioCubicacion,
   InfoOT,
+  NuevoServicio,
+  NuevoUO,
   ProveedorAgenciaContrato,
+  RequestEditCubicacion,
+  ServicioUOActualizar,
   SessionData,
+  UOAgregar,
 } from '@model';
+import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
+import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
-import { Subscription } from 'rxjs';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'zwc-resultado-ingenieria-container',
   templateUrl: './resultado-ingenieria-container.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./resultado-ingenieria-container.component.scss'],
 })
 export class ResultadoIngenieriaContainerComponent
-  implements OnInit, OnDestroy
+  implements OnInit, OnDestroy, AfterViewInit
 {
   subscription: Subscription = new Subscription();
+
+  @ViewChild('tableServicios', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServicios: TableServiciosComponent;
+
+  @ViewChild('agregarServiciosForm', {
+    read: FormAgregarServiciosComponent,
+    static: false,
+  })
+  agregarServiciosForm: FormAgregarServiciosComponent;
+
   dataOT: InfoOT;
   dataCubicacion: CarritoService[] = [];
   accionesOT: Accion[] = [];
+  cubicacion_ingeniria_id: number;
+  carrito$ = this.serviciosFacade.carrito$();
+
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
   ).permisos.map(value => value.slug);
   contrato: string;
 
+  // LOADINGS
+  sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
+
   constructor(
     private authFacade: AuthFacade,
     private cubicacionFacade: CubicacionFacade,
     private contratoFacade: ContratoFacade,
+    private serviciosFacade: ServiciosFacade,
+    private loadingFacade: LoadingsFacade,
     private route: ActivatedRoute
   ) {}
 
@@ -88,6 +126,7 @@ export class ResultadoIngenieriaContainerComponent
             this.dataOT = detalleOT.data.ot;
             this.contrato =
               this.dataOT.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
+            this.cubicacion_ingeniria_id = this.dataOT.cubicacion_ing_id;
 
             // PRECARGAR DATOS FILTROS PARA AGREGAR SERVICIOS
             this.contratoFacade.getActividadesContratoProveedor(
@@ -124,6 +163,222 @@ export class ResultadoIngenieriaContainerComponent
   canSeePrices(): boolean {
     return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
+
+  editarCubicacion(): void {
+    this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+
+    // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
+    if (
+      this.tableServicios.servicios_eliminar.length > 0 ||
+      this.tableServicios.uos_eliminar.length > 0
+    ) {
+      this.cubicacionFacade.eliminarServicioCarrito(
+        this.tableServicios.servicios_eliminar,
+        this.tableServicios.uos_eliminar
+      );
+    }
+
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        const isLocal = (item: { precargado?: boolean }) =>
+          item.precargado === undefined || item.precargado === false;
+
+        const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
+
+        const servicios: {
+          precargado: boolean;
+          servicio_rowid: number;
+          servicio_id: number;
+          servicio_cantidad: number;
+          unidad_obras: Array<{
+            precargado: boolean;
+            uo_rowid: number;
+            uo_cantidad: number;
+            uo_codigo: string;
+          }>;
+        }[] = this.tableServicios.formTable.get('table').value as Array<{
+          precargado: boolean;
+          servicio_id: number;
+          servicio_rowid: number;
+          servicio_cantidad: number;
+          unidad_obras: Array<{
+            precargado: boolean;
+            uo_rowid: number;
+            uo_cantidad: number;
+            uo_codigo: string;
+          }>;
+        }>;
+
+        const nuevos_servicios: NuevoServicio[] = servicios
+          .filter(isLocal)
+          .map(servicio => {
+            let unidad_obra: NuevoUO[] = [];
+            unidad_obra = servicio.unidad_obras.map(uo => ({
+              uob_codigo: uo.uo_codigo,
+              cantidad: +uo.uo_cantidad,
+            }));
+            return {
+              servicio_id: +servicio.servicio_id,
+              actividad_id: carrito.find(
+                value =>
+                  value.servicio_id === servicio.servicio_id &&
+                  value.unidad_obras[0].uo_codigo ===
+                    servicio.unidad_obras[0].uo_codigo
+              ).unidad_obras[0].actividad_id,
+              tipo_servicio_id: +carrito.find(
+                value =>
+                  value.servicio_id === servicio.servicio_id &&
+                  value.unidad_obras[0].uo_codigo ===
+                    servicio.unidad_obras[0].uo_codigo
+              ).tipo_servicio_id,
+              cantidad: +servicio.servicio_cantidad,
+              unidad_obra,
+            };
+          });
+
+        const servicios_actualizar: ServicioUOActualizar[] = servicios
+          .filter(notLocal)
+          .map(servicio => ({
+            rowid: servicio.servicio_rowid,
+            cantidad: +servicio.servicio_cantidad,
+          }));
+
+        const unidades_obra_actualizar: ServicioUOActualizar[] = servicios
+          .filter(notLocal)
+          .reduce((ac, servicio) => {
+            const unidades_obra = servicio.unidad_obras
+              .filter(notLocal)
+              .map(uo => ({
+                rowid: uo.uo_rowid,
+                cantidad: +uo.uo_cantidad,
+              }));
+            return ac.concat(unidades_obra);
+          }, []);
+
+        const nuevas_unidades_obra: UOAgregar[] = servicios
+          .filter(notLocal)
+          .reduce((ac, servicio) => {
+            const unidades_obra = servicio.unidad_obras
+              .filter(isLocal)
+              .map(uo => ({
+                servicio_rowid: servicio.servicio_rowid,
+                uob_codigo: uo.uo_codigo,
+                uob_cantidad: +uo.uo_cantidad,
+              }));
+            return ac.concat(unidades_obra);
+          }, []);
+
+        let cubicacionData = this.dataOT.model_cubicacion_id;
+        const request: RequestEditCubicacion = {
+          cubicacion_datos: {
+            id: +this.cubicacion_ingeniria_id,
+            tipo_cubicacion_id: cubicacionData.tipo_cubicacion_id, // FORMULARIO
+            contrato_id: cubicacionData.contrato_id, // FORMULARIO
+            agencia_id: cubicacionData.agencia_id, // FORMULARIO
+            proveedor_id: cubicacionData.proveedor_id, // NGRX proveedorselected
+            codigo_acuerdo: cubicacionData.codigo_acuerdo, // NGRX proveedorselected
+            cmarco_has_proveedor_id: cubicacionData.cmarco_has_proveedor_id, // FORMULARIO
+            usuario_creador_id: cubicacionData.usuario_creador_id, // LOCALSTORE
+            direccion_desde: cubicacionData.direccion_desde, // FORMULARIO
+            altura_desde: cubicacionData.altura_desde, // FORMULARIO
+            direccion_hasta: cubicacionData.direccion_hasta, // FORMULARIO
+            altura_hasta: cubicacionData.altura_hasta, // FORMULARIO
+            descripcion: cubicacionData.descripcion, // FORMULARIO
+          },
+          cubicacion_detalle: {
+            nuevo: nuevos_servicios,
+            actualizar: {
+              servicio: servicios_actualizar,
+              unidad_obra: unidades_obra_actualizar,
+              agregar_uob_a_servicio: nuevas_unidades_obra,
+            },
+          },
+        };
+
+        this.cubicacionFacade.editCubicacion(request);
+      })
+    );
+  }
+
+  ngAfterViewInit(): void {
+    //SETTING INIT FORMULARIOS
+    this.agregarServiciosForm?.formFilter
+      .get('tipo_servicio_id')
+      .disable({ emitEvent: false });
+    this.agregarServiciosForm?.formFilter
+      .get('servicio_id')
+      .disable({ emitEvent: false });
+    this.agregarServiciosForm?.formFilter
+      .get('unidad_obra_cod')
+      .disable({ emitEvent: false });
+
+    // RESET
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('actividad_id')
+        .valueChanges.subscribe(() => {
+          this.contratoFacade.resetTipoServiciosContrato();
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
+
+          this.agregarServiciosForm?.formFilter
+            .get('tipo_servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
+
+    this.subscription.add(
+      this.agregarServiciosForm?.formFilter
+        .get('tipo_servicio_id')
+        .valueChanges.subscribe(() => {
+          this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+          this.serviciosFacade.resetServicioSelected();
+          this.serviciosFacade.resetUnidadesObraServicio();
+
+          this.agregarServiciosForm?.formFilter
+            .get('servicio_id')
+            .setValue(null, { emitEvent: false });
+          this.agregarServiciosForm?.formFilter
+            .get('unidad_obra_cod')
+            .setValue(null, { emitEvent: false });
+        })
+    );
+
+    // this.subscription.add(
+    //   this.tableServiciosInformeAvance?.formTable
+    //     .get('table')
+    //     .valueChanges.subscribe(v => {
+    //       this.calcularTotalFinal();
+    //     })
+    // );
+
+    // this.subscription.add(
+    //   this.tableServiciosAdicionales?.formTable
+    //     .get('table')
+    //     .valueChanges.subscribe(v => {
+    //       this.calcularTotalFinal();
+    //     })
+    // );
+    // this.calcularTotalFinal();
+  }
+
+  // calcularTotalFinal(): void {
+  //   let totalInformeAvance =
+  //     +this.tableServiciosInformeAvance?.totalServicios +
+  //     +this.tableServiciosInformeAvance?.totalUOs;
+  //   let totalAdicionales =
+  //     +this.tableServiciosAdicionales?.totalServicios +
+  //     +this.tableServiciosAdicionales?.totalUOs;
+
+  //   this.totalFinalInformeAvance = totalInformeAvance + totalAdicionales;
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
