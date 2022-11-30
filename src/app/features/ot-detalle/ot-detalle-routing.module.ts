@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccionesOTResolver } from 'src/app/core/resolvers/accionesOT.resolver';
+import { DetalleCubicacionFromOTResolver } from 'src/app/core/resolvers/detalleCubicacionFromOT.resolver';
 import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
 import { RegistroLibroLobrasResolver } from 'src/app/core/resolvers/registrosLibroObras.resolver';
-import { DetalleCubicacionResolver } from '../cubicacion/resolvers/detalle-cubicacion.resolver';
 import { AnexosComponent } from './components/anexos/anexos.component';
 import { CosteoComponent } from './components/costeo/costeo.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
         component: CosteoComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
-          cubicacion: DetalleCubicacionResolver,
+          cubicacion: DetalleCubicacionFromOTResolver,
         },
       },
       {

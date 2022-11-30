@@ -1,10 +1,17 @@
 <div class="container-component">
     <h1>Servicios Cubicados</h1>
 
-    <zwc-table-servicios mode_source="static" [data_source]="dataCubicacion" [cantidad_editable]="false"
-        [column_acciones]="false"
-        [contratoMarco]="dataOT?.model_cubicacion_id?.model_contrato_id?.model_tipo_contrato_id?.nombre">
-    </zwc-table-servicios>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-informe-avance">
+                <zwc-table-servicios mode_source="static" [data_source]="dataCubicacion" [cantidad_editable]="false"
+                    [column_acciones]="false"
+                    [contratoMarco]="dataOT?.model_cubicacion_id?.model_contrato_id?.model_tipo_contrato_id?.nombre">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
 
 
 

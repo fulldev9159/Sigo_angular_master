@@ -1,19 +1,23 @@
 <div class="container-box">
     <h1>Resultado ingeniería</h1>
+
+    <p-divider align="center">
+        <span class="p-tag">Servicios Cubicados</span>
+    </p-divider>
     <div class="card">
         <div class=" grid">
             <div class="field col-12 table-informe-avance">
-                <!-- <zwc-table-servicios #tableServiciosInformeAvance mode_source="static"
-                    [data_source]="serviciosInformeAvance" [cantidad_editable]="true" [column_acciones]="false"
-                    [contratoMarco]="contrato">
-                </zwc-table-servicios> -->
+                <zwc-table-servicios mode_source="static" [data_source]="dataCubicacion" [cantidad_editable]="false"
+                    [column_acciones]="false"
+                    [contratoMarco]="dataOT?.model_cubicacion_id?.model_contrato_id?.model_tipo_contrato_id?.nombre">
+                </zwc-table-servicios>
             </div>
 
         </div>
     </div>
 
     <p-divider align="center">
-        <span class="p-tag">Servicios Adicionales</span>
+        <span class="p-tag">Ingenierías</span>
     </p-divider>
     <!--
     <div class="card">
