@@ -19,7 +19,7 @@
     <p-divider align="center">
         <span class="p-tag">Ingenierías</span>
     </p-divider>
-    <!--
+
     <div class="card">
         <div class=" grid">
             <div class="field col-12 table-agregar-servicios-adicionales">
@@ -29,35 +29,35 @@
                 <div class="grid">
                     <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
                         <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="ServiciosAdicionales"
-                            [informeAvance]="serviciosInformeAvance">
+                            [informeAvance]="dataCubicacion">
                         </zwc-form-agregar-servicios>
                     </div>
                     <div class="field col-12 md:col-9 lg:col-9 xl:col-9 table-adicionales">
-    <zwc-table-servicios mode_source="agregar-adicionales-informe-avance" [informe_avance]="serviciosInformeAvance"
-        [contratoMarco]="contrato" #tableServiciosAdicionales>
-    </zwc-table-servicios>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="card" *ngIf="canSeePrices()">
-    <div class=" grid">
-        <div class="field col-12 table-agregar-servicios-adicionales">
-            <p-divider align="center">
-                <span class="p-tag">Total</span>
-            </p-divider>
-            <div class="grid">
-                <div class="field col-12 md:col-3 lg:col-3 xl:col-3 total-final-ia">
-                    {{totalFinalInformeAvance|
-                    currency : 'CLP' : '$':'.0-2':'es-CL'}}
+                        <zwc-table-servicios mode_source="agregar-adicionales-informe-avance"
+                            [informe_avance]="dataCubicacion" [contratoMarco]="contrato" #tableServiciosAdicionales>
+                        </zwc-table-servicios>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="card" *ngIf="canSeePrices()">
+        <div class=" grid">
+            <div class="field col-12 table-agregar-servicios-adicionales">
+                <p-divider align="center">
+                    <span class="p-tag">Total</span>
+                </p-divider>
+                <div class="grid">
+                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3 total-final-ia">
+                        {{totalFinalInformeAvance|
+                        currency : 'CLP' : '$':'.0-2':'es-CL'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 
 <p-divider align="center">
 </p-divider>
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccionesOTResolver } from 'src/app/core/resolvers/accionesOT.resolver';
 import { DetalleCubicacionFromOTResolver } from 'src/app/core/resolvers/detalleCubicacionFromOT.resolver';
+import { DetalleCubicacionIngFromOTResolver } from 'src/app/core/resolvers/detalleCubicacionIngFromOT.resolver';
 import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
 import { ResultadoIngenieriaContainerComponent } from './containers/resultado-ingenieria-container/resultado-ingenieria-container.component';
 const routes: Routes = [
@@ -11,6 +13,8 @@ const routes: Routes = [
     resolve: {
       detalleOT: DetalleOTResolver,
       cubicacion: DetalleCubicacionFromOTResolver,
+      cubicacionIngenieria: DetalleCubicacionIngFromOTResolver,
+      accionesOT: AccionesOTResolver,
     },
   },
 ];
