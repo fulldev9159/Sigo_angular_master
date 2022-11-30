@@ -317,20 +317,38 @@
                 <table style="width: 100%;" id="table-usuarios-involucrados">
                     <tr>
                         <th>Cargo</th>
+                        <th>Acción</th>
                         <th>Usuario</th>
                     </tr>
                     <tr *ngFor="let item of usuarios_involucrados ">
-                        <td>
-                            <ng-container *ngIf="item.concepto==='ADM_CONTRATO'">Administrador Contratista
-                            </ng-container>
-                            <ng-container *ngIf="item.concepto==='SUPERVISOR_DE_TRABAJOS'">Supervisor de trabajos
-                            </ng-container>
-                            <ng-container *ngIf="item.concepto==='APROBADOR_OPERACIONES'">Operaciones</ng-container>
-                            <ng-container *ngIf="item.concepto==='SUPERVISOR_ACEPTACION_INICIAL'">Supervisor
-                            </ng-container>
-                            <ng-container *ngIf="item.concepto==='JEFE_AREA_ACEPTACION_INICIAL'">Jefe de Área
-                            </ng-container>
-                        </td>
+                        <ng-container *ngIf="item.concepto==='ADM_CONTRATO'">
+                            <td>Administrador Contratista</td>
+                            <td>TO-DO</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='SUPERVISOR_DE_TRABAJOS'">
+                            <td>Supervisor de trabajos</td>
+                            <td>TO-DO</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='APROBADOR_OPERACIONES'">
+                            <td>Operaciones</td>
+                            <td>Aprobación de los trabajos</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='SUPERVISOR_ACEPTACION_INICIAL'">
+                            <td>Supervisor</td>
+                            <td>Aprobación inicial OT</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='JEFE_AREA_ACEPTACION_INICIAL'">
+                            <td>Jefe de área</td>
+                            <td>Aprobación inicial OT</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='APROBACION_JERARQUICA_JEFE_AREA'">
+                            <td>Jefe de área</td>
+                            <td>Aprobación de acta</td>
+                        </ng-container>
+                        <ng-container *ngIf="item.concepto==='APROBACION_JERARQUICA_SUPERVISOR'">
+                            <td>Supervisor</td>
+                            <td>Aprobación de acta</td>
+                        </ng-container>
                         <td>{{item.model_proxy_id.model_usuario_id.nombres}}
                             {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
                     </tr>
