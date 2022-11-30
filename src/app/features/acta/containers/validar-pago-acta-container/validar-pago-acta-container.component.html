@@ -63,7 +63,8 @@
 
     <div class="card">
         <div class=" grid">
-            <div class="field col-12 ">
+            <div class="field col-3"></div>
+            <div class="field col-6">
                 <table style="width: 100%;font-size: 0.7rem;">
                     <tr>
                         <th>
@@ -74,15 +75,15 @@
                         </th>
                     </tr>
                     <tr *ngFor="let item of (quienAutorizoPago$| async) ? (quienAutorizoPago$| async) : []">
-                        <td style="text-align: center;background-color: #dedcdc;">
+                        <td style="text-align: center;">
                             {{item.model_proxy_id.model_perfil_id.nombre}}</td>
-                        <td style="text-align: center;background-color: #dedcdc;">
+                        <td style="text-align: center">
                             {{item.model_proxy_id.model_usuario_id.nombres}}
                             {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
                     </tr>
                 </table>
             </div>
-
+            <div class="field col-3"></div>
         </div>
     </div>
 
