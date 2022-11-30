@@ -29,6 +29,7 @@ const routes: Routes = [
         component: CosteoComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
+          cubicacion: DetalleCubicacionResolver,
         },
       },
       {
