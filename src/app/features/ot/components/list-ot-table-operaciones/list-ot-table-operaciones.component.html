@@ -78,6 +78,18 @@
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
+
+  <!-- OT_ET_EJECUCION_TRABAJOS_INGENIERIA -->
+  <button id="play-button" pTooltip="Editar resultado ingeniería" *ngIf="findAccion('OT_EDITAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
+  <button id="play-button" pTooltip="Enviar resultado ingeniería" *ngIf="findAccion('OT_ENVIAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
+
+
   <!-- ACCIONES FIJAS -->
   <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
     <fa-icon [icon]="infoIcon"></fa-icon>

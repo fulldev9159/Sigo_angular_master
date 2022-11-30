@@ -51,6 +51,15 @@ const routes: Routes = [
     canActivate: [SigoGuard],
   },
   {
+    path: 'ingenieria',
+    loadChildren: () =>
+      import('./features/ingenieria/ingenieria.module').then(
+        m => m.IngenieriaModule
+      ),
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
+  {
     path: 'acta',
     loadChildren: () =>
       import('./features/acta/acta.module').then(m => m.ActaModule),
