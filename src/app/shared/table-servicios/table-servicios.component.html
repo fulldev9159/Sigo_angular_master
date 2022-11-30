@@ -11,10 +11,10 @@
         <th style="background: var(--bg-th-servicios)">Descripción</th>
         <th style="background: var(--bg-th-servicios)">Tipo</th>
         <th style="background: var(--bg-th-servicios)">Cantidad</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="isBucle">Puntos Baremos</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="isBucle && canSeePrices">Puntos Baremos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Precio {{ isBucle ? 'Especialidad' :
           'Unitario' }}</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="isBucle">Total Baremos</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="isBucle && canSeePrices">Total Baremos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Total Pesos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
           Acciones
@@ -87,14 +87,16 @@
 
               </div>
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle" style="text-align:right;">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices"
+              style="text-align:right;">
               {{servicio.puntos_baremos}}
             </td>
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices">
               {{ +servicio.prov_has_serv_precio |
               currency: 'CLP':'$':'.0-2':'es-CL' }}
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle" style="text-align:right;">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices"
+              style="text-align:right;">
               {{+servicio.puntos_baremos
               *+getControlServiceCantidad(servicio.servicio_id).value | number : '1.2-2'}}
             </td>
