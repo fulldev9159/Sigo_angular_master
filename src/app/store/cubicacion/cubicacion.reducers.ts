@@ -20,6 +20,7 @@ export interface StateCubicacion {
   agenciaSelected: AgenciaContrato;
   listarCubicaciones: Cubicacion[];
   detalleCubicacion: DetalleCubicacion;
+  detalleCubicacionIngenieria: DetalleCubicacion;
   cubicacionesContrato: CubicacionContrato[];
   adminContratoFromCub: AdminContratoFromCub[];
 }
@@ -31,6 +32,7 @@ export const initialState: StateCubicacion = {
   agenciaSelected: null,
   listarCubicaciones: [],
   detalleCubicacion: null,
+  detalleCubicacionIngenieria: null,
   cubicacionesContrato: [],
   adminContratoFromCub: [],
 };
@@ -62,6 +64,13 @@ export const reducerCubicacion = createReducer(
     (state, { detalleCubicacion }) => ({
       ...state,
       detalleCubicacion,
+    })
+  ),
+  on(
+    cubicacionActions.detalleCubicacionIngenieriaSuccess,
+    (state, { detalleCubicacion }) => ({
+      ...state,
+      detalleCubicacionIngenieria: detalleCubicacion,
     })
   ),
   on(

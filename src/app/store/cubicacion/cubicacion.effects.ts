@@ -127,6 +127,24 @@ export class CubicacionEffects {
     )
   );
 
+  detalleCubicacionIngenieria$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacionIngenieria),
+      concatMap(({ cubicacion_id }) =>
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response =>
+            cubicacionActions.detalleCubicacionIngenieriaSuccess({
+              detalleCubicacion: response.data,
+            })
+          ),
+          catchError(error =>
+            of(cubicacionActions.detalleCubicacionIngenieriaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   eliminarServicioCarrito$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubicacionActions.eliminarServicioCarrito),
@@ -204,7 +222,8 @@ export class CubicacionEffects {
           cubicacionActions.listarCubicacionesError,
           cubicacionActions.clonarCubicacionError,
           cubicacionActions.eliminarCubicacionError,
-          cubicacionActions.eliminarServicioCarritoError
+          cubicacionActions.eliminarServicioCarritoError,
+          cubicacionActions.detalleCubicacionIngenieriaError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -130,6 +130,32 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.detalleCubicacion);
   }
 
+  // DETALLE CUBICACION INGENIERIA
+  public detalleCubicacionIngenieria(cubicacion_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.detalleCubicacionIngenieria({ cubicacion_id })
+    );
+  }
+
+  public detalleCubicacionIngenieriaSuccess(
+    detalleCubicacion: DetalleCubicacion
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.detalleCubicacionIngenieriaSuccess({
+        detalleCubicacion,
+      })
+    );
+  }
+  public detalleCubicacionIngenieriaError(error: any): void {
+    this.store.dispatch(
+      cubicacionActions.detalleCubicacionIngenieriaError({ error })
+    );
+  }
+
+  public detalleCubicacionIngenieria$(): Observable<DetalleCubicacion> {
+    return this.store.select(cubicacionSelectors.detalleCubicacionIngenieria);
+  }
+
   // ELIMINAR SERVICIO CARRITO
   public eliminarServicioCarrito(
     servicio?: number[],

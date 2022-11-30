@@ -130,6 +130,20 @@ export const detalleCubicacionError = createAction(
   props<{ error: any }>()
 );
 
+// DETEALLE CUBICACION INGENIERIA
+export const detalleCubicacionIngenieria = createAction(
+  '[CUBICACION] detalleCubicacionIngenieria ',
+  props<{ cubicacion_id: number }>()
+);
+export const detalleCubicacionIngenieriaSuccess = createAction(
+  '[CUBICACION] detalleCubicacionIngenieria Success',
+  props<{ detalleCubicacion: DetalleCubicacion }>()
+);
+export const detalleCubicacionIngenieriaError = createAction(
+  '[CUBICACION] detalleCubicacionIngenieria Error',
+  props<{ error: any }>()
+);
+
 // ELIMINAR SERVICIO CARRITO
 export const eliminarServicioCarrito = createAction(
   '[CUBICACION] eliminarServicioCarrito ',
