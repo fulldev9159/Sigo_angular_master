@@ -42,6 +42,7 @@ import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
+import { LogService } from '@log';
 
 interface TableService {
   precargado: boolean;
@@ -130,7 +131,9 @@ export class InformeAvanceComponent
   contrato: string;
 
   materialesSelected: MaterialesManoObra[] | null;
+  materialSelected: MaterialesManoObra | null;
   displayModalMateriales = false;
+  displayModalConfirmacionOrigen = false;
 
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
@@ -160,7 +163,8 @@ export class InformeAvanceComponent
     private flujoOTFacade: FlujoOTFacade,
     private authFacade: AuthFacade,
     private route: ActivatedRoute,
-    private detector: ChangeDetectorRef
+    private detector: ChangeDetectorRef,
+    private logger: LogService
   ) {}
 
   ngOnInit(): void {
@@ -169,7 +173,7 @@ export class InformeAvanceComponent
     this.subscription.add(
       this.route.data.subscribe(
         ({ detalleOT, detalleInformeAvance, accionesOT }) => {
-          console.log(accionesOT);
+          this.logger.debug('acciones', accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
@@ -481,7 +485,7 @@ export class InformeAvanceComponent
       initialVal
     );
 
-    console.log('servicios a actualizar', agregar_uob_a_servicio);
+    this.logger.debug('servicios a actualizar', agregar_uob_a_servicio);
 
     // REQUEST SERVICIOS ADICONALES
     let request_adicionales: RequestAdicionales = {
@@ -786,19 +790,37 @@ export class InformeAvanceComponent
     servicio: CarritoService;
     uo: CarritoUO;
   }): void {
-    console.log('servicio', servicio);
-    console.log('uo', uo);
+    this.logger.debug('servicio', servicio);
+    this.logger.debug('uo', uo);
     this.materialesSelected = [...(uo?.material_arr ?? [])];
-    console.log('materiales', this.materialesSelected);
+    this.logger.debug('materiales', this.materialesSelected);
     this.displayModalMateriales = true;
   }
 
   closeModalMateriales(): void {
+    this.materialSelected = null;
     this.materialesSelected = null;
     this.displayModalMateriales = false;
+    this.displayModalConfirmacionOrigen = false;
   }
 
   openChangeToProveedorConfirmation(material: MaterialesManoObra): void {
-    console.log('cambiar origen de material', material);
+    this.materialSelected = material;
+    this.displayModalConfirmacionOrigen = true;
+  }
+
+  closeModalCambiarMaterialOrigenAProveedor(): void {
+    this.materialSelected = null;
+    this.displayModalConfirmacionOrigen = false;
+  }
+
+  confirmarCambiarMaterialOrigenAProveedor(): void {
+    if (this.materialSelected) {
+      const { material_id } = this.materialSelected;
+      if (material_id !== undefined) {
+        this.informeAvanceFacade.cambiarMaterialOrigenAProveedor(material_id);
+        this.displayModalConfirmacionOrigen = false;
+      }
+    }
   }
 }

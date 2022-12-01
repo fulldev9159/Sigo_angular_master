@@ -227,6 +227,31 @@ export class InformeAvanceEffects {
     )
   );
 
+  // CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+  cambiarOrigenMaterialAProveedor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) =>
+        this.informeAvanceHttp
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() =>
+              informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error =>
+              of(
+                informeAvanceActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -234,7 +259,8 @@ export class InformeAvanceEffects {
           informeAvanceActions.getDetalleInformeAvanceSuccess,
           informeAvanceActions.sendDetalleInformeAvanceSuccess,
           informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess,
-          informeAvanceActions.actualizarInformeAvanceSuccess
+          informeAvanceActions.actualizarInformeAvanceSuccess,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -253,7 +279,8 @@ export class InformeAvanceEffects {
           informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError,
           informeAvanceActions.actualizarInformeAvanceYenviarError,
           informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError,
-          informeAvanceActions.actualizarInformeAvanceYautorizarIAError
+          informeAvanceActions.actualizarInformeAvanceYautorizarIAError,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -134,3 +134,7 @@
     </table>
   </div>
 </p-dialog>
+
+<p-dialog header="Cambiar Origen a PROVEEDOR" [(visible)]="displayModalConfirmacionOrigen" [draggable]="false" [modal]="true">
+  <zwc-view-confirmacion pregunta='¿Está seguro(a) de realizar esta acción?' (cancelar)="closeModalCambiarMaterialOrigenAProveedor()" (confirmar)="confirmarCambiarMaterialOrigenAProveedor()"></zwc-view-confirmacion>
+</p-dialog>

@@ -247,6 +247,14 @@ export class AfterHttpService {
       this.router.navigate(['/ot/list-ot']);
     }
 
+    // CAMBIAR MATERIAL ORIGEN A PROVEEDOR
+    if (
+      action.type ===
+      informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess.type
+    ) {
+      this.snackMessage.showMessage(`Cambios realizados`, 'Exito', 4000);
+    }
+
     // ACEPTACION DE INFORME DE AVANCE
     if (
       action.type ===
