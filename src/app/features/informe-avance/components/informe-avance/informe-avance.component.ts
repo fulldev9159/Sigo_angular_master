@@ -252,6 +252,7 @@ export class InformeAvanceComponent
                     // TODO Revisar
                     material_arr: uo.many_informe_has_material.map(m => {
                       return {
+                        material_id: m.id,
                         material_codigo: m.material_cod,
                         material_nombre: m.model_material_cod.descripcion,
                         material_origen: m.origen,
@@ -795,5 +796,9 @@ export class InformeAvanceComponent
   closeModalMateriales(): void {
     this.materialesSelected = null;
     this.displayModalMateriales = false;
+  }
+
+  openChangeToProveedorConfirmation(material: MaterialesManoObra): void {
+    console.log('cambiar origen de material', material);
   }
 }

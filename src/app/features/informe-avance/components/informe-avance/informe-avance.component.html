@@ -105,3 +105,32 @@
   <zwc-view-confirmacion pregunta='¿Desea confirmar la aprobación del informe de avance?' (cancelar)="displayModalAprobacionInformeAvance=false" (confirmar)="autorizarInformeAvance()" textConfirmar="Aprobar Informe de Avance">
   </zwc-view-confirmacion>
 </p-dialog>
+
+<p-dialog header="Lista de Materiales" [(visible)]="displayModalMateriales" [draggable]="false" [modal]="true" (onHide)="closeModalMateriales()">
+  <div class="row" style="width: 87vw;">
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Cod</th>
+          <th>Nombre</th>
+          <th>Origen</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of materialesSelected">
+          <td class="label-table">{{item.material_codigo}}</td>
+          <td class="data-primaria">{{item.material_nombre}}</td>
+          <td class="label-table">{{item.material_origen}}</td>
+          <td class="data-primaria">
+            <ng-container *ngIf="item.material_origen !== 'PROVEEDOR'">
+              <button pButton type="button" class="p-button-outlined p-button-sm" (click)="openChangeToProveedorConfirmation(item)">
+                Cambiar Origen a PROVEEDOR
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-dialog>
