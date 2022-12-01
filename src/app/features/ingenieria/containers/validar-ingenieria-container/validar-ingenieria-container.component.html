@@ -42,26 +42,35 @@
         </div>
     </div>
 </div>
-<!-- <p-dialog header="Confirmar envío del resultado de ingeniería" [(visible)]="displayModalEnvioResultadoIngenieria"
-    [draggable]="false" [modal]="true">
-    Order de trabajo ID: {{ot_id}}
-    <zwc-view-confirmacion pregunta='¿Desea confirmar el envío del resultado de ingeniería?'
-        (cancelar)="displayModalEnvioResultadoIngenieria=false" (confirmar)="enviarResultadoIngenieria()"
-        textConfirmar="Enviar">
-    </zwc-view-confirmacion>
-</p-dialog> -->
 
 <!-- MODALS -->
-<!-- <p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
-    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
+<p-dialog header="Rechazo del resultado ingeniería" [(visible)]="showModalRechazar" [draggable]="false" [modal]="true">
+    <form [formGroup]="formRechazo">
+
+        <div class="row">
+            <div class="col">
+                <label for="">* Motivo</label>
+
+            </div>
+            <div class="col">
+                <textarea formControlName="motivo" class="form-control" placeholder="" name="observaciones"
+                    id="observaciones" cols="30" rows="2"></textarea>
+            </div>
+        </div>
+    </form>
+
     <ng-template pTemplate="footer">
-      <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-        (click)="closeModalRechazarActa()">
-        Cancelar
-      </button>
-      <button pButton type="button" id="button-confirmar" (click)="rechazarActa()"
-        [disabled]="!rechazoActaForm.formRechazo.valid">
-        Rechazar acta
-      </button>
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="closeModalRechazar()">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="rechazar()">
+            Rechazar
+        </button>
     </ng-template>
-  </p-dialog> -->
+</p-dialog>
+<p-dialog header="Confirmar aprobación del resultado de ingeniería" [(visible)]="displayModalAprobacion"
+    [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+</p-dialog>

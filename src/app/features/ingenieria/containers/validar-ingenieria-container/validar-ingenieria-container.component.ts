@@ -1,15 +1,21 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   Accion,
+  AprobarRechazarIgenieria,
   CarritoService,
   DetalleServicioCubicacion,
+  Dropdown,
   InfoOT,
   SessionData,
 } from '@model';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
+import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
-import { Subscription } from 'rxjs';
+import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
+import { IngenieriaFacade } from '@storeOT/ingenieria/ingenieria.facades';
+import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-validar-ingenieria-container',
@@ -36,7 +42,40 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
   ).permisos.map(value => value.slug);
 
-  constructor(private authFacade: AuthFacade, private route: ActivatedRoute) {}
+  motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.motivo > b.motivo ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.motivo,
+          code: value.id,
+        }))
+      )
+    );
+
+  formRechazoControls = {
+    motivo: new FormControl(null, [
+      Validators.required,
+      // this.noWhitespace,
+      Validators.maxLength(200),
+    ]),
+  };
+  formRechazo: FormGroup = new FormGroup(this.formRechazoControls);
+
+  // MODALS
+  displayModalAprobacion = false;
+  showModalRechazar = false;
+
+  constructor(
+    private authFacade: AuthFacade,
+    private flujoOTFacade: FlujoOTFacade,
+    private ingenieriaFacade: IngenieriaFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.authFacade.showMenuDetalleOT(true);
@@ -127,6 +166,39 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
 
   accionExist(accion: string): boolean {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
+  }
+
+  displayModalRechazar(): void {
+    this.flujoOTFacade.getMotivosRechazo('ACTA');
+    this.showModalRechazar = true;
+  }
+
+  closeModalRechazar(): void {
+    this.showModalRechazar = false;
+  }
+
+  rechazar() {
+    // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+    let form = this.tableServiciosAutorizarAdicionales.formTable.get('table')
+      .value as Array<{
+      servicio_rowid: number;
+      validar_adicional: boolean;
+    }>;
+    let adicionales_aprobados_id = form
+      .filter(v => !v.validar_adicional)
+      .map(v => v.servicio_rowid);
+    let adicionales_rechazados_id = form
+      .filter(v => v.validar_adicional)
+      .map(v => v.servicio_rowid);
+
+    let request: AprobarRechazarIgenieria = {
+      ot_id: this.ot_id,
+      servicios_rechazados: [...new Set(adicionales_rechazados_id)],
+      observacion: this.formRechazo.get('motivo').value,
+      autorizacion: 'RECHAZADO',
+    };
+
+    this.ingenieriaFacade.aprobarRechazarIngenieria(request);
   }
 
   ngOnDestroy(): void {

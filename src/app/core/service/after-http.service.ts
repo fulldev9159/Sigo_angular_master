@@ -366,6 +366,18 @@ export class AfterHttpService {
       );
       this.router.navigate(['/ot/list-ot']);
     }
+
+    // APROBAR/RECHAZAR RESULTADO INGENIERIA
+    if (
+      action.type === ingenieriaActions.aprobarRechazarIngenieriaSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Acción realizada correctamente`,
+        'Exito',
+        4000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
   }
 
   reloadTableOT(): void {

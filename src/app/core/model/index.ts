@@ -29,6 +29,7 @@ export * from './libro-obras';
 export * from './permiso';
 export * from './guia-subgrupo';
 export * from './area';
+export * from './ingenieria';
 
 export interface Response<T> {
   data: T;
