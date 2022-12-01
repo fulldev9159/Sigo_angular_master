@@ -1,7 +1,46 @@
 <div class="container-box">
     <h1>Validación del resultado ingeniería</h1>
 
+    <p-divider align="center">
+        <span class="p-tag">Autorizar Ingeniería</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-autorizar-adicionales">
+                <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static"
+                    [data_source]="dataCubicacionIngenieria" [cantidad_editable]="false" [column_acciones]="true"
+                    [accion_delete]="false" [accion_aprobacion_servicio_adic]="true" [contratoMarco]="contrato">
+                </zwc-table-servicios>
+            </div>
 
+        </div>
+    </div>
+
+    <p-divider align="center"></p-divider>
+
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"
+                    [routerLink]="['/ot']">
+                    Atrás
+                </button>
+            </div>
+            <div *ngIf="accionExist('OT_AUTORIZAR_RESULTADO_ING') && serviciosAdicionalesAprobados() "
+                class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Validar" icon="ok"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacion=true">
+                </zwc-pbutton-sending>
+            </div>
+            <div *ngIf="accionExist('OT_AUTORIZAR_RESULTADO_ING')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar" icon="nok"
+                    Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
+                    (click)="displayModalRechazar()">
+                </zwc-pbutton-sending>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- <p-dialog header="Confirmar envío del resultado de ingeniería" [(visible)]="displayModalEnvioResultadoIngenieria"
     [draggable]="false" [modal]="true">
@@ -11,3 +50,18 @@
         textConfirmar="Enviar">
     </zwc-view-confirmacion>
 </p-dialog> -->
+
+<!-- MODALS -->
+<!-- <p-dialog header="Rechazo del acta" [(visible)]="showModalRechazarActa" [draggable]="false" [modal]="true">
+    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoActaForm></zwc-view-rechazo>
+    <ng-template pTemplate="footer">
+      <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+        (click)="closeModalRechazarActa()">
+        Cancelar
+      </button>
+      <button pButton type="button" id="button-confirmar" (click)="rechazarActa()"
+        [disabled]="!rechazoActaForm.formRechazo.valid">
+        Rechazar acta
+      </button>
+    </ng-template>
+  </p-dialog> -->
