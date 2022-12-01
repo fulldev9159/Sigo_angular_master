@@ -78,10 +78,12 @@
             (click)="displayModalAprobacion=false">
             Cancelar
         </button>
-        <button pButton type="button" id="button-confirmar" (click)="displayModalOT=true">
+        <button pButton type="button" id="button-confirmar" (click)="displayModalOT=true"
+            *ngIf="tipo_cubicacion==='OT'|| tipo_cubicacion==='FULL'">
             Aprobar como Construcción
         </button>
-        <button pButton type="button" id="button-confirmar" (click)="displayModalAP=true">
+        <button pButton type="button" id="button-confirmar" (click)="displayModalAP=true"
+            *ngIf="tipo_cubicacion==='AP'|| tipo_cubicacion==='FULL'">
             Aprobar como Ingeniería
         </button>
     </ng-template>

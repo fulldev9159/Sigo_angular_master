@@ -37,6 +37,7 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
   cubicacion_ingeniria_id: number;
   ot_id: number;
   contrato: string;
+  tipo_cubicacion: string;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
@@ -88,11 +89,14 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
           if (accionesOT) this.accionesOT = accionesOT;
 
           if (detalleOT) {
+            console.log(detalleOT);
             this.dataOT = detalleOT.data.ot;
             this.contrato =
               this.dataOT.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
             this.cubicacion_ingeniria_id = this.dataOT.cubicacion_ing_id;
             this.ot_id = this.dataOT.id;
+            this.tipo_cubicacion =
+              this.dataOT.model_cubicacion_id.model_tipo_cubicacion_id.slug;
           }
           if (
             cubicacionIngenieria &&
