@@ -19,8 +19,7 @@
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
           Acciones
           <ng-container *ngIf="accion_aprobacion_servicio_adic">
-            <div style="display:flex;flex-direction: column;align-items: center;color:white;"
-              [ngClass]="formAprobarTodos.get('all').value?'recha-color':'aprob-color'">
+            <div style="display:flex;flex-direction: column;align-items: center;color:white;" [ngClass]="formAprobarTodos.get('all').value?'recha-color':'aprob-color'">
               {{formAprobarTodos.get('all').value?'Rechazada':'Aprobada'}}
               <p-inputSwitch [formControl]="formAprobarTodos.get('all')">
               </p-inputSwitch>
@@ -35,7 +34,7 @@
         <th>Cantidad</th>
         <th *ngIf="canSeePrices">Precio Un.</th>
         <th *ngIf="canSeePrices">Total</th>
-        <th *ngIf="column_acciones">Acciones</th>
+        <th *ngIf="accionesUOEnabled">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -48,11 +47,9 @@
           </td>
           <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
             <ng-container *ngIf="servicio.adicional!=='ORIGINAL' && servicio.adicional!==undefined">
-              <p-tag *ngIf="servicio.adicional==='PENDIENTE'" styleClass="pendiente" value="Adicional"
-                severity="warning">
+              <p-tag *ngIf="servicio.adicional==='PENDIENTE'" styleClass="pendiente" value="Adicional" severity="warning">
               </p-tag>
-              <p-tag *ngIf="servicio.adicional==='ACEPTADO'" styleClass="aceptado" value="Adicional aprobado"
-                severity="success">
+              <p-tag *ngIf="servicio.adicional==='ACEPTADO'" styleClass="aceptado" value="Adicional aprobado" severity="success">
               </p-tag>
               <p-tag *ngIf="servicio.adicional==='RECHAZADO'" styleClass="rechazado" value="Adicional rechazado">
               </p-tag>
@@ -66,8 +63,7 @@
               <div class="container-cantidad">
                 <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
                   <ng-container *ngIf="getControlServiceCantidad(servicio.servicio_id) as control">
-                    <p-inputNumber [formControl]="control" mode="decimal" inputId="locale-german" locale="de-DE"
-                      [minFractionDigits]="maxDecimals" (onInput)="cantidadChanged(control, $event)">
+                    <p-inputNumber [formControl]="control" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="maxDecimals" (onInput)="cantidadChanged(control, $event)">
                     </p-inputNumber>
                   </ng-container>
                   <!-- <span style="color: red">{{ getControlServiceCantidad(servicio.servicio_id).errors | json }}</span> -->
@@ -87,16 +83,14 @@
 
               </div>
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices"
-              style="text-align:right;">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices" style="text-align:right;">
               {{servicio.puntos_baremos}}
             </td>
             <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices">
               {{ +servicio.prov_has_serv_precio |
               currency: 'CLP':'$':'.0-2':'es-CL' }}
             </td>
-            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices"
-              style="text-align:right;">
+            <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="isBucle && canSeePrices" style="text-align:right;">
               {{+servicio.puntos_baremos
               *+getControlServiceCantidad(servicio.servicio_id).value | number : '1.2-2'}}
             </td>
@@ -126,14 +120,12 @@
           </ng-container>
 
           <td *ngIf="column_acciones" [attr.rowspan]="+servicio.unidad_obras.length + 1">
-            <button *ngIf="accion_delete" (click)="deleteServicioFromCarrito(servicio)"
-              class="ui button eliminar-button">
+            <button *ngIf="accion_delete" (click)="deleteServicioFromCarrito(servicio)" class="ui button eliminar-button">
               <fa-icon [icon]="trashICon"></fa-icon>
             </button>
 
             <ng-container *ngIf="accion_aprobacion_servicio_adic">
-              <div style="display:flex;flex-direction: column;align-items: center;color:white;"
-                [ngClass]="getControlService(servicio.servicio_id,'validar_adicional').value?'recha-color':'aprob-color'">
+              <div style="display:flex;flex-direction: column;align-items: center;color:white;" [ngClass]="getControlService(servicio.servicio_id,'validar_adicional').value?'recha-color':'aprob-color'">
                 {{getControlService(servicio.servicio_id,'validar_adicional').value?'Rechazada':'Aprobada'}}
                 <p-inputSwitch [formControl]="getControlService(servicio.servicio_id,'validar_adicional')">
                 </p-inputSwitch>
@@ -150,8 +142,7 @@
               <ng-container *ngIf="uo.adicional_existente_ia">
                 <p-tag *ngIf="uo.adicional==='PENDIENTE'" styleClass="pendiente" value="Adicional" severity="warning">
                 </p-tag>
-                <p-tag *ngIf="uo.adicional==='ACEPTADO'" styleClass="aceptado" value="Adicional aprobado"
-                  severity="success">
+                <p-tag *ngIf="uo.adicional==='ACEPTADO'" styleClass="aceptado" value="Adicional aprobado" severity="success">
                 </p-tag>
                 <p-tag *ngIf="uo.adicional==='RECHAZADO'" styleClass="rechazado" value="Adicional rechazado">
                 </p-tag>
@@ -169,8 +160,7 @@
                 <div class="container-cantidad">
                   <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
                     <ng-container *ngIf="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo) as control">
-                      <p-inputNumber [formControl]="control" mode="decimal" inputId="locale-german" locale="de-DE"
-                        [minFractionDigits]="maxDecimals" (onInput)="cantidadChanged(control, $event)">
+                      <p-inputNumber [formControl]="control" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="maxDecimals" (onInput)="cantidadChanged(control, $event)">
                       </p-inputNumber>
                     </ng-container>
                     <!-- <span style="color: red">{{ getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).errors | json
@@ -196,15 +186,14 @@
                 {{uo.uo_precio_total_clp*+getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).value|
                 currency : 'CLP' : '$':'.0-2':'es-CL'}}
               </td>
-              <td *ngIf="column_acciones">
+              <td *ngIf="accionesUOEnabled">
                 <ng-container *ngIf="servicio.unidad_obras.length>1 && accion_delete">
                   <button (click)="deleteUOFromServicioFromCarrito(servicio, uo)" class="ui button eliminar-button">
                     <fa-icon [icon]="trashICon"></fa-icon>
                   </button>
                 </ng-container>
                 <ng-container *ngIf="accion_detalle_uo">
-                  <button (click)="viewDetallesUOFromServicioFromCarrito(servicio, uo)"
-                    class="ui button generic-color">Detalles</button>
+                  <button (click)="viewDetallesUOFromServicioFromCarrito(servicio, uo)" class="ui button generic-color">Detalles</button>
                 </ng-container>
               </td>
             </ng-container>
@@ -229,7 +218,7 @@
         </ng-container>
 
         <td [colSpan]="2">Total Servicios</td>
-        <td [colSpan]="2" style="text-align:right" id="total-servicio-monto">
+        <td [colSpan]="3" style="text-align:right" id="total-servicio-monto">
           {{totalServicios>99999999999999999999999?0:totalServicios| currency
           :
           'CLP' :
@@ -254,7 +243,6 @@
   </table>
 </form>
 
-<div class="message" id="alert-carrito-vacio"
-  *ngIf="(data_carrito$|async).length === 0 && mode_source!=='agregar-adicionales-informe-avance' && !accion_aprobacion_servicio_adic">
+<div class="message" id="alert-carrito-vacio" *ngIf="(data_carrito$|async).length === 0 && mode_source!=='agregar-adicionales-informe-avance' && !accion_aprobacion_servicio_adic">
   <p-message severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>
 </div>
