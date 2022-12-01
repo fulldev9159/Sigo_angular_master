@@ -252,6 +252,15 @@ export class InformeAvanceEffects {
     )
   );
 
+  redirectToWebhooksPageWhenTheWebhookIsCreated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() => window.location.reload())
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

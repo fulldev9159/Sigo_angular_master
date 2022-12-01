@@ -798,10 +798,9 @@ export class InformeAvanceComponent
   }
 
   closeModalMateriales(): void {
-    this.materialSelected = null;
     this.materialesSelected = null;
     this.displayModalMateriales = false;
-    this.displayModalConfirmacionOrigen = false;
+    this.closeModalCambiarMaterialOrigenAProveedor();
   }
 
   openChangeToProveedorConfirmation(material: MaterialesManoObra): void {
@@ -819,7 +818,8 @@ export class InformeAvanceComponent
       const { material_id } = this.materialSelected;
       if (material_id !== undefined) {
         this.informeAvanceFacade.cambiarMaterialOrigenAProveedor(material_id);
-        this.displayModalConfirmacionOrigen = false;
+        this.closeModalCambiarMaterialOrigenAProveedor();
+        this.closeModalMateriales();
       }
     }
   }
