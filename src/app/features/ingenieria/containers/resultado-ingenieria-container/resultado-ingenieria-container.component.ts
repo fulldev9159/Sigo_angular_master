@@ -56,6 +56,7 @@ export class ResultadoIngenieriaContainerComponent
 
   dataOT: InfoOT;
   dataCubicacion: CarritoService[] = [];
+  dataCubicacionIngenieria: CarritoService[] = [];
   accionesOT: Accion[] = [];
   cubicacion_ingeniria_id: number;
   carrito$ = this.serviciosFacade.carrito$();
@@ -63,6 +64,8 @@ export class ResultadoIngenieriaContainerComponent
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
   ).permisos.map(value => value.slug);
+  rol = (JSON.parse(localStorage.getItem('auth')).sessionData as SessionData)
+    .rol_slug;
   contrato: string;
 
   // LOADINGS
@@ -194,7 +197,14 @@ export class ResultadoIngenieriaContainerComponent
                       },
                     ],
                   };
-                  this.serviciosFacade.addDirectServiceCarrito(new_service);
+                  if (this.rol === 'ADM_EECC') {
+                    // DATOS NO MUTABLES
+                    this.dataCubicacionIngenieria.push(new_service);
+                  }
+                  if (this.rol === 'TRABAJADOR') {
+                    // DATOS PARA CARRITO MUTABLE (AGREGAR, EDITAR, ELIMINAR SERVICIOS)
+                    this.serviciosFacade.addDirectServiceCarrito(new_service);
+                  }
                 });
               }
             );
