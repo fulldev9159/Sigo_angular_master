@@ -12,8 +12,7 @@
         <th style="background: var(--bg-th-servicios)">Tipo</th>
         <th style="background: var(--bg-th-servicios)">Cantidad</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="isBucle && canSeePrices">Puntos Baremos</th>
-        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Precio {{ isBucle ? 'Especialidad' :
-          'Unitario' }}</th>
+        <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Precio {{ isBucle ? 'Especialidad' : 'Unitario' }}</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="isBucle && canSeePrices">Total Baremos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="canSeePrices">Total Pesos</th>
         <th style="background: var(--bg-th-servicios)" *ngIf="column_acciones">
@@ -192,7 +191,7 @@
                     <fa-icon [icon]="trashICon"></fa-icon>
                   </button>
                 </ng-container>
-                <ng-container *ngIf="accion_detalle_uo">
+                <ng-container *ngIf="accion_detalle_uo && ((accion_detalle_uo_only_precargado && uo.precargado) || !accion_detalle_uo_only_precargado)">
                   <button (click)="viewDetallesUOFromServicioFromCarrito(servicio, uo)" class="ui button generic-color">Detalles</button>
                 </ng-container>
               </td>

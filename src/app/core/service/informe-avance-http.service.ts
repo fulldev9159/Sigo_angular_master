@@ -53,4 +53,10 @@ export class InformeAvanceHttpService {
       request
     );
   }
+
+  changeMaterialOrigenToProveedor(material_id: number): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/ot/origen_material/update`, {
+      informe_has_material_id: material_id,
+    });
+  }
 }

@@ -61,6 +61,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() column_acciones_uo: boolean = true;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_uo: boolean = false;
+  @Input() accion_detalle_uo_only_precargado: boolean = false;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
   @Input() contratoMarco = '';
@@ -470,12 +471,12 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
     if (this.canSeePrices) {
       base = base + 2;
+      if (this.isBucle) {
+        base = base + 2;
+      }
     }
     if (this.column_acciones) {
       base = base + 1;
-    }
-    if (this.isBucle) {
-      base = base + 2;
     }
 
     return base;
