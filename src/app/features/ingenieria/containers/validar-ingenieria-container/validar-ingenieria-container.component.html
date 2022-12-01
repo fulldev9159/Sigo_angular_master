@@ -69,8 +69,32 @@
         </button>
     </ng-template>
 </p-dialog>
+
 <p-dialog header="Confirmar aprobación del resultado de ingeniería" [(visible)]="displayModalAprobacion"
     [draggable]="false" [modal]="true">
     Order de trabajo ID: {{ot_id}}
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="displayModalAprobacion=false">
+            Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="displayModalOT=true">
+            Aprobar como Construcción
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="displayModalAP=true">
+            Aprobar como Ingeniería
+        </button>
+    </ng-template>
+</p-dialog>
 
+<p-dialog header="Confirmar aprobar como Construcción" [(visible)]="displayModalOT" [draggable]="false" [modal]="true">
+    <zwc-view-confirmacion pregunta='¿Desea confirmar la aprobación como contrucción?' (cancelar)="displayModalOT=false"
+        (confirmar)="aprobarComoOT()" textConfirmar="Enviar">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+<p-dialog header="Confirmar aprobar como Ingeniería" [(visible)]="displayModalAP" [draggable]="false" [modal]="true">
+    <zwc-view-confirmacion pregunta='¿Desea confirmar la aprobación como contrucción ingeniería?'
+        (cancelar)="displayModalAP=false" (confirmar)="aprobarComoAP()" textConfirmar="Enviar">
+    </zwc-view-confirmacion>
 </p-dialog>

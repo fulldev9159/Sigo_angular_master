@@ -69,6 +69,8 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
   // MODALS
   displayModalAprobacion = false;
   showModalRechazar = false;
+  displayModalOT = false;
+  displayModalAP = false;
 
   constructor(
     private authFacade: AuthFacade,
@@ -199,6 +201,29 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
     };
 
     this.ingenieriaFacade.aprobarRechazarIngenieria(request);
+    this.closeModalRechazar();
+  }
+
+  aprobarComoOT(): void {
+    let request: AprobarRechazarIgenieria = {
+      ot_id: this.ot_id,
+      autorizacion: 'AUTORIZADO_OT',
+    };
+
+    this.ingenieriaFacade.aprobarRechazarIngenieria(request);
+    this.displayModalOT = false;
+    this.displayModalAprobacion = false;
+  }
+
+  aprobarComoAP(): void {
+    let request: AprobarRechazarIgenieria = {
+      ot_id: this.ot_id,
+      autorizacion: 'AUTORIZADO_AP',
+    };
+
+    this.ingenieriaFacade.aprobarRechazarIngenieria(request);
+    this.displayModalAP = false;
+    this.displayModalAprobacion = false;
   }
 
   ngOnDestroy(): void {
