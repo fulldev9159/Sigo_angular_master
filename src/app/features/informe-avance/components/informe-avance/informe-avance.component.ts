@@ -36,6 +36,7 @@ import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
+import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
@@ -74,6 +75,9 @@ interface TableService {
 export class InformeAvanceComponent
   implements OnDestroy, OnInit, AfterViewInit
 {
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
+
   @ViewChild('agregarServiciosForm', {
     read: FormAgregarServiciosComponent,
     static: false,
@@ -104,6 +108,7 @@ export class InformeAvanceComponent
   carrito$ = this.serviciosFacade.carrito$();
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.informeAvanceFacade.getDetalleInformeAvance$();
+  otDetalle$: Observable<DetalleOT> = this.otDetalleDFacade.getDetalleOT$();
   motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
     .getMotivosRechazo$()
     .pipe(
@@ -146,6 +151,7 @@ export class InformeAvanceComponent
     private cubicacionFacade: CubicacionFacade,
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
+    private otDetalleDFacade: OTDetalleFacade,
     private flujoOTFacade: FlujoOTFacade,
     private authFacade: AuthFacade,
     private route: ActivatedRoute,
@@ -736,5 +742,14 @@ export class InformeAvanceComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  canEditMaterials(otDetalle: DetalleOT): boolean {
+    const rol = this.sessionData?.rol_slug ?? '';
+    const etapa = otDetalle?.ot?.model_tipo_etapa_ot_id?.slug ?? '';
+    return (
+      (rol === 'TRABAJADOR' && etapa === 'OT_ET_EJECUCION_TRABAJOS') ||
+      (rol === 'ADM_EECC' && etapa === 'OT_ET_PAGO_ACEPTACION_IA')
+    );
   }
 }

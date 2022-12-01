@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   //// api: 'http://34.122.92.38:4300/SIGO',
-  api: 'http://34.122.92.38:4041',
+  //// api: 'http://34.122.92.38:4041',
+  api: 'http://34.122.92.38:4040',
   log: {
     level: 'TRACE',
   },
