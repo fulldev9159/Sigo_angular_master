@@ -13,6 +13,7 @@ import {
   AgenciaContrato,
   AgregarUOAdicionalAServicio,
   CarritoService,
+  CarritoUO,
   ContratosUser,
   DetalleInformeAvance,
   DetalleOT,
@@ -27,6 +28,7 @@ import {
   ServicioAdicionalActualizar,
   SessionData,
   UOAdicionalActualizar,
+  MaterialesManoObra,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -126,6 +128,9 @@ export class InformeAvanceComponent
   accionesOT: Accion[] = [];
   ot_id: number;
   contrato: string;
+
+  materialesSelected: MaterialesManoObra[] | null;
+  displayModalMateriales = false;
 
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
@@ -243,6 +248,26 @@ export class InformeAvanceComponent
                     uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                     uob_unidad_medida_descripcion:
                       uo.model_unidad_id.descripcion,
+
+                    // TODO Revisar
+                    material_arr: uo.many_informe_has_material.map(m => {
+                      return {
+                        material_codigo: m.material_cod,
+                        material_nombre: m.model_material_cod.descripcion,
+                        material_origen: m.origen,
+                        material_precio_clp: m.valor_unitario_clp, // ?
+
+                        material_cantidad: m.cantidad,
+                        material_precio: m.valor, // ?
+                        material_tipo_moneda_id: m.model_tipo_moneda_id.id,
+                        material_unidad_id: m.model_unidad_id.id,
+                        material_unidad_medida_cod: '--', // ?
+                        material_valor: m.valor,
+                        material_unidad_codigo: m.model_unidad_id.codigo,
+                        material_unidad_descripcion:
+                          m.model_unidad_id.descripcion,
+                      };
+                    }),
                   },
                 ],
               };
@@ -751,5 +776,24 @@ export class InformeAvanceComponent
       (rol === 'TRABAJADOR' && etapa === 'OT_ET_EJECUCION_TRABAJOS') ||
       (rol === 'ADM_EECC' && etapa === 'OT_ET_PAGO_ACEPTACION_IA')
     );
+  }
+
+  showMateriales({
+    servicio,
+    uo,
+  }: {
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }): void {
+    console.log('servicio', servicio);
+    console.log('uo', uo);
+    this.materialesSelected = [...(uo?.material_arr ?? [])];
+    console.log('materiales', this.materialesSelected);
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = null;
+    this.displayModalMateriales = false;
   }
 }

@@ -4,7 +4,7 @@
     <div class="card">
       <div class=" grid">
         <div class="field col-12 table-informe-avance">
-          <zwc-table-servicios #tableServiciosInformeAvance mode_source="static" [data_source]="serviciosInformeAvance" [cantidad_editable]="true" [column_acciones]="false" [column_acciones_uo]="true" [accion_delete]="false" [accion_detalle_uo]="false" [contratoMarco]="contrato">
+          <zwc-table-servicios #tableServiciosInformeAvance mode_source="static" [data_source]="serviciosInformeAvance" [cantidad_editable]="true" [column_acciones]="false" [column_acciones_uo]="canEditMaterials(otDetalle)" [accion_delete]="false" [accion_detalle_uo]="canEditMaterials(otDetalle)" [contratoMarco]="contrato" (detallesUOClicked)="showMateriales($event)">
           </zwc-table-servicios>
         </div>
       </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="field col-12 md:col-9 lg:col-9 xl:col-9 table-adicionales">
               <!-- IMPORTANTE: SE DEBE INDICAR QUE ES MODO AGREGACION DE ADICIONALES INFORME AVANCE Y ENVIAR EL INFORME DE AVANCE ACTUAL PARA DETERMINAR SI UN SERVICIO YA EXISTE O NO -->
-              <zwc-table-servicios mode_source="agregar-adicionales-informe-avance" [informe_avance]="serviciosInformeAvance" [contratoMarco]="contrato" #tableServiciosAdicionales>
+              <zwc-table-servicios mode_source="agregar-adicionales-informe-avance" [informe_avance]="serviciosInformeAvance" [contratoMarco]="contrato" [accion_detalle_uo]="canEditMaterials(otDetalle)" (detallesUOClicked)="showMateriales($event)" #tableServiciosAdicionales>
               </zwc-table-servicios>
             </div>
           </div>
