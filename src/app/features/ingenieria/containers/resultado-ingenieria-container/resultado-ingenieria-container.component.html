@@ -86,38 +86,18 @@
                 [sending]="sendingSaveCubicacion$|async"
                 [Pdisabled]="!tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                 (call)="editarCubicacion()"></zwc-pbutton-sending>
+
+            <zwc-pbutton-sending Pid="enviar" content="Enviar Resultado" *ngIf="rol==='ADM_EECC'"
+                Pclass="p-button-info p-button-sm mt-4 w-full" (call)="displayModalEnvioResultadoIngenieria=true">
+            </zwc-pbutton-sending>
         </div>
     </div>
 </div>
-<!-- <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"
-    [modal]="true">
-    <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInformeAvanceForm></zwc-view-rechazo>
-    <ng-template pTemplate="footer">
-        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-            (click)="showModalRechazarInformeAvance=false">
-            Cancelar
-        </button>
-        <button pButton type="button" id="button-confirmar" (click)="rechazarInformeAvance()"
-            [disabled]="!rechazoInformeAvanceForm.formRechazo.valid">
-            Rechazar informe de avance
-        </button>
-    </ng-template>
-</p-dialog>
-
-<p-dialog header="Confirmar envío del Informe de Avance" [(visible)]="displayModalEnvioInformeAvance"
+<p-dialog header="Confirmar envío del resultado de ingeniería" [(visible)]="displayModalEnvioResultadoIngenieria"
     [draggable]="false" [modal]="true">
     Order de trabajo ID: {{ot_id}}
-    <zwc-view-confirmacion pregunta='¿Desea confirmar el envío del informe de avance?'
-        (cancelar)="displayModalEnvioInformeAvance=false" (confirmar)="enviarInformeAvance()"
-        textConfirmar="Enviar Informe de Avance">
+    <zwc-view-confirmacion pregunta='¿Desea confirmar el envío del resultado de ingeniería?'
+        (cancelar)="displayModalEnvioResultadoIngenieria=false" (confirmar)="enviarResultadoIngenieria()"
+        textConfirmar="Enviar">
     </zwc-view-confirmacion>
 </p-dialog>
-
-<p-dialog header="Confirmar aprobación del Informe de Avance" [(visible)]="displayModalAprobacionInformeAvance"
-    [draggable]="false" [modal]="true">
-    Order de trabajo ID: {{ot_id}}
-    <zwc-view-confirmacion pregunta='¿Desea confirmar la aprobación del informe de avance?'
-        (cancelar)="displayModalAprobacionInformeAvance=false" (confirmar)="autorizarInformeAvance()"
-        textConfirmar="Aprobar Informe de Avance">
-    </zwc-view-confirmacion>
-</p-dialog> -->

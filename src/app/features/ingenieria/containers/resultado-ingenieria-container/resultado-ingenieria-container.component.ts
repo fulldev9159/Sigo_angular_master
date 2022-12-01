@@ -27,6 +27,7 @@ import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servici
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { IngenieriaFacade } from '@storeOT/ingenieria/ingenieria.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Subscription, take } from 'rxjs';
@@ -60,6 +61,7 @@ export class ResultadoIngenieriaContainerComponent
   accionesOT: Accion[] = [];
   cubicacion_ingeniria_id: number;
   carrito$ = this.serviciosFacade.carrito$();
+  ot_id: number;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
@@ -67,6 +69,9 @@ export class ResultadoIngenieriaContainerComponent
   rol = (JSON.parse(localStorage.getItem('auth')).sessionData as SessionData)
     .rol_slug;
   contrato: string;
+
+  // MODAL
+  displayModalEnvioResultadoIngenieria = false;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -77,6 +82,7 @@ export class ResultadoIngenieriaContainerComponent
     private contratoFacade: ContratoFacade,
     private serviciosFacade: ServiciosFacade,
     private loadingFacade: LoadingsFacade,
+    private ingenieriaFacade: IngenieriaFacade,
     private route: ActivatedRoute
   ) {}
 
@@ -130,6 +136,7 @@ export class ResultadoIngenieriaContainerComponent
             this.contrato =
               this.dataOT.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
             this.cubicacion_ingeniria_id = this.dataOT.cubicacion_ing_id;
+            this.ot_id = this.dataOT.id;
 
             // PRECARGAR DATOS FILTROS PARA AGREGAR SERVICIOS
             this.contratoFacade.getActividadesContratoProveedor(
@@ -435,6 +442,10 @@ export class ResultadoIngenieriaContainerComponent
   //   this.totalFinalInformeAvance = totalInformeAvance + totalAdicionales;
   // }
 
+  enviarResultadoIngenieria(): void {
+    this.displayModalEnvioResultadoIngenieria = false;
+    this.ingenieriaFacade.enviarResultadoIngenieria(this.ot_id);
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

@@ -88,6 +88,11 @@ import { AreaEffects } from './area/area.effects';
 import * as formAreaReduce from './area/area.reducers';
 // AREA
 
+// INGENIERIA
+import { IngenieriaEffects } from './ingenieria/ingenieria.effects';
+import * as formIngenieriaReduce from './ingenieria/ingenieria.reducers';
+// INGENIERIA
+
 @NgModule({
   declarations: [],
   imports: [
@@ -205,6 +210,13 @@ import * as formAreaReduce from './area/area.reducers';
     StoreModule.forFeature(
       formAreaReduce.Featurekey,
       formAreaReduce.reducerArea
+    ),
+
+    // INGENIERIA
+    EffectsModule.forFeature([IngenieriaEffects]),
+    StoreModule.forFeature(
+      formIngenieriaReduce.Featurekey,
+      formIngenieriaReduce.reducerIngenieria
     ),
 
     SharedModule,

@@ -16,6 +16,7 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
+import * as ingenieriaActions from '@storeOT/ingenieria/ingenieria.actions';
 
 interface ActionErr {
   error?: any;
@@ -351,6 +352,18 @@ export class AfterHttpService {
     // ENVIO INFORME TRABAJOS FINALIZADOS
     if (action.type === actaActions.informarTrabajosFinalizadosSuccess.type) {
       this.snackMessage.showMessage(`Envío exitoso`, 'Exito', 4000);
+      this.router.navigate(['/ot/list-ot']);
+    }
+
+    // ENVIAR RESULTADO INGENIERIA
+    if (
+      action.type === ingenieriaActions.enviarResultadoIngenieriaSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Resultado ingeniería enviado con éxito`,
+        'Exito',
+        4000
+      );
       this.router.navigate(['/ot/list-ot']);
     }
   }

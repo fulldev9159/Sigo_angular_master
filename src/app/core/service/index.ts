@@ -20,3 +20,4 @@ export * from './acta-http.service';
 export * from './libro-obras-http.service';
 export * from './area-http.service';
 export * from './guia-subgrupo-http.service';
+export * from './ingenieria-http.service';
