@@ -85,7 +85,8 @@
                                item.etapa_slug==='OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR'||
                                item.etapa_slug==='OT_ET_PENDIENTE_CIERRE'||
                                item.etapa_slug==='OT_ET_ANULACION_POR_RECHAZO_INICIAL'||
-                               item.etapa_slug==='OT_ET_ANULACION_POR_RECHAZO_PROV'">
+                               item.etapa_slug==='OT_ET_ANULACION_POR_RECHAZO_PROV'||
+                               item.etapa_slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA'">
             <p-chip [label]="item.etapa_otdesc" image="assets/images/logo.png"></p-chip>
           </ng-container>
           <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_PROVEEDOR'||

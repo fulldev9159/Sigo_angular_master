@@ -87,6 +87,11 @@
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
+  <!-- OT_ET_AUTORIZACION_RESULTADO_INGENIERIA -->
+  <button id="play-button" pTooltip="Validar resultado ingeniería" *ngIf="findAccion('OT_AUTORIZAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/validar-ingenieria',ot_id]">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
 
   <!-- ACCIONES FIJAS -->
   <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
