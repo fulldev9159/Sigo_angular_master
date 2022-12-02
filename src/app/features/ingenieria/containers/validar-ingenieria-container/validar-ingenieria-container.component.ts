@@ -84,7 +84,7 @@ export class ValidarIngenieriaContainerComponent implements OnInit, OnDestroy {
     this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
       this.route.data.subscribe(
-        ({ detalleOT, cubicacion, cubicacionIngenieria, accionesOT }) => {
+        ({ detalleOT, cubicacionIngenieria, accionesOT }) => {
           console.log(accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
 

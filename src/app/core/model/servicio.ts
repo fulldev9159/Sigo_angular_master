@@ -124,6 +124,9 @@ export interface DetalleServicioCubicacion {
   model_servicio_id: ModelServicio;
   model_unidad_id: Unidad;
   numero_producto: string;
+  autorizacion_ing_estado: string;
+  autorizacion_ing_usuario_id: number;
+  autorizacion_ing_fecha: Date;
   model_precio_tipo_moneda_id: {
     id: number;
     codigo: string;

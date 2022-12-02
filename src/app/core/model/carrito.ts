@@ -20,6 +20,7 @@ export interface CarritoService {
   faltante_porcentaje_entero?: number;
   prov_has_serv_precio?: number;
   puntos_baremos?: number;
+  autorizado_ingenieria?: string;
 
   unidad_obras: CarritoUO[];
 }

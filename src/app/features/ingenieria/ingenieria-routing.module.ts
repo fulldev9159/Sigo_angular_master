@@ -13,7 +13,7 @@ const routes: Routes = [
     component: ResultadoIngenieriaContainerComponent,
     resolve: {
       detalleOT: DetalleOTResolver,
-      cubicacion: DetalleCubicacionFromOTResolver,
+      // cubicacion: DetalleCubicacionFromOTResolver,
       cubicacionIngenieria: DetalleCubicacionIngFromOTResolver,
       accionesOT: AccionesOTResolver,
     },
@@ -23,7 +23,6 @@ const routes: Routes = [
     component: ValidarIngenieriaContainerComponent,
     resolve: {
       detalleOT: DetalleOTResolver,
-      cubicacion: DetalleCubicacionFromOTResolver,
       cubicacionIngenieria: DetalleCubicacionIngFromOTResolver,
       accionesOT: AccionesOTResolver,
     },
