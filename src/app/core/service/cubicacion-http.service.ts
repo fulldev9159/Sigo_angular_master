@@ -102,7 +102,7 @@ export class CubicacionHttpService {
     return this.http.post<any>(
       `${this.API_URL}/cubicacion/origen_material/update`,
       {
-        informe_has_material_id: material_id,
+        cubicacion_has_material_id: material_id,
       }
     );
   }
