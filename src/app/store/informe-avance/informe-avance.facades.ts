@@ -136,4 +136,11 @@ export class InformeAvanceFacade {
       informeAvanceActions.AceptarRechazarInformeAvanceOT({ request })
     );
   }
+
+  // CAMBIAR ORIGEN DE MATERIAL
+  public cambiarMaterialOrigenAProveedor(material_id: number): void {
+    this.store.dispatch(
+      informeAvanceActions.CambiarMaterialOrigenAProveedor({ material_id })
+    );
+  }
 }

@@ -13,6 +13,7 @@ import {
   AgenciaContrato,
   AgregarUOAdicionalAServicio,
   CarritoService,
+  CarritoUO,
   ContratosUser,
   DetalleInformeAvance,
   DetalleOT,
@@ -27,6 +28,7 @@ import {
   ServicioAdicionalActualizar,
   SessionData,
   UOAdicionalActualizar,
+  MaterialesManoObra,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -36,9 +38,11 @@ import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
+import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
+import { LogService } from '@log';
 
 interface TableService {
   precargado: boolean;
@@ -74,6 +78,9 @@ interface TableService {
 export class InformeAvanceComponent
   implements OnDestroy, OnInit, AfterViewInit
 {
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
+
   @ViewChild('agregarServiciosForm', {
     read: FormAgregarServiciosComponent,
     static: false,
@@ -104,6 +111,7 @@ export class InformeAvanceComponent
   carrito$ = this.serviciosFacade.carrito$();
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.informeAvanceFacade.getDetalleInformeAvance$();
+  otDetalle$: Observable<DetalleOT> = this.otDetalleDFacade.getDetalleOT$();
   motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
     .getMotivosRechazo$()
     .pipe(
@@ -121,6 +129,11 @@ export class InformeAvanceComponent
   accionesOT: Accion[] = [];
   ot_id: number;
   contrato: string;
+
+  materialesSelected: MaterialesManoObra[] | null;
+  materialSelected: MaterialesManoObra | null;
+  displayModalMateriales = false;
+  displayModalConfirmacionOrigen = false;
 
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
@@ -146,10 +159,12 @@ export class InformeAvanceComponent
     private cubicacionFacade: CubicacionFacade,
     private loadingsFacade: LoadingsFacade,
     private informeAvanceFacade: InformeAvanceFacade,
+    private otDetalleDFacade: OTDetalleFacade,
     private flujoOTFacade: FlujoOTFacade,
     private authFacade: AuthFacade,
     private route: ActivatedRoute,
-    private detector: ChangeDetectorRef
+    private detector: ChangeDetectorRef,
+    private logger: LogService
   ) {}
 
   ngOnInit(): void {
@@ -158,7 +173,7 @@ export class InformeAvanceComponent
     this.subscription.add(
       this.route.data.subscribe(
         ({ detalleOT, detalleInformeAvance, accionesOT }) => {
-          console.log(accionesOT);
+          this.logger.debug('acciones', accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
           if (detalleOT) {
             const ot = detalleOT.data as DetalleOT;
@@ -237,6 +252,27 @@ export class InformeAvanceComponent
                     uob_unidad_medida_cod: uo.model_unidad_id.codigo,
                     uob_unidad_medida_descripcion:
                       uo.model_unidad_id.descripcion,
+
+                    // TODO Revisar
+                    material_arr: uo.many_informe_has_material.map(m => {
+                      return {
+                        material_id: m.id,
+                        material_codigo: m.material_cod,
+                        material_nombre: m.model_material_cod.descripcion,
+                        material_origen: m.origen,
+                        material_precio_clp: m.valor_unitario_clp, // ?
+
+                        material_cantidad: m.cantidad,
+                        material_precio: m.valor, // ?
+                        material_tipo_moneda_id: m.model_tipo_moneda_id.id,
+                        material_unidad_id: m.model_unidad_id.id,
+                        material_unidad_medida_cod: '--', // ?
+                        material_valor: m.valor,
+                        material_unidad_codigo: m.model_unidad_id.codigo,
+                        material_unidad_descripcion:
+                          m.model_unidad_id.descripcion,
+                      };
+                    }),
                   },
                 ],
               };
@@ -449,7 +485,7 @@ export class InformeAvanceComponent
       initialVal
     );
 
-    console.log('servicios a actualizar', agregar_uob_a_servicio);
+    this.logger.debug('servicios a actualizar', agregar_uob_a_servicio);
 
     // REQUEST SERVICIOS ADICONALES
     let request_adicionales: RequestAdicionales = {
@@ -736,5 +772,55 @@ export class InformeAvanceComponent
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  canEditMaterials(otDetalle: DetalleOT): boolean {
+    const rol = this.sessionData?.rol_slug ?? '';
+    const etapa = otDetalle?.ot?.model_tipo_etapa_ot_id?.slug ?? '';
+    return (
+      (rol === 'TRABAJADOR' && etapa === 'OT_ET_EJECUCION_TRABAJOS') ||
+      (rol === 'ADM_EECC' && etapa === 'OT_ET_PAGO_ACEPTACION_IA')
+    );
+  }
+
+  showMateriales({
+    servicio,
+    uo,
+  }: {
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }): void {
+    this.logger.debug('servicio', servicio);
+    this.logger.debug('uo', uo);
+    this.materialesSelected = [...(uo?.material_arr ?? [])];
+    this.logger.debug('materiales', this.materialesSelected);
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = null;
+    this.displayModalMateriales = false;
+    this.closeModalCambiarMaterialOrigenAProveedor();
+  }
+
+  openChangeToProveedorConfirmation(material: MaterialesManoObra): void {
+    this.materialSelected = material;
+    this.displayModalConfirmacionOrigen = true;
+  }
+
+  closeModalCambiarMaterialOrigenAProveedor(): void {
+    this.materialSelected = null;
+    this.displayModalConfirmacionOrigen = false;
+  }
+
+  confirmarCambiarMaterialOrigenAProveedor(): void {
+    if (this.materialSelected) {
+      const { material_id } = this.materialSelected;
+      if (material_id !== undefined) {
+        this.informeAvanceFacade.cambiarMaterialOrigenAProveedor(material_id);
+        this.closeModalCambiarMaterialOrigenAProveedor();
+        this.closeModalMateriales();
+      }
+    }
   }
 }
