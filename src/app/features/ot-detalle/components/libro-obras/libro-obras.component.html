@@ -129,6 +129,21 @@
                             *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
                     </ng-container>
 
+                    <ng-container *ngIf="registro.evento==='AUTORIZACION_RESULTADO_ING'">
+                        <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                            [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                        </fa-icon>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado el resultado
+                            de ingeniería con
+                            la siguiente observación:</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado la orden de
+                            trabajo</span>
+                        <br>
+                        <q
+                            *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
+
+
                     <ng-container *ngIf="registro.evento==='INF_TRAB_FIN_ACTA'">
                         <q>{{getMetadata(registro.metadata).observacion}}</q>
                     </ng-container>

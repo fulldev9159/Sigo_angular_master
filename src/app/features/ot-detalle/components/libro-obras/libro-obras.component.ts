@@ -108,6 +108,14 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         icon: this.inboxIcon,
         text: 'Solicitud de Informe de fin de trabajos',
       },
+      ENVIO_RESULTADO_INGENIERIA: {
+        icon: this.inboxIcon,
+        text: 'Envío de resultado de ingeniería',
+      },
+      AUTORIZACION_RESULTADO_ING: {
+        icon: this.inboxIcon,
+        text: 'Valicación del resultado de ingeniería',
+      },
     };
   }
 
