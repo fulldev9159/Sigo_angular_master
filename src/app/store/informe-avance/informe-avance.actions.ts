@@ -146,3 +146,19 @@ export const actualizarInformeAvanceYautorizarIAError = createAction(
   '[INFORME AVANCE] GET actualizarInformeAvanceYautorizarIA Error',
   props<{ error: any }>()
 );
+
+//  CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+export const CambiarMaterialOrigenAProveedor = createAction(
+  '[INFORME AVANCE] GET CambiarMaterialOrigenAProveedor',
+  props<{ material_id: number }>()
+);
+
+export const CambiarMaterialOrigenAProveedorSuccess = createAction(
+  '[INFORME AVANCE] GET CambiarMaterialOrigenAProveedor Success',
+  props<{ material_id: number }>()
+);
+
+export const CambiarMaterialOrigenAProveedorError = createAction(
+  '[INFORME AVANCE] GET CambiarMaterialOrigenAProveedor Error',
+  props<{ error: any }>()
+);

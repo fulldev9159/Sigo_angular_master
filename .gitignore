@@ -47,3 +47,5 @@ cypress/videos
 
 
 gource.mp4
+
+**/*.swp
