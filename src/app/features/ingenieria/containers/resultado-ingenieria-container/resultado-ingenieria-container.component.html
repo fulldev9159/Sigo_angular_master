@@ -1,7 +1,7 @@
 <div class="container-box">
     <h1>Resultado ingeniería</h1>
 
-    <p-divider align="center">
+    <!-- <p-divider align="center">
         <span class="p-tag">Servicios Cubicados</span>
     </p-divider>
     <div class="card">
@@ -14,7 +14,7 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <p-divider align="center">
         <span class="p-tag">Ingenierías</span>
@@ -51,22 +51,6 @@
                 </zwc-table-servicios>
             </div>
 
-        </div>
-    </div>
-
-    <div class="card" *ngIf="canSeePrices()">
-        <div class=" grid">
-            <div class="field col-12 table-agregar-servicios-adicionales">
-                <p-divider align="center">
-                    <span class="p-tag">Total</span>
-                </p-divider>
-                <div class="grid">
-                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3 total-final-ia">
-                        {{totalFinalInformeAvance|
-                        currency : 'CLP' : '$':'.0-2':'es-CL'}}
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
