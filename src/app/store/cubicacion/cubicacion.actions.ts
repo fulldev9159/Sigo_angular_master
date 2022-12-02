@@ -210,3 +210,19 @@ export const resetProveedorSelected = createAction(
 export const resetAgenciaSelected = createAction(
   '[CUBICACION] resetAgenciaSelected '
 );
+
+//  CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+export const CambiarMaterialOrigenAProveedor = createAction(
+  '[CUBICACION] GET CambiarMaterialOrigenAProveedor',
+  props<{ material_id: number }>()
+);
+
+export const CambiarMaterialOrigenAProveedorSuccess = createAction(
+  '[CUBICACION] GET CambiarMaterialOrigenAProveedor Success',
+  props<{ material_id: number }>()
+);
+
+export const CambiarMaterialOrigenAProveedorError = createAction(
+  '[CUBICACION] GET CambiarMaterialOrigenAProveedor Error',
+  props<{ error: any }>()
+);
