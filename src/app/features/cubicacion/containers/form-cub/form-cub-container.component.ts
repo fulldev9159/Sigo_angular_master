@@ -72,8 +72,11 @@ export class FormCubContainerComponent
   cubicacion_id: number;
   title: string;
 
+  uoIsPrecargada = false;
   materialesSelected: MaterialesManoObra[] | null;
+  materialSelected: MaterialesManoObra | null;
   displayModalMateriales = false;
+  displayModalConfirmacionOrigen = false;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -331,6 +334,7 @@ export class FormCubContainerComponent
                       // TODO Revisar
                       material_arr: uo.many_cubicacion_has_material.map(m => {
                         return {
+                          material_id: m.id,
                           material_codigo: m.material_cod,
                           material_nombre: m.model_material_cod.descripcion,
                           material_origen: m.origen,
@@ -597,13 +601,42 @@ export class FormCubContainerComponent
     servicio: CarritoService;
     uo: CarritoUO;
   }): void {
+    this.uoIsPrecargada = uo?.precargado ?? false;
     this.materialesSelected = [...(uo?.material_arr ?? [])];
     this.displayModalMateriales = true;
   }
 
   closeModalMateriales(): void {
+    this.uoIsPrecargada = false;
     this.materialesSelected = null;
     this.displayModalMateriales = false;
+    this.closeModalCambiarMaterialOrigenAProveedor();
+  }
+
+  get canEditMaterials(): boolean {
+    const rol = this.sessionData?.rol_slug ?? '';
+    return rol === 'GESTOR' && this.uoIsPrecargada;
+  }
+
+  openChangeToProveedorConfirmation(material: MaterialesManoObra): void {
+    this.materialSelected = material;
+    this.displayModalConfirmacionOrigen = true;
+  }
+
+  closeModalCambiarMaterialOrigenAProveedor(): void {
+    this.materialSelected = null;
+    this.displayModalConfirmacionOrigen = false;
+  }
+
+  confirmarCambiarMaterialOrigenAProveedor(): void {
+    if (this.materialSelected) {
+      const { material_id } = this.materialSelected;
+      if (material_id !== undefined) {
+        this.cubicacionFacade.cambiarMaterialOrigenAProveedor(material_id);
+        this.closeModalCambiarMaterialOrigenAProveedor();
+        this.closeModalMateriales();
+      }
+    }
   }
 
   goBack(): void {

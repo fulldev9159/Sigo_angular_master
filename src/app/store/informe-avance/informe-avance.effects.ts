@@ -252,7 +252,8 @@ export class InformeAvanceEffects {
     )
   );
 
-  redirectToWebhooksPageWhenTheWebhookIsCreated$ = createEffect(
+  // TODO Sacar ésto
+  reloadWhenMaterialChangesToProveedor$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess),

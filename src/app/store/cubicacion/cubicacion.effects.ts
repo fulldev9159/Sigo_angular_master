@@ -211,6 +211,41 @@ export class CubicacionEffects {
     )
   );
 
+  // CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+  cambiarOrigenMaterialAProveedor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) =>
+        this.cubicacionHttpService
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() =>
+              cubicacionActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error =>
+              of(
+                cubicacionActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
+  // TODO Sacar ésto
+  reloadWhenMaterialChangesToProveedor$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() => window.location.reload())
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -222,7 +257,8 @@ export class CubicacionEffects {
           cubicacionActions.clonarCubicacionSuccess,
           cubicacionActions.eliminarCubicacionSuccess,
           cubicacionActions.eliminarServicioCarritoSuccess,
-          cubicacionActions.editCubicacionIngenieriaSuccess
+          cubicacionActions.editCubicacionIngenieriaSuccess,
+          cubicacionActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -241,7 +277,8 @@ export class CubicacionEffects {
           cubicacionActions.eliminarCubicacionError,
           cubicacionActions.eliminarServicioCarritoError,
           cubicacionActions.detalleCubicacionIngenieriaError,
-          cubicacionActions.editCubicacionIngenieriaError
+          cubicacionActions.editCubicacionIngenieriaError,
+          cubicacionActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

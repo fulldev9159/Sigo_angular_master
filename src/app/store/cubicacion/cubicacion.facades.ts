@@ -204,4 +204,11 @@ export class CubicacionFacade {
   public resetAgenciaSelected(): void {
     this.store.dispatch(cubicacionActions.resetAgenciaSelected());
   }
+
+  // CAMBIAR ORIGEN DE MATERIAL
+  public cambiarMaterialOrigenAProveedor(material_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.CambiarMaterialOrigenAProveedor({ material_id })
+    );
+  }
 }
