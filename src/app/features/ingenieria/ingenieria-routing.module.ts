@@ -6,6 +6,7 @@ import { DetalleCubicacionIngFromOTResolver } from 'src/app/core/resolvers/detal
 import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
 import { ResultadoIngenieriaContainerComponent } from './containers/resultado-ingenieria-container/resultado-ingenieria-container.component';
 import { ValidarIngenieriaContainerComponent } from './containers/validar-ingenieria-container/validar-ingenieria-container.component';
+import { VerIngenieriaContainerComponent } from './containers/ver-ingenieria-container/ver-ingenieria-container.component';
 const routes: Routes = [
   { path: '', redirectTo: 'resultado-ingenieria', pathMatch: 'full' },
   {
@@ -21,6 +22,15 @@ const routes: Routes = [
   {
     path: 'validar-ingenieria/:id',
     component: ValidarIngenieriaContainerComponent,
+    resolve: {
+      detalleOT: DetalleOTResolver,
+      cubicacionIngenieria: DetalleCubicacionIngFromOTResolver,
+      accionesOT: AccionesOTResolver,
+    },
+  },
+  {
+    path: 'ver-ingenieria/:id',
+    component: VerIngenieriaContainerComponent,
     resolve: {
       detalleOT: DetalleOTResolver,
       cubicacionIngenieria: DetalleCubicacionIngFromOTResolver,

@@ -3,10 +3,11 @@ import {
   faBook,
   faCalculator,
   faFileContract,
+  faFlask,
   faFolderOpen,
   faInfo,
 } from '@fortawesome/free-solid-svg-icons';
-import { DetalleOT } from '@model';
+import { DetalleOT, SessionData } from '@model';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { Observable } from 'rxjs';
 
@@ -19,6 +20,8 @@ export class MenuDetalleOtComponent {
   // 67 TODO: PROGRAMAR QUE OCURRE SI FALLA EL GET DETALLE OT
   // 133 TODO: PROGRAMAR QUE SE VISUALICE EN EL MENÚ LA OPCION ESCOGIDA
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
+  rol = (JSON.parse(localStorage.getItem('auth')).sessionData as SessionData)
+    .rol_slug;
 
   // ICONS
   infoIcon = faInfo;
@@ -26,6 +29,7 @@ export class MenuDetalleOtComponent {
   actaInfo = faFileContract;
   libroObrasIcon = faBook;
   anexosIcon = faFolderOpen;
+  ingenieriaIcon = faFlask;
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}
 }

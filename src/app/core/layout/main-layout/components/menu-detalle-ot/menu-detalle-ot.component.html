@@ -24,6 +24,59 @@
                     <span>Libro Obras</span>
                 </a>
             </li>
+
+
+            <!-- INGENIERIA -->
+            <ng-container
+                *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS_INGENIERIA' && (rol==='TRABAJADOR'||rol==='ADM_EECC')">
+                <li routerLinkActive="active" id="registrar-ingenieria">
+                    <a [routerLink]="['/ingenieria/resultado-ingenieria',otDetalle.ot.id]">
+                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                        <span>Ingeniería</span>
+                    </a>
+                </li>
+            </ng-container>
+
+            <ng-container *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
+                                rol==='GESTOR'">
+                <li routerLinkActive="active" id="validar-ingenieria">
+                    <a [routerLink]="['/ingenieria/validar-ingenieria',otDetalle.ot.id]">
+                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                        <span>Ingeniería</span>
+                    </a>
+                </li>
+            </ng-container>
+
+            <ng-container *ngIf="(otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
+                                (rol==='TRABAJADOR'||rol==='ADM_EECC')) ||
+                                ((otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS' ||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_ACEPTACION_IA'||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_GENERACION_ACTA'||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR' ||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_SOLICITUD_PAGO'||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES' ||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO' ||
+                                  otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS_ESPERA_IMPUTACION'  ) && 
+                                (rol==='TRABAJADOR'||
+                                  rol==='ADM_EECC'||
+                                  rol==='GESTOR'||
+                                  rol==='OPERACIONES'||
+                                  rol==='SUPERVISOR'||
+                                  rol==='JEFE_AREA' ||
+                                  rol==='SUBGERENTE'||
+                                  rol==='GERENTE'  
+                                   )) ">
+                <li routerLinkActive="active" id="ver-ingenieria">
+                    <a [routerLink]="['/ingenieria/ver-ingenieria',otDetalle.ot.id]">
+                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                        <span>Ingeniería</span>
+                    </a>
+                </li>
+            </ng-container>
+            <!-- INGENIERIA -->
+
+
+
             <li routerLinkActive="active" id="detalleot-anexos">
                 <a [routerLink]="['/ot-detalle/anexos',otDetalle.ot.id]">
                     <fa-icon [icon]="anexosIcon"></fa-icon>
