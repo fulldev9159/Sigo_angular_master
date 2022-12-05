@@ -257,6 +257,13 @@ export class AfterHttpService {
       this.snackMessage.showMessage(`Cambios realizados`, 'Exito', 4000);
     }
 
+    if (
+      action.type ===
+      cubicacionActions.CambiarMaterialOrigenAProveedorSuccess.type
+    ) {
+      this.snackMessage.showMessage(`Cambios realizados`, 'Exito', 4000);
+    }
+
     // ACEPTACION DE INFORME DE AVANCE
     if (
       action.type ===
