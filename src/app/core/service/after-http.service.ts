@@ -138,7 +138,7 @@ export class AfterHttpService {
         'Exito',
         4000
       );
-      // location.reload();
+      location.reload();
     }
 
     // CLONAR CUBICACIÓN

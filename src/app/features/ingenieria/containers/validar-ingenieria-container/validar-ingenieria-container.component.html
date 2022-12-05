@@ -33,7 +33,8 @@
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalAprobacion=true">
                 </zwc-pbutton-sending>
             </div>
-            <div *ngIf="accionExist('OT_AUTORIZAR_RESULTADO_ING')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <div *ngIf="accionExist('OT_AUTORIZAR_RESULTADO_ING') && !serviciosAdicionalesAprobados() "
+                class="field col-12 md:col-4 lg:col-4 xl:col-4">
                 <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar" icon="nok"
                     Pclass="p-button-info p-button-sm mt-4 w-full bg-red-500 hover:bg-red-300"
                     (click)="displayModalRechazar()">
