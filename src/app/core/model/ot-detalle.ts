@@ -111,6 +111,31 @@ export interface InfoOT {
   fecha_derivada?: any;
   numero_hem?: any;
   fecha_cont_hem?: any;
+
+  model_cubicacion_ing_id: ModelCubicacionIngId;
+}
+
+export interface ModelCubicacionIngId {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  direccion_desde: string;
+  altura_desde: string;
+  direccion_hasta: string;
+  altura_hasta: string;
+  tipo_cubicacion_id: number;
+  contrato_id: number;
+  proveedor_id: number;
+  codigo_acuerdo: string;
+  cmarco_has_proveedor_id: number;
+  agencia_id: number;
+  usuario_creador_id: number;
+  costo: number;
+  flg_hidden: boolean;
+  observacion_autorizacion_ing?: any;
+  created_at: Date;
+  updated_at: Date;
+  model_contrato_id: ModelContratoMarco;
 }
 
 export interface PDFInicial {

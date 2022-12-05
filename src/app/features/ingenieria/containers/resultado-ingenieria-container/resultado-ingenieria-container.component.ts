@@ -293,10 +293,11 @@ export class ResultadoIngenieriaContainerComponent
             return ac.concat(unidades_obra);
           }, []);
 
-        let cubicacionData = this.dataOT.model_cubicacion_id;
+        let cubicacionData = this.dataOT.model_cubicacion_ing_id;
         const request: RequestEditCubicacion = {
           cubicacion_datos: {
             id: +this.cubicacion_ingeniria_id,
+            nombre: cubicacionData.nombre,
             tipo_cubicacion_id: cubicacionData.tipo_cubicacion_id, // FORMULARIO
             contrato_id: cubicacionData.contrato_id, // FORMULARIO
             agencia_id: cubicacionData.agencia_id, // FORMULARIO
@@ -320,7 +321,8 @@ export class ResultadoIngenieriaContainerComponent
           },
         };
 
-        this.cubicacionFacade.editCubicacion(request);
+        console.log('Req', request);
+        this.cubicacionFacade.editCubicacionIngenieria(request);
       })
     );
   }
