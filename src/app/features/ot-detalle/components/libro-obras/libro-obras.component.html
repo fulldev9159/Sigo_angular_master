@@ -136,8 +136,10 @@
                         <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado el resultado
                             de ingeniería con
                             la siguiente observación:</span>
-                        <span *ngIf="getMetadata(registro.metadata).estado==='ACEPTADO'">Se ha aceptado la orden de
-                            trabajo</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='AUTORIZADO_AP'">Se ha continuado como
+                            ingeniería</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='AUTORIZADO_OT'">Se ha continuado como
+                            contrucción</span>
                         <br>
                         <q
                             *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
