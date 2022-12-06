@@ -18,6 +18,7 @@ import {
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
+  DetalleOT,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
@@ -144,6 +145,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   formTrabajosFinalizados: FormGroup = new FormGroup({
     informe: new FormControl('', [Validators.required]),
   });
+
+  otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
 
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
@@ -377,6 +380,14 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   confirmarCierreAdministrativo(): void {
     this.flujoOTFacade.cierreAdministrativo(this.ot_id);
     this.displayModalCierreAdministrativo = false;
+  }
+
+  // CAMBIO SUSTENTO FINANCIERO
+  openModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = true;
+      this.otDetalleFacade.getDetalleOT(this.ot_id);
+    }
   }
 
   ngOnDestroy(): void {

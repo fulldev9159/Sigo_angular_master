@@ -2,7 +2,7 @@
   <!-- PLAY CONTINUAR -->
 
   <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
-  <button id="play-button" pTooltip="Actualizar sustento financiero" *ngIf="!findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="displayModalCambiarSustentoFinanciero=true">
+  <button id="play-button" pTooltip="Actualizar sustento financiero" *ngIf="!findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
     <fa-icon [icon]="dollarIcon"></fa-icon>
   </button>
 
@@ -187,6 +187,11 @@
 <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
 <p-dialog header="Actualizar sustento financiero" [(visible)]="displayModalCambiarSustentoFinanciero" [draggable]="false" [modal]="true">
   <p>Order de trabajo ID: {{ot_id}}</p>
+  <ng-container *ngIf="otDetalle$ | async as otDetalle">
+    <ng-container *ngIf="otDetalle.ot.id === ot_id">
+      <zwc-formulario-ot-sustento-financiero-modal [detalle]="otDetalle"></zwc-formulario-ot-sustento-financiero-modal>
+    </ng-container>
+  </ng-container>
 </p-dialog>
 
 <p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false" [modal]="true">

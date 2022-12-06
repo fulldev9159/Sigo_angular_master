@@ -13,6 +13,7 @@ import { FormularioOtOrdinarioComponent } from './components/formulario-ot-ordin
 import { FormularioOtFijoComponent } from './components/formulario-ot-fijo/formulario-ot-fijo.component';
 import { FormularioOtMovilComponent } from './components/formulario-ot-movil/formulario-ot-movil.component';
 import { FormularioOtSustentoFinancieroComponent } from './components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
+import { FormularioOtSustentoFinancieroModalComponent } from './components/formulario-ot-sustento-financiero-modal/formulario-ot-sustento-financiero-modal.component';
 import { FormularioOtExtrasComponent } from './components/formulario-ot-extras/formulario-ot-extras.component';
 import { FormularioOtNumeroInternoComponent } from './components/formulario-ot-numero-interno/formulario-ot-numero-interno.component';
 import { ListOtFiltrosComponent } from './components/list-ot-filtros/list-ot-filtros.component';
@@ -31,6 +32,7 @@ import { RegistrarLibroObrasComponent } from './components/registrar-libro-obras
     FormularioOtFijoComponent,
     FormularioOtMovilComponent,
     FormularioOtSustentoFinancieroComponent,
+    FormularioOtSustentoFinancieroModalComponent,
     FormularioOtExtrasComponent,
     FormularioOtNumeroInternoComponent,
     ListOtFiltrosComponent,
