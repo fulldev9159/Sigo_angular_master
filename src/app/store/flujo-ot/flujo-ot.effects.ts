@@ -231,6 +231,19 @@ export class FlujoOTEffects {
   );
 
   // DESQUIEBRE OT
+  quiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.quiebre),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.quiebre(request).pipe(
+          map(response => flujoOTActions.quiebreSuccess({ response })),
+          catchError(error => of(flujoOTActions.quiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // DESQUIEBRE OT
   desquiebre$ = createEffect(() =>
     this.actions$.pipe(
       ofType(flujoOTActions.desquiebre),

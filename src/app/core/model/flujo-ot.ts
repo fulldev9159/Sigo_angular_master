@@ -36,6 +36,12 @@ export interface ReqSolicitarQuiebre {
   observacion: string;
 }
 
+// SOLICITAR QUIEBRE
+export interface ReqQuiebre {
+  ot_id: number;
+  tipo_causa_id: number;
+  observacion: string;
+}
 export interface LastSolicitudQuiebre {
   id: number;
   ot_id: number;

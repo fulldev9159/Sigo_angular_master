@@ -2,6 +2,7 @@ import {
   LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -215,6 +216,21 @@ export const solicitarQuiebreSuccess = createAction(
 );
 export const solicitarQuiebreError = createAction(
   '[FLUJO OT] GET solicitarQuiebre Error',
+  props<{ error: any }>()
+);
+
+// QUIEBRE OT
+export const quiebre = createAction(
+  '[FLUJO OT] GET quiebre',
+  props<{ request: ReqQuiebre }>()
+);
+
+export const quiebreSuccess = createAction(
+  '[FLUJO OT] GET quiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const quiebreError = createAction(
+  '[FLUJO OT] GET quiebre Error',
   props<{ error: any }>()
 );
 

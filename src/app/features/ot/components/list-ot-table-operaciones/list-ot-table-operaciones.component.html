@@ -171,7 +171,7 @@
   <ng-template #content>
     <div style="display: flex;flex-direction:column ;">
       <p>Order de trabajo ID: {{ot_id}}</p>
-      <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">¿Confirma el quiebre de la OT?</h2>
+      <!-- <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">¿Confirma el quiebre de la OT?</h2> -->
       <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Existe una solicitud de quiebre por
         parte de la empresa contratista</h2>
       <br>
@@ -189,12 +189,16 @@
         </button>
       </div>
 
-      <div class="buttonsQuiebre" style="display: flex;" *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+      <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+        *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+        <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
+          subTextTipoMotivo="Seleccione un tipo de motivo" #QuiebreForm></zwc-view-rechazo>
         <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
           (click)="displayAprobarRechazarQuiebreGestor=false">
           Cancelar
         </button>
-        <button pButton type="button" id="button-aprobar" (click)="quiebreGestor()">
+        <button pButton type="button" id="button-aprobar" (click)="quiebreGestor()"
+          [disabled]="!QuiebreForm.formRechazo.valid">
           Confirmar
         </button>
       </div>

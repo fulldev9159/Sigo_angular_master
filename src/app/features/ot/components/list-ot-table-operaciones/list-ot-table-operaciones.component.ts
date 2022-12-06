@@ -14,6 +14,7 @@ import {
   Accion,
   Dropdown,
   LastSolicitudQuiebre,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -68,6 +69,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     static: false,
   })
   solicitudQuiebreForm: ViewRechazoComponent;
+
+  @ViewChild('QuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  QuiebreForm: ViewRechazoComponent;
 
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
@@ -333,7 +340,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // QUIEBRE
   showModalSolicitarQuiebre(): void {
-    this.flujoOTFacade.getMotivosRechazo('ACEPTACION_OT_EECC');
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
     this.displayModalSolicitarQuiebre = true;
   }
 
@@ -350,8 +357,21 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   showModalQuebrarGestor(): void {
     this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
-    this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    // this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
     this.displayAprobarRechazarQuiebreGestor = true;
+  }
+
+  quiebreGestor(): void {
+    console.log(this.solicitudQuiebreForm);
+    let request: ReqQuiebre = {
+      ot_id: this.ot_id,
+      observacion: this.QuiebreForm.formRechazo.get('motivo').value,
+      tipo_causa_id: +this.QuiebreForm.formRechazo.get('tipo_id').value,
+    };
+
+    this.flujoOTFacade.quiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
   }
 
   // DESQUIEBRE
