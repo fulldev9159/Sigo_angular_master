@@ -4,6 +4,7 @@ import { environment } from '@environment';
 import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   Response,
@@ -115,10 +116,11 @@ export class FlujoOtHttpService {
   }
 
   // SOLICITUD DE QUIEBRE
-  solicitarQuiebre(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.API_URL}`, {
-      ot_id,
-    });
+  solicitarQuiebre(request: ReqSolicitarQuiebre): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre/create`,
+      request
+    );
   }
 
   // DESQUIEBRE

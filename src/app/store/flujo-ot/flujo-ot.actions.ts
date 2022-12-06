@@ -1,6 +1,7 @@
 import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   Response,
@@ -189,7 +190,7 @@ export const anularOTError = createAction(
 // SOLICITAR QUIEBRE OT
 export const solicitarQuiebre = createAction(
   '[FLUJO OT] GET solicitarQuiebre',
-  props<{ ot_id: number }>()
+  props<{ request: ReqSolicitarQuiebre }>()
 );
 
 export const solicitarQuiebreSuccess = createAction(
@@ -203,7 +204,7 @@ export const solicitarQuiebreError = createAction(
 
 // DESQUIEBRE OT
 export const desquiebre = createAction(
-  '[FLUJO OT] GET solicitarQuiebre',
+  '[FLUJO OT] GET desquiebre',
   props<{ ot_id: number }>()
 );
 

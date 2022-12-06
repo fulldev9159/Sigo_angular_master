@@ -28,3 +28,10 @@ export interface MotivoRechazo {
   motivo: string;
   tipo: string;
 }
+
+// SOLICITAR QUIEBRE
+export interface ReqSolicitarQuiebre {
+  ot_id: number;
+  tipo_motivo_quiebre: number;
+  observacion: string;
+}

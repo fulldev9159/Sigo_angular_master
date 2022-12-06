@@ -13,6 +13,7 @@ import {
 import {
   Accion,
   Dropdown,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
@@ -61,6 +62,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   @ViewChild(RegistrarLibroObrasComponent)
   registrarLibroObraForm: RegistrarLibroObrasComponent;
 
+  @ViewChild('solicitudQuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  solicitudQuiebreForm: ViewRechazoComponent;
+
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
   bookIcon = faBook;
@@ -103,7 +110,6 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       )
     );
 
-  //
   motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
     .getMotivosRechazo$()
     .pipe(
@@ -318,8 +324,19 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   }
 
   // QUIEBRE
+  showModalSolicitarQuiebre(): void {
+    this.flujoOTFacade.getMotivosRechazo('ACEPTACION_OT_EECC');
+    this.displayModalSolicitarQuiebre = true;
+  }
+
   confirmarSolicitudQuiebre(): void {
-    this.flujoOTFacade.solicitarQuiebre(this.ot_id);
+    const request: ReqSolicitarQuiebre = {
+      ot_id: this.ot_id,
+      observacion: this.solicitudQuiebreForm.formRechazo.get('motivo').value,
+      tipo_motivo_quiebre:
+        +this.solicitudQuiebreForm.formRechazo.get('tipo_id').value,
+    };
+    this.flujoOTFacade.solicitarQuiebre(request);
     this.displayModalSolicitarQuiebre = false;
   }
 

@@ -108,7 +108,7 @@
   </button>
 
   <button id="solicitar-quiebre-button" pTooltip="Solicitar quierbe OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE')"
-    (click)="displayModalSolicitarQuiebre=true">
+    (click)="showModalSolicitarQuiebre()">
     <fa-icon [icon]="pauseIcon"></fa-icon>
   </button>
 
@@ -144,13 +144,35 @@
 
 </p-dialog>
 
-<!-- QUIEBRE -->
-<p-dialog header="Quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
+<!-- SOLICITAR QUIEBRE -->
+<p-dialog header="Solicitar quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
+
+  <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
+    subTextTipoMotivo="Seleccione un tipo de motivo" #solicitudQuiebreForm></zwc-view-rechazo>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="displayModalSolicitarQuiebre=false">
+      Cancelar
+    </button>
+    <button pButton type="button" id="button-confirmar" (click)="confirmarSolicitudQuiebre()"
+      [disabled]="!solicitudQuiebreForm.formRechazo.valid">
+      Solicitar Quiebre
+    </button>
+  </ng-template>
+</p-dialog>
+
+
+
+
+<!-- <p-dialog header="Quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+
+  
   <zwc-view-confirmacion pregunta='¿Comfirma la solicitud de quiebre?' (cancelar)="displayModalSolicitarQuiebre=false"
     (confirmar)="confirmarSolicitudQuiebre()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
-</p-dialog>
+</p-dialog> -->
 
 <!-- DESQUIEBRE -->
 <p-dialog header="Desquiebre" [(visible)]="displayModalDesquiebre" [draggable]="false" [modal]="true">

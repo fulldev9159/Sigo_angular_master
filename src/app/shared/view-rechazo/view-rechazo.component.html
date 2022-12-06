@@ -1,7 +1,7 @@
 <form [formGroup]="formRechazo">
     <br>
-    <zwc-pdropdown [control]="formRechazoControls.tipo_id" Label="* Tipo Rechazo" dropdown_id="select-tipo-rechazo"
-        [data]="motivosRehazo" Pplaceholder="Seleccione un tipo de rechazo"></zwc-pdropdown>
+    <zwc-pdropdown [control]="formRechazoControls.tipo_id" [Label]="tituloTipoMotivo" dropdown_id="select-tipo-rechazo"
+        [data]="motivosRehazo" [Pplaceholder]="subTextTipoMotivo"></zwc-pdropdown>
     <br>
     <div class="row">
         <div class="col">

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
 } from '@model';
@@ -108,8 +109,8 @@ export class FlujoOTFacade {
   }
 
   // SOLICITAR QUIEBRE OT
-  public solicitarQuiebre(ot_id: number): void {
-    this.store.dispatch(flujoOTActions.solicitarQuiebre({ ot_id }));
+  public solicitarQuiebre(request: ReqSolicitarQuiebre): void {
+    this.store.dispatch(flujoOTActions.solicitarQuiebre({ request }));
   }
 
   // DESQUIEBRE OT

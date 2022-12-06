@@ -200,8 +200,8 @@ export class FlujoOTEffects {
   solicitarQuiebre$ = createEffect(() =>
     this.actions$.pipe(
       ofType(flujoOTActions.solicitarQuiebre),
-      concatMap(({ ot_id }) =>
-        this.flujoOTServiceHttp.solicitarQuiebre(ot_id).pipe(
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.solicitarQuiebre(request).pipe(
           map(response => flujoOTActions.solicitarQuiebreSuccess({ response })),
           catchError(error =>
             of(flujoOTActions.solicitarQuiebreError({ error }))
