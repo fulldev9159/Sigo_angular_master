@@ -395,6 +395,16 @@ export class AfterHttpService {
       );
       this.router.navigate(['/ot/list-ot']);
     }
+
+    // SOLICITAR QUIEBRE
+    if (action.type === flujoOTActions.solicitarQuiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha enviado la solicitud exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
   }
 
   reloadTableOT(): void {

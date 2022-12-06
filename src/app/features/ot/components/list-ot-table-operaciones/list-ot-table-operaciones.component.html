@@ -107,6 +107,11 @@
     <fa-icon [icon]="medicalIcon"></fa-icon>
   </button>
 
+  <button id="quiebre-button" pTooltip="Quebrar OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE')"
+    (click)="displayModalSolicitarQuiebre=true">
+    <fa-icon [icon]="pauseIcon"></fa-icon>
+  </button>
+
 </div>
 
 
@@ -123,6 +128,14 @@
     </zwc-pbutton-sending>
   </ng-template>
 
+</p-dialog>
+
+<!-- QUIEBRE -->
+<p-dialog header="Quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+  <zwc-view-confirmacion pregunta='¿Comfirma la solicitud de quiebre?' (cancelar)="displayModalSolicitarQuiebre=false"
+    (confirmar)="confirmarSolicitudQuiebre()" textConfirmar="Confirmar">
+  </zwc-view-confirmacion>
 </p-dialog>
 
 

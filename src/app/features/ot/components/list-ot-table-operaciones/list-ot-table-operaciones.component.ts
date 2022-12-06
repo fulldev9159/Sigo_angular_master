@@ -4,6 +4,7 @@ import {
   faBook,
   faBookMedical,
   faCircleInfo,
+  faPause,
   faPlay,
   faSquareCheck,
   faSquareXmark,
@@ -63,6 +64,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   medicalIcon = faBookMedical;
   bookIcon = faBook;
   playIcon = faPlay;
+  pauseIcon = faPause;
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
@@ -77,6 +79,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalAnularOT = false;
   displayModalInformeTrabajosFinalizados = false;
   displayModalSendInformeTrabajosFinalizados = false;
+  displayModalSolicitarQuiebre = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -309,6 +312,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       this.ot_id,
       this.formTrabajosFinalizados.get('informe').value
     );
+  }
+
+  // QUIEBRE
+  confirmarSolicitudQuiebre(): void {
+    this.flujoOTFacade.solicitarQuiebre(this.ot_id);
+    this.displayModalSolicitarQuiebre = false;
   }
 
   ngOnDestroy(): void {

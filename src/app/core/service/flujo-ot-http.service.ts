@@ -113,4 +113,11 @@ export class FlujoOtHttpService {
       ot_id,
     });
   }
+
+  // SOLICITUD DE QUIEBRE
+  solicitarQuiebre(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.API_URL}`, {
+      ot_id,
+    });
+  }
 }

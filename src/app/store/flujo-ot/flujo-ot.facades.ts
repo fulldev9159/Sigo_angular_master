@@ -106,4 +106,9 @@ export class FlujoOTFacade {
   public anularOT(ot_id: number): void {
     this.store.dispatch(flujoOTActions.anularOT({ ot_id }));
   }
+
+  // SOLICITAR QUIEBRE OT
+  public solicitarQuiebre(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.solicitarQuiebre({ ot_id }));
+  }
 }
