@@ -35,3 +35,18 @@ export interface ReqSolicitarQuiebre {
   tipo_motivo_quiebre: number;
   observacion: string;
 }
+
+export interface LastSolicitudQuiebre {
+  id: number;
+  ot_id: number;
+  tipo_motivo_quiebre: number;
+  observacion: string;
+  solicitud_usuario_id: number;
+  aprobacion_estado: string;
+  aprobacion_usuario_id?: any;
+  aprobacion_fecha?: any;
+  causa_rechazo_id?: any;
+  motivo_rechazo?: any;
+  ot_has_duracion_id?: any;
+  created_at: Date;
+}

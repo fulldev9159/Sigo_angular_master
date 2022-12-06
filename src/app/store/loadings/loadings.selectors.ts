@@ -207,3 +207,8 @@ export const sendingAprobacionPago = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingAprobacionPago
 );
+
+export const sendingLastSolicitudQuiebre = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingLastSolicitudQuiebre
+);

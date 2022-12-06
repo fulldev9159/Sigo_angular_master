@@ -13,6 +13,7 @@ import {
 import {
   Accion,
   Dropdown,
+  LastSolicitudQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -23,7 +24,7 @@ import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
-import { map, Observable, Subscription, take, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
@@ -127,10 +128,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       )
     );
 
-  flagSolicitudQuiebre: boolean;
-  flagSolicitudQuiebre$: Observable<boolean> = this.flujoOTFacade
-    .getSolicitudQuiebre$()
-    .pipe(tap(x => (this.flagSolicitudQuiebre = x)));
+  flagSolicitudQuiebre$: Observable<LastSolicitudQuiebre> =
+    this.flujoOTFacade.getSolicitudQuiebre$();
 
   // FORM
   formControls = {
@@ -145,6 +144,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
+  loadingLastSolicitudPago$: Observable<boolean> =
+    this.loadingsFacade.sendingLastSolicitudQuiebre$();
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
@@ -349,19 +350,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   showModalQuebrarGestor(): void {
     this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
-    this.subscription.add(
-      this.flujoOTFacade
-        .getSolicitudQuiebre$()
-        .pipe(take(1))
-        .subscribe(x => {
-          if (x) {
-            this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
-            this.displayAprobarRechazarQuiebreGestor = true;
-          } else {
-            this.displayQuiebreGestor = true;
-          }
-        })
-    );
+    this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    this.displayAprobarRechazarQuiebreGestor = true;
   }
 
   // DESQUIEBRE

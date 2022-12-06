@@ -1,4 +1,5 @@
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ReqSolicitarQuiebre,
@@ -195,7 +196,7 @@ export const getSolicitudQuiebre = createAction(
 
 export const getSolicitudQuiebreSuccess = createAction(
   '[FLUJO OT] GET getSolicitudQuiebre Success',
-  props<{ flag: boolean }>()
+  props<{ lastSolicitudQuiebre: LastSolicitudQuiebre }>()
 );
 export const getSolicitudQuiebreError = createAction(
   '[FLUJO OT] GET getSolicitudQuiebre Error',

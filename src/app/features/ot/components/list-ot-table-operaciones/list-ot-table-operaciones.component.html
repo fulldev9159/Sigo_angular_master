@@ -164,30 +164,44 @@
 
 <!-- APROBAR/RECHAZAR QUIEBRE GESTOR -->
 <p-dialog header="Quiebre" [(visible)]="displayAprobarRechazarQuiebreGestor" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-      (click)="displayAprobarRechazarQuiebreGestor=false">
-      Cancelar
-    </button>
-    <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre()">
-      Aprobar solicitud
-    </button>
-    <button pButton type="button" id="button-rechazar" (click)="rechazarSolicitudQuiebre()">
-      Rechazar solicitud
-    </button>
+  <div class="loading-modal-content" *ngIf="loadingLastSolicitudPago$|async  ; else content">
+    <p>Loading...</p>
+  </div>
+
+  <ng-template #content>
+    <div style="display: flex;flex-direction:column ;">
+      <p>Order de trabajo ID: {{ot_id}}</p>
+      <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">¿Confirma el quiebre de la OT?</h2>
+      <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Existe una solicitud de quiebre por
+        parte de la empresa contratista</h2>
+      <br>
+      <div class="buttonsQuiebre" style="display: flex;"
+        *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+          (click)="displayAprobarRechazarQuiebreGestor=false">
+          Cancelar
+        </button>
+        <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre()">
+          Aprobar solicitud
+        </button>
+        <button pButton type="button" id="button-rechazar" (click)="rechazarSolicitudQuiebre()">
+          Rechazar solicitud
+        </button>
+      </div>
+
+      <div class="buttonsQuiebre" style="display: flex;" *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+          (click)="displayAprobarRechazarQuiebreGestor=false">
+          Cancelar
+        </button>
+        <button pButton type="button" id="button-aprobar" (click)="quiebreGestor()">
+          Confirmar
+        </button>
+      </div>
+    </div>
   </ng-template>
 </p-dialog>
 
-<!-- QUEBRAR GESTOR -->
-<p-dialog header="Quiebre" [(visible)]="displayQuiebreGestor" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
-
-
-  <!-- <zwc-view-confirmacion pregunta='¿Comfirma el quiebre de la OT?' (cancelar)="displayQuiebreGestor=false"
-    (confirmar)="confirmarQuiebre()" textConfirmar="Confirmar">
-  </zwc-view-confirmacion> -->
-</p-dialog>
 
 <!-- DESQUIEBRE -->
 <p-dialog header="Desquiebre" [(visible)]="displayModalDesquiebre" [draggable]="false" [modal]="true">

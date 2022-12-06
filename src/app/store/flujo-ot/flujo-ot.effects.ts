@@ -204,7 +204,7 @@ export class FlujoOTEffects {
         this.flujoOTServiceHttp.getSolicitudQuiebre(ot_id).pipe(
           map(response =>
             flujoOTActions.getSolicitudQuiebreSuccess({
-              flag: response.data.flag_solicitud,
+              lastSolicitudQuiebre: response.data,
             })
           ),
           catchError(error =>

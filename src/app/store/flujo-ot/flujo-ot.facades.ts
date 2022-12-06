@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ReqSolicitarQuiebre,
@@ -113,7 +114,7 @@ export class FlujoOTFacade {
     this.store.dispatch(flujoOTActions.getSolicitudQuiebre({ ot_id }));
   }
 
-  public getSolicitudQuiebre$(): Observable<any> {
+  public getSolicitudQuiebre$(): Observable<LastSolicitudQuiebre> {
     return this.store.select(flujoOTSelectors.getSolicitudQuiebre);
   }
 
