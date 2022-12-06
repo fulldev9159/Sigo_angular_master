@@ -6,6 +6,7 @@ import {
   faCircleInfo,
   faPause,
   faPlay,
+  faDollar,
   faRectangleXmark,
   faSquareCheck,
   faSquareXmark,
@@ -72,6 +73,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   medicalIcon = faBookMedical;
   bookIcon = faBook;
   playIcon = faPlay;
+  dollarIcon = faDollar;
   pauseIcon = faPause;
   checkIcon = faSquareCheck;
   cancelIcon = faSquareXmark;
@@ -79,6 +81,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
+  displayModalCambiarSustentoFinanciero = false;
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
   displayModalRechazoOrdenDeTrabajoInicial = false;
