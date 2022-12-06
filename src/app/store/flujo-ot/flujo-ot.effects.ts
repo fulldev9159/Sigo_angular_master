@@ -196,6 +196,25 @@ export class FlujoOTEffects {
     )
   );
 
+  // GET SOLICITAR QUIEBRE OT
+  getSolicitudQuiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.getSolicitudQuiebre),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.getSolicitudQuiebre(ot_id).pipe(
+          map(response =>
+            flujoOTActions.getSolicitudQuiebreSuccess({
+              flag: response.data.flag_solicitud,
+            })
+          ),
+          catchError(error =>
+            of(flujoOTActions.getSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // SOLICITAR QUIEBRE OT
   solicitarQuiebre$ = createEffect(() =>
     this.actions$.pipe(
@@ -280,7 +299,8 @@ export class FlujoOTEffects {
           flujoOTActions.rechazarOTProveedorError,
           flujoOTActions.solicitarQuiebreError,
           flujoOTActions.desquiebreError,
-          flujoOTActions.cierreAdministrativoError
+          flujoOTActions.cierreAdministrativoError,
+          flujoOTActions.getSolicitudQuiebreError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

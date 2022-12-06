@@ -23,7 +23,7 @@ import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
-import { map, Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, take, tap } from 'rxjs';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
@@ -93,6 +93,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalSolicitarQuiebre = false;
   displayModalDesquiebre = false;
   displayModalCierreAdministrativo = false;
+  displayAprobarRechazarQuiebreGestor = false;
+  displayQuiebreGestor = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -124,6 +126,11 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
         }))
       )
     );
+
+  flagSolicitudQuiebre: boolean;
+  flagSolicitudQuiebre$: Observable<boolean> = this.flujoOTFacade
+    .getSolicitudQuiebre$()
+    .pipe(tap(x => (this.flagSolicitudQuiebre = x)));
 
   // FORM
   formControls = {
@@ -338,6 +345,23 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     };
     this.flujoOTFacade.solicitarQuiebre(request);
     this.displayModalSolicitarQuiebre = false;
+  }
+
+  showModalQuebrarGestor(): void {
+    this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
+    this.subscription.add(
+      this.flujoOTFacade
+        .getSolicitudQuiebre$()
+        .pipe(take(1))
+        .subscribe(x => {
+          if (x) {
+            this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+            this.displayAprobarRechazarQuiebreGestor = true;
+          } else {
+            this.displayQuiebreGestor = true;
+          }
+        })
+    );
   }
 
   // DESQUIEBRE

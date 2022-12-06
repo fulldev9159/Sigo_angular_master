@@ -9,7 +9,7 @@ import {
   RequestAprobarRechazarOperaciones,
   Response,
 } from '@model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -113,6 +113,17 @@ export class FlujoOtHttpService {
     return this.http.post<Response<any>>(`${this.API_URL}/ot/ot/anular`, {
       ot_id,
     });
+  }
+
+  getSolicitudQuiebre(ot_id: number): Observable<Response<any>> {
+    return of({
+      status: {
+        desc: '',
+        code: 0,
+      },
+      data: { flag_solicitud: true },
+    });
+    // return this.http.post<Response<any>>(`${this.API_URL}`, { ot_id });
   }
 
   // SOLICITUD DE QUIEBRE

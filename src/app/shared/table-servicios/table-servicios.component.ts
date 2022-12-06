@@ -58,7 +58,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   // AL ESCOGER MODE static LA FUENTE DE LA DATA A DESPLEGAR SERÁ LA QUE SEA ENVIADA EN data_source Y A ESTA NO SE LE PRODRÁ AGREGAR O QUITAR SERVICIOS
   @Input() cantidad_editable: boolean = true;
   @Input() column_acciones: boolean = true;
-  @Input() column_acciones_uo: boolean = true;
+  @Input() column_acciones_uo: boolean = false;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_uo: boolean = false;
   @Input() accion_detalle_uo_only_precargado: boolean = false;

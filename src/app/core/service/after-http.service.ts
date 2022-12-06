@@ -403,7 +403,7 @@ export class AfterHttpService {
         'Exito',
         2000
       );
-      // location.reload();
+      location.reload();
     }
 
     // DESQUIEBRE

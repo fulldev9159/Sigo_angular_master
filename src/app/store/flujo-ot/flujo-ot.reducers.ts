@@ -11,11 +11,13 @@ export const Featurekey = 'flujo-ot';
 export interface StateFlujoOT {
   posibleSupervisorDeTrabajo: PosibleSupervisorTrabajo[];
   motivosRechazo: MotivoRechazo[];
+  flagSolicitudQuiebre: boolean;
 }
 
 export const initialState: StateFlujoOT = {
   posibleSupervisorDeTrabajo: [],
   motivosRechazo: [],
+  flagSolicitudQuiebre: false,
 };
 
 export const reducerFlujoOT = createReducer(
@@ -33,5 +35,9 @@ export const reducerFlujoOT = createReducer(
       ...state,
       motivosRechazo: motivo_rechazo,
     })
-  )
+  ),
+  on(flujoOTActions.getSolicitudQuiebreSuccess, (state, { flag }) => ({
+    ...state,
+    flagSolicitudQuiebre: flag,
+  }))
 );
