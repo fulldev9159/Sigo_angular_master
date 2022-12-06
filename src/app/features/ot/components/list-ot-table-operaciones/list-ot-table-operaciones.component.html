@@ -112,6 +112,10 @@
     <fa-icon [icon]="pauseIcon"></fa-icon>
   </button>
 
+  <button id="desquiebre-button" pTooltip="Desquebrar OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE_')"
+    (click)="displayModalDesquiebre=true">
+    <fa-icon [icon]="playIcon"></fa-icon>
+  </button>
 </div>
 
 
@@ -135,6 +139,14 @@
   Order de trabajo ID: {{ot_id}}
   <zwc-view-confirmacion pregunta='¿Comfirma la solicitud de quiebre?' (cancelar)="displayModalSolicitarQuiebre=false"
     (confirmar)="confirmarSolicitudQuiebre()" textConfirmar="Confirmar">
+  </zwc-view-confirmacion>
+</p-dialog>
+
+<!-- DESQUIEBRE -->
+<p-dialog header="Desquiebre" [(visible)]="displayModalDesquiebre" [draggable]="false" [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+  <zwc-view-confirmacion pregunta='¿Comfirma el desquiebre de la OT?' (cancelar)="displayModalDesquiebre=false"
+    (confirmar)="confirmarDesquiebre()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 

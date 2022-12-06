@@ -111,4 +111,9 @@ export class FlujoOTFacade {
   public solicitarQuiebre(ot_id: number): void {
     this.store.dispatch(flujoOTActions.solicitarQuiebre({ ot_id }));
   }
+
+  // DESQUIEBRE OT
+  public desquiebre(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.desquiebre({ ot_id }));
+  }
 }

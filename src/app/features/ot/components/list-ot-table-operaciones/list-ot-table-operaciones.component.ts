@@ -80,6 +80,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalInformeTrabajosFinalizados = false;
   displayModalSendInformeTrabajosFinalizados = false;
   displayModalSolicitarQuiebre = false;
+  displayModalDesquiebre = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -318,6 +319,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   confirmarSolicitudQuiebre(): void {
     this.flujoOTFacade.solicitarQuiebre(this.ot_id);
     this.displayModalSolicitarQuiebre = false;
+  }
+
+  // DESQUIEBRE
+  confirmarDesquiebre(): void {
+    this.flujoOTFacade.desquiebre(this.ot_id);
+    this.displayModalDesquiebre = false;
   }
 
   ngOnDestroy(): void {

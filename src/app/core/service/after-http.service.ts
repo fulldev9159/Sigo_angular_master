@@ -405,6 +405,16 @@ export class AfterHttpService {
       );
       location.reload();
     }
+
+    // DESQUIEBRE
+    if (action.type === flujoOTActions.desquiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el desquiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
   }
 
   reloadTableOT(): void {

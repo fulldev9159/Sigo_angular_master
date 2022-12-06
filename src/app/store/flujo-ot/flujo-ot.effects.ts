@@ -211,6 +211,19 @@ export class FlujoOTEffects {
     )
   );
 
+  // DESQUIEBRE OT
+  desquiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.desquiebre),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.Desquiebre(ot_id).pipe(
+          map(response => flujoOTActions.desquiebreSuccess({ response })),
+          catchError(error => of(flujoOTActions.desquiebreError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -224,7 +237,8 @@ export class FlujoOTEffects {
           flujoOTActions.cerrarOTSuccess,
           flujoOTActions.anularOTSuccess,
           flujoOTActions.rechazarOTProveedorSuccess,
-          flujoOTActions.solicitarQuiebreSuccess
+          flujoOTActions.solicitarQuiebreSuccess,
+          flujoOTActions.desquiebreSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -246,7 +260,8 @@ export class FlujoOTEffects {
           flujoOTActions.cerrarOTError,
           flujoOTActions.anularOTError,
           flujoOTActions.rechazarOTProveedorError,
-          flujoOTActions.solicitarQuiebreError
+          flujoOTActions.solicitarQuiebreError,
+          flujoOTActions.desquiebreError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -186,7 +186,7 @@ export const anularOTError = createAction(
   props<{ error: any }>()
 );
 
-//  SOLICITAR QUIEBRE OT
+// SOLICITAR QUIEBRE OT
 export const solicitarQuiebre = createAction(
   '[FLUJO OT] GET solicitarQuiebre',
   props<{ ot_id: number }>()
@@ -198,5 +198,20 @@ export const solicitarQuiebreSuccess = createAction(
 );
 export const solicitarQuiebreError = createAction(
   '[FLUJO OT] GET solicitarQuiebre Error',
+  props<{ error: any }>()
+);
+
+// DESQUIEBRE OT
+export const desquiebre = createAction(
+  '[FLUJO OT] GET solicitarQuiebre',
+  props<{ ot_id: number }>()
+);
+
+export const desquiebreSuccess = createAction(
+  '[FLUJO OT] GET desquiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const desquiebreError = createAction(
+  '[FLUJO OT] GET desquiebre Error',
   props<{ error: any }>()
 );
