@@ -116,4 +116,9 @@ export class FlujoOTFacade {
   public desquiebre(ot_id: number): void {
     this.store.dispatch(flujoOTActions.desquiebre({ ot_id }));
   }
+
+  // CIERRE ADMINISTRATIVO OT
+  public cierreAdministrativo(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.cierreAdministrativo({ ot_id }));
+  }
 }

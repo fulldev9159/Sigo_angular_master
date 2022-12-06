@@ -415,6 +415,16 @@ export class AfterHttpService {
       );
       location.reload();
     }
+
+    // CIERRE ADMINISTRAITIVO
+    if (action.type === flujoOTActions.cierreAdministrativoSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el cierre administrativo exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
   }
 
   reloadTableOT(): void {

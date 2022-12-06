@@ -216,9 +216,26 @@ export class FlujoOTEffects {
     this.actions$.pipe(
       ofType(flujoOTActions.desquiebre),
       concatMap(({ ot_id }) =>
-        this.flujoOTServiceHttp.Desquiebre(ot_id).pipe(
+        this.flujoOTServiceHttp.desquiebre(ot_id).pipe(
           map(response => flujoOTActions.desquiebreSuccess({ response })),
           catchError(error => of(flujoOTActions.desquiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // CIERRE ADMINISTRATIVO OT
+  cierreAdministrativo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.cierreAdministrativo),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.cierreAdministrativo(ot_id).pipe(
+          map(response =>
+            flujoOTActions.cierreAdministrativoSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.cierreAdministrativoError({ error }))
+          )
         )
       )
     )
@@ -238,7 +255,8 @@ export class FlujoOTEffects {
           flujoOTActions.anularOTSuccess,
           flujoOTActions.rechazarOTProveedorSuccess,
           flujoOTActions.solicitarQuiebreSuccess,
-          flujoOTActions.desquiebreSuccess
+          flujoOTActions.desquiebreSuccess,
+          flujoOTActions.cierreAdministrativoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -261,7 +279,8 @@ export class FlujoOTEffects {
           flujoOTActions.anularOTError,
           flujoOTActions.rechazarOTProveedorError,
           flujoOTActions.solicitarQuiebreError,
-          flujoOTActions.desquiebreError
+          flujoOTActions.desquiebreError,
+          flujoOTActions.cierreAdministrativoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

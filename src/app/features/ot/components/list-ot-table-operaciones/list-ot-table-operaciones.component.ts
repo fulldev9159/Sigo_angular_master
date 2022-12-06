@@ -6,6 +6,7 @@ import {
   faCircleInfo,
   faPause,
   faPlay,
+  faRectangleXmark,
   faSquareCheck,
   faSquareXmark,
 } from '@fortawesome/free-solid-svg-icons';
@@ -65,6 +66,9 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   bookIcon = faBook;
   playIcon = faPlay;
   pauseIcon = faPause;
+  checkIcon = faSquareCheck;
+  cancelIcon = faSquareXmark;
+  rectanguleIcon = faRectangleXmark;
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
@@ -81,6 +85,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalSendInformeTrabajosFinalizados = false;
   displayModalSolicitarQuiebre = false;
   displayModalDesquiebre = false;
+  displayModalCierreAdministrativo = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -127,9 +132,6 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
-
-  checkIcon = faSquareCheck;
-  cancelIcon = faSquareXmark;
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
@@ -325,6 +327,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   confirmarDesquiebre(): void {
     this.flujoOTFacade.desquiebre(this.ot_id);
     this.displayModalDesquiebre = false;
+  }
+
+  // CIERRE ADMINISTRATIVO
+  confirmarCierreAdministrativo(): void {
+    this.flujoOTFacade.cierreAdministrativo(this.ot_id);
+    this.displayModalCierreAdministrativo = false;
   }
 
   ngOnDestroy(): void {

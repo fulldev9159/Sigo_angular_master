@@ -215,3 +215,18 @@ export const desquiebreError = createAction(
   '[FLUJO OT] GET desquiebre Error',
   props<{ error: any }>()
 );
+
+// CIERRE ADMINISTRATIVO OT
+export const cierreAdministrativo = createAction(
+  '[FLUJO OT] GET cierreAdministrativo',
+  props<{ ot_id: number }>()
+);
+
+export const cierreAdministrativoSuccess = createAction(
+  '[FLUJO OT] GET cierreAdministrativo Success',
+  props<{ response: Response<any> }>()
+);
+export const cierreAdministrativoError = createAction(
+  '[FLUJO OT] GET cierreAdministrativo Error',
+  props<{ error: any }>()
+);

@@ -116,6 +116,11 @@
     (click)="displayModalDesquiebre=true">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
+
+  <button id="cierre-administrativo-button" pTooltip="Cierre administrativo" style="background-color: #f99898;"
+    *ngIf="findAccion('OT_CERRAR_ADMINISTRATIVO')" (click)="displayModalCierreAdministrativo=true">
+    <fa-icon [icon]="rectanguleIcon"></fa-icon>
+  </button>
 </div>
 
 
@@ -147,6 +152,16 @@
   Order de trabajo ID: {{ot_id}}
   <zwc-view-confirmacion pregunta='¿Comfirma el desquiebre de la OT?' (cancelar)="displayModalDesquiebre=false"
     (confirmar)="confirmarDesquiebre()" textConfirmar="Confirmar">
+  </zwc-view-confirmacion>
+</p-dialog>
+
+<!-- CIERRE ADMINISTRATIVO -->
+<p-dialog header="cierre administrativo" [(visible)]="displayModalCierreAdministrativo" [draggable]="false"
+  [modal]="true">
+  Order de trabajo ID: {{ot_id}}
+  <zwc-view-confirmacion pregunta='¿Comfirma el cierre administrativo de la OT?'
+    (cancelar)="displayModalCierreAdministrativo=false" (confirmar)="confirmarCierreAdministrativo()"
+    textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
