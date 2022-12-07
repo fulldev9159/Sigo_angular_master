@@ -348,6 +348,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // QUIEBRE
   showModalSolicitarQuiebre(): void {
+    this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
     this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
     this.displayModalSolicitarQuiebre = true;
   }

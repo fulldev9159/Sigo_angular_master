@@ -145,19 +145,31 @@
 
 <!-- SOLICITAR QUIEBRE -->
 <p-dialog header="Solicitar quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
+  <div class="loading-modal-content" *ngIf="loadingLastSolicitudPago$|async  ; else content">
+    <p>Loading...</p>
+  </div>
 
-  <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
-    subTextTipoMotivo="Seleccione un tipo de motivo" #solicitudQuiebreForm></zwc-view-rechazo>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
-      (click)="displayModalSolicitarQuiebre=false">
-      Cancelar
-    </button>
-    <button pButton type="button" id="button-confirmar" (click)="confirmarSolicitudQuiebre()"
-      [disabled]="!solicitudQuiebreForm.formRechazo.valid">
-      Solicitar Quiebre
-    </button>
+  <ng-template #content>
+    <div style="display: flex;flex-direction:column ;">
+      <p>Order de trabajo ID: {{ot_id}}</p>
+      <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Ya ha enviado una solicitud y debe
+        esperar su aprobación</h2>
+      <br>
+
+      <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+        *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+        <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
+          subTextTipoMotivo="Seleccione un tipo de motivo" #solicitudQuiebreForm></zwc-view-rechazo>
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+          (click)="displayModalSolicitarQuiebre=false">
+          Cancelar
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="confirmarSolicitudQuiebre()"
+          [disabled]="!solicitudQuiebreForm.formRechazo.valid">
+          Solicitar Quiebre
+        </button>
+      </div>
+    </div>
   </ng-template>
 </p-dialog>
 
