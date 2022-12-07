@@ -1,3 +1,14 @@
 <ng-container *ngIf="form">
   <zwc-formulario-ot-sustento-financiero [form]="form"></zwc-formulario-ot-sustento-financiero>
+  <ng-container *ngIf="form.errors?.noprovisorios === 'capex_provisorio'">
+    <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+      <small class="p-error block">No es posible actualizar con PEP2 provisorio</small>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="form.errors?.noprovisorios === 'ceco_provisorio'">
+    <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+      <small class="p-error block">No es posible actualizar con CECO provisorio</small>
+    </div>
+  </ng-container>
+  <zwc-pbutton-sending Pid="update-sustento-financiero" content="Guardar cambios" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="false" (call)="submit()"></zwc-pbutton-sending>
 </ng-container>

@@ -6,9 +6,40 @@ import {
   OnChanges,
   OnDestroy,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { DetalleOT } from '@model';
 import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
+
+function NoProvisorios(group: AbstractControl): ValidationErrors | null {
+  const costos_control = group.get('costos');
+
+  if (costos_control) {
+    const costos = costos_control.value;
+
+    if (costos === 'capex') {
+      const pep2_capex_id_control = group.get('pep2_capex_id');
+      const pep2_capex_id = pep2_capex_id_control.value ?? '';
+
+      if (pep2_capex_id === 'capex_provisorio') {
+        return { noprovisorios: 'capex_provisorio' };
+      }
+    } else if (costos === 'opex') {
+      const ceco_codigo_control = group.get('ceco_codigo');
+      const ceco_codigo = ceco_codigo_control.value ?? '';
+
+      if (ceco_codigo === 'ceco_provisorio') {
+        return { noprovisorios: 'ceco_provisorio' };
+      }
+    }
+  }
+
+  return null;
+}
 
 @Component({
   selector: 'zwc-formulario-ot-sustento-financiero-modal',
@@ -20,19 +51,22 @@ export class FormularioOtSustentoFinancieroModalComponent
 {
   @Input() detalle?: DetalleOT;
 
-  form?: FormGroup = new FormGroup({
-    costos: new FormControl('capex', []),
+  form: FormGroup = new FormGroup(
+    {
+      costos: new FormControl('capex', []),
 
-    pmo_codigo: new FormControl(null, []),
-    lp_codigo: new FormControl(null, []),
-    pep2_capex_id: new FormControl(null, []),
-    pep2_provisorio: new FormControl(null, []),
+      pmo_codigo: new FormControl(null, []),
+      lp_codigo: new FormControl(null, []),
+      pep2_capex_id: new FormControl(null, []),
+      pep2_provisorio: new FormControl(null, []),
 
-    id_opex_codigo: new FormControl(null, []),
-    cuenta_sap_codigo: new FormControl(null, []),
-    ceco_codigo: new FormControl(null, []),
-    ceco_provisorio: new FormControl(null, []),
-  });
+      id_opex_codigo: new FormControl(null, []),
+      cuenta_sap_codigo: new FormControl(null, []),
+      ceco_codigo: new FormControl(null, []),
+      ceco_provisorio: new FormControl(null, []),
+    },
+    [NoProvisorios]
+  );
 
   constructor(private sustentoFinancieroFacade: SustentoFinancieroFacade) {}
 
@@ -42,12 +76,7 @@ export class FormularioOtSustentoFinancieroModalComponent
     if (changes['detalle']) {
       const detalle = changes['detalle'].currentValue;
       if (detalle) {
-        setTimeout(() => {
-          //// console.log('set detalle', JSON.stringify(detalle, null, 2));
-          this.initForm(detalle);
-        }, 1000);
-      } else {
-        this.form = undefined;
+        this.initForm(detalle);
       }
     }
   }
@@ -108,47 +137,67 @@ export class FormularioOtSustentoFinancieroModalComponent
     ////   cubicacionSelected.tipo_contrato_marco_nombre !== 'Móvil'
     //// ) {
     this.sustentoFinancieroFacade.getPMO('');
-    if (values.costos === 'capex') {
-      this.sustentoFinancieroFacade.getLP(+values.pmo_codigo);
-      this.sustentoFinancieroFacade.getPEP2(
-        +values.pmo_codigo,
-        values.lp_codigo
-      );
-    }
+    //// if (values.costos === 'capex') {
+    ////   this.sustentoFinancieroFacade.getLP(+values.pmo_codigo);
+    ////   this.sustentoFinancieroFacade.getPEP2(
+    ////     +values.pmo_codigo,
+    ////     values.lp_codigo
+    ////   );
+    //// }
     //// }
 
     this.sustentoFinancieroFacade.getIDsOpex();
-    if (values.costos === 'opex') {
-      this.sustentoFinancieroFacade.getCuentaSAP(values.id_opex_codigo);
-      this.sustentoFinancieroFacade.getCECO(
-        values.id_opex_codigo,
-        +values.cuenta_sap_codigo
-      );
-    }
+    //// if (values.costos === 'opex') {
+    ////   this.sustentoFinancieroFacade.getCuentaSAP(values.id_opex_codigo);
+    ////   this.sustentoFinancieroFacade.getCECO(
+    ////     values.id_opex_codigo,
+    ////     +values.cuenta_sap_codigo
+    ////   );
+    //// }
 
-    this.form = undefined;
-    this.form = new FormGroup({
-      costos: new FormControl(values.costos, []),
+    //// this.form = undefined;
+    //// this.form = new FormGroup({
+    ////   costos: new FormControl(values.costos, []),
 
-      pmo_codigo: new FormControl(values.pmo_codigo, []),
-      lp_codigo: new FormControl(values.lp_codigo, []),
-      pep2_capex_id: new FormControl(values.pep2_capex_id, []),
-      pep2_provisorio: new FormControl(values.pep2_provisorio, []),
+    ////   pmo_codigo: new FormControl(values.pmo_codigo, []),
+    ////   lp_codigo: new FormControl(values.lp_codigo, []),
+    ////   pep2_capex_id: new FormControl(values.pep2_capex_id, []),
+    ////   pep2_provisorio: new FormControl(values.pep2_provisorio, []),
 
-      id_opex_codigo: new FormControl(values.id_opex_codigo, []),
-      cuenta_sap_codigo: new FormControl(values.cuenta_sap_codigo, []),
-      ceco_codigo: new FormControl(values.ceco_codigo, []),
-      ceco_provisorio: new FormControl(values.ceco_provisorio, []),
+    ////   id_opex_codigo: new FormControl(values.id_opex_codigo, []),
+    ////   cuenta_sap_codigo: new FormControl(values.cuenta_sap_codigo, []),
+    ////   ceco_codigo: new FormControl(values.ceco_codigo, []),
+    ////   ceco_provisorio: new FormControl(values.ceco_provisorio, []),
+    //// });
+
+    this.form.get('pep2_provisorio').disable();
+    this.form.get('ceco_provisorio').disable();
+
+    setTimeout(() => {
+      this.form.get('costos').setValue(values.costos);
+      if (values.costos === 'capex') {
+        this.form.get('pmo_codigo').setValue(values.pmo_codigo);
+        this.form.get('lp_codigo').setValue(values.lp_codigo);
+        this.form.get('pep2_capex_id').setValue(values.pep2_capex_id);
+        if (values.pep2_provisorio !== null) {
+          this.form.get('pep2_provisorio').setValue(values.pep2_provisorio);
+        }
+      } else if (values.costos === 'opex') {
+        this.form.get('id_opex_codigo').setValue(values.id_opex_codigo);
+        this.form.get('cuenta_sap_codigo').setValue(values.cuenta_sap_codigo);
+        this.form.get('ceco_codigo').setValue(values.ceco_codigo);
+        if (values.ceco_provisorio !== null) {
+          this.form.get('ceco_provisorio').setValue(values.ceco_provisorio);
+        }
+      }
     });
-
-    //// this.form.get('costos').updateValueAndValidity({ emitEvent: true });
   }
 
   get values(): any {
-    if (this.form) {
-      return this.form.getRawValue();
-    }
+    return this.form.getRawValue();
+  }
 
-    return undefined;
+  get valid(): boolean {
+    return this.form.valid;
   }
 }
