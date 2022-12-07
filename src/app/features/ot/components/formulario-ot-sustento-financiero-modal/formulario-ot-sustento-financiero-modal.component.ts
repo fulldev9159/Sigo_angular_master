@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  SimpleChanges,
-  OnInit,
-  OnChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -48,9 +41,7 @@ function NoProvisorios(group: AbstractControl): ValidationErrors | null {
   templateUrl: './formulario-ot-sustento-financiero-modal.component.html',
   styleUrls: ['./formulario-ot-sustento-financiero-modal.component.scss'],
 })
-export class FormularioOtSustentoFinancieroModalComponent
-  implements OnInit, OnChanges, OnDestroy
-{
+export class FormularioOtSustentoFinancieroModalComponent implements OnChanges {
   sendingUpdateSustentoFinanciero$: Observable<boolean> =
     this.loadingsFacade.sendingUpdateSustentoFinanciero$();
   @Input() detalle?: DetalleOT;
@@ -77,8 +68,6 @@ export class FormularioOtSustentoFinancieroModalComponent
     private loadingsFacade: LoadingsFacade
   ) {}
 
-  ngOnInit(): void {}
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['detalle']) {
       const detalle = changes['detalle'].currentValue;
@@ -87,8 +76,6 @@ export class FormularioOtSustentoFinancieroModalComponent
       }
     }
   }
-
-  ngOnDestroy(): void {}
 
   initForm(detalle: DetalleOT): void {
     const {
