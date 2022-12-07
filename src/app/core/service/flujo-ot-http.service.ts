@@ -145,9 +145,12 @@ export class FlujoOtHttpService {
 
   // DESQUIEBRE
   desquiebre(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.API_URL}`, {
-      ot_id,
-    });
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/desquiebre/insert`,
+      {
+        ot_id,
+      }
+    );
   }
 
   // CIERRE ADMINISTRATIVO
