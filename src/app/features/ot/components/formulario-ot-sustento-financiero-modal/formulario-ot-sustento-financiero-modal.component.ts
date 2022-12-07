@@ -12,8 +12,10 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { DetalleOT } from '@model';
+import { Observable } from 'rxjs';
+import { DetalleOT, SustentoFinancieroReq } from '@model';
 import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
 function NoProvisorios(group: AbstractControl): ValidationErrors | null {
   const costos_control = group.get('costos');
@@ -49,6 +51,8 @@ function NoProvisorios(group: AbstractControl): ValidationErrors | null {
 export class FormularioOtSustentoFinancieroModalComponent
   implements OnInit, OnChanges, OnDestroy
 {
+  sendingUpdateSustentoFinanciero$: Observable<boolean> =
+    this.loadingsFacade.sendingUpdateSustentoFinanciero$();
   @Input() detalle?: DetalleOT;
 
   form: FormGroup = new FormGroup(
@@ -65,10 +69,13 @@ export class FormularioOtSustentoFinancieroModalComponent
       ceco_codigo: new FormControl(null, []),
       ceco_provisorio: new FormControl(null, []),
     },
-    [NoProvisorios]
+    [NoProvisorios] //// TODO comentar esta línea si se desea guardar provisorios
   );
 
-  constructor(private sustentoFinancieroFacade: SustentoFinancieroFacade) {}
+  constructor(
+    private sustentoFinancieroFacade: SustentoFinancieroFacade,
+    private loadingsFacade: LoadingsFacade
+  ) {}
 
   ngOnInit(): void {}
 
@@ -155,21 +162,7 @@ export class FormularioOtSustentoFinancieroModalComponent
     ////   );
     //// }
 
-    //// this.form = undefined;
-    //// this.form = new FormGroup({
-    ////   costos: new FormControl(values.costos, []),
-
-    ////   pmo_codigo: new FormControl(values.pmo_codigo, []),
-    ////   lp_codigo: new FormControl(values.lp_codigo, []),
-    ////   pep2_capex_id: new FormControl(values.pep2_capex_id, []),
-    ////   pep2_provisorio: new FormControl(values.pep2_provisorio, []),
-
-    ////   id_opex_codigo: new FormControl(values.id_opex_codigo, []),
-    ////   cuenta_sap_codigo: new FormControl(values.cuenta_sap_codigo, []),
-    ////   ceco_codigo: new FormControl(values.ceco_codigo, []),
-    ////   ceco_provisorio: new FormControl(values.ceco_provisorio, []),
-    //// });
-
+    //// TODO comentar estas dos líneas si se desea guardar provisorios
     this.form.get('pep2_provisorio').disable();
     this.form.get('ceco_provisorio').disable();
 
@@ -193,11 +186,65 @@ export class FormularioOtSustentoFinancieroModalComponent
     });
   }
 
-  get values(): any {
-    return this.form.getRawValue();
+  get values(): SustentoFinancieroReq {
+    const {
+      costos,
+
+      pmo_codigo,
+      lp_codigo,
+      pep2_capex_id,
+      pep2_provisorio,
+
+      id_opex_codigo,
+      cuenta_sap_codigo,
+      ceco_codigo,
+      ceco_provisorio,
+    } = this.form.getRawValue();
+
+    const tipo_sustento = costos.toUpperCase();
+
+    const request: SustentoFinancieroReq = {
+      tipo_sustento,
+
+      es_sustento_provisorio:
+        tipo_sustento === 'CAPEX'
+          ? pep2_capex_id === 'capex_provisorio'
+          : ceco_codigo === 'ceco_provisorio',
+
+      pmo_codigo: tipo_sustento === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+      lp: lp_codigo,
+      pep2:
+        tipo_sustento === 'CAPEX'
+          ? pep2_capex_id === 'capex_provisorio'
+            ? pep2_provisorio
+            : pep2_capex_id
+          : pep2_capex_id,
+
+      id_opex: id_opex_codigo,
+      cuenta_sap:
+        tipo_sustento === 'CAPEX' ? cuenta_sap_codigo : +cuenta_sap_codigo,
+      ceco:
+        tipo_sustento === 'OPEX'
+          ? ceco_codigo === 'ceco_provisorio'
+            ? ceco_provisorio
+            : ceco_codigo
+          : ceco_codigo,
+    };
+
+    return request;
   }
 
   get valid(): boolean {
     return this.form.valid;
+  }
+
+  submit(): void {
+    if (this.detalle && this.valid) {
+      const {
+        ot: { id },
+      } = this.detalle;
+      const values = this.values;
+      this.sustentoFinancieroFacade.updateSustentoFinanciero(id, values);
+    }
   }
 }

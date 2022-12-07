@@ -178,6 +178,11 @@ export const sendingCreateOT = createSelector(
   (state: reducer.StateLoadings) => state.sendingCreateOT
 );
 
+export const sendingUpdateSustentoFinanciero = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingUpdateSustentoFinanciero
+);
+
 export const sendingDownloadOTsAsignadas = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingDownloadOTsAsignadas
