@@ -406,7 +406,7 @@ export class AfterHttpService {
       location.reload();
     }
 
-    // SOLICITAR QUIEBRE
+    // QUIEBRE
     if (action.type === flujoOTActions.quiebreSuccess.type) {
       this.snackMessage.showMessage(
         `Se ha realizado el quiebre exitosamente`,
@@ -414,6 +414,18 @@ export class AfterHttpService {
         2000
       );
       location.reload();
+    }
+
+    // APROBAR/RECHAZAR QUIEBRE
+    if (
+      action.type === flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Se ha aprobado el quiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      // location.reload();
     }
 
     // DESQUIEBRE

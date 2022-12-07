@@ -184,7 +184,7 @@
         <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre()">
           Aprobar solicitud
         </button>
-        <button pButton type="button" id="button-rechazar" (click)="rechazarSolicitudQuiebre()">
+        <button pButton type="button" id="button-rechazar" (click)="displayRechazoSolicitudQuiebre()">
           Rechazar solicitud
         </button>
       </div>
@@ -204,6 +204,33 @@
       </div>
     </div>
   </ng-template>
+</p-dialog>
+
+<!-- RECHAZAR SOLICITUD QUIEBRE -->
+<p-dialog header="Rechazo solicitud de quiebre" [(visible)]="displayModalRechazarSolicitudQuiebre" [draggable]="false"
+  [modal]="true">
+
+  <div style="display: flex;flex-direction:column ;">
+    <p>Order de trabajo ID: {{ot_id}}</p>
+
+    <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+      *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">
+      <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoSolicitudQuiebreForm></zwc-view-rechazo>
+
+      <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+        (click)="closeModalRechazoSolicitudQuiebre()">
+        Cancelar
+      </button>
+      <ng-container *ngIf="flagSolicitudQuiebre$|async as solicitudQuiebre">
+        <button pButton type="button" id="button-confirmar" (click)="rechazarSolicitudQuiebre(solicitudQuiebre?.id)"
+          [disabled]="!rechazoSolicitudQuiebreForm.formRechazo.valid">
+          Confirmar
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+
 </p-dialog>
 
 

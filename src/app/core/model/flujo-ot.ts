@@ -56,3 +56,12 @@ export interface LastSolicitudQuiebre {
   ot_has_duracion_id?: any;
   created_at: Date;
 }
+
+export interface ReqAprobarRechazarSolicitudQuiebre {
+  id: number; // id de la solicitud
+  values: {
+    aprobacion_estado: string; // APROBADO, RECHAZADO
+    causa_rechazo_id: number;
+    motivo_rechazo: string;
+  };
+}

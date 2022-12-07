@@ -14,6 +14,7 @@ import {
   Accion,
   Dropdown,
   LastSolicitudQuiebre,
+  ReqAprobarRechazarSolicitudQuiebre,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -76,6 +77,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   })
   QuiebreForm: ViewRechazoComponent;
 
+  @ViewChild('rechazoSolicitudQuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoSolicitudQuiebreForm: ViewRechazoComponent;
+
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
   bookIcon = faBook;
@@ -103,6 +110,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalCierreAdministrativo = false;
   displayAprobarRechazarQuiebreGestor = false;
   displayQuiebreGestor = false;
+  displayModalRechazarSolicitudQuiebre = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -357,13 +365,11 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   showModalQuebrarGestor(): void {
     this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
-    // this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
     this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
     this.displayAprobarRechazarQuiebreGestor = true;
   }
 
   quiebreGestor(): void {
-    console.log(this.solicitudQuiebreForm);
     let request: ReqQuiebre = {
       ot_id: this.ot_id,
       observacion: this.QuiebreForm.formRechazo.get('motivo').value,
@@ -372,6 +378,33 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
     this.flujoOTFacade.quiebre(request);
     this.displayAprobarRechazarQuiebreGestor = false;
+  }
+
+  // RECHAZAR SOLICITUD DE QUIEBRE
+  displayRechazoSolicitudQuiebre(): void {
+    this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    this.displayModalRechazarSolicitudQuiebre = true;
+  }
+
+  closeModalRechazoSolicitudQuiebre(): void {
+    this.displayModalRechazarSolicitudQuiebre = false;
+    this.displayAprobarRechazarQuiebreGestor = false;
+    this.rechazoSolicitudQuiebreForm.formRechazo.reset();
+  }
+
+  rechazarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'RECHAZADO',
+        causa_rechazo_id:
+          +this.rechazoSolicitudQuiebreForm.formRechazo.get('tipo_id').value,
+        motivo_rechazo:
+          this.rechazoSolicitudQuiebreForm.formRechazo.get('motivo').value,
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.closeModalRechazoSolicitudQuiebre();
   }
 
   // DESQUIEBRE

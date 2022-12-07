@@ -3,6 +3,7 @@ import {
   LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -127,6 +128,15 @@ export class FlujoOTFacade {
   //  QUIEBRE OT
   public quiebre(request: ReqQuiebre): void {
     this.store.dispatch(flujoOTActions.quiebre({ request }));
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE OT
+  public aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.aprobarRechazarSolicitudQuiebre({ request })
+    );
   }
 
   // DESQUIEBRE OT

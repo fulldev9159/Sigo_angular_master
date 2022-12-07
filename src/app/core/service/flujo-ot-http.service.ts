@@ -5,6 +5,7 @@ import {
   LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -139,6 +140,16 @@ export class FlujoOtHttpService {
   quiebre(request: ReqQuiebre): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/quiebre/insert`,
+      request
+    );
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE
+  aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre_id/update`,
       request
     );
   }
