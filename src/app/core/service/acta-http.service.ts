@@ -189,4 +189,14 @@ export class ActaHttpService {
       { ot_id }
     );
   }
+  
+  // ACTAS IMPUTACION2 API
+  getActasImputacion2(): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/get_actas_imputacion2/get`, {}
+    );
+  }
 }
+
+  
+  

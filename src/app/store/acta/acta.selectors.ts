@@ -42,3 +42,8 @@ export const quienAutorizoPago = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.quienAautorizado
 );
+
+export const getActasImputacion2 = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.imputacion2
+);

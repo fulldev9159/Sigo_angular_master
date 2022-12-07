@@ -227,4 +227,22 @@ export class ActaFacade {
       actaActions.solicitarInformeTrabajosFinalizados({ ot_id })
     );
   }
+
+  // GET ACTAS IMPUTACION2
+  public getActasImputacion2(): void { 
+    this.store.dispatch(actaActions.getActasImputacion2());
+  } 
+
+  public getActasImputacion2$(): Observable<any> {
+    return this.store.select(actaSelectors.getActasImputacion2);
+  }
+
+  public getActasImputacion2Sucess(response: Response<any>): void {
+    this.store.dispatch(actaActions.getActasImputacion2Success({response}));
+  }
+
+  public getActasImputacion2Error(error: any) {
+    this.store.dispatch(actaActions.getActasImputacion2Error({ error }));
+  }
+
 }

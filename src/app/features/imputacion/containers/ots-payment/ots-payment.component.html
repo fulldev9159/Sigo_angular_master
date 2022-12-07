@@ -1,0 +1,92 @@
+<zwc-content-layout [navbarHeader]="[]">
+    <div content>
+        <h1>Imputación 1 e imputación 2 combinados</h1>
+
+        <form>
+            <div class="">
+                <div class="formgrid grid">
+                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                        <div class="card row scroll-table">
+                            <p-table [value]="imputacion2" dataKey="act_id" selectionMode="multiple" [rowHover]="true"
+                                [(selection)]="selectedActas" styleClass="p-datatable-sm">
+
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr class="actas-list">
+                                        <th style="width: 20%; text-align: center;">
+                                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                        </th>
+                                        <th style="width: 40%">
+                                            OT
+                                        </th>
+                                        <th style="width: 40%">
+                                            ACTA
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item>
+                                    <tr class="actas-list">
+                                        <th style="width: 20%">
+                                            <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                                        </th>
+                                        <td style="width: 40%">{{item?.ot_id}}</td>
+                                        <td style="width: 40%">{{item?.act_id}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                        <div class="row center">
+                            <button id="generar-csv" content=""
+                                class="p-element p-button-outlined p-button-sm p-button p-component"
+                                [disabled]="!selectedActas || !selectedActas.length" (click)="getImputacionData()">
+                                Generar para datos CSV
+                            </button>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+                        <div class="card row scroll-table">
+                            <p-table #dt [columns]="integracionDataColumn" [value]="integracionData"
+                                styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
+                                [(selection)]="selectedActas" [paginator]="true" [rows]="10" scrollDirection="both"
+                                [scrollable]="true" exportFilename="imputacion2">
+
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <ng-container *ngFor="let column of columns">
+                                            <th style="width:100px" pSortableColumn="{{column.header}}">
+                                                {{column.header}}
+                                                <p-sortIcon field="{{column.header}}">
+                                                </p-sortIcon>
+                                            </th>
+                                        </ng-container>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item let-columns="columns">
+                                    <tr>
+                                        <td style="width:100px; word-break: break-all;" *ngFor="let column of columns">
+                                            {{item[column.field]}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                        <div class="row center">
+                            <button id="descargar-csv" content=""
+                                class="p-element p-button-outlined p-button-sm p-button p-component"
+                                [disabled]="!integracionData || !integracionData.length" (click)="dt.exportCSV()">
+                                Descargar archivo CSV
+                            </button>
+
+                            <p-fileUpload mode="basic" name="demo[]" [customUpload]="true"
+                                (change)="onChangeCsvFile($event)" (uploadHandler)="onUploadCsvFile($event)"
+                                styleClass="p-element p-button-outlined p-button-sm p-button p-component"
+                                style="display: inline-table; margin-left:30px; margin-top:15px;"
+                                chooseLabel="Cargar archivo CSV" uploadLabel="Subir datos CSV" accept=".csv"
+                                maxFileSize="1000000">
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</zwc-content-layout>
