@@ -116,6 +116,14 @@ export class FlujoOTFacade {
     this.store.dispatch(flujoOTActions.getSolicitudQuiebre({ ot_id }));
   }
 
+  public getSolicitudQuiebreSuccess(
+    lastSolicitudQuiebre: LastSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.getSolicitudQuiebreSuccess({ lastSolicitudQuiebre })
+    );
+  }
+
   public getSolicitudQuiebre$(): Observable<LastSolicitudQuiebre> {
     return this.store.select(flujoOTSelectors.getSolicitudQuiebre);
   }
