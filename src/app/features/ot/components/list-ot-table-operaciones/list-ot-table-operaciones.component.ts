@@ -408,6 +408,17 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     this.closeModalRechazoSolicitudQuiebre();
   }
 
+  aprobarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'APROBADO',
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
+  }
+
   // DESQUIEBRE
   confirmarDesquiebre(): void {
     this.flujoOTFacade.desquiebre(this.ot_id);

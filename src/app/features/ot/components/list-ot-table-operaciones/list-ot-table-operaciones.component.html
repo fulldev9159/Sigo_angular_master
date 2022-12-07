@@ -186,7 +186,7 @@
     </div>
 
     <ng-template #content>
-      <div style="display: flex;flex-direction:column ;">
+      <div style="display: flex;flex-direction:column ;" *ngIf="flagSolicitudQuiebre$|async as solicitudQuiebre">
         <p>Order de trabajo ID: {{ot_id}}</p>
         <!-- <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">¿Confirma el quiebre de la OT?</h2> -->
         <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Existe una solicitud de quiebre por
@@ -198,7 +198,7 @@
             (click)="displayAprobarRechazarQuiebreGestor=false">
             Cancelar
           </button>
-          <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre()">
+          <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre(solicitudQuiebre?.id)">
             Aprobar solicitud
           </button>
           <button pButton type="button" id="button-rechazar" (click)="displayRechazoSolicitudQuiebre()">
@@ -250,7 +250,6 @@
   </div>
 
 </p-dialog>
-
 
 <!-- DESQUIEBRE -->
 <p-dialog header="Desquiebre" [(visible)]="displayModalDesquiebre" [draggable]="false" [modal]="true">
