@@ -150,6 +150,29 @@
                         <q>{{getMetadata(registro.metadata).observacion}}</q>
                     </ng-container>
 
+                    <ng-container *ngIf="registro.evento==='SOLICITUD_QUIEBRE'">
+                        <div style="display: flex;flex-direction: column;">
+                            <span>{{registro.mensaje}}</span>
+                            <p>mensaje:</p>
+                            <q>
+                                {{getMetadata(registro.metadata).observacion}}
+                            </q>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="registro.evento==='SOLICITUD_QUIEBRE_APROBACION'">
+                        <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
+                            [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">
+                        </fa-icon>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='RECHAZADO'">Se ha rechazado la solicitud
+                            de quiebre con
+                            la siguiente observación:</span>
+                        <span *ngIf="getMetadata(registro.metadata).estado==='APROBADO'">Se ha aceptado la solicitud de
+                            quiebre</span>
+                        <br>
+                        <q
+                            *ngIf="getMetadata(registro.metadata).observacion">{{getMetadata(registro.metadata).observacion}}</q>
+                    </ng-container>
                 </div>
 
             </div>
