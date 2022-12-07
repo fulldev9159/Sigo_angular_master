@@ -165,6 +165,16 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
         .getComentariosFinalizacionTrabajos$()
         .subscribe(v => this.formTrabajosFinalizados.get('informe').setValue(v))
     );
+
+    this.subscription.add(
+      this.loadingsFacade
+        .sendingUpdateSustentoFinanciero$()
+        .subscribe(loading => {
+          if (!loading) {
+            this.closeModalCambiarSustentoFinanciero();
+          }
+        })
+    );
   }
 
   // ACCIONES ETAPA: OT_ET_AUTORIZACION_INICIAL
@@ -387,6 +397,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     if (this.ot_id !== undefined) {
       this.displayModalCambiarSustentoFinanciero = true;
       this.otDetalleFacade.getDetalleOT(this.ot_id);
+    }
+  }
+
+  closeModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = false;
     }
   }
 

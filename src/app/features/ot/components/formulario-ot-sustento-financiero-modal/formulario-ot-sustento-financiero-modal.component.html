@@ -1,6 +1,5 @@
 <ng-container *ngIf="form">
   <zwc-formulario-ot-sustento-financiero [form]="form"></zwc-formulario-ot-sustento-financiero>
-  <pre>{{ values | json }}</pre>
   <ng-container *ngIf="form.errors?.noprovisorios === 'capex_provisorio'">
     <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
       <small class="p-error block">No es posible actualizar con PEP2 provisorio</small>
