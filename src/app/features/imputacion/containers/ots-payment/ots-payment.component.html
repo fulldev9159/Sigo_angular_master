@@ -38,7 +38,7 @@
                         <div class="row center">
                             <button id="generar-csv" content=""
                                 class="p-element p-button-outlined p-button-sm p-button p-component"
-                                [disabled]="!selectedActas || !selectedActas.length" (click)="getImputacionData()">
+                                [disabled]="!selectedActas || !selectedActas.length" (click)="getImputacionData(null)">
                                 Generar para datos CSV
                             </button>
                         </div>
@@ -48,7 +48,8 @@
                             <p-table #dt [columns]="integracionDataColumn" [value]="integracionData"
                                 styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
                                 [(selection)]="selectedActas" [paginator]="true" [rows]="10" scrollDirection="both"
-                                [scrollable]="true" exportFilename="imputacion2">
+                                [scrollable]="true" exportFilename="imputacion2" [loading]="loading"
+                                emptymessage="no data">
 
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
@@ -76,10 +77,9 @@
                                 Descargar archivo CSV
                             </button>
 
-                            <p-fileUpload mode="basic" name="demo[]" [customUpload]="true"
-                                (change)="onChangeCsvFile($event)" (uploadHandler)="onUploadCsvFile($event)"
-                                styleClass="p-element p-button-outlined p-button-sm p-button p-component"
-                                style="display: inline-table; margin-left:30px; margin-top:15px;"
+                            <p-fileUpload #fileUpload mode="basic" name="file" [customUpload]="true" multiple=""
+                                (onSelect)="onChangeCsvFile($event)" (uploadHandler)="onUploadCsvFile($event)"
+                                styleClass="p-element p-button-outlined p-button-sm p-button p-component cargar-csv"
                                 chooseLabel="Cargar archivo CSV" uploadLabel="Subir datos CSV" accept=".csv"
                                 maxFileSize="1000000">
                             </p-fileUpload>

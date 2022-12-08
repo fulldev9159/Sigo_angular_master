@@ -2,10 +2,12 @@ import { Component, ViewChild ,OnInit, OnDestroy } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Table } from 'primeng/table';
 import { PrimeNGConfig } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActaFacade } from "@storeOT/acta/acta.facades";
 import { keys } from "lodash";
 import { NgModule } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { FileUpload } from "primeng/fileupload";
 
 @Component({
     selector: 'zwc-ots-payment',
@@ -14,634 +16,28 @@ import { NgModule } from "@angular/core";
 })
 export class OtsPaymentComponent implements OnInit, OnDestroy {
     @ViewChild('dt') table: Table;
+    @ViewChild('fileUpload') fileUpload: FileUpload;
 
     subscription: Subscription = new Subscription();
     imputacion2: any;
 
-    
+    loading: boolean = false;
     integracionData: any[] = [];
     integracionDataColumn: any[] = [];    
     additionData:any;
     selectedActas: any[] = [];
 
-    constructor(private actaFacade: ActaFacade)   { 
-        this.actaFacade.getActasImputacion2();
-        
+    csvFile: File;
+
+    constructor(private actaFacade: ActaFacade, private http: HttpClient)   { 
+        this.actaFacade.getActasImputacion2();        
         this.additionData = {"acta_estado":"", "usuario":"", "fecha_cont_hem":"", "estado_descripcion":"", "monto_clp":"", "numero_pago":"", "fecha_derivada":"", "estado":"", "numero_cabecera":"", "numero_derivada":"", "tipo_cambio":"", "monto_hem":"", "numero_hem":""};
-        this.integracionData = [
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "6",
-              "id_acta": "8",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "25",
-              "codigo_catalogo": "ServZweicom1",
-              "valor_unitario": "20000000.00",
-              "cantidad_pagar": "2",
-              "valor_pagar": "40000000.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "6",
-              "id_acta": "8",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "26",
-              "codigo_catalogo": "ServZweicom2",
-              "valor_unitario": "10000000.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "10000000.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "6",
-              "id_acta": "8",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "6",
-              "id_acta": "8",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "6",
-              "id_acta": "8",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-1",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "CLP",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            },
-            {
-              "sitio": "",
-              "numero_contrato": "3300209195",
-              "proveedor": "ZWEICOM S.A.",
-              "tipo": "CAPEX",
-              "id_pmo": "25",
-              "lp": "CHI100",
-              "gestor": "Leopoldo Barrios",
-              "codigo_sitio": "",
-              "pep2": "P-0077-22-2002-05106-021",
-              "id_ot": "3",
-              "id_acta": "12",
-              "nombre": "ordinario_leo_6",
-              "aprobador": "Simon Diaz",
-              "id_detalle": "-2",
-              "codigo_catalogo": "Materiales",
-              "valor_unitario": "0.00",
-              "cantidad_pagar": "1",
-              "valor_pagar": "0.00",
-              "valor_total": "50000000.00",
-              "moneda": "USD",
-              "contrato": "CONTRATO_ORDINARIO",
-              "fecha_ingreso": "07-11-2022"
-            }
-        ];
-        
     }
 
     ngOnInit(): void {        
         this.actaFacade.getActasImputacion2$().subscribe(response => {            
-            this.imputacion2 = response?.items;   
-            console.log("imputacion2:=", this.imputacion2);         
-        });
-
-        this.onAdditionData(this.additionData);
-        //console.log("integracionData := ", this.integracionData);
-        this.integracionDataColumn = this.onGetKeyFromIntegracionData(this.integracionData?.[0]);                
+            this.imputacion2 = response?.items;           
+        });        
     }
 
     onAdditionData(data: object): void {
@@ -651,27 +47,101 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
     }
 
     onGetKeyFromIntegracionData(data: object): any[] {      
-        const keys = Object.keys(data).reduce((arr, key) => [...arr, {header: key, field: key}], []);
+        const keys = !data? null: Object.keys(data).reduce((arr, key) => [...arr, {header: key, field: key}], []);
         return keys;
     }
 
     onDownloadCSV(): void {
     }
 
-    getImputacionData(): void {
-      alert("getImputacionData")
+    async getImputacionData(data:any[]) {      
+      this.loading = true;
+
+      if (!data)  {
+        
+        // get data from server...
+        await this.getdata();
+      
+        if (this.integracionData?.length>0)  {
+          this.onAdditionData(this.additionData);
+          this.fileUpload.clear();
+        }
+
+      } else {
+        this.integracionData = data;
+      }
+
+      this.integracionDataColumn = this.onGetKeyFromIntegracionData(this.integracionData?.[0]);
+
+      setTimeout(() => { this.loading = false; }, 1000);
     }
 
-    onUploadCsvFile(event:any): void {
-      alert("upload csv file");
+    onUploadCsvFile(event:any): void {      
+
+
+      this.fileUpload.clear();
     }
 
     onChangeCsvFile(event:any): void {
-      alert("load csv file");
+
+      this.csvFile = event.currentFiles[0];
+
+      let reader = new FileReader();
+      reader.readAsText(this.csvFile);
+  
+      reader.onload = () => {
+        const csvData = reader.result;  
+        const csvRecordsArray = (<string>csvData).split(/\r\n|\n/);    
+        const headers = this.getHeaderArray(csvRecordsArray);
+        this.getImputacionData(this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headers));        
+      };  
+  
+      reader.onerror = function () {  
+        console.log('error is occured while reading file!');  
+      };        
     }
+    
+    getHeaderArray(csvRecordsArr: any) {  
+      const headers = (<string>csvRecordsArr[0]).split(',');  
+      const headerArray = [];  
+      for (let col = 0; col < headers.length; col++) {  
+        headerArray.push(headers[col]);  
+      }
+      return headerArray;
+    }  
+
+    getDataRecordsArrayFromCSVFile(csvRecordsArray: any[], headers: any[]) {
+
+      var csvArr = [];  
+      for (let i = 1; i < csvRecordsArray.length; i++) {  
+        let curruntRecord = (<string>csvRecordsArray[i]).replace(/"/g, "").split(',');  
+        if (curruntRecord.length == headers.length) {  
+          csvArr.push(headers.reduce((obj, header, index) => ({...obj, [header]: curruntRecord[index].trim()}), {}));
+        }  
+      }  
+
+      return csvArr;  
+    }  
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
+
+    async getdata(){
+      
+      const url = 'http://34.122.92.38:4041/simulators/imputacion/integracion1/payload/get';
+      const body = "";
+      
+
+      this.integracionData = await this.selectedActas.reduce(async (arr, item) => {
+        
+        const responseData: any = await this.http.post(url, {'acta_id':item?.act_id},
+          {headers:{'content-type':"application/json"}}
+        ).toPromise().then();
+        console.log(responseData);
+        return [...arr, ...responseData?.data]
+    }, []);
+
+  }
 
 }
