@@ -93,6 +93,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#eliminarAdicional" >eliminarAdicional</a>
+                            </li>
+                            <li>
                                 <a href="#serviciosAdicionales" >serviciosAdicionales</a>
                             </li>
                         </ul>
@@ -161,6 +164,87 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarAdicional"></a>
+                    <span class="name">
+                        <span ><b>eliminarAdicional</b></span>
+                        <a href="#eliminarAdicional"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminarAdicional(servicio_adicional: number[], unidad_obra: number[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/app/core/service/servicios-adicionales-http.service.ts:28</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>servicio_adicional</td>
+                                    <td>
+                                            <code>number[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>unidad_obra</td>
+                                    <td>
+                                            <code>number[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -296,6 +380,17 @@ export class ServiciosAdicionalesHttpService {
     return this.http.post&lt;Response&lt;ResponseAgregarAdicionales&gt;&gt;(
       &#x60;${this.API_URL}/ot/servicio_adicional/solicitud/save&#x60;,
       request
+    );
+  }
+
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicional(
+    servicio_adicional: number[],
+    unidad_obra: number[]
+  ): Observable&lt;Response&lt;{ servicio: number[]; unidad_obra: [] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ servicio: number[]; unidad_obra: [] }&gt;&gt;(
+      &#x60;${this.API_URL}/ot/servicio_adicional/solicitud/delete&#x60;,
+      { servicio_adicional, unidad_obra }
     );
   }
 }

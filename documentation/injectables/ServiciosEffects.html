@@ -84,6 +84,15 @@
                                 <a href="#agregarAdicionales$" >agregarAdicionales$</a>
                             </li>
                             <li>
+                                <a href="#agregarAdicionalesYautorizarIA$" >agregarAdicionalesYautorizarIA$</a>
+                            </li>
+                            <li>
+                                <a href="#agregarAdicionalesYenviarIA$" >agregarAdicionalesYenviarIA$</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarAdicionales$" >eliminarAdicionales$</a>
+                            </li>
+                            <li>
                                 <a href="#getServiciosAgenciaContratoProveedor$" >getServiciosAgenciaContratoProveedor$</a>
                             </li>
                             <li>
@@ -119,7 +128,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -253,7 +262,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -292,7 +301,134 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:107</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarAdicionalesYautorizarIA$"></a>
+                    <span class="name">
+                        <span ><b>agregarAdicionalesYautorizarIA$</b></span>
+                        <a href="#agregarAdicionalesYautorizarIA$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYautorizarIA),
+      concatMap(({ request, request_autorizacion }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              serviciosActions.agregarAdicionalesYautorizarIAError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarAdicionalesYenviarIA$"></a>
+                    <span class="name">
+                        <span ><b>agregarAdicionalesYenviarIA$</b></span>
+                        <a href="#agregarAdicionalesYenviarIA$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYenviarIA),
+      concatMap(({ request, ot_id }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              serviciosActions.agregarAdicionalesYenviarIAError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarAdicionales$"></a>
+                    <span class="name">
+                        <span ><b>eliminarAdicionales$</b></span>
+                        <a href="#eliminarAdicionales$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.eliminarAdicional),
+      concatMap(({ servicio_adicional, unidad_obra }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService
+          .eliminarAdicional(servicio_adicional, unidad_obra)
+          .pipe(
+            map(response &#x3D;&gt;
+              serviciosActions.eliminarAdicionalSuccess({ response })
+            ),
+            catchError(err &#x3D;&gt;
+              of(serviciosActions.eliminarAdicionalError({ error: err }))
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:167</a></div>
                         </td>
                     </tr>
 
@@ -339,7 +475,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -384,7 +520,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -411,7 +547,8 @@
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
           serviciosActions.addServicioCarritoSuccess,
-          serviciosActions.agregarAdicionalesSuccess
+          serviciosActions.agregarAdicionalesSuccess,
+          serviciosActions.eliminarAdicionalSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -421,7 +558,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:123</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:185</a></div>
                         </td>
                     </tr>
 
@@ -448,7 +585,10 @@
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
           serviciosActions.addServicioCarritoError,
-          serviciosActions.agregarAdicionalesError
+          serviciosActions.agregarAdicionalesError,
+          serviciosActions.eliminarAdicionalError,
+          serviciosActions.agregarAdicionalesYenviarIAError,
+          serviciosActions.agregarAdicionalesYautorizarIAError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -458,7 +598,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:137</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:200</a></div>
                         </td>
                     </tr>
 
@@ -479,6 +619,7 @@ import {
   ServiciosAdicionalesHttpService,
 } from &#x27;@services&#x27;;
 import * as serviciosActions from &#x27;./servicios.actions&#x27;;
+import * as informeAvanceActions from &#x27;@storeOT/informe-avance/informe-avance.actions&#x27;;
 import { catchError, concatMap, map, mergeMap, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
 import { ServiciosHttpService } from &#x27;src/app/core/service/servicios-http.service&#x27;;
@@ -593,6 +734,67 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR SERVICIOS ADICIONALES Y ENVIAR INFORME DE AVANCE
+  agregarAdicionalesYenviarIA$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYenviarIA),
+      concatMap(({ request, ot_id }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              serviciosActions.agregarAdicionalesYenviarIAError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // AGREGAR SERVICIOS ADICIONALES Y AUTOTIZAR INFORME DE AVANCE
+  agregarAdicionalesYautorizarIA$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionalesYautorizarIA),
+      concatMap(({ request, request_autorizacion }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              serviciosActions.agregarAdicionalesYautorizarIAError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicionales$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.eliminarAdicional),
+      concatMap(({ servicio_adicional, unidad_obra }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService
+          .eliminarAdicional(servicio_adicional, unidad_obra)
+          .pipe(
+            map(response &#x3D;&gt;
+              serviciosActions.eliminarAdicionalSuccess({ response })
+            ),
+            catchError(err &#x3D;&gt;
+              of(serviciosActions.eliminarAdicionalError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -600,7 +802,8 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
           serviciosActions.addServicioCarritoSuccess,
-          serviciosActions.agregarAdicionalesSuccess
+          serviciosActions.agregarAdicionalesSuccess,
+          serviciosActions.eliminarAdicionalSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -614,7 +817,10 @@ export class ServiciosEffects {
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
           serviciosActions.addServicioCarritoError,
-          serviciosActions.agregarAdicionalesError
+          serviciosActions.agregarAdicionalesError,
+          serviciosActions.eliminarAdicionalError,
+          serviciosActions.agregarAdicionalesYenviarIAError,
+          serviciosActions.agregarAdicionalesYautorizarIAError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

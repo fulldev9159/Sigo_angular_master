@@ -225,7 +225,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:73</a></div>
                             </td>
                         </tr>
 
@@ -363,8 +363,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="120"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:120</a></div>
                 </td>
             </tr>
 
@@ -400,8 +400,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:81</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:83</a></div>
                 </td>
             </tr>
 
@@ -528,7 +528,9 @@
       map(values &#x3D;&gt; {
         let tmp &#x3D; [...values];
         return tmp.sort((a, b) &#x3D;&gt;
-          a.cubicacion_nombre &gt; b.cubicacion_nombre ? 1 : -1
+          a.cubicacion_nombre.localeCompare(b.cubicacion_nombre, &#x27;es&#x27;, {
+            sensitivity: &#x27;base&#x27;,
+          })
         );
       }),
       map(values &#x3D;&gt;
@@ -567,7 +569,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -598,7 +600,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -658,7 +660,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts:116</a></div>
                                 </td>
                             </tr>
 
@@ -726,7 +728,9 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
       map(values &#x3D;&gt; {
         let tmp &#x3D; [...values];
         return tmp.sort((a, b) &#x3D;&gt;
-          a.cubicacion_nombre &gt; b.cubicacion_nombre ? 1 : -1
+          a.cubicacion_nombre.localeCompare(b.cubicacion_nombre, &#x27;es&#x27;, {
+            sensitivity: &#x27;base&#x27;,
+          })
         );
       }),
       map(values &#x3D;&gt;
@@ -804,7 +808,7 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
             &lt;div class&#x3D;&quot;field col-12 md:col-6 lg:col-6 xl:col-6&quot;&gt;
                 &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;contrato&#x27;)&quot; Label&#x3D;&quot;*Contrato Marco&quot;
                     dropdown_id&#x3D;&quot;select-contrato_marco&quot; [data]&#x3D;&quot;contratoUsuarios$|async&quot;
-                    Pplaceholder&#x3D;&quot;Selecione un contrato marco&quot;&gt;&lt;/zwc-pdropdown&gt;
+                    Pplaceholder&#x3D;&quot;Seleccione un contrato marco&quot;&gt;&lt;/zwc-pdropdown&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -812,7 +816,7 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
         &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
             &lt;div class&#x3D;&quot;field col-12 md:col-6 lg:col-6 xl:col-6&quot;&gt;
                 &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;cubicacion_id&#x27;)&quot; Label&#x3D;&quot;*Cubicación&quot; dropdown_id&#x3D;&quot;select-cubicacion&quot;
-                    [data]&#x3D;&quot;cubicacionesContrato$|async&quot; Pplaceholder&#x3D;&quot;Selecione una cubicación&quot;
+                    [data]&#x3D;&quot;cubicacionesContrato$|async&quot; Pplaceholder&#x3D;&quot;Seleccione una cubicación&quot;
                     [loading]&#x3D;&quot;loadingGetCubicacionesContrato$|async&quot;&gt;&lt;/zwc-pdropdown&gt;
             &lt;/div&gt;
             &lt;div class&#x3D;&quot;field  col-12 md:col-6 lg:col-6 xl:col-6&quot;&gt;
@@ -875,8 +879,8 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><form [formGroup]="form">    <div class="card">        <div class="formgrid grid">            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-input-text Label="*Nombre de la OT" [control]="form.get(\'nombre\')" name_input="input-nombre-ot">                </zwc-input-text>            </div>            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-pdropdown [control]="form.get(\'contrato\')" Label="*Contrato Marco"                    dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async"                    Pplaceholder="Selecione un contrato marco"></zwc-pdropdown>            </div>        </div>    </div>    <div class="card">        <div class="formgrid grid">            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-pdropdown [control]="form.get(\'cubicacion_id\')" Label="*Cubicación" dropdown_id="select-cubicacion"                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"                    [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>            </div>            <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">                <div class="message error-message"                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get(\'contrato\').value!==null && (loadingGetCubicacionesContrato$|async)===false">                    <small class="p-error block">                        No existen cubicaciones creadas con el contrato marco escogido                    </small>                </div>                <div class="bg-blue-100 text-blue-500 message" *ngIf="form.get(\'cubicacion_id\').value!==null ">                    <small class="p-info block">                        {{(cubicacionSelected$|async)?.cubicacion_descripcion}}                    </small>                </div>            </div>        </div>    </div></form></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="form">    <div class="card">        <div class="formgrid grid">            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-input-text Label="*Nombre de la OT" [control]="form.get(\'nombre\')" name_input="input-nombre-ot">                </zwc-input-text>            </div>            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-pdropdown [control]="form.get(\'contrato\')" Label="*Contrato Marco"                    dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async"                    Pplaceholder="Seleccione un contrato marco"></zwc-pdropdown>            </div>        </div>    </div>    <div class="card">        <div class="formgrid grid">            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">                <zwc-pdropdown [control]="form.get(\'cubicacion_id\')" Label="*Cubicación" dropdown_id="select-cubicacion"                    [data]="cubicacionesContrato$|async" Pplaceholder="Seleccione una cubicación"                    [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>            </div>            <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">                <div class="message error-message"                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get(\'contrato\').value!==null && (loadingGetCubicacionesContrato$|async)===false">                    <small class="p-error block">                        No existen cubicaciones creadas con el contrato marco escogido                    </small>                </div>                <div class="bg-blue-100 text-blue-500 message" *ngIf="form.get(\'cubicacion_id\').value!==null ">                    <small class="p-info block">                        {{(cubicacionSelected$|async)?.cubicacion_descripcion}}                    </small>                </div>            </div>        </div>    </div></form></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormularioOtBaseComponent'};
 </script>

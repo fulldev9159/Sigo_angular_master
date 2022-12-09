@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -113,13 +116,35 @@ export class FlujoOTFacade {
     this.store.dispatch(flujoOTActions.getSolicitudQuiebre({ ot_id }));
   }
 
-  public getSolicitudQuiebre$(): Observable<any> {
+  public getSolicitudQuiebreSuccess(
+    lastSolicitudQuiebre: LastSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.getSolicitudQuiebreSuccess({ lastSolicitudQuiebre })
+    );
+  }
+
+  public getSolicitudQuiebre$(): Observable<LastSolicitudQuiebre> {
     return this.store.select(flujoOTSelectors.getSolicitudQuiebre);
   }
 
   // SOLICITAR QUIEBRE OT
   public solicitarQuiebre(request: ReqSolicitarQuiebre): void {
     this.store.dispatch(flujoOTActions.solicitarQuiebre({ request }));
+  }
+
+  //  QUIEBRE OT
+  public quiebre(request: ReqQuiebre): void {
+    this.store.dispatch(flujoOTActions.quiebre({ request }));
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE OT
+  public aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.aprobarRechazarSolicitudQuiebre({ request })
+    );
   }
 
   // DESQUIEBRE OT

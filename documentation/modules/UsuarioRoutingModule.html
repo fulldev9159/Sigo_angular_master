@@ -76,6 +76,7 @@
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { FormUsuarioContainerComponent } from &#x27;./containers/form-usuario-container/form-usuario-container.component&#x27;;
 import { ListUsuarioContainerComponent } from &#x27;./containers/list-usuario-container/list-usuario-container.component&#x27;;
+import { ListPerfilesUsuarioContainerComponent } from &#x27;./containers/list-perfiles-usuario-container/list-perfiles-usuario-container.component&#x27;;
 import { UsuarioComponent } from &#x27;./usuario.component&#x27;;
 const routes: Routes &#x3D; [
   {
@@ -94,6 +95,10 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;form-usuario/:id&#x27;,
         component: FormUsuarioContainerComponent,
+      },
+      {
+        path: &#x27;list-perfiles-usuario/:id&#x27;,
+        component: ListPerfilesUsuarioContainerComponent,
       },
     ],
   },

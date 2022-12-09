@@ -84,6 +84,10 @@
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -141,13 +145,25 @@
                                 <a href="#acta" >acta</a>
                             </li>
                             <li>
+                                <a href="#contrato" >contrato</a>
+                            </li>
+                            <li>
+                                <a href="#displayModalsolicitarInformeFinDeTrabajos" >displayModalsolicitarInformeFinDeTrabajos</a>
+                            </li>
+                            <li>
                                 <a href="#formComentario" >formComentario</a>
                             </li>
                             <li>
                                 <a href="#ot_id" >ot_id</a>
                             </li>
                             <li>
+                                <a href="#sendingInformarTrabajosFinalizados$" >sendingInformarTrabajosFinalizados$</a>
+                            </li>
+                            <li>
                                 <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#total_actas" >total_actas</a>
                             </li>
                         </ul>
                     </td>
@@ -173,6 +189,9 @@
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
+                            <li>
+                                <a href="#solicitarInformeFinDeTrabajos" >solicitarInformeFinDeTrabajos</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -191,12 +210,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actaFacade: <a href="../injectables/ActaFacade.html" target="_self">ActaFacade</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+<code>constructor(actaFacade: <a href="../injectables/ActaFacade.html" target="_self">ActaFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>, authFacade: <a href="../injectables/AuthFacade.html" target="_self">AuthFacade</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -218,6 +237,30 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/ActaFacade.html" target="_self" >ActaFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingsFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthFacade.html" target="_self" >AuthFacade</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -275,8 +318,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:231</a></div>
                 </td>
             </tr>
 
@@ -344,8 +387,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="105"
-                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:105</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="235"
+                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:235</a></div>
                 </td>
             </tr>
 
@@ -381,8 +424,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="112"
-                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:112</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="246"
+                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:246</a></div>
                 </td>
             </tr>
 
@@ -418,8 +461,45 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:59</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitarInformeFinDeTrabajos"></a>
+                    <span class="name">
+                        <span ><b>solicitarInformeFinDeTrabajos</b></span>
+                        <a href="#solicitarInformeFinDeTrabajos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>solicitarInformeFinDeTrabajos()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="242"
+                            class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:242</a></div>
                 </td>
             </tr>
 
@@ -465,7 +545,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -496,7 +576,58 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contrato"></a>
+                    <span class="name">
+                        <span ><b>contrato</b></span>
+                        <a href="#contrato"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayModalsolicitarInformeFinDeTrabajos"></a>
+                    <span class="name">
+                        <span ><b>displayModalsolicitarInformeFinDeTrabajos</b></span>
+                        <a href="#displayModalsolicitarInformeFinDeTrabajos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -529,7 +660,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -555,7 +686,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendingInformarTrabajosFinalizados$"></a>
+                    <span class="name">
+                        <span ><b>sendingInformarTrabajosFinalizados$</b></span>
+                        <a href="#sendingInformarTrabajosFinalizados$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingInformarTrabajosFinalizados$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -586,7 +748,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="total_actas"></a>
+                    <span class="name">
+                        <span ><b>total_actas</b></span>
+                        <a href="#total_actas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/acta/containers/generar-acta-container/generar-acta-container.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -599,17 +787,25 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
 import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 import {
   Accion,
   CarritoService,
+  DetalleOT,
   DetalleServicio4Acta,
   DetalleUO4Acta,
 } from &#x27;@model&#x27;;
 import { ActaFacade } from &#x27;@storeOT/acta/acta.facades&#x27;;
-import { Subscription } from &#x27;rxjs&#x27;;
+import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { Observable, Subscription } from &#x27;rxjs&#x27;;
 
 // 124 TODO: CONFIRMAR SI SOLO SE VAN A UTILIZAR LOS ENDPOINTS DE GET SERVICIOS FOR ACTA Y GET UOS FOR ACTA
 // 125 TODO: GENERAR REGLAS PARA DETERMINAR EN QUE CONDICION ESTÁ EL SERVICIO Y LA UO
@@ -620,6 +816,7 @@ import { Subscription } from &#x27;rxjs&#x27;;
   selector: &#x27;zwc-generar-acta-container&#x27;,
   templateUrl: &#x27;./generar-acta-container.component.html&#x27;,
   styleUrls: [&#x27;./generar-acta-container.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   subscription: Subscription &#x3D; new Subscription();
@@ -631,71 +828,192 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   });
 
   ot_id: number;
-  constructor(private actaFacade: ActaFacade, private route: ActivatedRoute) {}
+  total_actas: number;
+  contrato: string;
+
+  // LOADINGS
+  sendingInformarTrabajosFinalizados$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingInformarTrabajosFinalizados$();
+
+  // MODAL
+  displayModalsolicitarInformeFinDeTrabajos &#x3D; false;
+
+  constructor(
+    private actaFacade: ActaFacade,
+    private loadingsFacade: LoadingsFacade,
+    private authFacade: AuthFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
     this.subscription.add(
-      this.route.data.subscribe(({ servicios4acta, uos4acta, accionesOT }) &#x3D;&gt; {
-        console.log(accionesOT);
-        if (accionesOT) this.accionesOT &#x3D; accionesOT;
+      this.route.data.subscribe(
+        ({
+          servicios4acta,
+          uos4acta,
+          accionesOT,
+          totalActas,
+          observaciontrabajos,
+          detalleOT,
+        }) &#x3D;&gt; {
+          console.log(accionesOT);
+          if (accionesOT) this.accionesOT &#x3D; accionesOT;
+          if (totalActas) this.total_actas &#x3D; totalActas.data.total;
 
-        // ORGANIZAR DATA PARA TABLA
-        // 138 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
-        // 139 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
-        // 140 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
+          if (detalleOT) {
+            const ot &#x3D; detalleOT.data as DetalleOT;
+            this.contrato &#x3D;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
+          }
 
-        let servicios &#x3D; servicios4acta?.data.items as DetalleServicio4Acta[];
-        let uob &#x3D; uos4acta?.data.items as DetalleUO4Acta[];
+          // ORGANIZAR DATA PARA TABLA
+          // 138 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+          // 139 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+          // 140 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
 
-        if (servicios &amp;&amp; servicios.length &gt; 0) {
-          this.ot_id &#x3D; servicios[0].ot_id;
-          servicios.forEach(service &#x3D;&gt; {
-            let servicioCarrito: CarritoService &#x3D; {
-              precargado: true,
-              servicio_rowid: service.id,
-              servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
-              adicional: service.adicional_aceptacion_estado,
+          let servicios &#x3D; servicios4acta?.data.items as DetalleServicio4Acta[];
+          let uob &#x3D; uos4acta?.data.items as DetalleUO4Acta[];
 
-              servicio_id: service.servicio_id,
-              numero_producto: service.servicio_numero_producto,
-              servicio_precio_final_clp: service.valor_unitario_clp,
-              servicio_nombre: service.servicio_descripcion,
-              tipo_servicio_descripcion: &#x27;TODO&#x27;,
-              tipo_servicio_id: -1,
-              servicio_unidad_cod: service.unidad_codigo,
-              servicio_unidad_descripcion: service.unidad_descripcion,
-              unidad_obras: [],
-            };
+          if (servicios &amp;&amp; servicios.length &gt; 0) {
+            this.ot_id &#x3D; servicios[0].ot_id;
 
-            let uobs &#x3D; uob.filter(
-              v &#x3D;&gt;
-                v.servicio_numero_producto &#x3D;&#x3D;&#x3D; service.servicio_numero_producto
+            let servicios_originales &#x3D; servicios.filter(
+              v &#x3D;&gt; v.adicional_aceptacion_estado &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
             );
-            uobs.map(uo &#x3D;&gt;
-              this.acta.push({
-                ...servicioCarrito,
-                unidad_obras: [
-                  {
-                    precargado: true,
-                    uo_rowid: uo.id,
-                    uo_cantidad: uo.faltante_cantidad,
-
-                    uo_codigo: uo.unidad_obra_cod,
-                    uo_nombre: uo.unidad_obra_desc,
-                    uo_precio_total_clp: uo.valor_unitario_clp,
-                    actividad_descripcion: &#x27;TODO&#x27;,
-                    actividad_id: -1,
-                    uob_unidad_medida_cod: uo.unidad_codigo,
-                    uob_unidad_medida_descripcion: uo.unidad_obra_desc,
-                  },
-                ],
-              })
+            let uos_originales &#x3D; uob.filter(
+              v &#x3D;&gt; v.servicio_adicional_aceptacion_estado &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
             );
-          });
+
+            let servicios_adicionales &#x3D; servicios.filter(
+              v &#x3D;&gt; v.adicional_aceptacion_estado !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+
+            let uos_adicionales &#x3D; uob.filter(
+              v &#x3D;&gt; v.servicio_adicional_aceptacion_estado !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+
+            console.log(&#x27;servicios_orginales&#x27;, servicios_originales);
+            console.log(&#x27;uos_originales&#x27;, uos_originales);
+
+            console.log(&#x27;servicios_ad&#x27;, servicios_adicionales);
+            console.log(&#x27;uos_ad&#x27;, uos_adicionales);
+
+            servicios_originales.forEach(service &#x3D;&gt; {
+              let servicioCarrito: CarritoService &#x3D; {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: service.tipo_servicio_descripcion,
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
+                unidad_obras: [],
+              };
+
+              uos_originales
+                .filter(
+                  v &#x3D;&gt;
+                    v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                    service.servicio_numero_producto
+                )
+                .map(uo &#x3D;&gt;
+                  this.acta.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
+
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: service.actividad_descripcion,
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                      },
+                    ],
+                  })
+                );
+            });
+
+            servicios_adicionales.forEach(service &#x3D;&gt; {
+              let servicioCarrito: CarritoService &#x3D; {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: service.tipo_servicio_descripcion,
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
+                servicios_adicional_dummy:
+                  servicios_originales.find(
+                    v &#x3D;&gt;
+                      v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                      service.servicio_numero_producto
+                  ) !&#x3D;&#x3D; undefined,
+                unidad_obras: [],
+              };
+
+              uos_adicionales
+                .filter(
+                  v &#x3D;&gt;
+                    v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                    service.servicio_numero_producto
+                )
+                .map(uo &#x3D;&gt;
+                  this.acta.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
+
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: service.actividad_descripcion,
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                        adicional: service.adicional_aceptacion_estado,
+                        adicional_existente_ia:
+                          servicioCarrito.servicios_adicional_dummy,
+                      },
+                    ],
+                  })
+                );
+            });
+          }
+
+          console.log(this.acta);
         }
+      )
+    );
 
-        console.log(this.acta);
-      })
+    this.subscription.add(
+      this.actaFacade
+        .getComentariosFinalizacionTrabajos$()
+        .subscribe(v &#x3D;&gt; this.formComentario.get(&#x27;comentarios&#x27;).setValue(v))
     );
   }
 
@@ -708,6 +1026,10 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
       this.ot_id,
       this.formComentario.get(&#x27;comentarios&#x27;).value
     );
+  }
+
+  solicitarInformeFinDeTrabajos(): void {
+    this.actaFacade.solicitarInformeTrabajosFinalizados(this.ot_id);
   }
 
   ngOnDestroy(): void {
@@ -723,9 +1045,10 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
 
     &lt;div class&#x3D;&quot;card&quot;&gt;
         &lt;div class&#x3D;&quot; grid&quot;&gt;
-            &lt;div class&#x3D;&quot;field col-12 table-informe-avance&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 table-acta&quot;&gt;
                 &lt;zwc-table-servicios #tableServiciosActa mode_source&#x3D;&quot;static&quot; [data_source]&#x3D;&quot;acta&quot;
-                    [cantidad_editable]&#x3D;&quot;false&quot; [column_acciones]&#x3D;&quot;false&quot;&gt;
+                    [cantidad_editable]&#x3D;&quot;false&quot; [column_acciones]&#x3D;&quot;false&quot; [contratoMarco]&#x3D;&quot;contrato&quot;
+                    [column_acciones_uo]&#x3D;&quot;false&quot;&gt;
                 &lt;/zwc-table-servicios&gt;
             &lt;/div&gt;
 
@@ -733,24 +1056,24 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
     &lt;/div&gt;
 
     &lt;p-divider align&#x3D;&quot;center&quot;&gt;
-        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Observaciones&lt;/span&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;* Observaciones&lt;/span&gt;
     &lt;/p-divider&gt;
 
     &lt;div class&#x3D;&quot;card&quot;&gt;
         &lt;div class&#x3D;&quot; grid&quot;&gt;
-            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_SOLIC_INF_TRABAJO_FIN&#x27;)&quot; class&#x3D;&quot;field col-12&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_SOLIC_INF_TRABAJO_FIN&#x27;) &amp;&amp; total_actas&gt;0&quot; class&#x3D;&quot;field col-12&quot;&gt;
                 &lt;zwc-pbutton-sending Pid&#x3D;&quot;solicitar-informe-fin-trabajos-button&quot;
                     content&#x3D;&quot;Solicitar informe de fin de trabajos&quot; Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot;
-                    (click)&#x3D;&quot;solicitarInformeFinDeTrabajos()&quot;&gt;&lt;/zwc-pbutton-sending&gt;
+                    (click)&#x3D;&quot;displayModalsolicitarInformeFinDeTrabajos&#x3D;true&quot;&gt;&lt;/zwc-pbutton-sending&gt;
             &lt;/div&gt;
             &lt;!-- 178 TODO: MEJORAR EL CSS --&gt;
-            &lt;!-- 179 TODO: AGREGAR MENSAJE DE REQUERIDO --&gt;
             &lt;form [formGroup]&#x3D;&quot;formComentario&quot;&gt;
                 &lt;div class&#x3D;&quot;col-12&quot; id&#x3D;&quot;control_observaciones&quot;&gt;
                     &lt;textarea formControlName&#x3D;&quot;comentarios&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;&quot; name&#x3D;&quot;comentarios&quot;
                         id&#x3D;&quot;comentarios&quot; cols&#x3D;&quot;30&quot; rows&#x3D;&quot;2&quot;&gt;&lt;/textarea&gt;
                     &lt;br&gt;
                 &lt;/div&gt;
+                &lt;zwc-input-alert [control]&#x3D;&quot;formComentario.get(&#x27;comentarios&#x27;)&quot;&gt;&lt;/zwc-input-alert&gt;
             &lt;/form&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -762,17 +1085,28 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
     &lt;div class&#x3D;&quot;card&quot;&gt;
         &lt;div class&#x3D;&quot; grid&quot;&gt;
             &lt;div class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
-                &lt;button pButton pRipple type&#x3D;&quot;button&quot; id&#x3D;&quot;button-atrás&quot; class&#x3D;&quot;p-button-outlined&quot;&gt;
+                &lt;button pButton pRipple type&#x3D;&quot;button&quot; id&#x3D;&quot;button-atrás&quot; class&#x3D;&quot;p-button-outlined&quot;
+                    [routerLink]&#x3D;&quot;[&#x27;/ot&#x27;]&quot;&gt;
                     Atrás
                 &lt;/button&gt;
             &lt;/div&gt;
             &lt;!-- 180 TODO: AGREGAR EL LOADING --&gt;
-            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_GENERAR_ACTA&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot; accionExist(&#x27;OT_GENERAR_ACTA&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
                 &lt;zwc-pbutton-sending Pid&#x3D;&quot;generar-acta-button&quot; content&#x3D;&quot;Generar acta&quot;
-                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;generarActa()&quot;&gt;&lt;/zwc-pbutton-sending&gt;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;generarActa()&quot;
+                    [sending]&#x3D;&quot;sendingInformarTrabajosFinalizados$|async&quot;&gt;&lt;/zwc-pbutton-sending&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-    &lt;/div&gt;</code></pre>
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p-dialog header&#x3D;&quot;Confirmar solicitud de informe fin de trabajos&quot;
+    [(visible)]&#x3D;&quot;displayModalsolicitarInformeFinDeTrabajos&quot; [draggable]&#x3D;&quot;false&quot; [modal]&#x3D;&quot;true&quot;&gt;
+    Order de trabajo ID: {{ot_id}}
+    &lt;zwc-view-confirmacion pregunta&#x3D;&#x27;¿Desea confirmar la solicitud?&#x27;
+        (cancelar)&#x3D;&quot;displayModalsolicitarInformeFinDeTrabajos&#x3D;false&quot; (confirmar)&#x3D;&quot;solicitarInformeFinDeTrabajos()&quot;&gt;
+    &lt;/zwc-view-confirmacion&gt;
+&lt;/p-dialog&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -786,6 +1120,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
         width: 86vw;
         height: 154px;
         padding: 10px;
+        border: 0.07rem solid #bcbfc1;
     }
 }</code></pre>
     </div>
@@ -815,8 +1150,8 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container-acta">    <h1>Acta</h1>    <div class="card">        <div class=" grid">            <div class="field col-12 table-informe-avance">                <zwc-table-servicios #tableServiciosActa mode_source="static" [data_source]="acta"                    [cantidad_editable]="false" [column_acciones]="false">                </zwc-table-servicios>            </div>        </div>    </div>    <p-divider align="center">        <span class="p-tag">Observaciones</span>    </p-divider>    <div class="card">        <div class=" grid">            <div *ngIf="accionExist(\'OT_SOLIC_INF_TRABAJO_FIN\')" class="field col-12">                <zwc-pbutton-sending Pid="solicitar-informe-fin-trabajos-button"                    content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"                    (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>            </div>            <!-- 178 TODO: MEJORAR EL CSS -->            <!-- 179 TODO: AGREGAR MENSAJE DE REQUERIDO -->            <form [formGroup]="formComentario">                <div class="col-12" id="control_observaciones">                    <textarea formControlName="comentarios" class="form-control" placeholder="" name="comentarios"                        id="comentarios" cols="30" rows="2"></textarea>                    <br>                </div>            </form>        </div>    </div>    <p-divider align="center">    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">                    Atrás                </button>            </div>            <!-- 180 TODO: AGREGAR EL LOADING -->            <div *ngIf="accionExist(\'OT_GENERAR_ACTA\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="generar-acta-button" content="Generar acta"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="generarActa()"></zwc-pbutton-sending>            </div>        </div>    </div></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container-acta">    <h1>Acta</h1>    <div class="card">        <div class=" grid">            <div class="field col-12 table-acta">                <zwc-table-servicios #tableServiciosActa mode_source="static" [data_source]="acta"                    [cantidad_editable]="false" [column_acciones]="false" [contratoMarco]="contrato"                    [column_acciones_uo]="false">                </zwc-table-servicios>            </div>        </div>    </div>    <p-divider align="center">        <span class="p-tag">* Observaciones</span>    </p-divider>    <div class="card">        <div class=" grid">            <div *ngIf="accionExist(\'OT_SOLIC_INF_TRABAJO_FIN\') && total_actas>0" class="field col-12">                <zwc-pbutton-sending Pid="solicitar-informe-fin-trabajos-button"                    content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"                    (click)="displayModalsolicitarInformeFinDeTrabajos=true"></zwc-pbutton-sending>            </div>            <!-- 178 TODO: MEJORAR EL CSS -->            <form [formGroup]="formComentario">                <div class="col-12" id="control_observaciones">                    <textarea formControlName="comentarios" class="form-control" placeholder="" name="comentarios"                        id="comentarios" cols="30" rows="2"></textarea>                    <br>                </div>                <zwc-input-alert [control]="formComentario.get(\'comentarios\')"></zwc-input-alert>            </form>        </div>    </div>    <p-divider align="center">    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined"                    [routerLink]="[\'/ot\']">                    Atrás                </button>            </div>            <!-- 180 TODO: AGREGAR EL LOADING -->            <div *ngIf=" accionExist(\'OT_GENERAR_ACTA\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="generar-acta-button" content="Generar acta"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="generarActa()"                    [sending]="sendingInformarTrabajosFinalizados$|async"></zwc-pbutton-sending>            </div>        </div>    </div></div><p-dialog header="Confirmar solicitud de informe fin de trabajos"    [(visible)]="displayModalsolicitarInformeFinDeTrabajos" [draggable]="false" [modal]="true">    Order de trabajo ID: {{ot_id}}    <zwc-view-confirmacion pregunta=\'¿Desea confirmar la solicitud?\'        (cancelar)="displayModalsolicitarInformeFinDeTrabajos=false" (confirmar)="solicitarInformeFinDeTrabajos()">    </zwc-view-confirmacion></p-dialog></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'GenerarActaContainerComponent'};
 </script>

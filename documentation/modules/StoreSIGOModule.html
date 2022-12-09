@@ -219,6 +219,16 @@ import { ActaEffects } from &#x27;./acta/acta.effects&#x27;;
 import * as formActaReduce from &#x27;./acta/acta.reducers&#x27;;
 // ACTA
 
+// AREA
+import { AreaEffects } from &#x27;./area/area.effects&#x27;;
+import * as formAreaReduce from &#x27;./area/area.reducers&#x27;;
+// AREA
+
+// INGENIERIA
+import { IngenieriaEffects } from &#x27;./ingenieria/ingenieria.effects&#x27;;
+import * as formIngenieriaReduce from &#x27;./ingenieria/ingenieria.reducers&#x27;;
+// INGENIERIA
+
 @NgModule({
   declarations: [],
   imports: [
@@ -329,6 +339,20 @@ import * as formActaReduce from &#x27;./acta/acta.reducers&#x27;;
     StoreModule.forFeature(
       formActaReduce.Featurekey,
       formActaReduce.reducerActa
+    ),
+
+    // AREA
+    EffectsModule.forFeature([AreaEffects]),
+    StoreModule.forFeature(
+      formAreaReduce.Featurekey,
+      formAreaReduce.reducerArea
+    ),
+
+    // INGENIERIA
+    EffectsModule.forFeature([IngenieriaEffects]),
+    StoreModule.forFeature(
+      formIngenieriaReduce.Featurekey,
+      formIngenieriaReduce.reducerIngenieria
     ),
 
     SharedModule,

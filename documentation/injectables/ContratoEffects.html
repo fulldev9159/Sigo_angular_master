@@ -78,10 +78,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#ActivateContrato$" >ActivateContrato$</a>
+                            </li>
+                            <li>
                                 <a href="#getActividadesContratoProveedor$" >getActividadesContratoProveedor$</a>
                             </li>
                             <li>
                                 <a href="#getAgenciasContrato$" >getAgenciasContrato$</a>
+                            </li>
+                            <li>
+                                <a href="#getContratos$" >getContratos$</a>
+                            </li>
+                            <li>
+                                <a href="#getSingleContrato$" >getSingleContrato$</a>
                             </li>
                             <li>
                                 <a href="#getTipoServiciosContrato$" >getTipoServiciosContrato$</a>
@@ -91,6 +100,12 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#redirectAfterSaveContratoSuccess" >redirectAfterSaveContratoSuccess</a>
+                            </li>
+                            <li>
+                                <a href="#updateContrato$" >updateContrato$</a>
                             </li>
                         </ul>
                     </td>
@@ -111,12 +126,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, contratoHttpService: <a href="../injectables/ContratoHttpService.html" target="_self">ContratoHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
+<code>constructor(actions$: Actions, contratoHttpService: <a href="../injectables/ContratoHttpService.html" target="_self">ContratoHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -169,6 +184,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -184,6 +211,45 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ActivateContrato$"></a>
+                    <span class="name">
+                        <span ><b>ActivateContrato$</b></span>
+                        <a href="#ActivateContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.activateContrato),
+      concatMap(({ request }) &#x3D;&gt;
+        this.contratoHttpService.activateContrato(request).pipe(
+          map(response &#x3D;&gt;
+            contratoActions.activateContratoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(contratoActions.activateContratoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -222,7 +288,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -261,7 +327,79 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getContratos$"></a>
+                    <span class="name">
+                        <span ><b>getContratos$</b></span>
+                        <a href="#getContratos$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.getContratos),
+      concatMap(() &#x3D;&gt;
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response &#x3D;&gt; contratoActions.getContratosSuccess({ response })),
+          catchError(error &#x3D;&gt; of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSingleContrato$"></a>
+                    <span class="name">
+                        <span ><b>getSingleContrato$</b></span>
+                        <a href="#getSingleContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.getSingleContrato),
+      concatMap(({ contrato_id }) &#x3D;&gt;
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response &#x3D;&gt;
+            contratoActions.getSingleContratoSuccess({ contrato_id, response })
+          ),
+          catchError(error &#x3D;&gt; of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -304,7 +442,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -330,7 +468,9 @@
         ofType(
           contratoActions.getAgenciasContratoSuccess,
           contratoActions.getActividadesContratoProveedorSuccess,
-          contratoActions.getTipoServiciosContratoSuccess
+          contratoActions.getTipoServiciosContratoSuccess,
+          contratoActions.updateContratoSuccess,
+          contratoActions.activateContratoSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -340,7 +480,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:132</a></div>
                         </td>
                     </tr>
 
@@ -366,7 +506,10 @@
         ofType(
           contratoActions.getAgenciasContratoError,
           contratoActions.getActividadesContratoProveedorError,
-          contratoActions.getTipoServiciosContratoError
+          contratoActions.getTipoServiciosContratoError,
+          contratoActions.getContratosError,
+          contratoActions.updateContratoError,
+          contratoActions.activateContratoError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -376,7 +519,81 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:87</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectAfterSaveContratoSuccess"></a>
+                    <span class="name">
+                        <span ><b>redirectAfterSaveContratoSuccess</b></span>
+                        <a href="#redirectAfterSaveContratoSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          //// contratoActions.createContratoSuccess,
+          contratoActions.updateContratoSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/contratos/list-contratos&#x27;])
+        )
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="163" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateContrato$"></a>
+                    <span class="name">
+                        <span ><b>updateContrato$</b></span>
+                        <a href="#updateContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.updateContrato),
+      concatMap(({ request }) &#x3D;&gt;
+        this.contratoHttpService.updateContrato(request).pipe(
+          map(response &#x3D;&gt; contratoActions.updateContratoSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(contratoActions.updateContratoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/store/contrato/contrato.effects.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -392,6 +609,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { AfterHttpService, ContratoHttpService } from &#x27;@services&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 import * as contratoActions from &#x27;./contrato.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
@@ -401,7 +619,8 @@ export class ContratoEffects {
   constructor(
     private actions$: Actions,
     private contratoHttpService: ContratoHttpService,
-    private afterHttp: AfterHttpService
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
 
   getAgenciasContrato$ &#x3D; createEffect(() &#x3D;&gt;
@@ -462,13 +681,71 @@ export class ContratoEffects {
     )
   );
 
+  getContratos$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.getContratos),
+      concatMap(() &#x3D;&gt;
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response &#x3D;&gt; contratoActions.getContratosSuccess({ response })),
+          catchError(error &#x3D;&gt; of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  );
+
+  getSingleContrato$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.getSingleContrato),
+      concatMap(({ contrato_id }) &#x3D;&gt;
+        this.contratoHttpService.getAllContratos().pipe(
+          map(response &#x3D;&gt;
+            contratoActions.getSingleContratoSuccess({ contrato_id, response })
+          ),
+          catchError(error &#x3D;&gt; of(contratoActions.getContratosError({ error })))
+        )
+      )
+    )
+  );
+
+  updateContrato$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.updateContrato),
+      concatMap(({ request }) &#x3D;&gt;
+        this.contratoHttpService.updateContrato(request).pipe(
+          map(response &#x3D;&gt; contratoActions.updateContratoSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(contratoActions.updateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  ActivateContrato$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(contratoActions.activateContrato),
+      concatMap(({ request }) &#x3D;&gt;
+        this.contratoHttpService.activateContrato(request).pipe(
+          map(response &#x3D;&gt;
+            contratoActions.activateContratoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(contratoActions.activateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           contratoActions.getAgenciasContratoSuccess,
           contratoActions.getActividadesContratoProveedorSuccess,
-          contratoActions.getTipoServiciosContratoSuccess
+          contratoActions.getTipoServiciosContratoSuccess,
+          contratoActions.updateContratoSuccess,
+          contratoActions.activateContratoSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -481,9 +758,26 @@ export class ContratoEffects {
         ofType(
           contratoActions.getAgenciasContratoError,
           contratoActions.getActividadesContratoProveedorError,
-          contratoActions.getTipoServiciosContratoError
+          contratoActions.getTipoServiciosContratoError,
+          contratoActions.getContratosError,
+          contratoActions.updateContratoError,
+          contratoActions.activateContratoError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSaveContratoSuccess &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          //// contratoActions.createContratoSuccess,
+          contratoActions.updateContratoSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/contratos/list-contratos&#x27;])
+        )
       ),
     { dispatch: false }
   );

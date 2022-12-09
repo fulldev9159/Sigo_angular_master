@@ -70,6 +70,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
 
 
 <section>
@@ -115,6 +122,151 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#areas4createUser$" >areas4createUser$</a>
+                            </li>
+                            <li>
+                                <a href="#contratosUser$" >contratosUser$</a>
+                            </li>
+                            <li>
+                                <a href="#DisplayPermisosModal" >DisplayPermisosModal</a>
+                            </li>
+                            <li>
+                                <a href="#formControls" >formControls</a>
+                            </li>
+                            <li>
+                                <a href="#formUser" >formUser</a>
+                            </li>
+                            <li>
+                                <a href="#guiasSubgrupo$" >guiasSubgrupo$</a>
+                            </li>
+                            <li>
+                                <a href="#ModalDataPermissions" >ModalDataPermissions</a>
+                            </li>
+                            <li>
+                                <a href="#posiblesContractosUser$" >posiblesContractosUser$</a>
+                            </li>
+                            <li>
+                                <a href="#proveedores4createUser$" >proveedores4createUser$</a>
+                            </li>
+                            <li>
+                                <a href="#showPassword" >showPassword</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#usuario_id" >usuario_id</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checkAreaAndEnable" >checkAreaAndEnable</a>
+                            </li>
+                            <li>
+                                <a href="#checkContratosAndEnable" >checkContratosAndEnable</a>
+                            </li>
+                            <li>
+                                <a href="#disableAreaFormControl" >disableAreaFormControl</a>
+                            </li>
+                            <li>
+                                <a href="#disableContratosFormControl" >disableContratosFormControl</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <a href="#initAreaFormControlEvent" >initAreaFormControlEvent</a>
+                            </li>
+                            <li>
+                                <a href="#initData" >initData</a>
+                            </li>
+                            <li>
+                                <a href="#initDelegatedAuthFormControlEvent" >initDelegatedAuthFormControlEvent</a>
+                            </li>
+                            <li>
+                                <a href="#initFormControlsEvents" >initFormControlsEvents</a>
+                            </li>
+                            <li>
+                                <a href="#initObservables" >initObservables</a>
+                            </li>
+                            <li>
+                                <a href="#initProveerdorFromControlEvent" >initProveerdorFromControlEvent</a>
+                            </li>
+                            <li>
+                                <a href="#initProviderRadioFormControlEvent" >initProviderRadioFormControlEvent</a>
+                            </li>
+                            <li>
+                                <a href="#initSuperiorFromControlEvent" >initSuperiorFromControlEvent</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#resetAreaFormControl" >resetAreaFormControl</a>
+                            </li>
+                            <li>
+                                <a href="#resetContratosFormControl" >resetContratosFormControl</a>
+                            </li>
+                            <li>
+                                <a href="#resetProveedorFormControl" >resetProveedorFormControl</a>
+                            </li>
+                            <li>
+                                <a href="#save" >save</a>
+                            </li>
+                            <li>
+                                <a href="#showPermisos" >showPermisos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#values" >values</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
 
     <section>
     <h3 id="constructor">Constructor</h3>
@@ -122,15 +274,93 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(userFacade: <a href="../interfaces/User.html" target="_self">UserFacade</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, profileFacade: ProfileFacade, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, detector: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:86</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/User.html" target="_self" >UserFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>profileFacade</td>
+                                                  
+                                                        <td>
+                                                                    <code>ProfileFacade</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>detector</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -139,27 +369,2000 @@
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkAreaAndEnable"></a>
+                    <span class="name">
+                        <span ><b>checkAreaAndEnable</b></span>
+                        <a href="#checkAreaAndEnable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkAreaAndEnable(areas: <a href="../interfaces/Area.html" target="_self">Area[]</a>)</code>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="347"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:347</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>areas</td>
+                                    <td>
+                                                <code><a href="../interfaces/Area.html" target="_self" >Area[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkContratosAndEnable"></a>
+                    <span class="name">
+                        <span ><b>checkContratosAndEnable</b></span>
+                        <a href="#checkContratosAndEnable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checkContratosAndEnable(contratos: PosiblesContratosUser[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="355"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:355</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>contratos</td>
+                                    <td>
+                                            <code>PosiblesContratosUser[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="disableAreaFormControl"></a>
+                    <span class="name">
+                        <span ><b>disableAreaFormControl</b></span>
+                        <a href="#disableAreaFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>disableAreaFormControl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="371"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:371</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="disableContratosFormControl"></a>
+                    <span class="name">
+                        <span ><b>disableContratosFormControl</b></span>
+                        <a href="#disableContratosFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>disableContratosFormControl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="375"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:375</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="406"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:406</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initAreaFormControlEvent"></a>
+                    <span class="name">
+                        <span ><b>initAreaFormControlEvent</b></span>
+                        <a href="#initAreaFormControlEvent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initAreaFormControlEvent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="271"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:271</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initData"></a>
+                    <span class="name">
+                        <span ><b>initData</b></span>
+                        <a href="#initData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="400"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:400</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initDelegatedAuthFormControlEvent"></a>
+                    <span class="name">
+                        <span ><b>initDelegatedAuthFormControlEvent</b></span>
+                        <a href="#initDelegatedAuthFormControlEvent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initDelegatedAuthFormControlEvent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="314"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:314</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initFormControlsEvents"></a>
+                    <span class="name">
+                        <span ><b>initFormControlsEvents</b></span>
+                        <a href="#initFormControlsEvents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initFormControlsEvents()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="229"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:229</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initObservables"></a>
+                    <span class="name">
+                        <span ><b>initObservables</b></span>
+                        <a href="#initObservables"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initObservables()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:183</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initProveerdorFromControlEvent"></a>
+                    <span class="name">
+                        <span ><b>initProveerdorFromControlEvent</b></span>
+                        <a href="#initProveerdorFromControlEvent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initProveerdorFromControlEvent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="252"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:252</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initProviderRadioFormControlEvent"></a>
+                    <span class="name">
+                        <span ><b>initProviderRadioFormControlEvent</b></span>
+                        <a href="#initProviderRadioFormControlEvent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initProviderRadioFormControlEvent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="237"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:237</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initSuperiorFromControlEvent"></a>
+                    <span class="name">
+                        <span ><b>initSuperiorFromControlEvent</b></span>
+                        <a href="#initSuperiorFromControlEvent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initSuperiorFromControlEvent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="289"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:289</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="179"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:179</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:100</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetAreaFormControl"></a>
+                    <span class="name">
+                        <span ><b>resetAreaFormControl</b></span>
+                        <a href="#resetAreaFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetAreaFormControl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="386"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:386</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetContratosFormControl"></a>
+                    <span class="name">
+                        <span ><b>resetContratosFormControl</b></span>
+                        <a href="#resetContratosFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetContratosFormControl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="390"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:390</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetProveedorFormControl"></a>
+                    <span class="name">
+                        <span ><b>resetProveedorFormControl</b></span>
+                        <a href="#resetProveedorFormControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resetProveedorFormControl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="382"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:382</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>save()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="435"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:435</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPermisos"></a>
+                    <span class="name">
+                        <span ><b>showPermisos</b></span>
+                        <a href="#showPermisos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showPermisos(perfil: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="411"
+                            class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:411</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>perfil</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="areas4createUser$"></a>
+                    <span class="name">
+                        <span ><b>areas4createUser$</b></span>
+                        <a href="#areas4createUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Area.html" target="_self" >Observable&lt;Area[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contratosUser$"></a>
+                    <span class="name">
+                        <span ><b>contratosUser$</b></span>
+                        <a href="#contratosUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;ContratosUser[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DisplayPermisosModal"></a>
+                    <span class="name">
+                        <span ><b>DisplayPermisosModal</b></span>
+                        <a href="#DisplayPermisosModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formControls"></a>
+                    <span class="name">
+                        <span ><b>formControls</b></span>
+                        <a href="#formControls"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    id: new FormControl(null),
+    guia_subgrupo_id: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+    ]),
+    delegated_auth: new FormControl([&#x27;true&#x27;], []),
+    password: new FormControl(&#x27;&#x27;, []),
+    username: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(20),
+    ]),
+    nombres: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(45),
+    ]),
+    apellidos: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      ,
+      Validators.maxLength(45),
+    ]),
+    rut: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(50),
+    ]),
+    firma: new FormControl(null),
+    celular: new FormControl(null, [Validators.maxLength(15)]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(45),
+    ]),
+    provider: new FormControl(&#x27;movistar&#x27;),
+    proveedor_id: new FormControl(null, [Validators.required]),
+    area_id: new FormControl(null, [Validators.required]),
+    contratos_marco: new FormControl(null),
+    // perfiles: new FormControl(null, [Validators.required]),
+    // superior: new FormControl(null, [Validators.required]),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formUser"></a>
+                    <span class="name">
+                        <span ><b>formUser</b></span>
+                        <a href="#formUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup(this.formControls)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guiasSubgrupo$"></a>
+                    <span class="name">
+                        <span ><b>guiasSubgrupo$</b></span>
+                        <a href="#guiasSubgrupo$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/GuiaSubgrupo.html" target="_self" >Observable&lt;GuiaSubgrupo[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ModalDataPermissions"></a>
+                    <span class="name">
+                        <span ><b>ModalDataPermissions</b></span>
+                        <a href="#ModalDataPermissions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="posiblesContractosUser$"></a>
+                    <span class="name">
+                        <span ><b>posiblesContractosUser$</b></span>
+                        <a href="#posiblesContractosUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;PosiblesContratosUser[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="proveedores4createUser$"></a>
+                    <span class="name">
+                        <span ><b>proveedores4createUser$</b></span>
+                        <a href="#proveedores4createUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ModelProveedor.html" target="_self" >Observable&lt;ModelProveedor[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPassword"></a>
+                    <span class="name">
+                        <span ><b>showPassword</b></span>
+                        <a href="#showPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuario_id"></a>
+                    <span class="name">
+                        <span ><b>usuario_id</b></span>
+                        <a href="#usuario_id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="values"></a>
+                        <span class="name"><b>values</b><a href="#values"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>values()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="499" class="link-to-prism">src/app/features/administracion/usuario/containers/form-usuario-container/form-usuario-container.component.ts:499</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Observable, Subscription } from &#x27;rxjs&#x27;;
+import { FormGroup, FormControl, Validators } from &#x27;@angular/forms&#x27;;
+import { map, tap, withLatestFrom } from &#x27;rxjs/operators&#x27;;
+
+import { UsuarioFacade as UserFacade } from &#x27;@storeOT/usuario/usuario.facades&#x27;;
+import { PerfilFacade as ProfileFacade } from &#x27;@storeOT/perfil/perfil.facades&#x27;;
+
+import * as _ from &#x27;lodash&#x27;;
+import {
+  Area,
+  GuiaSubgrupo,
+  ModelProveedor,
+  RequestCreateUser,
+  ContratosUser,
+  RequestUpdateUser,
+  PosiblesContratosUser,
+} from &#x27;@model&#x27;;
+
+import * as CustomValidators from &#x27;@sharedOT/validators&#x27;;
 
 @Component({
   selector: &#x27;zwc-form-usuario-container&#x27;,
   templateUrl: &#x27;./form-usuario-container.component.html&#x27;,
   styleUrls: [&#x27;./form-usuario-container.component.scss&#x27;],
 })
-export class FormUsuarioContainerComponent {
-  constructor() {}
+export class FormUsuarioContainerComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
+
+  DisplayPermisosModal &#x3D; false;
+  ModalDataPermissions: any[] &#x3D; [];
+
+  showPassword &#x3D; false;
+  formControls &#x3D; {
+    id: new FormControl(null),
+    guia_subgrupo_id: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+    ]),
+    delegated_auth: new FormControl([&#x27;true&#x27;], []),
+    password: new FormControl(&#x27;&#x27;, []),
+    username: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(20),
+    ]),
+    nombres: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(45),
+    ]),
+    apellidos: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      ,
+      Validators.maxLength(45),
+    ]),
+    rut: new FormControl(null, [
+      Validators.required,
+      CustomValidators.NoWhitespace,
+      Validators.maxLength(50),
+    ]),
+    firma: new FormControl(null),
+    celular: new FormControl(null, [Validators.maxLength(15)]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(45),
+    ]),
+    provider: new FormControl(&#x27;movistar&#x27;),
+    proveedor_id: new FormControl(null, [Validators.required]),
+    area_id: new FormControl(null, [Validators.required]),
+    contratos_marco: new FormControl(null),
+    // perfiles: new FormControl(null, [Validators.required]),
+    // superior: new FormControl(null, [Validators.required]),
+  };
+
+  formUser: FormGroup &#x3D; new FormGroup(this.formControls);
+
+  guiasSubgrupo$: Observable&lt;GuiaSubgrupo[]&gt;;
+  proveedores4createUser$: Observable&lt;ModelProveedor[]&gt;;
+  areas4createUser$: Observable&lt;Area[]&gt;;
+  posiblesContractosUser$: Observable&lt;PosiblesContratosUser[]&gt;;
+  contratosUser$: Observable&lt;ContratosUser[]&gt;;
+  usuario_id: number &#x3D; null;
+  // profiles$: Observable&lt;Data.Perfil[]&gt;;
+  // samecompanyusers$: Observable&lt;PosiblesSuperiores[]&gt;;
+  // roles: any;
+  // perfiles: any;
+
+  constructor(
+    private userFacade: UserFacade,
+    private router: Router,
+    private profileFacade: ProfileFacade,
+    private route: ActivatedRoute,
+    private detector: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.userFacade.resetData();
+    this.initObservables();
+    this.initFormControlsEvents();
+    this.initData();
+
+    this.subscription.add(
+      this.route.paramMap.subscribe(params &#x3D;&gt; {
+        const id &#x3D; params.get(&#x27;id&#x27;);
+        if (id !&#x3D;&#x3D; null) {
+          this.usuario_id &#x3D; +params.get(&#x27;id&#x27;);
+          this.userFacade.getAllUsers();
+          this.userFacade.getContratosUsuario(+params.get(&#x27;id&#x27;));
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.userFacade
+        .getAllUsers$()
+        .pipe(withLatestFrom(this.contratosUser$))
+        .subscribe(([users, contratos]) &#x3D;&gt; {
+          if (users &amp;&amp; users.length &gt; 0 &amp;&amp; this.usuario_id) {
+            const userSelected &#x3D; users.find(
+              user &#x3D;&gt; user.id &#x3D;&#x3D;&#x3D; this.usuario_id
+            );
+            this.formUser.get(&#x27;id&#x27;).setValue(userSelected.id);
+            this.formUser.get(&#x27;username&#x27;).setValue(userSelected.username);
+            this.formUser.get(&#x27;username&#x27;).disable();
+            this.formUser.get(&#x27;nombres&#x27;).setValue(userSelected.nombres);
+            this.formUser.get(&#x27;apellidos&#x27;).setValue(userSelected.apellidos);
+            this.formUser.get(&#x27;email&#x27;).setValue(userSelected.email);
+            this.formUser.get(&#x27;rut&#x27;).setValue(userSelected.rut);
+            this.formUser.get(&#x27;celular&#x27;).setValue(userSelected.celular);
+            this.formUser
+              .get(&#x27;guia_subgrupo_id&#x27;)
+              .setValue(userSelected.guia_subgrupo_id);
+            this.formUser
+              .get(&#x27;delegated_auth&#x27;)
+              .setValue(userSelected.delegated_auth ? [&#x27;true&#x27;] : []);
+
+            // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
+            // const proveedor &#x3D; proveedores.find(proveedor&#x3D;&gt;{proveedor.id&#x3D;&#x3D;&#x3D;user.proveedor_id})
+            if (userSelected.proveedor_id &#x3D;&#x3D;&#x3D; 1) {
+              this.formUser.get(&#x27;provider&#x27;).setValue(&#x27;movistar&#x27;);
+            } else {
+              this.formUser.get(&#x27;provider&#x27;).setValue(&#x27;contratista&#x27;);
+            }
+            const delay &#x3D; 700;
+            setTimeout(() &#x3D;&gt; {
+              this.formUser
+                .get(&#x27;proveedor_id&#x27;)
+                .setValue(userSelected.proveedor_id);
+            }, delay);
+            setTimeout(() &#x3D;&gt; {
+              this.formUser.get(&#x27;area_id&#x27;).setValue(userSelected.area_id);
+            }, delay);
+            console.log(contratos);
+            console.log(contratos.map(contrato &#x3D;&gt; contrato.contrato_id));
+            setTimeout(() &#x3D;&gt; {
+              this.formUser
+                .get(&#x27;contratos_marco&#x27;)
+                .setValue(contratos.map(contrato &#x3D;&gt; contrato.contrato_id));
+            }, 700);
+            // setTimeout(() &#x3D;&gt; {
+            //   this.formUser.get(&#x27;superior&#x27;).setValue(17);
+            // }, 1500);
+            // this.formUser
+            //   .get(&#x27;perfiles&#x27;)
+            //   .setValue(user.perfiles.map(perfil &#x3D;&gt; perfil.id));
+
+            setTimeout(() &#x3D;&gt; {
+              this.detector.detectChanges();
+            }, 2000);
+          }
+        })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  initObservables(): void {
+    this.guiasSubgrupo$ &#x3D; this.userFacade.getAllGuiasSubgrupo$();
+    this.proveedores4createUser$ &#x3D;
+      this.userFacade.getAllProveedores4CreateUser$();
+    this.areas4createUser$ &#x3D; this.userFacade
+      .getAllarea4createUser$()
+      .pipe(tap(areas &#x3D;&gt; this.checkAreaAndEnable(areas)));
+    this.contratosUser$ &#x3D; this.userFacade.getContratosUsuario$();
+    // this.profiles$ &#x3D; this.profileFacade.getProfile$().pipe(
+    //   map(perfiles &#x3D;&gt; {
+    //     return perfiles || [];
+    //   })
+    // );
+    // this.subscription.add(
+    //   this.profiles$.subscribe(perfiles &#x3D;&gt; {
+    //     this.roles &#x3D; perfiles.reduce((ac, perfil) &#x3D;&gt; {
+    //       ac[perfil.rol_nombre] &#x3D; [];
+    //       return ac;
+    //     }, {});
+    //     perfiles.forEach(perfil &#x3D;&gt; this.roles[perfil.rol_nombre].push(perfil));
+    //     this.perfiles &#x3D; Object.keys(this.roles).map(rol &#x3D;&gt; {
+    //       return {
+    //         label: rol,
+    //         value: &#x27;rol&#x27;,
+    //         items: this.roles[rol].map((perfil: Perfil) &#x3D;&gt; {
+    //           return { label: perfil.nombre, value: perfil.id };
+    //         }),
+    //       };
+    //     });
+    //   })
+    // );
+    this.posiblesContractosUser$ &#x3D; this.userFacade
+      .getPosiblesContratosUser4CreateEdit$()
+      .pipe(
+        map(contratos &#x3D;&gt; contratos || []),
+        tap(contratos &#x3D;&gt; this.checkContratosAndEnable(contratos))
+      );
+    // this.proveedores4createUser$.subscribe(perfiles &#x3D;&gt; {
+    //   console.log(perfiles);
+    // });
+    // this.samecompanyusers$ &#x3D; this.userFacade.getPosiblesSuperiores$().pipe(
+    //   map(usuarios &#x3D;&gt; usuarios || []),
+    //   tap(usuarios &#x3D;&gt; this.checkSuperioresAndEnable(usuarios))
+    // );
+  }
+
+  initFormControlsEvents(): void {
+    this.initProviderRadioFormControlEvent();
+    this.initProveerdorFromControlEvent();
+    this.initAreaFormControlEvent();
+    this.initSuperiorFromControlEvent();
+    this.initDelegatedAuthFormControlEvent();
+  }
+
+  initProviderRadioFormControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get(&#x27;provider&#x27;).valueChanges.subscribe(provider &#x3D;&gt; {
+        this.resetProveedorFormControl();
+        this.resetAreaFormControl();
+        this.userFacade.resetContratos();
+        if (provider &#x3D;&#x3D;&#x3D; &#x27;movistar&#x27;) {
+          this.userFacade.getAllProveedores4CreateUser(true);
+        } else if (provider &#x3D;&#x3D;&#x3D; &#x27;contratista&#x27;) {
+          this.userFacade.getAllProveedores4CreateUser(false);
+        }
+      })
+    );
+  }
+
+  initProveerdorFromControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get(&#x27;proveedor_id&#x27;).valueChanges.subscribe(proveedor_id &#x3D;&gt; {
+        this.resetAreaFormControl();
+        this.resetContratosFormControl();
+        if (proveedor_id !&#x3D;&#x3D; null &amp;&amp; proveedor_id !&#x3D;&#x3D; undefined) {
+          const radioProvider &#x3D; this.formUser.get(&#x27;provider&#x27;).value;
+          if (radioProvider &#x3D;&#x3D;&#x3D; &#x27;contratista&#x27;) {
+            this.userFacade.getAllarea4createUser(false);
+          } else if (radioProvider &#x3D;&#x3D;&#x3D; &#x27;movistar&#x27;) {
+            this.userFacade.getAllarea4createUser(true);
+          }
+        } else {
+          this.disableAreaFormControl();
+        }
+      })
+    );
+  }
+
+  initAreaFormControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get(&#x27;area_id&#x27;).valueChanges.subscribe(area_id &#x3D;&gt; {
+        if (area_id !&#x3D;&#x3D; null &amp;&amp; area_id !&#x3D;&#x3D; undefined) {
+          const radioProvider &#x3D; this.formUser.get(&#x27;provider&#x27;).value;
+          const proveedor_id &#x3D; this.formUser.get(&#x27;proveedor_id&#x27;).value;
+          // if (radioProvider &#x3D;&#x3D;&#x3D; &#x27;contratista&#x27;) {
+          this.userFacade.getPosiblesContratosUser4CreateEdit(+proveedor_id);
+          // } else if (radioProvider &#x3D;&#x3D;&#x3D; &#x27;movistar&#x27;) {
+          //   this.userFacade.getPosiblesContratosUser4CreateEdit(-1);
+          // }
+        } else {
+          this.disableContratosFormControl();
+        }
+      })
+    );
+  }
+
+  initSuperiorFromControlEvent(): void {
+    this.subscription.add(
+      this.formUser
+        .get(&#x27;contratos_marco&#x27;)
+        .valueChanges.subscribe(contratos_marco_id &#x3D;&gt; {
+          // this.resetSuperiorFormControl();
+          if (
+            contratos_marco_id !&#x3D;&#x3D; null &amp;&amp;
+            contratos_marco_id !&#x3D;&#x3D; undefined &amp;&amp;
+            contratos_marco_id.length &gt; 0
+          ) {
+            const proveedor_id &#x3D; this.formUser.get(&#x27;proveedor_id&#x27;).value;
+            const area_id &#x3D; this.formUser.get(&#x27;area_id&#x27;).value;
+            // this.userFacade.getPosiblesSuperiores(
+            //   +proveedor_id,
+            //   +area_id,
+            //   contratos_marco_id
+            // );
+          } else {
+            // this.disableSuperiorFormControl();
+          }
+        })
+    );
+  }
+
+  initDelegatedAuthFormControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get(&#x27;delegated_auth&#x27;).valueChanges.subscribe(value &#x3D;&gt; {
+        if (this.usuario_id &#x3D;&#x3D;&#x3D; null) {
+          if (value.length &gt; 0) {
+            this.formUser.get(&#x27;password&#x27;).clearValidators();
+          } else {
+            this.formUser
+              .get(&#x27;password&#x27;)
+              .setValidators([
+                Validators.required,
+                CustomValidators.NoWhitespace,
+                Validators.maxLength(100),
+              ]);
+          }
+        } else {
+          if (value.length &gt; 0) {
+            this.formUser.get(&#x27;password&#x27;).clearValidators();
+          } else {
+            this.formUser
+              .get(&#x27;password&#x27;)
+              .setValidators([
+                CustomValidators.NoWhitespaceIfHasValue,
+                Validators.maxLength(100),
+              ]);
+          }
+        }
+        this.formUser.get(&#x27;password&#x27;).updateValueAndValidity();
+      })
+    );
+  }
+
+  //  --- ENABLED ---
+  checkAreaAndEnable(areas: Area[]): void {
+    if (areas?.length &gt; 0) {
+      this.formUser.get(&#x27;area_id&#x27;).enable();
+    } else {
+      this.formUser.get(&#x27;area_id&#x27;).disable();
+    }
+  }
+
+  checkContratosAndEnable(contratos: PosiblesContratosUser[]): void {
+    if (contratos.length &gt; 0) {
+      this.formUser.get(&#x27;contratos_marco&#x27;).enable();
+    } else {
+      this.formUser.get(&#x27;contratos_marco&#x27;).disable();
+    }
+  }
+
+  // checkSuperioresAndEnable(usuarios: PosiblesSuperiores[]): void {
+  //   if (usuarios.length &gt; 0) {
+  //     this.formUser.get(&#x27;superior&#x27;).enable();
+  //   } else {
+  //     this.formUser.get(&#x27;superior&#x27;).disable();
+  //   }
+  // }
+  //  ---- DISABLED ---
+  disableAreaFormControl(): void {
+    this.formUser.get(&#x27;area_id&#x27;).disable({ emitEvent: false });
+  }
+
+  disableContratosFormControl(): void {
+    this.formUser.get(&#x27;contratos_marco&#x27;).disable({ emitEvent: false });
+  }
+  // disableSuperiorFormControl(): void {
+  //   this.formUser.get(&#x27;superior&#x27;).disable({ emitEvent: false });
+  // }
+  //  --- RESET -----
+  resetProveedorFormControl(): void {
+    this.formUser.get(&#x27;proveedor_id&#x27;).reset();
+  }
+
+  resetAreaFormControl(): void {
+    this.formUser.get(&#x27;area_id&#x27;).reset();
+  }
+
+  resetContratosFormControl(): void {
+    this.formUser.get(&#x27;contratos_marco&#x27;).reset();
+  }
+
+  // resetSuperiorFormControl(): void {
+  //   this.userFacade.resetSuperiores();
+  //   this.formUser.get(&#x27;superior&#x27;).reset();
+  // }
+
+  // --- INIT DATA ---
+  initData(): void {
+    this.userFacade.getAllProveedores4CreateUser(true);
+    this.userFacade.getAllGuiasSubgrupo();
+    // this.profileFacade.getProfile();
+  }
+
+  goBack(): void {
+    this.userFacade.resetData();
+    this.router.navigate([&#x27;/administracion/usuarios/list-usuarios&#x27;]);
+  }
+
+  showPermisos(perfil: number): void {
+    // this.subscription.add(
+    //   this.profiles$.pipe(take(1)).subscribe(x &#x3D;&gt; {
+    //     x.forEach(y &#x3D;&gt; {
+    //       if (y.id &#x3D;&#x3D;&#x3D; perfil) {
+    //         const data &#x3D; y.permisos.map(permit &#x3D;&gt; {
+    //           let permitCustom;
+    //           if (permit &amp;&amp; permit.slug) {
+    //             permitCustom &#x3D; { ...permit, module: permit.slug.split(&#x27;_&#x27;)[0] };
+    //           }
+    //           return permitCustom;
+    //         });
+    //         // console.log(_.chain(data).groupBy(&#x27;module&#x27;).map((value, key) &#x3D;&gt; ({ module: key, permissions: value })).value())
+    //         this.ModalDataPermissions &#x3D; _.chain(data)
+    //           .groupBy(&#x27;module&#x27;)
+    //           .map((value, key) &#x3D;&gt; ({ module: key, permissions: value }))
+    //           .value();
+    //         this.DisplayPermisosModal &#x3D; true;
+    //       }
+    //     });
+    //   })
+    // );
+  }
+
+  save(): void {
+    if (this.formUser.get(&#x27;id&#x27;).value !&#x3D;&#x3D; null) {
+      const delegated_auth &#x3D;
+        this.formUser.get(&#x27;delegated_auth&#x27;).value.length &gt; 0;
+      const newPassword &#x3D; this.formUser.get(&#x27;password&#x27;).value;
+      const updateRequest: RequestUpdateUser &#x3D; {
+        usuario_id: this.usuario_id,
+        values: {
+          nombres: this.formUser.get(&#x27;nombres&#x27;).value,
+          apellidos: this.formUser.get(&#x27;apellidos&#x27;).value,
+          rut: this.formUser.get(&#x27;rut&#x27;).value,
+          celular: this.formUser.get(&#x27;celular&#x27;).value,
+          email: this.formUser.get(&#x27;email&#x27;).value,
+          proveedor_id: +this.formUser.get(&#x27;proveedor_id&#x27;).value,
+          area_id: +this.formUser.get(&#x27;area_id&#x27;).value,
+          guia_subgrupo_id: +this.formUser.get(&#x27;guia_subgrupo_id&#x27;).value,
+          delegated_auth,
+          password: delegated_auth
+            ? undefined
+            : newPassword.length &gt; 0
+            ? newPassword
+            : undefined,
+        },
+        contratos_marco: this.formUser.get(&#x27;contratos_marco&#x27;).value,
+      };
+      this.userFacade.updateUser(updateRequest);
+      // let request: Data.EditUserRequest;
+      // request &#x3D; {
+      //   id: +this.formUser.get(&#x27;id&#x27;).value,
+      //   ...data,
+      // };
+      // console.log(&#x27;EDIT REQUEST&#x27;, request);
+      // this.userFacade.editUserNew(request);
+      // // ToDo: Esto es un WA para que no se habra el modal
+      // this.userFacade.SetDisplayDetalleModal(false);
+    } else {
+      const delegated_auth &#x3D;
+        this.formUser.get(&#x27;delegated_auth&#x27;).value.length &gt; 0;
+      const request: RequestCreateUser &#x3D; {
+        username: this.formUser.get(&#x27;username&#x27;).value,
+        nombres: this.formUser.get(&#x27;nombres&#x27;).value,
+        apellidos: this.formUser.get(&#x27;apellidos&#x27;).value,
+        rut: this.formUser.get(&#x27;rut&#x27;).value,
+        celular: this.formUser.get(&#x27;celular&#x27;).value,
+        email: this.formUser.get(&#x27;email&#x27;).value,
+        proveedor_id: +this.formUser.get(&#x27;proveedor_id&#x27;).value,
+        area_id: +this.formUser.get(&#x27;area_id&#x27;).value,
+        contratos_marco: this.formUser.get(&#x27;contratos_marco&#x27;).value,
+        estado: true,
+        guia_subgrupo_id: +this.formUser.get(&#x27;guia_subgrupo_id&#x27;).value,
+        delegated_auth,
+        password: delegated_auth
+          ? undefined
+          : this.formUser.get(&#x27;password&#x27;).value,
+      };
+
+      console.log(request);
+      this.userFacade.createUser(request);
+    }
+  }
+
+  // onUpload(event: any): void {}
+
+  // onDeleteFile(event: any): void {}
+  get values(): any {
+    return this.formUser.getRawValue();
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;form-usuario-container works!&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col&quot;&gt;
+      &lt;h1 class&#x3D;&quot;mt-4&quot;&gt;Usuario &lt;/h1&gt;
+      &lt;span&gt;formulario de ingreso&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col&quot;&gt;
+      &lt;button pButton type&#x3D;&quot;button&quot; label&#x3D;&quot;Volver&quot; icon&#x3D;&quot;pi pi-arrow-left&quot; class&#x3D;&quot;p-button-sm mt-5 float-right p-button-outlined&quot; (click)&#x3D;&quot;goBack()&quot;&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-12&quot;&gt;
+      &lt;hr&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;card-body&quot;&gt;
+      &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12&quot;&gt;
+          &lt;form [formGroup]&#x3D;&quot;formUser&quot;&gt;
+            &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
+              &lt;div class&#x3D;&quot;col-md-6 col-xs-12 &quot;&gt;
+                &lt;div id&#x3D;&quot;guia-input&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-4 col-xs-12 &quot;&gt;
+                      &lt;label&gt;* Usuario Guia:&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-8 col-xs-12 &quot;&gt;
+                      &lt;input [formControl]&#x3D;&quot;formControls.username&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;username&quot;&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div id&#x3D;&quot;rut-input&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-4 col-xs-12 &quot;&gt;
+                      &lt;label&gt;* Documento identidad:&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-8 col-xs-12 &quot;&gt;
+                      &lt;input [formControl]&#x3D;&quot;formControls.rut&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;rut&quot;&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;!-- &lt;input id&#x3D;&quot;documento-input&quot; name&#x3D;&quot;documento-input&quot; formControlName&#x3D;&quot;rut&quot; maxlength&#x3D;&quot;15&quot; minlength&#x3D;&quot;10&quot; placeholder&#x3D;&quot;xx.xxx.xxx-x&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot;&gt;  --&gt;
+                &lt;br&gt;
+                &lt;div id&#x3D;&quot;nombres-input&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-4 col-xs-12 &quot;&gt;
+                      &lt;label&gt;* Nombres:&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-8 col-xs-12 &quot;&gt;
+                      &lt;input [formControl]&#x3D;&quot;formControls.nombres&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;nombres&quot;&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div id&#x3D;&quot;apellidos-input&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-4 col-xs-12 &quot;&gt;
+                      &lt;label&gt;* Apellidos:&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-8 col-xs-12 &quot;&gt;
+                      &lt;input [formControl]&#x3D;&quot;formControls.apellidos&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;apellidos&quot;&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;div id&#x3D;&quot;email-input&quot;&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-md-4 col-xs-12 &quot;&gt;
+                      &lt;label&gt;* Email:&lt;/label&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;col-md-8 col-xs-12 &quot;&gt;
+                      &lt;input [formControl]&#x3D;&quot;formControls.email&quot; class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;email&quot;&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;row&quot;&gt;
+                  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;
+                    &lt;label for&#x3D;&quot;&quot;&gt;Celular&lt;/label&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;col-md-8 col-xs-12&quot; id&#x3D;&quot;celular-input&quot;&gt;
+                    &lt;p-inputMask id&#x3D;&quot;celular-input&quot; name&#x3D;&quot;celular-input&quot; formControlName&#x3D;&quot;celular&quot; styleClass&#x3D;&quot;form-control&quot; mask&#x3D;&quot;(99) 9 9999 9999&quot; unmask&#x3D;&quot;true&quot;&gt;
+                    &lt;/p-inputMask&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;col-md-6 col-xs-12&quot;&gt;
+                &lt;div class&#x3D;&quot;row align-items-center&quot; style&#x3D;&quot;height: 100%;&quot;&gt;
+                  &lt;div class&#x3D;&quot;col-12&quot;&gt;
+                    &lt;div class&#x3D;&quot;tipoEmpresa&quot;&gt;
+                      &lt;label for&#x3D;&quot;&quot;&gt;Empresa&lt;/label&gt;
+                      &lt;div class&#x3D;&quot;row&quot; style&#x3D;&quot;margin-left: 19%;&quot;&gt;
+                        &lt;div class&#x3D;&quot;col-xs-12 col-md-5&quot;&gt;
+                          &lt;div class&#x3D;&quot;p-field-radiobutton&quot; id&#x3D;&quot;movistar-radio-input&quot;&gt;
+                            &lt;p-radioButton id&#x3D;&quot;movistar&quot; name&#x3D;&quot;provider&quot; formControlName&#x3D;&quot;provider&quot; value&#x3D;&quot;movistar&quot;&gt;&lt;/p-radioButton&gt;
+                            &lt;label for&#x3D;&quot;movistar&quot;&gt;Movistar&lt;/label&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;col-xs-12 col-md-7&quot;&gt;
+                          &lt;div class&#x3D;&quot;p-field-radiobutton&quot; id&#x3D;&quot;contratista-radio-input&quot;&gt;
+                            &lt;p-radioButton id&#x3D;&quot;proveedor&quot; name&#x3D;&quot;provider&quot; formControlName&#x3D;&quot;provider&quot; value&#x3D;&quot;contratista&quot;&gt;&lt;/p-radioButton&gt;
+                            &lt;label for&#x3D;&quot;proveedor&quot;&gt;Contratista&lt;/label&gt;
+                          &lt;/div&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;br&gt;
+                    &lt;div id&#x3D;&quot;proveedor-select&quot;&gt;
+                      &lt;zwc-pdropdown [control]&#x3D;&quot;formControls.proveedor_id&quot; Label&#x3D;&quot;* Proveedor&quot; dropdown_id&#x3D;&quot;proveedor-select-dropdown&quot; [data]&#x3D;&quot;proveedores4createUser$|async&quot; Pplaceholder&#x3D;&quot;Seleccione proveedor&quot; [loading]&#x3D;&quot;false&quot; optionLabel&#x3D;&quot;nombre&quot; optionValue&#x3D;&quot;id&quot;&gt;&lt;/zwc-pdropdown&gt;
+                    &lt;/div&gt;
+                    &lt;br&gt;
+                    &lt;div id&#x3D;&quot;area-select&quot;&gt;
+                      &lt;zwc-pdropdown [control]&#x3D;&quot;formControls.area_id&quot; Label&#x3D;&quot;* Área&quot; dropdown_id&#x3D;&quot;area-select-dropdown&quot; [data]&#x3D;&quot;areas4createUser$|async&quot; Pplaceholder&#x3D;&quot;Seleccione proveedor&quot; [loading]&#x3D;&quot;false&quot; optionLabel&#x3D;&quot;nombre&quot; optionValue&#x3D;&quot;id&quot;&gt;&lt;/zwc-pdropdown&gt;
+                    &lt;/div&gt;
+
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;col-12&quot;&gt;
+                &lt;hr&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;col-md-6 col-xs-12&quot;&gt;
+                &lt;div id&#x3D;&quot;guia-subgrupo-select&quot;&gt;
+                  &lt;zwc-pdropdown [control]&#x3D;&quot;formControls.guia_subgrupo_id&quot; Label&#x3D;&quot;* Guia Subgrupo&quot; dropdown_id&#x3D;&quot;guia-subgrupo-select-dropdown&quot; [data]&#x3D;&quot;guiasSubgrupo$|async&quot; Pplaceholder&#x3D;&quot;Seleccione subgrupo&quot; [loading]&#x3D;&quot;false&quot; optionLabel&#x3D;&quot;descripcion&quot; optionValue&#x3D;&quot;id&quot;&gt;&lt;/zwc-pdropdown&gt;
+                &lt;/div&gt;
+                &lt;br&gt;
+                &lt;p-checkbox [formControl]&#x3D;&quot;formControls.delegated_auth&quot; label&#x3D;&quot;Autenticar en GUIA&quot; value&#x3D;&quot;true&quot;&gt;&lt;/p-checkbox&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;formControls.delegated_auth.value.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+                  &lt;br&gt;
+                  &lt;div class&#x3D;&quot;row&quot;&gt;
+                    &lt;div class&#x3D;&quot;col-12&quot; id&#x3D;&quot;nombre-perfil-input&quot;&gt;
+                      &lt;span class&#x3D;&quot;p-float-label field&quot;&gt;
+                        &lt;input type&#x3D;&quot;{{ showPassword ? &#x27;text&#x27; : &#x27;password&#x27; }}&quot; pInputText name&#x3D;&quot;nombre&quot; class&#x3D;&quot;p-inputtext-sm&quot; [formControl]&#x3D;&quot;formControls.password&quot; /&gt;
+                        &lt;label for&#x3D;&quot;nombre&quot;&gt;{{ usuario_id &#x3D;&#x3D;&#x3D; null ? &#x27;Password&#x27;: &#x27;Nueva Password&#x27; }}&lt;/label&gt;
+                        &lt;zwc-input-alert [control]&#x3D;&quot;formControls.password&quot;&gt; &lt;/zwc-input-alert&gt;
+                      &lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;showPassword&quot;&gt;
+                    &lt;a style&#x3D;&quot;cursor: pointer&quot; (click)&#x3D;&quot;showPassword &#x3D; false&quot;&gt;Ocultar contraseña&lt;/a&gt;
+                  &lt;/ng-container&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;!showPassword&quot;&gt;
+                    &lt;a style&#x3D;&quot;cursor: pointer&quot; (click)&#x3D;&quot;showPassword &#x3D; true&quot;&gt;Mostrar contraseña&lt;/a&gt;
+                  &lt;/ng-container&gt;
+                &lt;/ng-container&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;col-12&quot;&gt;
+                &lt;hr&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
+              &lt;div class&#x3D;&quot;col-md-6 col-xs-12&quot;&gt;
+                &lt;label for&#x3D;&quot;&quot;&gt;Contratos con los que puede trabajar&lt;/label&gt;
+                &lt;div id&#x3D;&quot;contratos-select&quot;&gt;
+                  &lt;p-multiSelect id&#x3D;&quot;contratos_marco_multi&quot; name&#x3D;&quot;contratos_marco_multi&quot; [style]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;}&quot; placeholder&#x3D;&quot;Seleccionar contratos...&quot; [options]&#x3D;&quot;posiblesContractosUser$|async&quot; formControlName&#x3D;&quot;contratos_marco&quot; optionLabel&#x3D;&quot;nombre&quot; optionValue&#x3D;&quot;id&quot; [virtualScroll]&#x3D;&quot;true&quot; itemSize&#x3D;&quot;30&quot;&gt;
+                  &lt;/p-multiSelect&gt;
+                  &lt;div *ngIf&#x3D;&quot;formControls.contratos_marco.invalid &amp;&amp; (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)&quot;&gt;
+                    &lt;p-message severity&#x3D;&quot;error&quot; text&#x3D;&quot;Este campo es requerido&quot;&gt;&lt;/p-message&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;br&gt;
+                &lt;!-- &lt;label&gt;Adjuntar Firma&lt;/label&gt;
+                &lt;p-fileUpload chooseLabel&#x3D;&quot;Agregar documento&quot; name&#x3D;&quot;demo[]&quot; #filesform auto&#x3D;&quot;true&quot; (uploadHandler)&#x3D;&quot;onUpload($event)&quot; (onRemove)&#x3D;&quot;onDeleteFile($event)&quot; customUpload&#x3D;&quot;true&quot; accept&#x3D;&quot;.docx,.doc,.gif,.json,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain&quot; maxFileSize&#x3D;&quot;50000000&quot;&gt;
+                &lt;/p-fileUpload&gt;
+
+                &lt;label style&#x3D;&quot;color: #464646;font-weight: 400;&quot;&gt;
+                  &lt;strong style&#x3D;&quot;margin-left: 7px;margin-right: 7px;&quot;&gt;Extensiones permitidas:&lt;/strong&gt;
+                  &lt;span style&#x3D;&quot;word-spacing: 5px&quot;&gt;.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx &lt;/span&gt;
+                &lt;/label&gt; --&gt;
+              &lt;/div&gt;
+              &lt;!-- &lt;div class&#x3D;&quot;col-md-6 col-xs-12&quot;&gt;
+                &lt;app-select [control]&#x3D;&quot;formControls.superior&quot; label&#x3D;&quot;Superior directo&quot;&gt;
+                  &lt;ng-container options&gt;
+                    &lt;option value&#x3D;&quot;null&quot; selected disabled&gt;Seleccione persona&lt;/option&gt;
+                    &lt;option value&#x3D;&quot;null&quot;&gt;No posee superior directo&lt;/option&gt;
+                    &lt;ng-container *ngFor&#x3D;&quot;let superior of samecompanyusers$ | async&quot;&gt;
+                      &lt;option [value]&#x3D;&quot;superior.id&quot;&gt;
+                        {{ superior.nombres }} {{ superior.apellidos }}
+                      &lt;/option&gt;
+                    &lt;/ng-container&gt;
+                  &lt;/ng-container&gt;
+                &lt;/app-select&gt;
+              &lt;/div&gt; --&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;col-12&quot;&gt;
+                &lt;hr&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;!-- &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
+              &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;/div&gt;
+              &lt;div class&#x3D;&quot;col-5&quot; style&#x3D;&quot;border: solid 1px #ced4da;
+              padding: 33px;&quot;&gt;
+                &lt;h5&gt;Perfil&lt;/h5&gt;
+                &lt;p-multiSelect id&#x3D;&quot;perfiles&quot; [options]&#x3D;&quot;perfiles&quot; [style]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;}&quot; [group]&#x3D;&quot;true&quot; defaultLabel&#x3D;&quot;Seleccione los perfiles del usuario&quot; scrollHeight&#x3D;&quot;300px&quot; display&#x3D;&quot;chip&quot; formControlName&#x3D;&quot;perfiles&quot;&gt;
+                  &lt;ng-template let-group pTemplate&#x3D;&quot;group&quot;&gt;
+                    &lt;div class&#x3D;&quot;p-d-flex p-ai-center&quot;&gt;
+                      &lt;span&gt;{{group.label}}&lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/ng-template&gt;
+                &lt;/p-multiSelect&gt;
+                &lt;div *ngIf&#x3D;&quot;formControls.perfiles.invalid &amp;&amp; (formControls.perfiles.dirty || formControls.perfiles.touched)&quot;&gt;
+                  &lt;p-message severity&#x3D;&quot;error&quot; text&#x3D;&quot;Este campo es requerido&quot;&gt;&lt;/p-message&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;row justify-content-center&quot; *ngFor&#x3D;&quot;let perfil of profiles$|async&quot;&gt;
+                  &lt;div class&#x3D;&quot;col-1&quot;&gt;
+                    &lt;p-checkbox name&#x3D;&quot;group1&quot; value&#x3D;&quot;{{perfil.id}}&quot; formControlName&#x3D;&quot;perfiles&quot;&gt;&lt;/p-checkbox&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;col-8&quot;&gt; &lt;label for&#x3D;&quot;ny&quot;&gt;{{perfil.nombre}}&lt;/label&gt;&lt;/div&gt;
+                  &lt;div class&#x3D;&quot;col-2&quot; style&#x3D;&quot;text-align: start&quot;&gt; &lt;button (click)&#x3D;&quot;showPermisos(perfil.id)&quot; style&#x3D;&quot;border: 1px solid;&quot;&gt;permisos&lt;/button&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt; --&gt;
+            &lt;div class&#x3D;&quot;col-xs-12 offset-md-7 col-md-5 text-right mb-4&quot;&gt;
+              &lt;button id&#x3D;&quot;submit-user&quot; (click)&#x3D;&quot;save()&quot; type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!formUser.valid&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;&lt;em class&#x3D;&quot;pi pi-save mr-1&quot;&gt;&lt;/em&gt;Guardar&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -195,8 +2398,8 @@ export class FormUsuarioContainerComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>form-usuario-container works!</p></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid">  <div class="row">    <div class="col">      <h1 class="mt-4">Usuario </h1>      <span>formulario de ingreso</span>    </div>    <div class="col">      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>    </div>    <div class="col-12">      <hr>    </div>  </div>  <div class="card">    <div class="card-body">      <div class="row justify-content-center">        <div class="col-12">          <form [formGroup]="formUser">            <div class="row justify-content-center">              <div class="col-md-6 col-xs-12 ">                <div id="guia-input">                  <div class="row">                    <div class="col-md-4 col-xs-12 ">                      <label>* Usuario Guia:</label>                    </div>                    <div class="col-md-8 col-xs-12 ">                      <input [formControl]="formControls.username" class="form-control" type="text" name="username">                    </div>                  </div>                </div>                <br>                <div id="rut-input">                  <div class="row">                    <div class="col-md-4 col-xs-12 ">                      <label>* Documento identidad:</label>                    </div>                    <div class="col-md-8 col-xs-12 ">                      <input [formControl]="formControls.rut" class="form-control" type="text" name="rut">                    </div>                  </div>                </div>                <!-- <input id="documento-input" name="documento-input" formControlName="rut" maxlength="15" minlength="10" placeholder="xx.xxx.xxx-x" class="form-control" type="text">  -->                <br>                <div id="nombres-input">                  <div class="row">                    <div class="col-md-4 col-xs-12 ">                      <label>* Nombres:</label>                    </div>                    <div class="col-md-8 col-xs-12 ">                      <input [formControl]="formControls.nombres" class="form-control" type="text" name="nombres">                    </div>                  </div>                </div>                <br>                <div id="apellidos-input">                  <div class="row">                    <div class="col-md-4 col-xs-12 ">                      <label>* Apellidos:</label>                    </div>                    <div class="col-md-8 col-xs-12 ">                      <input [formControl]="formControls.apellidos" class="form-control" type="text" name="apellidos">                    </div>                  </div>                </div>                <br>                <div id="email-input">                  <div class="row">                    <div class="col-md-4 col-xs-12 ">                      <label>* Email:</label>                    </div>                    <div class="col-md-8 col-xs-12 ">                      <input [formControl]="formControls.email" class="form-control" type="text" name="email">                    </div>                  </div>                </div>                <div class="row">                  <div class="col-md-4 col-xs-12">                    <label for="">Celular</label>                  </div>                  <div class="col-md-8 col-xs-12" id="celular-input">                    <p-inputMask id="celular-input" name="celular-input" formControlName="celular" styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">                    </p-inputMask>                  </div>                </div>              </div>              <div class="col-md-6 col-xs-12">                <div class="row align-items-center" style="height: 100%;">                  <div class="col-12">                    <div class="tipoEmpresa">                      <label for="">Empresa</label>                      <div class="row" style="margin-left: 19%;">                        <div class="col-xs-12 col-md-5">                          <div class="p-field-radiobutton" id="movistar-radio-input">                            <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>                            <label for="movistar">Movistar</label>                          </div>                        </div>                        <div class="col-xs-12 col-md-7">                          <div class="p-field-radiobutton" id="contratista-radio-input">                            <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>                            <label for="proveedor">Contratista</label>                          </div>                        </div>                      </div>                    </div>                    <br>                    <div id="proveedor-select">                      <zwc-pdropdown [control]="formControls.proveedor_id" Label="* Proveedor" dropdown_id="proveedor-select-dropdown" [data]="proveedores4createUser$|async" Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>                    </div>                    <br>                    <div id="area-select">                      <zwc-pdropdown [control]="formControls.area_id" Label="* Área" dropdown_id="area-select-dropdown" [data]="areas4createUser$|async" Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>                    </div>                  </div>                </div>              </div>            </div>            <div class="row">              <div class="col-12">                <hr>              </div>            </div>            <div class="row">              <div class="col-md-6 col-xs-12">                <div id="guia-subgrupo-select">                  <zwc-pdropdown [control]="formControls.guia_subgrupo_id" Label="* Guia Subgrupo" dropdown_id="guia-subgrupo-select-dropdown" [data]="guiasSubgrupo$|async" Pplaceholder="Seleccione subgrupo" [loading]="false" optionLabel="descripcion" optionValue="id"></zwc-pdropdown>                </div>                <br>                <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>                <ng-container *ngIf="formControls.delegated_auth.value.length === 0">                  <br>                  <div class="row">                    <div class="col-12" id="nombre-perfil-input">                      <span class="p-float-label field">                        <input type="{{ showPassword ? \'text\' : \'password\' }}" pInputText name="nombre" class="p-inputtext-sm" [formControl]="formControls.password" />                        <label for="nombre">{{ usuario_id === null ? \'Password\': \'Nueva Password\' }}</label>                        <zwc-input-alert [control]="formControls.password"> </zwc-input-alert>                      </span>                    </div>                  </div>                  <ng-container *ngIf="showPassword">                    <a style="cursor: pointer" (click)="showPassword = false">Ocultar contraseña</a>                  </ng-container>                  <ng-container *ngIf="!showPassword">                    <a style="cursor: pointer" (click)="showPassword = true">Mostrar contraseña</a>                  </ng-container>                </ng-container>              </div>            </div>            <div class="row">              <div class="col-12">                <hr>              </div>            </div>            <div class="row justify-content-center">              <div class="col-md-6 col-xs-12">                <label for="">Contratos con los que puede trabajar</label>                <div id="contratos-select">                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{\'width\':\'100%\'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">                  </p-multiSelect>                  <div *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">                    <p-message severity="error" text="Este campo es requerido"></p-message>                  </div>                </div>                <br>                <!-- <label>Adjuntar Firma</label>                <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".docx,.doc,.gif,.json,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain" maxFileSize="50000000">                </p-fileUpload>                <label style="color: #464646;font-weight: 400;">                  <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>                  <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span>                </label> -->              </div>              <!-- <div class="col-md-6 col-xs-12">                <app-select [control]="formControls.superior" label="Superior directo">                  <ng-container options>                    <option value="null" selected disabled>Seleccione persona</option>                    <option value="null">No posee superior directo</option>                    <ng-container *ngFor="let superior of samecompanyusers$ | async">                      <option [value]="superior.id">                        {{ superior.nombres }} {{ superior.apellidos }}                      </option>                    </ng-container>                  </ng-container>                </app-select>              </div> -->            </div>            <div class="row">              <div class="col-12">                <hr>              </div>            </div>            <!-- <div class="row justify-content-center">              <div class="col-3"></div>              <div class="col-5" style="border: solid 1px #ced4da;              padding: 33px;">                <h5>Perfil</h5>                <p-multiSelect id="perfiles" [options]="perfiles" [style]="{\'width\':\'100%\'}" [group]="true" defaultLabel="Seleccione los perfiles del usuario" scrollHeight="300px" display="chip" formControlName="perfiles">                  <ng-template let-group pTemplate="group">                    <div class="p-d-flex p-ai-center">                      <span>{{group.label}}</span>                    </div>                  </ng-template>                </p-multiSelect>                <div *ngIf="formControls.perfiles.invalid && (formControls.perfiles.dirty || formControls.perfiles.touched)">                  <p-message severity="error" text="Este campo es requerido"></p-message>                </div>                <div class="row justify-content-center" *ngFor="let perfil of profiles$|async">                  <div class="col-1">                    <p-checkbox name="group1" value="{{perfil.id}}" formControlName="perfiles"></p-checkbox>                  </div>                  <div class="col-8"> <label for="ny">{{perfil.nombre}}</label></div>                  <div class="col-2" style="text-align: start"> <button (click)="showPermisos(perfil.id)" style="border: 1px solid;">permisos</button></div>                </div>              </div>              <div class="col-3"></div>            </div> -->            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formUser.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>            </div>          </form>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormUsuarioContainerComponent'};
 </script>

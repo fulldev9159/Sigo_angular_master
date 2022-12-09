@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/form-table-services-deprecated/form-table-services.component.ts</code>
+            <code>src/app/shared/table-servicios/table-servicios.component.ts</code>
         </p>
 
 
@@ -83,6 +83,12 @@
                     <tr>
                         <td class="col-md-4">
                             <ul class="index-list">
+                                <li>
+                                        <a href="#puntos_baremos" 
+>
+                                            puntos_baremos
+                                        </a>
+                                </li>
                                 <li>
                                         <a href="#servicio_cantidad" 
 >
@@ -118,6 +124,39 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="puntos_baremos"></a>
+                                        <span class="name "><b>puntos_baremos</b>
+                                            <a href="#puntos_baremos">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>puntos_baremos:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -257,8 +296,11 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
+  Output,
+  EventEmitter,
   OnDestroy,
   OnInit,
 } from &#x27;@angular/core&#x27;;
@@ -269,16 +311,19 @@ import {
   FormGroup,
   Validators,
 } from &#x27;@angular/forms&#x27;;
+import { faTrash } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
 import { CarritoService, CarritoUO, SessionData } from &#x27;@model&#x27;;
 import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
-import { combineLatest, map, Observable, of, Subscription } from &#x27;rxjs&#x27;;
+import { map, Observable, of, Subscription } from &#x27;rxjs&#x27;;
 import localeEsCl from &#x27;@angular/common/locales/es-CL&#x27;;
 import { registerLocaleData } from &#x27;@angular/common&#x27;;
+import * as CustomValidators from &#x27;@sharedOT/validators&#x27;;
 
 interface ServiceTableCarrito {
   servicio_id: number;
   servicio_cantidad: number;
   servicio_precio_final_clp: number;
+  puntos_baremos: number;
   unidad_obras: [
     {
       uo_codigo: string;
@@ -288,73 +333,126 @@ interface ServiceTableCarrito {
   ];
 }
 
-/**
- * @description
- *   PERMITE CREAR UNA TABLA CON LOS DATOS DE LOS SERVICIOS.
- *   los datos desplegados pueden ser a manejados por el reducer carrito para poder agregar o quitar servicios o por data fija de la que solo se puede modiicar su cantidad
- *
- */
-@Component({
-  selector: &#x27;zwc-form-table-services&#x27;,
-  templateUrl: &#x27;./form-table-services.component.html&#x27;,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [&#x27;./form-table-services.component.scss&#x27;],
-})
-export class FormTableServicesComponent implements OnDestroy, OnInit {
-  subscription: Subscription &#x3D; new Subscription();
-  @Input() StaticData: CarritoService[] &#x3D; null;
+// 173 TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+// 174 TODO: MEJORAR CSS DEL SWITCH
+// 175 TODO: VER MEJOR MANERA DE REPREENTAR LA EDICIÓN DE SERVICIOS EXISTENTES UX
 
-  carrito$: Observable&lt;CarritoService[]&gt; &#x3D; of([]);
+@Component({
+  selector: &#x27;zwc-table-servicios&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: &#x27;./table-servicios.component.html&#x27;,
+  styleUrls: [&#x27;./table-servicios.component.scss&#x27;],
+})
+export class TableServiciosComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
+  data_carrito$: Observable&lt;CarritoService[]&gt; &#x3D; of([]);
+  @Input() mode_source: string &#x3D; &#x27;aggregation&#x27;; // MODES: aggregation/static/agregar-adicionales-informe-avance
+  @Input() data_source: CarritoService[] &#x3D; null;
+  @Input() informe_avance: CarritoService[] &#x3D; null;
+  // AL ESCOGER MODE aggregation LA FUENTE DE LA DATA SERÁ EL STORE CARRITO QUE SE PODRÁ MANIPULAR DESDE CUALQUIER PARTE
+  // PARA QUE LAS CANTIDADES SE MANTENGAN AL AGREGAR O MODIFICAR UN SERVICIO ESTAS DEBEN SER MANEJADAS POR EL COMPONENTE QUE LLAMA A ESTE COMPONENTE
+  // AL ESCOGER MODE static LA FUENTE DE LA DATA A DESPLEGAR SERÁ LA QUE SEA ENVIADA EN data_source Y A ESTA NO SE LE PRODRÁ AGREGAR O QUITAR SERVICIOS
+  @Input() cantidad_editable: boolean &#x3D; true;
+  @Input() column_acciones: boolean &#x3D; true;
+  @Input() column_acciones_uo: boolean &#x3D; false;
+  @Input() accion_delete: boolean &#x3D; true;
+  @Input() accion_detalle_uo: boolean &#x3D; false;
+  @Input() accion_detalle_uo_only_precargado: boolean &#x3D; false;
+  @Input() accion_detalle_materiales_uo &#x3D; false;
+  @Input() accion_aprobacion_servicio_adic &#x3D; false;
+  @Input() contratoMarco &#x3D; &#x27;&#x27;;
+
+  @Output() detallesUOClicked &#x3D; new EventEmitter&lt;{
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }&gt;();
+
+  formTable: FormGroup &#x3D; new FormGroup({ table: new FormArray([]) });
+  formAprobarTodos: FormGroup &#x3D; new FormGroup({
+    all: new FormControl(false),
+  });
+
   totalServicios &#x3D; 0;
   totalUOs &#x3D; 0;
-
-  // FORMULARIO
-  formTableControl &#x3D; {
-    table: new FormArray([]),
-  };
-
-  formTable: FormGroup &#x3D; new FormGroup(this.formTableControl);
+  totalBaremos &#x3D; 0;
 
   servicios_eliminar: number[] &#x3D; [];
   uos_eliminar: number[] &#x3D; [];
 
-  showDelete &#x3D; true;
+  trashICon &#x3D; faTrash;
 
-  sessionData: SessionData &#x3D; JSON.parse(localStorage.getItem(&#x27;auth&#x27;))
-    .sessionData;
+  maxDigits &#x3D; 10;
+  maxDecimals &#x3D; 2;
 
-  constructor(private serviciosFacade: ServiciosFacade) {
+  permisos: string[] &#x3D; (
+    JSON.parse(localStorage.getItem(&#x27;auth&#x27;)).sessionData as SessionData
+  ).permisos.map(value &#x3D;&gt; value.slug);
+
+  constructor(
+    private serviciosFacade: ServiciosFacade,
+    private detector: ChangeDetectorRef
+  ) {
     registerLocaleData(localeEsCl, &#x27;es-CL&#x27;);
   }
 
   ngOnInit(): void {
-    this.StaticData ? this.LoadStaticMode() : this.LoadDynamicMode();
+    // DATA
+    if (this.mode_source &#x3D;&#x3D;&#x3D; &#x27;aggregation&#x27;)
+      this.data_carrito$ &#x3D; this.loadData(this.serviciosFacade.carrito$());
+    if (this.mode_source &#x3D;&#x3D;&#x3D; &#x27;static&#x27;)
+      this.data_carrito$ &#x3D; this.loadData(of(this.data_source));
+    else if (this.mode_source &#x3D;&#x3D;&#x3D; &#x27;agregar-adicionales-informe-avance&#x27;) {
+      if (this.informe_avance &#x3D;&#x3D;&#x3D; null)
+        throw Error(&#x27;Se debe enviar el informe de avance actual&#x27;);
 
+      this.data_carrito$ &#x3D; this.loadDataServiciosAdicionales(
+        this.serviciosFacade.carrito$(),
+        this.informe_avance
+      );
+    }
+
+    // CALCULAR TOTALES
     this.subscription.add(
       this.formTable.get(&#x27;table&#x27;).valueChanges.subscribe(table &#x3D;&gt; {
         this.totalServicios &#x3D; 0;
         this.totalUOs &#x3D; 0;
+        this.totalBaremos &#x3D; 0;
 
         if (table.length &gt; 0) {
           table.forEach((servicioTable: ServiceTableCarrito) &#x3D;&gt; {
-            let precio_uo &#x3D; servicioTable.unidad_obras.reduce(
+            let precio_total_uo &#x3D; servicioTable.unidad_obras.reduce(
               (acc, curr) &#x3D;&gt; acc + curr.uo_precio_total_clp * curr.uo_cantidad,
               0
             );
 
-            this.totalServicios &#x3D;
-              this.totalServicios +
+            let precio_total_servicio &#x3D;
               servicioTable.servicio_precio_final_clp *
-                servicioTable.servicio_cantidad;
-            this.totalUOs &#x3D; this.totalUOs + precio_uo;
+              servicioTable.servicio_cantidad;
+
+            let precio_total_baremos &#x3D;
+              servicioTable.puntos_baremos * servicioTable.servicio_cantidad;
+
+            this.totalBaremos &#x3D; this.totalBaremos + precio_total_baremos;
+            this.totalServicios &#x3D; this.totalServicios + precio_total_servicio;
+            this.totalUOs &#x3D; this.totalUOs + precio_total_uo;
           });
         }
       })
     );
+
+    // OBSERVAR APROBACION DE TODOS LOS ADICIONALES
+    this.subscription.add(
+      this.formAprobarTodos.get(&#x27;all&#x27;).valueChanges.subscribe(value &#x3D;&gt; {
+        const serviciosForm &#x3D; this.formTable.get(&#x27;table&#x27;) as FormArray;
+        serviciosForm.controls.map(control &#x3D;&gt;
+          control.get(&#x27;validar_adicional&#x27;).setValue(value)
+        );
+      })
+    );
   }
 
-  LoadDynamicMode(): void {
-    this.carrito$ &#x3D; this.serviciosFacade.carrito$().pipe(
+  loadData(data$: Observable&lt;CarritoService[]&gt;): Observable&lt;CarritoService[]&gt; {
+    return data$.pipe(
       map(servicios &#x3D;&gt; {
         let valueInitial: CarritoService[] &#x3D; [];
         if (servicios &amp;&amp; servicios.length &gt; 0) {
@@ -388,10 +486,56 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     );
   }
 
-  LoadStaticMode(): void {
-    this.showDelete &#x3D; false;
-    this.carrito$ &#x3D; of(this.StaticData);
-    this.makeForm(this.StaticData);
+  loadDataServiciosAdicionales(
+    data$: Observable&lt;CarritoService[]&gt;,
+    informe_avance: CarritoService[]
+  ): Observable&lt;CarritoService[]&gt; {
+    return data$.pipe(
+      map(servicios &#x3D;&gt; {
+        let ids_servicios_informe_avance: number[] &#x3D; informe_avance.map(
+          v &#x3D;&gt; v.servicio_id
+        );
+        let valueInitial: CarritoService[] &#x3D; [];
+        if (servicios &amp;&amp; servicios.length &gt; 0) {
+          // ORDENAR DE MANERA ESTRICTA
+          const carritoReducerEstricto &#x3D; servicios.reduce((acc, curr) &#x3D;&gt; {
+            let indexService &#x3D; acc.findIndex(
+              value &#x3D;&gt; value.servicio_id &#x3D;&#x3D;&#x3D; curr.servicio_id
+            );
+            let existInInformeAvance &#x3D; ids_servicios_informe_avance.find(
+              v &#x3D;&gt; v &#x3D;&#x3D;&#x3D; curr.servicio_id
+            );
+            if (indexService &#x3D;&#x3D;&#x3D; -1) {
+              // SERVICIO NUEVO
+              if (existInInformeAvance &#x3D;&#x3D;&#x3D; undefined) acc.push(curr);
+              if (existInInformeAvance !&#x3D;&#x3D; undefined)
+                acc.push({
+                  ...curr,
+                  servicios_adicional_dummy: true,
+                  servicio_cantidad: 0, // VER PORQUE NO MARCA 0
+                });
+            } else {
+              // SERVICIO EXISTE EN ADICIONALES
+              let temp &#x3D; [
+                ...acc.map(item &#x3D;&gt; ({
+                  ...item,
+                  unidad_obras: [...item.unidad_obras],
+                })),
+              ];
+              temp[indexService].unidad_obras.push(...curr.unidad_obras);
+              acc[indexService] &#x3D; temp[indexService];
+            }
+
+            return acc;
+          }, valueInitial);
+
+          this.makeForm(carritoReducerEstricto);
+          return carritoReducerEstricto;
+        } else {
+          return [];
+        }
+      })
+    );
   }
 
   makeForm(servicios: CarritoService[]): void {
@@ -407,19 +551,34 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
       // NUEVO SERVICIO
       if (indexServiceFormulario &#x3D;&#x3D;&#x3D; -1) {
+        let servicio_cantidad_control &#x3D; new FormControl(
+          servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+          [
+            Validators.required,
+            Validators.min(0.01),
+            CustomValidators.Decimals(this.maxDigits, this.maxDecimals),
+          ]
+        );
+
+        if (
+          servicio.servicio_cantidad !&#x3D;&#x3D; undefined &amp;&amp;
+          servicio.servicio_cantidad &#x3D;&#x3D;&#x3D; 0
+        ) {
+          servicio_cantidad_control &#x3D; new FormControl(0);
+        }
+
         const group &#x3D; new FormGroup({
           precargado: new FormControl(servicio.precargado ?? false, []),
           servicio_rowid: new FormControl(servicio.servicio_rowid, []),
           servicio_id: new FormControl(servicio.servicio_id, [
             Validators.required,
           ]),
-          servicio_cantidad: new FormControl(
-            servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
-            [Validators.required, Validators.min(0.01)]
-          ),
+          servicio_cantidad: servicio_cantidad_control,
           servicio_precio_final_clp: new FormControl(
             servicio.servicio_precio_final_clp
           ),
+          validar_adicional: new FormControl(false),
+          puntos_baremos: new FormControl(servicio.puntos_baremos),
           unidad_obras: new FormArray(
             servicio.unidad_obras.map(uo &#x3D;&gt; this.makeUOForm(uo))
           ),
@@ -450,6 +609,7 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
       }
     });
   }
+
   makeUOForm(uo: CarritoUO): FormGroup {
     let cantidad &#x3D; uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27; ? 0 : 1;
     let min &#x3D; uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27; ? 0 : 0.01;
@@ -461,19 +621,30 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
       uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
+        CustomValidators.Decimals(this.maxDigits, this.maxDecimals),
       ]),
       uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp),
     });
   }
 
+  // 177 TODO: UNIFICAR getControl
+
   getControlServiceCantidad(servicio_id: number): AbstractControl {
-    const controlName &#x3D; &#x27;table&#x27;;
     const index &#x3D; (
       this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
     ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; servicio_id);
-    return (this.formTable.controls[controlName] as FormArray).controls[
-      index
-    ].get(&#x27;servicio_cantidad&#x27;);
+    return (this.formTable.controls[&#x27;table&#x27;] as FormArray).controls[index].get(
+      &#x27;servicio_cantidad&#x27;
+    );
+  }
+
+  getControlService(servicio_id: number, control: string): AbstractControl {
+    const index &#x3D; (
+      this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
+    ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; servicio_id);
+    return (this.formTable.controls[&#x27;table&#x27;] as FormArray).controls[index].get(
+      control
+    );
   }
 
   getControlUOCantidad(
@@ -498,67 +669,134 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     ).controls[index_uo].get(&#x27;uo_cantidad&#x27;);
   }
 
-  deleteServicioFromCarrito(data: { servicio: CarritoService }): void {
-    if (data.servicio.precargado)
-      this.servicios_eliminar.push(data.servicio.servicio_rowid);
+  deleteServicioFromCarrito(servicio: CarritoService): void {
+    if (servicio.precargado)
+      this.servicios_eliminar.push(servicio.servicio_rowid);
 
-    this.serviciosFacade.deleteServicioFromCarrito(data.servicio.servicio_id);
+    this.serviciosFacade.deleteServicioFromCarrito(servicio.servicio_id);
     (this.formTable.get(&#x27;table&#x27;) as FormArray).removeAt(
       (
         this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
       ).findIndex(
-        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
+        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; servicio.servicio_id
       )
     );
   }
 
-  deleteUOFromServicioFromCarrito(data: {
-    servicio: CarritoService;
-    uo: CarritoUO;
-  }): void {
-    if (data.uo.uo_rowid) this.uos_eliminar.push(data.uo.uo_rowid);
+  deleteUOFromServicioFromCarrito(
+    servicio: CarritoService,
+    uo: CarritoUO
+  ): void {
+    // ALMACENAR LOS ROW ID DE UOS EXISTENTES PARA BORRAR EN DB
+    if (uo.uo_rowid) this.uos_eliminar.push(uo.uo_rowid);
 
+    // ELIMINAR EN STORE
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
-      data.servicio.servicio_id,
-      data.uo.uo_codigo
+      servicio.servicio_id,
+      uo.uo_codigo
     );
 
-    const index_service &#x3D; (
-      this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
-    ).findIndex(
-      serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
+    // ELIMINAR DEL FORMULARIO
+    let table_servicio &#x3D; this.formTable.get(&#x27;table&#x27;).value as Array&lt;{
+      servicio_id: string;
+    }&gt;;
+    const index_service &#x3D; table_servicio.findIndex(
+      v &#x3D;&gt; +v.servicio_id &#x3D;&#x3D;&#x3D; servicio.servicio_id
     );
-    (
-      (
-        (this.formTable.get(&#x27;table&#x27;) as FormArray).at(
-          index_service
-        ) as FormGroup
-      ).get(&#x27;unidad_obras&#x27;) as FormArray
-    ).removeAt(
-      (
-        (
-          (this.formTable.get(&#x27;table&#x27;) as FormArray).at(
-            index_service
-          ) as FormGroup
-        ).get(&#x27;unidad_obras&#x27;).value as Array&lt;{ uo_codigo: string }&gt;
-      ).findIndex(uo &#x3D;&gt; uo.uo_codigo &#x3D;&#x3D;&#x3D; data.uo.uo_codigo)
+
+    let table_serviceFormArray &#x3D; this.formTable.get(&#x27;table&#x27;) as FormArray;
+    let table_serviceFormGroup &#x3D; table_serviceFormArray.at(
+      index_service
+    ) as FormGroup;
+    let table_unidad_obrasFormArray &#x3D; table_serviceFormGroup.get(
+      &#x27;unidad_obras&#x27;
+    ) as FormArray;
+
+    let table_unidad_obrasArray &#x3D; table_serviceFormGroup.get(&#x27;unidad_obras&#x27;)
+      .value as Array&lt;{ uo_codigo: string }&gt;;
+    let index_uo &#x3D; table_unidad_obrasArray.findIndex(
+      v &#x3D;&gt; v.uo_codigo &#x3D;&#x3D;&#x3D; uo.uo_codigo
     );
+
+    table_unidad_obrasFormArray.removeAt(index_uo);
   }
 
-  colSpanCalculate(): number {
-    let colspan &#x3D; 7;
-    if (this.showDelete) colspan &#x3D; colspan - 1;
-    if (this.sessionData.rol &#x3D;&#x3D;&#x3D; &#x27;Trabajador (EECC)&#x27;) colspan &#x3D; colspan - 2;
+  viewDetallesUOFromServicioFromCarrito(
+    servicio: CarritoService,
+    uo: CarritoUO
+  ): void {
+    this.detallesUOClicked.emit({
+      servicio,
+      uo,
+    });
+  }
 
-    return colspan;
+  get canSeePrices(): boolean {
+    return this.permisos.find(v &#x3D;&gt; v &#x3D;&#x3D;&#x3D; &#x27;OT_VER_VALOR_SERV&#x27;) !&#x3D;&#x3D; undefined;
+  }
+
+  cantidadChanged(control: FormControl, { value }: { value: number }): void {
+    const previous &#x3D; +control.value;
+    if (value !&#x3D;&#x3D; previous) {
+      control.setValue(value, { emitEvent: true });
+      control.updateValueAndValidity({ emitEvent: true });
+      this.formTable.updateValueAndValidity({ emitEvent: true });
+      this.detector.detectChanges();
+      this.detector.markForCheck();
+    }
+  }
+
+  get hasElements(): boolean {
+    return (this.formTable.get(&#x27;table&#x27;) as FormArray).length &gt; 0;
   }
 
   get valid(): boolean {
-    return (this.formTable.get(&#x27;table&#x27;) as FormArray).length &gt; 0;
+    return this.formTable.valid &amp;&amp; this.hasElements;
+  }
+
+  getTotal(n: string): string {
+    return parseFloat(n).toFixed(2);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get colSpanServicios(): number {
+    let base &#x3D; 4;
+
+    if (this.canSeePrices) {
+      base &#x3D; base + 2;
+      if (this.isBucle) {
+        base &#x3D; base + 2;
+      }
+    }
+    if (this.column_acciones) {
+      base &#x3D; base + 1;
+    }
+
+    return base;
+  }
+
+  get accionesUOEnabled(): boolean {
+    return this.column_acciones || this.column_acciones_uo;
+  }
+
+  get colSpanUOs(): number {
+    let base &#x3D; 4;
+
+    if (this.canSeePrices) {
+      base &#x3D; base + 2;
+    }
+    if (this.accionesUOEnabled) {
+      base &#x3D; base + 1;
+    }
+
+    return base;
+  }
+
+  get isBucle(): boolean {
+    return this.contratoMarco &#x3D;&#x3D;&#x3D; &#x27;Bucle&#x27;;
   }
 }
 </code></pre>

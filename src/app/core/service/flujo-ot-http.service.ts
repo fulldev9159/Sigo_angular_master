@@ -2,8 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -115,15 +118,14 @@ export class FlujoOtHttpService {
     });
   }
 
-  getSolicitudQuiebre(ot_id: number): Observable<Response<any>> {
-    return of({
-      status: {
-        desc: '',
-        code: 0,
-      },
-      data: { flag_solicitud: true },
-    });
-    // return this.http.post<Response<any>>(`${this.API_URL}`, { ot_id });
+  // GET SOLICITUD QUIEBRE
+  getSolicitudQuiebre(
+    ot_id: number
+  ): Observable<Response<LastSolicitudQuiebre>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre/getlast`,
+      { ot_id }
+    );
   }
 
   // SOLICITUD DE QUIEBRE
@@ -134,11 +136,32 @@ export class FlujoOtHttpService {
     );
   }
 
+  //  QUIEBRE
+  quiebre(request: ReqQuiebre): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/quiebre/insert`,
+      request
+    );
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE
+  aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre_id/update`,
+      request
+    );
+  }
+
   // DESQUIEBRE
   desquiebre(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.API_URL}`, {
-      ot_id,
-    });
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/desquiebre/insert`,
+      {
+        ot_id,
+      }
+    );
   }
 
   // CIERRE ADMINISTRATIVO

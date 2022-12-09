@@ -84,13 +84,37 @@
                                 <a href="#AceptarRechazarIncialOT$" >AceptarRechazarIncialOT$</a>
                             </li>
                             <li>
+                                <a href="#anularOT$" >anularOT$</a>
+                            </li>
+                            <li>
                                 <a href="#aprobarRechazarOperaciones$" >aprobarRechazarOperaciones$</a>
+                            </li>
+                            <li>
+                                <a href="#aprobarRechazarSolicitudQuiebre$" >aprobarRechazarSolicitudQuiebre$</a>
                             </li>
                             <li>
                                 <a href="#asignarSupervisorTrabajo$" >asignarSupervisorTrabajo$</a>
                             </li>
                             <li>
+                                <a href="#cerrarOT$" >cerrarOT$</a>
+                            </li>
+                            <li>
+                                <a href="#cierreAdministrativo$" >cierreAdministrativo$</a>
+                            </li>
+                            <li>
+                                <a href="#confirmarRechazoObras$" >confirmarRechazoObras$</a>
+                            </li>
+                            <li>
+                                <a href="#desquiebre$" >desquiebre$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllMotivoRechazoOT$" >getAllMotivoRechazoOT$</a>
+                            </li>
+                            <li>
                                 <a href="#getPosibleSupervisorDeTrabajos$" >getPosibleSupervisorDeTrabajos$</a>
+                            </li>
+                            <li>
+                                <a href="#getSolicitudQuiebre$" >getSolicitudQuiebre$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
@@ -99,7 +123,16 @@
                                 <a href="#notifyAfterError" >notifyAfterError</a>
                             </li>
                             <li>
+                                <a href="#quiebre$" >quiebre$</a>
+                            </li>
+                            <li>
+                                <a href="#rechazarOTProveedor$" >rechazarOTProveedor$</a>
+                            </li>
+                            <li>
                                 <a href="#solicitarPago$" >solicitarPago$</a>
+                            </li>
+                            <li>
+                                <a href="#solicitarQuiebre$" >solicitarQuiebre$</a>
                             </li>
                         </ul>
                     </td>
@@ -281,6 +314,41 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="anularOT$"></a>
+                    <span class="name">
+                        <span ><b>anularOT$</b></span>
+                        <a href="#anularOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.anularOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.anularOT(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.anularOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.anularOTError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="aprobarRechazarOperaciones$"></a>
                     <span class="name">
                         <span ><b>aprobarRechazarOperaciones$</b></span>
@@ -309,7 +377,46 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:106</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="aprobarRechazarSolicitudQuiebre$"></a>
+                    <span class="name">
+                        <span ><b>aprobarRechazarSolicitudQuiebre$</b></span>
+                        <a href="#aprobarRechazarSolicitudQuiebre$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarSolicitudQuiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aprobarRechazarSolicitudQuiebre(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.aprobarRechazarSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="247" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:247</a></div>
                         </td>
                     </tr>
 
@@ -350,7 +457,196 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cerrarOT$"></a>
+                    <span class="name">
+                        <span ><b>cerrarOT$</b></span>
+                        <a href="#cerrarOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.cerrarOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.cerrarOT(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.cerrarOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.cerrarOTError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cierreAdministrativo$"></a>
+                    <span class="name">
+                        <span ><b>cierreAdministrativo$</b></span>
+                        <a href="#cierreAdministrativo$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.cierreAdministrativo),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.cierreAdministrativo(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.cierreAdministrativoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.cierreAdministrativoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="277" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:277</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarRechazoObras$"></a>
+                    <span class="name">
+                        <span ><b>confirmarRechazoObras$</b></span>
+                        <a href="#confirmarRechazoObras$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.confirmarRechazoObras),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.confirmarRechazoObras(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.confirmarRechazoObrasSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.confirmarRechazoObrasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="desquiebre$"></a>
+                    <span class="name">
+                        <span ><b>desquiebre$</b></span>
+                        <a href="#desquiebre$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.desquiebre),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.desquiebre(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.desquiebreSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.desquiebreError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="264" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllMotivoRechazoOT$"></a>
+                    <span class="name">
+                        <span ><b>getAllMotivoRechazoOT$</b></span>
+                        <a href="#getAllMotivoRechazoOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.getAllMotivoRechazoOT),
+      concatMap(({ tipo }) &#x3D;&gt;
+        this.flujoOTServiceHttp.getAllMotivoRechazoOT(tipo).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.getAllMotivoRechazoOTSuccess({
+              motivo_rechazo: response.data.items,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.getAllMotivoRechazoOTError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -400,6 +696,47 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getSolicitudQuiebre$"></a>
+                    <span class="name">
+                        <span ><b>getSolicitudQuiebre$</b></span>
+                        <a href="#getSolicitudQuiebre$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.getSolicitudQuiebre),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.getSolicitudQuiebre(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.getSolicitudQuiebreSuccess({
+              lastSolicitudQuiebre: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.getSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="notifyAfte$"></a>
                     <span class="name">
                         <span ><b>notifyAfte$</b></span>
@@ -417,7 +754,15 @@
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
           flujoOTActions.asignarSupervisorTrabajoSuccess,
           flujoOTActions.solicitarPagoSuccess,
-          flujoOTActions.aprobarRechazarOperacionesSuccess
+          flujoOTActions.aprobarRechazarOperacionesSuccess,
+          flujoOTActions.confirmarRechazoObrasSuccess,
+          flujoOTActions.cerrarOTSuccess,
+          flujoOTActions.anularOTSuccess,
+          flujoOTActions.rechazarOTProveedorSuccess,
+          flujoOTActions.solicitarQuiebreSuccess,
+          flujoOTActions.desquiebreSuccess,
+          flujoOTActions.cierreAdministrativoSuccess,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -427,7 +772,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:122</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:293</a></div>
                         </td>
                     </tr>
 
@@ -456,7 +801,17 @@
           flujoOTActions.aceptarOTProveedorError,
           flujoOTActions.asignarSupervisorTrabajoError,
           flujoOTActions.solicitarPagoError,
-          flujoOTActions.aprobarRechazarOperacionesError
+          flujoOTActions.aprobarRechazarOperacionesError,
+          flujoOTActions.getAllMotivoRechazoOTError,
+          flujoOTActions.confirmarRechazoObrasError,
+          flujoOTActions.cerrarOTError,
+          flujoOTActions.anularOTError,
+          flujoOTActions.rechazarOTProveedorError,
+          flujoOTActions.solicitarQuiebreError,
+          flujoOTActions.desquiebreError,
+          flujoOTActions.cierreAdministrativoError,
+          flujoOTActions.getSolicitudQuiebreError,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -466,7 +821,81 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:137</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="316" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:316</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quiebre$"></a>
+                    <span class="name">
+                        <span ><b>quiebre$</b></span>
+                        <a href="#quiebre$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.quiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.quiebre(request).pipe(
+          map(response &#x3D;&gt; flujoOTActions.quiebreSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.quiebreError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="234" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:234</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rechazarOTProveedor$"></a>
+                    <span class="name">
+                        <span ><b>rechazarOTProveedor$</b></span>
+                        <a href="#rechazarOTProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.rechazarOTProveedor),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aceptarRechazarOTProveedor(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.rechazarOTProveedorSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.rechazarOTProveedorError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -501,7 +930,44 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:93</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitarQuiebre$"></a>
+                    <span class="name">
+                        <span ><b>solicitarQuiebre$</b></span>
+                        <a href="#solicitarQuiebre$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarQuiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.solicitarQuiebre(request).pipe(
+          map(response &#x3D;&gt; flujoOTActions.solicitarQuiebreSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.solicitarQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/store/flujo-ot/flujo-ot.effects.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -587,6 +1053,34 @@ export class FlujoOTEffects {
     )
   );
 
+  rechazarOTProveedor$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.rechazarOTProveedor),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aceptarRechazarOTProveedor(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.rechazarOTProveedorSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.rechazarOTProveedorError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  anularOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.anularOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.anularOT(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.anularOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.anularOTError({ error })))
+        )
+      )
+    )
+  );
+
   asignarSupervisorTrabajo$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(flujoOTActions.asignarSupervisorTrabajo),
@@ -635,6 +1129,149 @@ export class FlujoOTEffects {
     )
   );
 
+  // GET ALL MOTIVO RECHAZO
+  getAllMotivoRechazoOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.getAllMotivoRechazoOT),
+      concatMap(({ tipo }) &#x3D;&gt;
+        this.flujoOTServiceHttp.getAllMotivoRechazoOT(tipo).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.getAllMotivoRechazoOTSuccess({
+              motivo_rechazo: response.data.items,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.getAllMotivoRechazoOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // CONFIRMAR RECHAZO OBRAS
+  confirmarRechazoObras$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.confirmarRechazoObras),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.confirmarRechazoObras(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.confirmarRechazoObrasSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.confirmarRechazoObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // CERRAR OT
+  cerrarOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.cerrarOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.cerrarOT(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.cerrarOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.cerrarOTError({ error })))
+        )
+      )
+    )
+  );
+
+  // GET SOLICITAR QUIEBRE OT
+  getSolicitudQuiebre$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.getSolicitudQuiebre),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.getSolicitudQuiebre(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.getSolicitudQuiebreSuccess({
+              lastSolicitudQuiebre: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.getSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SOLICITAR QUIEBRE OT
+  solicitarQuiebre$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarQuiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.solicitarQuiebre(request).pipe(
+          map(response &#x3D;&gt; flujoOTActions.solicitarQuiebreSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.solicitarQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // QUIEBRE OT
+  quiebre$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.quiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.quiebre(request).pipe(
+          map(response &#x3D;&gt; flujoOTActions.quiebreSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.quiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // APROBAR/RECHAZAR QUIEBRE OT
+  aprobarRechazarSolicitudQuiebre$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarSolicitudQuiebre),
+      concatMap(({ request }) &#x3D;&gt;
+        this.flujoOTServiceHttp.aprobarRechazarSolicitudQuiebre(request).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.aprobarRechazarSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // DESQUIEBRE OT
+  desquiebre$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.desquiebre),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.desquiebre(ot_id).pipe(
+          map(response &#x3D;&gt; flujoOTActions.desquiebreSuccess({ response })),
+          catchError(error &#x3D;&gt; of(flujoOTActions.desquiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // CIERRE ADMINISTRATIVO OT
+  cierreAdministrativo$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(flujoOTActions.cierreAdministrativo),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.flujoOTServiceHttp.cierreAdministrativo(ot_id).pipe(
+          map(response &#x3D;&gt;
+            flujoOTActions.cierreAdministrativoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(flujoOTActions.cierreAdministrativoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -643,7 +1280,15 @@ export class FlujoOTEffects {
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
           flujoOTActions.asignarSupervisorTrabajoSuccess,
           flujoOTActions.solicitarPagoSuccess,
-          flujoOTActions.aprobarRechazarOperacionesSuccess
+          flujoOTActions.aprobarRechazarOperacionesSuccess,
+          flujoOTActions.confirmarRechazoObrasSuccess,
+          flujoOTActions.cerrarOTSuccess,
+          flujoOTActions.anularOTSuccess,
+          flujoOTActions.rechazarOTProveedorSuccess,
+          flujoOTActions.solicitarQuiebreSuccess,
+          flujoOTActions.desquiebreSuccess,
+          flujoOTActions.cierreAdministrativoSuccess,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -659,7 +1304,17 @@ export class FlujoOTEffects {
           flujoOTActions.aceptarOTProveedorError,
           flujoOTActions.asignarSupervisorTrabajoError,
           flujoOTActions.solicitarPagoError,
-          flujoOTActions.aprobarRechazarOperacionesError
+          flujoOTActions.aprobarRechazarOperacionesError,
+          flujoOTActions.getAllMotivoRechazoOTError,
+          flujoOTActions.confirmarRechazoObrasError,
+          flujoOTActions.cerrarOTError,
+          flujoOTActions.anularOTError,
+          flujoOTActions.rechazarOTProveedorError,
+          flujoOTActions.solicitarQuiebreError,
+          flujoOTActions.desquiebreError,
+          flujoOTActions.cierreAdministrativoError,
+          flujoOTActions.getSolicitudQuiebreError,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

@@ -90,6 +90,24 @@
                                         </a>
                                 </li>
                                 <li>
+                                        <a href="#autorizacion_ing_estado" 
+>
+                                            autorizacion_ing_estado
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#autorizacion_ing_fecha" 
+>
+                                            autorizacion_ing_fecha
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#autorizacion_ing_usuario_id" 
+>
+                                            autorizacion_ing_usuario_id
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#cantidad" 
 >
                                             cantidad
@@ -229,6 +247,105 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <code>actividad_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="autorizacion_ing_estado"></a>
+                                        <span class="name "><b>autorizacion_ing_estado</b>
+                                            <a href="#autorizacion_ing_estado">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>autorizacion_ing_estado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="autorizacion_ing_fecha"></a>
+                                        <span class="name "><b>autorizacion_ing_fecha</b>
+                                            <a href="#autorizacion_ing_fecha">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>autorizacion_ing_fecha:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="autorizacion_ing_usuario_id"></a>
+                                        <span class="name "><b>autorizacion_ing_usuario_id</b>
+                                            <a href="#autorizacion_ing_usuario_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>autorizacion_ing_usuario_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -525,7 +642,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>model_tipo_servicio_id:     <code>literal type</code>
+                                        <code>model_tipo_servicio_id:         <code><a href="../interfaces/ModelTipoServicioId.html" target="_self" >ModelTipoServicioId</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -533,7 +650,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
+                                            <i>Type : </i>        <code><a href="../interfaces/ModelTipoServicioId.html" target="_self" >ModelTipoServicioId</a></code>
 
                                         </td>
                                     </tr>
@@ -900,6 +1017,19 @@ export interface ModelServicio {
   requiere_evidencia: boolean;
 }
 
+export interface ModelServicioWithTipo extends ModelServicio {
+  model_tipo_servicio_id: ModelTipoServicioId;
+}
+
+export interface ModelServicioWithTipoAndUnidad extends ModelServicioWithTipo {
+  model_unidad_id: {
+    id: number;
+    codigo: string;
+    descripcion: string;
+    estado: boolean;
+  };
+}
+
 //  GET SERVICIOS DE UNA AGENCIA/CONTRATO
 export interface RequestGetServicioTipoAgenciaContratoProveedor {
   agencia_id: number;
@@ -918,6 +1048,7 @@ export interface ServicioAgenciaContratoProveedor {
   unidad_desripcion: string;
   unidad_id: number;
   numero_producto: string;
+  precio: number;
 }
 
 // GET DETALLES DE UN SERVICIO DE UN TIPO DE UNA GENCIA/CONTRATO
@@ -991,6 +1122,9 @@ export interface DetalleServicioCubicacion {
   model_servicio_id: ModelServicio;
   model_unidad_id: Unidad;
   numero_producto: string;
+  autorizacion_ing_estado: string;
+  autorizacion_ing_usuario_id: number;
+  autorizacion_ing_fecha: Date;
   model_precio_tipo_moneda_id: {
     id: number;
     codigo: string;
@@ -999,15 +1133,16 @@ export interface DetalleServicioCubicacion {
   many_cubicacion_has_uob: DetalleUOCubicacion[];
 
   model_actividad_id: Actividad;
-  model_tipo_servicio_id: {
-    id: number;
-    codigo: string;
-    descripcion: string;
-    estado: boolean;
-    contrato_marco_id: number;
-  };
+  model_tipo_servicio_id: ModelTipoServicioId;
 }
 
+export interface ModelTipoServicioId {
+  id: number;
+  codigo: string;
+  descripcion: string;
+  estado: boolean;
+  contrato_marco_id: number;
+}
 // INFORME AVANCE
 export interface ServicioFromInfomeAvance {
   id: number;
@@ -1030,12 +1165,17 @@ export interface ServicioFromInfomeAvance {
   evidencia_id: number;
   valor_unitario_clp: number;
 
-  model_servicio_id: ModelServicio;
+  model_servicio_id: ModelServicioWithTipo;
   model_unidad_id: Unidad;
   model_precio_tipo_moneda_id: TipoMoneda;
-
+  model_actividad_id: ModelActividadId;
   numero_producto: string;
   many_informe_has_uob: UnidadObraFromInformeAvance[];
+}
+
+export interface ModelActividadId {
+  id: number;
+  descripcion: string;
 }
 </code></pre>
     </div>

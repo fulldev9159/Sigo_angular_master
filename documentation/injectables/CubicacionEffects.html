@@ -78,6 +78,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#cambiarOrigenMaterialAProveedor$" >cambiarOrigenMaterialAProveedor$</a>
+                            </li>
+                            <li>
                                 <a href="#clonarCubicacion$" >clonarCubicacion$</a>
                             </li>
                             <li>
@@ -87,7 +90,13 @@
                                 <a href="#detalleCubicacion$" >detalleCubicacion$</a>
                             </li>
                             <li>
+                                <a href="#detalleCubicacionIngenieria$" >detalleCubicacionIngenieria$</a>
+                            </li>
+                            <li>
                                 <a href="#editCubicacion$" >editCubicacion$</a>
+                            </li>
+                            <li>
+                                <a href="#editCubicacionIngenieria$" >editCubicacionIngenieria$</a>
                             </li>
                             <li>
                                 <a href="#eliminarCubicacion$" >eliminarCubicacion$</a>
@@ -112,6 +121,9 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#reloadWhenMaterialChangesToProveedor$" >reloadWhenMaterialChangesToProveedor$</a>
                             </li>
                         </ul>
                     </td>
@@ -205,6 +217,53 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarOrigenMaterialAProveedor$"></a>
+                    <span class="name">
+                        <span ><b>cambiarOrigenMaterialAProveedor$</b></span>
+                        <a href="#cambiarOrigenMaterialAProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) &#x3D;&gt;
+        this.cubicacionHttpService
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() &#x3D;&gt;
+              cubicacionActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error &#x3D;&gt;
+              of(
+                cubicacionActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -317,7 +376,48 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:112</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="detalleCubicacionIngenieria$"></a>
+                    <span class="name">
+                        <span ><b>detalleCubicacionIngenieria$</b></span>
+                        <a href="#detalleCubicacionIngenieria$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacionIngenieria),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.detalleCubicacionIngenieriaSuccess({
+              detalleCubicacion: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.detalleCubicacionIngenieriaError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -367,6 +467,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="editCubicacionIngenieria$"></a>
+                    <span class="name">
+                        <span ><b>editCubicacionIngenieria$</b></span>
+                        <a href="#editCubicacionIngenieria$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.editCubicacionIngenieria),
+      concatMap(({ request }) &#x3D;&gt;
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.editCubicacionIngenieriaSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.editCubicacionIngenieriaError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="eliminarCubicacion$"></a>
                     <span class="name">
                         <span ><b>eliminarCubicacion$</b></span>
@@ -395,7 +534,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -436,7 +575,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:130</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:164</a></div>
                         </td>
                     </tr>
 
@@ -475,7 +614,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:164</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -514,7 +653,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:148</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:182</a></div>
                         </td>
                     </tr>
 
@@ -592,7 +731,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:96</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -622,7 +761,9 @@
           cubicacionActions.listarCubicacionesSuccess,
           cubicacionActions.clonarCubicacionSuccess,
           cubicacionActions.eliminarCubicacionSuccess,
-          cubicacionActions.eliminarServicioCarritoSuccess
+          cubicacionActions.eliminarServicioCarritoSuccess,
+          cubicacionActions.editCubicacionIngenieriaSuccess,
+          cubicacionActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -632,7 +773,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:180</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="249" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:249</a></div>
                         </td>
                     </tr>
 
@@ -662,7 +803,10 @@
           cubicacionActions.listarCubicacionesError,
           cubicacionActions.clonarCubicacionError,
           cubicacionActions.eliminarCubicacionError,
-          cubicacionActions.eliminarServicioCarritoError
+          cubicacionActions.eliminarServicioCarritoError,
+          cubicacionActions.detalleCubicacionIngenieriaError,
+          cubicacionActions.editCubicacionIngenieriaError,
+          cubicacionActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -672,7 +816,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:197</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadWhenMaterialChangesToProveedor$"></a>
+                    <span class="name">
+                        <span ><b>reloadWhenMaterialChangesToProveedor$</b></span>
+                        <a href="#reloadWhenMaterialChangesToProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(cubicacionActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() &#x3D;&gt; window.location.reload())
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="240" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:240</a></div>
                         </td>
                     </tr>
 
@@ -764,6 +940,22 @@ export class CubicacionEffects {
     )
   );
 
+  editCubicacionIngenieria$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.editCubicacionIngenieria),
+      concatMap(({ request }) &#x3D;&gt;
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.editCubicacionIngenieriaSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.editCubicacionIngenieriaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   eliminarCubicacion$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(cubicacionActions.eliminarCubicacion),
@@ -808,6 +1000,24 @@ export class CubicacionEffects {
           ),
           catchError(error &#x3D;&gt;
             of(cubicacionActions.detalleCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  detalleCubicacionIngenieria$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacionIngenieria),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.detalleCubicacionIngenieriaSuccess({
+              detalleCubicacion: response.data,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.detalleCubicacionIngenieriaError({ error }))
           )
         )
       )
@@ -864,6 +1074,41 @@ export class CubicacionEffects {
     )
   );
 
+  // CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+  cambiarOrigenMaterialAProveedor$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) &#x3D;&gt;
+        this.cubicacionHttpService
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() &#x3D;&gt;
+              cubicacionActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error &#x3D;&gt;
+              of(
+                cubicacionActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
+  // TODO Sacar ésto
+  reloadWhenMaterialChangesToProveedor$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(cubicacionActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() &#x3D;&gt; window.location.reload())
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -874,7 +1119,9 @@ export class CubicacionEffects {
           cubicacionActions.listarCubicacionesSuccess,
           cubicacionActions.clonarCubicacionSuccess,
           cubicacionActions.eliminarCubicacionSuccess,
-          cubicacionActions.eliminarServicioCarritoSuccess
+          cubicacionActions.eliminarServicioCarritoSuccess,
+          cubicacionActions.editCubicacionIngenieriaSuccess,
+          cubicacionActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -891,7 +1138,10 @@ export class CubicacionEffects {
           cubicacionActions.listarCubicacionesError,
           cubicacionActions.clonarCubicacionError,
           cubicacionActions.eliminarCubicacionError,
-          cubicacionActions.eliminarServicioCarritoError
+          cubicacionActions.eliminarServicioCarritoError,
+          cubicacionActions.detalleCubicacionIngenieriaError,
+          cubicacionActions.editCubicacionIngenieriaError,
+          cubicacionActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

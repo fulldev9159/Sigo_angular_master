@@ -87,6 +87,21 @@
                                 <a href="#aceptarRechazarAdicionales$" >aceptarRechazarAdicionales$</a>
                             </li>
                             <li>
+                                <a href="#aprobarRechazarSolicitudPago$" >aprobarRechazarSolicitudPago$</a>
+                            </li>
+                            <li>
+                                <a href="#getActas$" >getActas$</a>
+                            </li>
+                            <li>
+                                <a href="#getComentariosTrabajosFinalizados$" >getComentariosTrabajosFinalizados$</a>
+                            </li>
+                            <li>
+                                <a href="#getDetalleActa$" >getDetalleActa$</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalActas$" >getTotalActas$</a>
+                            </li>
+                            <li>
                                 <a href="#informarTrabajosFinalizados$" >informarTrabajosFinalizados$</a>
                             </li>
                             <li>
@@ -94,6 +109,12 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#quienAutorizoPagoOT$" >quienAutorizoPagoOT$</a>
+                            </li>
+                            <li>
+                                <a href="#solicitarInformeTrabajosFinalizados$" >solicitarInformeTrabajosFinalizados$</a>
                             </li>
                             <li>
                                 <a href="#validarActa$" >validarActa$</a>
@@ -303,6 +324,201 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="aprobarRechazarSolicitudPago$"></a>
+                    <span class="name">
+                        <span ><b>aprobarRechazarSolicitudPago$</b></span>
+                        <a href="#aprobarRechazarSolicitudPago$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.aprobarRechazarSolicitudPago),
+      concatMap(({ request }) &#x3D;&gt;
+        this.actaHttp.aprobarRechazarSolicitudPago(request).pipe(
+          map(response &#x3D;&gt;
+            actaActions.aprobarRechazarSolicitudPagoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(actaActions.aprobarRechazarSolicitudPagoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/store/acta/acta.effects.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActas$"></a>
+                    <span class="name">
+                        <span ><b>getActas$</b></span>
+                        <a href="#getActas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getActas),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getActas(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getActasSuccess({ actas: response.data.items })
+          ),
+          catchError(error &#x3D;&gt; of(actaActions.getActasError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/store/acta/acta.effects.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getComentariosTrabajosFinalizados$"></a>
+                    <span class="name">
+                        <span ><b>getComentariosTrabajosFinalizados$</b></span>
+                        <a href="#getComentariosTrabajosFinalizados$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getComentariosFinalizacionTrabajos),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getComentatiosfinalizacionTrabajos(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getComentariosFinalizacionTrabajosSuccess({
+              comentariosFinalizacionTrabajos: response.data.observacion,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              actaActions.getComentariosFinalizacionTrabajosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/store/acta/acta.effects.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDetalleActa$"></a>
+                    <span class="name">
+                        <span ><b>getDetalleActa$</b></span>
+                        <a href="#getDetalleActa$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getDetalleActa),
+      concatMap(({ acta_id }) &#x3D;&gt;
+        this.actaHttp.detallesActa(acta_id).pipe(
+          map(response &#x3D;&gt; actaActions.getDetalleActaSuccess({ response })),
+          catchError(error &#x3D;&gt; of(actaActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/store/acta/acta.effects.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalActas$"></a>
+                    <span class="name">
+                        <span ><b>getTotalActas$</b></span>
+                        <a href="#getTotalActas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getTotalActas),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getTotalActas(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getTotalActasSuccess({
+              totalActas: response.data.total,
+            })
+          ),
+          catchError(error &#x3D;&gt; of(actaActions.getTotalActasError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/store/acta/acta.effects.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="informarTrabajosFinalizados$"></a>
                     <span class="name">
                         <span ><b>informarTrabajosFinalizados$</b></span>
@@ -358,7 +574,9 @@
           actaActions.getServicios4ActaSuccess,
           actaActions.getUOs4ActaSuccess,
           actaActions.informarTrabajosFinalizadosSuccess,
-          actaActions.validarActaSuccess
+          actaActions.validarActaSuccess,
+          actaActions.aprobarRechazarSolicitudPagoSuccess,
+          actaActions.solicitarInformeTrabajosFinalizadosSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -368,7 +586,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/store/acta/acta.effects.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="210" class="link-to-prism">src/app/store/acta/acta.effects.ts:210</a></div>
                         </td>
                     </tr>
 
@@ -396,7 +614,12 @@
           actaActions.getUOs4ActaError,
           actaActions.informarTrabajosFinalizadosError,
           actaActions.aceptarRechazarAdcionalesValidarActaError,
-          actaActions.validarActaError
+          actaActions.validarActaError,
+          actaActions.getTotalActasError,
+          actaActions.getComentariosFinalizacionTrabajosError,
+          actaActions.quienAutorizoPagoError,
+          actaActions.aprobarRechazarSolicitudPagoError,
+          actaActions.solicitarInformeTrabajosFinalizadosError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -406,7 +629,91 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/store/acta/acta.effects.ts:102</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/store/acta/acta.effects.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quienAutorizoPagoOT$"></a>
+                    <span class="name">
+                        <span ><b>quienAutorizoPagoOT$</b></span>
+                        <a href="#quienAutorizoPagoOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.quienAutorizoPago),
+      concatMap(({ ot_id, acta_id }) &#x3D;&gt;
+        this.actaHttp.quienAutorizoPago(ot_id, acta_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.quienAutorizoPagoSuccess({
+              quienAautorizado: response.data.items,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(actaActions.quienAutorizoPagoError({ error: err }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/store/acta/acta.effects.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitarInformeTrabajosFinalizados$"></a>
+                    <span class="name">
+                        <span ><b>solicitarInformeTrabajosFinalizados$</b></span>
+                        <a href="#solicitarInformeTrabajosFinalizados$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.solicitarInformeTrabajosFinalizados),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.solicitarInformeTrabajosFinalizados(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.solicitarInformeTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              actaActions.solicitarInformeTrabajosFinalizadosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/store/acta/acta.effects.ts:190</a></div>
                         </td>
                     </tr>
 
@@ -541,6 +848,128 @@ export class ActaEffects {
     )
   );
 
+  getTotalActas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getTotalActas),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getTotalActas(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getTotalActasSuccess({
+              totalActas: response.data.total,
+            })
+          ),
+          catchError(error &#x3D;&gt; of(actaActions.getTotalActasError({ error })))
+        )
+      )
+    )
+  );
+
+  getActas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getActas),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getActas(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getActasSuccess({ actas: response.data.items })
+          ),
+          catchError(error &#x3D;&gt; of(actaActions.getActasError({ error })))
+        )
+      )
+    )
+  );
+
+  // COMENTARIOS TRABAJOS FINALIZADOS
+  getComentariosTrabajosFinalizados$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getComentariosFinalizacionTrabajos),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.getComentatiosfinalizacionTrabajos(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.getComentariosFinalizacionTrabajosSuccess({
+              comentariosFinalizacionTrabajos: response.data.observacion,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              actaActions.getComentariosFinalizacionTrabajosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  getDetalleActa$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.getDetalleActa),
+      concatMap(({ acta_id }) &#x3D;&gt;
+        this.actaHttp.detallesActa(acta_id).pipe(
+          map(response &#x3D;&gt; actaActions.getDetalleActaSuccess({ response })),
+          catchError(error &#x3D;&gt; of(actaActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
+
+  // QUIEN AUTORIZO PAGO
+  quienAutorizoPagoOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.quienAutorizoPago),
+      concatMap(({ ot_id, acta_id }) &#x3D;&gt;
+        this.actaHttp.quienAutorizoPago(ot_id, acta_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.quienAutorizoPagoSuccess({
+              quienAautorizado: response.data.items,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(actaActions.quienAutorizoPagoError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.aprobarRechazarSolicitudPago),
+      concatMap(({ request }) &#x3D;&gt;
+        this.actaHttp.aprobarRechazarSolicitudPago(request).pipe(
+          map(response &#x3D;&gt;
+            actaActions.aprobarRechazarSolicitudPagoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(actaActions.aprobarRechazarSolicitudPagoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  solicitarInformeTrabajosFinalizados$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(actaActions.solicitarInformeTrabajosFinalizados),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.actaHttp.solicitarInformeTrabajosFinalizados(ot_id).pipe(
+          map(response &#x3D;&gt;
+            actaActions.solicitarInformeTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(
+              actaActions.solicitarInformeTrabajosFinalizadosError({
+                error: err,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -548,7 +977,9 @@ export class ActaEffects {
           actaActions.getServicios4ActaSuccess,
           actaActions.getUOs4ActaSuccess,
           actaActions.informarTrabajosFinalizadosSuccess,
-          actaActions.validarActaSuccess
+          actaActions.validarActaSuccess,
+          actaActions.aprobarRechazarSolicitudPagoSuccess,
+          actaActions.solicitarInformeTrabajosFinalizadosSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -563,7 +994,12 @@ export class ActaEffects {
           actaActions.getUOs4ActaError,
           actaActions.informarTrabajosFinalizadosError,
           actaActions.aceptarRechazarAdcionalesValidarActaError,
-          actaActions.validarActaError
+          actaActions.validarActaError,
+          actaActions.getTotalActasError,
+          actaActions.getComentariosFinalizacionTrabajosError,
+          actaActions.quienAutorizoPagoError,
+          actaActions.aprobarRechazarSolicitudPagoError,
+          actaActions.solicitarInformeTrabajosFinalizadosError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

@@ -81,6 +81,27 @@
                                 <a href="#aceptarRechazarInformeAvance$" >aceptarRechazarInformeAvance$</a>
                             </li>
                             <li>
+                                <a href="#actualizarInformeAvance$" >actualizarInformeAvance$</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarInformeAvanceAdicionalesYautorizarIA$" >actualizarInformeAvanceAdicionalesYautorizarIA$</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarInformeAvanceAdicionalesYenviar$" >actualizarInformeAvanceAdicionalesYenviar$</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarInformeAvanceYAdicionales$" >actualizarInformeAvanceYAdicionales$</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarInformeAvanceYautorizar$" >actualizarInformeAvanceYautorizar$</a>
+                            </li>
+                            <li>
+                                <a href="#actualizarInformeAvanceYenviar$" >actualizarInformeAvanceYenviar$</a>
+                            </li>
+                            <li>
+                                <a href="#cambiarOrigenMaterialAProveedor$" >cambiarOrigenMaterialAProveedor$</a>
+                            </li>
+                            <li>
                                 <a href="#getDetalleInformeAvance$" >getDetalleInformeAvance$</a>
                             </li>
                             <li>
@@ -88,6 +109,9 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#reloadWhenMaterialChangesToProveedor$" >reloadWhenMaterialChangesToProveedor$</a>
                             </li>
                             <li>
                                 <a href="#SendDetalleInformeAvance$" >SendDetalleInformeAvance$</a>
@@ -116,7 +140,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -222,7 +246,338 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvance$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvance$</b></span>
+                        <a href="#actualizarInformeAvance$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvance),
+      concatMap(({ request_informe_avance, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.actualizarInformeAvanceSuccess({
+              response,
+              ot_id,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvanceAdicionalesYautorizarIA$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvanceAdicionalesYautorizarIA$</b></span>
+                        <a href="#actualizarInformeAvanceAdicionalesYautorizarIA$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(
+        informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIA
+      ),
+      concatMap(
+        ({
+          request_informe_avance,
+          request_adicionales,
+          request_autorizacion,
+        }) &#x3D;&gt;
+          this.informeAvanceHttp
+            .updateInformeAvance(request_informe_avance)
+            .pipe(
+              map(response &#x3D;&gt;
+                serviciosActions.agregarAdicionalesYautorizarIA({
+                  request: request_adicionales,
+                  request_autorizacion,
+                })
+              ),
+              catchError(error &#x3D;&gt;
+                of(
+                  informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError(
+                    {
+                      error,
+                    }
+                  )
+                )
+              )
+            )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvanceAdicionalesYenviar$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvanceAdicionalesYenviar$</b></span>
+                        <a href="#actualizarInformeAvanceAdicionalesYenviar$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceAdicionalesYenviar),
+      concatMap(({ request_informe_avance, request_adicionales, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionalesYenviarIA({
+              request: request_adicionales,
+              ot_id,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError(
+                {
+                  error,
+                }
+              )
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvanceYAdicionales$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvanceYAdicionales$</b></span>
+                        <a href="#actualizarInformeAvanceYAdicionales$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYAdicionales),
+      concatMap(({ request_informe_avance, request_adicionales }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionales({
+              request: request_adicionales,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYAdicionalesError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvanceYautorizar$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvanceYautorizar$</b></span>
+                        <a href="#actualizarInformeAvanceYautorizar$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYautorizarIA),
+      concatMap(({ request_informe_avance, request_autorizacion }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYautorizarIAError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actualizarInformeAvanceYenviar$"></a>
+                    <span class="name">
+                        <span ><b>actualizarInformeAvanceYenviar$</b></span>
+                        <a href="#actualizarInformeAvanceYenviar$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYenviar),
+      concatMap(({ request_informe_avance, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYenviarError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarOrigenMaterialAProveedor$"></a>
+                    <span class="name">
+                        <span ><b>cambiarOrigenMaterialAProveedor$</b></span>
+                        <a href="#cambiarOrigenMaterialAProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) &#x3D;&gt;
+        this.informeAvanceHttp
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() &#x3D;&gt;
+              informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error &#x3D;&gt;
+              of(
+                informeAvanceActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="231" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:231</a></div>
                         </td>
                     </tr>
 
@@ -261,7 +616,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -287,7 +642,9 @@
         ofType(
           informeAvanceActions.getDetalleInformeAvanceSuccess,
           informeAvanceActions.sendDetalleInformeAvanceSuccess,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess,
+          informeAvanceActions.actualizarInformeAvanceSuccess,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -297,7 +654,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="265" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:265</a></div>
                         </td>
                     </tr>
 
@@ -323,7 +680,14 @@
         ofType(
           informeAvanceActions.getDetalleInformeAvanceError,
           informeAvanceActions.sendDetalleInformeAvanceError,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTError
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError,
+          informeAvanceActions.actualizarInformeAvanceYAdicionalesError,
+          informeAvanceActions.actualizarInformeAvanceError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError,
+          informeAvanceActions.actualizarInformeAvanceYenviarError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError,
+          informeAvanceActions.actualizarInformeAvanceYautorizarIAError,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -333,7 +697,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:86</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="280" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:280</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reloadWhenMaterialChangesToProveedor$"></a>
+                    <span class="name">
+                        <span ><b>reloadWhenMaterialChangesToProveedor$</b></span>
+                        <a href="#reloadWhenMaterialChangesToProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() &#x3D;&gt; window.location.reload())
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="256" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:256</a></div>
                         </td>
                     </tr>
 
@@ -372,7 +768,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:132</a></div>
                         </td>
                     </tr>
 
@@ -389,6 +785,7 @@
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { AfterHttpService, InformeAvanceHttpService } from &#x27;@services&#x27;;
 import * as informeAvanceActions from &#x27;./informe-avance.actions&#x27;;
+import * as serviciosActions from &#x27;@storeOT/servicios/servicios.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
 
@@ -417,6 +814,103 @@ export class InformeAvanceEffects {
     )
   );
 
+  // BORRADOR
+  // ACTUALIZAR INFORME DE AVANCE Y ADICIONALES
+  actualizarInformeAvanceYAdicionales$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYAdicionales),
+      concatMap(({ request_informe_avance, request_adicionales }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionales({
+              request: request_adicionales,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYAdicionalesError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO EL INFORME DE AVANCE
+  actualizarInformeAvance$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvance),
+      concatMap(({ request_informe_avance, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.actualizarInformeAvanceSuccess({
+              response,
+              ot_id,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ENVIAR INFORME DE AVANCE
+
+  // ACTUALIZAR INFORME DE AVANCE, LOS ADICIONALES Y ENVIAR EL INFORME
+  actualizarInformeAvanceAdicionalesYenviar$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceAdicionalesYenviar),
+      concatMap(({ request_informe_avance, request_adicionales, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionalesYenviarIA({
+              request: request_adicionales,
+              ot_id,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError(
+                {
+                  error,
+                }
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO INFORME DE AVANCE Y ENVIAR EL INFORME
+  actualizarInformeAvanceYenviar$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYenviar),
+      concatMap(({ request_informe_avance, ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYenviarError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // SEND DETALLE INFORME DE AVANCE
   SendDetalleInformeAvance$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
@@ -428,6 +922,65 @@ export class InformeAvanceEffects {
           ),
           catchError(error &#x3D;&gt;
             of(informeAvanceActions.sendDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // AUTORIZAR INFORME AVANCE
+  // ACTUALIZAR INFORME DE AVANCE, LOS ADICIONALES Y AUTORIZAR EL INFORME
+  actualizarInformeAvanceAdicionalesYautorizarIA$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(
+        informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIA
+      ),
+      concatMap(
+        ({
+          request_informe_avance,
+          request_adicionales,
+          request_autorizacion,
+        }) &#x3D;&gt;
+          this.informeAvanceHttp
+            .updateInformeAvance(request_informe_avance)
+            .pipe(
+              map(response &#x3D;&gt;
+                serviciosActions.agregarAdicionalesYautorizarIA({
+                  request: request_adicionales,
+                  request_autorizacion,
+                })
+              ),
+              catchError(error &#x3D;&gt;
+                of(
+                  informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError(
+                    {
+                      error,
+                    }
+                  )
+                )
+              )
+            )
+      )
+    )
+  );
+
+  // ACTUALIZAR SOLO INFORME DE AVANCE Y ENVIAR EL INFORME
+  actualizarInformeAvanceYautorizar$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.actualizarInformeAvanceYautorizarIA),
+      concatMap(({ request_informe_avance, request_autorizacion }) &#x3D;&gt;
+        this.informeAvanceHttp.updateInformeAvance(request_informe_avance).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOT({
+              request: request_autorizacion,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.actualizarInformeAvanceYautorizarIAError({
+                error,
+              })
+            )
           )
         )
       )
@@ -457,13 +1010,50 @@ export class InformeAvanceEffects {
     )
   );
 
+  // CAMBIAR ORIGEN DE MATERIAL A PROVEEDOR
+  cambiarOrigenMaterialAProveedor$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.CambiarMaterialOrigenAProveedor),
+      concatMap(({ material_id }) &#x3D;&gt;
+        this.informeAvanceHttp
+          .cambiarMaterialOrigenAProveedor(material_id)
+          .pipe(
+            map(() &#x3D;&gt;
+              informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess({
+                material_id,
+              })
+            ),
+            catchError(error &#x3D;&gt;
+              of(
+                informeAvanceActions.CambiarMaterialOrigenAProveedorError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
+  // TODO Sacar ésto
+  reloadWhenMaterialChangesToProveedor$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess),
+        tap(() &#x3D;&gt; window.location.reload())
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           informeAvanceActions.getDetalleInformeAvanceSuccess,
           informeAvanceActions.sendDetalleInformeAvanceSuccess,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess,
+          informeAvanceActions.actualizarInformeAvanceSuccess,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -476,7 +1066,14 @@ export class InformeAvanceEffects {
         ofType(
           informeAvanceActions.getDetalleInformeAvanceError,
           informeAvanceActions.sendDetalleInformeAvanceError,
-          informeAvanceActions.AceptarRechazarInformeAvanceOTError
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError,
+          informeAvanceActions.actualizarInformeAvanceYAdicionalesError,
+          informeAvanceActions.actualizarInformeAvanceError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYenviarError,
+          informeAvanceActions.actualizarInformeAvanceYenviarError,
+          informeAvanceActions.actualizarInformeAvanceAdicionalesYautorizarIAError,
+          informeAvanceActions.actualizarInformeAvanceYautorizarIAError,
+          informeAvanceActions.CambiarMaterialOrigenAProveedorError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

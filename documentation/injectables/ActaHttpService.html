@@ -96,7 +96,19 @@
                                 <a href="#aceptarRechazarAdicionales" >aceptarRechazarAdicionales</a>
                             </li>
                             <li>
+                                <a href="#aprobarRechazarSolicitudPago" >aprobarRechazarSolicitudPago</a>
+                            </li>
+                            <li>
+                                <a href="#detallesActa" >detallesActa</a>
+                            </li>
+                            <li>
+                                <a href="#getActas" >getActas</a>
+                            </li>
+                            <li>
                                 <a href="#getActaTiposPago" >getActaTiposPago</a>
+                            </li>
+                            <li>
+                                <a href="#getComentatiosfinalizacionTrabajos" >getComentatiosfinalizacionTrabajos</a>
                             </li>
                             <li>
                                 <a href="#getLastActa" >getLastActa</a>
@@ -105,10 +117,19 @@
                                 <a href="#getServicios4Acta" >getServicios4Acta</a>
                             </li>
                             <li>
+                                <a href="#getTotalActas" >getTotalActas</a>
+                            </li>
+                            <li>
                                 <a href="#getUOs4Acta" >getUOs4Acta</a>
                             </li>
                             <li>
                                 <a href="#informarTrabajosFinalizados" >informarTrabajosFinalizados</a>
+                            </li>
+                            <li>
+                                <a href="#quienAutorizoPago" >quienAutorizoPago</a>
+                            </li>
+                            <li>
+                                <a href="#solicitarInformeTrabajosFinalizados" >solicitarInformeTrabajosFinalizados</a>
                             </li>
                             <li>
                                 <a href="#validarActa" >validarActa</a>
@@ -136,7 +157,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/service/acta-http.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/core/service/acta-http.service.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -199,8 +220,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:88</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:92</a></div>
                 </td>
             </tr>
 
@@ -252,6 +273,213 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="aprobarRechazarSolicitudPago"></a>
+                    <span class="name">
+                        <span ><b>aprobarRechazarSolicitudPago</b></span>
+                        <a href="#aprobarRechazarSolicitudPago"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>aprobarRechazarSolicitudPago(request: <a href="../interfaces/RequestAprobacionRechazoSolicitudPago.html" target="_self">RequestAprobacionRechazoSolicitudPago</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="174"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:174</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>request</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestAprobacionRechazoSolicitudPago.html" target="_self" >RequestAprobacionRechazoSolicitudPago</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="detallesActa"></a>
+                    <span class="name">
+                        <span ><b>detallesActa</b></span>
+                        <a href="#detallesActa"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>detallesActa(acta_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="150"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:150</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>acta_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;ResponseDetalleActa&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActas"></a>
+                    <span class="name">
+                        <span ><b>getActas</b></span>
+                        <a href="#getActas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getActas(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getActaTiposPago"></a>
                     <span class="name">
                         <span ><b>getActaTiposPago</b></span>
@@ -268,8 +496,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="70"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:70</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:74</a></div>
                 </td>
             </tr>
 
@@ -280,6 +508,75 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getComentatiosfinalizacionTrabajos"></a>
+                    <span class="name">
+                        <span ><b>getComentatiosfinalizacionTrabajos</b></span>
+                        <a href="#getComentatiosfinalizacionTrabajos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getComentatiosfinalizacionTrabajos(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:139</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -305,8 +602,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="105"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:105</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:109</a></div>
                 </td>
             </tr>
 
@@ -374,8 +671,77 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalActas"></a>
+                    <span class="name">
+                        <span ><b>getTotalActas</b></span>
+                        <a href="#getTotalActas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalActas(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="119"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:119</a></div>
                 </td>
             </tr>
 
@@ -443,8 +809,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:41</a></div>
                 </td>
             </tr>
 
@@ -512,8 +878,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -577,6 +943,156 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="quienAutorizoPago"></a>
+                    <span class="name">
+                        <span ><b>quienAutorizoPago</b></span>
+                        <a href="#quienAutorizoPago"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>quienAutorizoPago(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, acta_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="160"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:160</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>acta_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitarInformeTrabajosFinalizados"></a>
+                    <span class="name">
+                        <span ><b>solicitarInformeTrabajosFinalizados</b></span>
+                        <a href="#solicitarInformeTrabajosFinalizados"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>solicitarInformeTrabajosFinalizados(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="184"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:184</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="validarActa"></a>
                     <span class="name">
                         <span ><b>validarActa</b></span>
@@ -593,8 +1109,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/app/core/service/acta-http.service.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/app/core/service/acta-http.service.ts:82</a></div>
                 </td>
             </tr>
 
@@ -672,7 +1188,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/service/acta-http.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/core/service/acta-http.service.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -693,9 +1209,13 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
+  listarActa,
+  QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobacionRechazoSolicitudPago,
   RequestValidarActa,
   Response,
+  ResponseDetalleActa,
 } from &#x27;@model&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 
@@ -795,6 +1315,81 @@ export class ActaHttpService {
       {
         ot_id,
       }
+    );
+  }
+
+  // TOTAL ACTAS
+  getTotalActas(ot_id: number): Observable&lt;Response&lt;{ total: number }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ total: number }&gt;&gt;(
+      &#x60;${this.API_URL}/ot/total_actas_procesadas/get&#x60;,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // LISTAR ACTAS
+  getActas(ot_id: number): Observable&lt;Response&lt;{ items: listarActa[] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ items: listarActa[] }&gt;&gt;(
+      &#x60;${this.API_URL}/ot/acta/get_by_otid&#x60;,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // OBTENER COMENTARIOS FINALIZACION DE TRABAJOS
+  getComentatiosfinalizacionTrabajos(
+    ot_id: number
+  ): Observable&lt;
+    Response&lt;{ ot_id: number; acta_id: number; observacion: string }&gt;
+  &gt; {
+    return this.http.post&lt;
+      Response&lt;{ ot_id: number; acta_id: number; observacion: string }&gt;
+    &gt;(&#x60;${this.API_URL}/ot/acta/trabajo/finalizado/observacion/get&#x60;, { ot_id });
+  }
+
+  // DETALLES DE UN ACTA
+  detallesActa(acta_id: number): Observable&lt;ResponseDetalleActa&gt; {
+    return this.http.post&lt;ResponseDetalleActa&gt;(
+      &#x60;${this.API_URL}/ot/acta/get_detalle_bitacora&#x60;,
+      {
+        acta_id,
+      }
+    );
+  }
+
+  // SOLICITAR PAGO
+  quienAutorizoPago(
+    ot_id: number,
+    acta_id: number
+  ): Observable&lt;Response&lt;{ items: QuienAutorizoActa[] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ items: QuienAutorizoActa[] }&gt;&gt;(
+      &#x60;${this.API_URL}/ot/ot_autorizacion_pago_otid/get&#x60;,
+      {
+        ot_id,
+        acta_id,
+      }
+    );
+  }
+
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago(
+    request: RequestAprobacionRechazoSolicitudPago
+  ): Observable&lt;Response&lt;any&gt;&gt; {
+    return this.http.post&lt;Response&lt;any&gt;&gt;(
+      &#x60;${this.API_URL}/ot/ot_autorizacion_pago/autorizar&#x60;,
+      request
+    );
+  }
+
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  solicitarInformeTrabajosFinalizados(
+    ot_id: number
+  ): Observable&lt;Response&lt;any&gt;&gt; {
+    return this.http.post&lt;Response&lt;any&gt;&gt;(
+      &#x60;${this.API_URL}/ot/sol_inf_trabajos_fin/do&#x60;,
+      { ot_id }
     );
   }
 }

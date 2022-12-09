@@ -17,5 +17,5 @@ export const motivosRechazo = createSelector(
 
 export const getSolicitudQuiebre = createSelector(
   selectFlujoOT,
-  (state: reducer.StateFlujoOT) => state.flagSolicitudQuiebre
+  (state: reducer.StateFlujoOT) => state.lastSolicitudQuiebre
 );

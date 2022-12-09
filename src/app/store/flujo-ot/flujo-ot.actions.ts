@@ -1,6 +1,9 @@
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -195,7 +198,7 @@ export const getSolicitudQuiebre = createAction(
 
 export const getSolicitudQuiebreSuccess = createAction(
   '[FLUJO OT] GET getSolicitudQuiebre Success',
-  props<{ flag: boolean }>()
+  props<{ lastSolicitudQuiebre: LastSolicitudQuiebre }>()
 );
 export const getSolicitudQuiebreError = createAction(
   '[FLUJO OT] GET getSolicitudQuiebre Error',
@@ -214,6 +217,36 @@ export const solicitarQuiebreSuccess = createAction(
 );
 export const solicitarQuiebreError = createAction(
   '[FLUJO OT] GET solicitarQuiebre Error',
+  props<{ error: any }>()
+);
+
+// QUIEBRE OT
+export const quiebre = createAction(
+  '[FLUJO OT] GET quiebre',
+  props<{ request: ReqQuiebre }>()
+);
+
+export const quiebreSuccess = createAction(
+  '[FLUJO OT] GET quiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const quiebreError = createAction(
+  '[FLUJO OT] GET quiebre Error',
+  props<{ error: any }>()
+);
+
+// APROBAR/RECHAZAR QUIEBRE OT
+export const aprobarRechazarSolicitudQuiebre = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre',
+  props<{ request: ReqAprobarRechazarSolicitudQuiebre }>()
+);
+
+export const aprobarRechazarSolicitudQuiebreSuccess = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const aprobarRechazarSolicitudQuiebreError = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre Error',
   props<{ error: any }>()
 );
 

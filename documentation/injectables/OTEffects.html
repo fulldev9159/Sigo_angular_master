@@ -81,6 +81,9 @@
                                 <a href="#createOT$" >createOT$</a>
                             </li>
                             <li>
+                                <a href="#downloadOTsAsignadas$" >downloadOTsAsignadas$</a>
+                            </li>
+                            <li>
                                 <a href="#getAreaDeNegocio$" >getAreaDeNegocio$</a>
                             </li>
                             <li>
@@ -125,6 +128,9 @@
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
                             </li>
+                            <li>
+                                <a href="#requestDownloadOTsAsignadas$" >requestDownloadOTsAsignadas$</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -144,12 +150,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, otHttpService: <a href="../injectables/OtHttpService.html" target="_self">OtHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, numeroInternoHttp: <a href="../injectables/NumeroInternoHttpService.html" target="_self">NumeroInternoHttpService</a>)</code>
+<code>constructor(actions$: Actions, otHttpService: <a href="../injectables/OtHttpService.html" target="_self">OtHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, numeroInternoHttp: <a href="../injectables/NumeroInternoHttpService.html" target="_self">NumeroInternoHttpService</a>, ot: <a href="../injectables/OTFacade.html" target="_self">OTFacade</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/store/ot/ot.effects.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/store/ot/ot.effects.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -214,6 +220,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>ot</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OTFacade.html" target="_self" >OTFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -257,7 +287,51 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/ot/ot.effects.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/store/ot/ot.effects.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="downloadOTsAsignadas$"></a>
+                    <span class="name">
+                        <span ><b>downloadOTsAsignadas$</b></span>
+                        <a href="#downloadOTsAsignadas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(otActions.downloadOTsAsignadasSuccess),
+        tap(({ filename, data }) &#x3D;&gt; {
+          const link &#x3D; document.createElement(&#x27;a&#x27;);
+          link.style.display &#x3D; &#x27;none&#x27;;
+          document.body.appendChild(link);
+
+          const blob &#x3D; new Blob([data], { type: &#x27;application/ms-excel&#x27; });
+          const objectURL &#x3D; URL.createObjectURL(blob);
+
+          link.href &#x3D; objectURL;
+          link.href &#x3D; URL.createObjectURL(blob);
+          link.download &#x3D; filename;
+          link.click();
+        })
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/store/ot/ot.effects.ts:292</a></div>
                         </td>
                     </tr>
 
@@ -292,7 +366,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/store/ot/ot.effects.ts:104</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/store/ot/ot.effects.ts:109</a></div>
                         </td>
                     </tr>
 
@@ -315,13 +389,22 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAbiertas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTAbiertasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.ABIERTAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTAbiertasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTAbiertasError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -329,7 +412,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/store/ot/ot.effects.ts:160</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/store/ot/ot.effects.ts:174</a></div>
                         </td>
                     </tr>
 
@@ -352,13 +435,22 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAnuladas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTAnuladasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.ANULADAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTAnuladasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTAnuladasError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -366,7 +458,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/store/ot/ot.effects.ts:190</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="222" class="link-to-prism">src/app/store/ot/ot.effects.ts:222</a></div>
                         </td>
                     </tr>
 
@@ -389,13 +481,22 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTCerradas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTCerradasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.CERRADAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTCerradasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTCerradasError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -403,7 +504,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/store/ot/ot.effects.ts:175</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/store/ot/ot.effects.ts:198</a></div>
                         </td>
                     </tr>
 
@@ -426,13 +527,22 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTEjecucion),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTEjecucionError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.EN_EJECUCION,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTEjecucionSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTEjecucionError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -440,7 +550,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/store/ot/ot.effects.ts:145</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">src/app/store/ot/ot.effects.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -463,13 +573,22 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTQuebradas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTQuebradasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.EN_TRAMITE,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTQuebradasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTQuebradasError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -477,7 +596,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/store/ot/ot.effects.ts:205</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/store/ot/ot.effects.ts:246</a></div>
                         </td>
                     </tr>
 
@@ -512,7 +631,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/store/ot/ot.effects.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/store/ot/ot.effects.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -547,7 +666,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/store/ot/ot.effects.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/store/ot/ot.effects.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -582,7 +701,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/store/ot/ot.effects.ts:117</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/store/ot/ot.effects.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -619,7 +738,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/store/ot/ot.effects.ts:130</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/store/ot/ot.effects.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -654,7 +773,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/ot/ot.effects.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/store/ot/ot.effects.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -689,7 +808,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/ot/ot.effects.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/store/ot/ot.effects.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -728,7 +847,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/store/ot/ot.effects.ts:87</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/store/ot/ot.effects.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -775,7 +894,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/store/ot/ot.effects.ts:219</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="313" class="link-to-prism">src/app/store/ot/ot.effects.ts:313</a></div>
                         </td>
                     </tr>
 
@@ -812,7 +931,8 @@
           otActions.getBandejaOTAbiertasError,
           otActions.getBandejaOTCerradasError,
           otActions.getBandejaOTAnuladasError,
-          otActions.getBandejaOTQuebradasError
+          otActions.getBandejaOTQuebradasError,
+          otActions.downloadOTsAsignadasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -822,7 +942,52 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/store/ot/ot.effects.ts:243</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/store/ot/ot.effects.ts:337</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestDownloadOTsAsignadas$"></a>
+                    <span class="name">
+                        <span ><b>requestDownloadOTsAsignadas$</b></span>
+                        <a href="#requestDownloadOTsAsignadas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.downloadOTsAsignadas),
+      concatMap(
+        ({ fecha_inicio_real_ot__desde, fecha_inicio_real_ot__hasta }) &#x3D;&gt;
+          this.otHttpService
+            .downloadOTsAsignadas(
+              fecha_inicio_real_ot__desde,
+              fecha_inicio_real_ot__hasta
+            )
+            .pipe(
+              map(({ filename, data }) &#x3D;&gt;
+                otActions.downloadOTsAsignadasSuccess({ filename, data })
+              ),
+              catchError(error &#x3D;&gt;
+                of(otActions.downloadOTsAsignadasError({ error }))
+              )
+            )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/store/ot/ot.effects.ts:270</a></div>
                         </td>
                     </tr>
 
@@ -836,15 +1001,18 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType, concatLatestFrom } from &#x27;@ngrx/effects&#x27;;
 import {
   AfterHttpService,
   NumeroInternoHttpService,
   OtHttpService,
 } from &#x27;@services&#x27;;
+import { FiltroPestaniaOT } from &#x27;@model&#x27;;
 import * as otActions from &#x27;./ot.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
+import { OTFacade } from &#x27;./ot.facades&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 @Injectable()
 export class OTEffects {
@@ -852,7 +1020,9 @@ export class OTEffects {
     private actions$: Actions,
     private otHttpService: OtHttpService,
     private afterHttp: AfterHttpService,
-    private numeroInternoHttp: NumeroInternoHttpService
+    private numeroInternoHttp: NumeroInternoHttpService,
+    private ot: OTFacade,
+    private router: Router
   ) {}
 
   // CREATE OT
@@ -982,13 +1152,22 @@ export class OTEffects {
   getBandejaOTEjecucion$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTEjecucion),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTEjecucionError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.EN_EJECUCION,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTEjecucionSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTEjecucionError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -997,13 +1176,22 @@ export class OTEffects {
   getBandejaOTAbiertas$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAbiertas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTAbiertasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.ABIERTAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTAbiertasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTAbiertasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -1012,13 +1200,22 @@ export class OTEffects {
   getBandejaOTCerradas$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTCerradas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTCerradasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.CERRADAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTCerradasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTCerradasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -1027,13 +1224,22 @@ export class OTEffects {
   getBandejaOTAnuladas$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTAnuladas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTAnuladasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.ANULADAS,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTAnuladasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTAnuladasError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -1042,15 +1248,68 @@ export class OTEffects {
   getBandejaOTQuebradas$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getBandejaOTQuebradas),
-      concatMap(({ request }) &#x3D;&gt;
-        this.otHttpService.getBandejaOT(request).pipe(
-          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
-          catchError(error &#x3D;&gt;
-            of(otActions.getBandejaOTQuebradasError({ error }))
+      concatLatestFrom(() &#x3D;&gt; [this.ot.getFiltrosOT$()]),
+      concatMap(([, { filtro_propietario, filtro_tipo }]) &#x3D;&gt;
+        this.otHttpService
+          .getBandejaOT({
+            filtro_pestania: FiltroPestaniaOT.EN_TRAMITE,
+            filtro_propietario,
+            filtro_tipo,
+          })
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getBandejaOTQuebradasSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getBandejaOTQuebradasError({ error }))
+            )
           )
-        )
       )
     )
+  );
+
+  // DOWNLOAD Ots ASIGNADAS
+  requestDownloadOTsAsignadas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.downloadOTsAsignadas),
+      concatMap(
+        ({ fecha_inicio_real_ot__desde, fecha_inicio_real_ot__hasta }) &#x3D;&gt;
+          this.otHttpService
+            .downloadOTsAsignadas(
+              fecha_inicio_real_ot__desde,
+              fecha_inicio_real_ot__hasta
+            )
+            .pipe(
+              map(({ filename, data }) &#x3D;&gt;
+                otActions.downloadOTsAsignadasSuccess({ filename, data })
+              ),
+              catchError(error &#x3D;&gt;
+                of(otActions.downloadOTsAsignadasError({ error }))
+              )
+            )
+      )
+    )
+  );
+
+  downloadOTsAsignadas$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(otActions.downloadOTsAsignadasSuccess),
+        tap(({ filename, data }) &#x3D;&gt; {
+          const link &#x3D; document.createElement(&#x27;a&#x27;);
+          link.style.display &#x3D; &#x27;none&#x27;;
+          document.body.appendChild(link);
+
+          const blob &#x3D; new Blob([data], { type: &#x27;application/ms-excel&#x27; });
+          const objectURL &#x3D; URL.createObjectURL(blob);
+
+          link.href &#x3D; objectURL;
+          link.href &#x3D; URL.createObjectURL(blob);
+          link.download &#x3D; filename;
+          link.click();
+        })
+      ),
+    { dispatch: false }
   );
 
   notifyAfte$ &#x3D; createEffect(
@@ -1094,7 +1353,8 @@ export class OTEffects {
           otActions.getBandejaOTAbiertasError,
           otActions.getBandejaOTCerradasError,
           otActions.getBandejaOTAnuladasError,
-          otActions.getBandejaOTQuebradasError
+          otActions.getBandejaOTQuebradasError,
+          otActions.downloadOTsAsignadasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

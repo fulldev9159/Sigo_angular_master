@@ -415,6 +415,28 @@ export class AfterHttpService {
       location.reload();
     }
 
+    // QUIEBRE
+    if (action.type === flujoOTActions.quiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el quiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // APROBAR/RECHAZAR QUIEBRE
+    if (
+      action.type === flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Se ha aprobado el quiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
     // DESQUIEBRE
     if (action.type === flujoOTActions.desquiebreSuccess.type) {
       this.snackMessage.showMessage(

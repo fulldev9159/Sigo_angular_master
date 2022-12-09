@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/cubicacion/components/formulario/formulario.component.ts</code>
+            <code>src/app/features/auth/components/perfil-select/perfil-select.component.ts</code>
         </p>
 
 
@@ -177,270 +177,71 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from &#x27;@angular/core&#x27;;
-import { FormArray, FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
-import {
-  AgenciaContrato,
-  ContratosUser,
-  ProveedorAgenciaContrato,
-} from &#x27;@model&#x27;;
-import { ContratoFacade } from &#x27;@storeOT/contrato/contrato.facades&#x27;;
-import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { PerfilesUsuario } from &#x27;@model&#x27;;
+import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
-import { ProveedorFacade } from &#x27;@storeOT/proveedor/proveedor.facades&#x27;;
-import { UsuarioFacade } from &#x27;@storeOT/usuario/usuario.facades&#x27;;
-import { map, Observable, Subscription, take, tap } from &#x27;rxjs&#x27;;
-import { FormularioService } from &#x27;src/app/core/service/formulario.service&#x27;;
+import { PerfilFacade } from &#x27;@storeOT/perfil/perfil.facades&#x27;;
+import { map, Observable, take, tap } from &#x27;rxjs&#x27;;
 
 interface Dropdown {
   name: string;
   code: number;
 }
-/**
- * @description FORMULARIO QUE PERMITE INGRESAR:
- *    - Nombre de una cubicacion
- *    - Tipo de la cubicación
- *    - Contrato de la cubicación
- *    - Agencia de la cubicación
- *    - Proveedor de la cubicación
- *    - Dirección en caso de un contrato bucle
- *    - Observación opcional
- *
- * Datos necesarios inicalmente:
- *    - Contratos del usuario (getContratosUsuario)
- *    - Tipos de Cubicaciones (getTipoCubicacion)
- */
 @Component({
-  selector: &#x27;zwc-formulario&#x27;,
-  templateUrl: &#x27;./formulario.component.html&#x27;,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [&#x27;./formulario.component.scss&#x27;],
+  selector: &#x27;zwc-perfil-select&#x27;,
+  templateUrl: &#x27;./perfil-select.component.html&#x27;,
+  styleUrls: [&#x27;./perfil-select.component.scss&#x27;],
 })
-export class FormularioComponent implements OnDestroy, OnInit {
-  subscription: Subscription &#x3D; new Subscription();
-  // DATOS A USAR
-  contratosUsuario: ContratosUser[];
-  contrato_selected: ContratosUser;
-  contratoUsuarios$: Observable&lt;Dropdown[]&gt; &#x3D; this.usuarioFacade
-    .getContratosUsuario$()
+export class PerfilSelectComponent {
+  perfilesUsuarioDropdown$: Observable&lt;Dropdown[]&gt; &#x3D; this.perfilFacade
+    .getPerfilesUsuario$()
     .pipe(
-      tap(values &#x3D;&gt; (this.contratosUsuario &#x3D; values)),
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt;
-          a.model_contrato_id.nombre &gt; b.model_contrato_id.nombre ? 1 : -1
-        );
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: value.model_contrato_id.nombre,
-          code: value.contrato_id,
+      tap(perfiles &#x3D;&gt; (this.perfilesUsuario &#x3D; perfiles)),
+      map(perfiles &#x3D;&gt;
+        perfiles.map(perfil &#x3D;&gt; ({
+          name: perfil.model_perfil_id?.nombre,
+          code: perfil.id,
         }))
       ),
       take(1)
     );
+  perfilesUsuario: PerfilesUsuario[];
 
-  tipoCubicacion$: Observable&lt;Dropdown[]&gt; &#x3D; this.cubicacionFacade
-    .getTipoCubicacion$()
-    .pipe(
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: value.descripcion,
-          code: value.id,
-        }))
-      ),
-      take(1)
-    );
-  agenciasContrato: AgenciaContrato[];
-  agenciasContrato$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
-    .getAgenciasContrato$()
-    .pipe(
-      tap(values &#x3D;&gt; (this.agenciasContrato &#x3D; values)),
-      tap(values &#x3D;&gt;
-        this.formularioService.checkAndEnable(
-          this.formCub,
-          &#x27;agencia_id&#x27;,
-          values
-        )
-      ),
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt; (a.nombre &gt; b.nombre ? 1 : -1));
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: value.nombre,
-          code: value.id,
-        }))
-      )
-    );
-  proveedoresAgenciaContrato: ProveedorAgenciaContrato[];
-  proveedoresAgenciaContrato$: Observable&lt;Dropdown[]&gt; &#x3D; this.proveedorFacade
-    .getProveedoresAgenciaContrato$()
-    .pipe(
-      tap(proveedores &#x3D;&gt; (this.proveedoresAgenciaContrato &#x3D; proveedores)),
-      tap(values &#x3D;&gt;
-        this.formularioService.checkAndEnable(
-          this.formCub,
-          &#x27;cmarcoproveedor_id&#x27;,
-          values
-        )
-      ),
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt; (a.nombre &gt; b.nombre ? 1 : -1));
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: &#x60;${value.codigo_acuerdo} - ${value.nombre}&#x60;,
-          code: value.cmarco_has_proveedor_id,
-        }))
-      )
-    );
+  sendingGetPerfilesUser$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingFacade.sendingGetPerfilesUser$();
+  sendingPermisosPerfilUser$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingFacade.sendingPermisosPerfilUser$();
 
-  // FORMULARIO
-
-  formCubControl &#x3D; {
-    id: new FormControl(null),
-    nombre: new FormControl(null, [
-      Validators.required,
-      this.formularioService.noWhitespace,
-      Validators.maxLength(300),
-    ]),
-    tipocubicacion: new FormControl(null, [Validators.required]),
-    direcciondesde: new FormControl(null, []),
-    direcciondesdealtura: new FormControl(null, []),
-    direccionhasta: new FormControl(null, []),
-    direccionhastaaltura: new FormControl(null, []),
-    descripcion: new FormControl(&#x27;&#x27;),
-    contrato: new FormControl(null, [Validators.required]),
-    agencia_id: new FormControl(null, [Validators.required]),
-    cmarcoproveedor_id: new FormControl(null, [Validators.required]),
+  formControls &#x3D; {
+    perfil_id: new FormControl(&#x27;&#x27;, [Validators.required]),
   };
 
-  formCub: FormGroup &#x3D; new FormGroup(this.formCubControl);
-
-  // LOADINGS
-  getAgenciaContratoLoading$: Observable&lt;boolean&gt; &#x3D;
-    this.loadingFacade.sendingGetAgenciasContrato$();
-  getProveedoresAgenciaContratoLoading$: Observable&lt;boolean&gt; &#x3D;
-    this.loadingFacade.sendingGetProveedoresAgenciasContrato$();
+  formPerfilUser &#x3D; new FormGroup(this.formControls);
 
   constructor(
-    private formularioService: FormularioService,
-    private usuarioFacade: UsuarioFacade,
-    private cubicacionFacade: CubicacionFacade,
-    private contratoFacade: ContratoFacade,
-    private loadingFacade: LoadingsFacade,
-    private proveedorFacade: ProveedorFacade
+    private perfilFacade: PerfilFacade,
+    private authFacade: AuthFacade,
+    private loadingFacade: LoadingsFacade
   ) {}
 
-  ngOnInit(): void {
-    this.formObserver();
-  }
-
-  formObserver(): void {
-    // CONTRATO MARCO
-    this.subscription.add(
-      this.formCub.get(&#x27;contrato&#x27;).valueChanges.subscribe(contrato_id &#x3D;&gt; {
-        if (contrato_id &amp;&amp; contrato_id !&#x3D;&#x3D; null) {
-          // CALL GET AGENCIAS
-          this.formCub.get(&#x27;agencia_id&#x27;).disable({ emitEvent: false });
-          this.contratoFacade.getAgenciasContrato(+contrato_id);
-
-          // STORE CONTRATO SELECTED
-          this.contrato_selected &#x3D; this.contratosUsuario.find(
-            contrato &#x3D;&gt; contrato.contrato_id &#x3D;&#x3D;&#x3D; contrato_id
-          );
-          this.cubicacionFacade.contratoSelected(this.contrato_selected);
-        }
-
-        // CONTRATOS BUCLE
-        if (
-          this.contrato_selected &amp;&amp;
-          this.contrato_selected.model_contrato_id.tipo_contrato_id &#x3D;&#x3D;&#x3D; 4
-        ) {
-          this.formularioService.addValidators(
-            this.formCub,
-            [
-              &#x27;direcciondesde&#x27;,
-              &#x27;direcciondesdealtura&#x27;,
-              &#x27;direccionhasta&#x27;,
-              &#x27;direccionhastaaltura&#x27;,
-            ],
-            [
-              Validators.required,
-              this.formularioService.noWhitespace,
-              Validators.maxLength(100),
-            ]
-          );
-        } else {
-          this.formularioService.removeValidators(this.formCub, [
-            &#x27;direcciondesde&#x27;,
-            &#x27;direcciondesdealtura&#x27;,
-            &#x27;direccionhasta&#x27;,
-            &#x27;direccionhastaaltura&#x27;,
-          ]);
-        }
-      })
-    );
-    // AGENCIA
-    this.subscription.add(
-      this.formCub.get(&#x27;agencia_id&#x27;).valueChanges.subscribe(agencia_id &#x3D;&gt; {
-        if (agencia_id &amp;&amp; agencia_id !&#x3D;&#x3D; null) {
-          // STORE AGENCIA SELECTED
-          let agenciaSelected &#x3D; this.agenciasContrato.find(
-            agencia &#x3D;&gt; agencia.id &#x3D;&#x3D;&#x3D; agencia_id
-          );
-          this.cubicacionFacade.agenciaSelected(agenciaSelected);
-          // CALL GET PROVEEDORES
-          let contrato_id &#x3D; +this.formCub.get(&#x27;contrato&#x27;).value;
-          this.proveedorFacade.getProveedoresAgenciaContrato(
-            +agencia_id,
-            contrato_id
-          );
-        }
-      })
+  perfilar(): void {
+    const proxy_id_selected &#x3D; +this.formPerfilUser.get(&#x27;perfil_id&#x27;).value;
+    const perfil_selected &#x3D; this.perfilesUsuario.find(
+      perfil &#x3D;&gt; perfil.id &#x3D;&#x3D;&#x3D; proxy_id_selected
     );
 
-    // PROVEEDOR
-    this.subscription.add(
-      this.formCub
-        .get(&#x27;cmarcoproveedor_id&#x27;)
-        .valueChanges.subscribe(cmarcoproveedor_id &#x3D;&gt; {
-          if (cmarcoproveedor_id &amp;&amp; cmarcoproveedor_id !&#x3D; null) {
-            // STORE PROVEEDOR SELECTED
-            let proveedorSelected: ProveedorAgenciaContrato &#x3D;
-              this.proveedoresAgenciaContrato.find(
-                proveedor &#x3D;&gt;
-                  proveedor.cmarco_has_proveedor_id &#x3D;&#x3D;&#x3D; cmarcoproveedor_id
-              );
-            this.cubicacionFacade.proveedorSelected(proveedorSelected);
-
-            // CALL ACTIVIDADES DEL CONTRATO PROVEEDOR SELECTED
-            this.contratoFacade.getActividadesContratoProveedor(
-              +cmarcoproveedor_id
-            );
-          }
-        })
+    this.authFacade.refreshLogin(
+      proxy_id_selected,
+      perfil_selected.model_perfil_id.nombre,
+      perfil_selected.model_perfil_id.model_rol_id.nombre,
+      perfil_selected.model_perfil_id.model_rol_id.slug
     );
   }
 
-  get valid(): boolean {
-    return this.formCub.valid;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  logout(): void {
+    this.authFacade.Logout();
   }
 }
 </code></pre>

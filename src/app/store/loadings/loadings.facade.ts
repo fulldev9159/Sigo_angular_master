@@ -213,4 +213,8 @@ export class LoadingsFacade {
   public sendingAprobacionPago$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingAprobacionPago);
   }
+
+  public sendingLastSolicitudQuiebre$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingLastSolicitudQuiebre);
+  }
 }

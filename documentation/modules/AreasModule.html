@@ -206,6 +206,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ReactiveFormsModule, FormsModule } from &#x27;@angular/forms&#x27;;
 import { AreasComponent } from &#x27;./areas.component&#x27;;
 import { AreasRoutingModule } from &#x27;./areas-routing.module&#x27;;
 import { SharedModule } from &#x27;@sharedOT/shared.module&#x27;;
@@ -213,8 +214,18 @@ import { ListAreasContainerComponent } from &#x27;./containers/list-areas-contai
 import { FormAreasContainerComponent } from &#x27;./containers/form-areas-container/form-areas-container.component&#x27;;
 
 @NgModule({
-  declarations: [AreasComponent, ListAreasContainerComponent, FormAreasContainerComponent],
-  imports: [CommonModule, AreasRoutingModule, SharedModule],
+  declarations: [
+    AreasComponent,
+    ListAreasContainerComponent,
+    FormAreasContainerComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AreasRoutingModule,
+    SharedModule,
+  ],
 })
 export class AreasModule {}
 </code></pre>

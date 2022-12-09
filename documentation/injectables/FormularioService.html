@@ -152,8 +152,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app/core/service/formulario.service.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/app/core/service/formulario.service.ts:44</a></div>
                 </td>
             </tr>
 
@@ -245,8 +245,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/app/core/service/formulario.service.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">src/app/core/service/formulario.service.ts:62</a></div>
                 </td>
             </tr>
 
@@ -444,8 +444,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">src/app/core/service/formulario.service.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/core/service/formulario.service.ts:55</a></div>
                 </td>
             </tr>
 
@@ -525,8 +525,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/app/core/service/formulario.service.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/app/core/service/formulario.service.ts:40</a></div>
                 </td>
             </tr>
 
@@ -610,10 +610,23 @@ export class FormularioService {
   }
 
   errorMessageFn(errors: any): string {
+    console.log(errors);
     if (errors.required) {
       return &#x27;Este campo es requerido&#x27;;
     } else if (errors.minlength) {
       return &#x60;El texto debe tener un tamaño mínimo de ${errors.minlength.requiredLength} caracteres&#x60;;
+    } else if (errors.benumber) {
+      return &#x27;Debe ser un número&#x27;;
+    } else if (errors.nonzero) {
+      return &#x27;No son permitidos valores inferiores a 1&#x27;;
+    } else if (errors.max) {
+      return &#x60;Valor no debe ser mayor a ${errors.max.max}&#x60;;
+    } else if (errors.min) {
+      return &#x60;No puede ser negativo&#x60;;
+    } else if (errors.decimals) {
+      return &#x60;No puede exceder los ${errors.decimals.maxdigits.max} dígitos&#x60;;
+    } else if (errors.decimals) {
+      return &#x60;No puede exceder el máximo de decimales ${errors.decimals.maxdecimals.max}&#x60;;
     }
     return &#x27;Error sin mensaje definido&#x27;;
   }

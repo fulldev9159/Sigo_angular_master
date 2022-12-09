@@ -175,7 +175,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getOTFromNumeroInterno(numero_interno: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getOTFromNumeroInterno(tipo_numero_interno_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, numero_interno: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -203,6 +203,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>tipo_numero_interno_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
                                 <tr>
                                     <td>numero_interno</td>
                                     <td>
@@ -253,8 +265,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/app/store/numero-interno/numero-interno.facades.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/store/numero-interno/numero-interno.facades.ts:36</a></div>
                 </td>
             </tr>
 
@@ -377,9 +389,15 @@ export class NumeroInternoFacade {
   }
 
   // CREATE OT CONTRATO FIJO : GET OT FROM NUMERO INTERNO
-  public getOTFromNumeroInterno(numero_interno: string): void {
+  public getOTFromNumeroInterno(
+    tipo_numero_interno_id: number,
+    numero_interno: string
+  ): void {
     this.store.dispatch(
-      numeroInternoActions.getOTFromNumeroInterno({ numero_interno })
+      numeroInternoActions.getOTFromNumeroInterno({
+        tipo_numero_interno_id,
+        numero_interno,
+      })
     );
   }
 

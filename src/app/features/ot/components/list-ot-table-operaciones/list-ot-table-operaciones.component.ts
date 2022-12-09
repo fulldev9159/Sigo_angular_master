@@ -14,6 +14,9 @@ import {
 import {
   Accion,
   Dropdown,
+  LastSolicitudQuiebre,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
@@ -25,7 +28,7 @@ import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
-import { map, Observable, Subscription, take, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
@@ -70,6 +73,18 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   })
   solicitudQuiebreForm: ViewRechazoComponent;
 
+  @ViewChild('QuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  QuiebreForm: ViewRechazoComponent;
+
+  @ViewChild('rechazoSolicitudQuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoSolicitudQuiebreForm: ViewRechazoComponent;
+
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
   bookIcon = faBook;
@@ -99,6 +114,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalCierreAdministrativo = false;
   displayAprobarRechazarQuiebreGestor = false;
   displayQuiebreGestor = false;
+  displayModalRechazarSolicitudQuiebre = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -131,10 +147,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       )
     );
 
-  flagSolicitudQuiebre: boolean;
-  flagSolicitudQuiebre$: Observable<boolean> = this.flujoOTFacade
-    .getSolicitudQuiebre$()
-    .pipe(tap(x => (this.flagSolicitudQuiebre = x)));
+  flagSolicitudQuiebre$: Observable<LastSolicitudQuiebre> =
+    this.flujoOTFacade.getSolicitudQuiebre$();
 
   // FORM
   formControls = {
@@ -151,6 +165,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
+  loadingLastSolicitudPago$: Observable<boolean> =
+    this.loadingsFacade.sendingLastSolicitudQuiebre$();
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
@@ -348,7 +364,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // QUIEBRE
   showModalSolicitarQuiebre(): void {
-    this.flujoOTFacade.getMotivosRechazo('ACEPTACION_OT_EECC');
+    this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
     this.displayModalSolicitarQuiebre = true;
   }
 
@@ -365,19 +382,57 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   showModalQuebrarGestor(): void {
     this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
-    this.subscription.add(
-      this.flujoOTFacade
-        .getSolicitudQuiebre$()
-        .pipe(take(1))
-        .subscribe(x => {
-          if (x) {
-            this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
-            this.displayAprobarRechazarQuiebreGestor = true;
-          } else {
-            this.displayQuiebreGestor = true;
-          }
-        })
-    );
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
+    this.displayAprobarRechazarQuiebreGestor = true;
+  }
+
+  quiebreGestor(): void {
+    let request: ReqQuiebre = {
+      ot_id: this.ot_id,
+      observacion: this.QuiebreForm.formRechazo.get('motivo').value,
+      tipo_causa_id: +this.QuiebreForm.formRechazo.get('tipo_id').value,
+    };
+
+    this.flujoOTFacade.quiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
+  }
+
+  // RECHAZAR SOLICITUD DE QUIEBRE
+  displayRechazoSolicitudQuiebre(): void {
+    this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    this.displayModalRechazarSolicitudQuiebre = true;
+  }
+
+  closeModalRechazoSolicitudQuiebre(): void {
+    this.displayModalRechazarSolicitudQuiebre = false;
+    this.displayAprobarRechazarQuiebreGestor = false;
+    this.rechazoSolicitudQuiebreForm.formRechazo.reset();
+  }
+
+  rechazarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'RECHAZADO',
+        causa_rechazo_id:
+          +this.rechazoSolicitudQuiebreForm.formRechazo.get('tipo_id').value,
+        motivo_rechazo:
+          this.rechazoSolicitudQuiebreForm.formRechazo.get('motivo').value,
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.closeModalRechazoSolicitudQuiebre();
+  }
+
+  aprobarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'APROBADO',
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
   }
 
   // DESQUIEBRE

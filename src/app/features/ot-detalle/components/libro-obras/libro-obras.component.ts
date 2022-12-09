@@ -116,6 +116,14 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         icon: this.inboxIcon,
         text: 'Valicación del resultado de ingeniería',
       },
+      SOLICITUD_QUIEBRE: {
+        icon: this.inboxIcon,
+        text: 'Solicitud de quiebre por parte del proveedor',
+      },
+      SOLICITUD_QUIEBRE_APROBACION: {
+        icon: this.inboxIcon,
+        text: 'Aprobación de solicitud de quibre',
+      },
     };
   }
 

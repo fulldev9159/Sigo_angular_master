@@ -85,6 +85,13 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#ot_id" 
+>
+                                            ot_id
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#response" 
 >
                                             response
@@ -107,6 +114,44 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ot_id"></a>
+                                        <span class="name "><b>ot_id</b>
+                                            <a href="#ot_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ot_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -199,6 +244,9 @@ import * as otDetalleActions from &#x27;@storeOT/ot-detalle/ot-detalle.actions&#
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
+import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
+import { InformeAvanceFacade } from &#x27;@storeOT/informe-avance/informe-avance.facades&#x27;;
+import * as ingenieriaActions from &#x27;@storeOT/ingenieria/ingenieria.actions&#x27;;
 
 interface ActionErr {
   error?: any;
@@ -213,6 +261,7 @@ interface ActionSuccess {
       desc: string;
     };
   };
+  ot_id?: number;
   type: string;
 }
 
@@ -227,6 +276,8 @@ export class AfterHttpService {
     private snackMessage: SnackMessageService,
     private authFacade: AuthFacade,
     private cubicacionFacade: CubicacionFacade,
+    private serviciosFacade: ServiciosFacade,
+    private informeAvanceFacade: InformeAvanceFacade,
     private otFacade: OTFacade
   ) {}
 
@@ -241,6 +292,10 @@ export class AfterHttpService {
   successHandler(action: ActionSuccess): void {
     // LOGIN
     if (action.type &#x3D;&#x3D;&#x3D; authActions.loginSuccess.type) {
+      this.router.navigate([&#x27;/login/two-factor-authentication&#x27;]);
+    }
+    // LOGIN
+    if (action.type &#x3D;&#x3D;&#x3D; authActions.login2FASuccess.type) {
       this.router.navigate([&#x27;/login/perfil-select&#x27;]);
     }
     // LOGOUT
@@ -289,7 +344,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Cubicación creada con exito. Cubicación ID:${action.response.data.cubicacion_id}&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        2000
       );
       this.router.navigate([&#x27;/cubicacion/list-cub&#x27;]);
     }
@@ -299,9 +354,21 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Cubicación ID:${action.response.data.cubicacion_id} editada con exito&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.router.navigate([&#x27;/cubicacion/list-cub&#x27;]);
+    }
+
+    // EDITAR CUBICACIÓN INGENIERIA
+    if (
+      action.type &#x3D;&#x3D;&#x3D; cubicacionActions.editCubicacionIngenieriaSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Cubicación actualizada con éxito&#x60;,
+        &#x27;Exito&#x27;,
+        4000
+      );
+      location.reload();
     }
 
     // CLONAR CUBICACIÓN
@@ -309,7 +376,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Clonación realizada con éxito. Nueva Cubicación ID:${action.response.data.cubicacion_id}&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        2000
       );
       this.cubicacionFacade.listarCubicaciones();
     }
@@ -319,14 +386,14 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Cubicación ID:${action.response.data.cubicacion_id} eliminada con exito&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        2000
       );
       this.cubicacionFacade.listarCubicaciones();
     }
 
     // ELIMINAR SERVICIO CARRITO
     if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.eliminarServicioCarritoSuccess.type) {
-      this.snackMessage.showMessage(&#x60;Eliminación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.snackMessage.showMessage(&#x60;Eliminación exitosa&#x60;, &#x27;Exito&#x27;, 2000);
     }
 
     // CREATE OT
@@ -334,39 +401,71 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Orden de trabajo creada con exito. OT ID:${action.response.data.ot_id}&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
 
     // GUARDAR BORRADOR INFORME DE AVANCE
-    if (action.type &#x3D;&#x3D;&#x3D; serviciosActions.agregarAdicionalesSuccess.type) {
-      this.snackMessage.showMessage(
-        &#x60;Se guarda el informe de avance exitosamente&#x60;,
-        &#x27;Exito&#x27;,
-        6000
-      );
+    if (
+      action.type &#x3D;&#x3D;&#x3D; serviciosActions.agregarAdicionalesSuccess.type ||
+      action.type &#x3D;&#x3D;&#x3D; informeAvanceActions.actualizarInformeAvanceSuccess.type
+    ) {
+      let ot_id &#x3D; null;
+      if (action.type &#x3D;&#x3D;&#x3D; serviciosActions.agregarAdicionalesSuccess.type)
+        ot_id &#x3D; action.response.data.ot_id;
+      if (
+        action.type &#x3D;&#x3D;&#x3D; informeAvanceActions.actualizarInformeAvanceSuccess.type
+      )
+        ot_id &#x3D; action.ot_id;
+
+      console.log(&#x27;ot_id:&#x27;, ot_id);
+      if (ot_id &#x3D;&#x3D;&#x3D; null) throw Error(&#x60;Falla after http ${action.type}&#x60;);
+      else {
+        this.snackMessage.showMessage(
+          &#x60;Se guarda el informe de avance exitosamente&#x60;,
+          &#x27;Exito&#x27;,
+          4000
+        );
+
+        this.serviciosFacade.resetCarritoServices();
+        // this.informeAvanceFacade.getDetalleInformeAvance(+ot_id);
+      }
       location.reload();
     }
 
     // ACEPTAR OT INICIAL
     if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
-      this.snackMessage.showMessage(&#x60;Aprobación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.snackMessage.showMessage(&#x60;Acción exitosa&#x60;, &#x27;Exito&#x27;, 4000);
       this.reloadTableOT();
     }
 
     // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR
     if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type) {
-      this.snackMessage.showMessage(&#x60;Asignación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+      this.snackMessage.showMessage(&#x60;Asignación exitosa&#x60;, &#x27;Exito&#x27;, 4000);
       this.reloadTableOT();
     }
 
-    // 70 TODO: AGREGAR UN MENSAJE
-    // if (
-    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarPagoSuccess.type ||
-    //   action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aprobarRechazarOperacionesSuccess.type
-    // ) {
-    // }
+    // RECHAZAR OT PROVEEDOR
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.rechazarOTProveedorSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Rechazo exitoso&#x60;, &#x27;Exito&#x27;, 4000);
+      this.reloadTableOT();
+    }
+
+    // CONFIRMAR RECHAZO OPERACIONES
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.confirmarRechazoObrasSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Confirmación exitosa&#x60;, &#x27;Exito&#x27;, 4000);
+      this.reloadTableOT();
+    }
+
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.aprobarRechazarSolicitudPagoSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        4000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
 
     // ENVÍO DE INFORME DE AVANCE
     if (
@@ -375,9 +474,24 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Informe enviado exitosamente&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // CAMBIAR MATERIAL ORIGEN A PROVEEDOR
+    if (
+      action.type &#x3D;&#x3D;&#x3D;
+      informeAvanceActions.CambiarMaterialOrigenAProveedorSuccess.type
+    ) {
+      this.snackMessage.showMessage(&#x60;Cambios realizados&#x60;, &#x27;Exito&#x27;, 4000);
+    }
+
+    if (
+      action.type &#x3D;&#x3D;&#x3D;
+      cubicacionActions.CambiarMaterialOrigenAProveedorSuccess.type
+    ) {
+      this.snackMessage.showMessage(&#x60;Cambios realizados&#x60;, &#x27;Exito&#x27;, 4000);
     }
 
     // ACEPTACION DE INFORME DE AVANCE
@@ -388,7 +502,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Acción realizada exitosamente&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
@@ -398,7 +512,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Acción realizada exitosamente&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
@@ -408,7 +522,17 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Acción realizada exitosamente&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // APROBAR RECHAZAR OPERACIONES
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aprobarRechazarOperacionesSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        4000
       );
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
@@ -418,7 +542,7 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Envío de solicitud exitosa&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
       this.reloadTableOT();
     }
@@ -428,25 +552,141 @@ export class AfterHttpService {
       this.snackMessage.showMessage(
         &#x60;Registro subido exitosamente&#x60;,
         &#x27;Exito&#x27;,
-        6000
+        4000
       );
+    }
+
+    // CERRAR OT
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.cerrarOTSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Cierre de OT exitoso&#x60;, &#x27;Exito&#x27;, 4000);
+      this.reloadTableOT();
+    }
+
+    // ANULAR OT
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.anularOTSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Anulación de la OT exitosa&#x60;,
+        &#x27;Exito&#x27;,
+        4000
+      );
+      this.reloadTableOT();
+    }
+
+    // ELMINAR USUARIO
+    if (action.type &#x3D;&#x3D;&#x3D; usuarioActions.deleteUserSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Se ha eliminado con éxito&#x60;, &#x27;Exito&#x27;, 2000);
+      location.reload();
+    }
+
+    // ACTIVAR USUARIO
+    if (action.type &#x3D;&#x3D;&#x3D; usuarioActions.activateUserSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada con éxito&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+    }
+
+    // SOLICITAR INFORME TRABAJOS FINALIZADOS
+    if (
+      action.type &#x3D;&#x3D;&#x3D;
+      actaActions.solicitarInformeTrabajosFinalizadosSuccess.type
+    ) {
+      this.snackMessage.showMessage(&#x60;Solicitud exitosa&#x60;, &#x27;Exito&#x27;, 4000);
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // ENVIO INFORME TRABAJOS FINALIZADOS
+    if (action.type &#x3D;&#x3D;&#x3D; actaActions.informarTrabajosFinalizadosSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Envío exitoso&#x60;, &#x27;Exito&#x27;, 4000);
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // ENVIAR RESULTADO INGENIERIA
+    if (
+      action.type &#x3D;&#x3D;&#x3D; ingenieriaActions.enviarResultadoIngenieriaSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Resultado ingeniería enviado con éxito&#x60;,
+        &#x27;Exito&#x27;,
+        4000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // APROBAR/RECHAZAR RESULTADO INGENIERIA
+    if (
+      action.type &#x3D;&#x3D;&#x3D; ingenieriaActions.aprobarRechazarIngenieriaSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada correctamente&#x60;,
+        &#x27;Exito&#x27;,
+        4000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // SOLICITAR QUIEBRE
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.solicitarQuiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Se ha enviado la solicitud exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+      location.reload();
+    }
+
+    // QUIEBRE
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.quiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Se ha realizado el quiebre exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+      location.reload();
+    }
+
+    // APROBAR/RECHAZAR QUIEBRE
+    if (
+      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Se ha aprobado el quiebre exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+      location.reload();
+    }
+
+    // DESQUIEBRE
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.desquiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Se ha realizado el desquiebre exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+      location.reload();
+    }
+
+    // CIERRE ADMINISTRAITIVO
+    if (action.type &#x3D;&#x3D;&#x3D; flujoOTActions.cierreAdministrativoSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Se ha realizado el cierre administrativo exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        2000
+      );
+      location.reload();
     }
   }
 
-  // 71 TODO: USAR BIEN LOS FILTROS
   reloadTableOT(): void {
-    let filtros &#x3D; {
-      filtro_propietario: &#x27;TODAS&#x27;,
-      filtro_tipo: 0,
-    };
-    this.otFacade.getBandejaOT({
-      filtro_pestania: &#x27;EN_EJECUCION&#x27;,
-      ...filtros,
-    });
-    this.otFacade.getBandejaOT({
-      filtro_pestania: &#x27;ABIERTAS&#x27;,
-      ...filtros,
-    });
+    location.reload();
+    // CAMBIADO DEBIDO A QUE AHORA SE USA LA BOTONERA TAMBIÉN EN INFORMACIONES
+    // this.otFacade.getBandejaOT(&#x27;EN_EJECUCION&#x27;);
+    // this.otFacade.getBandejaOT(&#x27;ABIERTAS&#x27;);
+    // this.otFacade.getBandejaOT(&#x27;CERRADAS&#x27;);
+    // this.otFacade.getBandejaOT(&#x27;ANULADAS&#x27;);
+    // this.otFacade.getBandejaOT(&#x27;EN_TRAMITE&#x27;);
   }
 }
 </code></pre>

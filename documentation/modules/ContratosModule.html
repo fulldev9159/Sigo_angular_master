@@ -206,6 +206,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ReactiveFormsModule, FormsModule } from &#x27;@angular/forms&#x27;;
 import { ContratosComponent } from &#x27;./contratos.component&#x27;;
 import { SharedModule } from &#x27;@sharedOT/shared.module&#x27;;
 import { ListContratosContainerComponent } from &#x27;./containers/list-contratos-container/list-contratos-container.component&#x27;;
@@ -218,7 +219,13 @@ import { ContratosRoutingModule } from &#x27;./contratos-routing.module&#x27;;
     ListContratosContainerComponent,
     FormContratosContainerComponent,
   ],
-  imports: [CommonModule, ContratosRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ContratosRoutingModule,
+    SharedModule,
+  ],
 })
 export class ContratosModule {}
 </code></pre>

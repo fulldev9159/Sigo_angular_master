@@ -406,6 +406,8 @@ export const reducerServicios &#x3D; createReducer(
             responseService.data.items[0].servicio_unidad_codigo,
           servicio_unidad_descripcion:
             responseService.data.items[0].servicio_unidad_descripcion,
+          prov_has_serv_precio: responseService.data.items[0].precio_proveedor,
+          puntos_baremos: responseService.data.items[0].servicio_baremos ?? 0,
           unidad_obras: [
             {
               uo_codigo: responseUnidadObra.data.uo_codigo,
@@ -418,6 +420,8 @@ export const reducerServicios &#x3D; createReducer(
               uob_unidad_medida_cod: responseUnidadObra.data.uo_unidad_codigo,
               uob_unidad_medida_descripcion:
                 responseUnidadObra.data.uo_unidad_descripcion,
+
+              material_arr: responseUnidadObra.data.material_arr,
             },
           ],
         },

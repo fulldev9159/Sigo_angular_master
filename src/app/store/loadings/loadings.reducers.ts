@@ -12,6 +12,7 @@ import * as sustentoFinancieroActions from '../sustento-financiero/sustento-fina
 import * as proyectosActions from '../proyectos/proyectos.actions';
 import * as informeAvanceActions from '../informe-avance/informe-avance.actions';
 import * as actaActions from '../acta/acta.actions';
+import * as flujoOt from '../flujo-ot/flujo-ot.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -58,6 +59,7 @@ export interface StateLoadings {
   sendingGetPerfiles: boolean;
   sendingInformarTrabajosFinalizados: boolean;
   sendingAprobacionPago: boolean;
+  sendingLastSolicitudQuiebre: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -104,6 +106,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetPerfiles: false,
   sendingInformarTrabajosFinalizados: false,
   sendingAprobacionPago: false,
+  sendingLastSolicitudQuiebre: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -633,6 +636,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingDownloadOTsAsignadas: false,
+    })
+  ),
+
+  on(flujoOt.getSolicitudQuiebre, state => ({
+    ...state,
+    sendingLastSolicitudQuiebre: true,
+  })),
+  on(
+    flujoOt.getSolicitudQuiebreSuccess,
+    flujoOt.getSolicitudQuiebreError,
+    state => ({
+      ...state,
+      sendingLastSolicitudQuiebre: false,
     })
   )
 );

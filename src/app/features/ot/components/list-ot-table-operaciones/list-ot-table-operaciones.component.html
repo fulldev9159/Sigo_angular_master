@@ -2,57 +2,68 @@
   <!-- PLAY CONTINUAR -->
 
   <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
-  <button id="play-button" pTooltip="Actualizar sustento financiero" *ngIf="findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
+  <button id="play-button" pTooltip="Actualizar sustento financiero"
+    *ngIf="findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
     <fa-icon [icon]="dollarIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->
-  <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')" (click)="displayModalAceptarInicial=true">
+  <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')"
+    (click)="displayModalAceptarInicial=true">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_AUTORIZACION_PROVEEDOR ADMIN EECC-->
-  <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion('OT_ACEPTAR_PROVEEDOR')" (click)="openModalAceptacionOTProveedor()">
+  <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion('OT_ACEPTAR_PROVEEDOR')"
+    (click)="openModalAceptacionOTProveedor()">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->
   <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->
   <!-- TODOCOMENT: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
-  <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/informe-avance/informe-avance',ot_id]" *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
+  <button id="play-button" pTooltip="Editar/enviar informe avance"
+    [routerLink]="['/informe-avance/informe-avance',ot_id]"
+    *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
 
   <!-- OT_ET_PAGO_GENERACION_ACTA -->
   <!-- 182 TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->
-  <button id="play-button" pTooltip="Generar Acta" [routerLink]="['/acta/generar-acta',ot_id]" *ngIf="findAccion('OT_GENERAR_ACTA')">
+  <button id="play-button" pTooltip="Generar Acta" [routerLink]="['/acta/generar-acta',ot_id]"
+    *ngIf="findAccion('OT_GENERAR_ACTA')">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_PAGO_VALIDACION_ACTA_GESTOR -->
-  <button id="play-button" pTooltip="Validar Acta" [routerLink]="['/acta/validar-acta',ot_id]" *ngIf="findAccion('OT_VALIDAR_ACTA')">
+  <button id="play-button" pTooltip="Validar Acta" [routerLink]="['/acta/validar-acta',ot_id]"
+    *ngIf="findAccion('OT_VALIDAR_ACTA')">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
   <!-- 183 TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->
-  <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion('OT_SOLICITAR_PAGO')" (click)="displayModalSolicitudPago=true">
+  <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion('OT_SOLICITAR_PAGO')"
+    (click)="displayModalSolicitudPago=true">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
-  <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion('OT_APROBACION_OPERACIONES')" [routerLink]="['/acta/validar-trabajos-operaciones',ot_id]">
+  <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion('OT_APROBACION_OPERACIONES')"
+    [routerLink]="['/acta/validar-trabajos-operaciones',ot_id]">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR -->
-  <button id="play-button" pTooltip="Confirmar rechazo obras" *ngIf="findAccion('OT_CONFIRMAR_RECHAZO_OBRAS')" (click)="displayModalRechazoObras=true">
+  <button id="play-button" pTooltip="Confirmar rechazo obras" *ngIf="findAccion('OT_CONFIRMAR_RECHAZO_OBRAS')"
+    (click)="displayModalRechazoObras=true">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO -->
-  <button id="play-button" pTooltip="Autorizar pago Acta" [routerLink]="['/acta/validar-pago-acta',ot_id]" *ngIf="findAccion('OT_AUTORIZAR_PAGOS')">
+  <button id="play-button" pTooltip="Autorizar pago Acta" [routerLink]="['/acta/validar-pago-acta',ot_id]"
+    *ngIf="findAccion('OT_AUTORIZAR_PAGOS')">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
@@ -67,20 +78,24 @@
   </button>
 
   <!-- OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS -->
-  <button id="play-button" pTooltip="Informe trabajos finalizados" *ngIf="findAccion('OT_INF_TRABAJO_FIN')" (click)="displayInformeTrabajosFinalizados()">
+  <button id="play-button" pTooltip="Informe trabajos finalizados" *ngIf="findAccion('OT_INF_TRABAJO_FIN')"
+    (click)="displayInformeTrabajosFinalizados()">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_EJECUCION_TRABAJOS_INGENIERIA -->
-  <button id="play-button" pTooltip="Editar resultado ingeniería" *ngIf="findAccion('OT_EDITAR_RESULTADO_ING')" [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
+  <button id="play-button" pTooltip="Editar resultado ingeniería" *ngIf="findAccion('OT_EDITAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
-  <button id="play-button" pTooltip="Enviar resultado ingeniería" *ngIf="findAccion('OT_ENVIAR_RESULTADO_ING')" [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
+  <button id="play-button" pTooltip="Enviar resultado ingeniería" *ngIf="findAccion('OT_ENVIAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/resultado-ingenieria',ot_id]">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
   <!-- OT_ET_AUTORIZACION_RESULTADO_INGENIERIA -->
-  <button id="play-button" pTooltip="Validar resultado ingeniería" *ngIf="findAccion('OT_AUTORIZAR_RESULTADO_ING')" [routerLink]="['/ingenieria/validar-ingenieria',ot_id]">
+  <button id="play-button" pTooltip="Validar resultado ingeniería" *ngIf="findAccion('OT_AUTORIZAR_RESULTADO_ING')"
+    [routerLink]="['/ingenieria/validar-ingenieria',ot_id]">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
@@ -93,11 +108,13 @@
     <fa-icon [icon]="bookIcon"></fa-icon>
   </button>
 
-  <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras" *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true">
+  <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"
+    *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true">
     <fa-icon [icon]="medicalIcon"></fa-icon>
   </button>
 
-  <button id="solicitar-quiebre-button" pTooltip="Solicitar quierbe OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE')" (click)="showModalSolicitarQuiebre()">
+  <button id="solicitar-quiebre-button" pTooltip="Solicitar quierbe OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE')"
+    (click)="showModalSolicitarQuiebre()">
     <fa-icon [icon]="pauseIcon"></fa-icon>
   </button>
 
@@ -105,11 +122,13 @@
     <fa-icon [icon]="pauseIcon"></fa-icon>
   </button>
 
-  <button id="desquiebre-button" pTooltip="Desquebrar OT" *ngIf="findAccion('OT_SOLICITAR_QUIEBRE_')" (click)="displayModalDesquiebre=true">
+  <button id="desquiebre-button" pTooltip="Desquebrar OT" *ngIf="findAccion('OT_DESQUEBRAR')"
+    (click)="displayModalDesquiebre=true">
     <fa-icon [icon]="playIcon"></fa-icon>
   </button>
 
-  <button id="cierre-administrativo-button" pTooltip="Cierre administrativo" style="background-color: #f99898;" *ngIf="findAccion('OT_CERRAR_ADMINISTRATIVO')" (click)="displayModalCierreAdministrativo=true">
+  <button id="cierre-administrativo-button" pTooltip="Cierre administrativo" style="background-color: #f99898;"
+    *ngIf="findAccion('OT_CERRAR_ADMINISTRATIVO')" (click)="displayModalCierreAdministrativo=true">
     <fa-icon [icon]="rectanguleIcon"></fa-icon>
   </button>
 </div>
@@ -118,11 +137,13 @@
 
 <!-- MODALS -->
 
-<p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras" [draggable]="false" [modal]="true">
+<p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
+  [draggable]="false" [modal]="true">
 
   <zwc-registrar-libro-obras #registrarLibroObraForm></zwc-registrar-libro-obras>
   <ng-template pTemplate="footer">
-    <zwc-pbutton-sending Pid="subir-registro" content="Subir registro" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!registrarLibroObraForm.valid" [sending]="sendingCreateOT$|async" (call)="registrarLibroObras()">
+    <zwc-pbutton-sending Pid="subir-registro" content="Subir registro" Pclass="p-button-info p-button-sm mt-4 w-full"
+      [Pdisabled]="!registrarLibroObraForm.valid" [sending]="sendingCreateOT$|async" (call)="registrarLibroObras()">
     </zwc-pbutton-sending>
   </ng-template>
 
@@ -130,62 +151,133 @@
 
 <!-- SOLICITAR QUIEBRE -->
 <p-dialog header="Solicitar quiebre" [(visible)]="displayModalSolicitarQuiebre" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
 
-  <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo" subTextTipoMotivo="Seleccione un tipo de motivo" #solicitudQuiebreForm></zwc-view-rechazo>
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="displayModalSolicitarQuiebre=false">
-      Cancelar
-    </button>
-    <button pButton type="button" id="button-confirmar" (click)="confirmarSolicitudQuiebre()" [disabled]="!solicitudQuiebreForm.formRechazo.valid">
-      Solicitar Quiebre
-    </button>
-  </ng-template>
+  <ng-container *ngIf="findAccion('OT_SOLICITAR_QUIEBRE')">
+    <div class="loading-modal-content" *ngIf="loadingLastSolicitudPago$|async  ; else content">
+      <p>Loading...</p>
+    </div>
+
+    <ng-template #content>
+      <div style="display: flex;flex-direction:column ;">
+        <p>Order de trabajo ID: {{ot_id}}</p>
+        <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Ya ha enviado una solicitud y debe
+          esperar su aprobación</h2>
+        <br>
+
+        <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+          *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+          <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
+            subTextTipoMotivo="Seleccione un tipo de motivo" #solicitudQuiebreForm></zwc-view-rechazo>
+          <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="displayModalSolicitarQuiebre=false">
+            Cancelar
+          </button>
+          <button pButton type="button" id="button-confirmar" (click)="confirmarSolicitudQuiebre()"
+            [disabled]="!solicitudQuiebreForm.formRechazo.valid">
+            Solicitar Quiebre
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+
 </p-dialog>
 
 
 <!-- APROBAR/RECHAZAR QUIEBRE GESTOR -->
 <p-dialog header="Quiebre" [(visible)]="displayAprobarRechazarQuiebreGestor" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
-  <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="displayAprobarRechazarQuiebreGestor=false">
-      Cancelar
-    </button>
-    <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre()">
-      Aprobar solicitud
-    </button>
-    <button pButton type="button" id="button-rechazar" (click)="rechazarSolicitudQuiebre()">
-      Rechazar solicitud
-    </button>
-  </ng-template>
+  <ng-container *ngIf="findAccion('OT_QUEBRAR')">
+    <div class="loading-modal-content" *ngIf="loadingLastSolicitudPago$|async  ; else content">
+      <p>Loading...</p>
+    </div>
+
+    <ng-template #content>
+      <div style="display: flex;flex-direction:column ;" *ngIf="flagSolicitudQuiebre$|async as solicitudQuiebre">
+        <p>Order de trabajo ID: {{ot_id}}</p>
+        <!-- <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">¿Confirma el quiebre de la OT?</h2> -->
+        <h2 *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">Existe una solicitud de quiebre por
+          parte de la empresa contratista</h2>
+        <br>
+        <div class="buttonsQuiebre" style="display: flex;"
+          *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">
+          <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="displayAprobarRechazarQuiebreGestor=false">
+            Cancelar
+          </button>
+          <button pButton type="button" id="button-aprobar" (click)="aprobarSolicitudQuiebre(solicitudQuiebre?.id)">
+            Aprobar solicitud
+          </button>
+          <button pButton type="button" id="button-rechazar" (click)="displayRechazoSolicitudQuiebre()">
+            Rechazar solicitud
+          </button>
+        </div>
+
+        <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+          *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado===''">
+          <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" tituloTipoMotivo="* Tipo motivo"
+            subTextTipoMotivo="Seleccione un tipo de motivo" #QuiebreForm></zwc-view-rechazo>
+          <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="displayAprobarRechazarQuiebreGestor=false">
+            Cancelar
+          </button>
+          <button pButton type="button" id="button-aprobar" (click)="quiebreGestor()"
+            [disabled]="!QuiebreForm.formRechazo.valid">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
 </p-dialog>
 
-<!-- QUEBRAR GESTOR -->
-<p-dialog header="Quiebre" [(visible)]="displayQuiebreGestor" [draggable]="false" [modal]="true">
-  Order de trabajo ID: {{ot_id}}
+<!-- RECHAZAR SOLICITUD QUIEBRE -->
+<p-dialog header="Rechazo solicitud de quiebre" [(visible)]="displayModalRechazarSolicitudQuiebre" [draggable]="false"
+  [modal]="true">
 
+  <div style="display: flex;flex-direction:column ;">
+    <p>Order de trabajo ID: {{ot_id}}</p>
 
-  <!-- <zwc-view-confirmacion pregunta='¿Comfirma el quiebre de la OT?' (cancelar)="displayQuiebreGestor=false"
-    (confirmar)="confirmarQuiebre()" textConfirmar="Confirmar">
-  </zwc-view-confirmacion> -->
+    <div class="buttonsQuiebre" style="display: flex;flex-direction: column;"
+      *ngIf="(flagSolicitudQuiebre$|async)?.aprobacion_estado==='PENDIENTE'">
+      <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoSolicitudQuiebreForm></zwc-view-rechazo>
+
+      <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+        (click)="closeModalRechazoSolicitudQuiebre()">
+        Cancelar
+      </button>
+      <ng-container *ngIf="flagSolicitudQuiebre$|async as solicitudQuiebre">
+        <button pButton type="button" id="button-confirmar" (click)="rechazarSolicitudQuiebre(solicitudQuiebre?.id)"
+          [disabled]="!rechazoSolicitudQuiebreForm.formRechazo.valid">
+          Confirmar
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+
 </p-dialog>
 
 <!-- DESQUIEBRE -->
 <p-dialog header="Desquiebre" [(visible)]="displayModalDesquiebre" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
-  <zwc-view-confirmacion pregunta='¿Comfirma el desquiebre de la OT?' (cancelar)="displayModalDesquiebre=false" (confirmar)="confirmarDesquiebre()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Comfirma el desquiebre de la OT?' (cancelar)="displayModalDesquiebre=false"
+    (confirmar)="confirmarDesquiebre()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
 <!-- CIERRE ADMINISTRATIVO -->
-<p-dialog header="cierre administrativo" [(visible)]="displayModalCierreAdministrativo" [draggable]="false" [modal]="true">
+<p-dialog header="cierre administrativo" [(visible)]="displayModalCierreAdministrativo" [draggable]="false"
+  [modal]="true">
   Order de trabajo ID: {{ot_id}}
-  <zwc-view-confirmacion pregunta='¿Comfirma el cierre administrativo de la OT?' (cancelar)="displayModalCierreAdministrativo=false" (confirmar)="confirmarCierreAdministrativo()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Comfirma el cierre administrativo de la OT?'
+    (cancelar)="displayModalCierreAdministrativo=false" (confirmar)="confirmarCierreAdministrativo()"
+    textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
 <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
-<p-dialog header="Actualizar sustento financiero" [(visible)]="displayModalCambiarSustentoFinanciero" [draggable]="false" [modal]="true">
+<p-dialog header="Actualizar sustento financiero" [(visible)]="displayModalCambiarSustentoFinanciero"
+  [draggable]="false" [modal]="true">
   <p>Order de trabajo ID: {{ot_id}}</p>
   <ng-container *ngIf="otDetalle$ | async as otDetalle">
     <ng-container *ngIf="otDetalle.ot.id === ot_id">
@@ -194,13 +286,16 @@
   </ng-container>
 </p-dialog>
 
-<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false" [modal]="true">
+<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false"
+  [modal]="true">
   <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInicialForm></zwc-view-rechazo>
   <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="closeModalRechazoInicial()">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalRechazoInicial()">
       Cancelar
     </button>
-    <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()" [disabled]="!rechazoInicialForm.formRechazo.valid">
+    <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()"
+      [disabled]="!rechazoInicialForm.formRechazo.valid">
       Rechazar OT
     </button>
   </ng-template>
@@ -208,19 +303,25 @@
 
 
 <!-- OT_ET_AUTORIZACION_INICIAL -->
-<p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false" [modal]="true">
+<p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"
+  [modal]="true">
   <p>Order de trabajo ID: {{ot_id}}</p>
-  <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?' (cancelar)="ShowModelrechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()" textConfirmar="Aceptar OT">
+  <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?'
+    (cancelar)="ShowModelrechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
+    textConfirmar="Aceptar OT">
   </zwc-view-confirmacion>
 </p-dialog>
 
-<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false" [modal]="true">
+<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false"
+  [modal]="true">
   <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInicialForm></zwc-view-rechazo>
   <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="closeModalRechazoInicial()">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalRechazoInicial()">
       Cancelar
     </button>
-    <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()" [disabled]="!rechazoInicialForm.formRechazo.valid">
+    <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()"
+      [disabled]="!rechazoInicialForm.formRechazo.valid">
       Rechazar OT
     </button>
   </ng-template>
@@ -228,16 +329,20 @@
 
 
 <!-- OT_ET_AUTORIZACION_PROVEEDOR -->
-<p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false" [modal]="true" [style]="{heigth: '50vh'}">
+<p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
+  [modal]="true" [style]="{heigth: '50vh'}">
   <p> Order de trabajo ID: {{ot_id}}</p>
   <p>Escoja el supervisor de trabajos que la realizará el trabajo en caso de aceptar realizar la orden</p>
   <br>
   <form novalidate autocomplete="off" [formGroup]="form">
-    <zwc-pdropdown [control]="form.get('trabajador_id')" Label="* Supervisor" dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async" Pplaceholder="Seleccione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>
+    <zwc-pdropdown [control]="form.get('trabajador_id')" Label="* Supervisor" dropdown_id="select-supervisor-trabajos"
+      [data]="posibleSupervisorDeTrabajo$|async" Pplaceholder="Seleccione una persona"
+      [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>
   </form>
 
   <div class="container-button-confirmar">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="displayModalrechazarOrdenProveedor()">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="displayModalrechazarOrdenProveedor()">
       Rechazar Orden
     </button>
     <ng-container *ngIf="formValid; else formInvalid">
@@ -256,10 +361,12 @@
 <p-dialog header="Rechazo de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false" [modal]="true">
   <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoProveeodrForm></zwc-view-rechazo>
   <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="closeModalRechazoProveedor()" style="width: 29%;">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalRechazoProveedor()" style="width: 29%;">
       Cancelar
     </button>
-    <button pButton type="button" id="button-confirmar" (click)="rechazarOrdenProveedor()" [disabled]="!rechazoProveeodrForm.formRechazo.valid" style="width: 29%;">
+    <button pButton type="button" id="button-confirmar" (click)="rechazarOrdenProveedor()"
+      [disabled]="!rechazoProveeodrForm.formRechazo.valid" style="width: 29%;">
       Rechazar OT
     </button>
   </ng-template>
@@ -268,14 +375,16 @@
 <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
 <p-dialog header="Solicitud de pago" [(visible)]="displayModalSolicitudPago" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
-  <zwc-view-confirmacion pregunta='¿Comfirma solicitar pago?' (cancelar)="displayModalSolicitudPago=false" (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Comfirma solicitar pago?' (cancelar)="displayModalSolicitudPago=false"
+    (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
 <!-- OT_ET_PAGO_CONFIRMAR_RECHAZO_OBRAS_GESTOR -->
 <p-dialog header="Rechazo de obras" [(visible)]="displayModalRechazoObras" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
-  <zwc-view-confirmacion pregunta='¿Comfirma rechazo de obras?' (cancelar)="displayModalRechazoObras=false" (confirmar)="confirmarRechazoObras()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Comfirma rechazo de obras?' (cancelar)="displayModalRechazoObras=false"
+    (confirmar)="confirmarRechazoObras()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
@@ -283,7 +392,8 @@
 <p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
 
-  <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="rechazarActaOperaciones()" textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
+  <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="rechazarActaOperaciones()"
+    textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
   </zwc-view-confirmacion>
 </p-dialog>
 
@@ -291,7 +401,8 @@
 <p-dialog header="Cerrar OT" [(visible)]="displayModalCerrarOT" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
 
-  <zwc-view-confirmacion pregunta='¿Confirma que desea cerrar la OT?' (cancelar)="displayModalCerrarOT=false" (confirmar)="cerrarOT()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Confirma que desea cerrar la OT?' (cancelar)="displayModalCerrarOT=false"
+    (confirmar)="cerrarOT()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
@@ -299,33 +410,40 @@
 <p-dialog header="Anular OT" [(visible)]="displayModalAnularOT" [draggable]="false" [modal]="true">
   Order de trabajo ID: {{ot_id}}
 
-  <zwc-view-confirmacion pregunta='¿Confirma que desea anular la OT?' (cancelar)="displayModalAnularOT=false" (confirmar)="anularOT()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Confirma que desea anular la OT?' (cancelar)="displayModalAnularOT=false"
+    (confirmar)="anularOT()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
 
 <!-- OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS -->
-<p-dialog header="Informe trabajos finalizados" [(visible)]="displayModalInformeTrabajosFinalizados" [draggable]="false" [modal]="true">
+<p-dialog header="Informe trabajos finalizados" [(visible)]="displayModalInformeTrabajosFinalizados" [draggable]="false"
+  [modal]="true">
 
   <form [formGroup]="formTrabajosFinalizados">
     <div class="col-12" id="control_observaciones">
       <br>
-      <textarea formControlName="informe" class="form-control" name="comentarios" id="comentarios" cols="30" rows="2"></textarea>
+      <textarea formControlName="informe" class="form-control" name="comentarios" id="comentarios" cols="30"
+        rows="2"></textarea>
       <br>
     </div>
   </form>
   <ng-template pTemplate="footer">
-    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="closeModalInformeTrabajosFinalizados()">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalInformeTrabajosFinalizados()">
       Cancelar
     </button>
-    <button pButton type="button" id="button-confirmar" (click)="displayModalSendInformeTrabajosFinalizados=true" [disabled]="!formTrabajosFinalizados.valid">
+    <button pButton type="button" id="button-confirmar" (click)="displayModalSendInformeTrabajosFinalizados=true"
+      [disabled]="!formTrabajosFinalizados.valid">
       Enviar Informe
     </button>
   </ng-template>
 </p-dialog>
 
-<p-dialog header="Confirmación del envío" [(visible)]="displayModalSendInformeTrabajosFinalizados" [draggable]="false" [modal]="true">
+<p-dialog header="Confirmación del envío" [(visible)]="displayModalSendInformeTrabajosFinalizados" [draggable]="false"
+  [modal]="true">
   Order de trabajo ID: {{ot_id}}
 
-  <zwc-view-confirmacion pregunta='¿Confirma el envío?' (cancelar)="displayModalSendInformeTrabajosFinalizados=false" (confirmar)="sendInformeTrabajosFinalizados()" textConfirmar="Confirmar">
+  <zwc-view-confirmacion pregunta='¿Confirma el envío?' (cancelar)="displayModalSendInformeTrabajosFinalizados=false"
+    (confirmar)="sendInformeTrabajosFinalizados()" textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>
