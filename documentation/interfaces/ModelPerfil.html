@@ -405,6 +405,28 @@ export interface PerfilesUsuario {
   model_usuario_orig: ModelUsuario;
   model_superior_proxy_id: ModelUsuarioSuperior;
 }
+
+export interface Perfil extends ModelPerfil {
+  model_rol_id: { id: number; nombre: string };
+}
+
+export interface ListarPerfil extends Perfil {
+  rol: string;
+  estado: boolean;
+}
+
+export interface RequestCreatePerfil {
+  nombre: string;
+  descripcion: string;
+  permisos: number[];
+  eliminable: boolean;
+  rol_id: number;
+}
+
+export interface RequestUpdatePerfil {
+  id: number;
+  values: RequestCreatePerfil;
+}
 </code></pre>
     </div>
 </div>

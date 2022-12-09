@@ -74,12 +74,13 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import { ProfiledGuard } from &#x27;@coreOT&#x27;;
+import { ProfiledGuard, IsNot2FAGuard } from &#x27;@coreOT&#x27;;
 import { AuthTokenGuard } from &#x27;src/app/core/guard/auth.guard&#x27;;
 import { AuthComponent } from &#x27;./auth.component&#x27;;
 import { LoginFormComponent } from &#x27;./components/login-form/login-form.component&#x27;;
 import { PerfilesUsuarioResolver } from &#x27;./components/login-form/resolvers/perfiles-usuario.resolver&#x27;;
 import { PerfilSelectComponent } from &#x27;./components/perfil-select/perfil-select.component&#x27;;
+import { TwoFactorAuthenticationComponent } from &#x27;./components/two-factor-authentication/two-factor-authentication.component&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -95,6 +96,11 @@ const routes: Routes &#x3D; [
         path: &#x27;auth&#x27;,
         component: LoginFormComponent,
         canActivate: [AuthTokenGuard],
+      },
+      {
+        path: &#x27;two-factor-authentication&#x27;,
+        component: TwoFactorAuthenticationComponent,
+        canActivate: [IsNot2FAGuard],
       },
       {
         path: &#x27;perfil-select&#x27;,

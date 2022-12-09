@@ -93,6 +93,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getAllProveedores4CreateUser" >getAllProveedores4CreateUser</a>
+                            </li>
+                            <li>
                                 <a href="#getProveedoresAgenciaContrato" >getProveedoresAgenciaContrato</a>
                             </li>
                         </ul>
@@ -161,6 +164,75 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProveedores4CreateUser"></a>
+                    <span class="name">
+                        <span ><b>getAllProveedores4CreateUser</b></span>
+                        <a href="#getAllProveedores4CreateUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllProveedores4CreateUser(interno: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/core/service/proveedor-http.service.ts:27</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>interno</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -288,7 +360,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { environment } from &#x27;@environment&#x27;;
-import { ProveedorAgenciaContrato, Response } from &#x27;@model&#x27;;
+import { ProveedorAgenciaContrato, ModelProveedor, Response } from &#x27;@model&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 
 @Injectable({
@@ -308,6 +380,15 @@ export class ProveedorHttpService {
     return this.http.post&lt;Response&lt;{ items: ProveedorAgenciaContrato[] }&gt;&gt;(
       &#x60;${this.API_URL}/cubicacion/proveedores_from_agencia_contrato/get&#x60;,
       { agencia_id, contrato_id }
+    );
+  }
+
+  getAllProveedores4CreateUser(
+    interno: boolean
+  ): Observable&lt;Response&lt;{ items: ModelProveedor[] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ items: ModelProveedor[] }&gt;&gt;(
+      &#x60;${this.API_URL}/usuario/proveedor/get&#x60;,
+      { interno }
     );
   }
 }

@@ -1,0 +1,1044 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ActaPorServicioFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-acta-por-servicio-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./acta-por-servicio-form.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./acta-por-servicio-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#redondeo" >redondeo</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <a href="#saving" >saving</a>
+                            </li>
+                            <li>
+                                <a href="#totalServicios" >totalServicios</a>
+                            </li>
+                            <li>
+                                <a href="#totalUO" >totalUO</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#selected" >selected</a>
+                                </li>
+                                <li>
+                                    <a href="#hasElements" >hasElements</a>
+                                </li>
+                                <li>
+                                    <a href="#valid" >valid</a>
+                                </li>
+                                <li>
+                                    <a href="#valuesRaw" >valuesRaw</a>
+                                </li>
+                                <li>
+                                    <a href="#values" >values</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="form"></a>
+                        <b>form</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="saving"></a>
+                        <b>saving</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:39</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalServicios"></a>
+                        <b>totalServicios</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalUO"></a>
+                        <b>totalUO</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redondeo"></a>
+                    <span class="name">
+                        <span ><b>redondeo</b></span>
+                        <a href="#redondeo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redondeo(x: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>x</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selected"></a>
+                        <span class="name"><b>selected</b><a href="#selected"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>selected()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:45</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasElements"></a>
+                        <span class="name"><b>hasElements</b><a href="#hasElements"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>hasElements()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:50</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="valid"></a>
+                        <span class="name"><b>valid</b><a href="#valid"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>valid()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:54</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="valuesRaw"></a>
+                        <span class="name"><b>valuesRaw</b><a href="#valuesRaw"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>valuesRaw()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:61</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="values"></a>
+                        <span class="name"><b>values</b><a href="#values"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>values()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/acta/components/acta-por-servicio-form/acta-por-servicio-form.component.ts:68</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter,
+} from &#x27;@angular/core&#x27;;
+import {
+  FormControl,
+  FormGroup,
+  AbstractControl,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { SessionData } from &#x27;@model&#x27;;
+import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+}
+
+@Component({
+  selector: &#x27;zwc-acta-por-servicio-form&#x27;,
+  templateUrl: &#x27;./acta-por-servicio-form.component.html&#x27;,
+  styleUrls: [&#x27;./acta-por-servicio-form.component.scss&#x27;],
+})
+export class ActaPorServicioFormComponent {
+  @Input() form: FormGroup;
+  @Input() saving: boolean;
+  @Input() totalServicios: number;
+  @Input() totalUO: number;
+
+  constructor() {}
+
+  get selected(): number {
+    const values &#x3D; this.values;
+    return values.servicio.length + values.unidad_obra.length;
+  }
+
+  get hasElements(): boolean {
+    return this.selected &gt; 0;
+  }
+
+  get valid(): boolean {
+    if (this.form) {
+      return this.form.valid &amp;&amp; this.hasElements;
+    }
+    return false;
+  }
+
+  get valuesRaw(): any {
+    if (this.form) {
+      return this.form.getRawValue();
+    }
+    return null;
+  }
+
+  get values(): Detalle {
+    if (this.form) {
+      const { servicios, unidades_obra } &#x3D; this.form.getRawValue();
+
+      return {
+        servicio: servicios
+          .filter(({ selected }: any) &#x3D;&gt; selected)
+          .map((servicio: any) &#x3D;&gt; ({
+            rowid: +servicio.id,
+            cantidad: +servicio.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
+        unidad_obra: unidades_obra
+          .filter(({ selected }: any) &#x3D;&gt; selected)
+          .map((uo: any) &#x3D;&gt; ({
+            rowid: +uo.id,
+            cantidad: +uo.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
+      };
+    }
+    return null;
+  }
+
+  redondeo(x: number): number {
+    return +Number.parseFloat(x + &#x27;&#x27;).toFixed(2);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;row&quot;&gt;
+
+  &lt;!-- &lt;pre&gt;
+    {{form.get(&#x27;servicios&#x27;).value|json}}
+  &lt;/pre&gt;
+  &lt;pre&gt;
+    {{form.get(&#x27;unidades_obra&#x27;).value|json}}
+  &lt;/pre&gt; --&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;form&quot;&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;servicios&#x27;) as servicios&quot;&gt;
+      &lt;div class&#x3D;&quot;col-xs-12 col-md-12&quot;&gt;
+        &lt;div class&#x3D;&quot;card&quot;&gt;
+          &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;table style&#x3D;&quot;width:100%&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;&lt;/th&gt;
+                  &lt;th&gt;&lt;/th&gt;
+                  &lt;th&gt;Cod.&lt;/th&gt;
+                  &lt;th&gt;Descripción&lt;/th&gt;
+                  &lt;th style&#x3D;&quot;text-align: right&quot;&gt;Cant. informe av.&lt;/th&gt;
+                  &lt;th style&#x3D;&quot;text-align: right&quot;&gt;Cant. Pagada&lt;/th&gt;
+                  &lt;th style&#x3D;&quot;text-align: right&quot;&gt;Cant. a Enviar&lt;/th&gt;
+                  &lt;th&gt;Precio Un.&lt;/th&gt;
+                  &lt;th&gt;Total a pagar&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                &lt;ng-container *ngFor&#x3D;&quot;let servicio of servicios.controls&quot;&gt;
+                  &lt;ng-container *ngIf&#x3D;&quot;servicio.get(&#x27;adicional_aceptacion_estado&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;ORIGINAL&#x27;&quot;&gt;
+                    &lt;tr&gt;
+                      &lt;td&gt;{{servicio.get(&#x27;id&#x27;).value}}&lt;/td&gt;
+                      &lt;!-- SELECTED --&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                        &lt;td class&#x3D;&quot;label-table&quot;&gt;&lt;/td&gt;
+                      &lt;/ng-container&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                        &lt;td class&#x3D;&quot;label-table&quot;&gt;
+                          &lt;input type&#x3D;&quot;checkbox&quot; [formControl]&#x3D;&quot;servicio.get(&#x27;selected&#x27;)&quot;&gt;
+                        &lt;/td&gt;
+                      &lt;/ng-container&gt;
+
+                      &lt;!-- NUM PRODUCTO --&gt;
+                      &lt;td class&#x3D;&quot;label-table&quot;&gt;{{ servicio.get(&#x27;numero_producto&#x27;).value }}&lt;/td&gt;
+
+                      &lt;!-- DECRIPCION --&gt;
+                      &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;
+                        {{ servicio.get(&#x27;descripcion&#x27;).value |titlecase}}
+                      &lt;/td&gt;
+
+                      &lt;!-- CANTIDADES Y TOTALES --&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                        &lt;td colspan&#x3D;&quot;5&quot;&gt;$Pagado&lt;/td&gt;
+                      &lt;/ng-container&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                        &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ servicio.get(&#x27;cantidad_total&#x27;).value }}
+                        &lt;/td&gt;
+                        &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ servicio.get(&#x27;cantidad_total&#x27;).value -
+                          servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value }}&lt;/td&gt;
+                        &lt;td&gt;
+                          &lt;input [formControl]&#x3D;&quot;servicio.get(&#x27;cantidad_a_enviar&#x27;)&quot; type&#x3D;&quot;number&quot;&gt;
+                          &lt;zwc-input-alert [control]&#x3D;&quot;servicio.get(&#x27;cantidad_a_enviar&#x27;)&quot;&gt;&lt;/zwc-input-alert&gt;
+                        &lt;/td&gt;
+                        &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +servicio.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; :
+                          &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +servicio.get(&#x27;cantidad_a_enviar&#x27;).value *
+                          +servicio.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                      &lt;/ng-container&gt;
+
+                    &lt;/tr&gt;
+
+                    &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;unidades_obra&#x27;) as unidadesObra&quot;&gt;
+                      &lt;ng-container *ngFor&#x3D;&quot;let uo of unidadesObra.controls&quot;&gt;
+                        &lt;tr
+                          *ngIf&#x3D;&quot;uo.get(&#x27;servicio_numero_producto&#x27;).value&#x3D;&#x3D;&#x3D;servicio.get(&#x27;numero_producto&#x27;).value &amp;&amp; uo.get(&#x27;servicio_adicional_aceptacion_estado&#x27;).value &#x3D;&#x3D;&#x3D;&#x27;ORIGINAL&#x27; &quot;&gt;
+
+                          &lt;td&gt;{{uo.get(&#x27;id&#x27;).value}}&lt;/td&gt;
+
+                          &lt;!-- SELECTED --&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                            &lt;td class&#x3D;&quot;label-table&quot;&gt;&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                            &lt;td style&#x3D;&quot;padding-left: 22px !important;&quot;&gt;
+                              &lt;input type&#x3D;&quot;checkbox&quot; [formControl]&#x3D;&quot;uo.get(&#x27;selected&#x27;)&quot;&gt;
+                            &lt;/td&gt;
+                          &lt;/ng-container&gt;
+
+
+                          &lt;td class&#x3D;&quot;label-table&quot; style&#x3D;&quot;padding-left: 22px !important;&quot;&gt;{{ uo.get(&#x27;uo_codigo&#x27;).value }}
+                          &lt;/td&gt;
+                          &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;
+                            &lt;ng-container *ngIf&#x3D;&quot;servicio.get(&#x27;adicional_aceptacion_estado&#x27;).value!&#x3D;&#x3D;&#x27;ORIGINAL&#x27;&quot;&gt;
+                              &lt;p-tag styleClass&#x3D;&quot;pendiente&quot; value&#x3D;&quot;Adicional&quot; severity&#x3D;&quot;warning&quot;&gt;
+                              &lt;/p-tag&gt;
+                            &lt;/ng-container&gt;
+                            {{ uo.get(&#x27;descripcion&#x27;).value|titlecase }}
+                          &lt;/td&gt;
+
+                          &lt;!-- CANTIDADES Y TOTALES --&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                            &lt;td colspan&#x3D;&quot;5&quot;&gt;$Pagado&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                            &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ uo.get(&#x27;cantidad_total&#x27;).value }}
+                            &lt;/td&gt;
+                            &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{
+                              redondeo(uo.get(&#x27;cantidad_total&#x27;).value -
+                              uo.get(&#x27;cantidad_max_a_enviar&#x27;).value)}}&lt;/td&gt;
+                            &lt;td&gt;
+                              &lt;input [formControl]&#x3D;&quot;uo.get(&#x27;cantidad_a_enviar&#x27;)&quot; type&#x3D;&quot;number&quot;&gt;
+                              &lt;zwc-input-alert [control]&#x3D;&quot;uo.get(&#x27;cantidad_a_enviar&#x27;)&quot;&gt;&lt;/zwc-input-alert&gt;
+                            &lt;/td&gt;
+                            &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +uo.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; :
+                              &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{+uo.get(&#x27;cantidad_a_enviar&#x27;).value *
+                              +uo.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                        &lt;/tr&gt;
+                      &lt;/ng-container&gt;
+                    &lt;/ng-container&gt;
+                  &lt;/ng-container&gt;
+
+                  &lt;ng-container *ngIf&#x3D;&quot;servicio.get(&#x27;adicional_aceptacion_estado&#x27;).value!&#x3D;&#x3D;&#x27;ORIGINAL&#x27;&quot;&gt;
+                    &lt;tr&gt;
+                      &lt;td&gt;{{servicio.get(&#x27;id&#x27;).value}}&lt;/td&gt;
+
+                      &lt;!-- SELECTED --&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                        &lt;td&gt;&lt;/td&gt;
+                      &lt;/ng-container&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                        &lt;td&gt; &lt;input type&#x3D;&quot;checkbox&quot; [formControl]&#x3D;&quot;servicio.get(&#x27;selected&#x27;)&quot;&gt;
+                        &lt;/td&gt;
+                      &lt;/ng-container&gt;
+
+                      &lt;!-- NUM PRODUCTO --&gt;
+                      &lt;td class&#x3D;&quot;label-table&quot;&gt;{{ servicio.get(&#x27;numero_producto&#x27;).value }}&lt;/td&gt;
+
+                      &lt;!-- DECRIPCION --&gt;
+                      &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;
+                        &lt;ng-container *ngIf&#x3D;&quot;servicio.get(&#x27;adicional_aceptacion_estado&#x27;).value!&#x3D;&#x3D;&#x27;ORIGINAL&#x27;&quot;&gt;
+                          &lt;p-tag styleClass&#x3D;&quot;pendiente&quot; value&#x3D;&quot;Adicional&quot; severity&#x3D;&quot;warning&quot;&gt;
+                          &lt;/p-tag&gt;
+                        &lt;/ng-container&gt;
+                        {{ servicio.get(&#x27;descripcion&#x27;).value |titlecase}}
+                      &lt;/td&gt;
+
+
+                      &lt;!-- CANTIDADES Y TOTALES --&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                        &lt;td colspan&#x3D;&quot;5&quot;&gt;$Pagado&lt;/td&gt;
+                      &lt;/ng-container&gt;
+                      &lt;ng-container *ngIf&#x3D;&quot;+servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                        &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ servicio.get(&#x27;cantidad_total&#x27;).value }}
+                        &lt;/td&gt;
+                        &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ servicio.get(&#x27;cantidad_total&#x27;).value -
+                          servicio.get(&#x27;cantidad_max_a_enviar&#x27;).value }}&lt;/td&gt;
+                        &lt;td&gt;
+                          &lt;input [formControl]&#x3D;&quot;servicio.get(&#x27;cantidad_a_enviar&#x27;)&quot; type&#x3D;&quot;number&quot;&gt;
+                          &lt;zwc-input-alert [control]&#x3D;&quot;servicio.get(&#x27;cantidad_a_enviar&#x27;)&quot;&gt;&lt;/zwc-input-alert&gt;
+
+                        &lt;/td&gt;
+                        &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +servicio.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; :
+                          &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +servicio.get(&#x27;cantidad_a_enviar&#x27;).value *
+                          +servicio.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                      &lt;/ng-container&gt;
+                    &lt;/tr&gt;
+
+                    &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;unidades_obra&#x27;) as unidadesObra&quot;&gt;
+                      &lt;ng-container *ngFor&#x3D;&quot;let uo of unidadesObra.controls&quot;&gt;
+                        &lt;tr
+                          *ngIf&#x3D;&quot;uo.get(&#x27;servicio_numero_producto&#x27;).value&#x3D;&#x3D;&#x3D;servicio.get(&#x27;numero_producto&#x27;).value &amp;&amp; uo.get(&#x27;servicio_adicional_aceptacion_estado&#x27;).value !&#x3D;&#x3D;&#x27;ORIGINAL&#x27; &quot;&gt;
+
+                          &lt;td&gt;{{uo.get(&#x27;id&#x27;).value}}&lt;/td&gt;
+
+                          &lt;!-- SELECTED --&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                            &lt;td class&#x3D;&quot;label-table&quot;&gt;&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                            &lt;td style&#x3D;&quot;padding-left: 22px !important;&quot;&gt;
+                              &lt;input type&#x3D;&quot;checkbox&quot; [formControl]&#x3D;&quot;uo.get(&#x27;selected&#x27;)&quot;&gt;
+                            &lt;/td&gt;
+                          &lt;/ng-container&gt;
+
+
+                          &lt;td class&#x3D;&quot;label-table&quot; style&#x3D;&quot;padding-left: 22px !important;&quot;&gt;{{ uo.get(&#x27;uo_codigo&#x27;).value }}
+                          &lt;/td&gt;
+                          &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;
+                            &lt;ng-container *ngIf&#x3D;&quot;servicio.get(&#x27;adicional_aceptacion_estado&#x27;).value!&#x3D;&#x3D;&#x27;ORIGINAL&#x27;&quot;&gt;
+                              &lt;p-tag styleClass&#x3D;&quot;pendiente&quot; value&#x3D;&quot;Adicional&quot; severity&#x3D;&quot;warning&quot;&gt;
+                              &lt;/p-tag&gt;
+                            &lt;/ng-container&gt;
+                            {{ uo.get(&#x27;descripcion&#x27;).value|titlecase }}
+                          &lt;/td&gt;
+
+                          &lt;!-- CANTIDADES Y TOTALES --&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&#x3D;&#x3D;&#x3D;0&quot;&gt;
+                            &lt;td colspan&#x3D;&quot;5&quot;&gt;$Pagado&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;+uo.get(&#x27;cantidad_max_a_enviar&#x27;).value&gt;0&quot;&gt;
+                            &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ uo.get(&#x27;cantidad_total&#x27;).value }}
+                            &lt;/td&gt;
+                            &lt;td style&#x3D;&quot;text-align: right&quot; class&#x3D;&quot;data-secundaria&quot;&gt;{{ uo.get(&#x27;cantidad_total&#x27;).value -
+                              uo.get(&#x27;cantidad_max_a_enviar&#x27;).value }}&lt;/td&gt;
+                            &lt;td&gt;
+                              &lt;input [formControl]&#x3D;&quot;uo.get(&#x27;cantidad_a_enviar&#x27;)&quot; type&#x3D;&quot;number&quot;&gt;
+                              &lt;zwc-input-alert [control]&#x3D;&quot;uo.get(&#x27;cantidad_a_enviar&#x27;)&quot;&gt;&lt;/zwc-input-alert&gt;
+                            &lt;/td&gt;
+                            &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{ +uo.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; :
+                              &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                            &lt;td class&#x3D;&quot;data-secundaria&quot;&gt;{{+uo.get(&#x27;cantidad_a_enviar&#x27;).value *
+                              +uo.get(&#x27;precio_unitario&#x27;).value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}&lt;/td&gt;
+                          &lt;/ng-container&gt;
+                        &lt;/tr&gt;
+                      &lt;/ng-container&gt;
+                    &lt;/ng-container&gt;
+                  &lt;/ng-container&gt;
+
+                &lt;/ng-container&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/ng-container&gt;
+  &lt;/ng-container&gt;
+&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;div class&#x3D;&quot;row&quot; id&#x3D;&quot;table-totales&quot;&gt;
+  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;
+    &lt;table style&#x3D;&quot;width: 100%;&quot;&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Total Servicios&lt;/td&gt;
+        &lt;td&gt;{{totalServicios| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Total Unidades Obra&lt;/td&gt;
+        &lt;td&gt;{{totalUO| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- 
+&lt;div class&#x3D;&quot;row&quot; id&#x3D;&quot;table-totales&quot;&gt;
+  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-4 col-xs-12&quot;&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+      Total a Pagar
+      &lt;span class&#x3D;&quot;total-pagar&quot;&gt; {{totalServicios + totalUO| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}} &lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;ccol-md-4 col-xs-12&quot;&gt;&lt;/div&gt;
+&lt;/div&gt; --&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./acta-por-servicio-form.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.total-pagar {
+  font-size: 24px;
+}
+
+table {
+  width: 100%;
+
+  th {
+    border: 0;
+    border-width: 0;
+    border-right: 1px solid #f4f4f4 !important;
+    border-bottom: 1px solid #9e9e9e;
+    padding: 0.375rem;
+    background-color: #efefef;
+    font-weight: 500;
+    font-size: 10px;
+  }
+
+  td {
+    padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+    border: 0 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+    background: white;
+    font-size: var(--size-text-sigo);
+
+    // &amp;.label-table {
+    //   color: white;
+    //   font-size: 12px;
+    //   padding: 6px;
+    //   // border-radius: 4px;
+    //   font-weight: 500;
+    //   letter-spacing: 0.06rem;
+    //   background: #00b5ad;
+    // }
+
+    // &amp;.data-secundaria {
+    //   font-size: 0.9rem;
+    //   font-weight: 400;
+    // }
+  }
+
+  tfoot {
+    td {
+      background-color: #efefef;
+    }
+  }
+}
+
+
+
+:host ::ng-deep {
+  .p-tag {
+    font-size: 0.5rem;
+    letter-spacing: 0.02rem;
+  }
+
+  .p-tag.pendiente {
+    background-color: #F2D7A9 !important;
+    color: #ac7619;
+  }
+
+  .p-tag.aceptado {
+    background-color: #9bd18c !important;
+    color: #2a7815;
+  }
+
+  .p-tag.rechazado {
+    background-color: #f6a3a3 !important;
+    color: #a42929;
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row">  <!-- <pre>    {{form.get(\'servicios\').value|json}}  </pre>  <pre>    {{form.get(\'unidades_obra\').value|json}}  </pre> -->  <ng-container *ngIf="form">    <ng-container *ngIf="form.get(\'servicios\') as servicios">      <div class="col-xs-12 col-md-12">        <div class="card">          <div class=" grid">            <table style="width:100%">              <thead>                <tr>                  <th></th>                  <th></th>                  <th>Cod.</th>                  <th>Descripción</th>                  <th style="text-align: right">Cant. informe av.</th>                  <th style="text-align: right">Cant. Pagada</th>                  <th style="text-align: right">Cant. a Enviar</th>                  <th>Precio Un.</th>                  <th>Total a pagar</th>                </tr>              </thead>              <tbody>                <ng-container *ngFor="let servicio of servicios.controls">                  <ng-container *ngIf="servicio.get(\'adicional_aceptacion_estado\').value===\'ORIGINAL\'">                    <tr>                      <td>{{servicio.get(\'id\').value}}</td>                      <!-- SELECTED -->                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value===0">                        <td class="label-table"></td>                      </ng-container>                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value>0">                        <td class="label-table">                          <input type="checkbox" [formControl]="servicio.get(\'selected\')">                        </td>                      </ng-container>                      <!-- NUM PRODUCTO -->                      <td class="label-table">{{ servicio.get(\'numero_producto\').value }}</td>                      <!-- DECRIPCION -->                      <td class="data-secundaria">                        {{ servicio.get(\'descripcion\').value |titlecase}}                      </td>                      <!-- CANTIDADES Y TOTALES -->                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value===0">                        <td colspan="5">$Pagado</td>                      </ng-container>                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value>0">                        <td style="text-align: right" class="data-secundaria">{{ servicio.get(\'cantidad_total\').value }}                        </td>                        <td style="text-align: right" class="data-secundaria">{{ servicio.get(\'cantidad_total\').value -                          servicio.get(\'cantidad_max_a_enviar\').value }}</td>                        <td>                          <input [formControl]="servicio.get(\'cantidad_a_enviar\')" type="number">                          <zwc-input-alert [control]="servicio.get(\'cantidad_a_enviar\')"></zwc-input-alert>                        </td>                        <td class="data-secundaria">{{ +servicio.get(\'precio_unitario\').value| currency : \'CLP\' :                          \'$\':\'.0-2\':\'es-CL\' }}</td>                        <td class="data-secundaria">{{ +servicio.get(\'cantidad_a_enviar\').value *                          +servicio.get(\'precio_unitario\').value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\' }}</td>                      </ng-container>                    </tr>                    <ng-container *ngIf="form.get(\'unidades_obra\') as unidadesObra">                      <ng-container *ngFor="let uo of unidadesObra.controls">                        <tr                          *ngIf="uo.get(\'servicio_numero_producto\').value===servicio.get(\'numero_producto\').value && uo.get(\'servicio_adicional_aceptacion_estado\').value ===\'ORIGINAL\' ">                          <td>{{uo.get(\'id\').value}}</td>                          <!-- SELECTED -->                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value===0">                            <td class="label-table"></td>                          </ng-container>                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value>0">                            <td style="padding-left: 22px !important;">                              <input type="checkbox" [formControl]="uo.get(\'selected\')">                            </td>                          </ng-container>                          <td class="label-table" style="padding-left: 22px !important;">{{ uo.get(\'uo_codigo\').value }}                          </td>                          <td class="data-secundaria">                            <ng-container *ngIf="servicio.get(\'adicional_aceptacion_estado\').value!==\'ORIGINAL\'">                              <p-tag styleClass="pendiente" value="Adicional" severity="warning">                              </p-tag>                            </ng-container>                            {{ uo.get(\'descripcion\').value|titlecase }}                          </td>                          <!-- CANTIDADES Y TOTALES -->                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value===0">                            <td colspan="5">$Pagado</td>                          </ng-container>                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value>0">                            <td style="text-align: right" class="data-secundaria">{{ uo.get(\'cantidad_total\').value }}                            </td>                            <td style="text-align: right" class="data-secundaria">{{                              redondeo(uo.get(\'cantidad_total\').value -                              uo.get(\'cantidad_max_a_enviar\').value)}}</td>                            <td>                              <input [formControl]="uo.get(\'cantidad_a_enviar\')" type="number">                              <zwc-input-alert [control]="uo.get(\'cantidad_a_enviar\')"></zwc-input-alert>                            </td>                            <td class="data-secundaria">{{ +uo.get(\'precio_unitario\').value| currency : \'CLP\' :                              \'$\':\'.0-2\':\'es-CL\' }}</td>                            <td class="data-secundaria">{{+uo.get(\'cantidad_a_enviar\').value *                              +uo.get(\'precio_unitario\').value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\' }}</td>                          </ng-container>                        </tr>                      </ng-container>                    </ng-container>                  </ng-container>                  <ng-container *ngIf="servicio.get(\'adicional_aceptacion_estado\').value!==\'ORIGINAL\'">                    <tr>                      <td>{{servicio.get(\'id\').value}}</td>                      <!-- SELECTED -->                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value===0">                        <td></td>                      </ng-container>                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value>0">                        <td> <input type="checkbox" [formControl]="servicio.get(\'selected\')">                        </td>                      </ng-container>                      <!-- NUM PRODUCTO -->                      <td class="label-table">{{ servicio.get(\'numero_producto\').value }}</td>                      <!-- DECRIPCION -->                      <td class="data-secundaria">                        <ng-container *ngIf="servicio.get(\'adicional_aceptacion_estado\').value!==\'ORIGINAL\'">                          <p-tag styleClass="pendiente" value="Adicional" severity="warning">                          </p-tag>                        </ng-container>                        {{ servicio.get(\'descripcion\').value |titlecase}}                      </td>                      <!-- CANTIDADES Y TOTALES -->                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value===0">                        <td colspan="5">$Pagado</td>                      </ng-container>                      <ng-container *ngIf="+servicio.get(\'cantidad_max_a_enviar\').value>0">                        <td style="text-align: right" class="data-secundaria">{{ servicio.get(\'cantidad_total\').value }}                        </td>                        <td style="text-align: right" class="data-secundaria">{{ servicio.get(\'cantidad_total\').value -                          servicio.get(\'cantidad_max_a_enviar\').value }}</td>                        <td>                          <input [formControl]="servicio.get(\'cantidad_a_enviar\')" type="number">                          <zwc-input-alert [control]="servicio.get(\'cantidad_a_enviar\')"></zwc-input-alert>                        </td>                        <td class="data-secundaria">{{ +servicio.get(\'precio_unitario\').value| currency : \'CLP\' :                          \'$\':\'.0-2\':\'es-CL\' }}</td>                        <td class="data-secundaria">{{ +servicio.get(\'cantidad_a_enviar\').value *                          +servicio.get(\'precio_unitario\').value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\' }}</td>                      </ng-container>                    </tr>                    <ng-container *ngIf="form.get(\'unidades_obra\') as unidadesObra">                      <ng-container *ngFor="let uo of unidadesObra.controls">                        <tr                          *ngIf="uo.get(\'servicio_numero_producto\').value===servicio.get(\'numero_producto\').value && uo.get(\'servicio_adicional_aceptacion_estado\').value !==\'ORIGINAL\' ">                          <td>{{uo.get(\'id\').value}}</td>                          <!-- SELECTED -->                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value===0">                            <td class="label-table"></td>                          </ng-container>                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value>0">                            <td style="padding-left: 22px !important;">                              <input type="checkbox" [formControl]="uo.get(\'selected\')">                            </td>                          </ng-container>                          <td class="label-table" style="padding-left: 22px !important;">{{ uo.get(\'uo_codigo\').value }}                          </td>                          <td class="data-secundaria">                            <ng-container *ngIf="servicio.get(\'adicional_aceptacion_estado\').value!==\'ORIGINAL\'">                              <p-tag styleClass="pendiente" value="Adicional" severity="warning">                              </p-tag>                            </ng-container>                            {{ uo.get(\'descripcion\').value|titlecase }}                          </td>                          <!-- CANTIDADES Y TOTALES -->                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value===0">                            <td colspan="5">$Pagado</td>                          </ng-container>                          <ng-container *ngIf="+uo.get(\'cantidad_max_a_enviar\').value>0">                            <td style="text-align: right" class="data-secundaria">{{ uo.get(\'cantidad_total\').value }}                            </td>                            <td style="text-align: right" class="data-secundaria">{{ uo.get(\'cantidad_total\').value -                              uo.get(\'cantidad_max_a_enviar\').value }}</td>                            <td>                              <input [formControl]="uo.get(\'cantidad_a_enviar\')" type="number">                              <zwc-input-alert [control]="uo.get(\'cantidad_a_enviar\')"></zwc-input-alert>                            </td>                            <td class="data-secundaria">{{ +uo.get(\'precio_unitario\').value| currency : \'CLP\' :                              \'$\':\'.0-2\':\'es-CL\' }}</td>                            <td class="data-secundaria">{{+uo.get(\'cantidad_a_enviar\').value *                              +uo.get(\'precio_unitario\').value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\' }}</td>                          </ng-container>                        </tr>                      </ng-container>                    </ng-container>                  </ng-container>                </ng-container>              </tbody>            </table>          </div>        </div>      </div>    </ng-container>  </ng-container></div><br><div class="row" id="table-totales">  <div class="col-md-4 col-xs-12"></div>  <div class="col-md-4 col-xs-12">    <table style="width: 100%;">      <tr>        <td>Total Servicios</td>        <td>{{totalServicios| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>      </tr>      <tr>        <td>Total Unidades Obra</td>        <td>{{totalUO| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>      </tr>    </table>  </div>  <div class="col-md-4 col-xs-12"></div></div><!-- <div class="row" id="table-totales">  <div class="col-md-4 col-xs-12"></div>  <div class="col-md-4 col-xs-12">    <div class="card">      Total a Pagar      <span class="total-pagar"> {{totalServicios + totalUO| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}} </span>    </div>  </div>  <div class="ccol-md-4 col-xs-12"></div></div> --></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
+    var ACTUAL_COMPONENT = {'name': 'ActaPorServicioFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActaPorServicioFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -84,10 +84,19 @@
                                 <a href="#getDatabaseVersion$" >getDatabaseVersion$</a>
                             </li>
                             <li>
+                                <a href="#getNotificaciones$" >getNotificaciones$</a>
+                            </li>
+                            <li>
                                 <a href="#getPermisosPerfilUsuario4Login$" >getPermisosPerfilUsuario4Login$</a>
                             </li>
                             <li>
                                 <a href="#Login$" >Login$</a>
+                            </li>
+                            <li>
+                                <a href="#Login2FA$" >Login2FA$</a>
+                            </li>
+                            <li>
+                                <a href="#marcarNotificaciones$" >marcarNotificaciones$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
@@ -244,7 +253,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/store/auth/auth.effects.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/store/auth/auth.effects.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -281,7 +290,45 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/store/auth/auth.effects.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/store/auth/auth.effects.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNotificaciones$"></a>
+                    <span class="name">
+                        <span ><b>getNotificaciones$</b></span>
+                        <a href="#getNotificaciones$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getNotificaciones,
+        authActions.marcarNotificacionesSuccess),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getNotificaciones().pipe(
+          map(response &#x3D;&gt; authActions.getNotificacionesSuccess({ response })),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.getNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/store/auth/auth.effects.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -320,7 +367,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/store/auth/auth.effects.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/store/auth/auth.effects.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -366,6 +413,80 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="Login2FA$"></a>
+                    <span class="name">
+                        <span ><b>Login2FA$</b></span>
+                        <a href="#Login2FA$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.login2FA),
+      concatMap(({ code }) &#x3D;&gt;
+        this.loginService.logIn2FA(code).pipe(
+          map(response &#x3D;&gt; authActions.login2FASuccess()),
+          catchError(error &#x3D;&gt; of(authActions.login2FAError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/store/auth/auth.effects.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="marcarNotificaciones$"></a>
+                    <span class="name">
+                        <span ><b>marcarNotificaciones$</b></span>
+                        <a href="#marcarNotificaciones$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.marcarNotificaciones),
+      concatMap(({ id }) &#x3D;&gt;
+        this.authHttpService.marcarNotificaciones(id).pipe(
+          map(response &#x3D;&gt;
+            authActions.marcarNotificacionesSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.marcarNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/store/auth/auth.effects.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="notifyAfte$"></a>
                     <span class="name">
                         <span ><b>notifyAfte$</b></span>
@@ -380,6 +501,7 @@
       this.actions$.pipe(
         ofType(
           authActions.loginSuccess,
+          authActions.login2FASuccess,
           authActions.Logout,
           authActions.refreshLoginSuccess,
           authActions.getPermisosPerfilUsuario4LoginSuccess
@@ -392,7 +514,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/store/auth/auth.effects.ts:93</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/store/auth/auth.effects.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -417,10 +539,13 @@
       this.actions$.pipe(
         ofType(
           authActions.loginError,
+          authActions.login2FAError,
           authActions.refreshLoginError,
           authActions.getPermisosPerfilUsuario4LoginError,
           authActions.getDatabaseVersionError,
-          authActions.getAPIVersionError
+          authActions.getAPIVersionError,
+          authActions.getNotificacionesError,
+          authActions.marcarNotificacionesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -430,7 +555,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/store/auth/auth.effects.ts:107</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/store/auth/auth.effects.ts:152</a></div>
                         </td>
                     </tr>
 
@@ -465,7 +590,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/store/auth/auth.effects.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/store/auth/auth.effects.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -507,6 +632,19 @@ export class AuthEffects {
         this.loginService.logIn(username, password).pipe(
           map(response &#x3D;&gt; authActions.loginSuccess({ response })),
           catchError(error &#x3D;&gt; of(authActions.loginError({ error })))
+        )
+      )
+    )
+  );
+
+  // TWO FACTOR AUTHENTICATION
+  Login2FA$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.login2FA),
+      concatMap(({ code }) &#x3D;&gt;
+        this.loginService.logIn2FA(code).pipe(
+          map(response &#x3D;&gt; authActions.login2FASuccess()),
+          catchError(error &#x3D;&gt; of(authActions.login2FAError({ error })))
         )
       )
     )
@@ -570,11 +708,43 @@ export class AuthEffects {
     )
   );
 
+  getNotificaciones$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.getNotificaciones,
+        authActions.marcarNotificacionesSuccess),
+      concatMap(() &#x3D;&gt;
+        this.authHttpService.getNotificaciones().pipe(
+          map(response &#x3D;&gt; authActions.getNotificacionesSuccess({ response })),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.getNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  marcarNotificaciones$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(authActions.marcarNotificaciones),
+      concatMap(({ id }) &#x3D;&gt;
+        this.authHttpService.marcarNotificaciones(id).pipe(
+          map(response &#x3D;&gt;
+            authActions.marcarNotificacionesSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt; {
+            return of(authActions.marcarNotificacionesError({ error }));
+          })
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           authActions.loginSuccess,
+          authActions.login2FASuccess,
           authActions.Logout,
           authActions.refreshLoginSuccess,
           authActions.getPermisosPerfilUsuario4LoginSuccess
@@ -589,10 +759,13 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(
           authActions.loginError,
+          authActions.login2FAError,
           authActions.refreshLoginError,
           authActions.getPermisosPerfilUsuario4LoginError,
           authActions.getDatabaseVersionError,
-          authActions.getAPIVersionError
+          authActions.getAPIVersionError,
+          authActions.getNotificacionesError,
+          authActions.marcarNotificacionesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

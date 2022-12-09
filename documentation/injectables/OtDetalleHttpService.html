@@ -380,7 +380,13 @@ export class OtDetalleHttpService {
         &#x60;${this.API_URL}/ot/bandeja/get&#x60;,
         request
       )
-      .pipe(map(value &#x3D;&gt; value.data.items.find(v &#x3D;&gt; v.id &#x3D;&#x3D;&#x3D; ot_id).acciones));
+      .pipe(
+        map(value &#x3D;&gt;
+          value.data.items.find(v &#x3D;&gt; v.id &#x3D;&#x3D;&#x3D; ot_id)
+            ? value.data.items.find(v &#x3D;&gt; v.id &#x3D;&#x3D;&#x3D; ot_id).acciones
+            : []
+        )
+      );
   }
 }
 </code></pre>

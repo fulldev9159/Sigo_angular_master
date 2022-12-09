@@ -266,8 +266,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/app/core/guard/auth.guard.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/core/guard/auth.guard.ts:46</a></div>
                 </td>
             </tr>
 
@@ -345,13 +345,20 @@ export class AuthTokenGuard implements CanActivate, CanLoad {
   ): Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean&gt; | boolean | UrlTree {
     const isLoggin &#x3D; this.authService.isLoggin();
     const isAuth &#x3D; this.authService.isAuth();
+    const is2FALoggedIn &#x3D; this.authService.is2FALoggedIn();
+
     if (isLoggin) {
       this.router.navigate([&#x27;/home&#x27;]);
       return of(false);
     } else {
       if (isAuth) {
-        this.router.navigate([&#x27;/login/perfil-select&#x27;]);
-        return of(false);
+        if (is2FALoggedIn) {
+          this.router.navigate([&#x27;/login/perfil-select&#x27;]);
+          return of(false);
+        } else {
+          this.router.navigate([&#x27;/login/two-factor-authentication&#x27;]);
+          return of(false);
+        }
       } else {
         return of(true);
       }
@@ -361,13 +368,20 @@ export class AuthTokenGuard implements CanActivate, CanLoad {
   canLoad(route: Route): Observable&lt;boolean&gt; {
     const isLoggin &#x3D; this.authService.isLoggin();
     const isAuth &#x3D; this.authService.isAuth();
+    const is2FALoggedIn &#x3D; this.authService.is2FALoggedIn();
+
     if (isLoggin) {
       this.router.navigate([&#x27;/home&#x27;]);
       return of(false);
     } else {
       if (isAuth) {
-        this.router.navigate([&#x27;/login/perfil-select&#x27;]);
-        return of(false);
+        if (is2FALoggedIn) {
+          this.router.navigate([&#x27;/login/perfil-select&#x27;]);
+          return of(false);
+        } else {
+          this.router.navigate([&#x27;/login/two-factor-authentication&#x27;]);
+          return of(false);
+        }
       } else {
         return of(true);
       }

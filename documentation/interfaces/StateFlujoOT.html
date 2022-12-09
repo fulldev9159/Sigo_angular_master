@@ -84,6 +84,18 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                        <a href="#lastSolicitudQuiebre" 
+>
+                                            lastSolicitudQuiebre
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#motivosRechazo" 
+>
+                                            motivosRechazo
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#posibleSupervisorDeTrabajo" 
 >
                                             posibleSupervisorDeTrabajo
@@ -100,6 +112,72 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="lastSolicitudQuiebre"></a>
+                                        <span class="name "><b>lastSolicitudQuiebre</b>
+                                            <a href="#lastSolicitudQuiebre">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>lastSolicitudQuiebre:         <code><a href="../interfaces/LastSolicitudQuiebre.html" target="_self" >LastSolicitudQuiebre</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/LastSolicitudQuiebre.html" target="_self" >LastSolicitudQuiebre</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="motivosRechazo"></a>
+                                        <span class="name "><b>motivosRechazo</b>
+                                            <a href="#motivosRechazo">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>motivosRechazo:         <code><a href="../interfaces/MotivoRechazo.html" target="_self" >MotivoRechazo[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/MotivoRechazo.html" target="_self" >MotivoRechazo[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -138,7 +216,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PosibleSupervisorTrabajo, ProveedorAgenciaContrato } from &#x27;@model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  LastSolicitudQuiebre,
+  MotivoRechazo,
+  PosibleSupervisorTrabajo,
+  ProveedorAgenciaContrato,
+} from &#x27;@model&#x27;;
 import { createReducer, on } from &#x27;@ngrx/store&#x27;;
 import * as flujoOTActions from &#x27;./flujo-ot.actions&#x27;;
 
@@ -146,10 +229,14 @@ export const Featurekey &#x3D; &#x27;flujo-ot&#x27;;
 
 export interface StateFlujoOT {
   posibleSupervisorDeTrabajo: PosibleSupervisorTrabajo[];
+  motivosRechazo: MotivoRechazo[];
+  lastSolicitudQuiebre: LastSolicitudQuiebre;
 }
 
 export const initialState: StateFlujoOT &#x3D; {
   posibleSupervisorDeTrabajo: [],
+  motivosRechazo: [],
+  lastSolicitudQuiebre: null,
 };
 
 export const reducerFlujoOT &#x3D; createReducer(
@@ -159,6 +246,20 @@ export const reducerFlujoOT &#x3D; createReducer(
     (state, { response }) &#x3D;&gt; ({
       ...state,
       posibleSupervisorDeTrabajo: response.data.items,
+    })
+  ),
+  on(
+    flujoOTActions.getAllMotivoRechazoOTSuccess,
+    (state, { motivo_rechazo }) &#x3D;&gt; ({
+      ...state,
+      motivosRechazo: motivo_rechazo,
+    })
+  ),
+  on(
+    flujoOTActions.getSolicitudQuiebreSuccess,
+    (state, { lastSolicitudQuiebre }) &#x3D;&gt; ({
+      ...state,
+      lastSolicitudQuiebre,
     })
   )
 );

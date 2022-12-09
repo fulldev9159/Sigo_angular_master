@@ -79,6 +79,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#is2FALoggedIn" >is2FALoggedIn</a>
+                            </li>
+                            <li>
                                 <a href="#isAuth" >isAuth</a>
                             </li>
                             <li>
@@ -123,6 +126,43 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="is2FALoggedIn"></a>
+                    <span class="name">
+                        <span ><b>is2FALoggedIn</b></span>
+                        <a href="#is2FALoggedIn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>is2FALoggedIn()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/core/service/auth.service.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -217,8 +257,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/app/core/service/auth.service.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/core/service/auth.service.ts:34</a></div>
                 </td>
             </tr>
 
@@ -266,6 +306,11 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  is2FALoggedIn(): boolean {
+    const json &#x3D; JSON.parse(localStorage.getItem(&#x27;auth&#x27;));
+    return json?.twoFA ?? false;
   }
 
   isProfiled(): boolean {

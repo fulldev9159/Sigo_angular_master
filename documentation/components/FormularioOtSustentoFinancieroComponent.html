@@ -243,12 +243,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(sustentoFinancieroFacade: <a href="../injectables/SustentoFinancieroFacade.html" target="_self">SustentoFinancieroFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
+<code>constructor(sustentoFinancieroFacade: <a href="../injectables/SustentoFinancieroFacade.html" target="_self">SustentoFinancieroFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>, detector: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:114</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:128</a></div>
                             </td>
                         </tr>
 
@@ -289,6 +289,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>detector</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -316,7 +328,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:25</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -350,8 +362,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="172"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:172</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="211"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:211</a></div>
                 </td>
             </tr>
 
@@ -387,8 +399,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="187"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:187</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="230"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:230</a></div>
                 </td>
             </tr>
 
@@ -424,8 +436,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="205"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:205</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="253"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:253</a></div>
                 </td>
             </tr>
 
@@ -461,8 +473,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="136"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:136</a></div>
                 </td>
             </tr>
 
@@ -508,18 +520,22 @@
       let tmp &#x3D; [...values];
       return tmp.sort((a, b) &#x3D;&gt; (a.ceco &gt; b.ceco ? 1 : -1));
     }),
-    map(values &#x3D;&gt;
-      values.map(value &#x3D;&gt; ({
+    map(values &#x3D;&gt; [
+      {
+        name: &#x27;CECO provisorio&#x27;,
+        code: &#x27;ceco_provisorio&#x27;,
+      },
+      ...values.map(value &#x3D;&gt; ({
         name: value.ceco.toString(),
         code: value.ceco,
-      }))
-    )
+      })),
+    ])
   )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:95</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -565,7 +581,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -596,7 +612,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:114</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -627,7 +643,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -658,7 +674,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:112</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -689,7 +705,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:111</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -720,7 +736,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:113</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:127</a></div>
                         </td>
                     </tr>
 
@@ -751,7 +767,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:109</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -795,7 +811,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -826,18 +842,22 @@
       let tmp &#x3D; [...values];
       return tmp.sort((a, b) &#x3D;&gt; (a.pep2 &gt; b.pep2 ? 1 : -1));
     }),
-    map(values &#x3D;&gt;
-      values.map(value &#x3D;&gt; ({
+    map(values &#x3D;&gt; [
+      {
+        name: &#x27;PEP2 provisorio&#x27;,
+        code: &#x27;capex_provisorio&#x27;,
+      },
+      ...values.map(value &#x3D;&gt; ({
         name: value.pep2,
         code: value.pep2,
-      }))
-    )
+      })),
+    ])
   )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -879,7 +899,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -923,7 +943,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -954,7 +974,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -983,7 +1003,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:201</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="249" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:249</a></div>
                                 </td>
                             </tr>
 
@@ -994,7 +1014,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+} from &#x27;@angular/core&#x27;;
 import { FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { Dropdown } from &#x27;@model&#x27;;
 import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
@@ -1050,12 +1076,16 @@ export class FormularioOtSustentoFinancieroComponent
       let tmp &#x3D; [...values];
       return tmp.sort((a, b) &#x3D;&gt; (a.pep2 &gt; b.pep2 ? 1 : -1));
     }),
-    map(values &#x3D;&gt;
-      values.map(value &#x3D;&gt; ({
+    map(values &#x3D;&gt; [
+      {
+        name: &#x27;PEP2 provisorio&#x27;,
+        code: &#x27;capex_provisorio&#x27;,
+      },
+      ...values.map(value &#x3D;&gt; ({
         name: value.pep2,
         code: value.pep2,
-      }))
-    )
+      })),
+    ])
   );
 
   opex$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade
@@ -1093,12 +1123,16 @@ export class FormularioOtSustentoFinancieroComponent
       let tmp &#x3D; [...values];
       return tmp.sort((a, b) &#x3D;&gt; (a.ceco &gt; b.ceco ? 1 : -1));
     }),
-    map(values &#x3D;&gt;
-      values.map(value &#x3D;&gt; ({
+    map(values &#x3D;&gt; [
+      {
+        name: &#x27;CECO provisorio&#x27;,
+        code: &#x27;ceco_provisorio&#x27;,
+      },
+      ...values.map(value &#x3D;&gt; ({
         name: value.ceco.toString(),
         code: value.ceco,
-      }))
-    )
+      })),
+    ])
   );
 
   // LOADINGS
@@ -1111,7 +1145,8 @@ export class FormularioOtSustentoFinancieroComponent
 
   constructor(
     private sustentoFinancieroFacade: SustentoFinancieroFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -1144,6 +1179,18 @@ export class FormularioOtSustentoFinancieroComponent
     );
 
     this.subscription.add(
+      this.form.get(&#x27;pep2_capex_id&#x27;).valueChanges.subscribe(pep2_capex_id &#x3D;&gt; {
+        if (pep2_capex_id &#x3D;&#x3D;&#x3D; &#x27;capex_provisorio&#x27;) {
+          this.form.get(&#x27;pep2_provisorio&#x27;).setValidators([Validators.required]);
+          this.form.get(&#x27;pep2_provisorio&#x27;).updateValueAndValidity();
+        } else {
+          this.form.get(&#x27;pep2_provisorio&#x27;).setValidators(null);
+          this.form.get(&#x27;pep2_provisorio&#x27;).updateValueAndValidity();
+        }
+      })
+    );
+
+    this.subscription.add(
       this.form.get(&#x27;id_opex_codigo&#x27;).valueChanges.subscribe(id_opex_codigo &#x3D;&gt; {
         if (id_opex_codigo !&#x3D;&#x3D; null &amp;&amp; id_opex_codigo !&#x3D;&#x3D; undefined) {
           this.sustentoFinancieroFacade.getCuentaSAP(id_opex_codigo);
@@ -1163,6 +1210,18 @@ export class FormularioOtSustentoFinancieroComponent
           }
         })
     );
+
+    this.subscription.add(
+      this.form.get(&#x27;ceco_codigo&#x27;).valueChanges.subscribe(ceco_codigo &#x3D;&gt; {
+        if (ceco_codigo &#x3D;&#x3D;&#x3D; &#x27;ceco_provisorio&#x27;) {
+          this.form.get(&#x27;ceco_provisorio&#x27;).setValidators([Validators.required]);
+          this.form.get(&#x27;ceco_provisorio&#x27;).updateValueAndValidity();
+        } else {
+          this.form.get(&#x27;ceco_provisorio&#x27;).setValidators(null);
+          this.form.get(&#x27;ceco_provisorio&#x27;).updateValueAndValidity();
+        }
+      })
+    );
   }
 
   configCapex(): void {
@@ -1173,17 +1232,22 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get(&#x27;id_opex_codigo&#x27;).setValidators(null);
     this.form.get(&#x27;cuenta_sap_codigo&#x27;).setValidators(null);
     this.form.get(&#x27;ceco_codigo&#x27;).setValidators(null);
+    this.form.get(&#x27;ceco_provisorio&#x27;).setValidators(null);
 
     this.form.get(&#x27;id_opex_codigo&#x27;).reset();
     this.form.get(&#x27;cuenta_sap_codigo&#x27;).reset();
     this.form.get(&#x27;ceco_codigo&#x27;).reset();
     this.form.get(&#x27;ceco_provisorio&#x27;).reset();
+
+    this.form.updateValueAndValidity();
+    this.detector.detectChanges();
   }
 
   configOpex(): void {
     this.form.get(&#x27;pmo_codigo&#x27;).setValidators(null);
     this.form.get(&#x27;lp_codigo&#x27;).setValidators(null);
     this.form.get(&#x27;pep2_capex_id&#x27;).setValidators(null);
+    this.form.get(&#x27;pep2_provisorio&#x27;).setValidators(null);
 
     this.form.get(&#x27;id_opex_codigo&#x27;).setValidators([Validators.required]);
     this.form.get(&#x27;cuenta_sap_codigo&#x27;).setValidators([Validators.required]);
@@ -1192,6 +1256,10 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get(&#x27;pmo_codigo&#x27;).reset();
     this.form.get(&#x27;lp_codigo&#x27;).reset();
     this.form.get(&#x27;pep2_capex_id&#x27;).reset();
+    this.form.get(&#x27;pep2_provisorio&#x27;).reset();
+
+    this.form.updateValueAndValidity();
+    this.detector.detectChanges();
   }
 
   get valid(): boolean {
@@ -1207,60 +1275,59 @@ export class FormularioOtSustentoFinancieroComponent
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;p-divider align&#x3D;&quot;center&quot;&gt;
-    &lt;span class&#x3D;&quot;p-tag&quot;&gt;Sustento Financiero&lt;/span&gt;
+  &lt;span class&#x3D;&quot;p-tag&quot;&gt;Sustento Financiero&lt;/span&gt;
 &lt;/p-divider&gt;
 
 &lt;form [formGroup]&#x3D;&quot;form&quot;&gt;
-    &lt;div class&#x3D;&quot;card&quot;&gt;
-        &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
-            &lt;div class&#x3D;&quot;field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column&quot;
-                style&#x3D;&quot;display: flex;&quot;&gt;
-                &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;capex&quot; label&#x3D;&quot;Capex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
-                &lt;/p-radioButton&gt;
-                &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;opex&quot; label&#x3D;&quot;Opex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
-                &lt;/p-radioButton&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+      &lt;div class&#x3D;&quot;field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column&quot; style&#x3D;&quot;display: flex;&quot;&gt;
+        &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;capex&quot; label&#x3D;&quot;Capex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
+        &lt;/p-radioButton&gt;
+        &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;opex&quot; label&#x3D;&quot;Opex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
+        &lt;/p-radioButton&gt;
+      &lt;/div&gt;
 
-            &lt;/div&gt;
-
-            &lt;div class&#x3D;&quot;field col-12 md:col-8 lg:col-8 xl:col-8&quot;&gt;
-                &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;capex&#x27;&quot;&gt;
-                    &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pmo_codigo&#x27;)&quot; Label&#x3D;&quot;*PMO:&quot; dropdown_id&#x3D;&quot;select-pmo&quot;
-                            [data]&#x3D;&quot;pmo$|async&quot; Pplaceholder&#x3D;&quot;Selecione un pmo&quot; [loading]&#x3D;&quot;loadingPMO$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                        &lt;br&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;lp_codigo&#x27;)&quot; Label&#x3D;&quot;*Línea Presupuestaria:&quot;
-                            dropdown_id&#x3D;&quot;select-linea-presupuestaria&quot; [data]&#x3D;&quot;lineaPresupuestaria$|async&quot;
-                            Pplaceholder&#x3D;&quot;Selecione una línea presupuestaria&quot; [loading]&#x3D;&quot;loadingGetLP$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                        &lt;br&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pep2_capex_id&#x27;)&quot; Label&#x3D;&quot;*PEP2:&quot; dropdown_id&#x3D;&quot;select-pep2&quot;
-                            [data]&#x3D;&quot;pep2$|async&quot; Pplaceholder&#x3D;&quot;Selecione un pep2&quot; [loading]&#x3D;&quot;loadingGetPEP2$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;opex&#x27;&quot;&gt;
-                    &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;id_opex_codigo&#x27;)&quot; Label&#x3D;&quot;*ID Opex:&quot;
-                            dropdown_id&#x3D;&quot;select-opex&quot; [data]&#x3D;&quot;opex$|async&quot; Pplaceholder&#x3D;&quot;Selecione un opex id&quot;
-                            [loading]&#x3D;&quot;loadingGetOPEX$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                        &lt;br&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;cuenta_sap_codigo&#x27;)&quot; Label&#x3D;&quot;*Cuenta SAP:&quot;
-                            dropdown_id&#x3D;&quot;select-cuenta-sap&quot; [data]&#x3D;&quot;sap$|async&quot; Pplaceholder&#x3D;&quot;Selecione una cuenta sap&quot;
-                            [loading]&#x3D;&quot;loadingGetSAP$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                        &lt;br&gt;
-                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;ceco_codigo&#x27;)&quot; Label&#x3D;&quot;*CECO:&quot; dropdown_id&#x3D;&quot;select-ceco&quot;
-                            [data]&#x3D;&quot;ceco$|async&quot; Pplaceholder&#x3D;&quot;Selecione un ceco&quot; [loading]&#x3D;&quot;loadingGetCECO$|async&quot;&gt;
-                        &lt;/zwc-pdropdown&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+      &lt;div class&#x3D;&quot;field col-12 md:col-8 lg:col-8 xl:col-8&quot;&gt;
+        &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;capex&#x27;&quot;&gt;
+          &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pmo_codigo&#x27;)&quot; Label&#x3D;&quot;*PMO:&quot; dropdown_id&#x3D;&quot;select-pmo&quot; [data]&#x3D;&quot;pmo$|async&quot; Pplaceholder&#x3D;&quot;Seleccione un pmo&quot; [loading]&#x3D;&quot;loadingPMO$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;br&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;lp_codigo&#x27;)&quot; Label&#x3D;&quot;*Línea Presupuestaria:&quot; dropdown_id&#x3D;&quot;select-linea-presupuestaria&quot; [data]&#x3D;&quot;lineaPresupuestaria$|async&quot; Pplaceholder&#x3D;&quot;Seleccione una línea presupuestaria&quot; [loading]&#x3D;&quot;loadingGetLP$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;br&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pep2_capex_id&#x27;)&quot; Label&#x3D;&quot;*PEP2:&quot; dropdown_id&#x3D;&quot;select-pep2&quot; [data]&#x3D;&quot;pep2$|async&quot; Pplaceholder&#x3D;&quot;Seleccione un pep2&quot; [loading]&#x3D;&quot;loadingGetPEP2$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;pep2_capex_id&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;capex_provisorio&#x27;&quot;&gt;
+              &lt;br&gt;
+              &lt;zwc-input-text Label&#x3D;&quot;*PEP2 Provisorio&quot; [control]&#x3D;&quot;form.get(&#x27;pep2_provisorio&#x27;)&quot; name_input&#x3D;&quot;input-pep2-provisorio&quot;&gt;
+              &lt;/zwc-input-text&gt;
+            &lt;/ng-container&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
-
+        &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;opex&#x27;&quot;&gt;
+          &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;id_opex_codigo&#x27;)&quot; Label&#x3D;&quot;*ID Opex:&quot; dropdown_id&#x3D;&quot;select-opex&quot; [data]&#x3D;&quot;opex$|async&quot; Pplaceholder&#x3D;&quot;Seleccione un opex id&quot; [loading]&#x3D;&quot;loadingGetOPEX$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;br&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;cuenta_sap_codigo&#x27;)&quot; Label&#x3D;&quot;*Cuenta SAP:&quot; dropdown_id&#x3D;&quot;select-cuenta-sap&quot; [data]&#x3D;&quot;sap$|async&quot; Pplaceholder&#x3D;&quot;Seleccione una cuenta sap&quot; [loading]&#x3D;&quot;loadingGetSAP$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;br&gt;
+            &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;ceco_codigo&#x27;)&quot; Label&#x3D;&quot;*CECO:&quot; dropdown_id&#x3D;&quot;select-ceco&quot; [data]&#x3D;&quot;ceco$|async&quot; Pplaceholder&#x3D;&quot;Seleccione un ceco&quot; [loading]&#x3D;&quot;loadingGetCECO$|async&quot;&gt;
+            &lt;/zwc-pdropdown&gt;
+            &lt;ng-container *ngIf&#x3D;&quot;form.get(&#x27;ceco_codigo&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;ceco_provisorio&#x27;&quot;&gt;
+              &lt;br&gt;
+              &lt;zwc-input-text Label&#x3D;&quot;*CECO Provisorio&quot; [control]&#x3D;&quot;form.get(&#x27;ceco_provisorio&#x27;)&quot; name_input&#x3D;&quot;input-ceco-provisorio&quot;&gt;
+              &lt;/zwc-input-text&gt;
+            &lt;/ng-container&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-&lt;/form&gt;</code></pre>
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -1295,8 +1362,8 @@ export class FormularioOtSustentoFinancieroComponent
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p-divider align="center">    <span class="p-tag">Sustento Financiero</span></p-divider><form [formGroup]="form">    <div class="card">        <div class="formgrid grid">            <div class="field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column"                style="display: flex;">                <p-radioButton name="costos" value="capex" label="Capex" [formControl]="form.get(\'costos\')">                </p-radioButton>                <p-radioButton name="costos" value="opex" label="Opex" [formControl]="form.get(\'costos\')">                </p-radioButton>            </div>            <div class="field col-12 md:col-8 lg:col-8 xl:col-8">                <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'capex\'">                    <div class="field col-12 ">                        <zwc-pdropdown [control]="form.get(\'pmo_codigo\')" Label="*PMO:" dropdown_id="select-pmo"                            [data]="pmo$|async" Pplaceholder="Selecione un pmo" [loading]="loadingPMO$|async">                        </zwc-pdropdown>                        <br>                        <zwc-pdropdown [control]="form.get(\'lp_codigo\')" Label="*Línea Presupuestaria:"                            dropdown_id="select-linea-presupuestaria" [data]="lineaPresupuestaria$|async"                            Pplaceholder="Selecione una línea presupuestaria" [loading]="loadingGetLP$|async">                        </zwc-pdropdown>                        <br>                        <zwc-pdropdown [control]="form.get(\'pep2_capex_id\')" Label="*PEP2:" dropdown_id="select-pep2"                            [data]="pep2$|async" Pplaceholder="Selecione un pep2" [loading]="loadingGetPEP2$|async">                        </zwc-pdropdown>                    </div>                </div>                <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'opex\'">                    <div class="field col-12 ">                        <zwc-pdropdown [control]="form.get(\'id_opex_codigo\')" Label="*ID Opex:"                            dropdown_id="select-opex" [data]="opex$|async" Pplaceholder="Selecione un opex id"                            [loading]="loadingGetOPEX$|async">                        </zwc-pdropdown>                        <br>                        <zwc-pdropdown [control]="form.get(\'cuenta_sap_codigo\')" Label="*Cuenta SAP:"                            dropdown_id="select-cuenta-sap" [data]="sap$|async" Pplaceholder="Selecione una cuenta sap"                            [loading]="loadingGetSAP$|async">                        </zwc-pdropdown>                        <br>                        <zwc-pdropdown [control]="form.get(\'ceco_codigo\')" Label="*CECO:" dropdown_id="select-ceco"                            [data]="ceco$|async" Pplaceholder="Selecione un ceco" [loading]="loadingGetCECO$|async">                        </zwc-pdropdown>                    </div>                </div>            </div>        </div>    </div></form></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><p-divider align="center">  <span class="p-tag">Sustento Financiero</span></p-divider><form [formGroup]="form">  <div class="card">    <div class="formgrid grid">      <div class="field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column" style="display: flex;">        <p-radioButton name="costos" value="capex" label="Capex" [formControl]="form.get(\'costos\')">        </p-radioButton>        <p-radioButton name="costos" value="opex" label="Opex" [formControl]="form.get(\'costos\')">        </p-radioButton>      </div>      <div class="field col-12 md:col-8 lg:col-8 xl:col-8">        <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'capex\'">          <div class="field col-12 ">            <zwc-pdropdown [control]="form.get(\'pmo_codigo\')" Label="*PMO:" dropdown_id="select-pmo" [data]="pmo$|async" Pplaceholder="Seleccione un pmo" [loading]="loadingPMO$|async">            </zwc-pdropdown>            <br>            <zwc-pdropdown [control]="form.get(\'lp_codigo\')" Label="*Línea Presupuestaria:" dropdown_id="select-linea-presupuestaria" [data]="lineaPresupuestaria$|async" Pplaceholder="Seleccione una línea presupuestaria" [loading]="loadingGetLP$|async">            </zwc-pdropdown>            <br>            <zwc-pdropdown [control]="form.get(\'pep2_capex_id\')" Label="*PEP2:" dropdown_id="select-pep2" [data]="pep2$|async" Pplaceholder="Seleccione un pep2" [loading]="loadingGetPEP2$|async">            </zwc-pdropdown>            <ng-container *ngIf="form.get(\'pep2_capex_id\').value === \'capex_provisorio\'">              <br>              <zwc-input-text Label="*PEP2 Provisorio" [control]="form.get(\'pep2_provisorio\')" name_input="input-pep2-provisorio">              </zwc-input-text>            </ng-container>          </div>        </div>        <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'opex\'">          <div class="field col-12 ">            <zwc-pdropdown [control]="form.get(\'id_opex_codigo\')" Label="*ID Opex:" dropdown_id="select-opex" [data]="opex$|async" Pplaceholder="Seleccione un opex id" [loading]="loadingGetOPEX$|async">            </zwc-pdropdown>            <br>            <zwc-pdropdown [control]="form.get(\'cuenta_sap_codigo\')" Label="*Cuenta SAP:" dropdown_id="select-cuenta-sap" [data]="sap$|async" Pplaceholder="Seleccione una cuenta sap" [loading]="loadingGetSAP$|async">            </zwc-pdropdown>            <br>            <zwc-pdropdown [control]="form.get(\'ceco_codigo\')" Label="*CECO:" dropdown_id="select-ceco" [data]="ceco$|async" Pplaceholder="Seleccione un ceco" [loading]="loadingGetCECO$|async">            </zwc-pdropdown>            <ng-container *ngIf="form.get(\'ceco_codigo\').value === \'ceco_provisorio\'">              <br>              <zwc-input-text Label="*CECO Provisorio" [control]="form.get(\'ceco_provisorio\')" name_input="input-ceco-provisorio">              </zwc-input-text>            </ng-container>          </div>        </div>      </div>    </div>  </div></form></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormularioOtSustentoFinancieroComponent'};
 </script>

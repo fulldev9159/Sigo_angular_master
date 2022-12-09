@@ -75,25 +75,36 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { AccionesOTResolver } from &#x27;src/app/core/resolvers/accionesOT.resolver&#x27;;
+import { ObservacionesTrabajosResolver } from &#x27;src/app/core/resolvers/observacionesTrabajos.resolver&#x27;;
+import { DetalleOTResolver } from &#x27;src/app/core/resolvers/detalleOT.resolver&#x27;;
 import { ActaComponent } from &#x27;./acta.component&#x27;;
 import { GenerarActaContainerComponent } from &#x27;./containers/generar-acta-container/generar-acta-container.component&#x27;;
 import { ListActasContainerComponent } from &#x27;./containers/list-actas-container/list-actas-container.component&#x27;;
 import { ValidarActaContainerComponent } from &#x27;./containers/validar-acta-container/validar-acta-container.component&#x27;;
+import { ValidarActaOperacionesContainerComponent } from &#x27;./containers/validar-acta-operaciones-container/validar-acta-operaciones-container.component&#x27;;
 import { ValidarPagoActaContainerComponent } from &#x27;./containers/validar-pago-acta-container/validar-pago-acta-container.component&#x27;;
 import { ActaTiposPagosResolver } from &#x27;./resolvers/actaTipoPago.resolver&#x27;;
+import { DetalleInformeAvanceResolver } from &#x27;./resolvers/detalle-informe-avance.resolver&#x27;;
 import { LastActaResolver } from &#x27;./resolvers/lastActa.resolver&#x27;;
+import { ListActasResolver } from &#x27;./resolvers/listActas.resolver&#x27;;
 import { Servicios4ActaResolver } from &#x27;./resolvers/servicios4acta.resolver&#x27;;
+import { TotalActasResolver } from &#x27;./resolvers/totalActas.resolver&#x27;;
 import { UOs4ActaResolver } from &#x27;./resolvers/uos4acta.resolver&#x27;;
+// import { QuienAutorizoPagoResolver } from &#x27;./resolvers/quienAutorizoPago.resolver&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: ActaComponent,
     children: [
-      { path: &#x27;&#x27;, redirectTo: &#x27;list-acta&#x27;, pathMatch: &#x27;full&#x27; },
+      { path: &#x27;&#x27;, redirectTo: &#x27;list-actas&#x27;, pathMatch: &#x27;full&#x27; },
       {
-        path: &#x27;list-actas&#x27;,
+        path: &#x27;listar-actas/:id&#x27;,
         component: ListActasContainerComponent,
+        resolve: {
+          detalleOT: DetalleOTResolver,
+          listActas: ListActasResolver,
+        },
       },
       {
         path: &#x27;generar-acta/:id&#x27;,
@@ -102,6 +113,9 @@ const routes: Routes &#x3D; [
           servicios4acta: Servicios4ActaResolver,
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
+          totalActas: TotalActasResolver,
+          observacionesTrabajo: ObservacionesTrabajosResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
       {
@@ -112,6 +126,11 @@ const routes: Routes &#x3D; [
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
           actaTiposPagos: ActaTiposPagosResolver,
+          observacionesTrabajo: ObservacionesTrabajosResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
+          lastActa: LastActaResolver,
+          totalActas: TotalActasResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
       {
@@ -120,6 +139,18 @@ const routes: Routes &#x3D; [
         resolve: {
           accionesOT: AccionesOTResolver,
           lastActa: LastActaResolver,
+          // quienAutorizoPago: QuienAutorizoPagoResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
+          detalleOT: DetalleOTResolver,
+        },
+      },
+      {
+        path: &#x27;validar-trabajos-operaciones/:id&#x27;,
+        component: ValidarActaOperacionesContainerComponent,
+        resolve: {
+          accionesOT: AccionesOTResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
+          detalleOT: DetalleOTResolver,
         },
       },
     ],

@@ -70,6 +70,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
 
 
 <section>
@@ -119,7 +126,44 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#loadingTipoNumeroInterno$" >loadingTipoNumeroInterno$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tiposNumeroInterno$" >tiposNumeroInterno$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -163,15 +207,69 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(numeroInternoFacade: <a href="../injectables/NumeroInternoFacade.html" target="_self">NumeroInternoFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>, config: PrimeNGConfig)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:40</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>numeroInternoFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NumeroInternoFacade.html" target="_self" >NumeroInternoFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingsFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>config</td>
+                                                  
+                                                        <td>
+                                                                    <code>PrimeNGConfig</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -194,7 +292,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:17</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -203,7 +301,202 @@
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingTipoNumeroInterno$"></a>
+                    <span class="name">
+                        <span ><b>loadingTipoNumeroInterno$</b></span>
+                        <a href="#loadingTipoNumeroInterno$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetTipoNumeroInterno$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tiposNumeroInterno$"></a>
+                    <span class="name">
+                        <span ><b>tiposNumeroInterno$</b></span>
+                        <a href="#tiposNumeroInterno$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.numeroInternoFacade
+    .getTipoDeNumeroInterno$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.nombre &gt; b.nombre ? 1 : -1));
+      }),
+      map(values &#x3D;&gt; [
+        {
+          name: &#x27;Sin números&#x27;,
+          code: null,
+        },
+        ...values.map(value &#x3D;&gt; ({
+          name: value.nombre,
+          code: value.id,
+        })),
+      ])
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     <section>
     <h3 id="accessors">
@@ -225,7 +518,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/ot/components/formulario-ot-ordinario/formulario-ot-ordinario.component.ts:59</a></div>
                                 </td>
                             </tr>
 
@@ -236,21 +529,70 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
 import { FormGroup } from &#x27;@angular/forms&#x27;;
+import { Dropdown, OTFromNumeroInterno } from &#x27;@model&#x27;;
+import { NumeroInternoFacade } from &#x27;@storeOT/numero-interno/numero-interno.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { Observable, Subscription } from &#x27;rxjs&#x27;;
+import { PrimeNGConfig } from &#x27;primeng/api&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
 
 @Component({
   selector: &#x27;zwc-formulario-ot-ordinario&#x27;,
   templateUrl: &#x27;./formulario-ot-ordinario.component.html&#x27;,
   styleUrls: [&#x27;./formulario-ot-ordinario.component.scss&#x27;],
 })
-export class FormularioOtOrdinarioComponent {
+export class FormularioOtOrdinarioComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
   @Input() form: FormGroup;
 
-  constructor() {}
+  tiposNumeroInterno$: Observable&lt;Dropdown[]&gt; &#x3D; this.numeroInternoFacade
+    .getTipoDeNumeroInterno$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.nombre &gt; b.nombre ? 1 : -1));
+      }),
+      map(values &#x3D;&gt; [
+        {
+          name: &#x27;Sin números&#x27;,
+          code: null,
+        },
+        ...values.map(value &#x3D;&gt; ({
+          name: value.nombre,
+          code: value.id,
+        })),
+      ])
+    );
+
+  // LOADINGS
+  loadingTipoNumeroInterno$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetTipoNumeroInterno$();
+
+  constructor(
+    private numeroInternoFacade: NumeroInternoFacade,
+    private loadingsFacade: LoadingsFacade,
+    private config: PrimeNGConfig
+  ) {}
+
+  ngOnInit(): void {
+    this.numeroInternoFacade.getTipoDeNumeroInterno();
+    this.config.setTranslation({
+      monthNames:[
+        &#x27;Enero&#x27;, &#x27;Febrero&#x27;, &#x27;Marzo&#x27;, &#x27;Abril&#x27;, &#x27;Mayo&#x27;, &#x27;Junio&#x27;,
+        &#x27;Julio&#x27;, &#x27;Agosto&#x27;, &#x27;Septiembre&#x27;, &#x27;Octubre&#x27;, &#x27;Noviembre&#x27;, &#x27;Diciembre&#x27;,
+      ],
+      dayNamesMin:[&#x27;Do&#x27;, &#x27;Lu&#x27;, &#x27;Ma&#x27;, &#x27;Mi&#x27;, &#x27;Ju&#x27;, &#x27;Vi&#x27;, &#x27;Sa&#x27;],
+    });
+  }
 
   get valid(): boolean {
-    return this.form.valid;
+    return this.form?.valid ?? false;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
 </code></pre>
@@ -258,34 +600,45 @@ export class FormularioOtOrdinarioComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;p-divider align&#x3D;&quot;center&quot;&gt;
-    &lt;span class&#x3D;&quot;p-tag&quot;&gt;Contrato Marco: Ordinario&lt;/span&gt;
+  &lt;span class&#x3D;&quot;p-tag&quot;&gt;Contrato Marco: Ordinario&lt;/span&gt;
 &lt;/p-divider&gt;
 
 &lt;form [formGroup]&#x3D;&quot;form&quot;&gt;
-    &lt;div class&#x3D;&quot;card&quot;&gt;
-        &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
-            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                &lt;zwc-input-text Label&#x3D;&quot;*Número carta&quot; [control]&#x3D;&quot;form.get(&#x27;carta_adjudicacion&#x27;)&quot;
-                    name_input&#x3D;&quot;input-numero-carta&quot;&gt;
-                &lt;/zwc-input-text&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                &lt;label class&#x3D;&quot;mr-1&quot; for&#x3D;&quot;&quot;&gt;Fecha adjudicación&lt;/label&gt;
-                &lt;p-calendar [style]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;}&quot; inputStyleClass&#x3D;&quot;form-control d-block&quot;
-                    [inputStyle]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;,&#x27;height&#x27;:&#x27;2.5rem&#x27;}&quot; formControlName&#x3D;&quot;fecha_adjudicacion&quot;
-                    id&#x3D;&quot;fecha-adjudicacion&quot; name&#x3D;&quot;fecha-adjudicacion&quot; dateFormat&#x3D;&quot;dd/mm/yy&quot;&gt;&lt;/p-calendar&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                &lt;zwc-input-text Label&#x3D;&quot;*Número pedido&quot; [control]&#x3D;&quot;form.get(&#x27;numero_pedido&#x27;)&quot;
-                    name_input&#x3D;&quot;input-numero-pedido&quot;&gt;
-                &lt;/zwc-input-text&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
-                &lt;zwc-input-text Label&#x3D;&quot;*Materia&quot; [control]&#x3D;&quot;form.get(&#x27;materia&#x27;)&quot; name_input&#x3D;&quot;input-materia&quot;&gt;
-                &lt;/zwc-input-text&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+      &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+        &lt;zwc-input-text Label&#x3D;&quot;*Número carta&quot; [control]&#x3D;&quot;form.get(&#x27;carta_adjudicacion&#x27;)&quot;
+          name_input&#x3D;&quot;input-numero-carta&quot;&gt;
+        &lt;/zwc-input-text&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+        &lt;label class&#x3D;&quot;mr-1&quot; for&#x3D;&quot;&quot;&gt;*Fecha adjudicación&lt;/label&gt;
+        &lt;p-calendar [style]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;}&quot; inputStyleClass&#x3D;&quot;form-control d-block&quot;
+          [inputStyle]&#x3D;&quot;{&#x27;width&#x27;:&#x27;100%&#x27;,&#x27;height&#x27;:&#x27;2.5rem&#x27;}&quot; formControlName&#x3D;&quot;fecha_adjudicacion&quot; id&#x3D;&quot;fecha-adjudicacion&quot;
+          name&#x3D;&quot;fecha-adjudicacion&quot; dateFormat&#x3D;&quot;dd/mm/yy&quot;&gt;&lt;/p-calendar&gt;
+      &lt;/div&gt;
+      &lt;!-- &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+        &lt;zwc-input-text Label&#x3D;&quot;Número pedido&quot; [control]&#x3D;&quot;form.get(&#x27;numero_pedido&#x27;)&quot; name_input&#x3D;&quot;input-numero-pedido&quot;&gt;
+        &lt;/zwc-input-text&gt;
+      &lt;/div&gt; --&gt;
+      &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+        &lt;zwc-input-text Label&#x3D;&quot;*Materia&quot; [control]&#x3D;&quot;form.get(&#x27;materia&#x27;)&quot; name_input&#x3D;&quot;input-materia&quot;&gt;
+        &lt;/zwc-input-text&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+      &lt;div class&#x3D;&quot;field col-12 md:col-5 lg:col-5 xl:col-5&quot;&gt;
+        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;tipo_numero_interno_id&#x27;)&quot; Label&#x3D;&quot;Tipo de numero interno:&quot;
+          dropdown_id&#x3D;&quot;select-tipo-numero-interno&quot; [data]&#x3D;&quot;tiposNumeroInterno$|async&quot;
+          Pplaceholder&#x3D;&quot;Seleccione un tipo de numero interno&quot; [loading]&#x3D;&quot;loadingTipoNumeroInterno$|async&quot;&gt;
+        &lt;/zwc-pdropdown&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;zwc-formulario-ot-numero-interno [tipoNumeroInternoFormControl]&#x3D;&quot;form.get(&#x27;tipo_numero_interno_id&#x27;)&quot;
+      [otsNumeroInternoFormArray]&#x3D;&quot;form.get(&#x27;ots_numero_interno&#x27;)&quot;&gt;&lt;/zwc-formulario-ot-numero-interno&gt;
+  &lt;/div&gt;
 &lt;/form&gt;</code></pre>
     </div>
 
@@ -321,8 +674,8 @@ export class FormularioOtOrdinarioComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p-divider align="center">    <span class="p-tag">Contrato Marco: Ordinario</span></p-divider><form [formGroup]="form">    <div class="card">        <div class="formgrid grid">            <div class="field col-12 ">                <zwc-input-text Label="*Número carta" [control]="form.get(\'carta_adjudicacion\')"                    name_input="input-numero-carta">                </zwc-input-text>            </div>            <div class="field col-12 ">                <label class="mr-1" for="">Fecha adjudicación</label>                <p-calendar [style]="{\'width\':\'100%\'}" inputStyleClass="form-control d-block"                    [inputStyle]="{\'width\':\'100%\',\'height\':\'2.5rem\'}" formControlName="fecha_adjudicacion"                    id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>            </div>            <div class="field col-12 ">                <zwc-input-text Label="*Número pedido" [control]="form.get(\'numero_pedido\')"                    name_input="input-numero-pedido">                </zwc-input-text>            </div>            <div class="field col-12 ">                <zwc-input-text Label="*Materia" [control]="form.get(\'materia\')" name_input="input-materia">                </zwc-input-text>            </div>        </div>    </div></form></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><p-divider align="center">  <span class="p-tag">Contrato Marco: Ordinario</span></p-divider><form [formGroup]="form">  <div class="card">    <div class="formgrid grid">      <div class="field col-12 ">        <zwc-input-text Label="*Número carta" [control]="form.get(\'carta_adjudicacion\')"          name_input="input-numero-carta">        </zwc-input-text>      </div>      <div class="field col-12 ">        <label class="mr-1" for="">*Fecha adjudicación</label>        <p-calendar [style]="{\'width\':\'100%\'}" inputStyleClass="form-control d-block"          [inputStyle]="{\'width\':\'100%\',\'height\':\'2.5rem\'}" formControlName="fecha_adjudicacion" id="fecha-adjudicacion"          name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>      </div>      <!-- <div class="field col-12 ">        <zwc-input-text Label="Número pedido" [control]="form.get(\'numero_pedido\')" name_input="input-numero-pedido">        </zwc-input-text>      </div> -->      <div class="field col-12 ">        <zwc-input-text Label="*Materia" [control]="form.get(\'materia\')" name_input="input-materia">        </zwc-input-text>      </div>    </div>    <div class="formgrid grid">      <div class="field col-12 md:col-5 lg:col-5 xl:col-5">        <zwc-pdropdown [control]="form.get(\'tipo_numero_interno_id\')" Label="Tipo de numero interno:"          dropdown_id="select-tipo-numero-interno" [data]="tiposNumeroInterno$|async"          Pplaceholder="Seleccione un tipo de numero interno" [loading]="loadingTipoNumeroInterno$|async">        </zwc-pdropdown>      </div>    </div>    <zwc-formulario-ot-numero-interno [tipoNumeroInternoFormControl]="form.get(\'tipo_numero_interno_id\')"      [otsNumeroInternoFormArray]="form.get(\'ots_numero_interno\')"></zwc-formulario-ot-numero-interno>  </div></form></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormularioOtOrdinarioComponent'};
 </script>

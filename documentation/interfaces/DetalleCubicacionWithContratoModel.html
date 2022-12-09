@@ -90,9 +90,33 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                        <a href="#model_agencia_id" 
+>
+                                            model_agencia_id
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#model_contrato_id" 
 >
                                             model_contrato_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#model_proveedor_id" 
+>
+                                            model_proveedor_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#model_tipo_cubicacion_id" 
+>
+                                            model_tipo_cubicacion_id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#model_usuario_creador_id" 
+>
+                                            model_usuario_creador_id
                                         </a>
                                 </li>
                             </ul>
@@ -106,6 +130,39 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="model_agencia_id"></a>
+                                        <span class="name "><b>model_agencia_id</b>
+                                            <a href="#model_agencia_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>model_agencia_id:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -129,6 +186,105 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>        <code><a href="../interfaces/ContratoMarconWithTipoContratoModel.html" target="_self" >ContratoMarconWithTipoContratoModel</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="model_proveedor_id"></a>
+                                        <span class="name "><b>model_proveedor_id</b>
+                                            <a href="#model_proveedor_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>model_proveedor_id:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="model_tipo_cubicacion_id"></a>
+                                        <span class="name "><b>model_tipo_cubicacion_id</b>
+                                            <a href="#model_tipo_cubicacion_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>model_tipo_cubicacion_id:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="model_usuario_creador_id"></a>
+                                        <span class="name "><b>model_usuario_creador_id</b>
+                                            <a href="#model_usuario_creador_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>model_usuario_creador_id:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
 
                                         </td>
                                     </tr>
@@ -290,6 +446,60 @@ export interface DetalleCubicacionWithContratoModel
     &#x27;many_cubicacion_has_servicio&#x27; | &#x27;valor_total_clp&#x27;
   &gt; {
   model_contrato_id: ContratoMarconWithTipoContratoModel;
+  model_tipo_cubicacion_id: {
+    id: number;
+    slug: string;
+    descripcion: string;
+  };
+  model_proveedor_id: {
+    id: number;
+    rut: number;
+    dv: string;
+    nombre: string;
+    email: string;
+    telefono: string;
+    direccion: string;
+    estado: boolean;
+    interno: boolean;
+    representante_legal: string;
+    numero_contrato: number;
+    vigencia_garantia: number;
+    razon_social: string;
+    tipo_proveedor_id: number;
+    created_at: Date;
+    updated_at: Date;
+  };
+  model_agencia_id: {
+    id: number;
+    region_id: number;
+    codigo: string;
+    nombre: string;
+    estado: boolean;
+    model_region_id: {
+      id: number;
+      nombre: string;
+      codigo: string;
+    };
+  };
+  model_usuario_creador_id: {
+    id: number;
+    username: string;
+    guia_subgrupo_id: number;
+    delegated_auth: boolean;
+    password?: any;
+    rut: string;
+    nombres: string;
+    apellidos: string;
+    celular: string;
+    estado: boolean;
+    proveedor_id: number;
+    area_id: number;
+    email: string;
+    firma_archivo_id?: any;
+    eliminable: boolean;
+    created_at: Date;
+    updated_at: Date;
+  };
 }
 
 // CUBICACIONES DE UN CONTRATO ESPECIFICO
