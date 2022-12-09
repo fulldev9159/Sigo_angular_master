@@ -160,6 +160,16 @@
                         </div>
                     </ng-container>
 
+                    <ng-container *ngIf="registro.evento==='QUIEBRE'">
+                        <div style="display: flex;flex-direction: column;">
+                            <p>Se ha quebrado la OT con el siguiente </p>
+                            <p>mensaje:</p>
+                            <q>
+                                <span [innerHTML]="getMetadata(registro.metadata).motivo"></span>
+                            </q>
+                        </div>
+                    </ng-container>
+
                     <ng-container *ngIf="registro.evento==='SOLICITUD_QUIEBRE_APROBACION'">
                         <fa-icon [icon]="getMetadata(registro.metadata).estado==='RECHAZADO'?xmark:okmark"
                             [ngClass]="getMetadata(registro.metadata).estado==='RECHAZADO'?'iconRechazo':'iconAprobado'">

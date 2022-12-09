@@ -65,3 +65,11 @@ export interface ReqAprobarRechazarSolicitudQuiebre {
     motivo_rechazo?: string;
   };
 }
+
+export interface ReqCierreAdministrativo {
+  ot_id: number;
+  numero_derivada: string;
+  fecha_derivada: Date;
+  numero_hem: string;
+  fecha_cont_hem: Date;
+}

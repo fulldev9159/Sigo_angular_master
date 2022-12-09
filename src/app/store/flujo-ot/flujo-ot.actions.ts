@@ -3,6 +3,7 @@ import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -268,7 +269,7 @@ export const desquiebreError = createAction(
 // CIERRE ADMINISTRATIVO OT
 export const cierreAdministrativo = createAction(
   '[FLUJO OT] GET cierreAdministrativo',
-  props<{ ot_id: number }>()
+  props<{ request: ReqCierreAdministrativo }>()
 );
 
 export const cierreAdministrativoSuccess = createAction(

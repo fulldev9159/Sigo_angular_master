@@ -22,12 +22,14 @@ import {
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
   DetalleOT,
+  ReqCierreAdministrativo,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
+import { PrimeNGConfig } from 'primeng/api';
 import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
@@ -160,6 +162,13 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     informe: new FormControl('', [Validators.required]),
   });
 
+  formCierreAdministrativo: FormGroup = new FormGroup({
+    numero_derivada: new FormControl('', []),
+    fecha_derivada: new FormControl(null, []),
+    numero_hem: new FormControl('', []),
+    fecha_cont_hem: new FormControl(null, []),
+  });
+
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
 
   // LOADINGS
@@ -172,7 +181,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     private flujoOTFacade: FlujoOTFacade,
     private otDetalleFacade: OTDetalleFacade,
     private actaFacade: ActaFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
@@ -191,6 +201,24 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
           }
         })
     );
+
+    this.config.setTranslation({
+      monthNames: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+    });
   }
 
   // ACCIONES ETAPA: OT_ET_AUTORIZACION_INICIAL
@@ -443,7 +471,22 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // CIERRE ADMINISTRATIVO
   confirmarCierreAdministrativo(): void {
-    this.flujoOTFacade.cierreAdministrativo(this.ot_id);
+    let { numero_derivada, fecha_derivada, numero_hem, fecha_cont_hem } =
+      this.formCierreAdministrativo.getRawValue();
+
+    let request: ReqCierreAdministrativo = {
+      ot_id: this.ot_id,
+      numero_derivada,
+      fecha_derivada,
+      numero_hem,
+      fecha_cont_hem,
+    };
+    this.flujoOTFacade.cierreAdministrativo(request);
+    this.displayModalCierreAdministrativo = false;
+  }
+
+  closeModalCierreAdministrativo(): void {
+    this.formCierreAdministrativo.reset();
     this.displayModalCierreAdministrativo = false;
   }
 

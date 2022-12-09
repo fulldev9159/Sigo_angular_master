@@ -5,8 +5,10 @@ import {
   faBan,
   faCircleCheck,
   faCircleXmark,
+  faDoorClosed,
   faFileImport,
   faInbox,
+  faPause,
   faPlay,
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
@@ -32,6 +34,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   okmark = faCircleCheck;
   banIcon = faBan;
   fileIcon = faFileImport;
+  pauseIcon = faPause;
 
   titleArray: {
     [key: string]: {
@@ -123,6 +126,22 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
       SOLICITUD_QUIEBRE_APROBACION: {
         icon: this.inboxIcon,
         text: 'Aprobación de solicitud de quibre',
+      },
+      QUIEBRE: {
+        icon: this.pauseIcon,
+        text: 'Quiebre de la OT',
+      },
+      DESQUIEBRE: {
+        icon: this.inboxIcon,
+        text: 'Desquiebre de la OT',
+      },
+      CIERRE_ADMINISTRATIVO: {
+        icon: this.inboxIcon,
+        text: 'Cierre Administrativo',
+      },
+      CERRAR_OT: {
+        icon: faDoorClosed,
+        text: 'Cierre de la OT',
       },
     };
   }

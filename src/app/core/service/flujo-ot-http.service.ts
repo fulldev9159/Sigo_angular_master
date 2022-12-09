@@ -6,6 +6,7 @@ import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -165,9 +166,12 @@ export class FlujoOtHttpService {
   }
 
   // CIERRE ADMINISTRATIVO
-  cierreAdministrativo(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.API_URL}`, {
-      ot_id,
-    });
+  cierreAdministrativo(
+    request: ReqCierreAdministrativo
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/administrativo/cerrar`,
+      request
+    );
   }
 }

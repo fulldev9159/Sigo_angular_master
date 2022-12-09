@@ -277,8 +277,8 @@ export class FlujoOTEffects {
   cierreAdministrativo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(flujoOTActions.cierreAdministrativo),
-      concatMap(({ ot_id }) =>
-        this.flujoOTServiceHttp.cierreAdministrativo(ot_id).pipe(
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.cierreAdministrativo(request).pipe(
           map(response =>
             flujoOTActions.cierreAdministrativoSuccess({ response })
           ),

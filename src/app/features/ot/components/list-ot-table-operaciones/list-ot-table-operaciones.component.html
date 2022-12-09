@@ -269,8 +269,34 @@
 <p-dialog header="cierre administrativo" [(visible)]="displayModalCierreAdministrativo" [draggable]="false"
   [modal]="true">
   Order de trabajo ID: {{ot_id}}
+  <form [formGroup]="formCierreAdministrativo">
+    <div class="card form-cierre-administrativo">
+      <div class="formgrid grid">
+        <div class="field col-12 ">
+          <label for="">Numero derivada:</label>
+          <input type='number' formControlName="numero_derivada" name_input="input-numero-derivada">
+        </div>
+        <div class="field col-12 ">
+          <label for="">Fecha derivada</label>
+          <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}"
+            inputStyleClass="form-control d-block" formControlName="fecha_derivada" id="fecha-derivada"
+            name="fecha-derivada" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+        <div class="field col-12 ">
+          <label for="">Número hem:</label>
+          <input type="number" formControlName="numero_hem" name_input="input-numero-hem">
+        </div>
+        <div class="field col-12 ">
+          <label for="">Fecha cont. hem:</label>
+          <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}"
+            inputStyleClass="form-control d-block" formControlName="fecha_cont_hem" id="fecha-cont-hem"
+            name="fecha-cont-hem" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+      </div>
+    </div>
+  </form>
   <zwc-view-confirmacion pregunta='¿Comfirma el cierre administrativo de la OT?'
-    (cancelar)="displayModalCierreAdministrativo=false" (confirmar)="confirmarCierreAdministrativo()"
+    (cancelar)="closeModalCierreAdministrativo()" (confirmar)="confirmarCierreAdministrativo()"
     textConfirmar="Confirmar">
   </zwc-view-confirmacion>
 </p-dialog>

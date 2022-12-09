@@ -4,6 +4,7 @@ import {
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
   ReqQuiebre,
   ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
@@ -153,7 +154,7 @@ export class FlujoOTFacade {
   }
 
   // CIERRE ADMINISTRATIVO OT
-  public cierreAdministrativo(ot_id: number): void {
-    this.store.dispatch(flujoOTActions.cierreAdministrativo({ ot_id }));
+  public cierreAdministrativo(request: ReqCierreAdministrativo): void {
+    this.store.dispatch(flujoOTActions.cierreAdministrativo({ request }));
   }
 }
