@@ -1,6 +1,12 @@
 <div class="container-acciones">
   <!-- PLAY CONTINUAR -->
 
+  <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
+  <button id="play-button" pTooltip="Actualizar sustento financiero"
+    *ngIf="findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
+    <fa-icon [icon]="dollarIcon"></fa-icon>
+  </button>
+
   <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->
   <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')"
     (click)="displayModalAceptarInicial=true">
@@ -267,6 +273,32 @@
     (cancelar)="displayModalCierreAdministrativo=false" (confirmar)="confirmarCierreAdministrativo()"
     textConfirmar="Confirmar">
   </zwc-view-confirmacion>
+</p-dialog>
+
+<!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
+<p-dialog header="Actualizar sustento financiero" [(visible)]="displayModalCambiarSustentoFinanciero"
+  [draggable]="false" [modal]="true">
+  <p>Order de trabajo ID: {{ot_id}}</p>
+  <ng-container *ngIf="otDetalle$ | async as otDetalle">
+    <ng-container *ngIf="otDetalle.ot.id === ot_id">
+      <zwc-formulario-ot-sustento-financiero-modal [detalle]="otDetalle"></zwc-formulario-ot-sustento-financiero-modal>
+    </ng-container>
+  </ng-container>
+</p-dialog>
+
+<p-dialog header="Rechazo Inicial de la OT" [(visible)]="displayModalRechazoOrdenDeTrabajoInicial" [draggable]="false"
+  [modal]="true">
+  <zwc-view-rechazo [motivosRehazo]="motivosRechazo$|async" #rechazoInicialForm></zwc-view-rechazo>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+      (click)="closeModalRechazoInicial()">
+      Cancelar
+    </button>
+    <button pButton type="button" id="button-confirmar" (click)="RechazarOTInicial()"
+      [disabled]="!rechazoInicialForm.formRechazo.valid">
+      Rechazar OT
+    </button>
+  </ng-template>
 </p-dialog>
 
 

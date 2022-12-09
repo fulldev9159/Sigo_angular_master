@@ -11,6 +11,7 @@ import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import * as actaActions from '@storeOT/acta/acta.actions';
 import * as otDetalleActions from '@storeOT/ot-detalle/ot-detalle.actions';
+import * as sustentoFinancieroActions from '@storeOT/sustento-financiero/sustento-financiero.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -174,6 +175,14 @@ export class AfterHttpService {
         4000
       );
       this.router.navigate(['/ot/list-ot']);
+    }
+
+    // UPDATE SUSTENTO FINANCIERO
+    if (
+      action.type ===
+      sustentoFinancieroActions.updateSustentoFinancieroSuccess.type
+    ) {
+      this.snackMessage.showMessage(`Cambios realizados`, 'Exito', 4000);
     }
 
     // GUARDAR BORRADOR INFORME DE AVANCE

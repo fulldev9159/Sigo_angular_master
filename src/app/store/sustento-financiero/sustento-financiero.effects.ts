@@ -91,6 +91,22 @@ export class SustentoFinancieroEffects {
     )
   );
 
+  updateSustentoFinanciero$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.updateSustentoFinanciero),
+      concatMap(({ ot_id, values }) =>
+        this.sustentoFinancieroHttpService
+          .updateSustentoFinanciero(ot_id, values)
+          .pipe(
+            map(response => otActions.updateSustentoFinancieroSuccess()),
+            catchError(error =>
+              of(otActions.updateSustentoFinancieroError({ error }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -100,7 +116,8 @@ export class SustentoFinancieroEffects {
           otActions.getPEP2Success,
           otActions.getIDOpexSuccess,
           otActions.getCuentaSAPSuccess,
-          otActions.getCECOSuccess
+          otActions.getCECOSuccess,
+          otActions.updateSustentoFinancieroSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -116,7 +133,8 @@ export class SustentoFinancieroEffects {
           otActions.getPEP2Error,
           otActions.getIDOpexError,
           otActions.getCuentaSAPError,
-          otActions.getCECOError
+          otActions.getCECOError,
+          otActions.updateSustentoFinancieroError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

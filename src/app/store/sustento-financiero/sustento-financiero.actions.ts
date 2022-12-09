@@ -1,4 +1,13 @@
-import { CECO, LP, OPEX, PEP2, PMO, Response, SAP } from '@model';
+import {
+  CECO,
+  LP,
+  OPEX,
+  PEP2,
+  PMO,
+  Response,
+  SAP,
+  SustentoFinancieroReq,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // GET PMO
@@ -91,5 +100,20 @@ export const getCECOSuccess = createAction(
 
 export const getCECOError = createAction(
   '[SUSTENTO FINANCIERO] GET getCECO Error',
+  props<{ error: any }>()
+);
+
+// UPDATE SUSTENTO FINANCIERO
+export const updateSustentoFinanciero = createAction(
+  '[SUSTENTO FINANCIERO] GET updateSustentoFinanciero',
+  props<{ ot_id: number; values: SustentoFinancieroReq }>()
+);
+
+export const updateSustentoFinancieroSuccess = createAction(
+  '[SUSTENTO FINANCIERO] GET updateSustentoFinanciero Success'
+);
+
+export const updateSustentoFinancieroError = createAction(
+  '[SUSTENTO FINANCIERO] GET updateSustentoFinanciero Error',
   props<{ error: any }>()
 );

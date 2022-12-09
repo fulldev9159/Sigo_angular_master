@@ -182,6 +182,10 @@ export class LoadingsFacade {
     return this.store.select(loadingSelector.sendingCreateOT);
   }
 
+  public sendingUpdateSustentoFinanciero$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingUpdateSustentoFinanciero);
+  }
+
   public sendingDownloadOTsAsignadas$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingDownloadOTsAsignadas);
   }

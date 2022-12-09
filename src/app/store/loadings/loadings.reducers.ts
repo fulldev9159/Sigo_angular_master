@@ -51,6 +51,7 @@ export interface StateLoadings {
   sendingGetAdminContratoFromCub: boolean;
   sendingGetProyectos: boolean;
   sendingCreateOT: boolean;
+  sendingUpdateSustentoFinanciero: boolean;
   sendingDownloadOTsAsignadas: boolean;
   sendingGetPosibleSupervisorTrabajos: boolean;
   sendingSendDetalleInformeAvance: boolean;
@@ -97,6 +98,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAdminContratoFromCub: false,
   sendingGetProyectos: false,
   sendingCreateOT: false,
+  sendingUpdateSustentoFinanciero: false,
   sendingDownloadOTsAsignadas: false,
   sendingGetPosibleSupervisorTrabajos: false,
   sendingSendDetalleInformeAvance: false,
@@ -541,6 +543,19 @@ export const reducerLoadings = createReducer(
     ...state,
     sendingCreateOT: false,
   })),
+
+  on(sustentoFinancieroActions.updateSustentoFinanciero, state => ({
+    ...state,
+    sendingUpdateSustentoFinanciero: true,
+  })),
+  on(
+    sustentoFinancieroActions.updateSustentoFinancieroSuccess,
+    sustentoFinancieroActions.updateSustentoFinancieroError,
+    state => ({
+      ...state,
+      sendingUpdateSustentoFinanciero: false,
+    })
+  ),
 
   on(informeAvanceActions.sendDetalleInformeAvance, state => ({
     ...state,

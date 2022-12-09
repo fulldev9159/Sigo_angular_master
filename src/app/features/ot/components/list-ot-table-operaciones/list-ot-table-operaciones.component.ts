@@ -6,6 +6,7 @@ import {
   faCircleInfo,
   faPause,
   faPlay,
+  faDollar,
   faRectangleXmark,
   faSquareCheck,
   faSquareXmark,
@@ -20,6 +21,7 @@ import {
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
+  DetalleOT,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
@@ -87,6 +89,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   medicalIcon = faBookMedical;
   bookIcon = faBook;
   playIcon = faPlay;
+  dollarIcon = faDollar;
   pauseIcon = faPause;
   checkIcon = faSquareCheck;
   cancelIcon = faSquareXmark;
@@ -94,6 +97,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
+  displayModalCambiarSustentoFinanciero = false;
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
   displayModalRechazoOrdenDeTrabajoInicial = false;
@@ -156,6 +160,8 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     informe: new FormControl('', [Validators.required]),
   });
 
+  otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
+
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
@@ -174,6 +180,16 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       this.actaFacade
         .getComentariosFinalizacionTrabajos$()
         .subscribe(v => this.formTrabajosFinalizados.get('informe').setValue(v))
+    );
+
+    this.subscription.add(
+      this.loadingsFacade
+        .sendingUpdateSustentoFinanciero$()
+        .subscribe(loading => {
+          if (!loading) {
+            this.closeModalCambiarSustentoFinanciero();
+          }
+        })
     );
   }
 
@@ -429,6 +445,20 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   confirmarCierreAdministrativo(): void {
     this.flujoOTFacade.cierreAdministrativo(this.ot_id);
     this.displayModalCierreAdministrativo = false;
+  }
+
+  // CAMBIO SUSTENTO FINANCIERO
+  openModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = true;
+      this.otDetalleFacade.getDetalleOT(this.ot_id);
+    }
+  }
+
+  closeModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = false;
+    }
   }
 
   ngOnDestroy(): void {
