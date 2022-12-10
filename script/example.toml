@@ -13,7 +13,7 @@
     operaciones ='moperaciones'
 
 [cubicacion]
-    nombre='Cubicacion selenium'
+    nombre='Cubicacion selenium 2'
     tipo_cubicacion = 'Construcción'
     contrato_marco ='BUCLE'
     agencia='APOQUINDO'
@@ -69,19 +69,40 @@
                 cantidad=150
             
 [ot]
-   
+   nombre='OT selenium 2'
+   contrato_marco='BUCLE'
+   cubicacion='Cubicacion selenium 2'
+   oficina_central='0189 - S.FCO LAS CONDES'
+   solicitado_por='ATC'
+   direccion='Longitudinal'
+   altura='133'
+   piso=1
+   departamento=13
+   comuna='Buin'
+   tipo_red='ATP'
+   tipo_trabajo='Ampliacion'
+   area_negocio='NORMAL'
+   nombre_proyectista= 'Andoria algoritmo'
+   tipo_sustento='CAPEX'
+   pmo=25
+   linea_presupuestaria='CHI100'
+   pep2='P-0077-22-2002-05106-021'
+   admin_contrato='Luk COBRA CHILE Antonella'
+
 
 [flujo]
-   crear_cubicacion_nueva = true
-   crear_ot_nueva=true
-   aprobacion_inicial_supervisor = true
-   rechazo_inicial_supervisor = false
+# Puedes comentar, poner en false o quitar la etapa que no quieres que se ejecute
+# Solo se ejecutaran las acciones con true
+#    crear_cubicacion_nueva = true
+#    crear_ot_nueva=true
+#    aprobacion_inicial_supervisor = true
+#    rechazo_inicial_supervisor = false
    aprobacion_inicial_trabajador = true
-   rechazo_inicial_trabajador = false
-   aprobacion_inicial_subgerente = false
-   rechazo_inicial_subgerente = false
-   aprobacion_inicial_gerente = false
-   rechazo_inicial_gerente = false
-   aprobacion_proveedor = true
-   rechazo_proveedor = false
+#    rechazo_inicial_trabajador = false
+#    aprobacion_inicial_subgerente = false
+#    rechazo_inicial_subgerente = false
+#    aprobacion_inicial_gerente = false
+#    rechazo_inicial_gerente = false
+#    aprobacion_proveedor = true
+#    rechazo_proveedor = false
    

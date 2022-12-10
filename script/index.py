@@ -8,14 +8,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
 from time import sleep
+from urllib.parse import urlsplit
+from urllib.parse import urlparse
 
 
 data = ''
 driver = ''
-
-# functions = {
-#     'crear_cubicacion_nueva': selenium_base.crear_cubicacion_nueva()
-# }
 
 
 def config():
@@ -55,6 +53,10 @@ def openBrowser():
 
 
 def crear_cubicacion_nueva():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
     cub = data['cubicacion']
     login(data['users']['gestor'], 'Gestor/JP')
     search_field = driver.find_element(
@@ -94,6 +96,108 @@ def crear_cubicacion_nueva():
     element.click()
 
 
+def crear_ot_nueva():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['gestor'], 'Gestor/JP')
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "button[id='navbar-create-ot']")
+    search_field.click()
+
+    _input('input[name="input-nombre-ot"]', ot['nombre'])
+    _select_dropdown('#select-contrato_marco', ot['contrato_marco'])
+    _select_dropdown('#select-cubicacion', ot['cubicacion'])
+    _select_dropdown('#select-oficina-central', ot['oficina_central'])
+    _select_dropdown('#select-solicitado-por', ot['solicitado_por'])
+    _input('input[name="input-direccion"]', ot['direccion'])
+    _input('input[name="input-altura"]', ot['altura'])
+    _input('input[name="input-piso"]', ot['piso'])
+    _input('input[name="input-departamento"]', ot['departamento'])
+    _select_dropdown('#select-comuna', ot['comuna'])
+    _select_dropdown('#select-tipo-red', ot['tipo_red'])
+    _select_dropdown('#select-tipo-trabajo', ot['tipo_trabajo'])
+    _select_dropdown('#select-area-negocio', ot['area_negocio'])
+    _input('input[name="input-nombre-proyectista"]', ot['nombre_proyectista'])
+    _select_dropdown('#select-pmo', ot['pmo'])
+    _select_dropdown('#select-linea-presupuestaria',
+                     ot['linea_presupuestaria'])
+    _select_dropdown('#select-pep2', ot['pep2'])
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "#fecha-inicio-ot > span > input")
+    search_field.click()
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "#fecha-inicio-ot > span > div > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(2)> span")
+    search_field.click()
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "#fecha-termino-ot > span > input")
+    search_field.click()
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "#fecha-termino-ot > span > div > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(7) > span")
+    search_field.click()
+    _select_dropdown('#select-admin-contrato', ot['admin_contrato'])
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, "#crear-ot")
+    search_field.click()
+
+
+def aprobacion_inicial_supervisor():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['supervisor'], 'Supervisor (Telefónica)')
+
+    _click_button('#navbar-list-ot')
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, '#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
+    search_field.clear()
+    search_field.send_keys(ot['nombre'])
+
+    sleep(1)
+
+    _click_button('button[id="play-button"]')
+    _click_button('button[id="button-confirmar"]')
+
+
+def aprobacion_inicial_trabajador():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['jefearea'], 'Jefe de Área Telefónica')
+
+    _click_button('#navbar-list-ot')
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, '#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
+    search_field.clear()
+    search_field.send_keys(ot['nombre'])
+
+    sleep(1)
+
+    _click_button('button[id="play-button"]')
+    _click_button('button[id="button-confirmar"]')
+
+
+def whereiam():
+    url = driver.current_url
+    parsed_url = urlparse(url)
+
+    # Get the path of the URL
+    path = parsed_url.path
+
+    return path
+
+
+def logout():
+    element = driver.find_element(By.CSS_SELECTOR, "#logout")
+    element.click()
+
+
 def login(username, perfil):
     search_field_username = driver.find_element(By.NAME, "username")
     search_field_username.send_keys(username)
@@ -110,6 +214,12 @@ def login(username, perfil):
     search_field_button = driver.find_element(
         By.ID, "perfil-select-button")
     search_field_button.click()
+
+
+def _click_button(selector):
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, selector)
+    search_field.click()
 
 
 def _select_dropdown(selector, selection):
@@ -221,11 +331,25 @@ def main():
     # Start
     openBrowser()
 
-    crear_cubicacion_nueva()
-    # for paso in data["flujo"]:
-    #     if data["flujo"][paso]:
-    #         print(paso)
-    #         functions[paso]()
+    functions = {
+        'crear_cubicacion_nueva': crear_cubicacion_nueva,
+        'crear_ot_nueva': crear_ot_nueva,
+        'aprobacion_inicial_supervisor': aprobacion_inicial_supervisor,
+        'rechazo_inicial_supervisor': null,
+        'aprobacion_inicial_trabajador': aprobacion_inicial_trabajador,
+        'rechazo_inicial_trabajador': false,
+        'aprobacion_inicial_subgerente': false,
+        'rechazo_inicial_subgerente': false,
+        'aprobacion_inicial_gerente': false,
+        'rechazo_inicial_gerente': false,
+        'aprobacion_proveedor': true,
+        'rechazo_proveedor': false,
+    }
+
+    for paso in data["flujo"]:
+        if data["flujo"][paso]:
+            print(paso)
+            functions[paso]()
 
 
 if __name__ == "__main__":
