@@ -1,14 +1,18 @@
 <div class="two-factor-authentication-container md:w-13rem md:mr-4 xl:w-13rem xl:mr-4 lg:w-13rem lg:mr-4">
   <p class="sigo-color-dark-light two-factor-authentication-titulo"> 2FA</p>
 
-  <form [formGroup]="form2FA" autocomplete="nope" class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
+  <form [formGroup]="form2FA" autocomplete="nope"
+    class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
     <span class="p-float-label field">
-      <input type="text" pInputText name="code" class="p-inputtext-sm" [formControl]="formControls.code" />
+      <input type="text" pInputText name="code" class="p-inputtext-sm" [formControl]="formControls.code"
+        name='input-codigo-verificacion' />
       <label for="float-input">Código de verificación</label>
       <zwc-input-alert [control]="formControls.code"> </zwc-input-alert>
     </span>
 
-    <zwc-pbutton-sending Pid="login-button" content="Ingresar código" Pclass="p-button-info p-button-sm mt-4 w-14rem" [sending]="sendingLogin$ | async" [Pdisabled]="!form2FA.valid" (call)="login2FA()"></zwc-pbutton-sending>
+    <zwc-pbutton-sending Pid="login-button" content="Ingresar código" Pclass="p-button-info p-button-sm mt-4 w-14rem"
+      [sending]="sendingLogin$ | async" [Pdisabled]="!form2FA.valid" (call)="login2FA()"></zwc-pbutton-sending>
   </form>
-  <span class=" mt-7 sigo-color-dark-light text-xs">¿Desea acceder con otro usuario? <a (click)="logout()" id="logout" style="cursor:pointer ;"> Logout</a> </span>
+  <span class=" mt-7 sigo-color-dark-light text-xs">¿Desea acceder con otro usuario? <a (click)="logout()" id="logout"
+      style="cursor:pointer ;"> Logout</a> </span>
 </div>

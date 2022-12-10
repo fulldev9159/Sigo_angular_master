@@ -1,0 +1,43 @@
+[environment]
+    host = 'localhost'
+    port = 4206
+
+[users]
+    gestor = 'mgestor1'
+    supervisor = 'msupervisor1'
+    jefearea='mjefearea1'
+    subgerente = 'msubgerente1'
+    gerente = 'msubgerente1'
+    admineecc = 'ccadmincontrato1'
+    supervisortrabajos ='cctrabajador1'
+    operaciones ='moperaciones'
+
+[cubicacion]
+    nombre='Cubicacion selenium'
+    tipo_cubicacion = 'Construcción'
+    contrato_marco ='BUCLE'
+    agencia='APOQUINDO'
+    proveedor ='330000659 - COBRA CHILE SERVICIOS S.A.'
+    direccion_desde='los ririos'
+    altura_desde='3123'
+    direccion_hasta='las castaños'
+    altura_hasta='2213'
+    detalles='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum. Nam non consequat turpis. Curabitur vehicula enim posuere justo ornare, a imperdiet metus volutpat. Etiam nec mauris et est porttitor pharetra eu nec libero. Curabitur laoreet nisi a quam egestas egestas. Proin fringilla congue mauris eget porttitor.'
+
+[ot]
+
+
+[flujo]
+   crear_cubicacion_nueva = true
+   crear_ot_nueva=true
+   aprobacion_inicial_supervisor = true
+   rechazo_inicial_supervisor = false
+   aprobacion_inicial_trabajador = true
+   rechazo_inicial_trabajador = false
+   aprobacion_inicial_subgerente = false
+   rechazo_inicial_subgerente = false
+   aprobacion_inicial_gerente = false
+   rechazo_inicial_gerente = false
+   aprobacion_proveedor = true
+   rechazo_proveedor = false
+   
