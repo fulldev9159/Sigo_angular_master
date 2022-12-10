@@ -1,0 +1,52 @@
+form {
+
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 10px 10px;
+
+
+    div.grid {
+
+        div.field {
+            height: 100%;
+
+            div.row {
+                position: relative;
+                width: 100%;
+                padding: 0;
+            }
+
+            div.center {
+                position: relative;
+                display: flex;
+                justify-content: space-around;
+                margin-top: 15px;
+            }
+
+            div.scroll-table {
+                overflow-y: auto;
+                border: solid 1px #dddddd;
+                border-radius: 5px;
+                height: calc(100vh - 35vh);
+                max-height: calc(100vh - 35vh);
+            }
+        }
+    }
+
+}
+
+tr.actas-list {
+
+    th {
+        text-align: center;
+        position: sticky;
+        top: 0;
+    }
+
+    td {
+        font-size: var(--size-text-sigo);
+        text-align: center;
+        line-height: 1.7rem !important;
+    }
+
+}

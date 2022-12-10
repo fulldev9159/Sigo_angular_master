@@ -253,3 +253,18 @@ export const solicitarInformeTrabajosFinalizadosError = createAction(
   '[ACTA] GET solicitarInformeTrabajosFinalizados Error',
   props<{ error: any }>()
 );
+
+// GET ACTAS IMPUTACION2
+export const getActasImputacion2 = createAction(
+  '[ACTA] GET getActasImputacion2'  
+);
+
+export const getActasImputacion2Success = createAction(
+  '[ACTA] GET getActasImputacion2 Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getActasImputacion2Error = createAction(
+  '[ACTA] GET getActasImputacion2 Error',
+  props<{ error: any }>()
+);

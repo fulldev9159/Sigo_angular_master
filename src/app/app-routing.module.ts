@@ -87,6 +87,18 @@ const routes: Routes = [
     },
     canActivate: [SigoGuard, NgxPermissionsGuard],
   },
+  {
+    path: 'imputacion',
+    loadChildren: () =>
+      import('./features/imputacion/imputacion.module').then(m => m.ImputacionModule),
+    // canLoad: [SigoGuard],
+    data: {
+      permissions: {
+        only: 'IMPUTACION2',
+      },
+    },
+    canActivate: [SigoGuard, NgxPermissionsGuard],
+  },
 ];
 
 @NgModule({

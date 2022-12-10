@@ -55,6 +55,6 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authFacade.getDatabaseVersion();
-    this.authFacade.getAPIVersion();
+    this.authFacade.getAPIVersion();    
   }
 }

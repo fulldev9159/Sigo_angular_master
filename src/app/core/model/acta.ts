@@ -583,3 +583,5 @@ export interface RequestAprobacionRechazoSolicitudPago {
   tipo_rechazo_id?: number;
   observacion: string;
 }
+
+

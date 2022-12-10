@@ -189,4 +189,32 @@ export class ActaHttpService {
       { ot_id }
     );
   }
+  
+  // ACTAS IMPUTACION2 API
+  getActasImputacion2(): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/get_actas_imputacion2/get`, {}
+    );
+  }
+
+  // Request Imputation2 
+  getIntegracionData(act_id: any): any {
+    return this.http.post(
+      `${this.API_URL}/simulators/imputacion/integracion1/payload/get`,
+      { 'acta_id': act_id },
+      {headers:{'content-type':"application/json"}}
+    ).toPromise();
+  }
+
+  // Request Combined data
+  getCombineData(data: any): any {
+    return this.http.post(
+      `${this.API_URL}/ot/ecosistema/segunda_integracion`,
+      { data },
+      {headers:{'content-type':"application/json"}}
+    );
+  }
 }
+
+  
+  

@@ -101,7 +101,7 @@ export class NavbarComponent implements OnInit {
   constructor(private authFacade: AuthFacade, private userFacade: UserFacade) {}
 
   ngOnInit(): void {
-    this.authFacade.getNotificaciones();
+    this.authFacade.getNotificaciones();    
     this.authFacade.getNotificaciones$().subscribe(Notificationes => {
       this.Notificationes = Notificationes;
     });

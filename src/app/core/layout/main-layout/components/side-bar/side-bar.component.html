@@ -20,6 +20,10 @@
     <zwc-menu-reportes></zwc-menu-reportes>
   </ng-container>
 
+  <ng-container *ngIf="sessionData.nombre_perfil_select==='GECO'">
+    <zwc-menu-imputacion></zwc-menu-imputacion>
+  </ng-container>
+
   <div class="versiones-container">
     <table>
       <tr>

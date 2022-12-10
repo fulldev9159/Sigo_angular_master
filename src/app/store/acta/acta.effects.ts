@@ -242,4 +242,18 @@ export class ActaEffects {
       ),
     { dispatch: false }
   );
+
+  ///   Get Actas Imputacion2     
+  getActasImputacion2$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.getActasImputacion2),      
+      concatMap(() => 
+        this.actaHttp.getActasImputacion2().pipe(
+          map(response => actaActions.getActasImputacion2Success({response})),
+          catchError(error => of(actaActions.getActasImputacion2Error({ error })))
+        )
+      )           
+    )
+  );
+  
 }

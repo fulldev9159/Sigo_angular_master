@@ -20,6 +20,7 @@ export interface StateActa {
   actas: listarActa[];
   detalleActa: ResponseDetalleActa;
   quienAautorizado: QuienAutorizoActa[];
+  imputacion2: any;
 }
 
 export const initialState: StateActa = {
@@ -31,6 +32,7 @@ export const initialState: StateActa = {
   actas: [],
   detalleActa: null,
   quienAautorizado: [],
+  imputacion2: null,
 };
 
 export const reducerActa = createReducer(
@@ -69,5 +71,9 @@ export const reducerActa = createReducer(
   on(ActaActions.quienAutorizoPagoSuccess, (state, { quienAautorizado }) => ({
     ...state,
     quienAautorizado,
+  })),
+  on(ActaActions.getActasImputacion2Success, (state, { response }) => ({
+    ...state,
+    imputacion2: response.data,
   }))
 );
