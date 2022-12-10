@@ -22,10 +22,54 @@
     altura_desde='3123'
     direccion_hasta='las castaños'
     altura_hasta='2213'
-    detalles='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum. Nam non consequat turpis. Curabitur vehicula enim posuere justo ornare, a imperdiet metus volutpat. Etiam nec mauris et est porttitor pharetra eu nec libero. Curabitur laoreet nisi a quam egestas egestas. Proin fringilla congue mauris eget porttitor.'
-
+    detalles='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum.'
+    [[cubicacion.servicios]]
+            actividad='MATRIZ'
+            tipo_servicio='CABLES'
+            nombre='J451'
+            cantidad=15
+            [[cubicacion.servicios.uos]]
+                nombre='D013'
+                cantidad=10
+            [[cubicacion.servicios.uos]]
+                nombre='D012'
+                cantidad=14
+    [[cubicacion.servicios]]
+            actividad='MATRIZ'
+            tipo_servicio='LINEAS'
+            nombre='J101'
+            cantidad=5011
+            [[cubicacion.servicios.uos]]
+                nombre='C926'
+                cantidad='150,37'
+            [[cubicacion.servicios.uos]]
+                nombre='C881'
+                cantidad='2,3'
+            [[cubicacion.servicios.uos]]
+                nombre='C105'
+                cantidad='80,32'
+    [[cubicacion.servicios]]
+            actividad='FTTX'
+            tipo_servicio='PROYECTOS'
+            nombre='D080'
+            cantidad='1485'
+            [[cubicacion.servicios.uos]]
+                nombre='0 - SIN UO'
+                cantidad=0
+    [[cubicacion.servicios]]
+            actividad='FIBRA OPTICA'
+            tipo_servicio='LINEAS'
+            nombre='J201'
+            cantidad='10'
+            [[cubicacion.servicios.uos]]
+                nombre='H006'
+                cantidad=9
+            [[cubicacion.servicios.uos]]
+                nombre='H002'
+                cantidad=150
+            
 [ot]
-
+   
 
 [flujo]
    crear_cubicacion_nueva = true
