@@ -9,11 +9,13 @@
     subgerente = 'msubgerente1'
     gerente = 'msubgerente1'
     admineecc = 'ccadmincontrato1'
+    nombre_admineecc='Luk COBRA CHILE Antonella'
     supervisortrabajos ='cctrabajador1'
+    nombre_supervisor_trabajos='Ana COBRA CHILE Antonella'
     operaciones ='moperaciones'
 
 [cubicacion]
-    nombre='Cubicacion selenium 2'
+    nombre='Cubicacion selenium 3'
     tipo_cubicacion = 'Construcción'
     contrato_marco ='BUCLE'
     agencia='APOQUINDO'
@@ -69,9 +71,9 @@
                 cantidad=150
             
 [ot]
-   nombre='OT selenium 2'
+   nombre='OT selenium 3'
    contrato_marco='BUCLE'
-   cubicacion='Cubicacion selenium 2'
+   cubicacion='Cubicacion selenium 3'
    oficina_central='0189 - S.FCO LAS CONDES'
    solicitado_por='ATC'
    direccion='Longitudinal'
@@ -87,22 +89,21 @@
    pmo=25
    linea_presupuestaria='CHI100'
    pep2='P-0077-22-2002-05106-021'
-   admin_contrato='Luk COBRA CHILE Antonella'
-
+   admin_contrato="${users['nombre_admineecc']}"
 
 [flujo]
 # Puedes comentar, poner en false o quitar la etapa que no quieres que se ejecute
 # Solo se ejecutaran las acciones con true
-#    crear_cubicacion_nueva = true
-#    crear_ot_nueva=true
-#    aprobacion_inicial_supervisor = true
+   crear_cubicacion_nueva = true
+   crear_ot_nueva=true
+   aprobacion_inicial_supervisor = true
 #    rechazo_inicial_supervisor = false
-   aprobacion_inicial_trabajador = true
-#    rechazo_inicial_trabajador = false
+   aprobacion_inicial_jefearea = true
+#    rechazo_inicial_jefearea = false
 #    aprobacion_inicial_subgerente = false
 #    rechazo_inicial_subgerente = false
 #    aprobacion_inicial_gerente = false
 #    rechazo_inicial_gerente = false
-#    aprobacion_proveedor = true
+   aprobacion_proveedor = true
 #    rechazo_proveedor = false
    

@@ -151,19 +151,10 @@ def aprobacion_inicial_supervisor():
     ot = data['ot']
     login(data['users']['supervisor'], 'Supervisor (Telefónica)')
 
-    _click_button('#navbar-list-ot')
-    search_field = driver.find_element(
-        By.CSS_SELECTOR, '#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
-    search_field.clear()
-    search_field.send_keys(ot['nombre'])
-
-    sleep(1)
-
-    _click_button('button[id="play-button"]')
-    _click_button('button[id="button-confirmar"]')
+    aprobacion_inicial()
 
 
-def aprobacion_inicial_trabajador():
+def aprobacion_inicial_jefearea():
     path = whereiam()
     if path != '/login/auth':
         logout()
@@ -171,16 +162,60 @@ def aprobacion_inicial_trabajador():
     ot = data['ot']
     login(data['users']['jefearea'], 'Jefe de Área Telefónica')
 
+    aprobacion_inicial()
+
+
+def aprobacion_inicial_gerente():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['gerente'], 'Gerente Telefónica')
+
+    aprobacion_inicial()
+
+
+def aprobacion_inicial_subgerente():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['subgerente'], 'SubGerente Telefónica')
+
+    aprobacion_inicial()
+
+
+def aprobacion_inicial():
+    buscar_ot()
+    sleep(1)
+
+    _click_button('button[id="play-button"]')
+    _click_button('button[id="button-confirmar"]')
+
+
+def aprobacion_proveedor():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    ot = data['ot']
+    login(data['users']['admineecc'], 'Administrador EECC')
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _select_dropdown('#select-supervisor-trabajos',
+                     data['users']['nombre_admineecc'])
+    _click_button('button[id="button-confirmar"]')
+
+
+def buscar_ot():
     _click_button('#navbar-list-ot')
     search_field = driver.find_element(
         By.CSS_SELECTOR, '#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
     search_field.clear()
     search_field.send_keys(ot['nombre'])
-
-    sleep(1)
-
-    _click_button('button[id="play-button"]')
-    _click_button('button[id="button-confirmar"]')
 
 
 def whereiam():
@@ -336,13 +371,13 @@ def main():
         'crear_ot_nueva': crear_ot_nueva,
         'aprobacion_inicial_supervisor': aprobacion_inicial_supervisor,
         'rechazo_inicial_supervisor': null,
-        'aprobacion_inicial_trabajador': aprobacion_inicial_trabajador,
+        'aprobacion_inicial_trabajador': aprobacion_inicial_jefearea,
         'rechazo_inicial_trabajador': false,
-        'aprobacion_inicial_subgerente': false,
+        'aprobacion_inicial_subgerente': aprobacion_inicial_subgerente,
         'rechazo_inicial_subgerente': false,
-        'aprobacion_inicial_gerente': false,
+        'aprobacion_inicial_gerente': aprobacion_inicial_gerente,
         'rechazo_inicial_gerente': false,
-        'aprobacion_proveedor': true,
+        'aprobacion_proveedor': aprobacion_proveedor,
         'rechazo_proveedor': false,
     }
 
