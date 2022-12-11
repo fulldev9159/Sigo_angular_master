@@ -1,4 +1,4 @@
-nombre_global='Selenium Test 2'
+nombre_global='Selenium Test 3'
 
 [environment]
     host = 'localhost'
@@ -130,122 +130,112 @@ nombre_global='Selenium Test 2'
    linea_presupuestaria='CHI100'
    pep2='P-0077-22-2002-05106-021'
 
-
-# [actas]
-#    numeros_de_actas=2
-#    [[actas.acta]]
-#        acta_numero=1
-#        comentario_generar_acta='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum.'
-#    [[actas.acta]]
-#        acta_numero=2
-#        comentario_generar_acta='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum.'    
-
 [flujo]
 # Puedes comentar poner en false o quitar la etapa que no quieres que se ejecute
 # Solo se ejecutaran las acciones con true
-#    crear_cubicacion_nueva = true
-#    crear_ot_nueva=true
-#    aprobacion_inicial_supervisor = true
+    crear_cubicacion_nueva = true
+    crear_ot_nueva=true
+    aprobacion_inicial_supervisor = true
 #    rechazo_inicial_supervisor = false
-#    aprobacion_inicial_jefearea = true
+    aprobacion_inicial_jefearea = true
 #    rechazo_inicial_jefearea = false
 #    aprobacion_inicial_subgerente = false
 #    rechazo_inicial_subgerente = false
 #    aprobacion_inicial_gerente = false
 #    rechazo_inicial_gerente = false
-#    aprobacion_proveedor = true
+    aprobacion_proveedor = true
 #    rechazo_proveedor = false
-#    agregar_adicionales=true
-#    enviar_informe_avance=true
-#    aprobar_informe_avance=true
+    agregar_adicionales=true
+    enviar_informe_avance=true
+    aprobar_informe_avance=true
     # rechazar_informe_avance=false
-    # [[flujo.actas]]
-    #     acta_numero=1
-    #     tipo_pago='PORCENTAJE'
-    #     porcentaje=10
-    #     comentario_generar_acta="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
-    #     """
-    #     comentario_autorizar_pago_supervisor="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     """
-    #     comentario_autorizar_pago_jefearea="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
-    #     """
-    #     [[flujo.actas.flujo]]
-            # generar_acta=true
-            # aprobar_acta_gestor=true
+    [[flujo.actas]]
+        acta_numero=1
+        tipo_pago='PORCENTAJE'
+        porcentaje=10
+        comentario_generar_acta="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
             # rechazar_acta_gestor=false
-            # solitar_pago=true
-            # autorizar_solicitud_pago_supervisor=true
+            solitar_pago=true
+            autorizar_solicitud_pago_supervisor=true
             # rechazar_solicitud_pago_supervisor=false
-            # autorizar_solicitud_pago_jefearea=true
+            autorizar_solicitud_pago_jefearea=true
             # rechazar_solicitud_pago_jefearea=false
             # autorizar_solicitud_pago_subgerente=false
             # rechazar_solicitud_pago_subgerente=false
             # autorizar_solicitud_pago_gerente=false
             # rechazar_solicitud_pago_gerente=false
-            # imputacion=true
-    # [[flujo.actas]]
-    #     acta_numero=2
-    #     tipo_pago='PORCENTAJE'
-    #     porcentaje=80
-    #     comentario_generar_acta="""Acta 2 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
-    #     """
-    #     comentario_autorizar_pago_supervisor=""" Supervisor Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     """
-    #     comentario_autorizar_pago_jefearea="""Jefe area Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
-    #     """
-    #     [[flujo.actas.flujo]]
-            # generar_acta=true
-            # aprobar_acta_gestor=true
+            imputacion=true
+    [[flujo.actas]]
+        acta_numero=2
+        tipo_pago='PORCENTAJE'
+        porcentaje=80
+        comentario_generar_acta="""Acta 2 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor=""" Supervisor Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Jefe area Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
             # rechazar_acta_gestor=false
-            # solitar_pago=true
-            # autorizar_solicitud_pago_supervisor=true
+            solitar_pago=true
+            autorizar_solicitud_pago_supervisor=true
             # rechazar_solicitud_pago_supervisor=false
-            # autorizar_solicitud_pago_jefearea=true
+            autorizar_solicitud_pago_jefearea=true
             # rechazar_solicitud_pago_jefearea=false
             # autorizar_solicitud_pago_subgerente=false
             # rechazar_solicitud_pago_subgerente=false
             # autorizar_solicitud_pago_gerente=false
             # rechazar_solicitud_pago_gerente=false
-            # imputacion=true
-    #  [[flujo.actas]]
-    #     acta_numero=3
-    #     tipo_pago='PORCENTAJE'
-    #     porcentaje=10
-    #     comentario_generar_acta="""Acta 3 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
-    #     """
-    #     comentario_autorizar_pago_supervisor=""" Supervisor acta 3 Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     """
-    #     comentario_autorizar_pago_jefearea="""Jefe area  acta 3Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
-    #     \
-    #     Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
-    #     """
-    #     [[flujo.actas.flujo]]
-            # generar_acta=true
-            # aprobar_acta_gestor=true
+            imputacion=true
+     [[flujo.actas]]
+        acta_numero=3
+        tipo_pago='PORCENTAJE'
+        porcentaje=10
+        comentario_generar_acta="""Acta 3 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor=""" Supervisor acta 3 Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Jefe area  acta 3Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
             # rechazar_acta_gestor=false
-            # solitar_pago=true
+            solitar_pago=true
             # aprobacion_operaciones=true
             # rechazo_operaciones=false
-            # autorizar_solicitud_pago_supervisor=true
+            autorizar_solicitud_pago_supervisor=true
             # rechazar_solicitud_pago_supervisor=false
-            # autorizar_solicitud_pago_jefearea=true
+            autorizar_solicitud_pago_jefearea=true
             # rechazar_solicitud_pago_jefearea=false
             # autorizar_solicitud_pago_subgerente=false
             # rechazar_solicitud_pago_subgerente=false
             # autorizar_solicitud_pago_gerente=false
             # rechazar_solicitud_pago_gerente=false
-            # imputacion=true
+            imputacion=true
     cerrar_ot=true
