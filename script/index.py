@@ -10,6 +10,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 from time import sleep
 from urllib.parse import urlsplit
 from urllib.parse import urlparse
+import paramiko
 
 
 data = ''
@@ -59,13 +60,14 @@ def crear_cubicacion_nueva():
 
     cub = data['cubicacion']
     login(data['users']['gestor'], 'Gestor/JP')
+
     search_field = driver.find_element(
         By.CSS_SELECTOR, "button[id='navbar-create-cub']")
     search_field.click()
 
     search_field = driver.find_element(
         By.CSS_SELECTOR, "input[name='input-nombre-cubicacion']")
-    search_field.send_keys(data['cubicacion']['nombre'])
+    search_field.send_keys('Cubicacion {0}'.format(data['nombre_global']))
     _select_dropdown('#select-tipo-cubicacion', cub['tipo_cubicacion'])
     _select_dropdown('#select-contrato_marco', cub['contrato_marco'])
 
@@ -107,9 +109,11 @@ def crear_ot_nueva():
         By.CSS_SELECTOR, "button[id='navbar-create-ot']")
     search_field.click()
 
-    _input('input[name="input-nombre-ot"]', ot['nombre'])
+    _input('input[name="input-nombre-ot"]',
+           'OT {0}'.format(data['nombre_global']))
     _select_dropdown('#select-contrato_marco', ot['contrato_marco'])
-    _select_dropdown('#select-cubicacion', ot['cubicacion'])
+    _select_dropdown('#select-cubicacion',
+                     'Cubicacion {0}'.format(data['nombre_global']))
     _select_dropdown('#select-oficina-central', ot['oficina_central'])
     _select_dropdown('#select-solicitado-por', ot['solicitado_por'])
     _input('input[name="input-direccion"]', ot['direccion'])
@@ -137,7 +141,8 @@ def crear_ot_nueva():
     search_field = driver.find_element(
         By.CSS_SELECTOR, "#fecha-termino-ot > span > div > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(7) > span")
     search_field.click()
-    _select_dropdown('#select-admin-contrato', ot['admin_contrato'])
+    _select_dropdown('#select-admin-contrato',
+                     data['users']['nombre_admineecc'])
     search_field = driver.find_element(
         By.CSS_SELECTOR, "#crear-ot")
     search_field.click()
@@ -148,7 +153,6 @@ def aprobacion_inicial_supervisor():
     if path != '/login/auth':
         logout()
 
-    ot = data['ot']
     login(data['users']['supervisor'], 'Supervisor (Telefónica)')
 
     aprobacion_inicial()
@@ -159,7 +163,6 @@ def aprobacion_inicial_jefearea():
     if path != '/login/auth':
         logout()
 
-    ot = data['ot']
     login(data['users']['jefearea'], 'Jefe de Área Telefónica')
 
     aprobacion_inicial()
@@ -170,7 +173,6 @@ def aprobacion_inicial_gerente():
     if path != '/login/auth':
         logout()
 
-    ot = data['ot']
     login(data['users']['gerente'], 'Gerente Telefónica')
 
     aprobacion_inicial()
@@ -181,7 +183,6 @@ def aprobacion_inicial_subgerente():
     if path != '/login/auth':
         logout()
 
-    ot = data['ot']
     login(data['users']['subgerente'], 'SubGerente Telefónica')
 
     aprobacion_inicial()
@@ -200,25 +201,27 @@ def aprobacion_proveedor():
     if path != '/login/auth':
         logout()
 
-    ot = data['ot']
     login(data['users']['admineecc'], 'Administrador EECC')
+
     buscar_ot()
     sleep(1)
     _click_button('button[id="play-button"]')
     _select_dropdown('#select-supervisor-trabajos',
-                     data['users']['nombre_admineecc'])
+                     data['users']['nombre_supervisor_trabajos'])
     _click_button('button[id="button-confirmar"]')
 
 
 def buscar_ot():
+    ot = data['ot']
     _click_button('#navbar-list-ot')
     search_field = driver.find_element(
         By.CSS_SELECTOR, '#table-ejecucion>p-table>div>.p-datatable-header>div>span>input')
     search_field.clear()
-    search_field.send_keys(ot['nombre'])
+    search_field.send_keys('OT {0}'.format(data['nombre_global']))
 
 
 def whereiam():
+    sleep(1)
     url = driver.current_url
     parsed_url = urlparse(url)
 
@@ -231,6 +234,7 @@ def whereiam():
 def logout():
     element = driver.find_element(By.CSS_SELECTOR, "#logout")
     element.click()
+    sleep(1)
 
 
 def login(username, perfil):
@@ -359,6 +363,236 @@ def _change_cantidad(item, cantidad):
         inp.send_keys(cantidad)
 
 
+def agregar_adicionales():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['supervisortrabajos'], 'Trabajador EECC')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+
+    servicios = data['adicionales']['servicios']
+    for item in servicios:
+        _select_dropdown('#select-actividad', item['actividad'])
+        _select_dropdown('#select-tipo-servicio', item['tipo_servicio'])
+        _searh_item_and_select('#select-servicio', item['nombre'])
+        uos = item['uos']
+        for uo in uos:
+            _searh_uo_and_add('#select-unidad-obra', uo['nombre'])
+            _change_cantidad(item['nombre'], item['cantidad'])
+            _change_cantidad(uo['nombre'], uo['cantidad'])
+
+    element = driver.find_element(
+        By.CSS_SELECTOR, 'button[id="guardar-borrador-button"]')
+    element.click()
+
+
+def enviar_informe_avance():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['supervisortrabajos'], 'Trabajador EECC')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button('button[id="enviar-button"]')
+    _click_button('#button-confirmar')
+
+
+def aprobar_informe_avance():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['admineecc'], 'Administrador EECC')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button('button[id="aceptar-button"]')
+    _click_button('#button-confirmar')
+
+
+def generar_acta(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['admineecc'], 'Administrador EECC')
+
+    buscar_ot()
+    sleep(1)
+
+    _click_button('button[id="play-button"]')
+    element = driver.find_element(
+        By.CSS_SELECTOR, '#comentarios')
+    print(f"Acta data:", acta)
+    element.send_keys(acta['comentario_generar_acta'])
+    _click_button('button[id="generar-acta-button"]')
+    # _click_button('#button-confirmar')
+
+
+def aprobar_acta_gestor(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['gestor'], 'Gestor/JP')
+
+    buscar_ot()
+    sleep(1)
+
+    _click_button('button[id="play-button"]')
+
+    element = driver.find_element(
+        By.CSS_SELECTOR, '#select-tipo-pago>div')
+    clases = element.get_attribute("class")
+
+    if "p-disabled" in clases:
+        print("El elemento tiene la clase 'p-disabled'.")
+    else:
+        _select_dropdown("#select-tipo-pago", acta['tipo_pago'])
+
+    _input("input[name='input-porcentaje']", acta['porcentaje'])
+    _click_button("#validar-acta-button")
+    _click_button('#button-confirmar')
+
+
+def solitar_pago(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['gestor'], 'Gestor/JP')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button('#button-confirmar')
+
+
+def autorizar_solicitud_pago_supervisor(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['supervisor'], 'Supervisor (Telefónica)')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button("#validar-acta-button")
+    _input("#observaciones", acta['comentario_autorizar_pago_supervisor'])
+    _click_button('#button-confirmar')
+
+
+def autorizar_solicitud_pago_jefearea(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['jefearea'], 'Jefe de Área Telefónica')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button("#validar-acta-button")
+    _input("#observaciones", acta['comentario_autorizar_pago_jefearea'])
+    _click_button('#button-confirmar')
+
+
+def imputacion(acta):
+    sleep(5)
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['gestor'], 'Gestor/JP')
+
+    ot = data['ot']
+    _click_button('#navbar-list-ot')
+    sleep(1)
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 1:
+            element.click()
+
+    search_field = driver.find_element(
+        By.CSS_SELECTOR, '#table-abiertas>p-table>div>.p-datatable-header>div>span>input')
+    search_field.clear()
+    search_field.send_keys('OT {0}'.format(data['nombre_global']))
+
+    sleep(2)
+    elementos = driver.find_elements(
+        By.CSS_SELECTOR, 'button[id="acta-button"]')
+    for elemento in elementos:
+        # Verificar si el elemento es visible en la pantalla
+        if elemento.is_displayed():
+            # Seleccionar el elemento si es visible
+            elemento.click()
+            break
+
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul>li.acta-valida')
+
+    for indice, element in enumerate(elements):
+        if indice == len(elements) - 1:
+            print(element.get_attribute("id"))
+
+            acta_id = element.get_attribute("id")
+
+            client = paramiko.SSHClient()
+            client.load_system_host_keys()
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            client.connect(
+                hostname="34.122.92.38",
+                username="zweicom",
+                # key_filename=data['environment']['ruta_id_rsa']
+            )
+            stdin, stdout, stderr = client.exec_command(
+                "./segunda_integracion.pl -acta={0} -puerto={1}|bash".format(acta_id, data['environment']['api_port']))
+
+            for line in stdout:
+                print(line.strip())
+
+            client.close()
+            # Interrumpir la ejecución del ciclo
+            break
+
+    sleep(1)
+
+
+def aprobacion_operaciones(acta):
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['operaciones'], 'Operaciones')
+
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+
+
+def cerrar_ot():
+    path = whereiam()
+    if path != '/login/auth':
+        logout()
+
+    login(data['users']['gestor'], 'Gestor/JP')
+    buscar_ot()
+    sleep(1)
+    _click_button('button[id="play-button"]')
+    _click_button('#button-confirmar')
+
+
 def main():
     config()
     __print__data()
@@ -370,21 +604,40 @@ def main():
         'crear_cubicacion_nueva': crear_cubicacion_nueva,
         'crear_ot_nueva': crear_ot_nueva,
         'aprobacion_inicial_supervisor': aprobacion_inicial_supervisor,
-        'rechazo_inicial_supervisor': null,
-        'aprobacion_inicial_trabajador': aprobacion_inicial_jefearea,
-        'rechazo_inicial_trabajador': false,
+        'rechazo_inicial_supervisor': '_',
+        'aprobacion_inicial_jefearea': aprobacion_inicial_jefearea,
+        'rechazo_inicial_trabajador': '_',
         'aprobacion_inicial_subgerente': aprobacion_inicial_subgerente,
-        'rechazo_inicial_subgerente': false,
+        'rechazo_inicial_subgerente': '_',
         'aprobacion_inicial_gerente': aprobacion_inicial_gerente,
-        'rechazo_inicial_gerente': false,
+        'rechazo_inicial_gerente': '_',
         'aprobacion_proveedor': aprobacion_proveedor,
-        'rechazo_proveedor': false,
+        'rechazo_proveedor': '_',
+        'agregar_adicionales': agregar_adicionales,
+        'enviar_informe_avance': enviar_informe_avance,
+        'aprobar_informe_avance': aprobar_informe_avance,
+        'rechazar_informe_avance': '_',
+        'generar_acta': generar_acta,
+        'aprobar_acta_gestor': aprobar_acta_gestor,
+        'solitar_pago': solitar_pago,
+        'autorizar_solicitud_pago_supervisor': autorizar_solicitud_pago_supervisor,
+        'autorizar_solicitud_pago_jefearea': autorizar_solicitud_pago_jefearea,
+        'imputacion': imputacion,
+        'aprobacion_operaciones': aprobacion_operaciones,
+        'cerrar_ot': cerrar_ot
     }
 
     for paso in data["flujo"]:
-        if data["flujo"][paso]:
-            print(paso)
+        if data["flujo"][paso] and paso != 'actas':
             functions[paso]()
+        elif paso == 'actas':
+            for acta in data["flujo"][paso]:
+                print(f"Acta: ", acta['acta_numero'])
+                print(f"Tipo Pago:", acta['tipo_pago'])
+                for flujoacta in acta["flujo"]:
+                    for flujo in flujoacta:
+                        if flujoacta[flujo]:
+                            functions[flujo](acta)
 
 
 if __name__ == "__main__":

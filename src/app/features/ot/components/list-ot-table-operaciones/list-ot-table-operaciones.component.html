@@ -1,12 +1,6 @@
 <div class="container-acciones">
   <!-- PLAY CONTINUAR -->
 
-  <!-- OT_CAMBIAR_SUSTENTO_FINANCIERO -->
-  <button id="play-button" pTooltip="Actualizar sustento financiero"
-    *ngIf="findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
-    <fa-icon [icon]="dollarIcon"></fa-icon>
-  </button>
-
   <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->
   <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')"
     (click)="displayModalAceptarInicial=true">
@@ -130,6 +124,11 @@
   <button id="cierre-administrativo-button" pTooltip="Cierre administrativo" style="background-color: #f99898;"
     *ngIf="findAccion('OT_CERRAR_ADMINISTRATIVO')" (click)="displayModalCierreAdministrativo=true">
     <fa-icon [icon]="rectanguleIcon"></fa-icon>
+  </button>
+
+  <button id="cambio-sustento-financiero" pTooltip="Actualizar sustento financiero"
+    *ngIf="findAccion('OT_CAMBIAR_SUSTENTO_FINANCIERO')" (click)="openModalCambiarSustentoFinanciero()">
+    <fa-icon [icon]="dollarIcon"></fa-icon>
   </button>
 </div>
 
