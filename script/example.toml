@@ -1,4 +1,4 @@
-nombre_global='Selenium Test 3'
+nombre_global='Selenium Test 5'
 
 [environment]
     host = 'localhost'

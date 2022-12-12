@@ -269,9 +269,13 @@ def _select_dropdown(selector, selection):
     dropdown = driver.find_element(By.CSS_SELECTOR, selector)
     dropdown.click()
 
-    item = dropdown.find_element(
-        By.CSS_SELECTOR, "li[aria-label='{0}']".format(selection))
+    # item = dropdown.find_element(
+    #     By.CSS_SELECTOR, "li[aria-label='{0}']".format(selection))
 
+    item = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, "li[aria-label='{0}']".format(selection)))
+    )
     # Click on the item to select it
     item.click()
 
@@ -306,13 +310,11 @@ def _searh_item_and_select(selector, item):
         pass
 
     _input('{0}>div>div:nth-child(4)>div:nth-child(1)>div>input'.format(selector), item)
+    sleep(1)
     elements = driver.find_elements(By.CSS_SELECTOR, 'p-dropdownitem > li')
     print(f'c=', len(elements))
     if len(elements) == 1:
         elements[0].click()
-    else:
-        parser.error("Se encontraron {0} items para {1}".format(
-            len(elements), item))
 
 
 def _searh_uo_and_add(selector, item):
@@ -425,9 +427,14 @@ def generar_acta(acta):
 
     login(data['users']['admineecc'], 'Administrador EECC')
 
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 0:
+            element.click()
     buscar_ot()
     sleep(1)
-
     _click_button('button[id="play-button"]')
     element = driver.find_element(
         By.CSS_SELECTOR, '#comentarios')
@@ -443,6 +450,13 @@ def aprobar_acta_gestor(acta):
         logout()
 
     login(data['users']['gestor'], 'Gestor/JP')
+
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 0:
+            element.click()
 
     buscar_ot()
     sleep(1)
@@ -470,6 +484,12 @@ def solitar_pago(acta):
 
     login(data['users']['gestor'], 'Gestor/JP')
 
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 0:
+            element.click()
     buscar_ot()
     sleep(1)
     _click_button('button[id="play-button"]')
@@ -482,6 +502,13 @@ def autorizar_solicitud_pago_supervisor(acta):
         logout()
 
     login(data['users']['supervisor'], 'Supervisor (Telefónica)')
+
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 0:
+            element.click()
 
     buscar_ot()
     sleep(1)
@@ -498,6 +525,12 @@ def autorizar_solicitud_pago_jefearea(acta):
 
     login(data['users']['jefearea'], 'Jefe de Área Telefónica')
 
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'ul.p-tabview-nav>li.ng-star-inserted>a')
+    for indice, element in enumerate(elements):
+        # print(indice, element.text)
+        if indice == 0:
+            element.click()
     buscar_ot()
     sleep(1)
     _click_button('button[id="play-button"]')
@@ -629,6 +662,7 @@ def main():
 
     for paso in data["flujo"]:
         if data["flujo"][paso] and paso != 'actas':
+            print(f'etapa:', paso)
             functions[paso]()
         elif paso == 'actas':
             for acta in data["flujo"][paso]:
@@ -637,6 +671,7 @@ def main():
                 for flujoacta in acta["flujo"]:
                     for flujo in flujoacta:
                         if flujoacta[flujo]:
+                            print(f'acta etapa:', flujo)
                             functions[flujo](acta)
 
 
