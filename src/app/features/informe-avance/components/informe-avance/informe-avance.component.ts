@@ -858,17 +858,16 @@ export class InformeAvanceComponent
       };
 
       console.log(request_subir_evidencia);
+      console.log(this.subirEvidenciasForm.uploadedFiles['files']);
+      this.serviciosFacade.subirArchivoYregistrarEvidencia(
+        this.subirEvidenciasForm.uploadedFiles['files'],
+        request_subir_evidencia
+      );
 
-      // this.otDetalleFacade.subirArchivoLibroObrasYregistrarLibroObras(
-      //   +this.registrarLibroObraForm.form.get('categoria').value,
-      //   this.registrarLibroObraForm.uploadedFiles['files'],
-      //   request_registrar_libroObras
-      // );
+      this.subirEvidenciasForm.filesform.clear();
+      this.subirEvidenciasForm.form.reset();
 
-      // this.registrarLibroObraForm.filesform.clear();
-      // this.registrarLibroObraForm.form.reset();
-
-      // this.displayModalAgregarRegistroLibroDeObras = false;
+      this.displaySubirEvidencia = false;
     }
   }
 }

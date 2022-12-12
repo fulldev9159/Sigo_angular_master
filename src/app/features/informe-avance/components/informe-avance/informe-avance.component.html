@@ -178,8 +178,8 @@
     {{servicio_subir_evidencia?.servicio?.servicio_nombre}}</p>
 
   <zwc-subir-evidencias-form #subirEvidenciasForm></zwc-subir-evidencias-form>
-
   <zwc-pbutton-sending Pid="subir-evidencias" content="Subir registro" Pclass="p-button-info p-button-sm mt-4 w-full"
-    [Pdisabled]="!subirEvidenciasForm.valid" (call)="registrarEvidencia()">
+    [Pdisabled]="!subirEvidenciasForm.valid || subirEvidenciasForm.uploadedFiles['files']===undefined"
+    (call)="registrarEvidencia()">
   </zwc-pbutton-sending>
 </p-dialog>
