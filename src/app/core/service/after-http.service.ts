@@ -456,6 +456,16 @@ export class AfterHttpService {
       );
       location.reload();
     }
+
+    // SUBIR EVIDENCIAS
+    if (action.type === serviciosActions.createEnviarEvidenciasSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se han subido las evidencias correctamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
   }
 
   reloadTableOT(): void {

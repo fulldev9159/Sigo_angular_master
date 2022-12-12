@@ -90,34 +90,6 @@ export class OTDetalleEffects {
     )
   );
 
-  // SUBIR ARCHIVO/REGISTRO LIBRO DE OBRAS
-  subirArchivoLibroObrasYregistrarLibroObras$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otDetalleActions.subirArchivoLibroObrasYregistrarLibroObras),
-      concatMap(({ categoria_id, files, request_libroobras }) =>
-        this.libroObrasHttp
-          .subirArchivo(categoria_id, 'LIBRO_OBRAS', files)
-          .pipe(
-            map(response => {
-              return otDetalleActions.createRegistroLibroObras({
-                request: {
-                  ...request_libroobras,
-                  archivos: response.data.repositorio_archivos_ids,
-                },
-              });
-            }),
-            catchError(error =>
-              of(
-                otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError(
-                  { error }
-                )
-              )
-            )
-          )
-      )
-    )
-  );
-
   // CREATE REGISTRO LIBRO DE OBRAS
   createRegistroLibroObras$ = createEffect(() =>
     this.actions$.pipe(

@@ -7,6 +7,7 @@ import {
   ServicioAgenciaContratoProveedor,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   DetallesServicioTipoAgenciaContratoProveedor,
+  ReqSubirEvidencia,
 } from '@model';
 import { Observable } from 'rxjs';
 import {
@@ -58,6 +59,13 @@ export class ServiciosHttpService {
     return this.http.post<Response<DetallesUnidadObraServicio>>(
       `${this.API_URL}/cubicacion/datos_unidad_obra_material/get`,
       { uo_codigo }
+    );
+  }
+
+  subirEvidencias(request: ReqSubirEvidencia): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/evidencia/create`,
+      request
     );
   }
 }

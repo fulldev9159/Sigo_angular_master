@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   AfterHttpService,
   CubicacionHttpService,
+  LibroObrasHttpService,
   ServiciosAdicionalesHttpService,
 } from '@services';
 import * as serviciosActions from './servicios.actions';
@@ -17,6 +18,7 @@ export class ServiciosEffects {
     private actions$: Actions,
     private serviciosHttpService: ServiciosHttpService,
     private serviciosAdicionalesHttpService: ServiciosAdicionalesHttpService,
+    private libroObrasHttp: LibroObrasHttpService,
     private afterHttp: AfterHttpService
   ) {}
 
@@ -182,6 +184,49 @@ export class ServiciosEffects {
     )
   );
 
+  // SUBIR EVIDENCIA SERVICIO Y REGISTRAR
+  subirArchivoYregistrarEvidencia$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.subirArchivoYregistrarEvidencia),
+      concatMap(({ files, request_evidencia }) =>
+        this.libroObrasHttp.subirArchivo(2, 'EVIDENCIA_SERVICIO', files).pipe(
+          map(response => {
+            return serviciosActions.createEnviarEvidencias({
+              request: {
+                ...request_evidencia,
+                archivos: response.data.repositorio_archivos_ids,
+              },
+            });
+          }),
+          catchError(error =>
+            of(
+              serviciosActions.subirArchivoYregistrarEvidenciaError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  // CREATE REGISTRO LIBRO DE OBRAS
+  createEnviarEvidencias$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.createEnviarEvidencias),
+      concatMap(({ request }) =>
+        this.serviciosHttpService.subirEvidencias(request).pipe(
+          map(response =>
+            serviciosActions.createEnviarEvidenciasSuccess({ response })
+          ),
+          catchError(error =>
+            of(serviciosActions.createEnviarEvidenciasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -190,7 +235,8 @@ export class ServiciosEffects {
           serviciosActions.getUnidadesObraServicioSuccess,
           serviciosActions.addServicioCarritoSuccess,
           serviciosActions.agregarAdicionalesSuccess,
-          serviciosActions.eliminarAdicionalSuccess
+          serviciosActions.eliminarAdicionalSuccess,
+          serviciosActions.createEnviarEvidenciasSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -207,7 +253,9 @@ export class ServiciosEffects {
           serviciosActions.agregarAdicionalesError,
           serviciosActions.eliminarAdicionalError,
           serviciosActions.agregarAdicionalesYenviarIAError,
-          serviciosActions.agregarAdicionalesYautorizarIAError
+          serviciosActions.agregarAdicionalesYautorizarIAError,
+          serviciosActions.subirArchivoYregistrarEvidenciaError,
+          serviciosActions.createEnviarEvidenciasError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

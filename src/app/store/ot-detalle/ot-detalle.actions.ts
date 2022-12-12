@@ -78,20 +78,6 @@ export const subirArchivoLibroObrasYregistrarLibroObrasError = createAction(
   props<{ error: any }>()
 );
 
-//  SUBIR ARCHIVO Y REGISTAR EVIDENCIA SERVICIO
-export const subirArchivoYregistrarEvidencia = createAction(
-  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia',
-  props<{
-    files: any;
-    request_evidencia: ReqSubirEvidencia;
-  }>()
-);
-
-export const subirArchivoYregistrarEvidenciaError = createAction(
-  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia Error',
-  props<{ error: any }>()
-);
-
 //  CREATE LIBRO DE OBRAS
 export const createRegistroLibroObras = createAction(
   '[OT-DETALLE] GET createRegistroLibroObras',
