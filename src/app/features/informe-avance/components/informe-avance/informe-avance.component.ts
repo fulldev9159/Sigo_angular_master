@@ -237,6 +237,7 @@ export class InformeAvanceComponent
                   service.model_unidad_id.descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
                 puntos_baremos: service.puntos_baremos,
+                requiere_evidencia: service.requiere_evidencia,
                 unidad_obras: [
                   {
                     precargado: true,

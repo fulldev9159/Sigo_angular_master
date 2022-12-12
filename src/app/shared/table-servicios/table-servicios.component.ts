@@ -65,6 +65,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
   @Input() contratoMarco = '';
+  @Input() accion_subir_evidencias: false;
 
   @Output() detallesUOClicked = new EventEmitter<{
     servicio: CarritoService;
