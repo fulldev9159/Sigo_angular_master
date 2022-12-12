@@ -47,6 +47,15 @@ tr.actas-list {
         font-size: var(--size-text-sigo);
         text-align: center;
         line-height: 1.7rem !important;
-    }
 
+
+    }
+}
+
+tr.colored-tr {
+    td {
+        &:nth-child(-n+24) {
+            background-color: #e5f0c0;
+        }
+    }
 }

@@ -207,12 +207,12 @@ export class ActaHttpService {
   }
 
   // Request Combined data
-  getCombineData(data: any): any {
+  requestCombineData(data: any): any {
     return this.http.post(
       `${this.API_URL}/ot/ecosistema/segunda_integracion`,
-      { data },
-      {headers:{'content-type':"application/json"}}
-    );
+      data,
+      {headers:{'content-type':"application/json; charset=UTF-8"}}
+    ).toPromise();
   }
 }
 

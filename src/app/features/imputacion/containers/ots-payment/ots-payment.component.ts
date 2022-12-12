@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { FileUpload } from "primeng/fileupload";
 import { ActaFacade } from "@storeOT/acta/acta.facades";
 import { ActaHttpService } from "@services";
+import { detalleOT } from "@storeOT/ot-detalle/ot-detalle.selectors";
 
 @Component({
     selector: 'zwc-ots-payment',
@@ -24,6 +25,7 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
     additionData:any;
     joinItems: string[];
     selectedActas: any[] = [];
+    csvFileName: string = "";
 
     csvFile: File;
 
@@ -39,11 +41,12 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
           "fecha_derivada", "estado", "numero_cabecera", "codigo_catalogo", "numero_derivada", 
           "fecha_hora", "tipo_cambio", "monto_hem", "numero_hem"
         ];
+        this.csvFileName = "Imputacion2_" + this.toConvertType("fecha_hora", "");
     }
 
     ngOnInit(): void {        
         this.actaFacade.getActasImputacion2$().subscribe(response => {            
-            this.imputacion2 = response?.items;           
+            this.imputacion2 = response?.items;            
         });   
     }
 
@@ -125,7 +128,7 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       });
 
       // post data
-      var responseData = await this.actaHttp.getCombineData(postData);    
+      var responseData = await this.actaHttp.requestCombineData(postData);    
       console.log("postData:=", postData);
       console.log("responseData:=", responseData);
 
@@ -208,6 +211,16 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       await this.selectedActas.reduce(async (arr, item) => {
 
         responseData = await this.actaHttp.getIntegracionData(item?.act_id);
+
+        //responseData = responseData.
+        responseData = {
+          ...responseData, 
+          data: responseData?.data.map((item2:any) => ({
+            ...item2,
+            ot_nombre: item?.ot_nombre, 
+            act_created_at: item?.act_created_at,
+          }))
+        };
         data = [...data, ...responseData?.data];
       
       }, []);
