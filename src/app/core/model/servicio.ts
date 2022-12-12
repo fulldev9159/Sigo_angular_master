@@ -179,3 +179,10 @@ export interface ModelActividadId {
   id: number;
   descripcion: string;
 }
+
+export interface ReqSubirEvidencia {
+  ot_id: number;
+  observaciones: string;
+  informe_has_servicio_id: number;
+  archivos: number[];
+}

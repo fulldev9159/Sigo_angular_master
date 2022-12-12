@@ -1,0 +1,31 @@
+<form novalidate autocomplete="off" [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12" style="display: flex;
+            flex-direction: column;">
+                <label for="">*Observaciones</label>
+                <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
+                    id="observaciones" cols="30" rows="5"></textarea>
+            </div>
+
+            <div class="field col-12">
+                <label>Adjuntar evidencias</label>
+                <p-fileUpload chooseLabel="Agregar documento" name="files[]" #filesform auto="true"
+                    (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple"
+                    accept=".docx,.doc,.gif,.json,.jpg,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,.dwg,.csv,.xlsx,.xls,.ppt,.pptx,text/plain"
+                    maxFileSize="50000000" [invalidFileTypeMessageSummary]="'{0}: Tipo de archivo inválido,'"
+                    [invalidFileTypeMessageDetail]="'Solo se permiten los siguientes: {0}'"
+                    [invalidFileSizeMessageSummary]="'{0}: Tamaño de archivo no válido,'"
+                    [invalidFileSizeMessageDetail]="'El tamaño máximo de carga es de {0}.'">
+                </p-fileUpload>
+                <label style="color: #464646;font-weight: 400;">
+                    <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+                    <span style="word-spacing: 5px">.docx .doc .gif .json .jpg .jpeg .pjpeg .png .txt .pdf .gzip
+                        .zip .rar .7zip .dwg .csv .xlsx .xls .ppt .pptx </span>
+                </label>
+            </div>
+
+
+        </div>
+    </div>
+</form>

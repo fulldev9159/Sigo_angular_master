@@ -2,6 +2,7 @@ import {
   Accion,
   CategoriaArchivo,
   DetalleOT,
+  ReqSubirEvidencia,
   RequestCreateRegistroLibroObra,
   Response,
 } from '@model';
@@ -74,6 +75,20 @@ export const subirArchivoLibroObrasYregistrarLibroObras = createAction(
 
 export const subirArchivoLibroObrasYregistrarLibroObrasError = createAction(
   '[OT-DETALLE] GET subirArchivoLibroObrasYregistrarLibroObras Error',
+  props<{ error: any }>()
+);
+
+//  SUBIR ARCHIVO Y REGISTAR EVIDENCIA SERVICIO
+export const subirArchivoYregistrarEvidencia = createAction(
+  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia',
+  props<{
+    files: any;
+    request_evidencia: ReqSubirEvidencia;
+  }>()
+);
+
+export const subirArchivoYregistrarEvidenciaError = createAction(
+  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia Error',
   props<{ error: any }>()
 );
 

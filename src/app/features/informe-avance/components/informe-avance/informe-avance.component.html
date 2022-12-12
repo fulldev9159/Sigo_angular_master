@@ -7,7 +7,8 @@
           <zwc-table-servicios #tableServiciosInformeAvance mode_source="static" [data_source]="serviciosInformeAvance"
             [cantidad_editable]="true" [column_acciones]="true" [column_acciones_uo]="canEditMaterials(otDetalle)"
             [accion_delete]="false" [accion_detalle_uo]="canEditMaterials(otDetalle)" [contratoMarco]="contrato"
-            [accion_subir_evidencias]="true" (detallesUOClicked)="showMateriales($event)">
+            [accion_subir_evidencias]="true" (detallesUOClicked)="showMateriales($event)"
+            (showSubirEvidencia)="showSubirEvidenciaAction($event)">
           </zwc-table-servicios>
         </div>
       </div>
@@ -35,7 +36,7 @@
                 [informe_avance]="serviciosInformeAvance" [contratoMarco]="contrato"
                 [accion_detalle_uo]="canEditMaterials(otDetalle)" [accion_detalle_uo_only_precargado]="true"
                 [accion_subir_evidencias]="true" (detallesUOClicked)="showMateriales($event)"
-                #tableServiciosAdicionales>
+                (showSubirEvidencia)="showSubirEvidenciaAction($event)" #tableServiciosAdicionales>
               </zwc-table-servicios>
             </div>
           </div>
@@ -167,4 +168,18 @@
   <zwc-view-confirmacion pregunta='¿Está seguro(a) de realizar esta acción?'
     (cancelar)="closeModalCambiarMaterialOrigenAProveedor()" (confirmar)="confirmarCambiarMaterialOrigenAProveedor()">
   </zwc-view-confirmacion>
+</p-dialog>
+
+<p-dialog header="Subir evidencias" [(visible)]="displaySubirEvidencia" [draggable]="false" [modal]="true"
+  (onHide)="closeSubirEvidencias()">
+  <p> Order de trabajo ID: {{ot_id}}</p>
+  <!-- <pre>{{servicio_subir_evidencia|json}}</pre> -->
+  <p>Servicio: {{servicio_subir_evidencia?.servicio?.servicio_id}} -
+    {{servicio_subir_evidencia?.servicio?.servicio_nombre}}</p>
+
+  <zwc-subir-evidencias-form #subirEvidenciasForm></zwc-subir-evidencias-form>
+
+  <zwc-pbutton-sending Pid="subir-evidencias" content="Subir registro" Pclass="p-button-info p-button-sm mt-4 w-full"
+    [Pdisabled]="!subirEvidenciasForm.valid" (call)="registrarEvidencia()">
+  </zwc-pbutton-sending>
 </p-dialog>

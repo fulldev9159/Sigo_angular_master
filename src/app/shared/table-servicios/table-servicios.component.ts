@@ -72,6 +72,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     uo: CarritoUO;
   }>();
 
+  @Output() showSubirEvidencia = new EventEmitter<{
+    servicio: CarritoService;
+  }>();
+
   formTable: FormGroup = new FormGroup({ table: new FormArray([]) });
   formAprobarTodos: FormGroup = new FormGroup({
     all: new FormControl(false),
@@ -434,6 +438,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       servicio,
       uo,
     });
+  }
+
+  viewshowSubirEvidencia(servicio: CarritoService): void {
+    this.showSubirEvidencia.emit({ servicio });
   }
 
   get canSeePrices(): boolean {
