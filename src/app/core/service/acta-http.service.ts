@@ -210,8 +210,6 @@ export class ActaHttpService {
   getCombineImputacion2(data: any): Observable<Response<any>> {
     data = Object.values(data);
     data.pop();
-    
-    console.log("datavalue:=", data);
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/ecosistema/segunda_integracion`,
       data
