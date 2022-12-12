@@ -4,6 +4,7 @@ import { ActaHttpService, AfterHttpService } from '@services';
 import * as actaActions from './acta.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { concat } from 'lodash';
 
 @Injectable()
 export class ActaEffects {
@@ -216,7 +217,8 @@ export class ActaEffects {
           actaActions.informarTrabajosFinalizadosSuccess,
           actaActions.validarActaSuccess,
           actaActions.aprobarRechazarSolicitudPagoSuccess,
-          actaActions.solicitarInformeTrabajosFinalizadosSuccess
+          actaActions.solicitarInformeTrabajosFinalizadosSuccess,
+          actaActions.getCombineImputacion2Success
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -226,7 +228,7 @@ export class ActaEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(
+        ofType(          
           actaActions.getServicios4ActaError,
           actaActions.getUOs4ActaError,
           actaActions.informarTrabajosFinalizadosError,
@@ -236,7 +238,8 @@ export class ActaEffects {
           actaActions.getComentariosFinalizacionTrabajosError,
           actaActions.quienAutorizoPagoError,
           actaActions.aprobarRechazarSolicitudPagoError,
-          actaActions.solicitarInformeTrabajosFinalizadosError
+          actaActions.solicitarInformeTrabajosFinalizadosError,
+          actaActions.getCombineImputacion2Error
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
@@ -255,5 +258,22 @@ export class ActaEffects {
       )           
     )
   );
+
+  
+  /// Request combine imputacion2
+  getCombineImputacion2$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(actaActions.getCombineImputacion2),
+      concatMap( data =>
+        this.actaHttp.getCombineImputacion2(data).pipe(
+          map(response => actaActions.getCombineImputacion2Success({response})),
+          catchError(error => of(actaActions.getCombineImputacion2Error({error})))
+        )
+      )
+    )
+  );
+
+
+
   
 }

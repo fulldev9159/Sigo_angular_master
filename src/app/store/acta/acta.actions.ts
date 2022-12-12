@@ -268,3 +268,18 @@ export const getActasImputacion2Error = createAction(
   '[ACTA] GET getActasImputacion2 Error',
   props<{ error: any }>()
 );
+
+export const getCombineImputacion2 = createAction(
+  '[ACTA] GET getCombineImputacion2',
+  props< {data: any} >() 
+);
+
+export const getCombineImputacion2Success = createAction(
+  '[ACTA] GET getCombineImputacion2 Sucess',
+  props<{ response: Response<any> }>()
+);
+
+export const getCombineImputacion2Error = createAction(
+  '[ACTA] GET getCombineImputacion2 Error',
+  props<{ error: any }>()
+);

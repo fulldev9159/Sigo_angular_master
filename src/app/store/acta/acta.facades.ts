@@ -245,4 +245,23 @@ export class ActaFacade {
     this.store.dispatch(actaActions.getActasImputacion2Error({ error }));
   }
 
+
+  // Request Combine Imputacion2
+
+  public getCombineImputacion2(data: any): void { 
+    this.store.dispatch(actaActions.getCombineImputacion2(data));
+  } 
+
+  public getCombineImputacion2$(): Observable<any> {
+    return this.store.select(actaSelectors.getCombineImputacion2);
+  }
+
+  public getCombineImputacion2Sucess(response: Response<any>): void {
+    this.store.dispatch(actaActions.getCombineImputacion2Success({response}));
+  }
+
+  public getCombineImputacion2Error(error: any) {
+    this.store.dispatch(actaActions.getCombineImputacion2Error({ error }));
+  }
+
 }

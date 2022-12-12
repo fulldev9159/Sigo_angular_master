@@ -395,6 +395,16 @@ export class AfterHttpService {
       );
       this.router.navigate(['/ot/list-ot']);
     }
+
+    if (
+      action.type === actaActions.getCombineImputacion2Success.type
+    ) {
+      this.snackMessage.showMessage(
+        `Enviar datos de Integración con éxito`,
+        'Exito',
+        4000
+      );      
+    }
   }
 
   reloadTableOT(): void {

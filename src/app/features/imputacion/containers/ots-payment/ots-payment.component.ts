@@ -86,7 +86,7 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       setTimeout(() => { this.loading = false; }, 1000);
     }
 
-    async onUploadCsvFile(event:any) {      
+    onUploadCsvFile(event:any) {      
 
       var postData:any[] = [];
       var act_id: number = -1, ot_id: number = -1;      
@@ -128,10 +128,8 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       });
 
       // post data
-      var responseData = await this.actaHttp.requestCombineData(postData);    
-      console.log("postData:=", postData);
-      console.log("responseData:=", responseData);
 
+      this.actaFacade.getCombineImputacion2(postData);
       this.fileUpload.clear();      
     }
 
@@ -211,16 +209,6 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       await this.selectedActas.reduce(async (arr, item) => {
 
         responseData = await this.actaHttp.getIntegracionData(item?.act_id);
-
-        //responseData = responseData.
-        responseData = {
-          ...responseData, 
-          data: responseData?.data.map((item2:any) => ({
-            ...item2,
-            ot_nombre: item?.ot_nombre, 
-            act_created_at: item?.act_created_at,
-          }))
-        };
         data = [...data, ...responseData?.data];
       
       }, []);
