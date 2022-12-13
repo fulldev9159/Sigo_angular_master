@@ -6,12 +6,14 @@ import { ProyectosRoutingModule } from './proyectos-routing.module';
 import { SharedModule } from '@sharedOT/shared.module';
 import { ListProyectosContainerComponent } from './containers/list-proyectos-container/list-proyectos-container.component';
 import { FormProyectosContainerComponent } from './containers/form-proyectos-container/form-proyectos-container.component';
+import { TableDetalleProyectoTableDebitadoComponent } from './components/table-detalle-proyecto-table-debitado/table-detalle-proyecto-table-debitado.component';
 
 @NgModule({
   declarations: [
     ProyectosComponent,
     ListProyectosContainerComponent,
     FormProyectosContainerComponent,
+    TableDetalleProyectoTableDebitadoComponent,
   ],
   imports: [
     CommonModule,

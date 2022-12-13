@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Proyecto, RequestCreateProyecto } from '@model';
+import {
+  Proyecto,
+  RequestCreateProyecto,
+  DetalleProyectoTablaDebitado,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as proyectosSelectors from './proyectos.selectors';
@@ -50,5 +54,18 @@ export class ProyectosFacade {
     this.store.dispatch(
       proyectosActions.asignarProyecto({ ot_id, proyecto_id })
     );
+  }
+
+  // GET PROYECTO OTs
+  public resetProyectoOTs(): void {
+    this.store.dispatch(proyectosActions.resetProyectoOTs());
+  }
+
+  public getProyectoOTs(proyecto_id: number): void {
+    this.store.dispatch(proyectosActions.getProyectoOTs({ proyecto_id }));
+  }
+
+  public getProyectoOTs$(): Observable<DetalleProyectoTablaDebitado[]> {
+    return this.store.select(proyectosSelectors.getProyectoOTs);
   }
 }

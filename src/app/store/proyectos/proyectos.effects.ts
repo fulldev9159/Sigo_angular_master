@@ -104,6 +104,21 @@ export class ProyectosEffects {
     { dispatch: false }
   );
 
+  // GET TODOS LOS PROYECTOS
+  getProyectoOTs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(proyectosActions.getProyectoOTs),
+      concatMap(({ proyecto_id }) =>
+        this.proyectosHttpService.getProyectoOTs(proyecto_id).pipe(
+          map(response => proyectosActions.getProyectoOTsSuccess({ response })),
+          catchError(error =>
+            of(proyectosActions.getProyectoOTsError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -112,7 +127,8 @@ export class ProyectosEffects {
           proyectosActions.createProyectoSuccess,
           proyectosActions.updateProyectoSuccess,
           proyectosActions.deleteProyectoSuccess,
-          proyectosActions.asignarProyectoSuccess
+          proyectosActions.asignarProyectoSuccess,
+          proyectosActions.getProyectoOTsSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -127,7 +143,8 @@ export class ProyectosEffects {
           proyectosActions.createProyectoError,
           proyectosActions.updateProyectoError,
           proyectosActions.deleteProyectoError,
-          proyectosActions.asignarProyectoError
+          proyectosActions.asignarProyectoError,
+          proyectosActions.getProyectoOTsError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

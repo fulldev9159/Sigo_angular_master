@@ -1,4 +1,9 @@
-import { Proyecto, Response, RequestCreateProyecto } from '@model';
+import {
+  Proyecto,
+  Response,
+  RequestCreateProyecto,
+  DetalleProyectoTablaDebitado,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // GET TODOS LOS PROYECTOS
@@ -75,5 +80,20 @@ export const asignarProyectoSuccess = createAction(
 
 export const asignarProyectoError = createAction(
   '[PROYECTOS] asignarProyecto Error',
+  props<{ error: any }>()
+);
+
+// GET OTs DEL PROYECTO
+export const resetProyectoOTs = createAction('[PROYECTOS] ResetProyectoOTs');
+export const getProyectoOTs = createAction(
+  '[PROYECTOS] getProyectoOTs ',
+  props<{ proyecto_id: number }>()
+);
+export const getProyectoOTsSuccess = createAction(
+  '[PROYECTOS] getProyectoOTs Success',
+  props<{ response: Response<{ items: DetalleProyectoTablaDebitado[] }> }>()
+);
+export const getProyectoOTsError = createAction(
+  '[PROYECTOS] getProyectoOTs Error',
   props<{ error: any }>()
 );

@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response, Proyecto, RequestCreateProyecto } from '@model';
+import {
+  Response,
+  Proyecto,
+  RequestCreateProyecto,
+  DetalleProyectoTablaDebitado,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -60,5 +65,14 @@ export class ProyectosHttpService {
         proyecto_id,
       },
     });
+  }
+
+  getProyectoOTs(
+    proyecto_id: number
+  ): Observable<Response<{ items: DetalleProyectoTablaDebitado[] }>> {
+    return this.http.post<Response<{ items: DetalleProyectoTablaDebitado[] }>>(
+      `${this.API_URL}/ot/detalle_proyecto_tabla_debitado/get`,
+      { proyecto_id }
+    );
   }
 }

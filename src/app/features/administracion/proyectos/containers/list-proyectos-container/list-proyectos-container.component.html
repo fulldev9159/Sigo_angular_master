@@ -57,9 +57,13 @@
                     <strong>{{ item.nombre }}</strong>
                   </td>
                   <td>{{ item.descripcion }}</td>
-                  <td>{{ item.costo_estimado }}</td>
+                  <td>{{ item.costo_estimado | currency: 'CLP':'$':'.0-2':'es-CL' }}</td>
                   <td>
                     <div class="buttons-operaciones ">
+                      <button (click)="verOTsAsignadas(item)" id="button-ver-ots-asignadas">
+                        <fa-icon [icon]="detallesIcon"></fa-icon> Ver OTs Asignadas
+                      </button>
+
                       <button [disabled]="false" [pTooltip]="!true?'No es editable':''" [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-proyecto">
                         <fa-icon [icon]="editIcon"></fa-icon> Editar
                       </button>
@@ -68,21 +72,6 @@
                         <fa-icon [icon]="trashICon"></fa-icon>Eliminar
                       </button>
                     </div>
-                    <!--
-                    <div class="buttons-operaciones ">
-                      <button (click)="verPermisos(item)" id="button-ver-permisos">
-                        <fa-icon [icon]="permisosIcon"></fa-icon> Ver Permisos
-                      </button>
-                      <button [disabled]="!item.eliminable" [pTooltip]="!item.eliminable?'No es editable':''"
-                        [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-cubicacion">
-                        <fa-icon [icon]="editIcon"></fa-icon> Editar
-                      </button>
-                      <button [disabled]="!item.eliminable" (click)="eliminar(item)" id="button-eliminar-proyecto"
-                        [pTooltip]="!item.eliminable?'No es eliminable':''" class="delete-button">
-                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
-                      </button>
-                    </div>
-                    -->
                   </td>
                 </tr>
               </ng-template>
@@ -100,29 +89,11 @@
   </div>
 </div>
 
-<!--
-<p-dialog header="Detalles permisos" [(visible)]="DisplayPermisosPerfilModal" [draggable]="false" [modal]="true"
-  (onHide)="closeModalPermisosPerfil()">
-  <ng-container>
-    <div class="loading-modal-content" *ngIf="loadingGetProyectos$|async  ; else content">
-      <p>Loading...</p>
-    </div>
-  </ng-container>
-  <ng-template #content>
-    <div class="row">
-      <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
-        id="permisos-modulo-{{item.module}}">
-        <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"
-          [disabled]="true">
-          <ng-template pTemplate="header">
-            {{item.module}}
-          </ng-template>
-        </p-listbox>
-      </div>
-    </div>
-  </ng-template>
+<p-dialog header="OTs Asignadas" [(visible)]="displayProyectoOTs" [draggable]="false" [modal]="true" (onHide)="closeModalProyectoOTs()">
+  <div class="row">
+    <zwc-table-detalle-proyecto-table-debitado [detalle]="detalle$ | async"></zwc-table-detalle-proyecto-table-debitado>
+  </div>
 </p-dialog>
--->
 
 <p-dialog [visible]="displayModalEliminarProyecto" [closable]="false" (onHide)="closeModalEliminarProyecto()" [modal]="true" [draggable]="false" [resizable]="false">
   <div class="row">

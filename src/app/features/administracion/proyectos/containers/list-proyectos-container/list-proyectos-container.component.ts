@@ -1,10 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
-//// import { map } from 'rxjs/operators';
 import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
-//// import * as _ from 'lodash';
-import { Proyecto } from '@model';
+import { Proyecto, DetalleProyectoTablaDebitado } from '@model';
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
@@ -18,20 +16,22 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   proyectos$: Observable<Proyecto[]> = this.proyectoFacade.getProyectos$();
+  detalle$: Observable<DetalleProyectoTablaDebitado[]> =
+    this.proyectoFacade.getProyectoOTs$();
 
   // LOADINGS
   loadingGetProyectos$: Observable<boolean> =
     this.loadingFacade.sendingGetProyectos$();
 
   // DISPLAY MODALS
-  //// DisplayPermisosProyectoModal = false;
+  displayProyectoOTs = false;
   displayModalEliminarProyecto = false;
 
   // EXTRAS
   proyecto_id: number | null = null;
 
-  ////// // ICONS
-  ////// permisosIcon = faEye;
+  // ICONS
+  detallesIcon = faEye;
   editIcon = faPencil;
   trashICon = faTrash;
 
@@ -46,10 +46,10 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
     this.proyectoFacade.getProyectos();
   }
 
-  //// closeModalPermisosProyecto(): void {
-  ////   this.proyectoFacade.resetPermisosProyecto();
-  ////   this.DisplayPermisosProyectoModal = false;
-  //// }
+  closeModalProyectoOTs(): void {
+    this.proyectoFacade.resetProyectoOTs();
+    this.displayProyectoOTs = false;
+  }
 
   closeModalEliminarProyecto(): void {
     this.displayModalEliminarProyecto = false;
@@ -66,10 +66,10 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  //// verPermisos(proyecto: Proyecto): void {
-  ////   this.DisplayPermisosProyectoModal = true;
-  ////   this.proyectoFacade.getPermisosProyecto(proyecto.id);
-  //// }
+  verOTsAsignadas(proyecto: Proyecto): void {
+    this.displayProyectoOTs = true;
+    this.proyectoFacade.getProyectoOTs(proyecto.id);
+  }
 
   eliminar(proyecto: Proyecto): void {
     this.displayModalEliminarProyecto = true;
