@@ -49,4 +49,16 @@ export class ProyectosHttpService {
       }
     );
   }
+
+  asignarProyecto(
+    ot_id: number,
+    proyecto_id?: number
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.API_URL}/ot/ot_pid/update`, {
+      ot_id,
+      values: {
+        proyecto_id,
+      },
+    });
+  }
 }

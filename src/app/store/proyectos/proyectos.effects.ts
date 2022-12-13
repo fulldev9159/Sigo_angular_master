@@ -73,6 +73,23 @@ export class ProyectosEffects {
     )
   );
 
+  // ASIGNAR PROYECTO
+  asignarProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(proyectosActions.asignarProyecto),
+      concatMap(({ ot_id, proyecto_id }) =>
+        this.proyectosHttpService.asignarProyecto(ot_id, proyecto_id).pipe(
+          map(response =>
+            proyectosActions.asignarProyectoSuccess({ response })
+          ),
+          catchError(error =>
+            of(proyectosActions.asignarProyectoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   redirectAfterSaveProyectoSuccess = createEffect(
     () =>
       this.actions$.pipe(
@@ -94,7 +111,8 @@ export class ProyectosEffects {
           proyectosActions.getProyectosSuccess,
           proyectosActions.createProyectoSuccess,
           proyectosActions.updateProyectoSuccess,
-          proyectosActions.deleteProyectoSuccess
+          proyectosActions.deleteProyectoSuccess,
+          proyectosActions.asignarProyectoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -106,7 +124,10 @@ export class ProyectosEffects {
       this.actions$.pipe(
         ofType(
           proyectosActions.getProyectosError,
-          proyectosActions.createProyectoError
+          proyectosActions.createProyectoError,
+          proyectosActions.updateProyectoError,
+          proyectosActions.deleteProyectoError,
+          proyectosActions.asignarProyectoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

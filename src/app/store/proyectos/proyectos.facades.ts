@@ -44,4 +44,11 @@ export class ProyectosFacade {
   public deleteProyecto(proyecto_id: number): void {
     this.store.dispatch(proyectosActions.deleteProyecto({ proyecto_id }));
   }
+
+  // ASIGNAR PROYECTO
+  public asignarProyecto(ot_id: number, proyecto_id?: number): void {
+    this.store.dispatch(
+      proyectosActions.asignarProyecto({ ot_id, proyecto_id })
+    );
+  }
 }

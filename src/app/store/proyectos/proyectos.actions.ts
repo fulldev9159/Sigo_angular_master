@@ -61,3 +61,19 @@ export const deleteProyectoError = createAction(
   '[PROYECTOS] deleteProyecto Error',
   props<{ error: any }>()
 );
+
+// ASIGNAR PROYECTO
+export const asignarProyecto = createAction(
+  '[PROYECTOS] asignarProyecto',
+  props<{ proyecto_id?: number; ot_id: number }>()
+);
+
+export const asignarProyectoSuccess = createAction(
+  '[PROYECTOS] asignarProyecto Success',
+  props<{ response: any }>()
+);
+
+export const asignarProyectoError = createAction(
+  '[PROYECTOS] asignarProyecto Error',
+  props<{ error: any }>()
+);
