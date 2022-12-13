@@ -45,7 +45,7 @@
                             <button id="generar-csv" content=""
                                 class="p-element p-button-outlined p-button-sm p-button p-component"
                                 [disabled]="!selectedActas || !selectedActas.length" (click)="getImputacionData(null)">
-                                Generar para datos CSV
+                                Generar datos para CSV
                             </button>
                         </div>
                     </div>
@@ -54,8 +54,8 @@
                             <p-table #dt [columns]="integracionDataColumn" [value]="integracionData"
                                 styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
                                 [(selection)]="selectedActas" [paginator]="true" [rows]="10" scrollDirection="both"
-                                [scrollable]="true" exportFilename="{{csvFileName}}" [loading]="loading"
-                                emptymessage="no data">
+                                [scrollable]="true" csvSeparator=",     " exportFilename="{{csvFileName}}"
+                                [loading]="loading" emptyMessage="no data">
                                 <ng-template pTemplate="header" let-columns>
                                     <tr>
                                         <ng-container *ngFor="let column of columns">

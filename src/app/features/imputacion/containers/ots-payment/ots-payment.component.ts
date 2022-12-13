@@ -5,7 +5,6 @@ import { HttpClient } from "@angular/common/http";
 import { FileUpload } from "primeng/fileupload";
 import { ActaFacade } from "@storeOT/acta/acta.facades";
 import { ActaHttpService } from "@services";
-import { detalleOT } from "@storeOT/ot-detalle/ot-detalle.selectors";
 
 @Component({
     selector: 'zwc-ots-payment',
@@ -69,7 +68,6 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
 
       if (!data)  {
 
-        // get data from server...
         await this.getdata();
 
         if (this.integracionData?.length>0)  {
@@ -91,8 +89,6 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
       var postData:any[] = [];
       var act_id: number = -1, ot_id: number = -1;      
       
-      // if (this.integracionData?.length==0) return;
-      
       this.integracionData.map((item) => {          
         if ((act_id != Number.parseInt(item?.id_acta)) || (ot_id != Number.parseInt(item?.id_ot))) {
 
@@ -107,12 +103,9 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
         }
       });
 
-      
-
       postData.map((item) =>  {
         
         var filteredData: any[] = [];
-
         this.integracionData.reduce((newData, curData)=>{                        
 
           if (item.acta_id==Number.parseInt(curData.id_acta) && item.ot_id==Number.parseInt(curData.id_ot)) {              
@@ -126,8 +119,6 @@ export class OtsPaymentComponent implements OnInit, OnDestroy {
         item.items = filteredData;        
 
       });
-
-      // post data
 
       this.actaFacade.getCombineImputacion2(postData);
       this.fileUpload.clear();      
