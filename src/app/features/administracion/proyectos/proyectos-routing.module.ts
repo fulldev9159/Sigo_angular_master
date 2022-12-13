@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormProyectosContainerComponent } from './containers/form-proyectos-container/form-proyectos-container.component';
 import { ListProyectosContainerComponent } from './containers/list-proyectos-container/list-proyectos-container.component';
 import { ProyectosComponent } from './proyectos.component';
+import { OnlyGestorGuard } from './guards/only-gestor.guard';
 
 const routes: Routes = [
   {
@@ -17,10 +18,12 @@ const routes: Routes = [
       {
         path: 'form-proyectos',
         component: FormProyectosContainerComponent,
+        canActivate: [OnlyGestorGuard],
       },
       {
         path: 'form-proyectos/:id',
         component: FormProyectosContainerComponent,
+        canActivate: [OnlyGestorGuard],
       },
     ],
   },

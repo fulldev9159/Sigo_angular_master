@@ -5,7 +5,9 @@
       <span>listado de proyectos en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/administracion/proyectos/form-proyectos']" pButton type="button" label="Nuevo Proyecto" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-proyect-button"></button>
+      <ng-container *ngIf="canEdit">
+        <button [routerLink]="['/administracion/proyectos/form-proyectos']" pButton type="button" label="Nuevo Proyecto" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-proyect-button"></button>
+      </ng-container>
     </div>
     <div class="col-12">
       <hr>
@@ -64,13 +66,15 @@
                         <fa-icon [icon]="detallesIcon"></fa-icon> Ver OTs Asignadas
                       </button>
 
-                      <button [disabled]="false" [pTooltip]="!true?'No es editable':''" [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-proyecto">
-                        <fa-icon [icon]="editIcon"></fa-icon> Editar
-                      </button>
+                      <ng-container *ngIf="canEdit">
+                        <button [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-proyecto">
+                          <fa-icon [icon]="editIcon"></fa-icon> Editar
+                        </button>
 
-                      <button [disabled]="false" (click)="eliminar(item)" id="button-eliminar-proyecto" [pTooltip]="!true?'No es eliminable':''" class="delete-button">
-                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
-                      </button>
+                        <button (click)="eliminar(item)" id="button-eliminar-proyecto" [pTooltip]="!true?'No es eliminable':''" class="delete-button">
+                          <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                        </button>
+                      </ng-container>
                     </div>
                   </td>
                 </tr>

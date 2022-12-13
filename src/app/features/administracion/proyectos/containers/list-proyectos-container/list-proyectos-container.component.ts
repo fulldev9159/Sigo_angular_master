@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
-import { Proyecto, DetalleProyectoTablaDebitado } from '@model';
+import { Proyecto, DetalleProyectoTablaDebitado, SessionData } from '@model';
 import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
@@ -13,6 +13,8 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 })
 export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
 
   // DATOS A USAR
   proyectos$: Observable<Proyecto[]> = this.proyectoFacade.getProyectos$();
@@ -78,5 +80,9 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get canEdit(): boolean {
+    return this.sessionData?.rol_slug === 'GESTOR';
   }
 }
