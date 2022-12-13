@@ -12,7 +12,7 @@
                     <span>Información</span>
                 </a>
             </li>
-            <li routerLinkActive="active" id="detalleot-costeos">
+            <li routerLinkActive="active" id="detalleot-costeos" *ngIf="rol!=='OPERACIONES_VIS'">
                 <a [routerLink]="['/ot-detalle/costeos',otDetalle.ot.id]">
                     <fa-icon [icon]="costeosIcon"></fa-icon>
                     <span>Costeos</span>
@@ -27,27 +27,28 @@
 
 
             <!-- INGENIERIA -->
-            <ng-container
-                *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS_INGENIERIA' && (rol==='TRABAJADOR'||rol==='ADM_EECC')">
-                <li routerLinkActive="active" id="registrar-ingenieria">
-                    <a [routerLink]="['/ingenieria/resultado-ingenieria',otDetalle.ot.id]">
-                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
-                        <span>Ingeniería</span>
-                    </a>
-                </li>
-            </ng-container>
+            <ng-container *ngIf="rol!=='OPERACIONES_VIS'">
+                <ng-container
+                    *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS_INGENIERIA' && (rol==='TRABAJADOR'||rol==='ADM_EECC')">
+                    <li routerLinkActive="active" id="registrar-ingenieria">
+                        <a [routerLink]="['/ingenieria/resultado-ingenieria',otDetalle.ot.id]">
+                            <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                            <span>Ingeniería</span>
+                        </a>
+                    </li>
+                </ng-container>
 
-            <ng-container *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
+                <ng-container *ngIf="otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
                                 rol==='GESTOR'">
-                <li routerLinkActive="active" id="validar-ingenieria">
-                    <a [routerLink]="['/ingenieria/validar-ingenieria',otDetalle.ot.id]">
-                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
-                        <span>Ingeniería</span>
-                    </a>
-                </li>
-            </ng-container>
+                    <li routerLinkActive="active" id="validar-ingenieria">
+                        <a [routerLink]="['/ingenieria/validar-ingenieria',otDetalle.ot.id]">
+                            <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                            <span>Ingeniería</span>
+                        </a>
+                    </li>
+                </ng-container>
 
-            <ng-container *ngIf="(otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
+                <ng-container *ngIf="(otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_AUTORIZACION_RESULTADO_INGENIERIA' && 
                                 (rol==='TRABAJADOR'||rol==='ADM_EECC')) ||
                                 ((otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_EJECUCION_TRABAJOS' ||
                                   otDetalle.ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_ACEPTACION_IA'||
@@ -66,12 +67,13 @@
                                   rol==='SUBGERENTE'||
                                   rol==='GERENTE'  
                                    )) ">
-                <li routerLinkActive="active" id="ver-ingenieria">
-                    <a [routerLink]="['/ingenieria/ver-ingenieria',otDetalle.ot.id]">
-                        <fa-icon [icon]="ingenieriaIcon"></fa-icon>
-                        <span>Ingeniería</span>
-                    </a>
-                </li>
+                    <li routerLinkActive="active" id="ver-ingenieria">
+                        <a [routerLink]="['/ingenieria/ver-ingenieria',otDetalle.ot.id]">
+                            <fa-icon [icon]="ingenieriaIcon"></fa-icon>
+                            <span>Ingeniería</span>
+                        </a>
+                    </li>
+                </ng-container>
             </ng-container>
             <!-- INGENIERIA -->
 
@@ -83,7 +85,7 @@
                     <span>Documentos</span>
                 </a>
             </li>
-            <li routerLinkActive="active" id="menu-actas">
+            <li routerLinkActive="active" id="menu-actas" *ngIf="rol!=='OPERACIONES_VIS'">
                 <a [routerLink]="['/acta/listar-actas',otDetalle.ot.id]">
                     <i class="pi pi-globe"></i>
                     <span>Acta</span>
