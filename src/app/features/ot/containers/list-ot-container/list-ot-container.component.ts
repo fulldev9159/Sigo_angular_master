@@ -5,6 +5,7 @@ import {
   FiltroPropietarioOT,
   FiltroTipoOT,
   FiltroPestaniaOT,
+  SessionData,
 } from '@model';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
@@ -45,6 +46,10 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
   playIcon = faPlay;
 
   navbarHeader: MenuItem[];
+
+  rol = (JSON.parse(localStorage.getItem('auth')).sessionData as SessionData)
+    .rol_slug;
+
   constructor(private otFacade: OTFacade, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -89,11 +94,13 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
   }
 
   getBandejas(): void {
-    this.otFacade.getBandejaOT(FiltroPestaniaOT.EN_EJECUCION);
-    this.otFacade.getBandejaOT(FiltroPestaniaOT.ABIERTAS);
+    if (this.rol !== 'OPERACIONES_VIS') {
+      this.otFacade.getBandejaOT(FiltroPestaniaOT.EN_EJECUCION);
+      this.otFacade.getBandejaOT(FiltroPestaniaOT.ABIERTAS);
+      this.otFacade.getBandejaOT(FiltroPestaniaOT.ANULADAS);
+      this.otFacade.getBandejaOT(FiltroPestaniaOT.EN_TRAMITE);
+    }
     this.otFacade.getBandejaOT(FiltroPestaniaOT.CERRADAS);
-    this.otFacade.getBandejaOT(FiltroPestaniaOT.ANULADAS);
-    this.otFacade.getBandejaOT(FiltroPestaniaOT.EN_TRAMITE);
   }
 
   reloadBandeja({
