@@ -2,47 +2,38 @@
   <div content>
     <div class="grid">
       <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
-        <h1>{{editMode?'Edición de un perfil':'Creación de un nuevo Perfil' }}</h1>
+        <h1>{{editMode?'Edición de un Proyecto':'Creación de un nuevo Proyecto' }}</h1>
       </div>
       <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
-        <button (click)="goBack()" pButton type="button" label="volver" icon="pi pi-arrow-left"
-          class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
+        <button (click)="goBack()" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
       </div>
     </div>
 
-    <form [formGroup]="formPerfil">
-      <div class="card">
-        <div class="formgrid grid">
-          <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-            <zwc-input-text Label="*Nombre" [control]="formControls.nombre" name_input="nombre"></zwc-input-text>
-            <div class="mt-4"></div>
-            <zwc-pdropdown [control]="formControls.rol" Label="* Rol" dropdown_id="perfil-rol" [data]="allRoles$|async"
-              Pplaceholder="Seleccione un rol" [loading]="false" optionLabel="nombre" optionValue="id">
-            </zwc-pdropdown>
-            <div class="mt-4"></div>
-            <label>Descripción:</label>
-            <textarea [formControl]="formControls.descripcion" class="form-control" id="input-descripcion"
-              placeholder="Agregue una descripción" cols="30" rows="4"></textarea>
-            <zwc-input-alert [control]="formControls.descripcion"> </zwc-input-alert>
-            <div class="mt-4"></div>
-            <p-button label="Guardar" (click)="saveProfile()" [disabled]="!formPerfil.valid" slyle="font-size: 0.83rem;"
-              icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
-          </div>
-          <div class="field col-12 md:col-8 lg:col-8 xl:col-8" id="rol-perfil-select">
-            <div class="row" *ngIf="formPerfil.get('rol').value!==null && permisosRol.length>0">
-              <div *ngFor="let item of permisosRol" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
-                <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions"
-                  optionValue="model_permiso_id.id" checkbox="checkbox" [multiple]="true" [filter]="true"
-                  optionLabel="model_permiso_id.nombre_corto">
-                  <ng-template pTemplate="header">
-                    {{item.module}}
-                  </ng-template>
-                </p-listbox>
-              </div>
+    <ng-container *ngIf="formProyecto">
+      <form [formGroup]="formProyecto">
+        <div class="card">
+          <div class="formgrid grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+              <zwc-input-text Label="*Nombre" [control]="formControls.nombre" name_input="nombre"></zwc-input-text>
+
+              <div class="mt-4"></div>
+
+              <label>Descripción:</label>
+              <textarea [formControl]="formControls.descripcion" class="form-control" id="input-descripcion" placeholder="Agregue una descripción" cols="30" rows="4"></textarea>
+              <zwc-input-alert [control]="formControls.descripcion"></zwc-input-alert>
+
+              <div class="mt-4"></div>
+
+              <label>Costos administrativos (% del proyecto y/o costo fijo)</label>
+              <p-inputNumber [formControl]="formControls.costo_estimado" mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="maxDecimals"></p-inputNumber>
+
+              <div class="mt-4"></div>
+
+              <p-button label="Guardar" (click)="saveProyecto()" [disabled]="!formProyecto.valid" slyle="font-size: 0.83rem;" icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </ng-container>
   </div>
 </zwc-content-layout>

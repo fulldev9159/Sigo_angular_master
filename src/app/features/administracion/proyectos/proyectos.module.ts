@@ -5,13 +5,13 @@ import { ProyectosComponent } from './proyectos.component';
 import { ProyectosRoutingModule } from './proyectos-routing.module';
 import { SharedModule } from '@sharedOT/shared.module';
 import { ListProyectosContainerComponent } from './containers/list-proyectos-container/list-proyectos-container.component';
-//// import { FormProyectosContainerComponent } from './containers/form-proyectos-container/form-proyectos-container.component';
+import { FormProyectosContainerComponent } from './containers/form-proyectos-container/form-proyectos-container.component';
 
 @NgModule({
   declarations: [
     ProyectosComponent,
     ListProyectosContainerComponent,
-    //// FormProyectosContainerComponent,
+    FormProyectosContainerComponent,
   ],
   imports: [
     CommonModule,

@@ -14,6 +14,9 @@ export const initialState: StateProyectos = {
 
 export const reducerProyectos = createReducer(
   initialState,
+  on(proyectosActions.resetData, state => ({
+    ...initialState,
+  })),
   on(proyectosActions.getProyectosSuccess, (state, { response }) => ({
     ...state,
     proyectos: response.data.items,

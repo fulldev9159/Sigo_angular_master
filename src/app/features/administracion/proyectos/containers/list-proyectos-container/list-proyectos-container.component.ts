@@ -26,10 +26,6 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   // DATOS A USAR
   proyectos$: Observable<Proyecto[]> = this.proyectoFacade.getProyectos$();
 
-  ////// PermisosPerfil$: Observable<PermissionsGroup[]> = this.profileFacade
-  //////   .getPermisosPerfil$()
-  //////   .pipe(map(perfiles => this.getPermissionsGroup(perfiles)));
-
   // LOADINGS
   loadingGetProyectos$: Observable<boolean> =
     this.loadingFacade.sendingGetProyectos$();
@@ -38,8 +34,8 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   ////// DisplayPermisosPerfilModal = false;
   ////// displayModalEliminarPerfil = false;
 
-  ////// // EXTRAS
-  ////// perfil_id: number | null = null;
+  // EXTRAS
+  proyecto_id: number | null = null;
 
   ////// // ICONS
   ////// permisosIcon = faEye;
@@ -53,27 +49,26 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
-    //// this.profileFacade.resetData();
-    //// this.profileFacade.getProfile();
+    this.proyectoFacade.resetData();
+    this.proyectoFacade.getProyectos();
   }
 
   //// closeModalPermisosPerfil(): void {
-  ////   this.profileFacade.resetPermisosPerfil();
+  ////   this.proyectoFacade.resetPermisosPerfil();
   ////   this.DisplayPermisosPerfilModal = false;
   //// }
 
   //// closeModalEliminarPerfil(): void {
   ////   this.displayModalEliminarPerfil = false;
-  ////   this.perfil_id = null;
+  ////   this.proyecto_id = null;
   //// }
 
   //// EliminarPerfil(): void {
-  ////   if (this.perfil_id) {
-  ////     this.profileFacade.eliminarPerfil(this.perfil_id);
+  ////   if (this.proyecto_id) {
+  ////     this.proyectoFacade.eliminarPerfil(this.proyecto_id);
   ////     this.closeModalEliminarPerfil();
   ////     setTimeout(() => {
-  ////       this.profileFacade.getProfile();
+  ////       this.proyectoFacade.getProfile();
   ////     }, 700);
   ////   }
   //// }
@@ -97,12 +92,12 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
 
   //// verPermisos(perfil: ListarPerfil): void {
   ////   this.DisplayPermisosPerfilModal = true;
-  ////   this.profileFacade.getPermisosPerfil(perfil.id);
+  ////   this.proyectoFacade.getPermisosPerfil(perfil.id);
   //// }
 
   //// eliminar(perfil: ListarPerfil): void {
   ////   this.displayModalEliminarPerfil = true;
-  ////   this.perfil_id = perfil.id;
+  ////   this.proyecto_id = perfil.id;
   //// }
 
   ngOnDestroy(): void {

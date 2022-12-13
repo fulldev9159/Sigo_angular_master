@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SnackMessageService } from './snack-message.service';
 import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
+import * as proyectoActions from '@storeOT/proyectos/proyectos.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/ot/ot.actions';
@@ -84,6 +85,16 @@ export class AfterHttpService {
         'info',
         6000
       );
+    }
+
+    // CREATE PROYECTO SUCCESS
+    if (action.type === proyectoActions.createProyectoSuccess.type) {
+      this.snackMessage.showMessage(
+        `Proyecto creado con exito. Proyecto ID:${action.response.data.proyecto_id}`,
+        'Exito',
+        2000
+      );
+      //// this.router.navigate(['/cubicacion/list-cub']);
     }
 
     // REFRESH LOGIN

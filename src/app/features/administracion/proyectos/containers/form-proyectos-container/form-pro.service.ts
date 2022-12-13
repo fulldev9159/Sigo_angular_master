@@ -6,6 +6,9 @@ import * as CustomValidators from '@sharedOT/validators';
   providedIn: 'root',
 })
 export class FormProService {
+  maxDigits = 10;
+  maxDecimals = 2;
+
   constructor() {}
 
   FormConfig(): any {
@@ -23,13 +26,14 @@ export class FormProService {
         nonNullable: true,
         validators: [Validators.required, Validators.maxLength(200)],
       }),
-      rol: new FormControl(null, {
+      costo_estimado: new FormControl(null, {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [
+          Validators.required,
+          Validators.min(0.01),
+          //// CustomValidators.Decimals(this.maxDigits, this.maxDecimals),
+        ],
       }),
-      permisos_OT: new FormControl(null),
-      permisos_CUBICACION: new FormControl(null),
-      permisos_PERFIL: new FormControl(null),
     };
   }
 }

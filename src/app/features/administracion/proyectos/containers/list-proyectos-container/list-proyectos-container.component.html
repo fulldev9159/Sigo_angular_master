@@ -42,17 +42,22 @@
                     Descripción
                     <p-sortIcon field="descripcion"></p-sortIcon>
                   </th>
+                  <th>
+                    Costos administrativos<br>
+                    (% del proyecto y/o costo fijo)
+                  </th>
                   <th>Operaciones</th>
                 <tr>
               </ng-template>
 
               <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
                 <tr>
-                  <td>{{ item.nombre }}</td>
+                  <td>{{ item.id }}</td>
                   <td>
                     <strong>{{ item.nombre }}</strong>
                   </td>
                   <td>{{ item.descripcion }}</td>
+                  <td>{{ item.costo_estimado }}</td>
                   <td>
                     <!--
                     <div class="buttons-operaciones ">

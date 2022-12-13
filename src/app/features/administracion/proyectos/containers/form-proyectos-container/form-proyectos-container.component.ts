@@ -1,52 +1,52 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
-import * as _ from 'lodash';
+//// import { map, withLatestFrom } from 'rxjs/operators';
+//// import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
+import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
 import {
-  Perfil,
-  PermisoRol,
-  PermisosPerfil,
-  PermissionsGroup,
-  RequestCreatePerfil,
-  RequestUpdatePerfil,
-  Rol,
+  ////   Perfil,
+  ////   PermisoRol,
+  ////   PermisosPerfil,
+  ////   PermissionsGroup,
+  RequestCreateProyecto,
+  ////   RequestUpdatePerfil,
+  ////   Rol,
 } from '@model';
 import { FormProService } from './form-pro.service';
 import { LogService } from '@log';
 
 @Component({
-  selector: 'zwc-form-perfiles-container',
-  templateUrl: './form-perfiles-container.component.html',
-  styleUrls: ['./form-perfiles-container.component.scss'],
+  selector: 'zwc-form-proyectos-container',
+  templateUrl: './form-proyectos-container.component.html',
+  styleUrls: ['./form-proyectos-container.component.scss'],
 })
-export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
+export class FormProyectosContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  // DATOS A USAR
-  allRoles$: Observable<Rol[]>;
-  permisosRol: PermissionsGroup[] = [];
-  permisosPerfil: PermisosPerfil[];
-  // DISPLAY MODALS
+  //// // DATOS A USAR
+  //// allRoles$: Observable<Rol[]>;
+  //// permisosRol: PermissionsGroup[] = [];
+  //// permisosPerfil: PermisosPerfil[];
+  //// // DISPLAY MODALS
 
   // FORMULARIO
-  formControls: any;
-  formPerfil: FormGroup;
+  formControls?: any;
+  formProyecto?: FormGroup;
+  maxDecimals = 2;
 
-  // TABLE
+  //// // TABLE
 
-  // EXTRAS
-  perfil_id: number | null = null;
+  //// // EXTRAS
+  proyecto_id: number | null = null;
   editMode = false;
-  title = '';
 
-  permissions$: Observable<any>;
+  //// permissions$: Observable<any>;
 
   constructor(
     private route: ActivatedRoute,
-    private profileFacade: PerfilFacade,
+    private proyectoFacade: ProyectosFacade,
     private router: Router,
     private detector: ChangeDetectorRef,
     private formProService: FormProService,
@@ -54,210 +54,214 @@ export class FormPerfilesContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.profileFacade.resetData();
+    this.proyectoFacade.resetData();
 
     this.onInitGetInitialData();
     this.onInitSetInitialData();
-    this.onInitAccionesInicialesAdicionales();
   }
 
   onInitGetInitialData(): void {
     this.formControls = this.formProService.FormConfig();
-    this.formPerfil = new FormGroup(this.formControls);
-    this.subscription.add(
-      this.route.paramMap?.subscribe(params => {
-        const perfil_id = params.get('id');
-        if (perfil_id !== null) {
-          this.editMode = true;
-          this.formPerfil.get('id').setValue(perfil_id);
-          this.perfil_id = +perfil_id;
-          this.profileFacade.getProfile();
-          this.profileFacade.getPermisosPerfil(+perfil_id);
-        }
-      })
-    );
-    this.profileFacade.getAllRoles4createEditPerfil();
+    this.formProyecto = new FormGroup(this.formControls);
+
+    //// this.subscription.add(
+    ////   this.route.paramMap?.subscribe(params => {
+    ////     const proyecto_id = params.get('id');
+    ////     if (proyecto_id !== null) {
+    ////       this.editMode = true;
+    ////       this.formProyecto.get('id').setValue(proyecto_id);
+    ////       this.proyecto_id = +proyecto_id;
+    ////       this.proyectoFacade.getProfile();
+    ////     }
+    ////   })
+    //// );
   }
 
   onInitSetInitialData(): void {
-    this.allRoles$ = this.profileFacade.getAllRoles4createEditPerfil$();
+    //// this.subscription.add(
+    ////   this.proyectoFacade.getProfile$().subscribe(perfiles => {
+    ////     if (perfiles && perfiles.length > 0 && this.proyecto_id) {
+    ////       const perfil = perfiles.find(perf => perf.id === +this.proyecto_id);
+    ////       this.formPerfil.get('nombre').setValue(perfil.nombre);
+    ////       this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+    ////       this.formControls.rol.setValue(perfil.rol_id);
 
-    this.subscription.add(
-      this.profileFacade.getPermisosRol4CreateEdit$().subscribe(perfiles => {
-        this.permisosRol = this.getPermissionsGroup(perfiles);
-        this.detector.detectChanges();
-      })
-    );
+    ////       const PermissionsModules = this.getPermissionsGroup2(
+    ////         this.permisosPerfil
+    ////       );
+    ////       // this.logger.debug('PERMISOS', PermissionsModules);
+    ////       if (PermissionsModules.find(module => module.module === 'OT')) {
+    ////         this.formPerfil
+    ////           .get('permisos_OT')
+    ////           .setValue(
+    ////             PermissionsModules.find(
+    ////               module => module.module === 'OT'
+    ////             ).permissions.map(permiso => permiso.permiso_id)
+    ////           );
 
-    this.subscription.add(
-      this.profileFacade.getPermisosPerfil$().subscribe(permperfiles => {
-        // this.logger.debug('SUB', permperfiles);
-        this.permisosPerfil = permperfiles;
-        this.profileFacade.getProfile();
-      })
-    );
+    ////         this.detector.detectChanges();
+    ////       }
+    ////       if (
+    ////         PermissionsModules.find(module => module.module === 'CUBICACION')
+    ////       ) {
+    ////         this.formPerfil
+    ////           .get('permisos_CUBICACION')
+    ////           .setValue(
+    ////             PermissionsModules.find(
+    ////               module => module.module === 'CUBICACION'
+    ////             ).permissions.map(permiso => permiso.permiso_id)
+    ////           );
+    ////         this.detector.detectChanges();
+    ////       }
+    ////       if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+    ////         this.formPerfil
+    ////           .get('permisos_PERFIL')
+    ////           .setValue(
+    ////             PermissionsModules.find(
+    ////               module => module.module === 'PERFIL'
+    ////             ).permissions.map(permiso => permiso.permiso_id)
+    ////           );
+    ////         this.detector.detectChanges();
+    ////       }
+    ////     }
+    ////   })
+    //// );
 
-    this.subscription.add(
-      this.profileFacade.getProfile$().subscribe(perfiles => {
-        if (perfiles && perfiles.length > 0 && this.perfil_id) {
-          const perfil = perfiles.find(perf => perf.id === +this.perfil_id);
-          this.formPerfil.get('nombre').setValue(perfil.nombre);
-          this.formPerfil.get('descripcion').setValue(perfil.descripcion);
-          this.formControls.rol.setValue(perfil.rol_id);
-
-          const PermissionsModules = this.getPermissionsGroup2(
-            this.permisosPerfil
-          );
-          // this.logger.debug('PERMISOS', PermissionsModules);
-          if (PermissionsModules.find(module => module.module === 'OT')) {
-            this.formPerfil
-              .get('permisos_OT')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'OT'
-                ).permissions.map(permiso => permiso.permiso_id)
-              );
-
-            this.detector.detectChanges();
-          }
-          if (
-            PermissionsModules.find(module => module.module === 'CUBICACION')
-          ) {
-            this.formPerfil
-              .get('permisos_CUBICACION')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'CUBICACION'
-                ).permissions.map(permiso => permiso.permiso_id)
-              );
-            this.detector.detectChanges();
-          }
-          if (PermissionsModules.find(module => module.module === 'PERFIL')) {
-            this.formPerfil
-              .get('permisos_PERFIL')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'PERFIL'
-                ).permissions.map(permiso => permiso.permiso_id)
-              );
-            this.detector.detectChanges();
-          }
-        }
-      })
-    );
     setTimeout(() => {
       this.detector.detectChanges();
     }, 1000);
   }
 
-  onInitAccionesInicialesAdicionales(): void {
-    this.subscription.add(
-      this.formPerfil.get('rol').valueChanges.subscribe(rol_id => {
-        this.formPerfil.get('permisos_OT').reset();
-        this.formPerfil.get('permisos_CUBICACION').reset();
-        this.formPerfil.get('permisos_PERFIL').reset();
-
-        if (rol_id !== null && rol_id !== undefined) {
-          this.profileFacade.getPermisosRol4CreateEdit(+rol_id);
-        }
-      })
-    );
-  }
-
-  initRolFromControlEvent(): void {}
+  //// initRolFromControlEvent(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   goBack(): void {
-    this.profileFacade.resetData();
-    this.profileFacade.modalPermisosPerfil(false);
-    this.formPerfil.reset();
-    this.router.navigate(['/administracion/perfiles/list-perfiles']);
+    this.proyectoFacade.resetData();
+    //// this.proyectoFacade.modalPermisosPerfil(false);
+    if (this.formProyecto) {
+      this.formProyecto.reset();
+    }
+    this.router.navigate(['/administracion/proyectos/list-proyectos']);
   }
 
-  getPermissionsGroup(permissions: PermisoRol[]): PermissionsGroup[] {
-    const data = permissions?.map(permit => {
-      let permitCustom: any;
-      if (permit && permit.model_permiso_id.slug) {
-        permitCustom = {
-          ...permit,
-          module: permit.model_permiso_id.slug.split('_')[0],
-        };
-      }
-      return permitCustom;
-    });
+  //// getPermissionsGroup(permissions: PermisoRol[]): PermissionsGroup[] {
+  ////   const data = permissions?.map(permit => {
+  ////     let permitCustom: any;
+  ////     if (permit && permit.model_permiso_id.slug) {
+  ////       permitCustom = {
+  ////         ...permit,
+  ////         module: permit.model_permiso_id.slug.split('_')[0],
+  ////       };
+  ////     }
+  ////     return permitCustom;
+  ////   });
 
-    return _.chain(data)
-      .groupBy('module')
-      .map((value, key) => ({ module: key, permissions: value }))
-      .value();
+  ////   return _.chain(data)
+  ////     .groupBy('module')
+  ////     .map((value, key) => ({ module: key, permissions: value }))
+  ////     .value();
+  //// }
+
+  //// getPermissionsGroup2(permissions: PermisosPerfil[]): PermissionsGroup[] {
+  ////   const data = permissions.map(permit => {
+  ////     let permitCustom: any;
+  ////     if (permit && permit.model_permiso_id.slug) {
+  ////       permitCustom = {
+  ////         ...permit,
+  ////         module: permit.model_permiso_id.slug.split('_')[0],
+  ////       };
+  ////     }
+  ////     return permitCustom;
+  ////   });
+
+  ////   return _.chain(data)
+  ////     .groupBy('module')
+  ////     .map((value, key) => ({ module: key, permissions: value }))
+  ////     .value();
+  //// }
+
+  get valid(): boolean {
+    return this.formProyecto?.valid ?? false;
   }
 
-  getPermissionsGroup2(permissions: PermisosPerfil[]): PermissionsGroup[] {
-    const data = permissions.map(permit => {
-      let permitCustom: any;
-      if (permit && permit.model_permiso_id.slug) {
-        permitCustom = {
-          ...permit,
-          module: permit.model_permiso_id.slug.split('_')[0],
-        };
-      }
-      return permitCustom;
-    });
-
-    return _.chain(data)
-      .groupBy('module')
-      .map((value, key) => ({ module: key, permissions: value }))
-      .value();
-  }
-
-  saveProfile(): void {
-    const permisosOT =
-      this.formPerfil.get('permisos_OT').value === null
-        ? []
-        : this.formPerfil.get('permisos_OT').value;
-    const permisosCubicacion =
-      this.formPerfil.get('permisos_CUBICACION').value === null
-        ? []
-        : this.formPerfil.get('permisos_CUBICACION').value;
-    const permisosPerfil =
-      this.formPerfil.get('permisos_PERFIL').value === null
-        ? []
-        : this.formPerfil.get('permisos_PERFIL').value;
-    const permisos: number[] = [
-      ...permisosOT,
-      ...permisosCubicacion,
-      ...permisosPerfil,
-    ];
-
-    if (this.perfil_id === null) {
-      const request: RequestCreatePerfil = {
-        nombre: this.formPerfil.get('nombre').value,
-        descripcion: this.formPerfil.get('descripcion').value,
-        permisos,
-        rol_id: +this.formPerfil.get('rol').value,
-        eliminable: true,
+  get createRequest(): RequestCreateProyecto | undefined {
+    if (this.formProyecto) {
+      const { nombre, descripcion, costo_estimado } =
+        this.formProyecto.getRawValue();
+      return {
+        nombre,
+        descripcion,
+        costo_estimado: +costo_estimado,
       };
-
-      this.logger.debug('CREATE', request);
-      this.profileFacade.createPerfil(request);
-    } else {
-      const request: RequestUpdatePerfil = {
-        id: this.perfil_id,
-        values: {
-          nombre: this.formPerfil.get('nombre').value,
-          descripcion: this.formPerfil.get('descripcion').value,
-          permisos,
-          rol_id: +this.formPerfil.get('rol').value,
-          eliminable: true,
-        },
-      };
-      this.logger.debug('EDIT', request);
-      this.profileFacade.updatePerfil(request);
     }
 
-    this.profileFacade.modalPermisosPerfil(false);
+    return undefined;
+  }
+
+  saveProyecto(): void {
+    if (this.valid) {
+      if (this.proyecto_id === null) {
+        const createRequest = this.createRequest;
+        this.proyectoFacade.createProyecto(createRequest);
+      } else {
+        //// const request: RequestUpdatePerfil = {
+        ////   id: this.proyecto_id,
+        ////   values: {
+        ////     nombre: this.formPerfil.get('nombre').value,
+        ////     descripcion: this.formPerfil.get('descripcion').value,
+        ////     permisos,
+        ////     rol_id: +this.formPerfil.get('rol').value,
+        ////     eliminable: true,
+        ////   },
+        //// };
+        //// this.logger.debug('EDIT', request);
+        //// this.proyectoFacade.updatePerfil(request);
+      }
+    }
+    ////   const permisosOT =
+    ////     this.formPerfil.get('permisos_OT').value === null
+    ////       ? []
+    ////       : this.formPerfil.get('permisos_OT').value;
+    ////   const permisosCubicacion =
+    ////     this.formPerfil.get('permisos_CUBICACION').value === null
+    ////       ? []
+    ////       : this.formPerfil.get('permisos_CUBICACION').value;
+    ////   const permisosPerfil =
+    ////     this.formPerfil.get('permisos_PERFIL').value === null
+    ////       ? []
+    ////       : this.formPerfil.get('permisos_PERFIL').value;
+    ////   const permisos: number[] = [
+    ////     ...permisosOT,
+    ////     ...permisosCubicacion,
+    ////     ...permisosPerfil,
+    ////   ];
+    ////   if (this.proyecto_id === null) {
+    ////     const request: RequestCreatePerfil = {
+    ////       nombre: this.formPerfil.get('nombre').value,
+    ////       descripcion: this.formPerfil.get('descripcion').value,
+    ////       permisos,
+    ////       rol_id: +this.formPerfil.get('rol').value,
+    ////       eliminable: true,
+    ////     };
+    ////     this.logger.debug('CREATE', request);
+    ////     this.proyectoFacade.createPerfil(request);
+    ////   } else {
+    ////     const request: RequestUpdatePerfil = {
+    ////       id: this.proyecto_id,
+    ////       values: {
+    ////         nombre: this.formPerfil.get('nombre').value,
+    ////         descripcion: this.formPerfil.get('descripcion').value,
+    ////         permisos,
+    ////         rol_id: +this.formPerfil.get('rol').value,
+    ////         eliminable: true,
+    ////       },
+    ////     };
+    ////     this.logger.debug('EDIT', request);
+    ////     this.proyectoFacade.updatePerfil(request);
+    ////   }
+    ////   this.proyectoFacade.modalPermisosPerfil(false);
   }
 }

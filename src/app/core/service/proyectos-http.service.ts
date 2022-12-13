@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response, Proyecto } from '@model';
+import { Response, Proyecto, RequestCreateProyecto } from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,6 +18,13 @@ export class ProyectosHttpService {
     return this.http.post<Response<{ items: Proyecto[] }>>(
       `${this.API_URL}/configuration/proyecto/getall`,
       {}
+    );
+  }
+
+  createProyecto(request: RequestCreateProyecto): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/configuration/proyecto/create`,
+      request
     );
   }
 }

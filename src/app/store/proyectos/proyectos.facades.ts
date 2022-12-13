@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Proyecto } from '@model';
+import { Proyecto, RequestCreateProyecto } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as proyectosSelectors from './proyectos.selectors';
@@ -18,5 +18,15 @@ export class ProyectosFacade {
 
   public getProyectos$(): Observable<Proyecto[]> {
     return this.store.select(proyectosSelectors.getProyectos);
+  }
+
+  // RESET DATA
+  public resetData(): void {
+    this.store.dispatch(proyectosActions.resetData());
+  }
+
+  // CREATE PROYECTO
+  public createProyecto(request: RequestCreateProyecto): void {
+    this.store.dispatch(proyectosActions.createProyecto({ request }));
   }
 }
