@@ -11,5 +11,13 @@
         </a>
       </li>
     </ng-container>
+
+    <ng-container *ngxPermissionsOnly="['REPORTE_ACTIVOS']">
+      <li routerLinkActive="active" id="reportes-activos">
+        <a [routerLink]="['/reportes/activos']">
+          <span><small>Activos Fijos</small></span>
+        </a>
+      </li>
+    </ng-container>
   </ul>
 </div>

@@ -310,6 +310,46 @@ export class OTEffects {
     { dispatch: false }
   );
 
+  // DOWNLOAD ACTIVOS FIJOS
+  requestDownloadActivosFijos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.downloadActivosFijos),
+      concatMap(({ fecha_cierre_ot__desde, fecha_cierre_ot__hasta }) =>
+        this.otHttpService
+          .downloadActivosFijos(fecha_cierre_ot__desde, fecha_cierre_ot__hasta)
+          .pipe(
+            map(({ filename, data }) =>
+              otActions.downloadActivosFijosSuccess({ filename, data })
+            ),
+            catchError(error =>
+              of(otActions.downloadActivosFijosError({ error }))
+            )
+          )
+      )
+    )
+  );
+
+  downloadActivosFijos$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.downloadActivosFijosSuccess),
+        tap(({ filename, data }) => {
+          const link = document.createElement('a');
+          link.style.display = 'none';
+          document.body.appendChild(link);
+
+          const blob = new Blob([data], { type: 'application/ms-excel' });
+          const objectURL = URL.createObjectURL(blob);
+
+          link.href = objectURL;
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
+        })
+      ),
+    { dispatch: false }
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -352,7 +392,8 @@ export class OTEffects {
           otActions.getBandejaOTCerradasError,
           otActions.getBandejaOTAnuladasError,
           otActions.getBandejaOTQuebradasError,
-          otActions.downloadOTsAsignadasError
+          otActions.downloadOTsAsignadasError,
+          otActions.downloadActivosFijosError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

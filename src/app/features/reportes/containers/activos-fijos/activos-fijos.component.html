@@ -1,0 +1,40 @@
+<zwc-content-layout [navbarHeader]="[]">
+  <div content>
+    <h1>Reporte de Activos Fijos</h1>
+
+    <form [formGroup]="form">
+      <div class="card">
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <label class="mr-1" for="">*Fecha inicio</label>
+            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio" name="fecha-inicio" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <label for="">*Fecha término</label>
+            <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%','height':'2.5rem'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino" name="fecha-termino" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+
+          <ng-container *ngIf="form.get('fecha_inicio').errors === null && form.get('fecha_fin').errors === null">
+            <ng-container *ngIf="form.errors?.dategreaterorequal">
+              <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+                <small class="p-error block">La fecha de fin no puede ser inferior a la fecha de inicio</small>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="form.errors">
+            <ng-container *ngIf="form.errors?.dategreaterorequal === null && form.errors?.maxdatediffindays">
+              <div class="field col-12 md:col-12 lg:col-12 xl:col-12">
+                <small class="p-error block">No puede haber más de {{ form.errors.maxdatediffindays.days }} días de
+                  diferencia entre la fecha de inicio y la fecha fin</small>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+
+    <zwc-pbutton-sending Pid="generar-reporte" content="Generar reporte" Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="sendingDownloadActivosFijos$|async" (call)="generarReporte()">
+    </zwc-pbutton-sending>
+  </div>
+</zwc-content-layout>
