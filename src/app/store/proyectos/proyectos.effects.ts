@@ -58,6 +58,21 @@ export class ProyectosEffects {
     )
   );
 
+  // DELETE PROYECTO
+  deleteProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(proyectosActions.deleteProyecto),
+      concatMap(({ proyecto_id }) =>
+        this.proyectosHttpService.deleteProyecto(proyecto_id).pipe(
+          map(response => proyectosActions.deleteProyectoSuccess({ response })),
+          catchError(error =>
+            of(proyectosActions.deleteProyectoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   redirectAfterSaveProyectoSuccess = createEffect(
     () =>
       this.actions$.pipe(
@@ -78,7 +93,8 @@ export class ProyectosEffects {
         ofType(
           proyectosActions.getProyectosSuccess,
           proyectosActions.createProyectoSuccess,
-          proyectosActions.updateProyectoSuccess
+          proyectosActions.updateProyectoSuccess,
+          proyectosActions.deleteProyectoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),

@@ -39,4 +39,9 @@ export class ProyectosFacade {
       proyectosActions.updateProyecto({ proyecto_id, request })
     );
   }
+
+  // ELIMINAR PROYECTO
+  public deleteProyecto(proyecto_id: number): void {
+    this.store.dispatch(proyectosActions.deleteProyecto({ proyecto_id }));
+  }
 }

@@ -103,6 +103,12 @@ export class AfterHttpService {
       //// this.router.navigate(['/cubicacion/list-cub']);
     }
 
+    // DELETE PROYECTO SUCCESS
+    if (action.type === proyectoActions.deleteProyectoSuccess.type) {
+      this.snackMessage.showMessage(`Proyecto eliminado.`, 'Exito', 2000);
+      //// this.router.navigate(['/cubicacion/list-cub']);
+    }
+
     // REFRESH LOGIN
     if (action.type === authActions.refreshLoginSuccess.type) {
       this.authFacade.getPermisosPerfilUsuario4Login();

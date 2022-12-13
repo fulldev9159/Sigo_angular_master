@@ -23,9 +23,9 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   loadingGetProyectos$: Observable<boolean> =
     this.loadingFacade.sendingGetProyectos$();
 
-  ////// // DISPLAY MODALS
-  ////// DisplayPermisosPerfilModal = false;
-  ////// displayModalEliminarPerfil = false;
+  // DISPLAY MODALS
+  //// DisplayPermisosProyectoModal = false;
+  displayModalEliminarProyecto = false;
 
   // EXTRAS
   proyecto_id: number | null = null;
@@ -33,7 +33,7 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   ////// // ICONS
   ////// permisosIcon = faEye;
   editIcon = faPencil;
-  ////// trashICon = faTrash;
+  trashICon = faTrash;
 
   // CONSTRUCTOR
   constructor(
@@ -46,35 +46,35 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
     this.proyectoFacade.getProyectos();
   }
 
-  //// closeModalPermisosPerfil(): void {
-  ////   this.proyectoFacade.resetPermisosPerfil();
-  ////   this.DisplayPermisosPerfilModal = false;
+  //// closeModalPermisosProyecto(): void {
+  ////   this.proyectoFacade.resetPermisosProyecto();
+  ////   this.DisplayPermisosProyectoModal = false;
   //// }
 
-  //// closeModalEliminarPerfil(): void {
-  ////   this.displayModalEliminarPerfil = false;
-  ////   this.proyecto_id = null;
+  closeModalEliminarProyecto(): void {
+    this.displayModalEliminarProyecto = false;
+    this.proyecto_id = null;
+  }
+
+  EliminarProyecto(): void {
+    if (this.proyecto_id) {
+      this.proyectoFacade.deleteProyecto(this.proyecto_id);
+      this.closeModalEliminarProyecto();
+      setTimeout(() => {
+        this.proyectoFacade.getProyectos();
+      }, 700);
+    }
+  }
+
+  //// verPermisos(proyecto: Proyecto): void {
+  ////   this.DisplayPermisosProyectoModal = true;
+  ////   this.proyectoFacade.getPermisosProyecto(proyecto.id);
   //// }
 
-  //// EliminarPerfil(): void {
-  ////   if (this.proyecto_id) {
-  ////     this.proyectoFacade.eliminarPerfil(this.proyecto_id);
-  ////     this.closeModalEliminarPerfil();
-  ////     setTimeout(() => {
-  ////       this.proyectoFacade.getProfile();
-  ////     }, 700);
-  ////   }
-  //// }
-
-  //// verPermisos(perfil: ListarPerfil): void {
-  ////   this.DisplayPermisosPerfilModal = true;
-  ////   this.proyectoFacade.getPermisosPerfil(perfil.id);
-  //// }
-
-  //// eliminar(perfil: ListarPerfil): void {
-  ////   this.displayModalEliminarPerfil = true;
-  ////   this.proyecto_id = perfil.id;
-  //// }
+  eliminar(proyecto: Proyecto): void {
+    this.displayModalEliminarProyecto = true;
+    this.proyecto_id = proyecto.id;
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

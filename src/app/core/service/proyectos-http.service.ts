@@ -40,4 +40,13 @@ export class ProyectosHttpService {
       }
     );
   }
+
+  deleteProyecto(proyecto_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/configuration/proyecto/delete`,
+      {
+        proyecto_id,
+      }
+    );
+  }
 }

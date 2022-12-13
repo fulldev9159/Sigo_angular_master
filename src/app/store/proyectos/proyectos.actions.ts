@@ -45,3 +45,19 @@ export const updateProyectoError = createAction(
   '[PROYECTOS] updateProyecto Error',
   props<{ error: any }>()
 );
+
+// ELIMINAR PROYECTO
+export const deleteProyecto = createAction(
+  '[PROYECTOS] deleteProyecto',
+  props<{ proyecto_id: number }>()
+);
+
+export const deleteProyectoSuccess = createAction(
+  '[PROYECTOS] deleteProyecto Success',
+  props<{ response: any }>()
+);
+
+export const deleteProyectoError = createAction(
+  '[PROYECTOS] deleteProyecto Error',
+  props<{ error: any }>()
+);
