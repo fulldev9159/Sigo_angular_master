@@ -14,7 +14,7 @@ export const getProyectosError = createAction(
 
 export const resetData = createAction('[PROYECTOS] ResetData');
 
-// CREATE PERFIL
+// CREATE PROYECTO
 export const createProyecto = createAction(
   '[PROYECTOS] createProyecto',
   props<{ request: RequestCreateProyecto }>()
@@ -27,5 +27,21 @@ export const createProyectoSuccess = createAction(
 
 export const createProyectoError = createAction(
   '[PROYECTOS] createProyecto Error',
+  props<{ error: any }>()
+);
+
+// EDIT PROYECTO
+export const updateProyecto = createAction(
+  '[PROYECTOS] updateProyecto',
+  props<{ proyecto_id: number; request: RequestCreateProyecto }>()
+);
+
+export const updateProyectoSuccess = createAction(
+  '[PROYECTOS] updateProyecto Success',
+  props<{ response: Response<any> }>()
+);
+
+export const updateProyectoError = createAction(
+  '[PROYECTOS] updateProyecto Error',
   props<{ error: any }>()
 );

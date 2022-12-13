@@ -97,6 +97,12 @@ export class AfterHttpService {
       //// this.router.navigate(['/cubicacion/list-cub']);
     }
 
+    // UPDATE PROYECTO SUCCESS
+    if (action.type === proyectoActions.updateProyectoSuccess.type) {
+      this.snackMessage.showMessage(`Proyecto actualizado.`, 'Exito', 2000);
+      //// this.router.navigate(['/cubicacion/list-cub']);
+    }
+
     // REFRESH LOGIN
     if (action.type === authActions.refreshLoginSuccess.type) {
       this.authFacade.getPermisosPerfilUsuario4Login();

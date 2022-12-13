@@ -59,6 +59,9 @@
                   <td>{{ item.descripcion }}</td>
                   <td>{{ item.costo_estimado }}</td>
                   <td>
+                    <button [disabled]="false" [pTooltip]="!true?'No es editable':''" [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-proyecto">
+                      <fa-icon [icon]="editIcon"></fa-icon> Editar
+                    </button>
                     <!--
                     <div class="buttons-operaciones ">
                       <button (click)="verPermisos(item)" id="button-ver-permisos">

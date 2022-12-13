@@ -43,12 +43,27 @@ export class ProyectosEffects {
     )
   );
 
+  // UPDATE PROYECTO
+  updateProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(proyectosActions.updateProyecto),
+      concatMap(({ proyecto_id, request }) =>
+        this.proyectosHttpService.updateProyecto(proyecto_id, request).pipe(
+          map(response => proyectosActions.updateProyectoSuccess({ response })),
+          catchError(error =>
+            of(proyectosActions.updateProyectoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   redirectAfterSaveProyectoSuccess = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
-          proyectosActions.createProyectoSuccess
-          //// proyectosActions.updateProyectoSuccess
+          proyectosActions.createProyectoSuccess,
+          proyectosActions.updateProyectoSuccess
         ),
         tap(() =>
           this.router.navigate(['/administracion/proyectos/list-proyectos'])
@@ -62,7 +77,8 @@ export class ProyectosEffects {
       this.actions$.pipe(
         ofType(
           proyectosActions.getProyectosSuccess,
-          proyectosActions.createProyectoSuccess
+          proyectosActions.createProyectoSuccess,
+          proyectosActions.updateProyectoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),

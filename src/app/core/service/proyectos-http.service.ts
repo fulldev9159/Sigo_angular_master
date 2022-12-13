@@ -27,4 +27,17 @@ export class ProyectosHttpService {
       request
     );
   }
+
+  updateProyecto(
+    proyecto_id: number,
+    values: RequestCreateProyecto
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/configuration/proyecto/update`,
+      {
+        proyecto_id,
+        values,
+      }
+    );
+  }
 }

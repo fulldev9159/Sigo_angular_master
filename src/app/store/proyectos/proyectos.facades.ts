@@ -29,4 +29,14 @@ export class ProyectosFacade {
   public createProyecto(request: RequestCreateProyecto): void {
     this.store.dispatch(proyectosActions.createProyecto({ request }));
   }
+
+  // UPDATE PROYECTO
+  public updateProyecto(
+    proyecto_id: number,
+    request: RequestCreateProyecto
+  ): void {
+    this.store.dispatch(
+      proyectosActions.updateProyecto({ proyecto_id, request })
+    );
+  }
 }

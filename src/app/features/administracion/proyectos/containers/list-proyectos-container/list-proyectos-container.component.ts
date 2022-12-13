@@ -4,15 +4,8 @@ import { Observable, of, Subscription } from 'rxjs';
 //// import { map } from 'rxjs/operators';
 import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
 //// import * as _ from 'lodash';
-import {
-  Proyecto,
-  ////   Perfil,
-  ////   Permiso,
-  ////   PermisosPerfil,
-  ////   PermissionsGroup,
-} from '@model';
-//// //// import { ListProTableService } from './list-pro-table.service';
-//// import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Proyecto } from '@model';
+import { faEye, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
 @Component({
@@ -39,7 +32,7 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
 
   ////// // ICONS
   ////// permisosIcon = faEye;
-  ////// editIcon = faPencil;
+  editIcon = faPencil;
   ////// trashICon = faTrash;
 
   // CONSTRUCTOR
@@ -71,23 +64,6 @@ export class ListProyectosContainerComponent implements OnInit, OnDestroy {
   ////       this.proyectoFacade.getProfile();
   ////     }, 700);
   ////   }
-  //// }
-
-  //// getPermissionsGroup(permissions: PermisosPerfil[]): PermissionsGroup[] {
-  ////   const data = permissions?.map(permit => {
-  ////     let permitCustom: any;
-  ////     if (permit && permit.model_permiso_id.slug) {
-  ////       permitCustom = {
-  ////         ...permit,
-  ////         module: permit.model_permiso_id.slug.split('_')[0],
-  ////       };
-  ////     }
-  ////     return permitCustom;
-  ////   });
-  ////   return _.chain(data)
-  ////     .groupBy('module')
-  ////     .map((value, key) => ({ module: key, permissions: value }))
-  ////     .value();
   //// }
 
   //// verPermisos(perfil: ListarPerfil): void {
