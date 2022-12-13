@@ -128,6 +128,8 @@ export interface LastActa {
   pep2: string;
   ceco?: any;
   valor_total_clp: number;
+  costo: number;
+  pdf_archivo_id: number;
 
   imputacion1_estado: string;
   imputacion1_fecha: Date;
@@ -144,10 +146,10 @@ export interface DetalleServicioLastActa {
   id: number;
   informe_has_servicio_id: number;
 
-  imputacion1_estado: null;
-  imputacion2_estado: null;
-  imputacion1_json: null;
-  imputacion2_json: null;
+  imputacion1_estado: string;
+  imputacion2_estado: string;
+  imputacion1_json: string;
+  imputacion2_json: string;
   model_informe_has_servicio_id: {
     numero_producto: string;
     actividad_id: number;
@@ -157,6 +159,7 @@ export interface DetalleServicioLastActa {
     adicional_causas_rechazo_id: number;
     adicional_rechazo_observacion: string;
     cantidad: number;
+    cantidad_cubicada: number;
     evidencia_id: number;
     factor_conversion_precio: number;
     id: number;
@@ -213,6 +216,7 @@ export interface ModelInformeHasServicio {
   actividad_id: number;
   tipo_servicio_id: number;
   cantidad: number;
+  cantidad_cubicada: number;
   unidad_id: number;
   puntos_baremos: number;
   prov_has_serv_precio: number;
@@ -583,5 +587,3 @@ export interface RequestAprobacionRechazoSolicitudPago {
   tipo_rechazo_id?: number;
   observacion: string;
 }
-
-

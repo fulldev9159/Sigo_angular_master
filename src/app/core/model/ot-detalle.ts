@@ -24,6 +24,7 @@ export interface DetalleOT {
   // FLUJO OT
   pdf_inicial: PDFInicial;
   usuarios_involucrados: UsuarioInvolucrado[];
+  porcentaje_cumplimiento_sla: number;
 }
 
 export interface InfoOT {
@@ -103,6 +104,8 @@ export interface InfoOT {
     jefe_area_aceptacion_fecha: Date;
     causas_rechazo_id: number;
     observacion: string;
+    supervisor_proxy_id: number;
+    jefe_area_proxy_id: number;
   };
 
   flg_cierre_adm: boolean;
@@ -112,7 +115,7 @@ export interface InfoOT {
   numero_hem?: any;
   fecha_cont_hem?: any;
 
-  model_cubicacion_ing_id: ModelCubicacionIngId;
+  model_cubicacion_ing_id?: ModelCubicacionIngId;
 }
 
 export interface ModelCubicacionIngId {

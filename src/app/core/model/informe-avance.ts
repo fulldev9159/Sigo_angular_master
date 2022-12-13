@@ -12,6 +12,7 @@ export interface DetalleInformeAvance {
   created_at: Date;
   valor_total_clp: number;
   costo: number;
+  costo_adicionales: number;
   many_informe_has_servicio: ServicioFromInfomeAvance[];
 }
 

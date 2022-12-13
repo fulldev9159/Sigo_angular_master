@@ -135,6 +135,8 @@ export interface DetalleCubicacion {
   updated_at: Date;
   valor_total_clp: number;
   costo: number;
+  flg_hidden: boolean;
+  observacion_autorizacion_ing: string;
   many_cubicacion_has_servicio: DetalleServicioCubicacion[];
 }
 

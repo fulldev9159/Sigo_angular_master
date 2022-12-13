@@ -153,6 +153,7 @@ export interface ServicioFromInfomeAvance {
   actividad_id: number;
   tipo_servicio_id: number;
   cantidad: number; // USAR
+  cantidad_cubicada: number;
   unidad_id: number;
   puntos_baremos: number;
   prov_has_serv_precio: number;
@@ -178,6 +179,7 @@ export interface ServicioFromInfomeAvance {
 export interface ModelActividadId {
   id: number;
   descripcion: string;
+  codigo: string;
 }
 
 export interface ReqSubirEvidencia {
