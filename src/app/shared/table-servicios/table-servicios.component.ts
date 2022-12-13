@@ -58,17 +58,22 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   // AL ESCOGER MODE static LA FUENTE DE LA DATA A DESPLEGAR SERÁ LA QUE SEA ENVIADA EN data_source Y A ESTA NO SE LE PRODRÁ AGREGAR O QUITAR SERVICIOS
   @Input() cantidad_editable: boolean = true;
   @Input() column_acciones: boolean = true;
-  @Input() column_acciones_uo: boolean = true;
+  @Input() column_acciones_uo: boolean = false;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_uo: boolean = false;
   @Input() accion_detalle_uo_only_precargado: boolean = false;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio_adic = false;
   @Input() contratoMarco = '';
+  @Input() accion_subir_evidencias: false;
 
   @Output() detallesUOClicked = new EventEmitter<{
     servicio: CarritoService;
     uo: CarritoUO;
+  }>();
+
+  @Output() showSubirEvidencia = new EventEmitter<{
+    servicio: CarritoService;
   }>();
 
   formTable: FormGroup = new FormGroup({ table: new FormArray([]) });
@@ -433,6 +438,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
       servicio,
       uo,
     });
+  }
+
+  viewshowSubirEvidencia(servicio: CarritoService): void {
+    this.showSubirEvidencia.emit({ servicio });
   }
 
   get canSeePrices(): boolean {

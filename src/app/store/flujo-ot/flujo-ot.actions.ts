@@ -1,6 +1,11 @@
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
+  ReqQuiebre,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   Response,
@@ -183,5 +188,95 @@ export const anularOTSuccess = createAction(
 );
 export const anularOTError = createAction(
   '[FLUJO OT] GET anularOT Error',
+  props<{ error: any }>()
+);
+
+// GET SOLICITUD QUIEBRE
+export const getSolicitudQuiebre = createAction(
+  '[FLUJO OT] GET getSolicitudQuiebre',
+  props<{ ot_id: number }>()
+);
+
+export const getSolicitudQuiebreSuccess = createAction(
+  '[FLUJO OT] GET getSolicitudQuiebre Success',
+  props<{ lastSolicitudQuiebre: LastSolicitudQuiebre }>()
+);
+export const getSolicitudQuiebreError = createAction(
+  '[FLUJO OT] GET getSolicitudQuiebre Error',
+  props<{ error: any }>()
+);
+
+// SOLICITAR QUIEBRE OT
+export const solicitarQuiebre = createAction(
+  '[FLUJO OT] GET solicitarQuiebre',
+  props<{ request: ReqSolicitarQuiebre }>()
+);
+
+export const solicitarQuiebreSuccess = createAction(
+  '[FLUJO OT] GET solicitarQuiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const solicitarQuiebreError = createAction(
+  '[FLUJO OT] GET solicitarQuiebre Error',
+  props<{ error: any }>()
+);
+
+// QUIEBRE OT
+export const quiebre = createAction(
+  '[FLUJO OT] GET quiebre',
+  props<{ request: ReqQuiebre }>()
+);
+
+export const quiebreSuccess = createAction(
+  '[FLUJO OT] GET quiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const quiebreError = createAction(
+  '[FLUJO OT] GET quiebre Error',
+  props<{ error: any }>()
+);
+
+// APROBAR/RECHAZAR QUIEBRE OT
+export const aprobarRechazarSolicitudQuiebre = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre',
+  props<{ request: ReqAprobarRechazarSolicitudQuiebre }>()
+);
+
+export const aprobarRechazarSolicitudQuiebreSuccess = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const aprobarRechazarSolicitudQuiebreError = createAction(
+  '[FLUJO OT] GET aprobarRechazarSolicitudQuiebre Error',
+  props<{ error: any }>()
+);
+
+// DESQUIEBRE OT
+export const desquiebre = createAction(
+  '[FLUJO OT] GET desquiebre',
+  props<{ ot_id: number }>()
+);
+
+export const desquiebreSuccess = createAction(
+  '[FLUJO OT] GET desquiebre Success',
+  props<{ response: Response<any> }>()
+);
+export const desquiebreError = createAction(
+  '[FLUJO OT] GET desquiebre Error',
+  props<{ error: any }>()
+);
+
+// CIERRE ADMINISTRATIVO OT
+export const cierreAdministrativo = createAction(
+  '[FLUJO OT] GET cierreAdministrativo',
+  props<{ request: ReqCierreAdministrativo }>()
+);
+
+export const cierreAdministrativoSuccess = createAction(
+  '[FLUJO OT] GET cierreAdministrativo Success',
+  props<{ response: Response<any> }>()
+);
+export const cierreAdministrativoError = createAction(
+  '[FLUJO OT] GET cierreAdministrativo Error',
   props<{ error: any }>()
 );

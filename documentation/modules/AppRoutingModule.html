@@ -75,6 +75,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { SigoGuard } from &#x27;@coreOT&#x27;;
+import { NgxPermissionsGuard } from &#x27;ngx-permissions&#x27;;
 
 const routes: Routes &#x3D; [
   { path: &#x27;&#x27;, redirectTo: &#x27;home&#x27;, pathMatch: &#x27;full&#x27; },
@@ -124,6 +125,15 @@ const routes: Routes &#x3D; [
     canActivate: [SigoGuard],
   },
   {
+    path: &#x27;ingenieria&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/ingenieria/ingenieria.module&#x27;).then(\
+        m &#x3D;&gt; m.IngenieriaModule\
+      )&quot;,
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
+  {
     path: &#x27;acta&#x27;,
     loadChildren: () &#x3D;&gt;
       &quot;import(&#x27;./features/acta/acta.module&#x27;).then(m &#x3D;&gt; m.ActaModule)&quot;,
@@ -138,6 +148,18 @@ const routes: Routes &#x3D; [
       )&quot;,
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
+  },
+  {
+    path: &#x27;reportes&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/reportes/reportes.module&#x27;).then(m &#x3D;&gt; m.ReportesModule)&quot;,
+    // canLoad: [SigoGuard],
+    data: {
+      permissions: {
+        only: &#x27;REPORTE_BASE&#x27;,
+      },
+    },
+    canActivate: [SigoGuard, NgxPermissionsGuard],
   },
 ];
 

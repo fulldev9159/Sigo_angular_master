@@ -1,0 +1,1099 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  Detalle</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/acta/containers/validar-acta-container/validar-acta-container.component.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#servicio" 
+>
+                                            servicio
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#unidad_obra" 
+>
+                                            unidad_obra
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="servicio"></a>
+                                        <span class="name "><b>servicio</b>
+                                            <a href="#servicio">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>servicio:     <code>literal type[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="unidad_obra"></a>
+                                        <span class="name "><b>unidad_obra</b>
+                                            <a href="#unidad_obra">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>unidad_obra:     <code>literal type[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, FormArray, Validators } from &#x27;@angular/forms&#x27;;
+import * as CustomValidators from &#x27;@sharedOT/validators&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import {
+  Accion,
+  ActaTipoPago,
+  CarritoService,
+  DetalleOT,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  Dropdown,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
+} from &#x27;@model&#x27;;
+import { ActaFacade } from &#x27;@storeOT/acta/acta.facades&#x27;;
+import { endWith, map, Observable, Subscription } from &#x27;rxjs&#x27;;
+import { LogService } from &#x27;@log&#x27;;
+import { TableServiciosComponent } from &#x27;@sharedOT/table-servicios/table-servicios.component&#x27;;
+import { FlujoOTFacade } from &#x27;@storeOT/flujo-ot/flujo-ot.facades&#x27;;
+import { ViewRechazoComponent } from &#x27;@sharedOT/view-rechazo/view-rechazo.component&#x27;;
+import { ActaPorServicioFormComponent } from &#x27;../../components/acta-por-servicio-form/acta-por-servicio-form.component&#x27;;
+import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
+
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+}
+
+// 142 TODO: AGREGAR LAS OBSERVACIONES
+// 143 TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
+// 144 TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCENTAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
+// 145 TODO: QUITAR LOS SIN UO YA QUE SU CANTIDAD ES 0
+// 146 TODO: QUITAR LAS CANTIDADES 0
+// 147 TODO: PROGRAMAR EL BOTON INVALIDAR ACTA
+// 148 TODO: AGREGAR UNA CONFIRMACION AL VALIDAR
+
+@Component({
+  selector: &#x27;zwc-validar-acta-container&#x27;,
+  templateUrl: &#x27;./validar-acta-container.component.html&#x27;,
+  styleUrls: [&#x27;./validar-acta-container.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ValidarActaContainerComponent implements OnDestroy, OnInit {
+  subscription: Subscription &#x3D; new Subscription();
+
+  @ViewChild(&#x27;tableServiciosAutorizarAdicionales&#x27;, {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServiciosAutorizarAdicionales: TableServiciosComponent;
+
+  @ViewChild(&#x27;tableServicesTotal&#x27;, {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServicesTotal: TableServiciosComponent;
+
+  @ViewChild(&#x27;tablePagoPorServicio&#x27;, {
+    read: ActaPorServicioFormComponent,
+    static: false,
+  })
+  tablePagoPorServicio: ActaPorServicioFormComponent;
+
+  @ViewChild(&#x27;rechazoActaForm&#x27;, {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoActaForm: ViewRechazoComponent;
+
+  acta: CarritoService[] &#x3D; [];
+  acta_originales: CarritoService[] &#x3D; [];
+  acta_adicionales: CarritoService[] &#x3D; [];
+  accionesOT: Accion[] &#x3D; [];
+  actaTipoPago: Dropdown[];
+
+  ot_id: number;
+
+  totalServicios_servicio &#x3D; 0;
+  por_acta_pagado &#x3D; 0;
+  totalUO_servicio &#x3D; 0;
+
+  form: FormGroup &#x3D; new FormGroup({
+    tipo_pago: new FormControl(null, [Validators.required]),
+    porcentaje: new FormControl(100),
+    por_servicio: new FormGroup({
+      servicios: new FormArray([]),
+      unidades_obra: new FormArray([]),
+    }),
+  });
+
+  servicios: DetalleServicio4Acta[] &#x3D; [];
+  uos: DetalleUO4Acta[] &#x3D; [];
+
+  motivosRechazo$: Observable&lt;Dropdown[]&gt; &#x3D; this.flujoOTFacade
+    .getMotivosRechazo$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.motivo &gt; b.motivo ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.motivo,
+          code: value.id,
+        }))
+      )
+    );
+
+  total_informe_avance &#x3D; 0;
+  total_a_pagar &#x3D; 0;
+
+  total_actas &#x3D; 0;
+
+  tipo_pago: string;
+
+  contrato: string;
+
+  comentarioInforme$: Observable&lt;string&gt; &#x3D; this.actaFacade
+    .getComentariosFinalizacionTrabajos$()
+    .pipe(map(value &#x3D;&gt; value.replace(/\n/g, &#x27;&lt;br&gt;&#x27;)));
+
+  // MODAL
+  showModalRechazarActa &#x3D; false;
+  displayModalAprobacionActa &#x3D; false;
+
+  constructor(
+    private actaFacade: ActaFacade,
+    private route: ActivatedRoute,
+    private logger: LogService,
+    private flujoOTFacade: FlujoOTFacade,
+    private authFacade: AuthFacade,
+    private detector: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.authFacade.showMenuDetalleOT(true);
+    this.subscription.add(
+      this.route.data.subscribe(
+        ({
+          servicios4acta,
+          uos4acta,
+          accionesOT,
+          actaTiposPagos,
+          detalleInformeAvance,
+          lastActa,
+          totalActas,
+          detalleOT,
+        }) &#x3D;&gt; {
+          if (detalleInformeAvance)
+            this.total_informe_avance &#x3D;
+              detalleInformeAvance.data.valor_total_clp;
+          if (accionesOT) this.accionesOT &#x3D; accionesOT;
+          if (actaTiposPagos)
+            this.actaTipoPago &#x3D; (
+              actaTiposPagos.data.items as ActaTipoPago[]
+            ).map(value &#x3D;&gt; ({
+              name: value.descripcion,
+              code: value.descripcion,
+            }));
+          if (totalActas) this.total_actas &#x3D; totalActas.data.total;
+          if (detalleOT) {
+            const ot &#x3D; detalleOT.data as DetalleOT;
+            this.contrato &#x3D;
+              ot.ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre;
+          }
+          // ORGANIZAR DATA PARA TABLA
+          // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+          // 151 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+          // 152 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
+
+          let servicios &#x3D; servicios4acta?.data.items as DetalleServicio4Acta[];
+          let uob &#x3D; uos4acta?.data.items as DetalleUO4Acta[];
+
+          this.servicios &#x3D; servicios;
+          this.uos &#x3D; uob;
+
+          console.log(&#x27;s&#x27;, this.servicios);
+          console.log(&#x27;u&#x27;, this.uos);
+
+          this.loadServicioForm(this.servicios, this.uos);
+
+          if (servicios &amp;&amp; servicios.length &gt; 0) {
+            this.ot_id &#x3D; servicios[0].ot_id;
+
+            let servicios_originales &#x3D; servicios.filter(
+              v &#x3D;&gt; v.adicional_aceptacion_estado &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+            let uos_originales &#x3D; uob.filter(
+              v &#x3D;&gt; v.servicio_adicional_aceptacion_estado &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+
+            let servicios_adicionales &#x3D; servicios.filter(
+              v &#x3D;&gt; v.adicional_aceptacion_estado !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+
+            let uos_adicionales &#x3D; uob.filter(
+              v &#x3D;&gt; v.servicio_adicional_aceptacion_estado !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+            );
+
+            // SERVICIOS ADICIONALES
+            servicios_adicionales.forEach(service &#x3D;&gt; {
+              let servicioCarrito: CarritoService &#x3D; {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: service.tipo_servicio_descripcion,
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
+                servicios_adicional_dummy:
+                  servicios_originales.find(
+                    v &#x3D;&gt;
+                      v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                      service.servicio_numero_producto
+                  ) !&#x3D;&#x3D; undefined,
+                faltante_porcentaje_entero: service.faltante_porcentaje_entero,
+                unidad_obras: [],
+              };
+
+              uos_adicionales
+                .filter(
+                  v &#x3D;&gt;
+                    v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                    service.servicio_numero_producto
+                )
+                .map(uo &#x3D;&gt;
+                  this.acta_adicionales.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
+
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: service.actividad_descripcion,
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                        adicional_existente_ia:
+                          servicioCarrito.servicios_adicional_dummy,
+                      },
+                    ],
+                  })
+                );
+            });
+
+            // CUBICADOS
+            servicios_originales.forEach(service &#x3D;&gt; {
+              let servicioCarrito: CarritoService &#x3D; {
+                precargado: true,
+                servicio_rowid: service.id,
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                adicional: service.adicional_aceptacion_estado,
+
+                servicio_id: service.servicio_id,
+                numero_producto: service.servicio_numero_producto,
+                servicio_precio_final_clp: service.valor_unitario_clp,
+                servicio_nombre: service.servicio_descripcion,
+                tipo_servicio_descripcion: service.tipo_servicio_descripcion,
+                tipo_servicio_id: -1,
+                servicio_unidad_cod: service.unidad_codigo,
+                servicio_unidad_descripcion: service.unidad_descripcion,
+                faltante_porcentaje_entero: service.faltante_porcentaje_entero,
+                prov_has_serv_precio: service.prov_has_serv_precio,
+                puntos_baremos: service.puntos_baremos,
+                unidad_obras: [],
+              };
+
+              uos_originales
+                .filter(
+                  v &#x3D;&gt;
+                    v.servicio_numero_producto &#x3D;&#x3D;&#x3D;
+                    service.servicio_numero_producto
+                )
+                .map(uo &#x3D;&gt;
+                  this.acta_originales.push({
+                    ...servicioCarrito,
+                    unidad_obras: [
+                      {
+                        precargado: true,
+                        uo_rowid: uo.id,
+                        uo_cantidad: uo.faltante_cantidad,
+
+                        uo_codigo: uo.unidad_obra_cod,
+                        uo_nombre: uo.unidad_obra_desc,
+                        uo_precio_total_clp: uo.valor_unitario_clp,
+                        actividad_descripcion: service.actividad_descripcion,
+                        actividad_id: -1,
+                        uob_unidad_medida_cod: uo.unidad_codigo,
+                        uob_unidad_medida_descripcion: uo.unidad_obra_desc,
+                      },
+                    ],
+                  })
+                );
+            });
+          }
+
+          this.acta &#x3D; [...this.acta_originales, ...this.acta_adicionales];
+
+          this.por_acta_pagado &#x3D; this.acta[0].faltante_porcentaje_entero;
+
+          if (lastActa) this.tipo_pago &#x3D; lastActa.data?.tipo_pago;
+          if (this.tipo_pago) {
+            this.form.get(&#x27;tipo_pago&#x27;).setValue(this.tipo_pago);
+            this.form.get(&#x27;tipo_pago&#x27;).disable();
+            this.form.get(&#x27;porcentaje&#x27;).clearValidators();
+            this.form.get(&#x27;porcentaje&#x27;).updateValueAndValidity();
+            this.detector.detectChanges();
+            if (this.tipo_pago) {
+              // OBTENER EL TOTAL A PAGAR
+              if (this.tipo_pago &#x3D;&#x3D;&#x3D; &#x27;TOTAL&#x27;)
+                this.total_a_pagar &#x3D;
+                  +this.tableServicesTotal?.totalServicios +
+                  +this.tableServicesTotal?.totalUOs;
+
+              if (this.tipo_pago &#x3D;&#x3D;&#x3D; &#x27;POR_SERVICIO&#x27;)
+                this.total_a_pagar &#x3D;
+                  +this.totalServicios_servicio + +this.totalUO_servicio;
+
+              // CONFIGURAR FORM PAGO
+              if (this.tipo_pago &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;) {
+                // Toma el porcentaje faltante de alguno de los items, y ése será el
+                // tope para la siguiente iteración
+                // Ej: si a la primera iteración se pagó 25%, el valor para el porcentaje
+                // se moverá entre 0 a 75
+                // Si no hay items, se deja en 0 y se deshabilita
+
+                this.form.get(&#x27;porcentaje&#x27;).setValidators([
+                  Validators.required,
+                  // this.noWhitespace,
+                  // this.mustBeANumber,
+                  // this.nonZero,
+                  Validators.min(0),
+                  Validators.max(this.acta[0].faltante_porcentaje_entero),
+                ]);
+                this.form
+                  .get(&#x27;porcentaje&#x27;)
+                  .setValue(&#x60;${this.acta[0].faltante_porcentaje_entero}&#x60;);
+              }
+            }
+          }
+        }
+      )
+    );
+
+    // OBTENER EL TOTAL A PAGAR DEPENDIENDO DEL TIPO DE PAGO
+    // CONFIGURAR PORCENTAJE FORM
+    this.subscription.add(
+      this.form.get(&#x27;tipo_pago&#x27;).valueChanges.subscribe(tipo_pago &#x3D;&gt; {
+        this.form.get(&#x27;porcentaje&#x27;).clearValidators();
+        this.form.get(&#x27;porcentaje&#x27;).updateValueAndValidity();
+        this.detector.detectChanges();
+        if (tipo_pago) {
+          // OBTENER EL TOTAL A PAGAR
+          if (tipo_pago &#x3D;&#x3D;&#x3D; &#x27;TOTAL&#x27; || tipo_pago &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;)
+            this.total_a_pagar &#x3D;
+              +this.tableServicesTotal?.totalServicios +
+              +this.tableServicesTotal?.totalUOs;
+
+          if (tipo_pago &#x3D;&#x3D;&#x3D; &#x27;POR_SERVICIO&#x27;)
+            this.total_a_pagar &#x3D;
+              +this.totalServicios_servicio + +this.totalUO_servicio;
+
+          // CONFIGURAR FORM PAGO
+          if (tipo_pago &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;) {
+            // Toma el porcentaje faltante de alguno de los items, y ése será el
+            // tope para la siguiente iteración
+            // Ej: si a la primera iteración se pagó 25%, el valor para el porcentaje
+            // se moverá entre 0 a 75
+            // Si no hay items, se deja en 0 y se deshabilita
+
+            this.form.get(&#x27;porcentaje&#x27;).setValidators([
+              Validators.required,
+              // this.noWhitespace,
+              // this.mustBeANumber,
+              // this.nonZero,
+              Validators.min(0),
+              Validators.max(this.acta[0].faltante_porcentaje_entero),
+            ]);
+            this.form
+              .get(&#x27;porcentaje&#x27;)
+              .setValue(&#x60;${this.acta[0].faltante_porcentaje_entero}&#x60;);
+          }
+        }
+      })
+    );
+  }
+
+  accionExist(accion: string): boolean {
+    return this.accionesOT.find(v &#x3D;&gt; v.slug &#x3D;&#x3D;&#x3D; accion) !&#x3D;&#x3D; undefined;
+  }
+
+  get porServicioDetalle(): Detalle {
+    const {
+      por_servicio: { servicios &#x3D; [], unidades_obra &#x3D; [] },
+    } &#x3D; this.form.getRawValue();
+
+    this.detector.detectChanges();
+
+    return {
+      servicio: servicios
+        .filter((servicio: { selected: boolean }) &#x3D;&gt; servicio.selected)
+        .map((servicio: { id: string; cantidad_a_enviar: string }) &#x3D;&gt; ({
+          rowid: +servicio.id,
+          cantidad: +servicio.cantidad_a_enviar,
+          porcentaje:
+            this.form.get(&#x27;tipo_pago&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;
+              ? this.form.get(&#x27;porcentaje&#x27;).value
+              : 100,
+        })),
+      unidad_obra: unidades_obra
+        .filter((uo: { selected: boolean }) &#x3D;&gt; uo.selected)
+        .map((uo: { id: string; cantidad_a_enviar: string }) &#x3D;&gt; ({
+          rowid: +uo.id,
+          cantidad: +uo.cantidad_a_enviar,
+          porcentaje:
+            this.form.get(&#x27;tipo_pago&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;
+              ? this.form.get(&#x27;porcentaje&#x27;).value
+              : 100,
+        })),
+    };
+  }
+
+  requestValidarActa(aprobacion: string): RequestValidarActa {
+    let tipo_pago &#x3D; this.form.get(&#x27;tipo_pago&#x27;).value;
+    if (tipo_pago &#x3D;&#x3D;&#x3D; null) tipo_pago &#x3D; &#x27;TOTAL&#x27;;
+    let detalle: Detalle &#x3D; {
+      servicio: this.servicios.map(v &#x3D;&gt; ({
+        rowid: v.id,
+        cantidad: v.cantidad_total,
+        porcentaje:
+          this.form.get(&#x27;tipo_pago&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;
+            ? v.cantidad_total &#x3D;&#x3D;&#x3D; 0
+              ? 0
+              : +this.form.get(&#x27;porcentaje&#x27;).value
+            : v.cantidad_total &#x3D;&#x3D;&#x3D; 0
+            ? 0
+            : 100,
+      })),
+      unidad_obra: this.uos.map(v &#x3D;&gt; ({
+        rowid: v.id,
+        cantidad: v.cantidad_total,
+        porcentaje:
+          this.form.get(&#x27;tipo_pago&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;PORCENTAJE&#x27;
+            ? v.cantidad_total &#x3D;&#x3D;&#x3D; 0
+              ? 0
+              : +this.form.get(&#x27;porcentaje&#x27;).value
+            : v.cantidad_total &#x3D;&#x3D;&#x3D; 0
+            ? 0
+            : 100,
+      })),
+    };
+
+    if (tipo_pago &#x3D;&#x3D;&#x3D; &#x27;POR_SERVICIO&#x27;) {
+      detalle &#x3D; { ...this.porServicioDetalle };
+    }
+
+    return {
+      ot_id: this.ot_id,
+      tipo_pago,
+      observacion: this.rechazoActaForm?.formRechazo.get(&#x27;motivo&#x27;).value, // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
+      estado: aprobacion,
+      detalle,
+    };
+  }
+
+  get valid(): boolean {
+    if (this.form.get(&#x27;tipo_pago&#x27;).value &#x3D;&#x3D;&#x3D; &#x27;POR_SERVICIO&#x27;)
+      return this.form.valid &amp;&amp; this.tablePagoPorServicio?.valid;
+    return this.form.valid;
+  }
+
+  loadServicioForm(
+    servicios: DetalleServicio4Acta[],
+    unidades_obra: DetalleUO4Acta[]
+  ): void {
+    if (this.form) {
+      const serviciosForm &#x3D; this.form
+        .get(&#x27;por_servicio&#x27;)
+        .get(&#x27;servicios&#x27;) as FormArray;
+      const unidadesObraForm &#x3D; this.form
+        .get(&#x27;por_servicio&#x27;)
+        .get(&#x27;unidades_obra&#x27;) as FormArray;
+
+      serviciosForm.clear();
+      unidadesObraForm.clear();
+
+      (servicios ?? []).forEach(servicio &#x3D;&gt; {
+        // if (+servicio.faltante_cantidad &gt; 0) {
+        serviciosForm.push(
+          new FormGroup({
+            id: new FormControl(&#x60;${servicio.id}&#x60;, []),
+            servicio_codigo: new FormControl(&#x60;${servicio.servicio_codigo}&#x60;, []),
+            numero_producto: new FormControl(
+              &#x60;${servicio.servicio_numero_producto}&#x60;,
+              []
+            ),
+            descripcion: new FormControl(
+              &#x60;${servicio.servicio_descripcion}&#x60;,
+              []
+            ),
+            cantidad_total: new FormControl(&#x60;${servicio.cantidad_total}&#x60;, []),
+            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +servicio.valor_unitario_clp * +servicio.cantidad_total,
+              []
+            ),
+            cantidad_max_a_enviar: new FormControl(
+              &#x60;${servicio.faltante_cantidad}&#x60;,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(
+              { value: &#x60;${servicio.faltante_cantidad}&#x60;, disabled: true },
+              [
+                Validators.required,
+                CustomValidators.NoWhitespace,
+                // this.mustBeANumber,
+                // CustomValidators.NonZero,
+                Validators.min(0.01),
+                Validators.max(servicio.faltante_cantidad),
+              ]
+            ),
+            selected: new FormControl(false, []),
+            adicional_aceptacion_estado: new FormControl(
+              &#x60;${servicio.adicional_aceptacion_estado}&#x60;,
+              []
+            ),
+          })
+        );
+        // }
+      });
+
+      serviciosForm.controls.forEach((group, index) &#x3D;&gt;
+        this.subscription.add(
+          (group as FormGroup)
+            .get(&#x27;selected&#x27;)
+            .valueChanges.subscribe(selected &#x3D;&gt; {
+              this.updateCantidadEnviar(serviciosForm, index, selected);
+              this.updateTotalServicios();
+            })
+        )
+      );
+
+      (unidades_obra ?? []).forEach(uo &#x3D;&gt; {
+        // if (+uo.faltante_cantidad &gt; 0) {
+        unidadesObraForm.push(
+          new FormGroup({
+            id: new FormControl(&#x60;${uo.id}&#x60;, []),
+            descripcion: new FormControl(&#x60;${uo.unidad_obra_desc}&#x60;, []),
+            uo_codigo: new FormControl(&#x60;${uo.unidad_obra_cod}&#x60;, []),
+            cantidad_total: new FormControl(&#x60;${uo.cantidad_total}&#x60;, []),
+            cantidad_max_a_enviar: new FormControl(
+              &#x60;${uo.faltante_cantidad}&#x60;,
+              []
+            ),
+            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +uo.valor_unitario_clp * +uo.cantidad_total,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(
+              { value: &#x60;${uo.faltante_cantidad}&#x60;, disabled: true },
+              [
+                Validators.required,
+                CustomValidators.NoWhitespace,
+                // this.mustBeANumber,
+                // CustomValidators.NonZero,
+                Validators.min(0.01),
+                Validators.max(uo.faltante_cantidad),
+              ]
+            ),
+            informe_has_servicio_id: new FormControl(
+              &#x60;${uo.informe_has_servicio_id}&#x60;,
+              []
+            ),
+            servicio_numero_producto: new FormControl(
+              uo.servicio_numero_producto,
+              []
+            ),
+            servicio_adicional_aceptacion_estado: new FormControl(
+              uo.servicio_adicional_aceptacion_estado,
+              []
+            ),
+            selected: new FormControl(false, []),
+          })
+        );
+        // }
+      });
+
+      unidadesObraForm.controls.forEach((group, index) &#x3D;&gt;
+        this.subscription.add(
+          (group as FormGroup)
+            .get(&#x27;selected&#x27;)
+            .valueChanges.subscribe(selected &#x3D;&gt; {
+              this.updateCantidadEnviar(unidadesObraForm, index, selected);
+              this.updateTotalUO();
+            })
+        )
+      );
+
+      this.subscription.add(
+        serviciosForm.valueChanges.subscribe(servicio &#x3D;&gt; {
+          this.updateTotalServicios();
+        })
+      );
+
+      this.subscription.add(
+        unidadesObraForm.valueChanges.subscribe(uo &#x3D;&gt; {
+          this.updateTotalUO();
+        })
+      );
+    }
+  }
+
+  updateTotalServicios(): void {
+    this.logger.debug(&#x27;update total servicios&#x27;);
+
+    const serviciosForm &#x3D; this.form
+      .get(&#x27;por_servicio&#x27;)
+      .get(&#x27;servicios&#x27;) as FormArray;
+
+    this.totalServicios_servicio &#x3D; 0;
+
+    serviciosForm.value.forEach(
+      (servicio: {
+        selected: boolean;
+        precio_unitario: string;
+        cantidad_a_enviar: string;
+      }) &#x3D;&gt; {
+        if (servicio.selected) {
+          this.totalServicios_servicio &#x3D;
+            this.totalServicios_servicio +
+            +servicio.precio_unitario * +servicio.cantidad_a_enviar;
+        }
+      }
+    );
+
+    this.total_a_pagar &#x3D; +this.totalServicios_servicio + +this.totalUO_servicio;
+  }
+
+  updateTotalUO(): void {
+    this.logger.debug(&#x27;update total uo&#x27;);
+
+    const unidadesObraForm &#x3D; this.form
+      .get(&#x27;por_servicio&#x27;)
+      .get(&#x27;unidades_obra&#x27;) as FormArray;
+
+    this.totalUO_servicio &#x3D; 0;
+
+    unidadesObraForm.value.forEach(
+      (uo: {
+        selected: boolean;
+        precio_unitario: string;
+        cantidad_a_enviar: string;
+      }) &#x3D;&gt; {
+        if (uo.selected) {
+          this.totalUO_servicio &#x3D;
+            this.totalUO_servicio + +uo.precio_unitario * +uo.cantidad_a_enviar;
+        }
+      }
+    );
+
+    this.total_a_pagar &#x3D; +this.totalServicios_servicio + +this.totalUO_servicio;
+  }
+
+  updateCantidadEnviar(
+    form: FormArray,
+    index: number,
+    selected: boolean
+  ): void {
+    this.logger.debug(&#x27;update cantidad enviar&#x27;);
+
+    const max &#x3D; form.at(index).get(&#x27;cantidad_max_a_enviar&#x27;).value;
+    if (selected) {
+      //// form
+      ////   .at(index)
+      ////   .get(&#x27;cantidad_a_enviar&#x27;)
+      ////   .setValidators([
+      ////     Validators.required,
+      ////     this.noWhitespace,
+      ////     this.mustBeANumber,
+      ////     this.nonZero,
+      ////     Validators.min(0),
+      ////     Validators.max(+max),
+      ////   ]);
+      form.at(index).get(&#x27;cantidad_a_enviar&#x27;).enable();
+    } else {
+      form.at(index).get(&#x27;cantidad_a_enviar&#x27;).setValue(max);
+      //// form.at(index).get(&#x27;cantidad_a_enviar&#x27;).clearValidators();
+      form.at(index).get(&#x27;cantidad_a_enviar&#x27;).disable();
+    }
+  }
+
+  serviciosAdicionalesAprobados(): boolean {
+    if (this.tableServiciosAutorizarAdicionales?.formTable) {
+      let form &#x3D; this.tableServiciosAutorizarAdicionales.formTable.get(&#x27;table&#x27;)
+        .value as Array&lt;{
+        validar_adicional: boolean;
+      }&gt;;
+      if (form.length &gt; 0) {
+        let serviciosRechazados &#x3D; form.filter(
+          servicio &#x3D;&gt; servicio.validar_adicional
+        );
+
+        return serviciosRechazados.length &#x3D;&#x3D;&#x3D; 0;
+      } else {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  displayModalRechazarActa(): void {
+    this.flujoOTFacade.getMotivosRechazo(&#x27;ACTA&#x27;);
+    this.showModalRechazarActa &#x3D; true;
+  }
+
+  closeModalRechazarActa(): void {
+    this.showModalRechazarActa &#x3D; false;
+    this.rechazoActaForm.formRechazo.reset();
+  }
+
+  rechazarActa(): void {
+    if (this.total_actas &#x3D;&#x3D;&#x3D; 0) {
+      // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+      let form &#x3D; this.tableServiciosAutorizarAdicionales.formTable.get(&#x27;table&#x27;)
+        .value as Array&lt;{
+        servicio_rowid: number;
+        validar_adicional: boolean;
+      }&gt;;
+
+      let adicionales_aprobados_id &#x3D; form
+        .filter(v &#x3D;&gt; !v.validar_adicional)
+        .map(v &#x3D;&gt; v.servicio_rowid);
+      let adicionales_rechazados_id &#x3D; form
+        .filter(v &#x3D;&gt; v.validar_adicional)
+        .map(v &#x3D;&gt; v.servicio_rowid);
+
+      let request_aprobar_adicionales: RequestAceptarRechazarAdicionales &#x3D; {
+        ot_id: this.ot_id,
+        adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+        adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+        observacion: this.rechazoActaForm?.formRechazo.get(&#x27;motivo&#x27;).value,
+        causas_rechazo_id:
+          this.rechazoActaForm?.formRechazo.get(&#x27;tipo_id&#x27;).value,
+      };
+
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa &#x3D;
+        this.requestValidarActa(&#x27;INVALIDADO&#x27;);
+
+      console.log(&#x27;req ad&#x27;, request_aprobar_adicionales);
+      console.log(&#x27;req in&#x27;, request_validar_acta);
+
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.aceptarRechazarAdicionales(
+        request_validar_acta,
+        request_aprobar_adicionales
+      );
+    } else {
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa &#x3D;
+        this.requestValidarActa(&#x27;INVALIDADO&#x27;);
+
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.validarActa(request_validar_acta);
+    }
+  }
+
+  validarActa(): void {
+    // REQUEST PARA ACTUALIZAR APROBACION DE SERVICIOS ADICIONALES
+    if (this.total_actas &#x3D;&#x3D;&#x3D; 0) {
+      let form &#x3D; this.tableServiciosAutorizarAdicionales.formTable.get(&#x27;table&#x27;)
+        .value as Array&lt;{
+        servicio_rowid: number;
+        validar_adicional: boolean;
+      }&gt;;
+
+      let adicionales_aprobados_id &#x3D; form
+        .filter(v &#x3D;&gt; !v.validar_adicional)
+        .map(v &#x3D;&gt; v.servicio_rowid);
+      let adicionales_rechazados_id &#x3D; form
+        .filter(v &#x3D;&gt; v.validar_adicional)
+        .map(v &#x3D;&gt; v.servicio_rowid);
+
+      let request_aprobar_adicionales: RequestAceptarRechazarAdicionales &#x3D; {
+        ot_id: this.ot_id,
+        adicionales_aceptados: [...new Set(adicionales_aprobados_id)],
+        adicionales_rechazados: [...new Set(adicionales_rechazados_id)],
+        observacion: this.rechazoActaForm?.formRechazo.get(&#x27;motivo&#x27;).value,
+        causas_rechazo_id:
+          this.rechazoActaForm?.formRechazo.get(&#x27;tipo_id&#x27;).value,
+      };
+
+      // REQUEST PARA RECHAZAR EL ACTA
+      let request_validar_acta: RequestValidarActa &#x3D;
+        this.requestValidarActa(&#x27;VALIDADO&#x27;);
+
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR AMBOS
+      this.actaFacade.aceptarRechazarAdicionales(
+        request_validar_acta,
+        request_aprobar_adicionales
+      );
+    } else {
+      // REQUEST PARA APROBAR EL ACTA
+      let request_validar_acta: RequestValidarActa &#x3D;
+        this.requestValidarActa(&#x27;VALIDADO&#x27;);
+
+      this.rechazoActaForm.formRechazo.reset();
+      // INVOCAR
+      this.actaFacade.validarActa(request_validar_acta);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Detalle-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

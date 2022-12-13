@@ -107,12 +107,6 @@
                                             materia
                                         </a>
                                 </li>
-                                <li>
-                                        <a href="#numero_pedido" 
->
-                                            numero_pedido
-                                        </a>
-                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -223,39 +217,6 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="numero_pedido"></a>
-                                        <span class="name "><b>numero_pedido</b>
-                                            <a href="#numero_pedido">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>numero_pedido:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
 
@@ -285,7 +246,7 @@ export interface CreateOTBase {
 export interface CreateOTOrdinario extends CreateOTBase {
   carta_adjudicacion: string;
   fecha_adjudicacion: Date;
-  numero_pedido: string;
+  //numero_pedido: string;
   materia: string;
 }
 export interface CreateOTMovil extends CreateOTBase {
@@ -311,6 +272,10 @@ export interface CreateOTBucle extends CreateOTBase {
 
 export interface RequestCreateOTOrdinario {
   ot_datos: CreateOTOrdinario;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
 }
 export interface RequestCreateOTMovil {
   ot_datos: CreateOTMovil;
@@ -318,6 +283,10 @@ export interface RequestCreateOTMovil {
 
 export interface RequestCreateOTBucle {
   ot_datos: CreateOTBucle;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
 }
 
 export interface RequestCreateOTFijo {
@@ -328,11 +297,32 @@ export interface RequestCreateOTFijo {
   };
 }
 
+export enum FiltroPropietarioOT {
+  MIAS &#x3D; &#x27;MIAS&#x27;,
+  OTRAS &#x3D; &#x27;OTRAS&#x27;,
+  TODAS &#x3D; &#x27;TODAS&#x27;,
+}
+
+export enum FiltroTipoOT {
+  OT &#x3D; 1,
+  AP &#x3D; 2,
+  FULL &#x3D; 3,
+  TODAS &#x3D; 0,
+}
+
+export enum FiltroPestaniaOT {
+  EN_EJECUCION &#x3D; &#x27;EN_EJECUCION&#x27;,
+  ABIERTAS &#x3D; &#x27;ABIERTAS&#x27;,
+  CERRADAS &#x3D; &#x27;CERRADAS&#x27;,
+  ANULADAS &#x3D; &#x27;ANULADAS&#x27;,
+  EN_TRAMITE &#x3D; &#x27;EN_TRAMITE&#x27;,
+}
+
 // FILTROS OT
 export interface RequestBandejaOT {
-  filtro_pestania: string;
-  filtro_propietario: string;
-  filtro_tipo: number;
+  filtro_propietario: FiltroPropietarioOT;
+  filtro_tipo: FiltroTipoOT;
+  filtro_pestania: FiltroPestaniaOT;
 }
 // BANDEJA OT
 export interface OT {

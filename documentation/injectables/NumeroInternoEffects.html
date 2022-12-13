@@ -209,15 +209,17 @@
                         <i>Default value : </i><code>createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getOTFromNumeroInterno),
-      concatMap(({ numero_interno }) &#x3D;&gt;
-        this.numeroInternoHttp.getOTFromNumeroInterno(numero_interno).pipe(
-          map(response &#x3D;&gt;
-            otActions.getOTFromNumeroInternoSuccess({ response })
-          ),
-          catchError(error &#x3D;&gt;
-            of(otActions.getOTFromNumeroInternoError({ error }))
+      concatMap(({ tipo_numero_interno_id, numero_interno }) &#x3D;&gt;
+        this.numeroInternoHttp
+          .getOTFromNumeroInterno(tipo_numero_interno_id, numero_interno)
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getOTFromNumeroInternoSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getOTFromNumeroInternoError({ error }))
+            )
           )
-        )
       )
     )
   )</code>
@@ -299,7 +301,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/store/numero-interno/numero-interno.effects.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/store/numero-interno/numero-interno.effects.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -334,7 +336,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/store/numero-interno/numero-interno.effects.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/store/numero-interno/numero-interno.effects.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -388,15 +390,17 @@ export class NumeroInternoEffects {
   getOTFromNumeroInterno$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(otActions.getOTFromNumeroInterno),
-      concatMap(({ numero_interno }) &#x3D;&gt;
-        this.numeroInternoHttp.getOTFromNumeroInterno(numero_interno).pipe(
-          map(response &#x3D;&gt;
-            otActions.getOTFromNumeroInternoSuccess({ response })
-          ),
-          catchError(error &#x3D;&gt;
-            of(otActions.getOTFromNumeroInternoError({ error }))
+      concatMap(({ tipo_numero_interno_id, numero_interno }) &#x3D;&gt;
+        this.numeroInternoHttp
+          .getOTFromNumeroInterno(tipo_numero_interno_id, numero_interno)
+          .pipe(
+            map(response &#x3D;&gt;
+              otActions.getOTFromNumeroInternoSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(otActions.getOTFromNumeroInternoError({ error }))
+            )
           )
-        )
       )
     )
   );

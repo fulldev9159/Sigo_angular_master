@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
+  ReqQuiebre,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
 } from '@model';
@@ -105,5 +110,51 @@ export class FlujoOTFacade {
   // ANULAR OT
   public anularOT(ot_id: number): void {
     this.store.dispatch(flujoOTActions.anularOT({ ot_id }));
+  }
+
+  // GET SOLICITUD QUIEBRE
+  public getSolicitudQuiebre(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.getSolicitudQuiebre({ ot_id }));
+  }
+
+  public getSolicitudQuiebreSuccess(
+    lastSolicitudQuiebre: LastSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.getSolicitudQuiebreSuccess({ lastSolicitudQuiebre })
+    );
+  }
+
+  public getSolicitudQuiebre$(): Observable<LastSolicitudQuiebre> {
+    return this.store.select(flujoOTSelectors.getSolicitudQuiebre);
+  }
+
+  // SOLICITAR QUIEBRE OT
+  public solicitarQuiebre(request: ReqSolicitarQuiebre): void {
+    this.store.dispatch(flujoOTActions.solicitarQuiebre({ request }));
+  }
+
+  //  QUIEBRE OT
+  public quiebre(request: ReqQuiebre): void {
+    this.store.dispatch(flujoOTActions.quiebre({ request }));
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE OT
+  public aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.aprobarRechazarSolicitudQuiebre({ request })
+    );
+  }
+
+  // DESQUIEBRE OT
+  public desquiebre(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.desquiebre({ ot_id }));
+  }
+
+  // CIERRE ADMINISTRATIVO OT
+  public cierreAdministrativo(request: ReqCierreAdministrativo): void {
+    this.store.dispatch(flujoOTActions.cierreAdministrativo({ request }));
   }
 }

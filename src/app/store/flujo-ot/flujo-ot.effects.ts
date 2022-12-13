@@ -196,6 +196,100 @@ export class FlujoOTEffects {
     )
   );
 
+  // GET SOLICITAR QUIEBRE OT
+  getSolicitudQuiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.getSolicitudQuiebre),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.getSolicitudQuiebre(ot_id).pipe(
+          map(response =>
+            flujoOTActions.getSolicitudQuiebreSuccess({
+              lastSolicitudQuiebre: response.data,
+            })
+          ),
+          catchError(error =>
+            of(flujoOTActions.getSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SOLICITAR QUIEBRE OT
+  solicitarQuiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarQuiebre),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.solicitarQuiebre(request).pipe(
+          map(response => flujoOTActions.solicitarQuiebreSuccess({ response })),
+          catchError(error =>
+            of(flujoOTActions.solicitarQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // QUIEBRE OT
+  quiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.quiebre),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.quiebre(request).pipe(
+          map(response => flujoOTActions.quiebreSuccess({ response })),
+          catchError(error => of(flujoOTActions.quiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // APROBAR/RECHAZAR QUIEBRE OT
+  aprobarRechazarSolicitudQuiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarSolicitudQuiebre),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.aprobarRechazarSolicitudQuiebre(request).pipe(
+          map(response =>
+            flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.aprobarRechazarSolicitudQuiebreError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // DESQUIEBRE OT
+  desquiebre$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.desquiebre),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.desquiebre(ot_id).pipe(
+          map(response => flujoOTActions.desquiebreSuccess({ response })),
+          catchError(error => of(flujoOTActions.desquiebreError({ error })))
+        )
+      )
+    )
+  );
+
+  // CIERRE ADMINISTRATIVO OT
+  cierreAdministrativo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.cierreAdministrativo),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.cierreAdministrativo(request).pipe(
+          map(response =>
+            flujoOTActions.cierreAdministrativoSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.cierreAdministrativoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -208,7 +302,11 @@ export class FlujoOTEffects {
           flujoOTActions.confirmarRechazoObrasSuccess,
           flujoOTActions.cerrarOTSuccess,
           flujoOTActions.anularOTSuccess,
-          flujoOTActions.rechazarOTProveedorSuccess
+          flujoOTActions.rechazarOTProveedorSuccess,
+          flujoOTActions.solicitarQuiebreSuccess,
+          flujoOTActions.desquiebreSuccess,
+          flujoOTActions.cierreAdministrativoSuccess,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -229,7 +327,12 @@ export class FlujoOTEffects {
           flujoOTActions.confirmarRechazoObrasError,
           flujoOTActions.cerrarOTError,
           flujoOTActions.anularOTError,
-          flujoOTActions.rechazarOTProveedorError
+          flujoOTActions.rechazarOTProveedorError,
+          flujoOTActions.solicitarQuiebreError,
+          flujoOTActions.desquiebreError,
+          flujoOTActions.cierreAdministrativoError,
+          flujoOTActions.getSolicitudQuiebreError,
+          flujoOTActions.aprobarRechazarSolicitudQuiebreError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

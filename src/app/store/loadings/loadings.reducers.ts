@@ -12,6 +12,7 @@ import * as sustentoFinancieroActions from '../sustento-financiero/sustento-fina
 import * as proyectosActions from '../proyectos/proyectos.actions';
 import * as informeAvanceActions from '../informe-avance/informe-avance.actions';
 import * as actaActions from '../acta/acta.actions';
+import * as flujoOt from '../flujo-ot/flujo-ot.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -50,6 +51,7 @@ export interface StateLoadings {
   sendingGetAdminContratoFromCub: boolean;
   sendingGetProyectos: boolean;
   sendingCreateOT: boolean;
+  sendingUpdateSustentoFinanciero: boolean;
   sendingDownloadOTsAsignadas: boolean;
   sendingGetPosibleSupervisorTrabajos: boolean;
   sendingSendDetalleInformeAvance: boolean;
@@ -57,6 +59,7 @@ export interface StateLoadings {
   sendingGetPerfiles: boolean;
   sendingInformarTrabajosFinalizados: boolean;
   sendingAprobacionPago: boolean;
+  sendingLastSolicitudQuiebre: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -95,6 +98,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAdminContratoFromCub: false,
   sendingGetProyectos: false,
   sendingCreateOT: false,
+  sendingUpdateSustentoFinanciero: false,
   sendingDownloadOTsAsignadas: false,
   sendingGetPosibleSupervisorTrabajos: false,
   sendingSendDetalleInformeAvance: false,
@@ -102,6 +106,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetPerfiles: false,
   sendingInformarTrabajosFinalizados: false,
   sendingAprobacionPago: false,
+  sendingLastSolicitudQuiebre: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -539,6 +544,19 @@ export const reducerLoadings = createReducer(
     sendingCreateOT: false,
   })),
 
+  on(sustentoFinancieroActions.updateSustentoFinanciero, state => ({
+    ...state,
+    sendingUpdateSustentoFinanciero: true,
+  })),
+  on(
+    sustentoFinancieroActions.updateSustentoFinancieroSuccess,
+    sustentoFinancieroActions.updateSustentoFinancieroError,
+    state => ({
+      ...state,
+      sendingUpdateSustentoFinanciero: false,
+    })
+  ),
+
   on(informeAvanceActions.sendDetalleInformeAvance, state => ({
     ...state,
     sendingSendDetalleInformeAvance: true,
@@ -618,6 +636,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingDownloadOTsAsignadas: false,
+    })
+  ),
+
+  on(flujoOt.getSolicitudQuiebre, state => ({
+    ...state,
+    sendingLastSolicitudQuiebre: true,
+  })),
+  on(
+    flujoOt.getSolicitudQuiebreSuccess,
+    flujoOt.getSolicitudQuiebreError,
+    state => ({
+      ...state,
+      sendingLastSolicitudQuiebre: false,
     })
   )
 );

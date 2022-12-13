@@ -99,7 +99,19 @@
                                 <a href="#getDatabaseVersion" >getDatabaseVersion</a>
                             </li>
                             <li>
+                                <a href="#getNotificaciones" >getNotificaciones</a>
+                            </li>
+                            <li>
+                                <a href="#getPerfilesUser" >getPerfilesUser</a>
+                            </li>
+                            <li>
                                 <a href="#logIn" >logIn</a>
+                            </li>
+                            <li>
+                                <a href="#logIn2FA" >logIn2FA</a>
+                            </li>
+                            <li>
+                                <a href="#marcarNotificaciones" >marcarNotificaciones</a>
                             </li>
                             <li>
                                 <a href="#refeshLogin" >refeshLogin</a>
@@ -127,7 +139,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/service/auth-http.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/service/auth-http.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -190,8 +202,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/app/core/service/auth-http.service.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -227,8 +239,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/core/service/auth-http.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:47</a></div>
                 </td>
             </tr>
 
@@ -239,6 +251,112 @@
                     <div class="io-description">
                         <b>Returns : </b>    <code>Observable&lt;Response&lt;DatabaseVersion&gt;&gt;</code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNotificaciones"></a>
+                    <span class="name">
+                        <span ><b>getNotificaciones</b></span>
+                        <a href="#getNotificaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNotificaciones()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:69</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPerfilesUser"></a>
+                    <span class="name">
+                        <span ><b>getPerfilesUser</b></span>
+                        <a href="#getPerfilesUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPerfilesUser(usuario_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>usuario_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -264,8 +382,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">src/app/core/service/auth-http.service.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:22</a></div>
                 </td>
             </tr>
 
@@ -329,6 +447,144 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="logIn2FA"></a>
+                    <span class="name">
+                        <span ><b>logIn2FA</b></span>
+                        <a href="#logIn2FA"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logIn2FA(two_fa_code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>two_fa_code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="marcarNotificaciones"></a>
+                    <span class="name">
+                        <span ><b>marcarNotificaciones</b></span>
+                        <a href="#marcarNotificaciones"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>marcarNotificaciones(id: number[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:76</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                            <code>number[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="refeshLogin"></a>
                     <span class="name">
                         <span ><b>refeshLogin</b></span>
@@ -345,8 +601,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/core/service/auth-http.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/core/service/auth-http.service.ts:38</a></div>
                 </td>
             </tr>
 
@@ -424,7 +680,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/service/auth-http.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/service/auth-http.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -441,7 +697,13 @@
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { environment } from &#x27;@environment&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { Response, Login,DatabaseVersion } from &#x27;@model&#x27;;
+import {
+  Response,
+  Login,
+  DatabaseVersion,
+  PerfilesUsuario,
+  Notificacion,
+} from &#x27;@model&#x27;;
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
@@ -457,6 +719,15 @@ export class AuthHttpService {
       username,
       password,
     });
+  }
+
+  logIn2FA(two_fa_code: string): Observable&lt;Response&lt;any&gt;&gt; {
+    return this.http.post&lt;Response&lt;Login&gt;&gt;(
+      &#x60;${this.API_URL}/login/two_fa_validation&#x60;,
+      {
+        two_fa_code,
+      }
+    );
   }
 
   refeshLogin(proxy_id: number): Observable&lt;Response&lt;{ token: string }&gt;&gt; {
@@ -478,6 +749,29 @@ export class AuthHttpService {
   getAPIVersion(): Observable&lt;Response&lt;{ api_version: string }&gt;&gt; {
     return this.http.get&lt;Response&lt;{ api_version: string }&gt;&gt;(
       &#x60;${this.API_URL}/configuration/api/version/get&#x60;
+    );
+  }
+
+  getPerfilesUser(
+    usuario_id: number
+  ): Observable&lt;Response&lt;{ perfiles: PerfilesUsuario[] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ perfiles: PerfilesUsuario[] }&gt;&gt;(
+      &#x60;${this.API_URL}/usuario/perfiles/get&#x60;,
+      { usuario_id }
+    );
+  }
+
+  getNotificaciones(): Observable&lt;Response&lt;{ items: Notificacion[] }&gt;&gt; {
+    return this.http.post&lt;Response&lt;{ items: Notificacion[] }&gt;&gt;(
+      &#x60;${this.API_URL}/usuario/bandeja_notificacion/get&#x60;,
+      {}
+    );
+  }
+
+  marcarNotificaciones(id: number[]): Observable&lt;Response&lt;any&gt;&gt; {
+    return this.http.post&lt;Response&lt;any&gt;&gt;(
+      &#x60;${this.API_URL}/usuario/bandeja_notificacion/check&#x60;,
+      { id }
     );
   }
 }

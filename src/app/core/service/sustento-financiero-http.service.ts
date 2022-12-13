@@ -1,7 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { CECO, LP, OPEX, PEP2, PMO, Response, SAP } from '@model';
+import {
+  CECO,
+  LP,
+  OPEX,
+  PEP2,
+  PMO,
+  Response,
+  SAP,
+  SustentoFinancieroReq,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -63,6 +72,16 @@ export class SustentoFinancieroHttpService {
     return this.http.post<Response<{ items: CECO[] }>>(
       `${this.API_URL}/ot/sustento_financiero_opex_opxsap/get`,
       { id_opex, cuenta_sap }
+    );
+  }
+
+  updateSustentoFinanciero(
+    ot_id: number,
+    values: SustentoFinancieroReq
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/update_sustento_financiero/update`,
+      { ot_id, values }
     );
   }
 }

@@ -70,6 +70,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
 
 
 <section>
@@ -115,6 +122,95 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#displayModalEliminarPerfil" >displayModalEliminarPerfil</a>
+                            </li>
+                            <li>
+                                <a href="#DisplayPermisosPerfilModal" >DisplayPermisosPerfilModal</a>
+                            </li>
+                            <li>
+                                <a href="#editIcon" >editIcon</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetPerfiles$" >loadingGetPerfiles$</a>
+                            </li>
+                            <li>
+                                <a href="#perfil_id" >perfil_id</a>
+                            </li>
+                            <li>
+                                <a href="#perfiles$" >perfiles$</a>
+                            </li>
+                            <li>
+                                <a href="#permisosIcon" >permisosIcon</a>
+                            </li>
+                            <li>
+                                <a href="#PermisosPerfil$" >PermisosPerfil$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#trashICon" >trashICon</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeModalEliminarPerfil" >closeModalEliminarPerfil</a>
+                            </li>
+                            <li>
+                                <a href="#closeModalPermisosPerfil" >closeModalPermisosPerfil</a>
+                            </li>
+                            <li>
+                                <a href="#eliminar" >eliminar</a>
+                            </li>
+                            <li>
+                                <a href="#EliminarPerfil" >EliminarPerfil</a>
+                            </li>
+                            <li>
+                                <a href="#getPermissionsGroup" >getPermissionsGroup</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#verPermisos" >verPermisos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
 
     <section>
     <h3 id="constructor">Constructor</h3>
@@ -122,15 +218,57 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(profileFacade: <a href="../injectables/PerfilFacade.html" target="_self">PerfilFacade</a>, loadingFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:55</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>profileFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PerfilFacade.html" target="_self" >PerfilFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -139,35 +277,1009 @@
 
 
 
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModalEliminarPerfil"></a>
+                    <span class="name">
+                        <span ><b>closeModalEliminarPerfil</b></span>
+                        <a href="#closeModalEliminarPerfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModalEliminarPerfil()</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:73</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModalPermisosPerfil"></a>
+                    <span class="name">
+                        <span ><b>closeModalPermisosPerfil</b></span>
+                        <a href="#closeModalPermisosPerfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModalPermisosPerfil()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:68</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminar"></a>
+                    <span class="name">
+                        <span ><b>eliminar</b></span>
+                        <a href="#eliminar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminar(perfil: <a href="../interfaces/ListarPerfil.html" target="_self">ListarPerfil</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:110</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>perfil</td>
+                                    <td>
+                                                <code><a href="../interfaces/ListarPerfil.html" target="_self" >ListarPerfil</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EliminarPerfil"></a>
+                    <span class="name">
+                        <span ><b>EliminarPerfil</b></span>
+                        <a href="#EliminarPerfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>EliminarPerfil()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPermissionsGroup"></a>
+                    <span class="name">
+                        <span ><b>getPermissionsGroup</b></span>
+                        <a href="#getPermissionsGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPermissionsGroup(permissions: PermisosPerfil[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>permissions</td>
+                                    <td>
+                                            <code>PermisosPerfil[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/PermissionsGroup.html" target="_self" >PermissionsGroup[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:115</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verPermisos"></a>
+                    <span class="name">
+                        <span ><b>verPermisos</b></span>
+                        <a href="#verPermisos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>verPermisos(perfil: <a href="../interfaces/ListarPerfil.html" target="_self">ListarPerfil</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:105</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>perfil</td>
+                                    <td>
+                                                <code><a href="../interfaces/ListarPerfil.html" target="_self" >ListarPerfil</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayModalEliminarPerfil"></a>
+                    <span class="name">
+                        <span ><b>displayModalEliminarPerfil</b></span>
+                        <a href="#displayModalEliminarPerfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DisplayPermisosPerfilModal"></a>
+                    <span class="name">
+                        <span ><b>DisplayPermisosPerfilModal</b></span>
+                        <a href="#DisplayPermisosPerfilModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editIcon"></a>
+                    <span class="name">
+                        <span ><b>editIcon</b></span>
+                        <a href="#editIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPencil</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetPerfiles$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetPerfiles$</b></span>
+                        <a href="#loadingGetPerfiles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingFacade.sendingGetPerfiles$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="perfil_id"></a>
+                    <span class="name">
+                        <span ><b>perfil_id</b></span>
+                        <a href="#perfil_id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="perfiles$"></a>
+                    <span class="name">
+                        <span ><b>perfiles$</b></span>
+                        <a href="#perfiles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;ListarPerfil[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.profileFacade.getProfile$().pipe(
+    map(perfiles &#x3D;&gt;
+      perfiles?.map(perfil &#x3D;&gt; ({
+        ...perfil,
+        rol: perfil.model_rol_id.nombre,
+        estado: true,
+      }))
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="permisosIcon"></a>
+                    <span class="name">
+                        <span ><b>permisosIcon</b></span>
+                        <a href="#permisosIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faEye</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PermisosPerfil$"></a>
+                    <span class="name">
+                        <span ><b>PermisosPerfil$</b></span>
+                        <a href="#PermisosPerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/PermissionsGroup.html" target="_self" >Observable&lt;PermissionsGroup[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.profileFacade
+    .getPermisosPerfil$()
+    .pipe(map(perfiles &#x3D;&gt; this.getPermissionsGroup(perfiles)))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trashICon"></a>
+                    <span class="name">
+                        <span ><b>trashICon</b></span>
+                        <a href="#trashICon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faTrash</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/administracion/perfiles/containers/list-perfiles-container/list-perfiles-container.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Observable, of, Subscription } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { PerfilFacade } from &#x27;@storeOT/perfil/perfil.facades&#x27;;
+import * as _ from &#x27;lodash&#x27;;
+import {
+  ListarPerfil,
+  Perfil,
+  Permiso,
+  PermisosPerfil,
+  PermissionsGroup,
+} from &#x27;@model&#x27;;
+//// import { ListProTableService } from &#x27;./list-pro-table.service&#x27;;
+import { faEye, faPencil, faTrash } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
 
 @Component({
   selector: &#x27;zwc-list-perfiles-container&#x27;,
   templateUrl: &#x27;./list-perfiles-container.component.html&#x27;,
   styleUrls: [&#x27;./list-perfiles-container.component.scss&#x27;],
 })
-export class ListPerfilesContainerComponent {
-  constructor() {}
+export class ListPerfilesContainerComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
+
+  // DATOS A USAR
+  perfiles$: Observable&lt;ListarPerfil[]&gt; &#x3D; this.profileFacade.getProfile$().pipe(
+    map(perfiles &#x3D;&gt;
+      perfiles?.map(perfil &#x3D;&gt; ({
+        ...perfil,
+        rol: perfil.model_rol_id.nombre,
+        estado: true,
+      }))
+    )
+  );
+
+  PermisosPerfil$: Observable&lt;PermissionsGroup[]&gt; &#x3D; this.profileFacade
+    .getPermisosPerfil$()
+    .pipe(map(perfiles &#x3D;&gt; this.getPermissionsGroup(perfiles)));
+
+  // LOADINGS
+  loadingGetPerfiles$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingFacade.sendingGetPerfiles$();
+
+  // DISPLAY MODALS
+  DisplayPermisosPerfilModal &#x3D; false;
+  displayModalEliminarPerfil &#x3D; false;
+
+  // EXTRAS
+  perfil_id: number | null &#x3D; null;
+
+  // ICONS
+  permisosIcon &#x3D; faEye;
+  editIcon &#x3D; faPencil;
+  trashICon &#x3D; faTrash;
+
+  // CONSTRUCTOR
+  constructor(
+    private profileFacade: PerfilFacade,
+    private loadingFacade: LoadingsFacade
+  ) {}
+
+  ngOnInit(): void {
+    this.profileFacade.resetData();
+    this.profileFacade.getProfile();
+  }
+
+  closeModalPermisosPerfil(): void {
+    this.profileFacade.resetPermisosPerfil();
+    this.DisplayPermisosPerfilModal &#x3D; false;
+  }
+
+  closeModalEliminarPerfil(): void {
+    this.displayModalEliminarPerfil &#x3D; false;
+    this.perfil_id &#x3D; null;
+  }
+
+  EliminarPerfil(): void {
+    if (this.perfil_id) {
+      this.profileFacade.eliminarPerfil(this.perfil_id);
+      this.closeModalEliminarPerfil();
+      setTimeout(() &#x3D;&gt; {
+        this.profileFacade.getProfile();
+      }, 700);
+    }
+  }
+
+  getPermissionsGroup(permissions: PermisosPerfil[]): PermissionsGroup[] {
+    const data &#x3D; permissions?.map(permit &#x3D;&gt; {
+      let permitCustom: any;
+      if (permit &amp;&amp; permit.model_permiso_id.slug) {
+        permitCustom &#x3D; {
+          ...permit,
+          module: permit.model_permiso_id.slug.split(&#x27;_&#x27;)[0],
+        };
+      }
+      return permitCustom;
+    });
+    return _.chain(data)
+      .groupBy(&#x27;module&#x27;)
+      .map((value, key) &#x3D;&gt; ({ module: key, permissions: value }))
+      .value();
+  }
+
+  verPermisos(perfil: ListarPerfil): void {
+    this.DisplayPermisosPerfilModal &#x3D; true;
+    this.profileFacade.getPermisosPerfil(perfil.id);
+  }
+
+  eliminar(perfil: ListarPerfil): void {
+    this.displayModalEliminarPerfil &#x3D; true;
+    this.perfil_id &#x3D; perfil.id;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;list-perfiles-container works!&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid&quot;&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col&quot; id&#x3D;&quot;title-list-profile&quot;&gt;
+      &lt;h1 class&#x3D;&quot;mt-4&quot;&gt;Perfiles &lt;/h1&gt;
+      &lt;span&gt;listado de perfiles en sistema&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col&quot;&gt;
+      &lt;button [routerLink]&#x3D;&quot;[&#x27;/administracion/perfiles/form-perfiles&#x27;]&quot; pButton type&#x3D;&quot;button&quot; label&#x3D;&quot;Nuevo Perfil&quot;
+        icon&#x3D;&quot;pi pi-plus&quot; class&#x3D;&quot;p-button-sm mt-5 float-right&quot; id&#x3D;&quot;add-profile-button&quot;&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-12&quot;&gt;
+      &lt;hr&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;card-body&quot;&gt;
+      &lt;div class&#x3D;&quot; grid&quot;&gt;
+        &lt;div class&#x3D;&quot;field col-12 table-list-perfiles&quot;&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;perfiles$ | async as perfiles&quot;&gt;
+            &lt;p-table #dt [columns]&#x3D;&quot;[&#x27;nombre&#x27;, &#x27;descripcion&#x27;, &#x27;created_at&#x27;, &#x27;superior&#x27;]&quot; [value]&#x3D;&quot;perfiles&quot; dataKey&#x3D;&quot;id&quot;
+              styleClass&#x3D;&quot;p-datatable-sm p-datatable-gridlines&quot; responsiveLayout&#x3D;&quot;scroll&quot; [paginator]&#x3D;&quot;true&quot;
+              [rows]&#x3D;&quot;10&quot;&gt;
+              &lt;ng-template pTemplate&#x3D;&quot;caption&quot;&gt;
+                &lt;div class&#x3D;&quot;p-d-flex p-ai-center p-jc-between&quot;&gt;
+                  &lt;h5 class&#x3D;&quot;p-m-0&quot;&gt;&lt;/h5&gt;
+                  &lt;span class&#x3D;&quot;p-input-icon-left&quot;&gt;
+                    &lt;i class&#x3D;&quot;pi pi-search&quot;&gt;&lt;/i&gt;
+                    &lt;input pInputText type&#x3D;&quot;text&quot; (input)&#x3D;&quot;dt.filterGlobal($event.target.value, &#x27;contains&#x27;)&quot;
+                      placeholder&#x3D;&quot;Buscar...&quot; /&gt;
+                  &lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/ng-template&gt;
+
+              &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+                &lt;tr&gt;
+                  &lt;th pSortableColumn&#x3D;&quot;nombre&quot;&gt;
+                    Nombre Perfil
+                    &lt;p-sortIcon field&#x3D;&quot;nombre&quot;&gt;&lt;/p-sortIcon&gt;
+                  &lt;/th&gt;
+                  &lt;th pSortableColumn&#x3D;&quot;rol&quot;&gt;
+                    Rol
+                    &lt;p-sortIcon field&#x3D;&quot;rol&quot;&gt;&lt;/p-sortIcon&gt;
+                  &lt;/th&gt;
+                  &lt;th pSortableColumn&#x3D;&quot;descripcion&quot;&gt;
+                    Descripción
+                    &lt;p-sortIcon field&#x3D;&quot;descripcion&quot;&gt;&lt;/p-sortIcon&gt;
+                  &lt;/th&gt;
+                  &lt;th pSortableColumn&#x3D;&quot;created_at&quot;&gt;
+                    Fecha Creación
+                    &lt;p-sortIcon field&#x3D;&quot;created_at&quot;&gt;&lt;/p-sortIcon&gt;
+                  &lt;/th&gt;
+                  &lt;th pSortableColumn&#x3D;&quot;updated_at&quot;&gt;
+                    Fecha Modificación
+                    &lt;p-sortIcon field&#x3D;&quot;updated_at&quot;&gt;&lt;/p-sortIcon&gt;
+                  &lt;/th&gt;
+                  &lt;th&gt;Operaciones&lt;/th&gt;
+                &lt;tr&gt;
+              &lt;/ng-template&gt;
+
+              &lt;ng-template pTemplate&#x3D;&quot;body&quot; let-item let-rowIndex&#x3D;&quot;rowIndex&quot;&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;
+                    &lt;strong&gt;{{ item.nombre }}&lt;/strong&gt;
+                  &lt;/td&gt;
+                  &lt;td&gt;{{ item.model_rol_id.nombre }}&lt;/td&gt;
+                  &lt;td&gt;{{ item.descripcion }}&lt;/td&gt;
+                  &lt;td style&#x3D;&quot;text-align: right;&quot;&gt;{{ item.created_at | date:&#x27;dd-MM-yyyy&#x27; }}&lt;/td&gt;
+                  &lt;td style&#x3D;&quot;text-align: right;&quot;&gt;{{ item.updated_at | date:&#x27;dd-MM-yyyy&#x27; }}&lt;/td&gt;
+                  &lt;td&gt;
+                    &lt;div class&#x3D;&quot;buttons-operaciones &quot;&gt;
+                      &lt;button (click)&#x3D;&quot;verPermisos(item)&quot; id&#x3D;&quot;button-ver-permisos&quot;&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;permisosIcon&quot;&gt;&lt;/fa-icon&gt; Ver Permisos
+                      &lt;/button&gt;
+                      &lt;button [disabled]&#x3D;&quot;!item.eliminable&quot; [pTooltip]&#x3D;&quot;!item.eliminable?&#x27;No es editable&#x27;:&#x27;&#x27;&quot;
+                        [routerLink]&#x3D;&quot;[&#x27;/administracion/perfiles/form-perfiles&#x27;,item.id]&quot; id&#x3D;&quot;button-editar-cubicacion&quot;&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;editIcon&quot;&gt;&lt;/fa-icon&gt; Editar
+                      &lt;/button&gt;
+                      &lt;button [disabled]&#x3D;&quot;!item.eliminable&quot; (click)&#x3D;&quot;eliminar(item)&quot; id&#x3D;&quot;button-eliminar-perfil&quot;
+                        [pTooltip]&#x3D;&quot;!item.eliminable?&#x27;No es eliminable&#x27;:&#x27;&#x27;&quot; class&#x3D;&quot;delete-button&quot;&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;Eliminar
+                      &lt;/button&gt;
+                    &lt;/div&gt;
+                  &lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/ng-template&gt;
+
+              &lt;ng-template pTemplate&#x3D;&quot;summary&quot;&gt;
+                &lt;div class&#x3D;&quot;p-d-flex p-ai-center p-jc-between&quot;&gt;
+                  En total hay {{ perfiles ? perfiles.length : 0 }} elementos.
+                &lt;/div&gt;
+              &lt;/ng-template&gt;
+            &lt;/p-table&gt;
+          &lt;/ng-container&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p-dialog header&#x3D;&quot;Detalles permisos&quot; [(visible)]&#x3D;&quot;DisplayPermisosPerfilModal&quot; [draggable]&#x3D;&quot;false&quot; [modal]&#x3D;&quot;true&quot;
+  (onHide)&#x3D;&quot;closeModalPermisosPerfil()&quot;&gt;
+  &lt;ng-container&gt;
+    &lt;div class&#x3D;&quot;loading-modal-content&quot; *ngIf&#x3D;&quot;loadingGetPerfiles$|async  ; else content&quot;&gt;
+      &lt;p&gt;Loading...&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-template #content&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div *ngFor&#x3D;&quot;let item of PermisosPerfil$|async&quot; class&#x3D;&quot;col-xs-12 col-md-4 pt-2&quot;
+        id&#x3D;&quot;permisos-modulo-{{item.module}}&quot;&gt;
+        &lt;p-listbox [options]&#x3D;&quot;item.permissions&quot; optionLabel&#x3D;&quot;model_permiso_id.nombre_corto&quot; optionDisabled&#x3D;&quot;inactive&quot;
+          [disabled]&#x3D;&quot;true&quot;&gt;
+          &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+            {{item.module}}
+          &lt;/ng-template&gt;
+        &lt;/p-listbox&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+&lt;/p-dialog&gt;
+
+
+
+&lt;p-dialog [visible]&#x3D;&quot;displayModalEliminarPerfil&quot; [closable]&#x3D;&quot;false&quot; (onHide)&#x3D;&quot;closeModalEliminarPerfil()&quot; [modal]&#x3D;&quot;true&quot;
+  [draggable]&#x3D;&quot;false&quot; [resizable]&#x3D;&quot;false&quot;&gt;
+  &lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;col&quot;&gt;
+      &lt;p style&#x3D;&quot;font-size:20px;font-weight: 500;color:#003049;text-align: center;&quot;&gt;¿Está seguro que desea eliminar este
+        perfil?&lt;/p&gt;
+      &lt;div style&#x3D;&quot;padding: 0 9rem 0 9rem;&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;button pButton type&#x3D;&quot;button&quot; (click)&#x3D;&quot;EliminarPerfil()&quot; label&#x3D;&quot;Si, confirmo&quot; icon&#x3D;&quot;pi pi-trash&quot;
+              class&#x3D;&quot;p-button-sm mt-5 float-right&quot; id&#x3D;&quot;delete-perfil-user-button&quot;
+              style&#x3D;&quot;background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;&quot;&gt;&lt;/button&gt;
+            &amp;nbsp;
+            &lt;button pButton type&#x3D;&quot;button&quot; (click)&#x3D;&quot;closeModalEliminarPerfil()&quot; label&#x3D;&quot;Cancelar&quot;
+              class&#x3D;&quot;p-button-sm mt-5 float-right&quot; id&#x3D;&quot;delete-user-button&quot; style&#x3D;&quot;background: #b8b6b6;
+              border: gray;&quot;&gt;&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p-footer&gt;&lt;/p-footer&gt;
+&lt;/p-dialog&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./list-perfiles-container.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">:host ::ng-deep {
+    .p-listbox {
+        font-size: 0.7rem;
+    }
+
+    .p-listbox-header {
+        background: #000242;
+        color: white;
+        font-weight: 500;
+    }
+
+    .p-inputtext {
+        height: 11px;
+        font-size: 0.7rem;
+    }
+
+    .delete-button {
+        background-color: #d20000db !important;
+
+        &amp;:disabled {
+            background-color: #fb6262 !important
+        }
+    }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -195,8 +1307,8 @@ export class ListPerfilesContainerComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>list-perfiles-container works!</p></div>'
-    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid">  <div class="row">    <div class="col" id="title-list-profile">      <h1 class="mt-4">Perfiles </h1>      <span>listado de perfiles en sistema</span>    </div>    <div class="col">      <button [routerLink]="[\'/administracion/perfiles/form-perfiles\']" pButton type="button" label="Nuevo Perfil"        icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>    </div>    <div class="col-12">      <hr>    </div>  </div>  <div class="card">    <div class="card-body">      <div class=" grid">        <div class="field col-12 table-list-perfiles">          <ng-container *ngIf="perfiles$ | async as perfiles">            <p-table #dt [columns]="[\'nombre\', \'descripcion\', \'created_at\', \'superior\']" [value]="perfiles" dataKey="id"              styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true"              [rows]="10">              <ng-template pTemplate="caption">                <div class="p-d-flex p-ai-center p-jc-between">                  <h5 class="p-m-0"></h5>                  <span class="p-input-icon-left">                    <i class="pi pi-search"></i>                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, \'contains\')"                      placeholder="Buscar..." />                  </span>                </div>              </ng-template>              <ng-template pTemplate="header">                <tr>                  <th pSortableColumn="nombre">                    Nombre Perfil                    <p-sortIcon field="nombre"></p-sortIcon>                  </th>                  <th pSortableColumn="rol">                    Rol                    <p-sortIcon field="rol"></p-sortIcon>                  </th>                  <th pSortableColumn="descripcion">                    Descripción                    <p-sortIcon field="descripcion"></p-sortIcon>                  </th>                  <th pSortableColumn="created_at">                    Fecha Creación                    <p-sortIcon field="created_at"></p-sortIcon>                  </th>                  <th pSortableColumn="updated_at">                    Fecha Modificación                    <p-sortIcon field="updated_at"></p-sortIcon>                  </th>                  <th>Operaciones</th>                <tr>              </ng-template>              <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">                <tr>                  <td>                    <strong>{{ item.nombre }}</strong>                  </td>                  <td>{{ item.model_rol_id.nombre }}</td>                  <td>{{ item.descripcion }}</td>                  <td style="text-align: right;">{{ item.created_at | date:\'dd-MM-yyyy\' }}</td>                  <td style="text-align: right;">{{ item.updated_at | date:\'dd-MM-yyyy\' }}</td>                  <td>                    <div class="buttons-operaciones ">                      <button (click)="verPermisos(item)" id="button-ver-permisos">                        <fa-icon [icon]="permisosIcon"></fa-icon> Ver Permisos                      </button>                      <button [disabled]="!item.eliminable" [pTooltip]="!item.eliminable?\'No es editable\':\'\'"                        [routerLink]="[\'/administracion/perfiles/form-perfiles\',item.id]" id="button-editar-cubicacion">                        <fa-icon [icon]="editIcon"></fa-icon> Editar                      </button>                      <button [disabled]="!item.eliminable" (click)="eliminar(item)" id="button-eliminar-perfil"                        [pTooltip]="!item.eliminable?\'No es eliminable\':\'\'" class="delete-button">                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar                      </button>                    </div>                  </td>                </tr>              </ng-template>              <ng-template pTemplate="summary">                <div class="p-d-flex p-ai-center p-jc-between">                  En total hay {{ perfiles ? perfiles.length : 0 }} elementos.                </div>              </ng-template>            </p-table>          </ng-container>        </div>      </div>    </div>  </div></div><p-dialog header="Detalles permisos" [(visible)]="DisplayPermisosPerfilModal" [draggable]="false" [modal]="true"  (onHide)="closeModalPermisosPerfil()">  <ng-container>    <div class="loading-modal-content" *ngIf="loadingGetPerfiles$|async  ; else content">      <p>Loading...</p>    </div>  </ng-container>  <ng-template #content>    <div class="row">      <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"        id="permisos-modulo-{{item.module}}">        <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"          [disabled]="true">          <ng-template pTemplate="header">            {{item.module}}          </ng-template>        </p-listbox>      </div>    </div>  </ng-template></p-dialog><p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true"  [draggable]="false" [resizable]="false">  <div class="row">    <div class="col">      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este        perfil?</p>      <div style="padding: 0 9rem 0 9rem;">        <div class="row">          <div class="col">          </div>        </div>        <div class="row">          <div class="col">            <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash"              class="p-button-sm mt-5 float-right" id="delete-perfil-user-button"              style="background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;"></button>            &nbsp;            <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar"              class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;              border: gray;"></button>          </div>        </div>      </div>    </div>  </div>  <p-footer></p-footer></p-dialog></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'ActaPorServicioFormComponent', 'selector': 'zwc-acta-por-servicio-form'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CosteoComponent', 'selector': 'zwc-costeo'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtNumeroInternoComponent', 'selector': 'zwc-formulario-ot-numero-interno'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasContainerComponent', 'selector': 'zwc-list-actas-container'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListPerfilesUsuarioContainerComponent', 'selector': 'zwc-list-perfiles-usuario-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuAdminComponent', 'selector': 'zwc-menu-admin'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MenuReportesComponent', 'selector': 'zwc-menu-reportes'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'OtsAsignadasComponent', 'selector': 'zwc-ots-asignadas'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'RegistrarLibroObrasComponent', 'selector': 'zwc-registrar-libro-obras'},{'name': 'ReportesComponent', 'selector': 'zwc-reportes'},{'name': 'ResultadoIngenieriaContainerComponent', 'selector': 'zwc-resultado-ingenieria-container'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'TwoFactorAuthenticationComponent', 'selector': 'zwc-two-factor-authentication'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ValidarActaOperacionesContainerComponent', 'selector': 'zwc-validar-acta-operaciones-container'},{'name': 'ValidarIngenieriaContainerComponent', 'selector': 'zwc-validar-ingenieria-container'},{'name': 'ValidarPagoActaContainerComponent', 'selector': 'zwc-validar-pago-acta-container'},{'name': 'VerIngenieriaContainerComponent', 'selector': 'zwc-ver-ingenieria-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'ListPerfilesContainerComponent'};
 </script>

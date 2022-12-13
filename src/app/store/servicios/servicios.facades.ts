@@ -3,6 +3,7 @@ import {
   CarritoService,
   ContratosUser,
   PerfilesUsuario,
+  ReqSubirEvidencia,
   RequestAdicionales,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
@@ -136,6 +137,19 @@ export class ServiciosFacade {
   ): void {
     this.store.dispatch(
       serviciosActions.eliminarAdicional({ servicio_adicional, unidad_obra })
+    );
+  }
+
+  // SUBIR ARCHIVO EVIDENCIAS
+  public subirArchivoYregistrarEvidencia(
+    files: any,
+    request_evidencia: ReqSubirEvidencia
+  ): void {
+    this.store.dispatch(
+      serviciosActions.subirArchivoYregistrarEvidencia({
+        files,
+        request_evidencia,
+      })
     );
   }
 

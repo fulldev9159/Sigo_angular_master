@@ -74,6 +74,8 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { AccionesOTResolver } from &#x27;src/app/core/resolvers/accionesOT.resolver&#x27;;
+import { DetalleCubicacionFromOTResolver } from &#x27;src/app/core/resolvers/detalleCubicacionFromOT.resolver&#x27;;
 import { DetalleOTResolver } from &#x27;src/app/core/resolvers/detalleOT.resolver&#x27;;
 import { RegistroLibroLobrasResolver } from &#x27;src/app/core/resolvers/registrosLibroObras.resolver&#x27;;
 import { AnexosComponent } from &#x27;./components/anexos/anexos.component&#x27;;
@@ -93,6 +95,7 @@ const routes: Routes &#x3D; [
         component: InformacionComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
+          accionesOT: AccionesOTResolver,
         },
       },
       {
@@ -100,6 +103,7 @@ const routes: Routes &#x3D; [
         component: CosteoComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
+          cubicacion: DetalleCubicacionFromOTResolver,
         },
       },
       {

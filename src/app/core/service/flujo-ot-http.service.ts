@@ -2,13 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqCierreAdministrativo,
+  ReqQuiebre,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   Response,
 } from '@model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -112,5 +117,61 @@ export class FlujoOtHttpService {
     return this.http.post<Response<any>>(`${this.API_URL}/ot/ot/anular`, {
       ot_id,
     });
+  }
+
+  // GET SOLICITUD QUIEBRE
+  getSolicitudQuiebre(
+    ot_id: number
+  ): Observable<Response<LastSolicitudQuiebre>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre/getlast`,
+      { ot_id }
+    );
+  }
+
+  // SOLICITUD DE QUIEBRE
+  solicitarQuiebre(request: ReqSolicitarQuiebre): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre/create`,
+      request
+    );
+  }
+
+  //  QUIEBRE
+  quiebre(request: ReqQuiebre): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/quiebre/insert`,
+      request
+    );
+  }
+
+  // APROBAR/RECHAZAR QUIEBRE
+  aprobarRechazarSolicitudQuiebre(
+    request: ReqAprobarRechazarSolicitudQuiebre
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_solicitud_quiebre_id/update`,
+      request
+    );
+  }
+
+  // DESQUIEBRE
+  desquiebre(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/desquiebre/insert`,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // CIERRE ADMINISTRATIVO
+  cierreAdministrativo(
+    request: ReqCierreAdministrativo
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/administrativo/cerrar`,
+      request
+    );
   }
 }

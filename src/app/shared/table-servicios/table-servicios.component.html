@@ -151,6 +151,18 @@
                 </p-inputSwitch>
               </div>
             </ng-container>
+
+            <ng-container *ngIf="accion_subir_evidencias && servicio.precargado">
+              <div class=" container-evidencias">
+                <p *ngIf="servicio.requiere_evidencia && servicio.evidencia_id===null">Requiere evidencias*</p>
+                <p *ngIf="servicio.requiere_evidencia && servicio.evidencia_id!==null">Evidencia enviada</p>
+
+                <p *ngIf="!servicio.requiere_evidencia">No requiere evidencias</p>
+
+                <button *ngIf="servicio.requiere_evidencia" (click)="viewshowSubirEvidencia(servicio)"
+                  class="ui button generic-color">Subir evidencias</button>
+              </div>
+            </ng-container>
           </td>
         </tr>
         <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">

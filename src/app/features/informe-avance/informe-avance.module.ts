@@ -3,9 +3,17 @@ import { CommonModule } from '@angular/common';
 import { InformeAvanceRoutingModule } from './informe-avance-routing.module';
 import { InformeAvanceComponent } from './components/informe-avance/informe-avance.component';
 import { SharedModule } from '@sharedOT/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SubirEvidenciasFormComponent } from './components/subir-evidencias-form/subir-evidencias-form.component';
 
 @NgModule({
-  declarations: [InformeAvanceComponent],
-  imports: [CommonModule, InformeAvanceRoutingModule, SharedModule],
+  declarations: [InformeAvanceComponent, SubirEvidenciasFormComponent],
+  imports: [
+    CommonModule,
+    InformeAvanceRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class InformeAvanceModule {}

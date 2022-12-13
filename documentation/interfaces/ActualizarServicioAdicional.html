@@ -91,12 +91,14 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#servicio" 
 >
                                             servicio
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#unidad_obra" 
 >
                                             unidad_obra
@@ -178,6 +180,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -211,6 +218,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -248,8 +260,8 @@ export interface NuevaUOServicioAdicional {
 
 // ACTUALIZAR ADICIONAL
 export interface ActualizarServicioAdicional {
-  servicio: ServicioAdicionalActualizar[];
-  unidad_obra: UOAdicionalActualizar[];
+  servicio?: ServicioAdicionalActualizar[];
+  unidad_obra?: UOAdicionalActualizar[];
   agregar_uob_a_servicio?: AgregarUOAdicionalAServicio[];
 }
 

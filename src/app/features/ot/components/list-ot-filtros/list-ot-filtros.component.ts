@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './list-ot-filtros.component.html',
   styleUrls: ['./list-ot-filtros.component.scss'],
 })
-export class ListOtFiltrosComponent implements OnInit, OnDestroy {
+export class ListOtFiltrosComponent implements OnInit, OnDestroy, OnChanges {
   subscription: Subscription = new Subscription();
 
   form: FormGroup = new FormGroup({

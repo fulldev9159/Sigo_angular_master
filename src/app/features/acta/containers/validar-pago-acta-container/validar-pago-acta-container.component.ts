@@ -346,7 +346,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
       acta_id: this.acta_id,
       ot_total: this.ot_total,
       autoriza_pago: 'NO_AUTORIZADO',
-      tipo_rechazo: +this.rechazoActaForm?.formRechazo.get('tipo_id').value,
+      tipo_rechazo_id: +this.rechazoActaForm?.formRechazo.get('tipo_id').value,
       observacion: this.rechazoActaForm?.formRechazo.get('motivo').value,
     };
 

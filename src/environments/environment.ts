@@ -7,6 +7,7 @@ export const environment = {
   //// api: 'http://34.122.92.38:4300/SIGO',
   api: 'http://34.122.92.38:4041',
   // api: 'http://34.122.92.38:4040',
+  // api: 'http://localhost:4040',
   log: {
     level: 'TRACE',
   },

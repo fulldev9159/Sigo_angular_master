@@ -78,13 +78,70 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#activateUser$" >activateUser$</a>
+                            </li>
+                            <li>
+                                <a href="#addFirmaUser$" >addFirmaUser$</a>
+                            </li>
+                            <li>
+                                <a href="#agregarPerfilUsuario$" >agregarPerfilUsuario$</a>
+                            </li>
+                            <li>
+                                <a href="#createUser$" >createUser$</a>
+                            </li>
+                            <li>
+                                <a href="#deetePerfilUsuario$" >deetePerfilUsuario$</a>
+                            </li>
+                            <li>
+                                <a href="#deleteUser$" >deleteUser$</a>
+                            </li>
+                            <li>
+                                <a href="#editarSuperiorPerfilUsuario$" >editarSuperiorPerfilUsuario$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllProfile$" >getAllProfile$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllProveedores$" >getAllProveedores$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllUser$" >getAllUser$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllUser4addPerfil$" >getAllUser4addPerfil$</a>
+                            </li>
+                            <li>
+                                <a href="#getArea$" >getArea$</a>
+                            </li>
+                            <li>
                                 <a href="#getContratosUsuario$" >getContratosUsuario$</a>
+                            </li>
+                            <li>
+                                <a href="#getGuiasSubgrupo$" >getGuiasSubgrupo$</a>
+                            </li>
+                            <li>
+                                <a href="#getPerfiles$" >getPerfiles$</a>
+                            </li>
+                            <li>
+                                <a href="#getPosiblesContratosUser4createedit$" >getPosiblesContratosUser4createedit$</a>
+                            </li>
+                            <li>
+                                <a href="#getPosibleSuperior$" >getPosibleSuperior$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#redirectAfterSaveUsuarioSuccess" >redirectAfterSaveUsuarioSuccess</a>
+                            </li>
+                            <li>
+                                <a href="#updateUser$" >updateUser$</a>
+                            </li>
+                            <li>
+                                <a href="#upFirmaUser$" >upFirmaUser$</a>
                             </li>
                         </ul>
                     </td>
@@ -105,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, usuarioHttpService: <a href="../injectables/UsuarioHttpService.html" target="_self">UsuarioHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
+<code>constructor(actions$: Actions, usuarioHttpService: <a href="../injectables/UsuarioHttpService.html" target="_self">UsuarioHttpService</a>, authHttpService: <a href="../injectables/AuthHttpService.html" target="_self">AuthHttpService</a>, areaHttpService: <a href="../injectables/AreaHttpService.html" target="_self">AreaHttpService</a>, proveedorHttpService: <a href="../injectables/ProveedorHttpService.html" target="_self">ProveedorHttpService</a>, guiaSubgrupoHttpService: <a href="../injectables/GuiaSubgrupoHttpService.html" target="_self">GuiaSubgrupoHttpService</a>, perfilHttpService: <a href="../injectables/PerfilesHttpService.html" target="_self">PerfilesHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -152,10 +209,82 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>authHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthHttpService.html" target="_self" >AuthHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>areaHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AreaHttpService.html" target="_self" >AreaHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>proveedorHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ProveedorHttpService.html" target="_self" >ProveedorHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>guiaSubgrupoHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GuiaSubgrupoHttpService.html" target="_self" >GuiaSubgrupoHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>perfilHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PerfilesHttpService.html" target="_self" >PerfilesHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>afterHttp</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AfterHttpService.html" target="_self" >AfterHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -178,6 +307,463 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activateUser$"></a>
+                    <span class="name">
+                        <span ><b>activateUser$</b></span>
+                        <a href="#activateUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.activateUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.activateUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.activateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.activateUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="214" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:214</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addFirmaUser$"></a>
+                    <span class="name">
+                        <span ><b>addFirmaUser$</b></span>
+                        <a href="#addFirmaUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.addFirmaUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.addFirmaUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.addFirmaUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.addFirmaUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarPerfilUsuario$"></a>
+                    <span class="name">
+                        <span ><b>agregarPerfilUsuario$</b></span>
+                        <a href="#agregarPerfilUsuario$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.agregarPerfilUsuario),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.agregarPerfilUser(request).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.agregarPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.agregarPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUser$"></a>
+                    <span class="name">
+                        <span ><b>createUser$</b></span>
+                        <a href="#createUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.createUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.createUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.createUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.createUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:284</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deetePerfilUsuario$"></a>
+                    <span class="name">
+                        <span ><b>deetePerfilUsuario$</b></span>
+                        <a href="#deetePerfilUsuario$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.deletePerfilUser),
+      concatMap(({ usuarioproxy_id }) &#x3D;&gt;
+        this.usuarioHttpService.deletePerfilUser(usuarioproxy_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.deletePerfilUserSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.deletePerfilUserError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteUser$"></a>
+                    <span class="name">
+                        <span ><b>deleteUser$</b></span>
+                        <a href="#deleteUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.deleteUser),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.usuarioHttpService.deteleUser(usuario_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.deleteUserSuccess({ response })),
+          catchError(error &#x3D;&gt; of(usuarioActions.deleteUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="202" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarSuperiorPerfilUsuario$"></a>
+                    <span class="name">
+                        <span ><b>editarSuperiorPerfilUsuario$</b></span>
+                        <a href="#editarSuperiorPerfilUsuario$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.editarSuperiorPerfilUsuario),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.editarSuperiorPerfilUser(request).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.editarSuperiorPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.editarSuperiorPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProfile$"></a>
+                    <span class="name">
+                        <span ><b>getAllProfile$</b></span>
+                        <a href="#getAllProfile$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllPerfiles),
+      concatMap(() &#x3D;&gt;
+        this.perfilHttpService.getAllPerfiles().pipe(
+          map(response &#x3D;&gt; usuarioActions.getAllPerfilesSuccess({ response })),
+          catchError(error &#x3D;&gt; of(usuarioActions.getAllPerfilesError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProveedores$"></a>
+                    <span class="name">
+                        <span ><b>getAllProveedores$</b></span>
+                        <a href="#getAllProveedores$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllProveedores4CreateUser),
+      concatMap(({ interno }) &#x3D;&gt;
+        this.proveedorHttpService.getAllProveedores4CreateUser(interno).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllProveedores4CreateUserSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllProveedores4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUser$"></a>
+                    <span class="name">
+                        <span ><b>getAllUser$</b></span>
+                        <a href="#getAllUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllUser),
+      concatMap(() &#x3D;&gt;
+        this.usuarioHttpService.getAllUsers().pipe(
+          map(response &#x3D;&gt; usuarioActions.getAllUserSuccess({ response })),
+          catchError(err &#x3D;&gt; of(usuarioActions.getAllUserError({ error: err })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllUser4addPerfil$"></a>
+                    <span class="name">
+                        <span ><b>getAllUser4addPerfil$</b></span>
+                        <a href="#getAllUser4addPerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.SelectedUser4AddPerfil),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.usuarioHttpService.getAllUsers().pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.SelectedUser4AddPerfilSuccess({
+              usuario_id,
+              response,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(usuarioActions.SelectedUser4AddPerfilError({ error: err }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getArea$"></a>
+                    <span class="name">
+                        <span ><b>getArea$</b></span>
+                        <a href="#getArea$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllAreas4CreateUser),
+      concatMap(({ interno }) &#x3D;&gt;
+        this.areaHttpService.getAllProveedores4CreateUser(interno).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllAreas4CreateUserSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllAreas4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -210,7 +796,171 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getGuiasSubgrupo$"></a>
+                    <span class="name">
+                        <span ><b>getGuiasSubgrupo$</b></span>
+                        <a href="#getGuiasSubgrupo$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllGuiasSubgrupo),
+      concatMap(() &#x3D;&gt;
+        this.guiaSubgrupoHttpService.getAll().pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllGuiasSubgrupoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllGuiasSubgrupoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPerfiles$"></a>
+                    <span class="name">
+                        <span ><b>getPerfiles$</b></span>
+                        <a href="#getPerfiles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPerfilesUser),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.authHttpService.getPerfilesUser(usuario_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.getPerfilesUserSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getPerfilesUserError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPosiblesContratosUser4createedit$"></a>
+                    <span class="name">
+                        <span ><b>getPosiblesContratosUser4createedit$</b></span>
+                        <a href="#getPosiblesContratosUser4createedit$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPosiblesContratosUser4CreateEdit),
+      concatMap(({ proveedor_id }) &#x3D;&gt;
+        this.usuarioHttpService
+          .getPosiblesContratosUser4CreateEdit(proveedor_id)
+          .pipe(
+            map(response &#x3D;&gt; {
+              return usuarioActions.getPosiblesContratosUser4CreateEditSuccess({
+                response,
+              });
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                usuarioActions.getPosiblesContratosUser4CreateEditError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="316" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:316</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPosibleSuperior$"></a>
+                    <span class="name">
+                        <span ><b>getPosibleSuperior$</b></span>
+                        <a href="#getPosibleSuperior$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPosiblesSuperiores),
+      concatMap(({ usuario_id, usuario_perfil }) &#x3D;&gt;
+        this.usuarioHttpService
+          .getPosiblesSuperiores(usuario_id, usuario_perfil)
+          .pipe(
+            map(response &#x3D;&gt;
+              usuarioActions.getPosiblesSuperioresSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(usuarioActions.getPosiblesSuperioresError({ error }))
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -233,7 +983,17 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(usuarioActions.getContratosUsuarioSuccess),
+        ofType(
+          usuarioActions.getContratosUsuarioSuccess,
+          usuarioActions.getPerfilesUserSuccess,
+          usuarioActions.agregarPerfilUsuarioSuccess,
+          usuarioActions.editarSuperiorPerfilUsuarioSuccess,
+          usuarioActions.addFirmaUserSuccess,
+          usuarioActions.createUserSuccess,
+          usuarioActions.updateUserSuccess,
+          usuarioActions.deleteUserSuccess,
+          usuarioActions.activateUserSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -242,7 +1002,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="340" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:340</a></div>
                         </td>
                     </tr>
 
@@ -265,7 +1025,19 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(usuarioActions.getContratosUsuarioError),
+        ofType(
+          usuarioActions.getContratosUsuarioError,
+          usuarioActions.agregarPerfilUsuarioError,
+          usuarioActions.editarSuperiorPerfilUsuarioError,
+          usuarioActions.activateUserError,
+          //// usuarioActions.getContratosUserError,
+          usuarioActions.addFirmaUserError,
+          usuarioActions.upFirmaUserError,
+          usuarioActions.createUserError,
+          usuarioActions.updateUserError,
+          usuarioActions.getAllAreas4CreateUserError,
+          usuarioActions.deleteUserError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }
@@ -274,7 +1046,128 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="359" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:359</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectAfterSaveUsuarioSuccess"></a>
+                    <span class="name">
+                        <span ><b>redirectAfterSaveUsuarioSuccess</b></span>
+                        <a href="#redirectAfterSaveUsuarioSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          usuarioActions.createUserSuccess,
+          usuarioActions.updateUserSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/usuarios/list-usuarios&#x27;])
+        )
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:380</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUser$"></a>
+                    <span class="name">
+                        <span ><b>updateUser$</b></span>
+                        <a href="#updateUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.updateUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.updateUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.updateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.updateUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="300" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:300</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="upFirmaUser$"></a>
+                    <span class="name">
+                        <span ><b>upFirmaUser$</b></span>
+                        <a href="#upFirmaUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.upFirmaUser),
+      concatMap(({ usuario_id, request }) &#x3D;&gt;
+        this.usuarioHttpService.upFirmaUser(request).pipe(
+          map(response &#x3D;&gt; {
+            const requestAdd: RequestAddFirmaUser &#x3D; {
+              usuario_id,
+              values: {
+                firma_archivo_id: response.data.repositorio_archivos_ids[0],
+              },
+            };
+            return usuarioActions.addFirmaUser({
+              request: requestAdd,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.upFirmaUserError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/store/usuario/usuario.effects.ts:246</a></div>
                         </td>
                     </tr>
 
@@ -289,18 +1182,232 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
-import { AfterHttpService, UsuarioHttpService } from &#x27;@services&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import {
+  AfterHttpService,
+  UsuarioHttpService,
+  AuthHttpService,
+  AreaHttpService,
+  ProveedorHttpService,
+  GuiaSubgrupoHttpService,
+  PerfilesHttpService,
+} from &#x27;@services&#x27;;
 import * as usuarioActions from &#x27;./usuario.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
+
+import { RequestAddFirmaUser } from &#x27;@model&#x27;;
 
 @Injectable()
 export class UsuarioEffects {
   constructor(
     private actions$: Actions,
     private usuarioHttpService: UsuarioHttpService,
-    private afterHttp: AfterHttpService
+    private authHttpService: AuthHttpService,
+    private areaHttpService: AreaHttpService,
+    private proveedorHttpService: ProveedorHttpService,
+    private guiaSubgrupoHttpService: GuiaSubgrupoHttpService,
+    private perfilHttpService: PerfilesHttpService,
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
+
+  getAllUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllUser),
+      concatMap(() &#x3D;&gt;
+        this.usuarioHttpService.getAllUsers().pipe(
+          map(response &#x3D;&gt; usuarioActions.getAllUserSuccess({ response })),
+          catchError(err &#x3D;&gt; of(usuarioActions.getAllUserError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getPerfiles$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPerfilesUser),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.authHttpService.getPerfilesUser(usuario_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.getPerfilesUserSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getPerfilesUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAllProfile$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllPerfiles),
+      concatMap(() &#x3D;&gt;
+        this.perfilHttpService.getAllPerfiles().pipe(
+          map(response &#x3D;&gt; usuarioActions.getAllPerfilesSuccess({ response })),
+          catchError(error &#x3D;&gt; of(usuarioActions.getAllPerfilesError({ error })))
+        )
+      )
+    )
+  );
+
+  getPosibleSuperior$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPosiblesSuperiores),
+      concatMap(({ usuario_id, usuario_perfil }) &#x3D;&gt;
+        this.usuarioHttpService
+          .getPosiblesSuperiores(usuario_id, usuario_perfil)
+          .pipe(
+            map(response &#x3D;&gt;
+              usuarioActions.getPosiblesSuperioresSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(usuarioActions.getPosiblesSuperioresError({ error }))
+            )
+          )
+      )
+    )
+  );
+
+  agregarPerfilUsuario$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.agregarPerfilUsuario),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.agregarPerfilUser(request).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.agregarPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.agregarPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  editarSuperiorPerfilUsuario$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.editarSuperiorPerfilUsuario),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.editarSuperiorPerfilUser(request).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.editarSuperiorPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.editarSuperiorPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  deetePerfilUsuario$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.deletePerfilUser),
+      concatMap(({ usuarioproxy_id }) &#x3D;&gt;
+        this.usuarioHttpService.deletePerfilUser(usuarioproxy_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.deletePerfilUserSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.deletePerfilUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getGuiasSubgrupo$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllGuiasSubgrupo),
+      concatMap(() &#x3D;&gt;
+        this.guiaSubgrupoHttpService.getAll().pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllGuiasSubgrupoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllGuiasSubgrupoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAllProveedores$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllProveedores4CreateUser),
+      concatMap(({ interno }) &#x3D;&gt;
+        this.proveedorHttpService.getAllProveedores4CreateUser(interno).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllProveedores4CreateUserSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllProveedores4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getArea$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getAllAreas4CreateUser),
+      concatMap(({ interno }) &#x3D;&gt;
+        this.areaHttpService.getAllProveedores4CreateUser(interno).pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.getAllAreas4CreateUserSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(usuarioActions.getAllAreas4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAllUser4addPerfil$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.SelectedUser4AddPerfil),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.usuarioHttpService.getAllUsers().pipe(
+          map(response &#x3D;&gt;
+            usuarioActions.SelectedUser4AddPerfilSuccess({
+              usuario_id,
+              response,
+            })
+          ),
+          catchError(err &#x3D;&gt;
+            of(usuarioActions.SelectedUser4AddPerfilError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.deleteUser),
+      concatMap(({ usuario_id }) &#x3D;&gt;
+        this.usuarioHttpService.deteleUser(usuario_id).pipe(
+          map(response &#x3D;&gt; usuarioActions.deleteUserSuccess({ response })),
+          catchError(error &#x3D;&gt; of(usuarioActions.deleteUserError({ error })))
+        )
+      )
+    )
+  );
+
+  activateUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.activateUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.activateUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.activateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.activateUserError({ error })))
+        )
+      )
+    )
+  );
 
   getContratosUsuario$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
@@ -318,10 +1425,114 @@ export class UsuarioEffects {
     )
   );
 
+  upFirmaUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.upFirmaUser),
+      concatMap(({ usuario_id, request }) &#x3D;&gt;
+        this.usuarioHttpService.upFirmaUser(request).pipe(
+          map(response &#x3D;&gt; {
+            const requestAdd: RequestAddFirmaUser &#x3D; {
+              usuario_id,
+              values: {
+                firma_archivo_id: response.data.repositorio_archivos_ids[0],
+              },
+            };
+            return usuarioActions.addFirmaUser({
+              request: requestAdd,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.upFirmaUserError({ error })))
+        )
+      )
+    )
+  );
+
+  addFirmaUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.addFirmaUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.addFirmaUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.addFirmaUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.addFirmaUserError({ error })))
+        )
+      )
+    )
+  );
+
+  createUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.createUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.createUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.createUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.createUserError({ error })))
+        )
+      )
+    )
+  );
+
+  updateUser$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.updateUser),
+      concatMap(({ request }) &#x3D;&gt;
+        this.usuarioHttpService.updateUser(request).pipe(
+          map(response &#x3D;&gt; {
+            return usuarioActions.updateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error &#x3D;&gt; of(usuarioActions.updateUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getPosiblesContratosUser4createedit$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(usuarioActions.getPosiblesContratosUser4CreateEdit),
+      concatMap(({ proveedor_id }) &#x3D;&gt;
+        this.usuarioHttpService
+          .getPosiblesContratosUser4CreateEdit(proveedor_id)
+          .pipe(
+            map(response &#x3D;&gt; {
+              return usuarioActions.getPosiblesContratosUser4CreateEditSuccess({
+                response,
+              });
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                usuarioActions.getPosiblesContratosUser4CreateEditError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(usuarioActions.getContratosUsuarioSuccess),
+        ofType(
+          usuarioActions.getContratosUsuarioSuccess,
+          usuarioActions.getPerfilesUserSuccess,
+          usuarioActions.agregarPerfilUsuarioSuccess,
+          usuarioActions.editarSuperiorPerfilUsuarioSuccess,
+          usuarioActions.addFirmaUserSuccess,
+          usuarioActions.createUserSuccess,
+          usuarioActions.updateUserSuccess,
+          usuarioActions.deleteUserSuccess,
+          usuarioActions.activateUserSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -330,8 +1541,34 @@ export class UsuarioEffects {
   notifyAfterError &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(usuarioActions.getContratosUsuarioError),
+        ofType(
+          usuarioActions.getContratosUsuarioError,
+          usuarioActions.agregarPerfilUsuarioError,
+          usuarioActions.editarSuperiorPerfilUsuarioError,
+          usuarioActions.activateUserError,
+          //// usuarioActions.getContratosUserError,
+          usuarioActions.addFirmaUserError,
+          usuarioActions.upFirmaUserError,
+          usuarioActions.createUserError,
+          usuarioActions.updateUserError,
+          usuarioActions.getAllAreas4CreateUserError,
+          usuarioActions.deleteUserError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSaveUsuarioSuccess &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          usuarioActions.createUserSuccess,
+          usuarioActions.updateUserSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/usuarios/list-usuarios&#x27;])
+        )
       ),
     { dispatch: false }
   );

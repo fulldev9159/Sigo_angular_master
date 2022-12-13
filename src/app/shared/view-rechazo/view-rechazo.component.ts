@@ -11,6 +11,8 @@ export class ViewRechazoComponent {
   // 98 TODO: PROGRAMAR/MIGRAR RECHAZO
 
   @Input() motivosRehazo: Dropdown[];
+  @Input() tituloTipoMotivo = '* Tipo rechazo';
+  @Input() subTextTipoMotivo = 'Seleccione un tipo de rechazo';
 
   formRechazoControls = {
     tipo_id: new FormControl(null, [Validators.required]),

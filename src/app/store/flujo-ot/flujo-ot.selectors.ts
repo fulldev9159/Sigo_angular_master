@@ -14,3 +14,8 @@ export const motivosRechazo = createSelector(
   selectFlujoOT,
   (state: reducer.StateFlujoOT) => state.motivosRechazo
 );
+
+export const getSolicitudQuiebre = createSelector(
+  selectFlujoOT,
+  (state: reducer.StateFlujoOT) => state.lastSolicitudQuiebre
+);

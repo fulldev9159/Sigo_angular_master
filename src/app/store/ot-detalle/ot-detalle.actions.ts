@@ -2,6 +2,7 @@ import {
   Accion,
   CategoriaArchivo,
   DetalleOT,
+  ReqSubirEvidencia,
   RequestCreateRegistroLibroObra,
   Response,
 } from '@model';

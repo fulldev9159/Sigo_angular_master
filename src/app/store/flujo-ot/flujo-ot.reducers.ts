@@ -1,4 +1,5 @@
 import {
+  LastSolicitudQuiebre,
   MotivoRechazo,
   PosibleSupervisorTrabajo,
   ProveedorAgenciaContrato,
@@ -11,11 +12,13 @@ export const Featurekey = 'flujo-ot';
 export interface StateFlujoOT {
   posibleSupervisorDeTrabajo: PosibleSupervisorTrabajo[];
   motivosRechazo: MotivoRechazo[];
+  lastSolicitudQuiebre: LastSolicitudQuiebre;
 }
 
 export const initialState: StateFlujoOT = {
   posibleSupervisorDeTrabajo: [],
   motivosRechazo: [],
+  lastSolicitudQuiebre: null,
 };
 
 export const reducerFlujoOT = createReducer(
@@ -32,6 +35,13 @@ export const reducerFlujoOT = createReducer(
     (state, { motivo_rechazo }) => ({
       ...state,
       motivosRechazo: motivo_rechazo,
+    })
+  ),
+  on(
+    flujoOTActions.getSolicitudQuiebreSuccess,
+    (state, { lastSolicitudQuiebre }) => ({
+      ...state,
+      lastSolicitudQuiebre,
     })
   )
 );

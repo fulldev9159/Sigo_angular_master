@@ -4,23 +4,33 @@ import {
   faBook,
   faBookMedical,
   faCircleInfo,
+  faPause,
   faPlay,
+  faDollar,
+  faRectangleXmark,
   faSquareCheck,
   faSquareXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   Accion,
   Dropdown,
+  LastSolicitudQuiebre,
+  ReqAprobarRechazarSolicitudQuiebre,
+  ReqQuiebre,
+  ReqSolicitarQuiebre,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
   RequestCreateRegistroLibroObra,
+  DetalleOT,
+  ReqCierreAdministrativo,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
-import { map, Observable, Subscription } from 'rxjs';
+import { PrimeNGConfig } from 'primeng/api';
+import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
@@ -59,13 +69,37 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   @ViewChild(RegistrarLibroObrasComponent)
   registrarLibroObraForm: RegistrarLibroObrasComponent;
 
+  @ViewChild('solicitudQuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  solicitudQuiebreForm: ViewRechazoComponent;
+
+  @ViewChild('QuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  QuiebreForm: ViewRechazoComponent;
+
+  @ViewChild('rechazoSolicitudQuiebreForm', {
+    read: ViewRechazoComponent,
+    static: false,
+  })
+  rechazoSolicitudQuiebreForm: ViewRechazoComponent;
+
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
   bookIcon = faBook;
   playIcon = faPlay;
+  dollarIcon = faDollar;
+  pauseIcon = faPause;
+  checkIcon = faSquareCheck;
+  cancelIcon = faSquareXmark;
+  rectanguleIcon = faRectangleXmark;
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
+  displayModalCambiarSustentoFinanciero = false;
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
   displayModalRechazoOrdenDeTrabajoInicial = false;
@@ -77,6 +111,12 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayModalAnularOT = false;
   displayModalInformeTrabajosFinalizados = false;
   displayModalSendInformeTrabajosFinalizados = false;
+  displayModalSolicitarQuiebre = false;
+  displayModalDesquiebre = false;
+  displayModalCierreAdministrativo = false;
+  displayAprobarRechazarQuiebreGestor = false;
+  displayQuiebreGestor = false;
+  displayModalRechazarSolicitudQuiebre = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -94,7 +134,6 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       )
     );
 
-  //
   motivosRechazo$: Observable<Dropdown[]> = this.flujoOTFacade
     .getMotivosRechazo$()
     .pipe(
@@ -110,6 +149,9 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       )
     );
 
+  flagSolicitudQuiebre$: Observable<LastSolicitudQuiebre> =
+    this.flujoOTFacade.getSolicitudQuiebre$();
+
   // FORM
   formControls = {
     trabajador_id: new FormControl('', [Validators.required]),
@@ -120,18 +162,27 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
     informe: new FormControl('', [Validators.required]),
   });
 
+  formCierreAdministrativo: FormGroup = new FormGroup({
+    numero_derivada: new FormControl('', []),
+    fecha_derivada: new FormControl(null, []),
+    numero_hem: new FormControl('', []),
+    fecha_cont_hem: new FormControl(null, []),
+  });
+
+  otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
+
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
-
-  checkIcon = faSquareCheck;
-  cancelIcon = faSquareXmark;
+  loadingLastSolicitudPago$: Observable<boolean> =
+    this.loadingsFacade.sendingLastSolicitudQuiebre$();
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
     private otDetalleFacade: OTDetalleFacade,
     private actaFacade: ActaFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
@@ -140,6 +191,34 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
         .getComentariosFinalizacionTrabajos$()
         .subscribe(v => this.formTrabajosFinalizados.get('informe').setValue(v))
     );
+
+    this.subscription.add(
+      this.loadingsFacade
+        .sendingUpdateSustentoFinanciero$()
+        .subscribe(loading => {
+          if (!loading) {
+            this.closeModalCambiarSustentoFinanciero();
+          }
+        })
+    );
+
+    this.config.setTranslation({
+      monthNames: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+    });
   }
 
   // ACCIONES ETAPA: OT_ET_AUTORIZACION_INICIAL
@@ -309,6 +388,120 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
       this.ot_id,
       this.formTrabajosFinalizados.get('informe').value
     );
+  }
+
+  // QUIEBRE
+  showModalSolicitarQuiebre(): void {
+    this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
+    this.displayModalSolicitarQuiebre = true;
+  }
+
+  confirmarSolicitudQuiebre(): void {
+    const request: ReqSolicitarQuiebre = {
+      ot_id: this.ot_id,
+      observacion: this.solicitudQuiebreForm.formRechazo.get('motivo').value,
+      tipo_motivo_quiebre:
+        +this.solicitudQuiebreForm.formRechazo.get('tipo_id').value,
+    };
+    this.flujoOTFacade.solicitarQuiebre(request);
+    this.displayModalSolicitarQuiebre = false;
+  }
+
+  showModalQuebrarGestor(): void {
+    this.flujoOTFacade.getSolicitudQuiebre(this.ot_id);
+    this.flujoOTFacade.getMotivosRechazo('MOTIVO_QUIEBRE');
+    this.displayAprobarRechazarQuiebreGestor = true;
+  }
+
+  quiebreGestor(): void {
+    let request: ReqQuiebre = {
+      ot_id: this.ot_id,
+      observacion: this.QuiebreForm.formRechazo.get('motivo').value,
+      tipo_causa_id: +this.QuiebreForm.formRechazo.get('tipo_id').value,
+    };
+
+    this.flujoOTFacade.quiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
+  }
+
+  // RECHAZAR SOLICITUD DE QUIEBRE
+  displayRechazoSolicitudQuiebre(): void {
+    this.flujoOTFacade.getMotivosRechazo('RECHAZO_QUIEBRE');
+    this.displayModalRechazarSolicitudQuiebre = true;
+  }
+
+  closeModalRechazoSolicitudQuiebre(): void {
+    this.displayModalRechazarSolicitudQuiebre = false;
+    this.displayAprobarRechazarQuiebreGestor = false;
+    this.rechazoSolicitudQuiebreForm.formRechazo.reset();
+  }
+
+  rechazarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'RECHAZADO',
+        causa_rechazo_id:
+          +this.rechazoSolicitudQuiebreForm.formRechazo.get('tipo_id').value,
+        motivo_rechazo:
+          this.rechazoSolicitudQuiebreForm.formRechazo.get('motivo').value,
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.closeModalRechazoSolicitudQuiebre();
+  }
+
+  aprobarSolicitudQuiebre(solicitud_id: number): void {
+    let request: ReqAprobarRechazarSolicitudQuiebre = {
+      id: solicitud_id,
+      values: {
+        aprobacion_estado: 'APROBADO',
+      },
+    };
+    this.flujoOTFacade.aprobarRechazarSolicitudQuiebre(request);
+    this.displayAprobarRechazarQuiebreGestor = false;
+  }
+
+  // DESQUIEBRE
+  confirmarDesquiebre(): void {
+    this.flujoOTFacade.desquiebre(this.ot_id);
+    this.displayModalDesquiebre = false;
+  }
+
+  // CIERRE ADMINISTRATIVO
+  confirmarCierreAdministrativo(): void {
+    let { numero_derivada, fecha_derivada, numero_hem, fecha_cont_hem } =
+      this.formCierreAdministrativo.getRawValue();
+
+    let request: ReqCierreAdministrativo = {
+      ot_id: this.ot_id,
+      numero_derivada,
+      fecha_derivada,
+      numero_hem,
+      fecha_cont_hem,
+    };
+    this.flujoOTFacade.cierreAdministrativo(request);
+    this.displayModalCierreAdministrativo = false;
+  }
+
+  closeModalCierreAdministrativo(): void {
+    this.formCierreAdministrativo.reset();
+    this.displayModalCierreAdministrativo = false;
+  }
+
+  // CAMBIO SUSTENTO FINANCIERO
+  openModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = true;
+      this.otDetalleFacade.getDetalleOT(this.ot_id);
+    }
+  }
+
+  closeModalCambiarSustentoFinanciero(): void {
+    if (this.ot_id !== undefined) {
+      this.displayModalCambiarSustentoFinanciero = false;
+    }
   }
 
   ngOnDestroy(): void {

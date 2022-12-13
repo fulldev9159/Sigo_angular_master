@@ -62,3 +62,17 @@ export interface CECO {
   id: number;
   id_opex: string;
 }
+
+export interface SustentoFinancieroReq {
+  tipo_sustento: string;
+
+  es_sustento_provisorio: boolean;
+
+  pmo_codigo: number;
+  lp: string;
+  pep2: string;
+
+  id_opex: string;
+  cuenta_sap: number;
+  ceco: string;
+}

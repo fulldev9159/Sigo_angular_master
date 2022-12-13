@@ -177,7 +177,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getOTFromNumeroInterno(numero_interno: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>getOTFromNumeroInterno(tipo_numero_interno_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, numero_interno: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -205,6 +205,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>tipo_numero_interno_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
                                 <tr>
                                     <td>numero_interno</td>
                                     <td>
@@ -342,11 +354,12 @@ export class NumeroInternoHttpService {
   }
 
   getOTFromNumeroInterno(
+    tipo_numero_interno_id: number,
     numero_interno: string
   ): Observable&lt;Response&lt;{ items: OTFromNumeroInterno[] }&gt;&gt; {
     return this.http.post&lt;Response&lt;{ items: OTFromNumeroInterno[] }&gt;&gt;(
       &#x60;${this.API_URL}/ot/ot_has_numero_interno_niid/get&#x60;,
-      { numero_interno }
+      { tipo_numero_interno_id, numero_interno }
     );
   }
 }

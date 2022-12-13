@@ -580,7 +580,7 @@ export interface RequestAprobacionRechazoSolicitudPago {
   acta_id: number;
   ot_total: number;
   autoriza_pago: string; // AUTORIZADO, NO_AUTORIZADO
-  tipo_rechazo?: number;
+  tipo_rechazo_id?: number;
   observacion: string;
 }
 

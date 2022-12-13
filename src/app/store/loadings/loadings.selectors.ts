@@ -178,6 +178,11 @@ export const sendingCreateOT = createSelector(
   (state: reducer.StateLoadings) => state.sendingCreateOT
 );
 
+export const sendingUpdateSustentoFinanciero = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingUpdateSustentoFinanciero
+);
+
 export const sendingDownloadOTsAsignadas = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingDownloadOTsAsignadas
@@ -206,4 +211,9 @@ export const sendingInformarTrabajosFinalizados = createSelector(
 export const sendingAprobacionPago = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingAprobacionPago
+);
+
+export const sendingLastSolicitudQuiebre = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingLastSolicitudQuiebre
 );

@@ -1,6 +1,7 @@
 import {
   CarritoService,
   DetallesServicioTipoAgenciaContratoProveedor,
+  ReqSubirEvidencia,
   RequestAdicionales,
   RequestAutorizarInformeAvance,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
@@ -183,4 +184,34 @@ export const resetServicioSelected = createAction(
 );
 export const resetCarritoServices = createAction(
   '[SERVICIOS] resetCarritoServices '
+);
+
+// SUBIR ARCHIVO Y REGISTAR EVIDENCIA SERVICIO
+export const subirArchivoYregistrarEvidencia = createAction(
+  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia',
+  props<{
+    files: any;
+    request_evidencia: ReqSubirEvidencia;
+  }>()
+);
+
+export const subirArchivoYregistrarEvidenciaError = createAction(
+  '[OT-DETALLE] GET subirArchivoYregistrarEvidencia Error',
+  props<{ error: any }>()
+);
+
+//  CREATE ENVIAR EVIDENCIA
+export const createEnviarEvidencias = createAction(
+  '[OT-DETALLE] GET createEnviarEvidencias',
+  props<{ request: ReqSubirEvidencia }>()
+);
+
+export const createEnviarEvidenciasSuccess = createAction(
+  '[OT-DETALLE] GET createEnviarEvidencias Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createEnviarEvidenciasError = createAction(
+  '[OT-DETALLE] GET createEnviarEvidencias Error',
+  props<{ error: any }>()
 );

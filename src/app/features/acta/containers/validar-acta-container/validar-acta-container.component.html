@@ -104,7 +104,8 @@
                   <tr>
                     <td>% a pagar</td>
                     <td>
-                      <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100">
+                      <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100"
+                        name="input-porcentaje">
                       </p-inputNumber>
                       <br>
                       <span>Ya se ha pagado el {{100-por_acta_pagado}}%. Puedes escoger hasta el

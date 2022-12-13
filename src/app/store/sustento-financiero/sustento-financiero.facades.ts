@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as sustentoFinancieroSelectors from './sustento-financiero.selectors';
 import * as sustentoFinancieroActions from './sustento-financiero.actions';
-import { CECO, LP, OPEX, PEP2, PMO, SAP } from '@model';
+import { CECO, LP, OPEX, PEP2, PMO, SAP, SustentoFinancieroReq } from '@model';
 
 @Injectable({
   providedIn: 'root',
@@ -75,5 +75,15 @@ export class SustentoFinancieroFacade {
 
   public getCECO$(): Observable<CECO[]> {
     return this.store.select(sustentoFinancieroSelectors.getCECOs);
+  }
+
+  // UPDATE SUSTENTO FINANCIERO
+  public updateSustentoFinanciero(
+    ot_id: number,
+    values: SustentoFinancieroReq
+  ): void {
+    this.store.dispatch(
+      sustentoFinancieroActions.updateSustentoFinanciero({ ot_id, values })
+    );
   }
 }

@@ -21,6 +21,8 @@ export interface CarritoService {
   prov_has_serv_precio?: number;
   puntos_baremos?: number;
   autorizado_ingenieria?: string;
+  requiere_evidencia?: boolean;
+  evidencia_id?: number;
 
   unidad_obras: CarritoUO[];
 }

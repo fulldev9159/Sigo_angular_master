@@ -11,6 +11,7 @@ import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import * as actaActions from '@storeOT/acta/acta.actions';
 import * as otDetalleActions from '@storeOT/ot-detalle/ot-detalle.actions';
+import * as sustentoFinancieroActions from '@storeOT/sustento-financiero/sustento-financiero.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -174,6 +175,14 @@ export class AfterHttpService {
         4000
       );
       this.router.navigate(['/ot/list-ot']);
+    }
+
+    // UPDATE SUSTENTO FINANCIERO
+    if (
+      action.type ===
+      sustentoFinancieroActions.updateSustentoFinancieroSuccess.type
+    ) {
+      this.snackMessage.showMessage(`Cambios realizados`, 'Exito', 4000);
     }
 
     // GUARDAR BORRADOR INFORME DE AVANCE
@@ -396,14 +405,74 @@ export class AfterHttpService {
       this.router.navigate(['/ot/list-ot']);
     }
 
-    if (
-      action.type === actaActions.getCombineImputacion2Success.type
-    ) {
+    if (action.type === actaActions.getCombineImputacion2Success.type) {
       this.snackMessage.showMessage(
         `Enviar datos de Integración con éxito`,
         'Exito',
         4000
-      );      
+      );
+    }
+
+    // SOLICITAR QUIEBRE
+    if (action.type === flujoOTActions.solicitarQuiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha enviado la solicitud exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // QUIEBRE
+    if (action.type === flujoOTActions.quiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el quiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // APROBAR/RECHAZAR QUIEBRE
+    if (
+      action.type === flujoOTActions.aprobarRechazarSolicitudQuiebreSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Se ha aprobado el quiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // DESQUIEBRE
+    if (action.type === flujoOTActions.desquiebreSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el desquiebre exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // CIERRE ADMINISTRAITIVO
+    if (action.type === flujoOTActions.cierreAdministrativoSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se ha realizado el cierre administrativo exitosamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
+    }
+
+    // SUBIR EVIDENCIAS
+    if (action.type === serviciosActions.createEnviarEvidenciasSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se han subido las evidencias correctamente`,
+        'Exito',
+        2000
+      );
+      location.reload();
     }
   }
 

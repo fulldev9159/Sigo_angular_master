@@ -1,0 +1,241 @@
+nombre_global='Selenium Test 6'
+
+[environment]
+    host = 'localhost'
+    port = 4206
+    api_port=4041
+    ruta_id_rsa='~/.ssh/id_rsa'
+
+[users]
+    gestor = 'mgestor1'
+    supervisor = 'msupervisor1'
+    jefearea='mjefearea1'
+    subgerente = 'msubgerente1'
+    gerente = 'msubgerente1'
+    admineecc = 'ccadmincontrato1'
+    nombre_admineecc='Luk COBRA CHILE Antonella'
+    supervisortrabajos ='cctrabajador1'
+    nombre_supervisor_trabajos='Ana COBRA CHILE Antonella'
+    operaciones ='moperaciones1'
+
+[cubicacion]
+    tipo_cubicacion = 'Construcción'
+    contrato_marco ='BUCLE'
+    agencia='APOQUINDO'
+    proveedor ='330000659 - COBRA CHILE SERVICIOS S.A.'
+    direccion_desde='los ririos'
+    altura_desde='3123'
+    direccion_hasta='las castaños'
+    altura_hasta='2213'
+    detalles='In varius pretium pellentesque. Integer rhoncus sapien eu nisl volutpat fermentum.'
+    [[cubicacion.servicios]]
+            actividad='MATRIZ'
+            tipo_servicio='CABLES'
+            nombre='J451'
+            cantidad=15
+            [[cubicacion.servicios.uos]]
+                nombre='D013'
+                cantidad=10
+            [[cubicacion.servicios.uos]]
+                nombre='D012'
+                cantidad=14
+    [[cubicacion.servicios]]
+            actividad='MATRIZ'
+            tipo_servicio='LINEAS'
+            nombre='J101'
+            cantidad=5011
+            [[cubicacion.servicios.uos]]
+                nombre='C926'
+                cantidad='150,37'
+            [[cubicacion.servicios.uos]]
+                nombre='C881'
+                cantidad='2,3'
+            [[cubicacion.servicios.uos]]
+                nombre='C105'
+                cantidad='80,32'
+    [[cubicacion.servicios]]
+            actividad='FTTX'
+            tipo_servicio='PROYECTOS'
+            nombre='D080'
+            cantidad='1485'
+            [[cubicacion.servicios.uos]]
+                nombre='0 - SIN UO'
+                cantidad=0
+    [[cubicacion.servicios]]
+            actividad='FIBRA OPTICA'
+            tipo_servicio='LINEAS'
+            nombre='J201'
+            cantidad='10'
+            [[cubicacion.servicios.uos]]
+                nombre='H006'
+                cantidad=9
+            [[cubicacion.servicios.uos]]
+                nombre='H002'
+                cantidad=150
+
+[adicionales] 
+    [[adicionales.servicios]]
+        actividad='DISTRIBUCION'
+        tipo_servicio='DTH'
+        nombre='T051'
+        cantidad=4
+        [[adicionales.servicios.uos]]
+            nombre='DT04'
+            cantidad='10'
+        [[adicionales.servicios.uos]]
+            nombre='DT01'
+            cantidad='3'
+    [[adicionales.servicios]]
+        actividad='DISTRIBUCION'
+        tipo_servicio='DTH'
+        nombre='T052'
+        cantidad=2
+        [[adicionales.servicios.uos]]
+            nombre='DT06'
+            cantidad='3'
+    [[adicionales.servicios]]
+        actividad='MATRIZ'
+        tipo_servicio='LINEAS'
+        nombre='J101'
+        cantidad=2
+        [[adicionales.servicios.uos]]
+            nombre='C048'
+            cantidad=1
+        [[adicionales.servicios.uos]]
+            nombre='C870'
+            cantidad=1
+    [[adicionales.servicios]]
+        actividad='DISTRIBUCION'
+        tipo_servicio='DTH'
+        nombre='T052'
+        cantidad=2
+        [[adicionales.servicios.uos]]
+            nombre='DT06'
+            cantidad=3   
+[ot]
+   contrato_marco='BUCLE'
+   oficina_central='0189 - S.FCO LAS CONDES'
+   solicitado_por='ATC'
+   direccion='Longitudinal'
+   altura='133'
+   piso=1
+   departamento=13
+   comuna='Buin'
+   tipo_red='ATP'
+   tipo_trabajo='Ampliacion'
+   area_negocio='NORMAL'
+   nombre_proyectista= 'Andoria algoritmo'
+   tipo_sustento='CAPEX'
+   pmo=25
+   linea_presupuestaria='CHI100'
+   pep2='P-0077-22-2002-05106-021'
+
+[flujo]
+# Puedes comentar poner en false o quitar la etapa que no quieres que se ejecute
+# Solo se ejecutaran las acciones con true
+    crear_cubicacion_nueva = true
+    crear_ot_nueva=true
+    aprobacion_inicial_supervisor = true
+#    rechazo_inicial_supervisor = false
+    aprobacion_inicial_jefearea = true
+#    rechazo_inicial_jefearea = false
+#    aprobacion_inicial_subgerente = false
+#    rechazo_inicial_subgerente = false
+#    aprobacion_inicial_gerente = false
+#    rechazo_inicial_gerente = false
+    aprobacion_proveedor = true
+#    rechazo_proveedor = false
+    agregar_adicionales=true
+    enviar_informe_avance=true
+    aprobar_informe_avance=true
+    # rechazar_informe_avance=false
+    [[flujo.actas]]
+        acta_numero=1
+        tipo_pago='PORCENTAJE'
+        porcentaje=10
+        comentario_generar_acta="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
+            # rechazar_acta_gestor=false
+            solitar_pago=true
+            autorizar_solicitud_pago_supervisor=true
+            # rechazar_solicitud_pago_supervisor=false
+            autorizar_solicitud_pago_jefearea=true
+            # rechazar_solicitud_pago_jefearea=false
+            # autorizar_solicitud_pago_subgerente=false
+            # rechazar_solicitud_pago_subgerente=false
+            # autorizar_solicitud_pago_gerente=false
+            # rechazar_solicitud_pago_gerente=false
+            imputacion=true
+    [[flujo.actas]]
+        acta_numero=2
+        tipo_pago='PORCENTAJE'
+        porcentaje=80
+        comentario_generar_acta="""Acta 2 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor=""" Supervisor Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Jefe area Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
+            # rechazar_acta_gestor=false
+            solitar_pago=true
+            autorizar_solicitud_pago_supervisor=true
+            # rechazar_solicitud_pago_supervisor=false
+            autorizar_solicitud_pago_jefearea=true
+            # rechazar_solicitud_pago_jefearea=false
+            # autorizar_solicitud_pago_subgerente=false
+            # rechazar_solicitud_pago_subgerente=false
+            # autorizar_solicitud_pago_gerente=false
+            # rechazar_solicitud_pago_gerente=false
+            imputacion=true
+     [[flujo.actas]]
+        acta_numero=3
+        tipo_pago='PORCENTAJE'
+        porcentaje=10
+        comentario_generar_acta="""Acta 3 Gen acta Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.\
+        """
+        comentario_autorizar_pago_supervisor=""" Supervisor acta 3 Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        """
+        comentario_autorizar_pago_jefearea="""Jefe area  acta 3Mauris ac aliquet ipsum. Mauris tincidunt libero quis gravida ultrices. Integer sagittis massa ac augue laoreet placerat. Morbi quis varius eros. Curabitur ornare non purus ut euismod. Aliquam gravida tellus lacus, nec dapibus tellus pretium quis. Vivamus blandit augue vel tortor malesuada tincidunt. Fusce nec nibh metus. Praesent blandit consequat molestie.\
+        \
+        Fusce efficitur ultrices lacinia. Fusce volutpat laoreet pretium. Nullam tristique odio dui. Nulla massa ipsum, hendrerit non dignissim quis, ullamcorper in nibh. In sodales magna lorem, eget hendrerit ex volutpat nec. Pellentesque hendrerit iaculis ipsum, tristique porta enim. Maecenas sapien metus, ullamcorper eget bibendum non, ultrices in ipsum.
+        """
+        [[flujo.actas.flujo]]
+            generar_acta=true
+            aprobar_acta_gestor=true
+            # rechazar_acta_gestor=false
+            solitar_pago=true
+            # aprobacion_operaciones=true
+            # rechazo_operaciones=false
+            autorizar_solicitud_pago_supervisor=true
+            # rechazar_solicitud_pago_supervisor=false
+            autorizar_solicitud_pago_jefearea=true
+            # rechazar_solicitud_pago_jefearea=false
+            # autorizar_solicitud_pago_subgerente=false
+            # rechazar_solicitud_pago_subgerente=false
+            # autorizar_solicitud_pago_gerente=false
+            # rechazar_solicitud_pago_gerente=false
+            imputacion=true
+    cerrar_ot=true

@@ -266,8 +266,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/app/core/guard/profiled.guard.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/core/guard/profiled.guard.ts:46</a></div>
                 </td>
             </tr>
 
@@ -345,33 +345,46 @@ export class ProfiledGuard implements CanActivate, CanLoad {
   ): Observable&lt;boolean | UrlTree&gt; | Promise&lt;boolean&gt; | boolean | UrlTree {
     const isProfiled &#x3D; this.authService.isProfiled();
     const isAuth &#x3D; this.authService.isAuth();
-    if (isProfiled &amp;&amp; isAuth) {
-      this.router.navigate([&#x27;/home&#x27;]);
-      return of(false);
-    } else {
-      if (!isProfiled &amp;&amp; isAuth) {
-        return of(true);
-      } else {
-        this.router.navigate([&#x27;/login/auth&#x27;]);
+    const is2FALoggedIn &#x3D; this.authService.is2FALoggedIn();
+
+    if (is2FALoggedIn) {
+      if (isProfiled &amp;&amp; isAuth) {
+        this.router.navigate([&#x27;/home&#x27;]);
         return of(false);
+      } else {
+        if (!isProfiled &amp;&amp; isAuth) {
+          return of(true);
+        } else {
+          this.router.navigate([&#x27;/login/auth&#x27;]);
+          return of(false);
+        }
       }
+    } else {
+      this.router.navigate([&#x27;/login/two-factor-authentication&#x27;]);
+      return of(false);
     }
   }
 
   canLoad(route: Route): Observable&lt;boolean&gt; {
     const isProfiled &#x3D; this.authService.isProfiled();
     const isAuth &#x3D; this.authService.isAuth();
+    const is2FALoggedIn &#x3D; this.authService.is2FALoggedIn();
 
-    if (isProfiled &amp;&amp; isAuth) {
-      this.router.navigate([&#x27;/home&#x27;]);
-      return of(false);
-    } else {
-      if (!isProfiled &amp;&amp; isAuth) {
-        return of(true);
-      } else {
-        this.router.navigate([&#x27;/login/auth&#x27;]);
+    if (is2FALoggedIn) {
+      if (isProfiled &amp;&amp; isAuth) {
+        this.router.navigate([&#x27;/home&#x27;]);
         return of(false);
+      } else {
+        if (!isProfiled &amp;&amp; isAuth) {
+          return of(true);
+        } else {
+          this.router.navigate([&#x27;/login/auth&#x27;]);
+          return of(false);
+        }
       }
+    } else {
+      this.router.navigate([&#x27;/login/two-factor-authentication&#x27;]);
+      return of(false);
     }
   }
 }

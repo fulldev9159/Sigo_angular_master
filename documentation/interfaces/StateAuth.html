@@ -102,6 +102,12 @@
                                         </a>
                                 </li>
                                 <li>
+                                        <a href="#notificaciones" 
+>
+                                            notificaciones
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#sessionData" 
 >
                                             sessionData
@@ -111,6 +117,12 @@
                                         <a href="#showMenuDetalleOT" 
 >
                                             showMenuDetalleOT
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#twoFA" 
+>
+                                            twoFA
                                         </a>
                                 </li>
                             </ul>
@@ -227,6 +239,39 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="notificaciones"></a>
+                                        <span class="name "><b>notificaciones</b>
+                                            <a href="#notificaciones">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>notificaciones:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="sessionData"></a>
                                         <span class="name "><b>sessionData</b>
                                             <a href="#sessionData">
@@ -289,6 +334,39 @@
 
                         </tbody>
                     </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="twoFA"></a>
+                                        <span class="name "><b>twoFA</b>
+                                            <a href="#twoFA">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>twoFA:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
             </section>
     </div>
 
@@ -304,17 +382,21 @@ export const Featurekey &#x3D; &#x27;auth&#x27;;
 export interface StateAuth {
   sessionData: SessionData;
   isLoggin: boolean;
+  twoFA: boolean;
   showMenuDetalleOT: boolean;
   databaseVersion: DatabaseVersion;
   apiVersion: string;
+  notificaciones: any;
 }
 
 export const initialState: StateAuth &#x3D; {
   sessionData: null,
   isLoggin: false,
+  twoFA: false,
   showMenuDetalleOT: false,
   databaseVersion: null,
   apiVersion: null,
+  notificaciones: null,
 };
 
 export const reducerAuth &#x3D; createReducer(
@@ -323,15 +405,23 @@ export const reducerAuth &#x3D; createReducer(
     ...state,
     sessionData: response.data,
   })),
-  on(authActions.refreshLogin, (state, { proxy_id, nombre_perfil, rol }) &#x3D;&gt; ({
+  on(authActions.login2FASuccess, state &#x3D;&gt; ({
     ...state,
-    sessionData: {
-      ...state.sessionData,
-      perfil_proxy_id: proxy_id,
-      nombre_perfil_select: nombre_perfil,
-      rol,
-    },
+    twoFA: true,
   })),
+  on(
+    authActions.refreshLogin,
+    (state, { proxy_id, nombre_perfil, rol, rol_slug }) &#x3D;&gt; ({
+      ...state,
+      sessionData: {
+        ...state.sessionData,
+        perfil_proxy_id: proxy_id,
+        nombre_perfil_select: nombre_perfil,
+        rol,
+        rol_slug,
+      },
+    })
+  ),
   on(authActions.refreshLoginSuccess, (state, { response }) &#x3D;&gt; ({
     ...state,
     sessionData: {
@@ -371,6 +461,10 @@ export const reducerAuth &#x3D; createReducer(
   on(authActions.getAPIVersionSuccess, (state, { response }) &#x3D;&gt; ({
     ...state,
     apiVersion: response.data.api_version,
+  })),
+  on(authActions.getNotificacionesSuccess, (state, { response }) &#x3D;&gt; ({
+    ...state,
+    notificaciones: response.data.items,
   }))
 );
 </code></pre>

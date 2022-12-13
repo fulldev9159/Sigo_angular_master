@@ -78,13 +78,37 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#createPerfil$" >createPerfil$</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarPerfil$" >eliminarPerfil$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllProfile$" >getAllProfile$</a>
+                            </li>
+                            <li>
+                                <a href="#getAllRoles4CreateEdit$" >getAllRoles4CreateEdit$</a>
+                            </li>
+                            <li>
                                 <a href="#getPerfilesUsuario$" >getPerfilesUsuario$</a>
+                            </li>
+                            <li>
+                                <a href="#getPermisosPerfil$" >getPermisosPerfil$</a>
+                            </li>
+                            <li>
+                                <a href="#getPermisosRol4CreateEdit$" >getPermisosRol4CreateEdit$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfte$" >notifyAfte$</a>
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#redirectAfterSavePerfilSuccess" >redirectAfterSavePerfilSuccess</a>
+                            </li>
+                            <li>
+                                <a href="#updatePerfil$" >updatePerfil$</a>
                             </li>
                         </ul>
                     </td>
@@ -105,12 +129,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, perfilesHttpService: <a href="../injectables/PerfilesHttpService.html" target="_self">PerfilesHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
+<code>constructor(actions$: Actions, perfilesHttpService: <a href="../injectables/PerfilesHttpService.html" target="_self">PerfilesHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -163,6 +187,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -178,6 +214,150 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPerfil$"></a>
+                    <span class="name">
+                        <span ><b>createPerfil$</b></span>
+                        <a href="#createPerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.createPerfil),
+      concatMap(({ request }) &#x3D;&gt;
+        this.perfilesHttpService.createPerfil(request).pipe(
+          map(response &#x3D;&gt; profileActions.createPerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.createPerfilError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarPerfil$"></a>
+                    <span class="name">
+                        <span ><b>eliminarPerfil$</b></span>
+                        <a href="#eliminarPerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.eliminarPerfil),
+      concatMap(({ perfil_id }) &#x3D;&gt;
+        this.perfilesHttpService.eliminarPerfil(perfil_id).pipe(
+          map(response &#x3D;&gt; profileActions.eliminarPerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.eliminarPerfilError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProfile$"></a>
+                    <span class="name">
+                        <span ><b>getAllProfile$</b></span>
+                        <a href="#getAllProfile$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getAllProfile),
+      concatMap(() &#x3D;&gt;
+        this.perfilesHttpService.getAllPerfiles().pipe(
+          map(response &#x3D;&gt; profileActions.getProfileSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.getProfileError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllRoles4CreateEdit$"></a>
+                    <span class="name">
+                        <span ><b>getAllRoles4CreateEdit$</b></span>
+                        <a href="#getAllRoles4CreateEdit$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getAllRoles4CreateEditPerfil),
+      concatMap(() &#x3D;&gt;
+        this.perfilesHttpService.getAllRoles4CreateEditPerfil().pipe(
+          map(response &#x3D;&gt;
+            profileActions.getAllRoles4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getAllRoles4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -210,7 +390,85 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPermisosPerfil$"></a>
+                    <span class="name">
+                        <span ><b>getPermisosPerfil$</b></span>
+                        <a href="#getPermisosPerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosPerfil),
+      concatMap(({ perfil_id }) &#x3D;&gt;
+        this.perfilesHttpService.getPermisosPerfil(perfil_id).pipe(
+          map(response &#x3D;&gt;
+            profileActions.getPermisosPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getPermisosPerfilError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPermisosRol4CreateEdit$"></a>
+                    <span class="name">
+                        <span ><b>getPermisosRol4CreateEdit$</b></span>
+                        <a href="#getPermisosRol4CreateEdit$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosRol4CreateEditPerfil),
+      concatMap(({ rol_id }) &#x3D;&gt;
+        this.perfilesHttpService.getPermisosRol4CreateEditPerfil(rol_id).pipe(
+          map(response &#x3D;&gt;
+            profileActions.getPermisosRol4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getPermisosRol4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -234,8 +492,11 @@
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioSuccess
+          perfilActions.getPerfilesUsuarioSuccess,
           // perfilActions.getPermisosPerfilUsuarioSuccess
+          profileActions.eliminarPerfilSuccess,
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -245,7 +506,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -269,8 +530,12 @@
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioError
+          perfilActions.getPerfilesUsuarioError,
           // perfilActions.getPermisosPerfilUsuarioError
+          profileActions.eliminarPerfilError,
+          profileActions.getAllRoles4CreateEditPerfilError,
+          profileActions.createPerfilError,
+          profileActions.createPerfilError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -280,7 +545,79 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectAfterSavePerfilSuccess"></a>
+                    <span class="name">
+                        <span ><b>redirectAfterSavePerfilSuccess</b></span>
+                        <a href="#redirectAfterSavePerfilSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/perfiles/list-perfiles&#x27;])
+        )
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:178</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePerfil$"></a>
+                    <span class="name">
+                        <span ><b>updatePerfil$</b></span>
+                        <a href="#updatePerfil$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.updatePerfil),
+      concatMap(({ request }) &#x3D;&gt;
+        this.perfilesHttpService.updatePerfil(request).pipe(
+          map(response &#x3D;&gt; profileActions.updatePerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.updatePerfilError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/store/perfil/perfil.effects.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -294,18 +631,21 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { AfterHttpService, PerfilesHttpService } from &#x27;@services&#x27;;
 import * as perfilActions from &#x27;./perfil.actions&#x27;;
 import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
+import * as profileActions from &#x27;./perfil.actions&#x27;;
 
 @Injectable()
 export class PerfilEffects {
   constructor(
     private actions$: Actions,
     private perfilesHttpService: PerfilesHttpService,
-    private afterHttp: AfterHttpService
+    private afterHttp: AfterHttpService,
+    private router: Router
   ) {}
 
   getPerfilesUsuario$ &#x3D; createEffect(() &#x3D;&gt;
@@ -340,12 +680,111 @@ export class PerfilEffects {
   //   )
   // );
 
+  getAllProfile$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getAllProfile),
+      concatMap(() &#x3D;&gt;
+        this.perfilesHttpService.getAllPerfiles().pipe(
+          map(response &#x3D;&gt; profileActions.getProfileSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.getProfileError({ error })))
+        )
+      )
+    )
+  );
+
+  getPermisosPerfil$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosPerfil),
+      concatMap(({ perfil_id }) &#x3D;&gt;
+        this.perfilesHttpService.getPermisosPerfil(perfil_id).pipe(
+          map(response &#x3D;&gt;
+            profileActions.getPermisosPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getPermisosPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  eliminarPerfil$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.eliminarPerfil),
+      concatMap(({ perfil_id }) &#x3D;&gt;
+        this.perfilesHttpService.eliminarPerfil(perfil_id).pipe(
+          map(response &#x3D;&gt; profileActions.eliminarPerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.eliminarPerfilError({ error })))
+        )
+      )
+    )
+  );
+
+  getAllRoles4CreateEdit$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getAllRoles4CreateEditPerfil),
+      concatMap(() &#x3D;&gt;
+        this.perfilesHttpService.getAllRoles4CreateEditPerfil().pipe(
+          map(response &#x3D;&gt;
+            profileActions.getAllRoles4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getAllRoles4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getPermisosRol4CreateEdit$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosRol4CreateEditPerfil),
+      concatMap(({ rol_id }) &#x3D;&gt;
+        this.perfilesHttpService.getPermisosRol4CreateEditPerfil(rol_id).pipe(
+          map(response &#x3D;&gt;
+            profileActions.getPermisosRol4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(profileActions.getPermisosRol4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  createPerfil$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.createPerfil),
+      concatMap(({ request }) &#x3D;&gt;
+        this.perfilesHttpService.createPerfil(request).pipe(
+          map(response &#x3D;&gt; profileActions.createPerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.createPerfilError({ error })))
+        )
+      )
+    )
+  );
+
+  updatePerfil$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(profileActions.updatePerfil),
+      concatMap(({ request }) &#x3D;&gt;
+        this.perfilesHttpService.updatePerfil(request).pipe(
+          map(response &#x3D;&gt; profileActions.updatePerfilSuccess({ response })),
+          catchError(error &#x3D;&gt; of(profileActions.updatePerfilError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioSuccess
+          perfilActions.getPerfilesUsuarioSuccess,
           // perfilActions.getPermisosPerfilUsuarioSuccess
+          profileActions.eliminarPerfilSuccess,
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -356,10 +795,28 @@ export class PerfilEffects {
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioError
+          perfilActions.getPerfilesUsuarioError,
           // perfilActions.getPermisosPerfilUsuarioError
+          profileActions.eliminarPerfilError,
+          profileActions.getAllRoles4CreateEditPerfilError,
+          profileActions.createPerfilError,
+          profileActions.createPerfilError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  redirectAfterSavePerfilSuccess &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
+        ),
+        tap(() &#x3D;&gt;
+          this.router.navigate([&#x27;/administracion/perfiles/list-perfiles&#x27;])
+        )
       ),
     { dispatch: false }
   );

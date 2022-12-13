@@ -29,6 +29,7 @@ import {
   SessionData,
   UOAdicionalActualizar,
   MaterialesManoObra,
+  ReqSubirEvidencia,
 } from '@model';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
@@ -43,6 +44,8 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
 import { LogService } from '@log';
+import { FormControl, FormGroup } from '@angular/forms';
+import { SubirEvidenciasFormComponent } from '../subir-evidencias-form/subir-evidencias-form.component';
 
 interface TableService {
   precargado: boolean;
@@ -105,6 +108,12 @@ export class InformeAvanceComponent
   })
   rechazoInformeAvanceForm: ViewRechazoComponent;
 
+  @ViewChild('subirEvidenciasForm', {
+    read: SubirEvidenciasFormComponent,
+    static: false,
+  })
+  subirEvidenciasForm: SubirEvidenciasFormComponent;
+
   subscription: Subscription = new Subscription();
   serviciosInformeAvance: CarritoService[] = [];
   // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
@@ -146,12 +155,15 @@ export class InformeAvanceComponent
   showModalRechazarInformeAvance = false;
   displayModalEnvioInformeAvance = false;
   displayModalAprobacionInformeAvance = false;
+  displaySubirEvidencia = false;
 
   permisos: string[] = (
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
   ).permisos.map(value => value.slug);
 
   totalFinalInformeAvance = 0;
+
+  servicio_subir_evidencia: { servicio: CarritoService };
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -237,6 +249,8 @@ export class InformeAvanceComponent
                   service.model_unidad_id.descripcion,
                 prov_has_serv_precio: service.prov_has_serv_precio,
                 puntos_baremos: service.puntos_baremos,
+                requiere_evidencia: service.requiere_evidencia,
+                evidencia_id: service.evidencia_id,
                 unidad_obras: [
                   {
                     precargado: true,
@@ -770,6 +784,12 @@ export class InformeAvanceComponent
     return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
+  showSubirEvidenciaAction(servicio: { servicio: CarritoService }) {
+    console.log(servicio);
+    this.servicio_subir_evidencia = servicio;
+    this.displaySubirEvidencia = true;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -821,6 +841,34 @@ export class InformeAvanceComponent
         this.closeModalCambiarMaterialOrigenAProveedor();
         this.closeModalMateriales();
       }
+    }
+  }
+
+  closeSubirEvidencias(): void {
+    this.subirEvidenciasForm.form.reset();
+  }
+
+  registrarEvidencia(): void {
+    if (this.subirEvidenciasForm.form.valid) {
+      const request_subir_evidencia: ReqSubirEvidencia = {
+        ot_id: this.ot_id,
+        observaciones: this.subirEvidenciasForm.form.get('observaciones').value,
+        informe_has_servicio_id:
+          this.servicio_subir_evidencia.servicio.servicio_rowid,
+        archivos: [],
+      };
+
+      console.log(request_subir_evidencia);
+      console.log(this.subirEvidenciasForm.uploadedFiles['files']);
+      this.serviciosFacade.subirArchivoYregistrarEvidencia(
+        this.subirEvidenciasForm.uploadedFiles['files'],
+        request_subir_evidencia
+      );
+
+      this.subirEvidenciasForm.filesform.clear();
+      this.subirEvidenciasForm.form.reset();
+
+      this.displaySubirEvidencia = false;
     }
   }
 }
