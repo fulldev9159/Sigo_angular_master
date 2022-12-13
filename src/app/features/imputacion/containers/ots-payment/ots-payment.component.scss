@@ -41,20 +41,20 @@ tr.actas-list {
         text-align: center;
         position: sticky;
         top: 0;
+        white-space: nowrap !important;
     }
 
     td {
         font-size: var(--size-text-sigo);
         text-align: center;
-        line-height: 1.7rem !important;
-
-
+        line-height: 0.8rem !important;
+        border-right: 0px !important;
     }
 }
 
 tr.colored-tr {
     td {
-        &:nth-child(-n+24) {
+        &:nth-child(-n+22) {
             background-color: #e5f0c0;
         }
     }

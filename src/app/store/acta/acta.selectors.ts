@@ -47,3 +47,8 @@ export const getActasImputacion2 = createSelector(
   selectActa,
   (state: reducer.StateActa) => state.imputacion2
 );
+
+export const getCombineImputacion2 = createSelector(
+  selectActa,
+  (state: reducer.StateActa) => state.combineImputacion2
+);

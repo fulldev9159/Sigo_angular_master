@@ -207,12 +207,13 @@ export class ActaHttpService {
   }
 
   // Request Combined data
-  requestCombineData(data: any): any {
-    return this.http.post(
+  getCombineImputacion2(data: any): Observable<Response<any>> {
+    data = Object.values(data);
+    data.pop();
+    return this.http.post<Response<any>>(
       `${this.API_URL}/ot/ecosistema/segunda_integracion`,
-      data,
-      {headers:{'content-type':"application/json; charset=UTF-8"}}
-    ).toPromise();
+      data
+    );
   }
 }
 
