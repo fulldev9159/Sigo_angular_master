@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response, Proyectos } from '@model';
+import { Response, Proyecto } from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,9 +14,9 @@ export class ProyectosHttpService {
     this.API_URL = environment.api;
   }
 
-  getProyectos(): Observable<Response<{ items: Proyectos[] }>> {
-    return this.http.post<Response<{ items: Proyectos[] }>>(
-      `${this.API_URL}/ot/proyecto_uid/get`,
+  getProyectos(): Observable<Response<{ items: Proyecto[] }>> {
+    return this.http.post<Response<{ items: Proyecto[] }>>(
+      `${this.API_URL}/configuration/proyecto/getall`,
       {}
     );
   }

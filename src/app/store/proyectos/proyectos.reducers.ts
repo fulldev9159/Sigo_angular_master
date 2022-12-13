@@ -1,11 +1,11 @@
-import { Proyectos } from '@model';
+import { Proyecto } from '@model';
 import { createReducer, on } from '@ngrx/store';
 import * as proyectosActions from './proyectos.actions';
 
 export const Featurekey = 'proyectos';
 
 export interface StateProyectos {
-  proyectos: Proyectos[];
+  proyectos: Proyecto[];
 }
 
 export const initialState: StateProyectos = {

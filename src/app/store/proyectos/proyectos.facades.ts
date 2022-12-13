@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Proyectos } from '@model';
+import { Proyecto } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as proyectosSelectors from './proyectos.selectors';
@@ -16,7 +16,7 @@ export class ProyectosFacade {
     this.store.dispatch(proyectosActions.getProyectos());
   }
 
-  public getProyectos$(): Observable<Proyectos[]> {
+  public getProyectos$(): Observable<Proyecto[]> {
     return this.store.select(proyectosSelectors.getProyectos);
   }
 }

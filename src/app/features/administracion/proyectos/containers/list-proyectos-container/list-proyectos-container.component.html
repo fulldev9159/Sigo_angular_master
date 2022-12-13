@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-list-proyect">
+      <h1 class="mt-4">Proyectos </h1>
+      <span>listado de proyectos en sistema</span>
+    </div>
+    <div class="col">
+      <button [routerLink]="['/administracion/proyectos/form-proyectos']" pButton type="button" label="Nuevo Proyecto" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-proyect-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class=" grid">
+        <div class="field col-12 table-list-proyectos">
+          <ng-container *ngIf="proyectos$ | async as proyectos">
+            <p-table #dt [columns]="['id', 'nombre', 'descripcion']" [value]="proyectos" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll" [paginator]="true" [rows]="10">
+              <ng-template pTemplate="caption">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  <h5 class="p-m-0"></h5>
+                  <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                  </span>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="id">
+                    ID
+                    <p-sortIcon field="id"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="nombre">
+                    Nombre Proyecto
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="descripcion">
+                    Descripción
+                    <p-sortIcon field="descripcion"></p-sortIcon>
+                  </th>
+                  <th>Operaciones</th>
+                <tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ item.nombre }}</td>
+                  <td>
+                    <strong>{{ item.nombre }}</strong>
+                  </td>
+                  <td>{{ item.descripcion }}</td>
+                  <td>
+                    <!--
+                    <div class="buttons-operaciones ">
+                      <button (click)="verPermisos(item)" id="button-ver-permisos">
+                        <fa-icon [icon]="permisosIcon"></fa-icon> Ver Permisos
+                      </button>
+                      <button [disabled]="!item.eliminable" [pTooltip]="!item.eliminable?'No es editable':''"
+                        [routerLink]="['/administracion/proyectos/form-proyectos',item.id]" id="button-editar-cubicacion">
+                        <fa-icon [icon]="editIcon"></fa-icon> Editar
+                      </button>
+                      <button [disabled]="!item.eliminable" (click)="eliminar(item)" id="button-eliminar-perfil"
+                        [pTooltip]="!item.eliminable?'No es eliminable':''" class="delete-button">
+                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                      </button>
+                    </div>
+                    -->
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                  En total hay {{ proyectos ? proyectos.length : 0 }} elementos.
+                </div>
+              </ng-template>
+            </p-table>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<p-dialog header="Detalles permisos" [(visible)]="DisplayPermisosPerfilModal" [draggable]="false" [modal]="true"
+  (onHide)="closeModalPermisosPerfil()">
+  <ng-container>
+    <div class="loading-modal-content" *ngIf="loadingGetProyectos$|async  ; else content">
+      <p>Loading...</p>
+    </div>
+  </ng-container>
+  <ng-template #content>
+    <div class="row">
+      <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2"
+        id="permisos-modulo-{{item.module}}">
+        <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive"
+          [disabled]="true">
+          <ng-template pTemplate="header">
+            {{item.module}}
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [visible]="displayModalEliminarPerfil" [closable]="false" (onHide)="closeModalEliminarPerfil()" [modal]="true"
+  [draggable]="false" [resizable]="false">
+  <div class="row">
+    <div class="col">
+      <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este
+        perfil?</p>
+      <div style="padding: 0 9rem 0 9rem;">
+        <div class="row">
+          <div class="col">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash"
+              class="p-button-sm mt-5 float-right" id="delete-perfil-user-button"
+              style="background: #ffb6b6; border: #b36161; margin-left: 10px; color: #412727;"></button>
+            &nbsp;
+            <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar"
+              class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer></p-footer>
+</p-dialog>
+-->
