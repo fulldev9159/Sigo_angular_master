@@ -190,6 +190,10 @@ export class LoadingsFacade {
     return this.store.select(loadingSelector.sendingDownloadOTsAsignadas);
   }
 
+  public sendingDownloadActivosFijos$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingDownloadActivosFijos);
+  }
+
   public sendingGetPosibleSupervisorTrabajos$(): Observable<boolean> {
     return this.store.select(
       loadingSelector.sendingGetPosibleSupervisorTrabajos

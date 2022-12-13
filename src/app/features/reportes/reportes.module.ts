@@ -7,9 +7,14 @@ import { ReportesRoutingModule } from './reportes-routing.module';
 import { ReportesComponent } from './reportes.component';
 import { SharedModule } from '@sharedOT/shared.module';
 import { OtsAsignadasComponent } from './containers/ots-asignadas/ots-asignadas.component';
+import { ActivosFijosComponent } from './containers/activos-fijos/activos-fijos.component';
 
 @NgModule({
-  declarations: [ReportesComponent, OtsAsignadasComponent],
+  declarations: [
+    ReportesComponent,
+    OtsAsignadasComponent,
+    ActivosFijosComponent,
+  ],
   imports: [
     CommonModule,
     ReportesRoutingModule,

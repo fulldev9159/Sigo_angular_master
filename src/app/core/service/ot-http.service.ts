@@ -151,4 +151,42 @@ export class OtHttpService {
         })
       );
   }
+
+  downloadActivosFijos(
+    fecha_cierre_ot__desde: string,
+    fecha_cierre_ot__hasta: string
+  ): Observable<{ filename: string; data: ArrayBuffer }> {
+    return this.http
+      .post<HttpResponse<ArrayBuffer>>(
+        `${this.API_URL}/reportes/reporte_activos_fijos/download`,
+        { fecha_cierre_ot__desde, fecha_cierre_ot__hasta },
+        {
+          observe: 'response' as 'body',
+          responseType: 'arraybuffer' as 'json',
+        }
+      )
+      .pipe(
+        map((response: HttpResponse<ArrayBuffer>) => {
+          //// const contentDisposition = response.headers.get(
+          ////   'content-disposition'
+          //// );
+
+          const today = new Date();
+          const dd = String(today.getDate()).padStart(2, '0');
+          const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+          const yyyy = today.getFullYear();
+          const hh = today.getHours();
+          const MM = today.getMinutes();
+          const ss = today.getSeconds();
+          let ms = `${today.getMilliseconds()}00`;
+          ms = ms.slice(0, 3);
+
+          const filename = `reporte_activos_fijos_${yyyy}_${mm}_${dd}_${hh}_${MM}_${ss}_${ms}.xlsx`;
+          return {
+            filename,
+            data: response.body,
+          };
+        })
+      );
+  }
 }

@@ -258,6 +258,23 @@ export const downloadOTsAsignadasError = createAction(
   props<{ error: any }>()
 );
 
+// DOWNLOAD ACTIVOS FIJOS
+export const downloadActivosFijos = createAction(
+  '[OT] downloadActivosFijos',
+  props<{
+    fecha_cierre_ot__desde: string;
+    fecha_cierre_ot__hasta: string;
+  }>()
+);
+export const downloadActivosFijosSuccess = createAction(
+  '[OT] downloadActivosFijos Success',
+  props<{ filename: string; data: ArrayBuffer }>()
+);
+export const downloadActivosFijosError = createAction(
+  '[OT] downloadActivosFijos Error',
+  props<{ error: any }>()
+);
+
 export const setPageEjecucion = createAction(
   '[OT] setPageEjecucion',
   props<{ page: number }>()
