@@ -80,17 +80,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/reportes/reportes.module').then(m => m.ReportesModule),
     // canLoad: [SigoGuard],
-    data: {
-      permissions: {
-        only: 'REPORTE_BASE',
-      },
-    },
-    canActivate: [SigoGuard, NgxPermissionsGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: 'imputacion',
     loadChildren: () =>
-      import('./features/imputacion/imputacion.module').then(m => m.ImputacionModule),
+      import('./features/imputacion/imputacion.module').then(
+        m => m.ImputacionModule
+      ),
     // canLoad: [SigoGuard],
     data: {
       permissions: {

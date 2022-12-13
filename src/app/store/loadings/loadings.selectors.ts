@@ -188,6 +188,11 @@ export const sendingDownloadOTsAsignadas = createSelector(
   (state: reducer.StateLoadings) => state.sendingDownloadOTsAsignadas
 );
 
+export const sendingDownloadActivosFijos = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingDownloadActivosFijos
+);
+
 export const sendingGetPosibleSupervisorTrabajos = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetPosibleSupervisorTrabajos

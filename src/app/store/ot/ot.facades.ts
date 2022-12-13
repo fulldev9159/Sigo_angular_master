@@ -236,4 +236,16 @@ export class OTFacade {
       })
     );
   }
+
+  public downloadActivosFijos(
+    fecha_cierre_ot__desde: string,
+    fecha_cierre_ot__hasta: string
+  ): void {
+    this.store.dispatch(
+      otActions.downloadActivosFijos({
+        fecha_cierre_ot__desde,
+        fecha_cierre_ot__hasta,
+      })
+    );
+  }
 }
