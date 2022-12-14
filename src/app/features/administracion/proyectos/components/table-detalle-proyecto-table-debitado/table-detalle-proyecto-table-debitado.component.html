@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+      <th>OT</th>
+      <th>OT Nombre</th>
+      <th>PEP2</th>
+      <th>Estado</th>
+      <th>Proyecto</th>
+      <th>MontosOT</th>
+      <th>% de debitado</th>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="detalle.length > 0">
+      <ng-container *ngFor="let item of detalle">
+        <tr>
+          <td>{{ item.id_ot }}</td>
+          <td>
+            <strong>{{ item.nombre_ot }}</strong>
+          </td>
+          <td>{{ item.pep2 }}</td>
+          <td>{{ item.tipo_estado_ot_nombre }}</td>
+          <td>{{ item.proyecto_id }} - {{ item.proyecto_nombre }}</td>
+          <td>{{ item.monto_pagar_ot_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}</td>
+          <td>{{ item.porc_debitado_sobre_cien }}%</td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td colspan="4"></td>
+        <td>Totales</td>
+        <td>{{ detalle[0].monto_total_proyecto | currency: 'CLP':'$':'.0-2':'es-CL' }}</td>
+        <td>100%</td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="detalle.length === 0">
+      <tr>
+        <td colspan="7" style="text-align: center;">No hay elementos</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

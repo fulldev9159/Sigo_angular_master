@@ -24,6 +24,10 @@
     <zwc-menu-imputacion></zwc-menu-imputacion>
   </ng-container>
 
+  <ng-container *ngIf="sessionData.rol_slug in [ 'GESTOR', 'SUPERVISOR', 'JEFE_AREA', 'SUBGERENTE', 'GERENTE' ]">
+    <zwc-menu-gestor></zwc-menu-gestor>
+  </ng-container>
+
   <div class="versiones-container">
     <table>
       <tr>
