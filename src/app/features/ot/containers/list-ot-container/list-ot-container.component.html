@@ -3,7 +3,6 @@
     <ng-container *ngIf="filtrosOTs$ | async as filtros">
       <zwc-list-ot-filtros [filters]="filtros" (valueChanges)="reloadBandeja($event)"></zwc-list-ot-filtros>
 
-      {{rol}}
       <div class="card" style="margin-top: 10px;padding: 0;">
         <p-tabView [(activeIndex)]="activeTabIndex" (onChange)="bandejaItemSelected($event)">
           <p-tabPanel header="Ejecución" leftIcon="pi pi-play" *ngIf="rol!=='OPERACIONES_VIS'">
