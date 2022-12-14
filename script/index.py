@@ -262,11 +262,13 @@ def _click_button(selector):
 
 
 def _select_dropdown(selector, selection):
+    print(get_element_attr(selector))
     wait = WebDriverWait(driver, 10)
     # Wait for the callable function to return a non-empty value
     wait.until(lambda driver: get_element_attr(selector))
 
     dropdown = driver.find_element(By.CSS_SELECTOR, selector)
+    print(dropdown)
     dropdown.click()
 
     # item = dropdown.find_element(
