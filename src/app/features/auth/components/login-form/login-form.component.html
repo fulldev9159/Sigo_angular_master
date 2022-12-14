@@ -25,8 +25,11 @@
             </div>
         </ng-container> -->
 
+        <!-- <zwc-pbutton-sending Pid="login-button" content="Login" Pclass="p-button-info p-button-sm mt-4 w-14rem"
+            [sending]="sendingLogin$ | async" [Pdisabled]="!formLogin.valid" (call)="login()"></zwc-pbutton-sending> -->
+
         <zwc-pbutton-sending Pid="login-button" content="Login" Pclass="p-button-info p-button-sm mt-4 w-14rem"
-            [sending]="sendingLogin$ | async" [Pdisabled]="!formLogin.valid" (call)="login()"></zwc-pbutton-sending>
+            [sending]="sendingLogin$ | async" (call)="login()"></zwc-pbutton-sending>
     </form>
 
     <span class=" mt-7 sigo-color-dark-light text-xs">¿No conoces GUIA? <a
