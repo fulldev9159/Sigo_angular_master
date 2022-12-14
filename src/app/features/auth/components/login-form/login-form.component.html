@@ -1,37 +1,34 @@
-<div class="flex flex-column align-items-center justify-content-evenly h-full" >
+<div class="flex flex-column align-items-center justify-content-evenly h-full">
     <p class="sigo-color-dark-light login-titulo">Acceda utilizando su cuenta GUIA</p>
 
-    <form [formGroup]="formLogin" autocomplete="nope" class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
+    <form [formGroup]="formLogin" autocomplete="nope"
+        class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
         <span class="p-float-label p-input-icon-right field">
             <i class="pi pi-user"></i>
-            <input type="text" pInputText name="username" class="p-inputtext-sm" [formControl]="formLoginControls.username"/>            
+            <input type="text" pInputText name="username" class="p-inputtext-sm"
+                [formControl]="formLoginControls.username" />
             <label for="float-input">Nombre Usuario</label>
             <zwc-input-alert [control]="formLoginControls.username"> </zwc-input-alert>
         </span>
-        
+
         <span class="p-float-label p-input-icon-right mt-3">
             <i class="pi pi-key"></i>
-            <input type="password" pInputText name="password" class="p-inputtext-sm" [formControl]="formLoginControls.password"/>
+            <input type="password" pInputText name="password" class="p-inputtext-sm"
+                [formControl]="formLoginControls.password" />
             <label for="float-input">Password</label>
             <zwc-input-alert [control]="formLoginControls.password"> </zwc-input-alert>
         </span>
-        
-        <ng-container *ngIf="production">
+
+        <!-- <ng-container *ngIf="production">
             <div id="container-recaptcha" style="transform:scale(0.7);transform-origin:0;margin-left: 6rem;">
                 <re-captcha [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
             </div>
-        </ng-container>
-    
-        <zwc-pbutton-sending 
-        Pid="login-button"
-        content="Login"
-        Pclass="p-button-info p-button-sm mt-4 w-14rem"
-        [sending]="sendingLogin$ | async"
-        [Pdisabled]="!formLogin.valid"
-        (call)="login()"
-        ></zwc-pbutton-sending>
-    </form>
-    
-    <span class=" mt-7 sigo-color-dark-light text-xs" >¿No conoces GUIA? <a  href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia"> Ingrese a aquí</a> </span>   
-</div>
+        </ng-container> -->
 
+        <zwc-pbutton-sending Pid="login-button" content="Login" Pclass="p-button-info p-button-sm mt-4 w-14rem"
+            [sending]="sendingLogin$ | async" [Pdisabled]="!formLogin.valid" (call)="login()"></zwc-pbutton-sending>
+    </form>
+
+    <span class=" mt-7 sigo-color-dark-light text-xs">¿No conoces GUIA? <a
+            href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia"> Ingrese a aquí</a> </span>
+</div>
