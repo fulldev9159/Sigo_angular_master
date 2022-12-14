@@ -7,6 +7,7 @@ import {
   faPause,
   faPlay,
   faDollar,
+  faVoteYea,
   faRectangleXmark,
   faSquareCheck,
   faSquareXmark,
@@ -23,14 +24,17 @@ import {
   RequestCreateRegistroLibroObra,
   DetalleOT,
   ReqCierreAdministrativo,
+  Proyecto,
 } from '@model';
 import { ViewRechazoComponent } from '@sharedOT/view-rechazo/view-rechazo.component';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
+import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
 import { PrimeNGConfig } from 'primeng/api';
-import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
@@ -92,6 +96,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   bookIcon = faBook;
   playIcon = faPlay;
   dollarIcon = faDollar;
+  projectIcon = faVoteYea;
   pauseIcon = faPause;
   checkIcon = faSquareCheck;
   cancelIcon = faSquareXmark;
@@ -117,6 +122,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   displayAprobarRechazarQuiebreGestor = false;
   displayQuiebreGestor = false;
   displayModalRechazarSolicitudQuiebre = false;
+  displayModalAsignarProyecto = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -171,6 +177,28 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
 
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
 
+  formAsignarProyecto: FormGroup = new FormGroup({
+    proyecto_id: new FormControl('', []),
+  });
+  proyectos$: Observable<Dropdown[]> = this.proyectoFacade.getProyectos$().pipe(
+    map(values => {
+      let tmp = [...values];
+      return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
+    }),
+    map(values => [
+      {
+        name: 'Sin proyectos',
+        code: '',
+      },
+      ...values.map(value => ({
+        name: value.nombre,
+        code: value.id,
+      })),
+    ])
+  );
+  loadingProyectos$: Observable<boolean> =
+    this.loadingsFacade.sendingGetProyectos$();
+
   // LOADINGS
   loadingPosibleSupervisorDeTrabajos$: Observable<boolean> =
     this.loadingsFacade.sendingGetPosibleSupervisorTrabajos$();
@@ -180,12 +208,21 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   constructor(
     private flujoOTFacade: FlujoOTFacade,
     private otDetalleFacade: OTDetalleFacade,
+    private proyectoFacade: ProyectosFacade,
     private actaFacade: ActaFacade,
     private loadingsFacade: LoadingsFacade,
     private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.otDetalle$.subscribe((detalle: DetalleOT) =>
+        this.formAsignarProyecto
+          .get('proyecto_id')
+          .setValue(detalle?.ot?.proyecto_id ?? '')
+      )
+    );
+
     this.subscription.add(
       this.actaFacade
         .getComentariosFinalizacionTrabajos$()
@@ -499,8 +536,29 @@ export class ListOtTableOperacionesComponent implements OnDestroy, OnInit {
   }
 
   closeModalCambiarSustentoFinanciero(): void {
+    this.displayModalCambiarSustentoFinanciero = false;
+  }
+
+  // ASIGNAR PROYECTO
+  openModalAsignarProyecto(): void {
     if (this.ot_id !== undefined) {
-      this.displayModalCambiarSustentoFinanciero = false;
+      this.displayModalAsignarProyecto = true;
+      this.formAsignarProyecto.get('proyecto_id').setValue('');
+      this.otDetalleFacade.getDetalleOT(this.ot_id);
+      this.proyectoFacade.resetData();
+      this.proyectoFacade.getProyectos();
+    }
+  }
+
+  AsignarProyecto(): void {
+    if (this.ot_id !== undefined) {
+      const { proyecto_id } = this.formAsignarProyecto.getRawValue();
+      this.proyectoFacade.asignarProyecto(
+        this.ot_id,
+        proyecto_id === '' ? undefined : +proyecto_id
+      );
+
+      setTimeout(() => (this.displayModalAsignarProyecto = false), 700);
     }
   }
 

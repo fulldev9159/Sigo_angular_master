@@ -9,3 +9,8 @@ export const getProyectos = createSelector(
   selectProyectos,
   (state: reducer.StateProyectos) => state.proyectos
 );
+
+export const getProyectoOTs = createSelector(
+  selectProyectos,
+  (state: reducer.StateProyectos) => state.detalleProyectoTablaDebitado
+);

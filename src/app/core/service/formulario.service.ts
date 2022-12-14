@@ -16,7 +16,6 @@ export class FormularioService {
   }
 
   errorMessageFn(errors: any): string {
-    console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.minlength) {
