@@ -54,11 +54,15 @@ export class AfterHttpService {
   ) {}
 
   errorHandler(action: ActionErr): void {
+    
+    const duration = (action.type === '[ACTA] GET getCombineImputacion2 Error')? 0: 7000;
+
     this.snackMessage.showMessage(
       action.error.error.status.desc,
       'error',
-      7000
+      duration
     );
+    
   }
 
   successHandler(action: ActionSuccess): void {
