@@ -23,8 +23,8 @@
   <ng-container *ngIf="sessionData.nombre_perfil_select==='GECO'">
     <zwc-menu-imputacion></zwc-menu-imputacion>
   </ng-container>
-
-  <ng-container *ngIf="sessionData.rol_slug in [ 'GESTOR', 'SUPERVISOR', 'JEFE_AREA', 'SUBGERENTE', 'GERENTE' ]">
+  <ng-container
+    *ngIf="sessionData.rol_slug === 'GESTOR' || sessionData.rol_slug === 'SUPERVISOR' || sessionData.rol_slug=== 'JEFE_AREA' || sessionData.rol_slug ==='SUBGERENTE' || sessionData.rol_slug=== 'GERENTE'">
     <zwc-menu-gestor></zwc-menu-gestor>
   </ng-container>
 
