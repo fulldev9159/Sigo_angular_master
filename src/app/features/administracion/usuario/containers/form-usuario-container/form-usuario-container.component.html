@@ -5,7 +5,8 @@
       <span>formulario de ingreso</span>
     </div>
     <div class="col">
-      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left"
+        class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -79,7 +80,8 @@
                     <label for="">Celular</label>
                   </div>
                   <div class="col-md-8 col-xs-12" id="celular-input">
-                    <p-inputMask id="celular-input" name="celular-input" formControlName="celular" styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">
+                    <p-inputMask id="celular-input" name="celular-input" formControlName="celular"
+                      styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">
                     </p-inputMask>
                   </div>
                 </div>
@@ -92,13 +94,15 @@
                       <div class="row" style="margin-left: 19%;">
                         <div class="col-xs-12 col-md-5">
                           <div class="p-field-radiobutton" id="movistar-radio-input">
-                            <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>
+                            <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar">
+                            </p-radioButton>
                             <label for="movistar">Movistar</label>
                           </div>
                         </div>
                         <div class="col-xs-12 col-md-7">
                           <div class="p-field-radiobutton" id="contratista-radio-input">
-                            <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>
+                            <p-radioButton id="proveedor" name="provider" formControlName="provider"
+                              value="contratista"></p-radioButton>
                             <label for="proveedor">Contratista</label>
                           </div>
                         </div>
@@ -106,11 +110,17 @@
                     </div>
                     <br>
                     <div id="proveedor-select">
-                      <zwc-pdropdown [control]="formControls.proveedor_id" Label="* Proveedor" dropdown_id="proveedor-select-dropdown" [data]="proveedores4createUser$|async" Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>
+                      <zwc-pdropdown [control]="formControls.proveedor_id" Label="* Proveedor"
+                        dropdown_id="proveedor-select-dropdown" [data]="proveedores4createUser$|async"
+                        Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id">
+                      </zwc-pdropdown>
                     </div>
                     <br>
                     <div id="area-select">
-                      <zwc-pdropdown [control]="formControls.area_id" Label="* Área" dropdown_id="area-select-dropdown" [data]="areas4createUser$|async" Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id"></zwc-pdropdown>
+                      <zwc-pdropdown [control]="formControls.area_id" Label="* Gerencia"
+                        dropdown_id="area-select-dropdown" [data]="areas4createUser$|async"
+                        Pplaceholder="Seleccione proveedor" [loading]="false" optionLabel="nombre" optionValue="id">
+                      </zwc-pdropdown>
                     </div>
 
                   </div>
@@ -126,16 +136,21 @@
             <div class="row">
               <div class="col-md-6 col-xs-12">
                 <div id="guia-subgrupo-select">
-                  <zwc-pdropdown [control]="formControls.guia_subgrupo_id" Label="* Guia Subgrupo" dropdown_id="guia-subgrupo-select-dropdown" [data]="guiasSubgrupo$|async" Pplaceholder="Seleccione subgrupo" [loading]="false" optionLabel="descripcion" optionValue="id"></zwc-pdropdown>
+                  <zwc-pdropdown [control]="formControls.guia_subgrupo_id" Label="* Guia Subgrupo"
+                    dropdown_id="guia-subgrupo-select-dropdown" [data]="guiasSubgrupo$|async"
+                    Pplaceholder="Seleccione subgrupo" [loading]="false" optionLabel="descripcion" optionValue="id">
+                  </zwc-pdropdown>
                 </div>
                 <br>
-                <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>
+                <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true">
+                </p-checkbox>
                 <ng-container *ngIf="formControls.delegated_auth.value.length === 0">
                   <br>
                   <div class="row">
                     <div class="col-12" id="nombre-perfil-input">
                       <span class="p-float-label field">
-                        <input type="{{ showPassword ? 'text' : 'password' }}" pInputText name="nombre" class="p-inputtext-sm" [formControl]="formControls.password" />
+                        <input type="{{ showPassword ? 'text' : 'password' }}" pInputText name="nombre"
+                          class="p-inputtext-sm" [formControl]="formControls.password" />
                         <label for="nombre">{{ usuario_id === null ? 'Password': 'Nueva Password' }}</label>
                         <zwc-input-alert [control]="formControls.password"> </zwc-input-alert>
                       </span>
@@ -159,9 +174,13 @@
               <div class="col-md-6 col-xs-12">
                 <label for="">Contratos con los que puede trabajar</label>
                 <div id="contratos-select">
-                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
+                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}"
+                    placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async"
+                    formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true"
+                    itemSize="30">
                   </p-multiSelect>
-                  <div *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">
+                  <div
+                    *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">
                     <p-message severity="error" text="Este campo es requerido"></p-message>
                   </div>
                 </div>
@@ -221,7 +240,8 @@
               <div class="col-3"></div>
             </div> -->
             <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formUser.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formUser.valid"
+                class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
             </div>
           </form>
         </div>
